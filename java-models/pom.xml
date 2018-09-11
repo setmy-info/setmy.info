@@ -18,19 +18,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.verions}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.verions}</version>
         </dependency>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.verions}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${logback.verions}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.verions}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -43,9 +38,14 @@
             <version>${slf4j.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.verions}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.verions}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -92,12 +92,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
+            <version>3.8</version>
         </dependency>
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>1.21</version>
+            <version>1.23</version>
         </dependency>
     </dependencies>
     <build>
@@ -105,10 +105,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.0</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <!--source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target-->
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
                     <showWarnings>true</showWarnings>
@@ -202,10 +202,10 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.9.0</version>
             </plugin-->
-            <!--plugin>
+            <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>3.1.1</version>
+                <version>3.3.1</version>
                 <executions>
                     <execution>
                         <goals>
@@ -213,11 +213,11 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin-->
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.7</version>
+                <version>3.7.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -257,6 +257,41 @@
                         <id>attach-javadocs</id>
                         <goals>
                             <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <additionalOptions>-html5</additionalOptions>
+                </configuration>
+            </plugin>
+            <!--plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <tarLongFileMode>gnu</tarLongFileMode>
+                    <descriptors>
+                        <descriptor>src/main/assembly/src.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.16</version>
+                <executions>
+                    <execution>
+                        <id>download-licenses</id>
+                        <goals>
+                            <goal>download-licenses</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -488,15 +523,15 @@
     </developers>
 
     <scm>
-        <connection>scm:hg:https://bitbucket.org/imreit/java-models</connection>
-        <developerConnection>scm:hg:ssh://hg@bitbucket.org/imreit/java-models</developerConnection>
-        <url>https://bitbucket.org/imreit/java-models</url>
+        <connection>scm:hg:https://bitbucket.org/imreit/setmy.info</connection>
+        <developerConnection>scm:hg:ssh://hg@bitbucket.org/imreit/setmy.info</developerConnection>
+        <url>https://bitbucket.org/imreit/setmy.info</url>
         <tag>v1.0.7</tag>
     </scm>
 
     <issueManagement>
         <system>Bitbucket</system>
-        <url>https://bitbucket.org/imreit/java-models/issues</url>
+        <url>https://bitbucket.org/imreit/setmy.info/issues</url>
     </issueManagement>
 
     <ciManagement />
