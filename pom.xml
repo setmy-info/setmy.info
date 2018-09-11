@@ -43,8 +43,8 @@
         <module>java-models</module>
         <module>java-services</module>
         <!--module>groovy-models</module>
-        <module>groovy-services</module>
-        <module>jwt-models</module-->
+        <module>groovy-services</module-->
+        <module>jwt-models</module>
         <module>java-linguistics</module>
         <module>java-accounting</module>
     </modules>
