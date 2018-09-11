@@ -37,13 +37,15 @@
         <logback.verions>1.2.3</logback.verions>
         <slf4j.version>1.7.25</slf4j.version>
         <lucene.version>7.3.0</lucene.version>
+        <groovy.version>2.4.15</groovy.version>
+        <cucumber.version>1.2.5</cucumber.version>
     </properties>
 
     <modules>
         <module>java-models</module>
         <module>java-services</module>
-        <!--module>groovy-models</module>
-        <module>groovy-services</module-->
+        <module>groovy-models</module>
+        <module>groovy-services</module>
         <module>jwt-models</module>
         <module>java-linguistics</module>
         <module>java-accounting</module>

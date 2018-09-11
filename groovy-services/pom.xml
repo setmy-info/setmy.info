@@ -1,40 +1,35 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>info.setmy</groupId>
+        <artifactId>java-projects</artifactId>
+        <version>1.2.0-SNAPSHOT</version>
+    </parent>
+
     <groupId>info.setmy.services</groupId>
     <artifactId>groovy-services</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>groovy-services</name>
     <description>Base project for commons services, helpers, Utils, DAOs, repositories etc</description>
     <url>https://bitbucket.org/imreit/groovy-services</url>
 
-    <properties>
-        <source.level>1.8</source.level>
-        <target.level>1.8</target.level>
-        <java.version>1.8</java.version>
-        <encoding.level>UTF-8</encoding.level>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <junit5.version>5.1.0</junit5.version>
-        <junit.platform.version>1.1.0</junit.platform.version>
-        <mockito.version>2.16.0</mockito.version>
-        <groovy.version>2.4.15</groovy.version>
-        <dependency.locations.enabled>false</dependency.locations.enabled>
-        <cucumber.version>1.2.5</cucumber.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>info.setmy.services</groupId>
             <artifactId>java-services</artifactId>
-            <version>1.0.7-SNAPSHOT</version>
+            <version>${info.setmy.version}</version>
         </dependency>
         <dependency>
             <groupId>info.setmy.models</groupId>
             <artifactId>groovy-models</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>${info.setmy.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -136,8 +131,21 @@
                 </dependencies>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <!--source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target-->
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>${surefire.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.junit.platform</groupId>
@@ -148,7 +156,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>${failsafe.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -171,7 +179,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.0</version>
+                <version>${jacoco.version}</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -205,9 +213,27 @@
                 </configuration>
             </plugin>
             <!--plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.3.2</version>
+                <configuration>
+                    <targetClasses>
+                        <param>info.setmy.models*</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>info.setmy.models*</param>
+                    </targetTests>
+                </configuration>
+            </plugin-->
+            <!--plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.9.0</version>
+            </plugin-->
+            <!--plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>3.1.1</version>
+                <version>3.3.1</version>
                 <executions>
                     <execution>
                         <goals>
@@ -219,7 +245,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.7</version>
+                <version>3.7.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -253,7 +279,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -262,19 +288,41 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
                 <configuration>
-                    <source>${source.level}</source>
-                    <target>${target.level}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
-                    <showWarnings>true</showWarnings>
-                    <showDeprecation>true</showDeprecation>
+                    <additionalOptions>-html5</additionalOptions>
                 </configuration>
+            </plugin>
+            <!--plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <tarLongFileMode>gnu</tarLongFileMode>
+                    <descriptors>
+                        <descriptor>src/main/assembly/src.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.16</version>
+                <executions>
+                    <execution>
+                        <id>download-licenses</id>
+                        <goals>
+                            <goal>download-licenses</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -308,13 +356,44 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.9</version>
+                <version>3.0.0</version>
             </plugin>
+            <!--plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>3.0.5</version>
+                <configuration>
+                    <excludeFilterFile>${basedir}/src/test/resources/findbugs-exclude.xml</excludeFilterFile>
+                    <includeFilterFile>${basedir}/src/test/resources/findbugs-include.xml</includeFilterFile>
+                </configuration>
+            </plugin-->
+            <!--plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <violationSeverity>warning</violationSeverity>
+                    <consoleOutput>true</consoleOutput>
+                    <configLocation>${basedir}/src/test/resources/code.xml</configLocation>
+                    <configLocation>${basedir}/src/test/resources/sun_checks.xml</configLocation>
+                    <configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation>
+                </configuration>
+            </plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
                 <version>2.12.1</version>
             </plugin>
+            <!--plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>javancss-maven-plugin</artifactId>
+                <version>2.1</version>
+            </plugin-->
+            <!--plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.5</version>
+            </plugin-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>taglist-maven-plugin</artifactId>
@@ -339,10 +418,21 @@
                     </tagListOptions>
                 </configuration>
             </plugin>
+            <!--plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                </configuration>
+            </plugin-->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.1</version>
+                <version>${jacoco.version}</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -352,9 +442,85 @@
                 </reportSets>
             </plugin>
             <!--plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.4.2</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                            <report>test-javadoc</report>
+                        </reports>
+                    </reportSet>
+                    <reportSet>
+                        <id>aggregate</id>
+                        <inherited>false</inherited>
+                        <reports>
+                            <report>aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+                <configuration>
+                    <additionalOptions>-html5</additionalOptions>
+                </configuration>
+            </plugin-->
+            <!--plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-doap-plugin</artifactId>
+                <version>1.2</version>
+                <configuration>
+                    <doapOptions>
+                        <bugDatabase>${project.issueManagement.url}</bugDatabase>
+                        <category>library</category>
+                        <created>${project.inceptionYear}-01-01</created>
+                        <description>${project.description}</description>
+                        <downloadPage>\${project.distributionManagement.downloadUrl}</downloadPage>
+                        <homepage>${project.url}</homepage>
+                        <license>\$\{project.licenses[0].url}</license>
+                        <mailingList>${project.url}/mail-lists.html</mailingList>
+                        <name>${project.name}</name>
+                        <programmingLanguage>Java</programmingLanguage>
+                        <scmAnonymousConnection>${project.scm.connection}</scmAnonymousConnection>
+                        <scmDeveloperConnection>${project.scm.developerConnection}</scmDeveloperConnection>
+                        <shortdesc>${project.description}</shortdesc>
+                        <vendor>${project.organization.name}</vendor>
+                    </doapOptions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.8</version>
+                <configuration>
+                    <targetJdk>${maven.compiler.source}</targetJdk>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-linkcheck-plugin</artifactId>
+                <version>1.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-docck-plugin</artifactId>
+                <version>1.1</version>
+            </plugin-->
+            <!--plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>3.1.1</version>
+                <version>3.3.1</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -385,15 +551,15 @@
     </developers>
 
     <scm>
-        <connection>scm:hg:https://bitbucket.org/imreit/groovy-services</connection>
-        <developerConnection>scm:hg:ssh://hg@bitbucket.org/imreit/groovy-services</developerConnection>
-        <url>https://bitbucket.org/imreit/groovy-services</url>
-        <tag>v1.0.1</tag>
+        <connection>scm:hg:https://bitbucket.org/imreit/setmy.info</connection>
+        <developerConnection>scm:hg:ssh://hg@bitbucket.org/imreit/setmy.info</developerConnection>
+        <url>https://bitbucket.org/imreit/setmy.info</url>
+        <tag>v1.0.7</tag>
     </scm>
 
     <issueManagement>
         <system>Bitbucket</system>
-        <url>https://bitbucket.org/imreit/groovy-services/issues</url>
+        <url>https://bitbucket.org/imreit/setmy.info/issues</url>
     </issueManagement>
 
     <ciManagement />
@@ -423,4 +589,5 @@
             </comments>
         </license>
     </licenses>
+
 </project>
