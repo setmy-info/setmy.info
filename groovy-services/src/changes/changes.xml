@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+    <properties>
+        <title>Groovy services library</title>
+        <author email="imre.tabur@eesti.ee">Imre Tabur</author>
+    </properties>
+    <body>
+        <release version="1.0.0" date="2018-05-22" description="First Release">
+            <action dev="imreit" type="add">Project base created.</action>
+        </release>
+    </body>
+</document>

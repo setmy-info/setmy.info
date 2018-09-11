@@ -1,0 +1,10 @@
+## YAML Template.
+object:
+    numberValue: 123
+    booleanValue: true
+    stringValue: "Hello World"
+    subObject:
+        numberValue: 321
+        booleanValue: false
+        stringValue: "World Hello!"
+        

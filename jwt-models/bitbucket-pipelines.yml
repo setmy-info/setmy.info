@@ -1,0 +1,15 @@
+image: maven:3.5.3
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - maven
+        script: # Modify the commands below to build your repository.
+          - date # Date with current Time zone
+          - cp -f /usr/share/zoneinfo/Europe/Tallinn /etc/localtime # Change current time zone to Europe/Tallinn Time zone
+          - date # New Timezone's Date/Time
+          - echo "You can get the path(Region/Zone) with the table on https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
+          - mvn --version
+          - mvn -U -Duser.timezone="Europe/Tallinn" clean package # -B batch mode makes Maven less verbose
+        deployment: test

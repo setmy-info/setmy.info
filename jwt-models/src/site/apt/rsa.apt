@@ -1,0 +1,21 @@
+  ------------
+  RSA key management
+  ------------
+
+RSA key management
+
+[images/island.jpg]
+
+* RSA private and public key generation
+
+    Generate private key in PEM format:
+
+    <<openssl genpkey -algorithm RSA -out priv.key.pem -pkeyopt rsa_keygen_bits:2048>>
+
+    Generate publik key in PEM format from private key:
+
+    <<openssl rsa -pubout -in priv.key.pem -out pub.key.pem>>
+
+    Change PEM format to DER format:
+
+    <<openssl pkcs8 -topk8 -inform PEM -outform DER -in priv.key.pem -out priv.key.der -nocrypt>>
