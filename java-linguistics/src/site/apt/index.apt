@@ -1,0 +1,36 @@
+  ------------
+  Introduction
+  ------------
+
+Introduction
+
+[images/island.jpg]
+
+* Introduction
+
+    This project should have service, that can be configured into DI (dependencie injection)\
+    environment (like Spring, Guice, etc) and models for creating JWT and parsing JWT.
+
+    Library is using {{{https://github.com/auth0/java-jwt}java-jwt}}
+
+    JWT is defined in {{{https://tools.ietf.org/html/rfc7519#section-4.1}RFC-7519}}
+
+* Usage
+
+    Prepare service in side Spring boot beans for example. Alternatively in XML.
+
+    * <<JWTService jwtService = JWTService(SERVICE_NAME,ISSUER, EXAMPLE_SECRET_KEY, ALGORITHM_NAME, EXAMPLE_SESSION_MINUTES);>>
+    
+    * <<service.init();>>
+
+    Create JWT model object and JWT string:
+
+    * <<JWTToken jwtToken = new JWTToken(SERVICE_NAME);>>
+
+    * <<String jwtTokenString = jwtToken.toString();>>
+
+    Parse JWT string:
+
+    * <<JWTToken token = new JWTToken(SERVICE_NAME);>>
+
+    * <<token.parse(jwtTokenString);>>
