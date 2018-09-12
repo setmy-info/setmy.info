@@ -1,5 +1,6 @@
-package info.setmy.services.reports;
+package info.setmy.reports;
 
+import info.setmy.reports.JasperReportsService;
 import info.setmy.models.storage.DirectoryStructurePattern;
 import info.setmy.models.storage.Storage;
 import info.setmy.models.storage.StorageFile;

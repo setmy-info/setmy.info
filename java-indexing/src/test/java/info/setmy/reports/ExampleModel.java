@@ -1,4 +1,4 @@
-package info.setmy.services.reports;
+package info.setmy.reports;
 
 import info.setmy.models.reports.ReportModel;
 import info.setmy.services.ReportsService;

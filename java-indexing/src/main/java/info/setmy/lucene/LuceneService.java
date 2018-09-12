@@ -1,4 +1,4 @@
-package info.setmy.services.lucene;
+package info.setmy.lucene;
 
 import info.setmy.exceptions.InitializationException;
 import info.setmy.exceptions.UncheckedException;
@@ -106,7 +106,7 @@ public class LuceneService {
         return locationDirectory != null && indexDirectory != null;
     }
 
-    public long write(final info.setmy.model.lucene.Document doc) throws IOException {
+    public long write(final info.setmy.lucene.Document doc) throws IOException {
         return write(doc.getLuceneDocument());
     }
 
@@ -130,7 +130,7 @@ public class LuceneService {
             for (ScoreDoc hit : hits) {
                 int docId = hit.doc;
                 Document document = indexSearcher.doc(docId);
-                info.setmy.model.lucene.Document resultDocument = toDocument(document, clazz);
+                info.setmy.lucene.Document resultDocument = toDocument(document, clazz);
                 result.add((T) resultDocument);
             }
         } catch (ParseException | IOException ex) {
@@ -157,11 +157,11 @@ public class LuceneService {
         return reader;
     }
 
-    private <T> info.setmy.model.lucene.Document toDocument(final Document document, final Class<T> clazz) {
+    private <T> info.setmy.lucene.Document toDocument(final Document document, final Class<T> clazz) {
         try {
             final Constructor<?> ctor = clazz.getConstructor(org.apache.lucene.document.Document.class);
             final Object classInstance = ctor.newInstance(new Object[]{document});
-            return (info.setmy.model.lucene.Document) classInstance;
+            return (info.setmy.lucene.Document) classInstance;
         } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             throw new UncheckedException("Creating class for document has an error", ex);
         }

@@ -1,4 +1,4 @@
-package info.setmy.services.reports;
+package info.setmy.reports;
 
 import info.setmy.exceptions.reports.CompilationException;
 import info.setmy.exceptions.reports.ExportingException;

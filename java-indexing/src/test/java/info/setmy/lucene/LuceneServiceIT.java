@@ -1,5 +1,6 @@
-package info.setmy.services.lucene;
+package info.setmy.lucene;
 
+import info.setmy.lucene.LuceneService;
 import info.setmy.models.Paging;
 import java.io.File;
 import java.io.IOException;

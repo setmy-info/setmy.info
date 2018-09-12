@@ -1,6 +1,6 @@
-package info.setmy.services.lucene;
+package info.setmy.lucene;
 
-import info.setmy.model.lucene.Document;
+import info.setmy.lucene.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
 

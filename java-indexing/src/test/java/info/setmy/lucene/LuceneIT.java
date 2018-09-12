@@ -1,4 +1,4 @@
-package info.setmy.services.lucene;
+package info.setmy.lucene;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package info.setmy.model.lucene;
+package info.setmy.lucene;
 
 import org.apache.lucene.document.Field;
 
