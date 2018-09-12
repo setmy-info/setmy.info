@@ -49,6 +49,16 @@
         <module>jwt-models</module>
         <module>java-linguistics</module>
         <module>java-accounting</module>
+        <module>java-db</module>
+        <module>java-document-db</module>
+        <module>java-graph-db</module>
+        <module>java-hr</module>
+        <module>java-indexing</module>
+        <module>java-reports</module>
+        <module>java-scripting</module>
+        <module>java-storage</module>
+        <module>java-web-doc-format</module>
+        <module>java-xblr</module>
     </modules>
 
     <reporting>

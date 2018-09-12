@@ -13,7 +13,7 @@
     </parent>
 
     <groupId>info.setmy.linguistics</groupId>
-    <artifactId>java-db</artifactId>
+    <artifactId>java-reports</artifactId>
     <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>java-linguistics</name>
