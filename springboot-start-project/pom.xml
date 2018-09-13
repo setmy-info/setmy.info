@@ -39,6 +39,7 @@
         <failsafe.version>2.22.0</failsafe.version>
         <surefire.version>2.22.0</surefire.version>
         <log4j.verions>1.2.17</log4j.verions>
+        <log4j2.verions>2.11.1</log4j2.verions>
         <logback.verions>1.2.3</logback.verions>
         <slf4j.version>1.7.25</slf4j.version>
         <dependency.locations.enabled>false</dependency.locations.enabled>
@@ -48,12 +49,12 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.11.1</version>
+            <version>${log4j2.verions}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>2.11.1</version>
+            <version>${log4j2.verions}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -163,24 +164,9 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.2.5</version>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.197</version>
-        </dependency>
-        <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>3.6.2</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.dozer</groupId>
-            <artifactId>dozer</artifactId>
-            <version>5.5.1</version>
         </dependency>
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
@@ -191,6 +177,11 @@
             <groupId>info.setmy.linguistics</groupId>
             <artifactId>java-web</artifactId>
             <version>${info.setmy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.setmy.linguistics</groupId>
+            <artifactId>java-db</artifactId>
+            <version>1.2.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
