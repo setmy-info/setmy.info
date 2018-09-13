@@ -4,6 +4,7 @@ pipeline {
 
     environment {
         PATH = "/opt/has/bin:/opt/apache-maven-3.5.4/bin:/usr/local/bin:$PATH"
+        JAVA_HOME = "/opt/jdk-10.0.2/"
     }
 
     stages {
