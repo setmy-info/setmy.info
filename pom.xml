@@ -59,6 +59,8 @@
         <module>java-storage</module>
         <module>java-web-doc-format</module>
         <module>java-xblr</module>
+        <module>java-web</module>
+        <module>springboot-start-project</module>
     </modules>
 
     <dependencies>

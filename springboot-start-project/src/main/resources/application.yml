@@ -1,0 +1,30 @@
+server:
+    port: 8080
+    context-path: /rest
+    compression:
+        enabled: true
+        mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+
+spring: 
+    main:
+        banner-mode: "off"
+    application:
+        name: springboot-start-project
+        console:
+            enabled: false
+
+dataSource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./live 
+    username: sa
+    password:
+
+liquibase:
+    change-log: classpath:liquibase/master.xml
+
+example:
+    foo: Foo text
+    bar: Bar text
+
+scheduler:
+    timeInMillis: 60000
