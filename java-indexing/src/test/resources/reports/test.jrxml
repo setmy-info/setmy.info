@@ -4,7 +4,7 @@
     <queryString>
         <![CDATA[]]>
     </queryString>
-    <field name="reportsService" class="info.setmy.services.reports.JasperReportsService">
+    <field name="reportsService" class="info.setmy.reports.JasperReportsService">
         <fieldDescription><![CDATA[reportsService]]></fieldDescription>
     </field>
     <field name="subReport" class="java.util.List">
