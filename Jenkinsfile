@@ -1,25 +1,35 @@
 pipeline {
+
     agent any
 
     environment {
-        PATH = "/opt/apache-maven-3.5.4/bin:/usr/local/bin:$PATH"
+        PATH = "/opt/has/bin:/usr/local/bin:$PATH"
     }
 
     stages {
-        stage('Build') {
+        stage('Environment') {
             steps {
-                echo 'Building..'
                 echo "PATH is: $PATH"
             }
         }
-        stage('Test') {
+        stage('Cleaning') {
             steps {
-                echo 'Testing..'
+                sh 'mvn clean'
             }
         }
-        stage('Deploy') {
+        stage('Compiling') {
             steps {
-                echo 'Deploying....'
+                sh 'mvn compile'
+            }
+        }
+        stage('Test Compiling') {
+            steps {
+                sh 'mvn test-compile'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn install'
             }
         }
     }
