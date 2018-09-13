@@ -39,5 +39,28 @@ pipeline {
                 sh 'mvn install'
             }
         }
+        stage('Sites') {
+            steps {
+                sh 'cd groovy-models; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd groovy-services; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-accounting; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-db; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-document-db; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-graph-db; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-hr; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-indexing; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-linguistics; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-models; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-reports; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-scripting; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-services; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-storage; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-web; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-web-doc-format; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd java-xblr; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd jwt-models; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd springboot-start-project; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+            }
+        }
     }
 }
