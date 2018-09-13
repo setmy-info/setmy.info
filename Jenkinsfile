@@ -11,6 +11,7 @@ pipeline {
         stage('Environment') {
             steps {
                 echo "PATH is: $PATH"
+                sh 'mvn --version'
             }
         }
         stage('Cleaning') {
