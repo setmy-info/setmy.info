@@ -53,7 +53,7 @@ pipeline {
                 sh 'cd java-models; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
                 // sh 'cd java-reports; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
                 // sh 'cd java-scripting; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
-                sh 'cd java-services; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                // sh 'cd java-services; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
                 // sh 'cd java-storage; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
                 // sh 'cd java-web; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
                 // sh 'cd java-web-doc-format; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
