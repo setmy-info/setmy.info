@@ -26,6 +26,12 @@
             <artifactId>java-services</artifactId>
             <version>${info.setmy.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.camunda.bpm</groupId>
+            <artifactId>camunda-bom</artifactId>
+            <version>7.9.0</version>
+            <type>pom</type>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
