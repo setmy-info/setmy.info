@@ -14,7 +14,7 @@ import org.dozer.Mapper;
 @Named("dozerService")
 public class DozerService {
 
-    private final Logger log = LogManager.getLogger(ExampleRest.class);
+    private final Logger log = LogManager.getLogger(DozerService.class);
 
     private final Mapper dozerBeanMapper;
 
