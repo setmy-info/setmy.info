@@ -42,6 +42,7 @@
         <log4j2.verions>2.11.1</log4j2.verions>
         <logback.verions>1.2.3</logback.verions>
         <slf4j.version>1.7.25</slf4j.version>
+        <pitest.version>1.4.2</pitest.version>
         <dependency.locations.enabled>false</dependency.locations.enabled>
     </properties>
 
