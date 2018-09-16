@@ -64,6 +64,7 @@
         <module>springboot-start-project</module>
         <module>java-wf</module>
         <module>java-communication</module>
+        <module>java-vcs</module>
     </modules>
 
     <dependencies>
