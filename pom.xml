@@ -65,6 +65,7 @@
         <module>java-wf</module>
         <module>java-communication</module>
         <module>java-vcs</module>
+        <module>java-modular-ssn</module>
     </modules>
 
     <dependencies>
