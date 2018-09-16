@@ -209,7 +209,7 @@
             <!--plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.3.2</version>
+                <version>${pitest.version}</version>
                 <configuration>
                     <targetClasses>
                         <param>info.setmy.models*</param>
@@ -438,7 +438,7 @@
             <!--plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.4.2</version>
+                <version>${pitest.version}</version>
                 <reportSets>
                     <reportSet>
                         <reports>

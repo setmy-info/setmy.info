@@ -129,7 +129,7 @@
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.3.2</version>
+                <version>${pitest.version}</version>
                 <configuration>
                     <targetClasses>
                         <param>info.setmy.jwt*</param>
@@ -272,15 +272,15 @@
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>3.0.0</version>
             </plugin>
-            <plugin>
+            <!--plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
                 <version>3.0.5</version>
-                <!--configuration>
+                <configuration>
                     <excludeFilterFile>${basedir}/src/test/resources/findbugs-exclude.xml</excludeFilterFile>
                     <includeFilterFile>${basedir}/src/test/resources/findbugs-include.xml</includeFilterFile>
-                </configuration-->
-            </plugin>
+                </configuration>
+            </plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -358,7 +358,7 @@
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.4.2</version>
+                <version>${pitest.version}</version>
                 <reportSets>
                     <reportSet>
                         <reports>

@@ -39,6 +39,7 @@
         <lucene.version>7.3.0</lucene.version>
         <groovy.version>2.4.15</groovy.version>
         <cucumber.version>1.2.5</cucumber.version>
+        <pitest.version>1.4.2</pitest.version>
     </properties>
 
     <modules>
