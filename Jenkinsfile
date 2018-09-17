@@ -63,6 +63,7 @@ pipeline {
                 // sh 'cd java-communication; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
                 // sh 'cd java-vcs; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
                 // sh 'cd java-modular-ssn; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                sh 'cd documentation; mvn site:site; cd ..'
             }
         }
     }
