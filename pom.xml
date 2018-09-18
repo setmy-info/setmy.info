@@ -66,6 +66,7 @@
         <module>java-communication</module>
         <module>java-vcs</module>
         <module>java-modular-ssn</module>
+        <module>documentation</module>
     </modules>
 
     <dependencies>
