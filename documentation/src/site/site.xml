@@ -16,6 +16,7 @@
         </links>
         <menu name="Documentation">
             <item name="Index" href="index.html"/>
+            <item name="Index" href="architecture.html"/>
         </menu>
     </body>
     <skin>
