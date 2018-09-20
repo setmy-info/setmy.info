@@ -1,20 +1,18 @@
 package info.setmy.accounting.model;
 
-import info.setmy.models.Entity;
+import info.setmy.models.NamedEntity;
 
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class AccountRecord extends Entity {
-
-    private Account account;
+public class AccountRecord extends NamedEntity<Long> {
 
     private Money debit;
 
     private Money credit;
 
-    private AccountType type;
+    private Account account;
 
     public Money getDebit() {
         return debit;
@@ -30,14 +28,6 @@ public class AccountRecord extends Entity {
 
     public void setCredit(Money credit) {
         this.credit = credit;
-    }
-
-    public AccountType getType() {
-        return type;
-    }
-
-    public void setType(AccountType type) {
-        this.type = type;
     }
 
     public Account getAccount() {

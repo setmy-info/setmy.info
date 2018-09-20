@@ -3,16 +3,17 @@ package info.setmy.models;
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @param <T> entity ID type.
  */
-public abstract class Entity {
+public abstract class Entity<T> {
 
-    private Long id;
+    private T id;
 
-    public Long getId() {
+    public T getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(T id) {
         this.id = id;
     }
 }
