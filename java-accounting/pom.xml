@@ -26,11 +26,6 @@
             <artifactId>java-services</artifactId>
             <version>${info.setmy.version}</version>
         </dependency>
-        <dependency>
-            <groupId>info.setmy</groupId>
-            <artifactId>java-xblr</artifactId>
-            <version>${info.setmy.version}</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
