@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>info.setmy.microservice</groupId>
+    <groupId>info.setmy</groupId>
     <artifactId>springboot-start-project</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>springboot-start-project</name>
@@ -175,12 +175,12 @@
             <version>2.3.0</version>
         </dependency>
         <dependency>
-            <groupId>info.setmy.linguistics</groupId>
+            <groupId>info.setmy</groupId>
             <artifactId>java-web</artifactId>
             <version>${info.setmy.version}</version>
         </dependency>
         <dependency>
-            <groupId>info.setmy.linguistics</groupId>
+            <groupId>info.setmy</groupId>
             <artifactId>java-db</artifactId>
             <version>1.2.0-SNAPSHOT</version>
         </dependency>

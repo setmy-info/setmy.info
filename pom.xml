@@ -40,6 +40,8 @@
         <groovy.version>2.4.15</groovy.version>
         <cucumber.version>1.2.5</cucumber.version>
         <pitest.version>1.4.2</pitest.version>
+        <jersey.version>2.27</jersey.version>
+        <jackson.version>2.9.6</jackson.version>
     </properties>
 
     <modules>
@@ -59,7 +61,6 @@
         <module>java-scripting</module>
         <module>java-storage</module>
         <module>java-web-doc-format</module>
-        <module>java-xblr</module>
         <module>java-web</module>
         <module>springboot-start-project</module>
         <module>java-wf</module>
@@ -67,6 +68,7 @@
         <module>java-vcs</module>
         <module>java-modular-ssn</module>
         <module>documentation</module>
+        <module>java-rest-client</module>
     </modules>
 
     <dependencies>
