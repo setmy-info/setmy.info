@@ -264,11 +264,11 @@
                     <webApp>
                         <contextPath>/</contextPath>
                         <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
-                            <resourcesAsCSV>src/test/webapp</resourcesAsCSV>
+                            <resourcesAsCSV>${project.basedir}/src/test/webapp</resourcesAsCSV>
                         </baseResource>
                     </webApp>
                     <useTestClasspath>true</useTestClasspath>
-                    <contextXml>src/test/webapp/WEB-INF/jetty-context.xml</contextXml>
+                    <contextXml>${project.basedir}/src/test/webapp/WEB-INF/jetty-context.xml</contextXml>
                     <jvmArgs>-Dorg.eclipse.jetty.webapp.LEVEL=DEBUG</jvmArgs>
                     <jettyProperties>
                         <jettyProperty>jetty.server.dumpAfterStart=true</jettyProperty>
@@ -300,7 +300,6 @@
                             <stopKey>STOP</stopKey>
                         </configuration>
                     </execution>
-                    
                     <execution>
                         <id>stop-jetty</id>
                         <phase>post-integration-test</phase>
