@@ -12,7 +12,7 @@
         <version>1.2.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>info.setmy.services</groupId>
+    <groupId>info.setmy</groupId>
     <artifactId>java-services</artifactId>
     <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -22,7 +22,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>info.setmy.models</groupId>
+            <groupId>info.setmy</groupId>
             <artifactId>java-models</artifactId>
             <version>${info.setmy.version}</version>
         </dependency>
@@ -45,6 +45,16 @@
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>
             <version>5.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.1</version>
         </dependency>
     </dependencies>
     <build>

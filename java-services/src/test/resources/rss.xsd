@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+    Copyright Imre Tabur <imre.tabur@eesti.ee>
+-->
+
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://setmy.info/rss"
+    xmlns:rss="http://setmy.info/rss"
+    elementFormDefault="qualified">
+
+    <xs:attribute name="version"        type="xs:string"    />
+
+    <xs:element name="title"            type="xs:string"    />
+    <xs:element name="link"             type="xs:anyURI"    />
+    <xs:element name="description"      type="xs:string"    />
+    <xs:element name="language"         type="xs:string"    />
+    <xs:element name="pubDate"          type="xs:string"      />
+    <xs:element name="lastBuildDate"    type="xs:string"      />
+    <!--xs:element name="pubDate"          type="xs:date"      />
+    <xs:element name="lastBuildDate"    type="xs:date"      /-->
+    <xs:element name="docs"             type="xs:anyURI"    />
+    <xs:element name="generator"        type="xs:string"    />
+    <xs:element name="managingEditor"   type="xs:string"    />
+    <xs:element name="webMaster"        type="xs:string"    />
+    <xs:element name="guid"             type="xs:string"    />
+    
+    <xs:element name="item">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="rss:title" minOccurs="0" maxOccurs="1" />
+                <xs:element ref="rss:link" minOccurs="0" maxOccurs="1" />
+                <xs:element ref="rss:description" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="rss:pubDate" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="rss:guid" minOccurs="1" maxOccurs="1" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="channel">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="rss:title"         minOccurs="1" maxOccurs="1" />
+                <xs:element ref="rss:link"          minOccurs="1" maxOccurs="1" />
+                <xs:element ref="rss:description"   minOccurs="1" maxOccurs="1" />
+                <xs:element ref="rss:language"      minOccurs="1" maxOccurs="1" />
+                <xs:element ref="rss:pubDate"       minOccurs="1" maxOccurs="1" />
+                <xs:element ref="rss:lastBuildDate" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="rss:docs"          minOccurs="1" maxOccurs="1" />
+                <xs:element ref="rss:generator"     minOccurs="1" maxOccurs="1" />
+                <xs:element ref="rss:managingEditor" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="rss:webMaster"     minOccurs="1" maxOccurs="1" />
+                <xs:element ref="rss:item"          minOccurs="1" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="rss">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="rss:channel" minOccurs="0" maxOccurs="1" />
+            </xs:sequence>
+            <xs:attribute name="version">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0" xmlns="http://setmy.info/rss" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://setmy.info/rss ./rss.xsd">
+    <channel>
+        <title>Imre Tabur</title>
+        <link>http://some.link.example.com</link>
+        <description>Description</description>
+        <language>ee-et</language>
+        <pubDate>P, 23 sept 2018 20:41:08 EEST</pubDate>
+        <lastBuildDate>P, 23 sept 2018 20:41:08 EEST</lastBuildDate>
+        <docs>Docs</docs>
+        <generator>setmy.info</generator>
+        <managingEditor>Managing Editor</managingEditor>
+        <webMaster>Webmaster</webMaster>
+        <item>
+            <title>Title 2</title>
+            <link>http://some.link.example.com</link>
+            <description>Description</description>
+            <pubDate>P, 23 sept 2018 20:41:08 EEST</pubDate>
+            <guid>905e22b7-af92-4c71-864e-26ed90b11418</guid>
+        </item>
+    </channel>
+</rss>

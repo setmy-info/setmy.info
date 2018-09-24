@@ -3,10 +3,10 @@
 <project xmlns="http://maven.apache.org/DECORATION/1.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
          xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd"
-         name="java-xyz">
+         name="java-rest-client">
 
     <bannerLeft>
-        <name>Java ... </name>
+        <name>Java REST client</name>
         <href>https://bitbucket.org/imreit/setmy.info</href>
     </bannerLeft>
 

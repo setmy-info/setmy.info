@@ -12,20 +12,50 @@
         <version>1.2.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>info.setmy.linguistics</groupId>
-    <artifactId>java-xblr</artifactId>
+    <groupId>info.setmy</groupId>
+    <artifactId>java-rest-client</artifactId>
     <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>java-xblr</name>
-    <description>Base project for human text parsing and analyze.</description>
+    <name>java-rest-client</name>
+    <description>Java REST client.</description>
     <url>https://bitbucket.org/imreit/setmy.info</url>
 
     <dependencies>
         <dependency>
-            <groupId>info.setmy.services</groupId>
+            <groupId>info.setmy</groupId>
             <artifactId>java-services</artifactId>
             <version>${info.setmy.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!--dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency-->
+        <!--dependency>
+            <groupId>javax.xml</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.1</version>
+        </dependency-->
     </dependencies>
     <build>
         <plugins>
@@ -223,6 +253,62 @@
                     </execution>
                 </executions>
             </plugin-->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.12.v20180830</version>
+                <configuration>
+                    <supportedPackagings>jar</supportedPackagings>
+                    <webAppSourceDirectory>src/test/webapp</webAppSourceDirectory>
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                        <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+                            <resourcesAsCSV>${project.basedir}/src/test/webapp</resourcesAsCSV>
+                        </baseResource>
+                    </webApp>
+                    <useTestClasspath>true</useTestClasspath>
+                    <contextXml>${project.basedir}/src/test/webapp/WEB-INF/jetty-context.xml</contextXml>
+                    <jvmArgs>-Dorg.eclipse.jetty.webapp.LEVEL=DEBUG</jvmArgs>
+                    <jettyProperties>
+                        <jettyProperty>jetty.server.dumpAfterStart=true</jettyProperty>
+                    </jettyProperties>
+                    <stopPort>8005</stopPort>
+                    <stopKey>STOP</stopKey>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>jetty.port</name>
+                            <value>8777</value>
+                        </systemProperty>
+                    </systemProperties>
+                    <!--modules>
+                        <module>apache-jsp</module>
+                        <module>apache-jstl</module>
+                        <module>jmx</module>
+                    </modules-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start-jetty</id>
+                        <phase>pre-integration-test</phase>                       
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                        <configuration>
+                            <daemon>true</daemon>
+                            <stopPort>8005</stopPort>
+                            <stopKey>STOP</stopKey>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-jetty</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
