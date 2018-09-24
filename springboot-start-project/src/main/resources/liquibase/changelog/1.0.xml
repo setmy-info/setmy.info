@@ -26,5 +26,27 @@
     <changeSet id="1.0.1" author="Imre Tabur">
         <loadData file="liquibase/changelog/example.csv" tableName="EXAMPLE"></loadData>
     </changeSet>
+    
+    <changeSet id="1.0.2" author="Imre Tabur">
+
+        <createSequence sequenceName="PERSON_ID_SEQ" incrementBy="1" startValue="2"/>
+        <createTable tableName="PERSON">
+            <column name="ID" type="bigint">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="FIRST_NAME" type="varchar(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_NAME" type="varchar(512)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="PERSON"/>
+            <dropSequence sequenceName="PERSON_ID_SEQ" />
+        </rollback>
+
+    </changeSet>
 
 </databaseChangeLog>
