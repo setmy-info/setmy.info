@@ -5,17 +5,16 @@ import java.io.Serializable;
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
- * @param <T> entity ID type.
  */
-public abstract class Entity<T> implements Serializable {
+public abstract class Entity implements Serializable {
 
-    private T id;
+    private Long id;
 
-    public T getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(T id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

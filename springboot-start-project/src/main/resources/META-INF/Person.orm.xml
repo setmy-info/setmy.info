@@ -23,13 +23,19 @@
     <package>info.setmy.microservice.example.model</package>
 
     <!-- @MappedSuperclass -->
-    <mapped-superclass class="info.setmy.models.Entity"/>
+    <mapped-superclass class="info.setmy.models.Entity">
+        <attributes>
+            <id name="id">
+                <column name="ID" unique="true" nullable="false"/>
+            </id>
+        </attributes>
+    </mapped-superclass>
 
     <entity class="info.setmy.microservice.example.model.Person" name="Person">
-
         <table name="PERSON"/>
-        <!-- @Inheritance(strategy=InheritanceType.SINGLE_TABLE) -->
-        <!--inheritance strategy="SINGLE_TABLE"/ -->
+        <!-- @Inheritance(strategy=InheritanceType.SINGLE_TABLE) : SINGLE_TABLE, TABLE_PER_CLASS, JOINED;-->
+        <!-- inheritance strategy="SINGLE_TABLE"/ -->
+        <id-class class="info.setmy.models.Entity"/>
         <attributes>
             <id name="id">
                 <column name="ID" unique="true" nullable="false"/>
@@ -37,7 +43,7 @@
                 <generated-value strategy="SEQUENCE" generator="personSequenceGenerator"/>
                 <!-- @SequenceGenerator(name = "personSequenceGenerator" sequenceName = "PERSON_ID_SEQ", allocationSize = 1) -->
                 <sequence-generator name="personSequenceGenerator" sequence-name="PERSON_ID_SEQ" allocation-size="1" initial-value="1"/>
-            </id>           
+            </id>
             <basic name="firstName">
                 <column name="FIRST_NAME" length="512"/>
             </basic>

@@ -6,7 +6,7 @@ import info.setmy.models.Entity;
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class Person extends Entity<Long> {
+public class Person extends Entity {
 
     private String firstName;
 
