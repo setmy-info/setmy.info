@@ -3,14 +3,14 @@
 # Copyright Imre Tabur
 
 DOCKER_PROJECT_NAME="setmy-info-centos-java-tomcat"
-DOCKER_PROJECT_VERSION="v1.0.1"
+DOCKER_PROJECT_VERSION="v1.3.0"
 DOCKER_ID_USER="xxxxxx"
 DOCKER_ID_ORGANIZATION="setmyinfo"
 DOCKER_CONTENT_TRUST=1
-TOMCAT_DIR_NAME=apache-tomcat-9.0.11
+TOMCAT_DIR_NAME=apache-tomcat-9.0.12
 TOMCAT_TAR_FILE_NAME=$TOMCAT_DIR_NAME.tar.gz
 
-wget -c http://www-eu.apache.org/dist/tomcat/tomcat-9/v9.0.11/bin/$TOMCAT_TAR_FILE_NAME -O $TOMCAT_TAR_FILE_NAME
+wget -c http://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.12/bin/$TOMCAT_TAR_FILE_NAME -O $TOMCAT_TAR_FILE_NAME
 tar xvzf $TOMCAT_TAR_FILE_NAME
 
 docker build -t  "$DOCKER_ID_ORGANIZATION/$DOCKER_PROJECT_NAME:$DOCKER_PROJECT_VERSION" .
