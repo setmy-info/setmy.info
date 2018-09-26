@@ -3,13 +3,13 @@
 # Copyright Imre Tabur
 
 DOCKER_PROJECT_NAME="setmy-info-centos-java"
-DOCKER_PROJECT_VERSION="v1.0.1"
+DOCKER_PROJECT_VERSION="v1.11.0"
 DOCKER_ID_USER="xxxxxx"
 DOCKER_ID_ORGANIZATION="setmyinfo"
 DOCKER_CONTENT_TRUST=1
 
-JDK_TAR_FILE_NAME=openjdk-10.0.2_linux-x64_bin.tar.gz
-wget -c https://download.java.net/java/GA/jdk10/10.0.2/19aef61b38124481863b1413dce1855f/13/$JDK_TAR_FILE_NAME -O $JDK_TAR_FILE_NAME
+JDK_TAR_FILE_NAME=openjdk-11+28_linux-x64_bin.tar.gz
+wget -c https://download.java.net/java/GA/jdk11/28/GPL/$JDK_TAR_FILE_NAME -O $JDK_TAR_FILE_NAME
 tar xvzf $JDK_TAR_FILE_NAME
 
 docker build -t  "$DOCKER_ID_ORGANIZATION/$DOCKER_PROJECT_NAME:$DOCKER_PROJECT_VERSION" .
