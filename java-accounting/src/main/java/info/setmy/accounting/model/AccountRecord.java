@@ -6,7 +6,7 @@ import info.setmy.models.NamedEntity;
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class AccountRecord extends NamedEntity<Long> {
+public class AccountRecord extends NamedEntity {
 
     private Money debit;
 

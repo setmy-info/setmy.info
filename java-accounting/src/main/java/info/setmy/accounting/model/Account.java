@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class Account extends NamedEntity<Long> {
+public class Account extends NamedEntity {
 
     private Account parent;
 
