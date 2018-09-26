@@ -37,5 +37,8 @@ nbproject/
 live.mv.db
 live.trace.db
 
+docker-images/docker-centos-java/jdk*
+docker-images/docker-centos-java/openjdk*
+
 # switch to regexp syntax.
 syntax: regexp

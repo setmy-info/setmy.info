@@ -4,6 +4,8 @@ import info.setmy.microservice.dao.ExampleDao;
 import info.setmy.microservice.dao.ExampleRepository;
 import info.setmy.microservice.dao.JDBCExampleDao;
 import info.setmy.microservice.dao.JPAExampleDao;
+import info.setmy.microservice.dao.PersonRepository;
+import info.setmy.microservice.example.model.Person;
 import info.setmy.microservice.models.ExampleModel;
 import info.setmy.microservice.properties.ExampleProperties;
 import javax.inject.Named;
@@ -26,6 +28,8 @@ public class ExampleService {
 
     private final JPAExampleDao jpaExampleDao;
 
+    private final PersonRepository personRepository;
+
     private final DozerService dozerService;
 
     public ExampleService(final ExampleDao exampleDao,
@@ -33,13 +37,15 @@ public class ExampleService {
             final DozerService dozerService,
             final ExampleRepository exampleRepository,
             final JDBCExampleDao jdbcExampleDao,
-            final JPAExampleDao jpaExampleDao) {
+            final JPAExampleDao jpaExampleDao,
+            final PersonRepository personRepository) {
         this.exampleDao = exampleDao;
         this.exampleProperties = exampleProperties;
         this.dozerService = dozerService;
         this.exampleRepository = exampleRepository;
         this.jdbcExampleDao = jdbcExampleDao;
         this.jpaExampleDao = jpaExampleDao;
+        this.personRepository = personRepository;
     }
 
     public ExampleDao getExampleDao() {
