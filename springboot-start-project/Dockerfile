@@ -27,5 +27,5 @@ EXPOSE 8080/tcp
 EXPOSE 8443/tcp
 
 CMD ["/bin/sh"]
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/opt/has/lib/app.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/urandom","-jar","/opt/has/lib/app.jar"]
 
