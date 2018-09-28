@@ -105,6 +105,7 @@
                 <configuration>
                     <!--source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target-->
+                    <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
                     <showWarnings>true</showWarnings>
