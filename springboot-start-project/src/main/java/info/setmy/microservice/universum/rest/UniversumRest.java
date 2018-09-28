@@ -1,7 +1,7 @@
 package info.setmy.microservice.universum.rest;
 
 import static info.setmy.microservice.universum.constants.MeasuringUnits.SCALE;
-import info.setmy.microservice.universum.models.Planet;
+import info.setmy.microservice.universum.models.CelestialObject;
 import info.setmy.microservice.universum.services.UniversumService;
 import java.util.List;
 import javax.inject.Inject;
@@ -45,14 +45,14 @@ public class UniversumRest {
     @GET
     @Path("/{scale}")
     @Produces(APPLICATION_JSON)
-    public List<Planet> scale(@PathParam("scale") final long scale) {
+    public List<CelestialObject> scale(@PathParam("scale") final long scale) {
         return universumService.getScaled(scale);
     }
     
     // REST Call GET : http://localhost:8080/rest/universum
     @GET
     @Produces(APPLICATION_JSON)
-    public List<Planet> scale() {
+    public List<CelestialObject> scale() {
         return universumService.getScaled(SCALE);
     }
 }

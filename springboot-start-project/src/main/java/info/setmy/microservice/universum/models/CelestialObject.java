@@ -4,7 +4,7 @@ package info.setmy.microservice.universum.models;
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class Planet {
+public class CelestialObject {
 
     private final String name;
 
@@ -12,7 +12,7 @@ public class Planet {
 
     private final long diameter;
 
-    public Planet(final String name, final long distance, final long diameter) {
+    public CelestialObject(final String name, final long distance, final long diameter) {
         this.name = name;
         this.distance = distance;
         this.diameter = diameter;
@@ -30,7 +30,7 @@ public class Planet {
         return diameter;
     }
 
-    public Planet scale(final long scale) {
-        return new Planet(name, ((distance * 100L) / scale), ((diameter * 1000L) / scale));
+    public CelestialObject scale(final long scale) {
+        return new CelestialObject(name, ((distance * 100L) / scale), ((diameter * 1000L) / scale));
     }
 }
