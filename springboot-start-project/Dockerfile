@@ -31,4 +31,4 @@ EXPOSE 8080/tcp
 EXPOSE 8443/tcp
 
 CMD ["/bin/sh"]
-CMD java ${JAVA_OPTS} -Dspring.profiles.active=kubernetes -jar /opt/has/lib/app.jar
+CMD java ${JAVA_OPTS} -jar /opt/has/lib/app.jar
