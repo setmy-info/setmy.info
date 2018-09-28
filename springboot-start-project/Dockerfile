@@ -20,6 +20,10 @@ COPY target/springboot-start-project-1.0.0-SNAPSHOT.jar /opt/has/lib/app.jar
 RUN useradd microservice --shell /sbin/nologin --no-create-home
 RUN chown -R root:root                  /opt/has
 RUN chown -R microservice:microservice  /var/opt/has
+RUN ls /dev/urandom
+
+# Can add -Djavax.net.ssl.trustStore=/opt/has/lib/store.jks -Djavax.net.ssl.keyStorePassword=secretpass
+ENV JAVA_OPTS="-Djava.security.egd=file:/dev/urandom"
 
 WORKDIR /var/opt/has/microservice
 
@@ -27,5 +31,4 @@ EXPOSE 8080/tcp
 EXPOSE 8443/tcp
 
 CMD ["/bin/sh"]
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/urandom","-jar","/opt/has/lib/app.jar"]
-
+CMD java ${JAVA_OPTS} -Dspring.profiles.active=kubernetes -jar /opt/has/lib/app.jar
