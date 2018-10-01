@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+	
+    <parent>
+        <artifactId>gf-start-project</artifactId>
+        <groupId>ee.public.platform</groupId>
+        <version>1.0.0</version>
+    </parent>
+	
+    <artifactId>gf-start-helper</artifactId>
+    <groupId>ee.public.platform.lib</groupId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+	
+    <name>Public J2EE Platform API and Logic</name>
+    <description>Public J2EE Platform API and Logic Library</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>${mock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <artifactId>gf-start-dm</artifactId>
+            <groupId>ee.public.platform.lib</groupId>
+            <version>${gsp.sys.verion}</version>
+        </dependency>
+        <dependency>
+            <groupId>jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>${jasperrep.verion}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+        </plugins>
+    </build>
+
+</project>

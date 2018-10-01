@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/application_7.xsd" version="7">
+    <display-name>gf-start-platform-ear</display-name>
+
+    <module>
+        <ejb>gf-start-ejb-1.0.0.jar</ejb>
+    </module>
+    <module>
+        <web>
+            <web-uri>gf-start-web-app-1.0.0.war</web-uri>
+            <context-root>/gf-start-web</context-root>
+        </web>
+    </module>
+    <module>
+        <web>
+            <web-uri>gf-start-ws-1.0.0.war</web-uri>
+            <context-root>/gf-start-ws</context-root>
+        </web>
+    </module>
+</application>

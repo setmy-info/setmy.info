@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project    name="Maven" xmlns="http://maven.apache.org/DECORATION/1.0.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+
+    <bannerLeft>
+        <name>Visual Elements</name>
+    </bannerLeft>
+
+    <body>
+        <links>
+            <item name="APT Format" href="format.html"/>
+            <item name="Example" href="example.html"/>
+        </links>
+
+        <menu name="UI Elements">
+            <item name="Requirements" href="requirements.html"/>
+            <item name="User Stories" href="userstories.html"/>
+            <item name="Use Cases" href="usecasess.html"/>
+            <item name="Example" href="example.html"/>
+        </menu>
+
+        <menu name="Testing">
+            <item name="Test Plan" href="testplan.html"/>
+            <item name="Test Cases" href="testcases.html"/>
+        </menu>
+
+        <menu ref="reports"/>
+
+    </body>
+</project>

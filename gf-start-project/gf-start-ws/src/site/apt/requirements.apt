@@ -1,0 +1,59 @@
+ -----
+ Visual Elements Site
+ -----
+ Hear And See Systems OÜ
+ -----
+ -----
+
+Visual Elements Development Site
+~~~~~~~~~~~~~~
+
+* Primitive types
+
+~~~~~~~~~~~~~~
+
+** "text-label"
+
+ as
+
+      * Depends on:
+
+~~~~~~~~~~~~~~
+
+** "text-entry"
+
+ as
+
+      * Depends on:
+
+~~~~~~~~~~~~~~
+
+** "password-entry"
+
+ as
+
+      * Depends on:
+
+~~~~~~~~~~~~~~
+
+** "text-box"
+
+ as
+
+      * Depends on:
+
+* Complex types
+
+~~~~~~~~~~~~~~
+
+** "password-panel"
+
+ as
+
+      * Depends on:
+
+ "text-entry"
+
+ "password-entry"
+
+ "text-lable"

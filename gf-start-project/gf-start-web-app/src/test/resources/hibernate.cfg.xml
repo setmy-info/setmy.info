@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <!--property name="hibernate.connection.url">jdbc:postgresql://localhost/wordsdb</property>
+        <property name="hibernate.connection.username">worder</property-->
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost/domain-controller</property>
+        <property name="hibernate.connection.username">imreit</property>
+        <property name="hibernate.connection.password">g6p8</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <mapping resource="city.hbm.xml" />
+		<mapping resource="country.hbm.xml" />
+
+    </session-factory>
+</hibernate-configuration>
