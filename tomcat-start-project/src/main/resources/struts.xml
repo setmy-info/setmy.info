@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.multipart.maxSize" value="1000000" />
+    
+    <package name="default" namespace="/" extends="struts-default">
+
+        <action name="*Course" method="{1}" class="ee.pub.web.actions.CourseAction">
+            <result name="success">../pages/courseAction.jsp</result>
+        </action>
+        <action name="justPage" class="ee.pub.web.actions.CourseAction">
+            <result name="success">../pages/courseAction.jsp</result>
+        </action>
+        <!--action name="file" class="ee.pub.web.actions.FileAction">
+            <result name="success"  type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="contentDisposition">attachment;filename="fileABC.txt"</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action-->
+        <action name="*Greeting" method="{1}" class="ee.pub.web.Greeting">
+            <result name="SUCCESS">../pages/groovy.jsp</result>
+        </action>
+        <action name="*Greeting2" method="{1}" class="ee.pub.web.Greeting">
+            <result name="SUCCESS">../pages/groovy.jsp</result>
+        </action>
+    </package>
+
+</struts>

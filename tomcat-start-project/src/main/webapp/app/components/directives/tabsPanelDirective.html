@@ -1,0 +1,9 @@
+<!--li class="menuItem" data-ng-show="!session.user"><a href="#/login">{{translations.keys.loginPageLabel}}</a></li>
+<li class="menuItem" data-ng-show="session.user">{{session.user.firstName}} {{session.user.lastName}}</li>
+<li class="menuItem" data-ng-show="session.user"><a href="#/logout">{{translations.keys.logOutLabel}}</a></li-->
+<div class="">
+    <ul>
+        <li data-ng-repeat="tab in tabs" data-ng-click="tabChange($index)" data-ng-class="{background: $index === index}">{{tab.name}}</li>
+    </ul>
+    <div>{{tabs[index].content}}</div>
+</div>

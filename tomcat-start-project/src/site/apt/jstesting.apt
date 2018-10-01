@@ -1,0 +1,84 @@
+  ------------
+  JavaScript Unit Testing
+  ------------
+
+JavaScript Testing
+
+[images/island.jpg]
+
+* Intro
+
+    JavaScript platform: {{{https://nodejs.org/} NodeJS}}  
+
+    Karma test runner: {{{http://karma-runner.github.io/0.12/index.html} Karma}}
+
+    Jasmine test framework: {{{http://jasmine.github.io/} Jasmine}}
+
+    Browser: {{{http://phantomjs.org/} PhantomJS}}
+
+    Test coverage: {{{http://gotwarlost.github.io/istanbul/} Istanbul}}
+    
+
+* Installation
+
+    Install: *nodejs*
+
+    Go to test folder:  <<cd ./src/test/js>>
+
+	Setup proxies:
+	
+	<<npm config set proxy http://proxy.company.com:8080>>
+	
+	<<npm config set https-proxy http://proxy.company.com:8080>>
+	
+    Install karma: <<npm install karma --save-dev>>
+
+    Install karma plugins: <<npm install karma-jasmine istanbul karma-coverage --save-dev>>
+
+    Install PhantomJS browser: <<npm install phantomjs karma-phantomjs-launcher --save-dev>>
+
+* Windows karma.bat file (.\src\test\js\node_modules\karma\bin): 
+
+---
+
+set karma_dir=%~dp0
+set karma_script_file=%karma_dir%karma
+node %karma_script_file% %*
+
+---
+
+* Usage
+
+    Run karma: <<./node_modules/karma/bin/karma start>> or <<.\node_modules\karma\bin\karma.bat start>>
+
+* Examples
+
+    Mathematics / MathematicsSpec
+
+    SuperService / SuperServiceSpec
+
+    Water / WaterSpec
+
+    AngularApplicationController / AngularApplicationControllerSpec
+
+    NameService / NameServiceSpec
+
+* User Story
+
+    Context: Car race copetition software.
+
+** US #1
+
+    <<As race operator and organizer I can get list of competitors, so I can check competitors cars and names.>>\
+    AC 1: List row contains car number, competitor first and last name.\
+    AC 2: List is visible immediatelly when URL is visited.
+
+    Result: http://localhost:8080/tomcat-start-project/angular/example.html#/race
+
+* Coverage
+
+    .\tomcat-start-project\coverage\PhantomJS 1.9.8 (Windows 7 0.0.0)
+
+* See also
+
+    {{{http://karma-runner.github.io/0.12/intro/installation.html} Karma installation page}}

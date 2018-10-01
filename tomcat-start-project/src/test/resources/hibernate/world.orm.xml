@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-mappings
+    version="2.1"
+    xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+    
+    <description>The mapping for World.</description>
+
+    <persistence-unit-metadata>
+        <persistence-unit-defaults>
+            <access>PROPERTY</access>
+        </persistence-unit-defaults>
+    </persistence-unit-metadata>
+    
+    <package>ee.pub.hibernate.model</package>
+
+    <entity name="World" class="World">
+	<table name="world"/>
+        <attributes>
+            <id name="id">
+                <column name="id" unique="true" nullable="false" column-definition="id"/>
+                <generated-value strategy="SEQUENCE" generator="world_id_seq"/>
+            </id>
+            <!--one-to-many name="countries" target-entity="ee.pub.hibernate.model.Country" mapped-by="world_id" fetch="LAZY">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many-->
+        </attributes>
+    </entity>
+</entity-mappings>

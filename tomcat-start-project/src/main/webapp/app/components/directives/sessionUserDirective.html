@@ -1,0 +1,6 @@
+<li class="menuItem" data-ng-show="!session.user"><a href="#/login">{{translations.keys.loginPageLabel}}</a></li>
+<li class="menuItem" data-ng-show="session.user">{{session.user.firstName}} {{session.user.lastName}}</li>
+<li class="menuItem" data-ng-show="session.user">
+    ({{translations.keys.timeLeft | placeholders : minutesLeft : "Tabur"}})
+    <a id="logOutLink" href="#/logout" >{{translations.keys.logOutLabel}}</a>
+</li>

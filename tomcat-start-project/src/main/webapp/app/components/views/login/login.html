@@ -1,0 +1,21 @@
+<form id="loginForm" name="loginForm" data-ng-submit="submit()" >
+    <p>{{translations.keys.loginPageLabel}}</p>
+    <table>
+        <tr>
+            <td>{{translations.keys.userNameLabel}}:</td>
+            <td><input id="userName" type="text" placeholder="{{translations.keys.userNamePlaceholder}}" title="{{translations.keys.userNameTooltip}}" data-ng-model="userName" required></td>
+        </tr>
+        <tr>
+            <td>{{translations.keys.userPasswordLabel}}:</td>
+            <td><input id="userPassword" type="password" placeholder="{{translations.keys.userPasswordPlaceholder}}" title="{{translations.keys.userPasswordTooltip}}" data-ng-model="userPassword" required></td>
+        </tr>
+        <tr>
+            <td>
+                <input id="loginInput" type="submit" name="submit" title="{{translations.keys.submitButtonTooltip}}" value="{{translations.keys.submitButton}}" autofocus>
+            </td>
+            <td>
+                <input id="loginReset" type="reset" name="reset" title="{{translations.keys.resetButtonTooltip}}" value="{{translations.keys.resetButton}}">
+            </td>
+        </tr>
+    </table>
+</form>

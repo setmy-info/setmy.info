@@ -1,0 +1,22 @@
+{
+    "loginPageLabel": "Login",
+    "userNameLabel": "User name",
+    "userPasswordLabel": "User password",
+    "userNamePlaceholder": "User name...",
+    "userPasswordPlaceholder": "User password...",
+    "userNameTooltip": "Insert user name",
+    "userPasswordTooltip": "Insert user password",
+    "submitButton": "Login",
+    "resetButton": "Reset",
+    "submitButtonTooltip": "Ready to login",
+    "resetButtonTooltip": "Reset fields",
+    "logOutLabel": "Logout",
+    "language": "Language",
+    "currentVersion": "Current version is v%VERSION%.",
+    "thisIsPartialFor": "This is the partial for",
+    "view": "View",
+    "example": "First name: {0}, last name: {1} and just like that {3}.",
+    "sessionTimeOutMessage": "Constinue with session?",
+    "sessionTimeOutTitle": "Session timeout",
+    "timeLeft": "time left {0} minutes"
+}

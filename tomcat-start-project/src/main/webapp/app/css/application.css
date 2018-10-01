@@ -1,0 +1,39 @@
+/* app css stylesheet */
+
+.menuList {
+    list-style: none;
+    padding: 0 0 0;
+}
+
+ul.menuList {
+    margin-bottom: 0px;
+}
+
+li.menuItem {
+    display: inline;
+}
+
+li.menuItem :before {
+    padding-right: 0.3em;
+}
+
+li.menuItem :nth-child(1):before {
+    content: "";
+    padding: 0;
+}
+
+.topLeftCornerRadius {
+    border-top-left-radius: 3px;
+}
+
+.topRightCornerRadius {
+    border-top-right-radius: 3px;
+}
+
+.bottomLeftCornerRadius {
+    border-bottom-left-radius: 3px;
+}
+
+.bottomRightCornerRadius {
+    border-bottom-right-radius: 3px;
+}

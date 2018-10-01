@@ -1,0 +1,60 @@
+
+.noPadding {
+    padding: 0px;
+}
+
+.noMargin {
+    margin: 0px;
+}
+
+.noPaddingMargin {
+    padding: 0px;
+    margin: 0px;
+}
+
+.maxWidth {
+    width:  100%;
+}
+
+.maxHeight {
+    height: 100%;
+}
+
+.maxWidthHeight {
+    width:  100%;
+    height: 100%;
+}
+
+.floatLeft {
+    float: left;
+}
+
+.floatRight {
+    float: right;
+}
+
+.floatClear {
+    clear: both;
+}
+
+.noWrap {
+    white-space: nowrap;
+}
+
+/* Usage: autoScrollBars OR noScrollBars OR [noVerticalScrollBars OR-AND noHorizontalScrollBars]]*/
+.autoScrollBars {
+    overflow: auto;
+}
+
+.noScrollBars {
+    overflow: hidden;
+}
+
+.noVerticalScrollBars {
+    overflow-y: hidden;
+}
+
+.noHorizontalScrollBars {
+    overflow-x: hidden;
+}
+

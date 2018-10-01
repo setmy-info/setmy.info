@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" data-ng-app="webApplication" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" data-ng-app="webApplication" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" data-ng-app="webApplication" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" data-ng-app="webApplication" class="no-js"> <!--<![endif]-->
+    <head id="head">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AngularJS Seed App</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Minified part -->
+        <!--link rel="stylesheet" href="css/all.min.css">
+        <script src="js/all.min.js"></script-->
+        <!-- Ordinary part -->
+        <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+        <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
+        <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/main.css">
+        <link rel="stylesheet" href="../css/html-frames/html.css">
+        <link rel="stylesheet" href="../css/html-frames/html-frames.css">
+        <link rel="stylesheet" href="../css/html-frames/colors.css">
+        <link rel="stylesheet" href="css/application.css">
+        <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+
+    </head>
+    <body onload="webApplication.bodyOnLoad();" onblur="webApplication.bodyOnBlur();" onkeydown="webApplication.bodyOnKeyDown();" onmousedown="webApplication.bodyOnMouseDown();">
+        <ul class="menuList">
+            <li class="menuItem"><a href="#/view1">{{translations.keys.view}} 1</a></li>
+            <li class="menuItem"><a href="#/view2">{{translations.keys.view}} 2</a></li>
+            <li class="menuItem" data-session-user></li>
+            <li class="menuItem" data-language-selector></li>
+        </ul>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div data-ng-view></div>
+        <div><span data-application-version></span></div>
+        <script src="js/extend.js"></script>
+        <script src="js/typescript.js"></script>
+        <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+
+        <script src="lib/angular/angular.min.js"></script>
+        <script src="lib/angular-route/angular-route.min.js"></script>
+        <script src="lib/angular-cookies/angular-cookies.min.js"></script>
+        <script src="lib/angular-loader/angular-loader.min.js"></script>
+        <script src="lib/angular-resource/angular-resource.min.js"></script>
+        <script src="lib/angular-messages/angular-messages.min.js"></script>
+        <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+        <script src="js/angularLocaleChanger.js"></script>
+
+        <script src="lib/angular-classy/angular-classy.min.js"></script>
+        <script src="lib/angular-aop/build/angular-aop.min.js"></script>
+        <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="js/classyModelPlugin.js"></script>
+        <script src="js/application.js"></script>
+        <script src="components/aop/aspects.js"></script>
+        <script src="components/views/view1/view1Controller.js"></script>
+        <script src="components/views/view2/view2Controller.js"></script>
+        <script src="components/views/login/loginController.js"></script>
+        <script src="components/views/logout/logOutController.js"></script>
+        <script src="components/views/dialog/modalDialogController.js"></script>
+        <script src="components/views/logout/logOutDialogController.js"></script>
+        <script src="components/values/values.js"></script>
+        <script src="components/constants/constants.js"></script>
+        <script src="components/directives/applicationVersionDirective.js"></script>
+        <script src="components/directives/languageSelectorDirective.js"></script>
+        <script src="components/directives/sessionUserDirective.js"></script>
+        <script src="components/directives/tabsPanelDirective.js"></script>
+        <script src="components/resources/resources.js"></script>
+        <script src="components/filters/interpolateFilter.js"></script>
+        <script src="components/filters/placeholdersFilter.js"></script>
+        <script src="components/services/modelService.js"></script>
+        <script src="components/services/translationsService.js"></script>
+        <script src="components/services/configurationService.js"></script>
+        <script src="components/services/localStorageService.js"></script>
+        <script src="components/services/sessionStorageService.js"></script>
+        <script src="components/services/authenticationService.js"></script>
+        <script src="components/services/modalDialogService.js"></script>
+        <script src="components/services/sessionService.js"></script>
+        <script src="components/services/httpInterceptorService.js"></script>
+        <script src="components/services/timersService.js"></script>
+        <script src="components/services/cookiesService.js"></script>
+        <script src="components/services/schedulerService.js"></script>
+        <script src="components/services/authorizationService.js"></script>
+        <script src="components/services/personService.js"></script>
+        <script src="components/services/initService.js"></script>
+        <script src="lib/angular-dynamic-locale/dist/tmhDynamicLocale.js"></script>
+    </body>
+</html>

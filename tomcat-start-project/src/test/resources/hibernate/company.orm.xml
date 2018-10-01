@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-mappings
+    version="2.1"
+    xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+    
+    <description>The mapping for Company.</description>
+
+    <persistence-unit-metadata>
+        <persistence-unit-defaults>
+            <access>FIELD</access>
+        </persistence-unit-defaults>
+    </persistence-unit-metadata>
+
+    <entity name="Company" class="ee.pub.hibernate.model.Company">
+        <attributes>
+            <id name="id">
+                <column name="id" unique="true" nullable="false" column-definition="id"/>
+                <generated-value strategy="SEQUENCE" generator="company_id_seq"/>
+            </id>
+            <basic name="name">
+                <column name="name"/>
+            </basic>
+            <many-to-one name="country" fetch="EAGER" target-entity="ee.pub.hibernate.model.Country">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </many-to-one>
+            <one-to-many name="salesObjects" target-entity="ee.pub.hibernate.model.SalesObject" mapped-by="company_id" fetch="EAGER">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+        </attributes>
+    </entity>
+</entity-mappings>
