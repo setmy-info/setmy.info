@@ -41,5 +41,8 @@ docker-images/docker-centos-java/jdk*
 docker-images/docker-centos-java/openjdk*
 docker-images/docker-centos-java-tomcat/apache-tomcat*
 
+tomcat-start-project/download/*
+tomcat-start-project/apache-tomcat*
+
 # switch to regexp syntax.
 syntax: regexp

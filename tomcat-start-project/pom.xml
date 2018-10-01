@@ -1,54 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ee.pub.web.app</groupId>
-    <artifactId>tomcat-start-project</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <parent>
+        <groupId>info.setmy</groupId>
+        <artifactId>java-projects</artifactId>
+        <version>1.2.0-SNAPSHOT</version>
+    </parent>
 
+    <groupId>info.setmy</groupId>
+    <artifactId>tomcat-start-project</artifactId>
+    <version>1.2.0-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>tomcat-start-project</name>
-    <description>Simple tomcat.</description>
+    <description>Simple tomcat microservice.</description>
+    <url>https://bitbucket.org/imreit/setmy.info</url>
 
     <properties>
-        <!--maven.jetty.plugin.version>9.4.6.v20170531</maven.jetty.plugin.version-->
-        <maven.jetty.plugin.version>9.3.9.v20160517</maven.jetty.plugin.version>
-        <source.level>1.8</source.level>
-        <target.level>1.8</target.level>
-        <encoding.level>UTF-8</encoding.level>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>4.12</junit.version>
-        <mockito.version>2.6.3</mockito.version>
-        <struts2.version>2.3.28</struts2.version>
-        <log4j.version>1.2.17</log4j.version>
-        <hibernate.verion>5.2.10.Final</hibernate.verion>
-        <spring.version>4.3.10.RELEASE</spring.version>
-        <minify.name>all</minify.name>
-        <maven.tomcat.tomcatUsers.file>src/test/resources/tomcat-users.xml</maven.tomcat.tomcatUsers.file>
-        <jersey.version>2.22.2</jersey.version>
-        <cucumber.version>1.2.5</cucumber.version>
-        <groovy.version>2.4.12</groovy.version>
-        <maven.yuicompressor.force>true</maven.yuicompressor.force>
-        <!--netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server-->
-        <!--netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server-->
+        <!--netbeans.hint.deploy.server>gfv4ee7</netbeans.hint.deploy.server-->
+        <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
+        <maven.jetty.plugin.version>9.4.12.v20180830</maven.jetty.plugin.version>
+        <!-- maven.jetty.plugin.version>9.3.9.v20160517</maven.jetty.plugin.version -->
+        <spring.version>5.1.0.RELEASE</spring.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.verions}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.verions}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.verions}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.verions}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit5.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit5.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit5.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit5.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <version>${junit.platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.6.3</version>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -91,15 +143,20 @@
             <version>${spring.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.1.0.RELEASE</version>
+        </dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>javax.servlet.jsp-api</artifactId>
-            <version>2.3.0</version>
+            <version>2.3.3</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -108,9 +165,24 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>1.11.1.RELEASE</version>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>3.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>info.setmy</groupId>
+            <artifactId>java-web</artifactId>
+            <version>${info.setmy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.setmy</groupId>
+            <artifactId>java-db</artifactId>
+            <version>1.2.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -119,174 +191,31 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.8.0</version>
                 <configuration>
-                    <source>${source.level}</source>
-                    <target>${target.level}</target>
-                    <encoding>${encoding.level}</encoding>
-                    <!--compilerId>groovy-eclipse-compiler</compilerId-->
-                </configuration>
-                <!--dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>2.9.2-01</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-batch</artifactId>
-                        <version>2.4.3-01</version>
-                    </dependency>
-                </dependencies-->
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.groovy.maven</groupId>
-                <artifactId>gmaven-plugin</artifactId>
-                <version>1.0</version>
-                <executions>
-                    <execution>
-                        <id>typescript-build</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>execute</goal>
-                        </goals>
-                        <configuration>
-                            <source>${basedir}/src/main/groovy/build.groovy</source>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${maven.jetty.plugin.version}</version>
-                <configuration>
-                    <scanIntervalSeconds>0</scanIntervalSeconds>
-                    <webApp>
-                        <contextPath>/${project.artifactId}</contextPath>
-                    </webApp>
-                    <loginServices>
-                        <loginService implementation="org.eclipse.jetty.security.HashLoginService">
-                            <name>PubJaasRealm</name>
-                            <config>src/test/resources/realm.properties</config>
-                        </loginService>
-                    </loginServices>
-                    <contextXml>${basedir}/src/main/webapp/WEB-INF/jetty-context.xml</contextXml>
-                    <stopPort>8005</stopPort>
-                    <stopKey>STOP</stopKey>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>jetty.port</name>
-                            <value>8080</value>
-                        </systemProperty>
-                        <!-- systemProperty>
-                            <name>java.security.auth.login.config</name>
-                            <value>${basedir}/src/main/resources/jaas.config</value>
-                        </systemProperty -->
-                    </systemProperties>
-                </configuration>
-                <!-- executions>
-        <execution>
-            <id>start-jetty</id>
-            <phase>pre-integration-test</phase>                       
-            <goals>
-                <goal>run</goal>
-            </goals>
-            <configuration>
-                <daemon>true</daemon-->
-                <!--userRealms>
-                    <userRealm implementation="org.mortbay.jetty.security.HashUserRealm">
-                        <name>PubJaasRealm</name>
-                        <config>src/test/resources/realm.properties</config>
-                    </userRealm>
-                </userRealms-->
-                <!-- stopPort>8005</stopPort>
-                            <stopKey>STOP</stopKey>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>stop-jetty</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions-->
-                <dependencies>
-                    <!-- dependency>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-jaas</artifactId>
-                        <version>${maven.jetty.plugin.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>ee.pub.lib</groupId>
-                        <artifactId>jaas-start-project</artifactId>
-                        <version>1.0.0</version>
-                    </dependency -->
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>tomcat-maven-plugin</artifactId>
-                <version>1.1</version>
-                <configuration>
-                    <server>tomcat-server</server>
-                    <url>http://localhost:8080/manager</url>
-                    <path>/tomcat-start-project</path>
-                    <mode>both</mode>
-                    <mode>context</mode>
-                    <contextFile>src/main/webapp/META-INF/context.xml</contextFile>
+                    <!--source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target-->
+                    <release>${java.version}</release>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.6</version>
-                <executions>
-                    <execution>
-                        <id>attach-descriptor</id>
-                        <goals>
-                            <goal>attach-descriptor</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
                 <dependencies>
                     <dependency>
-                        <groupId>org.apache.maven.wagon</groupId>
-                        <artifactId>wagon-ssh</artifactId>
-                        <version>3.0.0</version>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>${junit.platform.version}</version>
                     </dependency>
                 </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pdf-plugin</artifactId>
-                <version>1.3</version>
-                <executions>
-                    <execution>
-                        <id>pdf</id>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>pdf</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
-                            <includeReports>false</includeReports>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <encoding>${encoding.level}</encoding>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.18.1</version>
+                <version>${failsafe.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -298,77 +227,228 @@
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>${junit.platform.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.4</version>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
                 <executions>
                     <execution>
-                        <id>attach-sources</id>
+                        <id>prepare-agent</id>
                         <goals>
-                            <goal>jar</goal>
-                            <goal>test-jar</goal>
+                            <goal>prepare-agent</goal>
                         </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>target/jacoco.exec</dataFile>
+                            <outputDirectory>target/jacoco-ut</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <!-- plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>yuicompressor-maven-plugin</artifactId>
-                <version>1.5.1</version>
-                <executions>
-                    <execution>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>jslint</goal>
-                            <goal>compress</goal>
-                        </goals>
-                    </execution>
-                </executions>        
                 <configuration>
-                    <excludes>
-                        <exclude>**/*-min.js</exclude>
-                        <exclude>**/*-min.css</exclude>
-                        <exclude>**/*.min.js</exclude>
-                        <exclude>**/*.min.css</exclude>
-                        <exclude>**/app/lib/**</exclude>
-                        <exclude>**/ieshiv.js</exclude>
-                    </excludes>
+                    <systemPropertyVariables>
+                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+                    </systemPropertyVariables>
                 </configuration>
-            </plugin-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <warName>${project.artifactId}</warName>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
             </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.2.2</version>
+                <version>${pitest.version}</version>
                 <configuration>
                     <targetClasses>
-                        <param>ee.pub.model*</param>
+                        <param>info.setmy.models*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>ee.pub.model*</param>
+                        <param>info.setmy.models*</param>
                     </targetTests>
                 </configuration>
+            </plugin>
+            <!--plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.9.0</version>
+            </plugin-->
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
             </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <additionalOptions>-html5</additionalOptions>
+                </configuration>
+            </plugin>
+            <!--plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <tarLongFileMode>gnu</tarLongFileMode>
+                    <descriptors>
+                        <descriptor>src/main/assembly/src.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.16</version>
+                <executions>
+                    <execution>
+                        <id>download-licenses</id>
+                        <goals>
+                            <goal>download-licenses</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${maven.jetty.plugin.version}</version>
+                <configuration>
+                    <supportedPackagings>war</supportedPackagings>
+                    <webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/${project.name}-${project.version}</contextPath>
+                        <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+                            <resourcesAsCSV>${project.basedir}/src/main/webapp</resourcesAsCSV>
+                        </baseResource>
+                    </webApp>
+                    <useTestClasspath>true</useTestClasspath>
+                    <contextXml>${project.basedir}/src/main/webapp/WEB-INF/jetty-context.xml</contextXml>
+                    <jvmArgs>-Dorg.eclipse.jetty.webapp.LEVEL=DEBUG</jvmArgs>
+                    <jettyProperties>
+                        <jettyProperty>jetty.server.dumpAfterStart=true</jettyProperty>
+                    </jettyProperties>
+                    <stopPort>8005</stopPort>
+                    <stopKey>STOP</stopKey>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>jetty.port</name>
+                            <value>8080</value>
+                        </systemProperty>
+                    </systemProperties>
+                    <!--modules>
+                        <module>apache-jsp</module>
+                        <module>apache-jstl</module>
+                        <module>jmx</module>
+                    </modules-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start-jetty</id>
+                        <phase>pre-integration-test</phase>                       
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                        <configuration>
+                            <daemon>true</daemon>
+                            <stopPort>8005</stopPort>
+                            <stopKey>STOP</stopKey>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-jetty</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+                <!--configuration>
+                    <warName>${project.artifactId}</warName>
+                </configuration-->
+            </plugin>
         </plugins>
+
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -381,49 +461,117 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+
     </build>
 
+    <profiles>
+        <profile>
+            <id>sign</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spring-boot.run.profiles>default,dev</spring-boot.run.profiles>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <spring-boot.run.profiles>default,test</spring-boot.run.profiles>
+            </properties>
+        </profile>
+        <profile>
+            <id>ci</id>
+            <properties>
+                <spring-boot.run.profiles>default,ci</spring-boot.run.profiles>
+            </properties>
+        </profile>
+        <profile>
+            <id>live</id>
+            <properties>
+                <spring-boot.run.profiles>default,live</spring-boot.run.profiles>
+            </properties>
+        </profile>
+    </profiles>
+
     <reporting>
-        <excludeDefaults>true</excludeDefaults>
-        <outputDirectory>${project.build.directory}/site</outputDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
-                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-                    <showAvatarImages>true</showAvatarImages>
-                </configuration>
+                <version>3.0.0</version>
             </plugin>
+            <!--
+            Problem with 3.0.5 plugin, that is crashing in middle of site building.
+            https://issues.apache.org/jira/browse/MPIR-374
+            -->
+            <!-- plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>3.0.5</version>
+                <configuration>
+                    <excludeFilterFile>${basedir}/src/test/resources/findbugs-exclude.xml</excludeFilterFile>
+                    <includeFilterFile>${basedir}/src/test/resources/findbugs-include.xml</includeFilterFile>
+                </configuration>
+            </plugin-->
+            <!--plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>3.1.6</version>
+                <configuration>
+                    <excludeFilterFile>${basedir}/src/test/resources/spotbugs-exclude.xml</excludeFilterFile>
+                    <includeFilterFile>${basedir}/src/test/resources/spotbugs-include.xml</includeFilterFile>
+                </configuration>
+            </plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <violationSeverity>warning</violationSeverity>
+                    <consoleOutput>true</consoleOutput>
+                    <configLocation>${basedir}/src/test/resources/code.xml</configLocation>
+                    <!-- configLocation>${basedir}/src/test/resources/sun_checks.xml</configLocation -->
+                    <!-- configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation -->
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
                 <version>2.12.1</version>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.17</version>
-                <configuration>
-                    <violationSeverity>warning</violationSeverity>
-                    <consoleOutput>true</consoleOutput>
-                    <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
-                    <!--configLocation>${basedir}/src/test/resources/google-checkstyle.xml</configLocation-->
-                    <!--configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation-->
-                </configuration>
-            </plugin>
-            <plugin>
+            <!-- can go broken -->
+            <!--plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>javancss-maven-plugin</artifactId>
                 <version>2.1</version>
-            </plugin>
+            </plugin-->
+            <!--plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.5</version>
+            </plugin-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>taglist-maven-plugin</artifactId>
@@ -448,7 +596,7 @@
                     </tagListOptions>
                 </configuration>
             </plugin>
-            <plugin>
+            <!--plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.7</version>
@@ -458,14 +606,60 @@
                         <format>xml</format>
                     </formats>
                 </configuration>
+            </plugin-->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
             </plugin>
             <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>${pitest.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                            <report>test-javadoc</report>
+                        </reports>
+                    </reportSet>
+                    <reportSet>
+                        <id>aggregate</id>
+                        <inherited>false</inherited>
+                        <reports>
+                            <report>aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+                <configuration>
+                    <additionalOptions>-html5</additionalOptions>
+                </configuration>
+            </plugin>
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-doap-plugin</artifactId>
                 <version>1.2</version>
                 <configuration>
                     <doapOptions>
-                        <!-- Default values -->
                         <bugDatabase>${project.issueManagement.url}</bugDatabase>
                         <category>library</category>
                         <created>${project.inceptionYear}-01-01</created>
@@ -484,37 +678,34 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.5</version>
-                <configuration>
-                    <!--includeFilterFile>${project.baseUri}/src/test/resources/findbugs-include.xml</includeFilterFile-->
-                    <!--excludeFilterFile>${project.baseUri}/src/test/resources/findbugs-exclude.xml</excludeFilterFile-->
-                    <!--onlyAnalyze>ee.pub.*</onlyAnalyze-->
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.8</version>
                 <configuration>
-                    <targetJdk>${source.level}</targetJdk>
+                    <targetJdk>${maven.compiler.source}</targetJdk>
                 </configuration>
             </plugin>
-            <!--plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-linkcheck-plugin</artifactId>
                 <version>1.2</version>
-            </plugin-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>2.5</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-docck-plugin</artifactId>
                 <version>1.1</version>
+            </plugin-->
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>3.3.1</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
             </plugin>
         </plugins>
     </reporting>
@@ -531,36 +722,44 @@
                 <role>Reviewer</role>
             </roles>
             <timezone>+2</timezone>
-            <properties>
+            <!--properties>
                 <picUrl>http://tinyurl.com/xxxxxxxxx</picUrl>
-            </properties>
+            </properties-->
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:hg:https://bitbucket.org/imreit/tomcat-start-project/</connection>
-        <developerConnection>scm:hg:https://bitbucket.org/imreit/tomcat-start-project/</developerConnection>
-        <url>https://bitbucket.org/imreit/tomcat-start-project</url>
+        <connection>scm:hg:https://bitbucket.org/imreit/setmy.info</connection>
+        <developerConnection>scm:hg:ssh://hg@bitbucket.org/imreit/setmy.info</developerConnection>
+        <url>https://bitbucket.org/imreit/setmy.info</url>
+        <tag>v1.0.7</tag>
     </scm>
 
     <issueManagement>
-        <system>JIra</system>
-        <url>https://bitbucket.org/imreit/tomcat-start-project/issues</url>
+        <system>Bitbucket</system>
+        <url>https://bitbucket.org/imreit/setmy.info/issues</url>
     </issueManagement>
-    
-    <repositories>
-        <repository>
-            <id>springsource-repo</id>
-            <name>SpringSource Repository</name>
-            <url>http://repo.springsource.org/release</url>
-        </repository>
-        <repository>
-            <id>sonatype-snapshots</id>
+
+    <ciManagement />
+    <contributors />
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>		
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
-    </repositories>
+    </distributionManagement>
+
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://bitbucket.org/imreit/setmy.info/downloads/MIT.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
 </project>

@@ -69,7 +69,7 @@
         <module>java-modular-ssn</module>
         <module>documentation</module>
         <module>java-rest-client</module>
-        <!-- module>tomcat-start-project</module -->
+        <module>tomcat-start-project</module>
     </modules>
 
     <dependencies>
