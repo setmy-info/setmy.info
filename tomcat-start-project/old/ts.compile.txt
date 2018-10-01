@@ -1,5 +1,0 @@
---module amd
---removeComments
--t ES5
---outDir ./src/main/webapp/app/js
---out ./src/main/webapp/app/js/typescript.js
