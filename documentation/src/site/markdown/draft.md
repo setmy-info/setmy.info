@@ -10,6 +10,7 @@ mvn archetype:create
 https://dzone.com/articles/how-publish-maven-site-docs
 
 firefox --new-tab `pwd`/src/site/resources/static.html
+firefox --new-tab `pwd`/target/site/index.html
 
 https://wiki.eclipse.org/EclipseLink/Examples/JPA/EclipseLink-ORM.XML
 https://dzone.com/articles/persisting-entity-classes
