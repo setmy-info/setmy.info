@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Named("exampleController")
 @RestController
-@RequestMapping(path = "api")
+@RequestMapping(path = "")
 public class ExampleController {
 
     final Logger log = LogManager.getLogger(ExampleController.class);
@@ -25,6 +25,7 @@ public class ExampleController {
     private final ExampleService exampleService;
 
     public ExampleController(final ExampleService exampleService) {
+        com.fasterxml.jackson.databind.exc.InvalidDefinitionException s;
         this.exampleService = exampleService;
     }
 

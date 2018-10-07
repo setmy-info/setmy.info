@@ -55,38 +55,14 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
-    <!--servlet>
-        <description>Jersey Based Web Service</description>
-        <servlet-name>jersey-serlvet</servlet-name>
-        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-        <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>info.setmy.microservice.universum.rest,info.setmy.microservice.rest</param-value>
-        </init-param>
-        <init-param>
-            <param-name>jersey.config.server.provider.classnames</param-name>
-            <param-value>
-                ee.pub.web.rest.filter.ResponseFilter,
-                ee.pub.web.rest.filter.RequestFilter,
-                ee.pub.web.rest.filter.PreMatchingFilter,
-                ee.pub.web.rest.filter.CheckRequestFilter
-            </param-value>
-        </init-param>
-        <init-param>
-            <param-name>jersey.config.server.provider.scanning.recursive</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <init-param>
-            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
+    <servlet>
+        <servlet-name>javax.ws.rs.core.Application</servlet-name>
     </servlet>
-
+ 
     <servlet-mapping>
-        <servlet-name>jersey-serlvet</servlet-name>
+        <servlet-name>javax.ws.rs.core.Application</servlet-name>
         <url-pattern>/rest/*</url-pattern>
-    </servlet-mapping-->
+    </servlet-mapping>
 
     <servlet>
         <description>Override init parameter to avoid nasty file locking issue on windows.</description>
@@ -96,4 +72,20 @@
             <param-value>false</param-value>
         </init-param>
     </servlet>
+    
+    <servlet>
+        <servlet-name>api</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value></param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>api</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>
