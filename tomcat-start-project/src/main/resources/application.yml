@@ -29,5 +29,8 @@ dataSource:
     liquibase:
         changeLog: classpath:liquibase/master.xml
         contexts: test, production
-        defaultSchema:
+        defaultSchema: public
         dropFirst: false
+    jpa:
+        persistenceUnitName: default
+        persistenceXmlPath: classpath:META-INF/persistence.xml

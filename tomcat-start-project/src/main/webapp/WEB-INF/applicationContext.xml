@@ -15,15 +15,18 @@
     <import resource="applicationYml.xml"/>
     <import resource="dataSource.xml"/>
     <import resource="liquibase.xml"/>
+    <import resource="orm.xml"/>
 
-    <!--context:annotation-config />
+    <context:annotation-config />
     <context:spring-configured />
     <tx:annotation-driven />
-    <context:component-scan base-package="ee.pub" />
-    <context:component-scan base-package="ee.pub.web.rest" />
-    <jpa:repositories base-package="ee.pub.dao"/>
-    <context:property-placeholder location="classpath*:jdbc.properties"/>
-    <aop:aspectj-autoproxy /-->
-
+    <context:component-scan base-package="info.setmy.microservice.config" />
+    <context:component-scan base-package="info.setmy.microservice.rest" />
+    <context:component-scan base-package="info.setmy.microservice.services" />
+    <context:component-scan base-package="info.setmy.microservice.dao" />
+    <context:component-scan base-package="info.setmy.microservice.properties" />
+    <context:component-scan base-package="info.setmy.microservice.controllers" />
+    <jpa:repositories base-package="info.setmy.microservice.dao"/>
+    <aop:aspectj-autoproxy />
 
 </beans>
