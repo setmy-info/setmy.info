@@ -12,11 +12,11 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <bean name="dataSourcePropertiesConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location">
-            <value>classpath:jdbc.properties</value>
-        </property>
+    <bean id="ymlDataSourceProperties" class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">
+        <property name="resources" value="classpath:jdbc.yml"/>
     </bean>
+
+    <context:property-placeholder properties-ref="ymlDataSourceProperties"/>
 
     <bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${dataSource.jdbc.driverClassName}" />

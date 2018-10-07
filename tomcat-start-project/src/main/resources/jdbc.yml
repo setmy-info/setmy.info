@@ -1,8 +1,10 @@
 # H2
-dataSource.jdbc.driverClassName=org.h2.Driver
-dataSource.jdbc.url=jdbc:h2:file:./live
-dataSource.jdbc.username=sa
-dataSource.jdbc.password=
+dataSource:
+    jdbc:
+        driverClassName: org.h2.Driver
+        url: jdbc:h2:file:./live
+        username: sa
+        password:
 
 # PostgreSQL
 #dataSource.jdbc.driverClassName=org.postgresql.Driver
