@@ -5,30 +5,29 @@ dataSource:
         url: jdbc:h2:file:./live
         username: sa
         password:
+# PostgreSQL
+#       driverClassName=org.postgresql.Driver
+#       url=jdbc:postgresql://localhost/tomcatdb
+#       username=test
+#       password=g6p8
+# HSQLDB
+# Server
+#       driverClassName=org.hsqldb.jdbcDriver
+#       url=jdbc:hsqldb:hsql://localhost
+#       username=sa
+#       password=
+# Memory
+#       driverClassName=org.hsqldb.jdbcDriver
+#       url=jdbc:hsqldb:mem:.
+#       username=SA
+#       password=
+# File
+#       driverClassName=org.hsqldb.jdbcDriver
+#       url=jdbc:hsqldb:file:./live;hsqldb.write_delay=false;shutdown=true
+#       username=SA
+#       password=
     liquibase:
         changeLog: classpath:liquibase/master.xml
         contexts: test, production
         defaultSchema:
         dropFirst: false
-
-# PostgreSQL
-#dataSource.jdbc.driverClassName=org.postgresql.Driver
-#dataSource.jdbc.url=jdbc:postgresql://localhost/tomcatdb
-#dataSource.jdbc.username=test
-#dataSource.jdbc.password=g6p8
-
-# HSQLDB
-#dataSource.jdbc.driverClassName=org.hsqldb.jdbcDriver
-#dataSource.jdbc.url=jdbc:hsqldb:hsql://localhost
-#dataSource.jdbc.username=SA
-#dataSource.jdbc.password=
-
-#dataSource.jdbc.driverClassName=org.hsqldb.jdbcDriver
-#dataSource.jdbc.url=jdbc:hsqldb:mem:.
-#dataSource.jdbc.username=SA
-#dataSource.jdbc.password=
-
-#dataSource.jdbc.driverClassName=org.hsqldb.jdbcDriver
-#dataSource.jdbc.url=jdbc:hsqldb:file:./live;hsqldb.write_delay=false;shutdown=true
-#dataSource.jdbc.username=SA
-#dataSource.jdbc.password=
