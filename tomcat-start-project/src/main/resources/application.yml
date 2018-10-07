@@ -15,7 +15,7 @@ spring:
 
 dataSource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:./live 
+    url: jdbc:h2:file:./live
     username: sa
     password:
 
