@@ -25,6 +25,6 @@ public class UniversumRestIT {
 
     @Test
     public void testHello() {
-        when().get(URL).then().statusCode(200).body("0.name", equalTo("Sun"));
+        when().get(URL).then().statusCode(200).body("", equalTo("Sun"));
     }
 }
