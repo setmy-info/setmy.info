@@ -1,14 +1,13 @@
 package info.setmy.microservice.rest;
 
 import static io.restassured.RestAssured.when;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.contains;
+import static io.restassured.RestAssured.withNoArgs;
+import io.restassured.parsing.Parser;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -28,6 +27,6 @@ public class ExampleRestIT {
 
     @Test
     public void testHello() {
-        when().get(URL).then().statusCode(200);
+        when().get(URL).then().parser("text/plain", Parser.TEXT).contentType("text/plain").statusCode(200).body(containsString("Hello World from DB"));
     }
 }

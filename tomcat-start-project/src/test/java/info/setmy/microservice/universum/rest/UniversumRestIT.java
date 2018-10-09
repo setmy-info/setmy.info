@@ -1,7 +1,6 @@
 package info.setmy.microservice.universum.rest;
 
 import static io.restassured.RestAssured.when;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.After;
 import org.junit.Before;
@@ -25,6 +24,6 @@ public class UniversumRestIT {
 
     @Test
     public void testHello() {
-        when().get(URL).then().statusCode(200).body("", equalTo("Sun"));
+        when().get(URL).then().statusCode(200).body("[0].name", equalTo("Sun"));
     }
 }

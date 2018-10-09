@@ -1,7 +1,6 @@
 package info.setmy.microservice.controllers;
 
 import static io.restassured.RestAssured.when;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.After;
 import org.junit.Before;
