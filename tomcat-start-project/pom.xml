@@ -24,7 +24,6 @@
         <!--netbeans.hint.deploy.server>gfv4ee7</netbeans.hint.deploy.server-->
         <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
         <maven.jetty.plugin.version>9.4.12.v20180830</maven.jetty.plugin.version>
-        <!-- maven.jetty.plugin.version>9.3.9.v20160517</maven.jetty.plugin.version -->
         <spring.version>5.1.0.RELEASE</spring.version>
     </properties>
 
@@ -485,7 +484,7 @@
                     <systemProperties>
                         <systemProperty>
                             <name>jetty.port</name>
-                            <value>8080</value>
+                            <value>8777</value>
                         </systemProperty>
                     </systemProperties>
                     <!--modules>

@@ -12,7 +12,7 @@ import org.junit.Test;
  */
 public class ExampleControllerIT {
 
-    private final String URL = "http://localhost:8080/tomcat-start-project-1.2.0-SNAPSHOT/api/example";
+    private final String URL = "http://localhost:8777/tomcat-start-project-1.2.0-SNAPSHOT/api/example";
 
     @Before
     public void setUp() {

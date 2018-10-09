@@ -12,7 +12,7 @@ import org.junit.Test;
  */
 public class UniversumRestIT {
 
-    private final String URL = "http://localhost:8080/tomcat-start-project-1.2.0-SNAPSHOT/rest/universum";
+    private final String URL = "http://localhost:8777/tomcat-start-project-1.2.0-SNAPSHOT/rest/universum";
 
     @Before
     public void setUp() {

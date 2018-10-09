@@ -15,7 +15,7 @@ import org.junit.Test;
  */
 public class ExampleRestIT {
 
-    private final String URL = "http://localhost:8080/tomcat-start-project-1.2.0-SNAPSHOT/rest/hello";
+    private final String URL = "http://localhost:8777/tomcat-start-project-1.2.0-SNAPSHOT/rest/hello";
 
     @Before
     public void setUp() {
