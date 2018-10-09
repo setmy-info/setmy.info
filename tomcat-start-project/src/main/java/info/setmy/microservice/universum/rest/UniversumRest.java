@@ -37,7 +37,7 @@ public class UniversumRest {
     }
 
     /**
-     * REST call GET : http://localhost:8080/rest/universum/1
+     * REST call GET : http://localhost:8080/tomcat-start-project-1.2.0-SNAPSHOT/rest/universum/1
      * 
      * @param scale to calculate
      * @return planets list in scaled.
@@ -49,7 +49,7 @@ public class UniversumRest {
         return universumService.getScaled(scale);
     }
     
-    // REST Call GET : http://localhost:8080/rest/universum
+    // REST Call GET : http://localhost:8080/tomcat-start-project-1.2.0-SNAPSHOT/rest/universum
     @GET
     @Produces(APPLICATION_JSON)
     public List<CelestialObject> scale() {
