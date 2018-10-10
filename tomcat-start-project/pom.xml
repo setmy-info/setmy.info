@@ -353,10 +353,10 @@
                 <version>${pitest.version}</version>
                 <configuration>
                     <targetClasses>
-                        <param>info.setmy.models*</param>
+                        <param>info.setmy.microservice*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>info.setmy.models*</param>
+                        <param>info.setmy.microservice*Test</param>
                     </targetTests>
                 </configuration>
             </plugin>
