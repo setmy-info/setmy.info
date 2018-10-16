@@ -64,10 +64,10 @@
     <!-- Miscellaneous other checks.                   -->
     <!-- See http://checkstyle.sf.net/config_misc.html -->
     <module name="RegexpSingleline">
-        <property name="format" value="\s+$"/>
-        <property name="minimum" value="0"/>
-        <property name="maximum" value="0"/>
-        <property name="message" value="Line has trailing spaces."/>
+       <property name="format" value="\s+$"/>
+       <property name="minimum" value="0"/>
+       <property name="maximum" value="0"/>
+       <property name="message" value="Line has trailing spaces."/>
     </module>
 
     <!-- Checks for Headers                                -->
@@ -81,11 +81,10 @@
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
-        <!-- Coop Pank : Clean code have less comments -->
-        <!-- module name="JavadocMethod"/>
+        <module name="JavadocMethod"/>
         <module name="JavadocType"/>
         <module name="JavadocVariable"/>
-        <module name="JavadocStyle"/ -->
+        <module name="JavadocStyle"/>
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->
@@ -110,10 +109,7 @@
 
         <!-- Checks for Size Violations.                    -->
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
-        <!-- Coop Pank : -->
-        <module name="LineLength">
-            <property name="max" value="120"/>
-        </module>
+        <module name="LineLength"/>
         <module name="MethodLength"/>
         <module name="ParameterNumber"/>
 
@@ -158,8 +154,7 @@
 
         <!-- Checks for class design                         -->
         <!-- See http://checkstyle.sf.net/config_design.html -->
-        <!-- Coop Pank : probably can harm unit testing -->
-        <!-- module name="DesignForExtension"/ -->
+        <module name="DesignForExtension"/>
         <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
