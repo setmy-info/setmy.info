@@ -628,7 +628,7 @@
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
                     <configLocation>${basedir}/src/test/resources/code.xml</configLocation>
-                    <!-- configLocation>${basedir}/src/test/resources/sun_checks.xml</configLocation -->
+                    <!-- configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation -->
                     <!-- configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation -->
                 </configuration>
             </plugin>
