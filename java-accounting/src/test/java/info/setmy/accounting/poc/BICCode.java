@@ -2,7 +2,6 @@ package info.setmy.accounting.poc;
 
 import java.util.regex.Pattern;
 import info.setmy.exceptions.ParsingException;
-import java.util.regex.Matcher;
 
 /**
  *
@@ -14,8 +13,13 @@ import java.util.regex.Matcher;
  */
 public class BICCode {
 
-    private static final Pattern LETTERS_PATTER = Pattern.compile("[A-Za-z]");
-    private static final Pattern LETTERS_AND_DIGITS_PATTER = Pattern.compile("[A-Za-z0-9]");
+    private static final Pattern LETTERS_PATTER = Pattern.compile("^[A-Za-z]+$");
+    private static final Pattern LETTERS_AND_DIGITS_PATTER = Pattern.compile("^[A-Za-z0-9]+$");
+
+    private static final String BRANCH_CODE_CONTAINS_UN_ACCEPTABLE_CHARACTERS = "Branch code contains un acceptable characters";
+    private static final String LOCATION_CODE_CONTAINS_UN_ACCEPTABLE_CHARACTERS = "Location code contains un acceptable characters";
+    private static final String COUNTRY_CODE_CONTAINS_UN_ACCEPTABLE_CHARATERS = "Country code contains un acceptable characters";
+    private static final String BANK_CODE_CONTAINS_UN_ACCEPTABLE_CHARACTERS = "Bank code contains un acceptable characters";
 
     private String original;
 
@@ -39,20 +43,62 @@ public class BICCode {
     }
 
     public final void parse(final String bicCodeString) {
-        if (bicCodeString.length() != 11) {
-            throw new ParsingException("");
-        }
+        validateLenght(bicCodeString, 11);
         final String bankCodePart = bicCodeString.substring(0, 4);
-        final String countryCodePart = bicCodeString.substring(4, 2);
-        final String locationCodePart = bicCodeString.substring(6, 2);
-        final String branchCodePart = bicCodeString.substring(8, 3);
-        
-        Matcher m = LETTERS_PATTER.matcher(bankCodePart);
-        m = LETTERS_PATTER.matcher(countryCodePart);
-        m = LETTERS_AND_DIGITS_PATTER.matcher(locationCodePart);
-        m = LETTERS_AND_DIGITS_PATTER.matcher(branchCodePart);
-        
+        final String countryCodePart = bicCodeString.substring(4, 6);
+        final String locationCodePart = bicCodeString.substring(6, 8);
+        final String branchCodePart = bicCodeString.substring(8, 11);
+        validateBankCode(bankCodePart);
+        validateCountryCode(countryCodePart);
+        validateLocationCode(locationCodePart);
+        validateBranchCode(branchCodePart);
         original = bicCodeString;
+        bankCode = bankCodePart;
+        countryCode = countryCodePart;
+        locationCode = locationCodePart;
+        branchCode = branchCodePart;
+    }
+
+    private void validateLenght(final String str, int len) throws ParsingException {
+        if (str.length() != len) {
+            throw new ParsingException("Length is not correct");
+        }
+    }
+
+    private void validateBranchCode(final String branchCodePart) throws ParsingException {
+        validateLenght(branchCodePart, 3);
+        if (!validateLettersAndDigits(branchCodePart)) {
+            throw new ParsingException(BRANCH_CODE_CONTAINS_UN_ACCEPTABLE_CHARACTERS);
+        }
+    }
+
+    private void validateLocationCode(final String locationCodePart) throws ParsingException {
+        validateLenght(locationCodePart, 2);
+        if (!validateLettersAndDigits(locationCodePart)) {
+            throw new ParsingException(LOCATION_CODE_CONTAINS_UN_ACCEPTABLE_CHARACTERS);
+        }
+    }
+
+    private void validateCountryCode(final String countryCodePart) throws ParsingException {
+        validateLenght(countryCodePart, 2);
+        if (!validateLetters(countryCodePart)) {
+            throw new ParsingException(COUNTRY_CODE_CONTAINS_UN_ACCEPTABLE_CHARATERS);
+        }
+    }
+
+    private void validateBankCode(final String bankCodePart) throws ParsingException {
+        validateLenght(bankCodePart, 4);
+        if (!validateLetters(bankCodePart)) {
+            throw new ParsingException(BANK_CODE_CONTAINS_UN_ACCEPTABLE_CHARACTERS);
+        }
+    }
+
+    private boolean validateLetters(final String str) {
+        return LETTERS_PATTER.matcher(str).matches();
+    }
+
+    private boolean validateLettersAndDigits(final String str) {
+        return LETTERS_AND_DIGITS_PATTER.matcher(str).matches();
     }
 
     public String getBankCode() {
@@ -60,6 +106,7 @@ public class BICCode {
     }
 
     public void setBankCode(String bankCode) {
+        validateBankCode(bankCode);
         this.bankCode = bankCode;
     }
 
@@ -68,6 +115,7 @@ public class BICCode {
     }
 
     public void setCountryCode(String countryCode) {
+        validateCountryCode(countryCode);
         this.countryCode = countryCode;
     }
 
@@ -76,6 +124,7 @@ public class BICCode {
     }
 
     public void setLocationCode(String locationCode) {
+        validateLocationCode(locationCode);
         this.locationCode = locationCode;
     }
 
@@ -84,13 +133,23 @@ public class BICCode {
     }
 
     public void setBranchCode(String branchCode) {
+        validateBranchCode(branchCode);
         this.branchCode = branchCode;
+    }
+
+    public String buildString() {
+        final StringBuffer stringBuilder = new StringBuffer();
+        stringBuilder.
+                append(bankCode).
+                append(countryCode).
+                append(locationCode).
+                append(branchCode);
+        original = stringBuilder.toString();
+        return original;
     }
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer();
-
-        return sb.toString();
+        return original;
     }
 }
