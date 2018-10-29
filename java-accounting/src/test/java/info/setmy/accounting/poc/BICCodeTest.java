@@ -42,13 +42,13 @@ public class BICCodeTest {
     @Test(expected = LengthValidationException.class)
     public void wrongLengthBankCode1() {
         bicCode = new BICCode();
-        bicCode.setBankCode("123");
+        bicCode.setBankCode("SPF");
     }
 
     @Test(expected = LengthValidationException.class)
     public void wrongLengthBankCode2() {
         bicCode = new BICCode();
-        bicCode.setBankCode("12345");
+        bicCode.setBankCode("SPFBB");
     }
 
     @Test(expected = ValidationException.class)
