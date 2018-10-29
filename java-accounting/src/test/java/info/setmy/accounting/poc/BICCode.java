@@ -1,7 +1,8 @@
 package info.setmy.accounting.poc;
 
+import info.setmy.exceptions.LengthValidationException;
 import java.util.regex.Pattern;
-import info.setmy.exceptions.ParsingException;
+import info.setmy.exceptions.ValidationException;
 
 /**
  *
@@ -59,37 +60,37 @@ public class BICCode {
         branchCode = branchCodePart;
     }
 
-    private void validateLenght(final String str, int len) throws ParsingException {
+    private void validateLenght(final String str, int len) {
         if (str.length() != len) {
-            throw new ParsingException("Length is not correct");
+            throw new LengthValidationException("Length is not correct");
         }
     }
 
-    private void validateBranchCode(final String branchCodePart) throws ParsingException {
+    private void validateBranchCode(final String branchCodePart) {
         validateLenght(branchCodePart, 3);
         if (!validateLettersAndDigits(branchCodePart)) {
-            throw new ParsingException(BRANCH_CODE_CONTAINS_UN_ACCEPTABLE_CHARACTERS);
+            throw new ValidationException(BRANCH_CODE_CONTAINS_UN_ACCEPTABLE_CHARACTERS);
         }
     }
 
-    private void validateLocationCode(final String locationCodePart) throws ParsingException {
+    private void validateLocationCode(final String locationCodePart) {
         validateLenght(locationCodePart, 2);
         if (!validateLettersAndDigits(locationCodePart)) {
-            throw new ParsingException(LOCATION_CODE_CONTAINS_UN_ACCEPTABLE_CHARACTERS);
+            throw new ValidationException(LOCATION_CODE_CONTAINS_UN_ACCEPTABLE_CHARACTERS);
         }
     }
 
-    private void validateCountryCode(final String countryCodePart) throws ParsingException {
+    private void validateCountryCode(final String countryCodePart) {
         validateLenght(countryCodePart, 2);
         if (!validateLetters(countryCodePart)) {
-            throw new ParsingException(COUNTRY_CODE_CONTAINS_UN_ACCEPTABLE_CHARATERS);
+            throw new ValidationException(COUNTRY_CODE_CONTAINS_UN_ACCEPTABLE_CHARATERS);
         }
     }
 
-    private void validateBankCode(final String bankCodePart) throws ParsingException {
+    private void validateBankCode(final String bankCodePart) {
         validateLenght(bankCodePart, 4);
         if (!validateLetters(bankCodePart)) {
-            throw new ParsingException(BANK_CODE_CONTAINS_UN_ACCEPTABLE_CHARACTERS);
+            throw new ValidationException(BANK_CODE_CONTAINS_UN_ACCEPTABLE_CHARACTERS);
         }
     }
 
@@ -107,6 +108,7 @@ public class BICCode {
 
     public void setBankCode(String bankCode) {
         validateBankCode(bankCode);
+        original = null;
         this.bankCode = bankCode;
     }
 
@@ -116,6 +118,7 @@ public class BICCode {
 
     public void setCountryCode(String countryCode) {
         validateCountryCode(countryCode);
+        original = null;
         this.countryCode = countryCode;
     }
 
@@ -125,6 +128,7 @@ public class BICCode {
 
     public void setLocationCode(String locationCode) {
         validateLocationCode(locationCode);
+        original = null;
         this.locationCode = locationCode;
     }
 
@@ -134,10 +138,11 @@ public class BICCode {
 
     public void setBranchCode(String branchCode) {
         validateBranchCode(branchCode);
+        original = null;
         this.branchCode = branchCode;
     }
 
-    public String buildString() {
+    private void buildOriginal() {
         final StringBuffer stringBuilder = new StringBuffer();
         stringBuilder.
                 append(bankCode).
@@ -145,11 +150,13 @@ public class BICCode {
                 append(locationCode).
                 append(branchCode);
         original = stringBuilder.toString();
-        return original;
     }
 
     @Override
     public String toString() {
+        if (original == null) {
+            buildOriginal();
+        }
         return original;
     }
 }

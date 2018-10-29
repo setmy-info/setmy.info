@@ -1,6 +1,7 @@
 package info.setmy.accounting.poc;
 
-import info.setmy.exceptions.ParsingException;
+import info.setmy.exceptions.LengthValidationException;
+import info.setmy.exceptions.ValidationException;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -20,29 +21,87 @@ public class BICCodeTest {
     public void parstingAndToString() {
         bicCode = new BICCode(BIC_CODE_STRING);
         assertThat(bicCode.toString(), is(equalTo(BIC_CODE_STRING)));
-        assertThat(bicCode.buildString(), is(equalTo(BIC_CODE_STRING)));
     }
 
-    /*Test
+    @Test
     public void parstingAndToString2() {
         bicCode = new BICCode();
-        bicCode.setBankCode(BIC_CODE_STRING);
-        bicCode.setCountryCode(BIC_CODE_STRING);
-        bicCode.setLocationCode(BIC_CODE_STRING);
-        bicCode.setBranchCode(BIC_CODE_STRING);
+        bicCode.setBankCode("SPFB");
+        bicCode.setCountryCode("FI");
+        bicCode.setLocationCode("HH");
+        bicCode.setBranchCode("ECB");
         assertThat(bicCode.toString(), is(equalTo(BIC_CODE_STRING)));
-        assertThat(bicCode.buildString(), is(equalTo(BIC_CODE_STRING)));
-    }*/
+    }
 
-    @Test(expected = ParsingException.class)
+    @Test(expected = ValidationException.class)
     public void wrongBankCode() {
         bicCode = new BICCode();
         bicCode.setBankCode("1234");
     }
 
-    @Test(expected = ParsingException.class)
-    public void wrongLocationCode() {
+    @Test(expected = LengthValidationException.class)
+    public void wrongLengthBankCode1() {
+        bicCode = new BICCode();
+        bicCode.setBankCode("123");
+    }
+
+    @Test(expected = LengthValidationException.class)
+    public void wrongLengthBankCode2() {
+        bicCode = new BICCode();
+        bicCode.setBankCode("12345");
+    }
+
+    @Test(expected = ValidationException.class)
+    public void wrongCountryCode() {
         bicCode = new BICCode();
         bicCode.setCountryCode("12");
+    }
+
+    @Test(expected = LengthValidationException.class)
+    public void wrongLengthCountryCode1() {
+        bicCode = new BICCode();
+        bicCode.setCountryCode("F");
+    }
+
+    @Test(expected = LengthValidationException.class)
+    public void wrongLengthCountryCode2() {
+        bicCode = new BICCode();
+        bicCode.setCountryCode("FIM");
+    }
+
+    @Test(expected = ValidationException.class)
+    public void wrongLocationCode() {
+        bicCode = new BICCode();
+        bicCode.setLocationCode(".-");
+    }
+
+    @Test(expected = LengthValidationException.class)
+    public void wrongLengthLocationCode1() {
+        bicCode = new BICCode();
+        bicCode.setLocationCode("H");
+    }
+
+    @Test(expected = LengthValidationException.class)
+    public void wrongLengthLocationCode2() {
+        bicCode = new BICCode();
+        bicCode.setLocationCode("HHH");
+    }
+
+    @Test(expected = ValidationException.class)
+    public void wrongBranchCode() {
+        bicCode = new BICCode();
+        bicCode.setBranchCode(".-/");
+    }
+
+    @Test(expected = LengthValidationException.class)
+    public void wrongLengthBranchCode1() {
+        bicCode = new BICCode();
+        bicCode.setBranchCode("EC");
+    }
+
+    @Test(expected = LengthValidationException.class)
+    public void wrongLengthBranchCode2() {
+        bicCode = new BICCode();
+        bicCode.setBranchCode("ECBC");
     }
 }
