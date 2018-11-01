@@ -1,0 +1,51 @@
+#!/bin/sh
+
+PROJECT_NAME=springboot-start-project
+PROJECT_VERSION=1.0.0-SNAPSHOT
+
+OPT_DIR=/opt
+HAS_OPT_DIR=${OPT_DIR}/has
+HAS_BIN_DIR=${HAS_OPT_DIR}/bin
+HAS_LIB_DIR=${HAS_OPT_DIR}/lib
+JAR_FILE_NAME=${PROJECT_NAME}-${PROJECT_VERSION}.jar
+JAR_FILE=${HAS_LIB_DIR}/${JAR_FILE_NAME}
+RETURN_VALUE=
+
+restartService() {
+    echo "restartService"
+    stopService
+    sleep 3
+    startService
+}
+
+preService() {
+    echo "preService"
+}
+
+startService() {
+    java ${JAVA_OPTS} -Dspring.profiles.active=${SPRING_PROFILES} -jar ${JAR_FILE}
+    RETURN_VALUE=${?}
+}
+
+postService() {
+    echo "postService"
+}
+
+stopService() {
+    echo killproc -p ${PID_FILE} -d 10 ${JAVA_COMMAND}
+    RETURN_VALUE="$?"
+}
+
+reloadService() {
+    echo "reloadService"
+}
+
+stopPostService() {
+    echo "stopPostService"
+}
+
+case $1 in
+    start|stop|reload|pre|post|stopPost|restart) ${1}Service;;
+esac
+
+exit ${RETURN_VALUE}

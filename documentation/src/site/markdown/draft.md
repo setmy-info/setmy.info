@@ -28,3 +28,9 @@ cd java-models && mvn org.pitest:pitest-maven:mutationCoverage site:site && cd .
 cd jwt-models && mvn org.pitest:pitest-maven:mutationCoverage site:site && cd .. &&
 cd springboot-start-project && mvn org.pitest:pitest-maven:mutationCoverage site:site && cd ..&&
 cd documentation && mvn site:site && cd ..
+
+
+Systemd services
+    https://dataandtechnology.wordpress.com/2018/03/01/systemd-service-and-script-example/
+    https://www.freedesktop.org/software/systemd/man/systemd.service.html
+    https://unix.stackexchange.com/questions/47695/how-to-write-startup-script-for-systemd#47715
