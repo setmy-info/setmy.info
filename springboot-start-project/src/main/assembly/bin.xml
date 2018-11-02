@@ -17,27 +17,25 @@ mvn site:site assembly:assembly package
             <outputDirectory>bin</outputDirectory>
             <fileMode>0755</fileMode>
             <directoryMode>0755</directoryMode>
-            <excludes>
-                <exclude>*.sh</exclude>
-            </excludes>
-        </fileSet>
-        <fileSet>
-            <directory>${project.build.directory}/lib</directory>
-            <outputDirectory>lib</outputDirectory>
             <includes>
-                <include>*.jar</include>
+                <include>springboot-start-project</include>
             </includes>
         </fileSet>
         <fileSet>
-            <directory>${project.build.directory}</directory>
-            <outputDirectory>lib</outputDirectory>
+            <directory>${basedir}/src/main/sh</directory>
+            <outputDirectory>etc/systemd/system</outputDirectory>
+            <directoryMode>0755</directoryMode>
             <includes>
-                <include>*.jar</include>
+                <include>springboot-start-project.service</include>
             </includes>
         </fileSet>
         <fileSet>
-            <directory>${project.build.directory}/site</directory>
-            <outputDirectory>docs</outputDirectory>
+            <directory>${basedir}/src/main/sh</directory>
+            <outputDirectory>etc/systemd/system/springboot-start-project.service.d</outputDirectory>
+            <directoryMode>0755</directoryMode>
+            <includes>
+                <include>environment.conf</include>
+            </includes>
         </fileSet>
     </fileSets>
 </assembly>

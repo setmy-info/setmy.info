@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PROJECT_NAME=springboot-start-project
-PROJECT_VERSION=1.0.0-SNAPSHOT
+PROJECT_VERSION=1.2.0-SNAPSHOT
 
 OPT_DIR=/opt
 HAS_OPT_DIR=${OPT_DIR}/has
@@ -10,6 +10,7 @@ HAS_LIB_DIR=${HAS_OPT_DIR}/lib
 JAR_FILE_NAME=${PROJECT_NAME}-${PROJECT_VERSION}.jar
 JAR_FILE=${HAS_LIB_DIR}/${JAR_FILE_NAME}
 RETURN_VALUE=
+JAVA=${JAVA_BIN_DIR}/java
 
 restartService() {
     echo "restartService"
@@ -23,7 +24,7 @@ preService() {
 }
 
 startService() {
-    java ${JAVA_OPTS} -Dspring.profiles.active=${SPRING_PROFILES} -jar ${JAR_FILE}
+    ${JAVA} ${JAVA_OPTS} -Dspring.profiles.active=${SPRING_PROFILES} -jar ${JAR_FILE}
     RETURN_VALUE=${?}
 }
 
