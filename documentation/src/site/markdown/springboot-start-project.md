@@ -39,6 +39,10 @@
         sudo systemctl start springboot-start-project.service
         sudo systemctl stop springboot-start-project.service
 
+    Analysing service
+        sudo systemctl cat springboot-start-project
+        sudo journalctl -u springboot-start-project
+
 ## Configuration
 
 ## Usage

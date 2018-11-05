@@ -1,0 +1,10 @@
+---
+- hosts: all
+  tasks:
+    - name: Creating folders.
+      file:
+        path: /opt/xyz
+        state: directory
+        owner: root
+        group: root
+        mode: 0775
