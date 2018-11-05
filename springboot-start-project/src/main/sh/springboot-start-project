@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# 
+
 PROJECT_NAME=springboot-start-project
 PROJECT_VERSION=1.2.0-SNAPSHOT
 
@@ -30,19 +32,22 @@ startService() {
 
 postService() {
     echo "postService"
+    RETURN_VALUE=0
 }
 
 stopService() {
-    echo killproc -p ${PID_FILE} -d 10 ${JAVA_COMMAND}
+    echo "stopService"
     RETURN_VALUE="$?"
 }
 
 reloadService() {
     echo "reloadService"
+    RETURN_VALUE=0
 }
 
 stopPostService() {
     echo "stopPostService"
+    RETURN_VALUE=0
 }
 
 case $1 in
