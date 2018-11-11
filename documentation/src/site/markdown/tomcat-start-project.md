@@ -10,6 +10,8 @@
 
 ## Configuration
 
+https://technet.sector19.net/linux/create-systemd-service-for-tomcat/
+
 ## Usage
 
 ## See also
