@@ -1,18 +1,29 @@
 #!/bin/sh
 
-# 
-
 PROJECT_NAME=springboot-start-project
 PROJECT_VERSION=1.2.0-SNAPSHOT
 
+PROVIDER_NAME=has
+CUR_DIR=`pwd`
 OPT_DIR=/opt
-HAS_OPT_DIR=${OPT_DIR}/has
-HAS_BIN_DIR=${HAS_OPT_DIR}/bin
-HAS_LIB_DIR=${HAS_OPT_DIR}/lib
+VAR_DIR=/var
+
+PROJECT_OPT_DIR=${OPT_DIR}/${PROVIDER_NAME}
+PROJECT_BIN_DIR=${PROJECT_OPT_DIR}/bin
+PROJECT_LIB_DIR=${PROJECT_OPT_DIR}/lib
+PROJECT_DOC_DIR=${PROJECT_OPT_DIR}/doc
+PROJECT_INFO_DIR=${PROJECT_OPT_DIR}/info
+PROJECT_MAN_DIR=${PROJECT_OPT_DIR}/man
+
+PROJECT_VAR_DIR=${VAR_DIR}/${OPT_DIR}/${PROVIDER_NAME}
+WORKING_DIR=${PROJECT_VAR_DIR}/${PROJECT_NAME}
+
+JAVA_BIN_DIR=${JAVA_HOME}/bin
+JAVA_COMMAND=${JAVA_BIN_DIR}/java
 JAR_FILE_NAME=${PROJECT_NAME}-${PROJECT_VERSION}.jar
 JAR_FILE=${HAS_LIB_DIR}/${JAR_FILE_NAME}
-RETURN_VALUE=
-JAVA=${JAVA_BIN_DIR}/java
+RETURN_VALUE=0
+
 
 restartService() {
     echo "restartService"
@@ -23,10 +34,11 @@ restartService() {
 
 preService() {
     echo "preService"
+    RETURN_VALUE=0
 }
 
 startService() {
-    ${JAVA} ${JAVA_OPTS} -Dspring.profiles.active=${SPRING_PROFILES} -jar ${JAR_FILE}
+    echo ${JAVA_COMMAND} ${JAVA_OPTS} -Dspring.profiles.active=${SPRING_PROFILES} -jar ${JAR_FILE}
     RETURN_VALUE=${?}
 }
 
@@ -37,7 +49,7 @@ postService() {
 
 stopService() {
     echo "stopService"
-    RETURN_VALUE="$?"
+    RETURN_VALUE=0
 }
 
 reloadService() {
@@ -50,8 +62,10 @@ stopPostService() {
     RETURN_VALUE=0
 }
 
+cd ${WORKING_DIR}
 case $1 in
     start|stop|reload|pre|post|stopPost|restart) ${1}Service;;
 esac
+cd ${CUR_DIR}
 
 exit ${RETURN_VALUE}

@@ -13,10 +13,8 @@
         sudo mkdir -p /opt/has/info
         sudo mkdir -p /opt/has/man
         sudo mkdir -p /var/opt/has
-        sudo mkdir -p /var/opt/has/log
-        sudo mkdir -p /var/opt/has/db
-        sudo chown -R microservice:microservice /var/opt/has/db
-        sudo chown -R microservice:microservice /var/opt/has/log
+        sudo mkdir -p /var/opt/has/springboot-start-project
+        sudo chown -R microservice:microservice /var/opt/has/springboot-start-project
         sudo useradd microservice --shell /sbin/nologin --no-create-home
         sudo mkdir -p /etc/systemd/system/springboot-start-project.service.d
 
@@ -38,6 +36,12 @@
     Starting and stoping
         sudo systemctl start springboot-start-project.service
         sudo systemctl stop springboot-start-project.service
+
+    Analysing service
+        sudo systemctl cat springboot-start-project
+        sudo journalctl -u springboot-start-project
+
+    sudo /opt/has/bin/springboot-start-project
 
 ## Configuration
 
