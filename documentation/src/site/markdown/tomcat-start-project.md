@@ -7,9 +7,11 @@
 ### CentOS
 
     sudo useradd microservice --shell /sbin/nologin --no-create-home
-    export ANT_OPTS='-Dhttp.proxyHost=myproxyhost -Dhttp.proxyPort=8080 -Dhttps.proxyHost=myproxyhost -Dhttps.proxyPort=8080'
+    export ANT_OPTS='-Dhttp.proxyHost=cache.example -Dhttp.proxyPort=8080 -Dhttps.proxyHost=cache.example -Dhttps.proxyPort=8080'
+    
     ant download.tomcat
-    sudo tar xvzf ./xxxxxxx -C /opt/has-tomcat/
+    sudo tar xvzf ./download/apache-tomcat-9.0.13.tar.gz -C /opt
+    sudo chown microservice:microservice /opt/apache-tomcat-9.0.13/temp /opt/apache-tomcat-9.0.13/webapps /opt/apache-tomcat-9.0.13/work
 
 ## Configuration
 

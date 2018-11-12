@@ -9,9 +9,9 @@
     <target name="default" />
 
     <target name="download.tomcat" depends="make.download.path">
-        <!--get src="${tomcat.download.url}" dest="${tomcat.download.path}/${tomcat}.tar.gz"/>
+        <get src="${tomcat.download.url}" dest="${tomcat.download.path}/${tomcat}.tar.gz"/>
         <get src="${tomcat.download.checksum.url}" dest="${tomcat.download.path}/${tomcat}.tar.gz.sha512"/>
-        <checksum file="${tomcat.download.path}/${tomcat}.tar.gz" algorithm="SHA-512" fileext=".sum.sha512" todir="${tomcat.download.path}"/-->
+        <checksum file="${tomcat.download.path}/${tomcat}.tar.gz" algorithm="SHA-512" fileext=".sum.sha512" todir="${tomcat.download.path}"/>
     </target>
 
     <target name="make.download.path">
@@ -20,7 +20,7 @@
     </target>
 
     <target name="install.tomcat" depends="make.install.path">
-        <!--gunzip src="${tomcat.download.path}/${tomcat}.tar.gz" dest="${tomcat.install.path}" /-->
+        <gunzip src="${tomcat.download.path}/${tomcat}.tar.gz" dest="${tomcat.install.path}" />
         <untar src="${tomcat.install.path}/${tomcat}.tar" dest="${tomcat.install.path}" />
         <chmod dir="${tomcat.install.path}/${tomcat}/bin" perm="ugo+rx" includes="**/*.sh" os="Linux,Solaris,FreeBSD" />
         <copy file="./src/test/xml/tomcat-users.xml" todir="${tomcat.install.path}/${tomcat}/conf" />
