@@ -1,10 +1,15 @@
 ---
-- hosts: all
+- hosts: arendus9.kp
+  become: yes
+  become_method: sudo
+  become_user: root
+  remote_user: imret
   tasks:
-    - name: Creating folders.
-      file:
-        path: /opt/xyz
-        state: directory
-        owner: root
-        group: root
-        mode: 0775
+#    - name: Creating folders.
+#      file:
+#        path: /opt/xyz
+#        state: directory
+#        owner: root
+#        group: root
+#        mode: 0775
+#      tags: dirs

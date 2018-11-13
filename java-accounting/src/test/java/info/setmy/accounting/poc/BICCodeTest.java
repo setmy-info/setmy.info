@@ -1,5 +1,6 @@
 package info.setmy.accounting.poc;
 
+import info.setmy.accounting.model.BICCode;
 import info.setmy.exceptions.LengthValidationException;
 import info.setmy.exceptions.ValidationException;
 import static org.hamcrest.CoreMatchers.equalTo;
