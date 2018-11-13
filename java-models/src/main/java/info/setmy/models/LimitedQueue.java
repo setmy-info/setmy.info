@@ -8,16 +8,15 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 public class LimitedQueue<T extends Object> extends ArrayBlockingQueue<T> {
 
-        public LimitedQueue(int i) {
-            super(i);
-        }
-
-        @Override
-        public boolean add(final T t) {
-            if (remainingCapacity() == 0) {
-                poll();
-            }
-            return super.add(t);
-        }
+    public LimitedQueue(int i) {
+        super(i);
     }
 
+    @Override
+    public boolean add(final T t) {
+        if (remainingCapacity() == 0) {
+            poll();
+        }
+        return super.add(t);
+    }
+}
