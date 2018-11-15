@@ -1,4 +1,4 @@
-package info.setmy.accounting.poc;
+package info.setmy.accounting.model;
 
 import info.setmy.accounting.model.BICCode;
 import info.setmy.exceptions.LengthValidationException;
