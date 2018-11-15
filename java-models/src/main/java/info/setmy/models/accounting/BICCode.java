@@ -1,6 +1,6 @@
-package info.setmy.accounting.model;
+package info.setmy.models.accounting;
 
-import static info.setmy.accounting.model.Validation.validation;
+import static info.setmy.models.accounting.Validation.validation;
 
 /**
  *
@@ -31,6 +31,14 @@ public class BICCode {
 
     public BICCode(final String bicCodeString) {
         parse(bicCodeString);
+    }
+
+    public String getOriginal() {
+        return original;
+    }
+
+    public void setOriginal(final String original) {
+        parse(original);
     }
 
     public final void parse(final String bicCodeString) {

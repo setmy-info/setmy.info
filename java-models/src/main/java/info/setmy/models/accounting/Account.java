@@ -1,4 +1,4 @@
-package info.setmy.accounting.model;
+package info.setmy.models.accounting;
 
 import info.setmy.models.NamedEntity;
 import java.util.ArrayList;

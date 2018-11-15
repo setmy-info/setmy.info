@@ -1,6 +1,6 @@
-package info.setmy.accounting.model;
+package info.setmy.models.accounting;
 
-import static info.setmy.accounting.model.Validation.validation;
+import static info.setmy.models.accounting.Validation.validation;
 
 /**
  * https://pangaliit.ee/arveldused/iban
@@ -27,6 +27,14 @@ public class IBAN {
 
     public IBAN(final String ibanString) {
         parse(ibanString);
+    }
+
+    public String getOriginal() {
+        return original;
+    }
+
+    public void setOriginal(final String original) {
+        parse(original);
     }
 
     public final void parse(final String ibanString) {

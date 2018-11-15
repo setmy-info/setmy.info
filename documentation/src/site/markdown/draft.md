@@ -20,6 +20,7 @@ http://java.sun.com/xml/ns/persistence/orm_2_0.xsd
 
 export JAVA_HOME=/opt/jdk-10.0.2/
 export JAVA_HOME=/opt/jdk-11/
+export JAVA_HOME=/opt/jdk-11.0.1/
 
 mvn cleaninstall &&
 cd groovy-models && mvn org.pitest:pitest-maven:mutationCoverage site:site && cd .. &&

@@ -1,4 +1,4 @@
-package info.setmy.accounting.model.bilance;
+package info.setmy.models.accounting.bilance;
 
 /**
  *

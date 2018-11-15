@@ -1,10 +1,14 @@
-package info.setmy.accounting.model;
+package info.setmy.models.accounting;
+
+import info.setmy.models.Bank;
 
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 public class BankAccount {
+
+    private Bank bank;// TODO
 
     private BICCode bicCode;
 
