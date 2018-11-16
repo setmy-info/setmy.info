@@ -42,7 +42,7 @@ public class BICCode {
     }
 
     public final void parse(final String bicCodeString) {
-        validation.validateLenght(bicCodeString, 11);
+        validation.validateExactLenght(bicCodeString, 11);
         final String bankCodePart = bicCodeString.substring(0, 4);
         final String countryCodePart = bicCodeString.substring(4, 6);
         final String locationCodePart = bicCodeString.substring(6, 8);
