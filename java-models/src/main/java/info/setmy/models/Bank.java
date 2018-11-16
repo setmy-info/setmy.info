@@ -8,6 +8,8 @@ import info.setmy.models.accounting.BICCode;
  */
 public class Bank extends Company {
 
+    private Contacts contacts;
+
     private BICCode bicCode;
 
     public BICCode getBicCode() {
@@ -16,5 +18,13 @@ public class Bank extends Company {
 
     public void setBicCode(BICCode bicCode) {
         this.bicCode = bicCode;
+    }
+
+    public Contacts getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Contacts contacts) {
+        this.contacts = contacts;
     }
 }

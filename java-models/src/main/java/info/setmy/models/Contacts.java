@@ -10,8 +10,11 @@ import java.util.List;
 public class Contacts extends Entity {
 
     private List<String> phones = new ArrayList<>();
+
     private List<String> mobilePhones = new ArrayList<>();
+
     private List<String> emails = new ArrayList<>();
+
     private List<Address> addresses = new ArrayList<>();
 
     public List<String> getPhones() {

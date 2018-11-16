@@ -1,9 +1,9 @@
-package info.setmy.models.accounting;
+package info.setmy.models;
 
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class Recipient {
+public class Currency extends NamedEntity {
 
 }

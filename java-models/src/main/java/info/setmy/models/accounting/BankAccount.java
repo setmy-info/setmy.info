@@ -8,38 +8,11 @@ import info.setmy.models.Bank;
  */
 public class BankAccount {
 
-    private Bank bank;// TODO
-
-    private BICCode bicCode;
+    private Bank bank;
 
     private IBAN iban;
 
     public BankAccount() {
-    }
-
-    public BankAccount(final String bicCodeString, final String ibanString) {
-        parse(bicCodeString, ibanString);
-    }
-
-    public final void parse(final String bicCodeString, final String ibanString) {
-        parseBICCode(bicCodeString);
-        parseIBAN(ibanString);
-    }
-
-    private void parseBICCode(final String bicCodeString) {
-        bicCode = new BICCode(bicCodeString);
-    }
-
-    private void parseIBAN(final String ibanString) {
-        iban = new IBAN(ibanString);
-    }
-
-    public BICCode getBicCode() {
-        return bicCode;
-    }
-
-    public void setBicCode(BICCode bicCode) {
-        this.bicCode = bicCode;
     }
 
     public IBAN getIban() {
@@ -48,5 +21,13 @@ public class BankAccount {
 
     public void setIban(IBAN iban) {
         this.iban = iban;
+    }
+
+    public Bank getBank() {
+        return bank;
+    }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
     }
 }
