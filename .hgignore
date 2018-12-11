@@ -45,5 +45,8 @@ docker-images/docker-centos-java-tomcat/apache-tomcat*
 tomcat-start-project/download/*
 tomcat-start-project/apache-tomcat*
 
+### NodeJS ###
+*/node_modules/
+
 # switch to regexp syntax.
 syntax: regexp
