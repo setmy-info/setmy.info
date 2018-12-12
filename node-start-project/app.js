@@ -6,8 +6,6 @@ var logger = require('morgan');
 
 var indexRouter = require('./src/backend/routes/index');
 var usersRouter = require('./src/backend/routes/users');
-var csrfPageRouter = require('./src/backend/routes/csrf');
-var csrfRESTRouter = require('./src/backend/rest/csrf');
 
 var app = express();
 
@@ -30,8 +28,6 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/csrf', csrfPageRouter);
-app.use('/rest/csrf', csrfRESTRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
