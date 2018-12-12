@@ -1,7 +1,7 @@
 package info.setmy.models;
 
-
 import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
@@ -39,5 +39,12 @@ public class JUnit5Test {
     @DisplayName(", display name: test 3 ")
     public void test3() {
         System.out.println("### Testing 3 ###");
+    }
+
+    @Test
+    @DisplayName(" example test 4 ")
+    public void test4(final TestInfo testInfo) {
+        System.out.println("### Testing 4 ###");
+        fail("Just failing " + testInfo.getDisplayName());
     }
 }
