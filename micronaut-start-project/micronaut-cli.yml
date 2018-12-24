@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: info.setmy
+---
+testFramework: junit
+sourceLanguage: java
