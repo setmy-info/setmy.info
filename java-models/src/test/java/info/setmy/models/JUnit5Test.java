@@ -3,6 +3,7 @@ package info.setmy.models;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,7 @@ public class JUnit5Test {
     }
 
     @Test
+    @Disabled
     @DisplayName(" example test 4 ")
     public void test4(final TestInfo testInfo) {
         System.out.println("### Testing 4 ###");

@@ -70,6 +70,7 @@
         <module>documentation</module>
         <module>java-rest-client</module>
         <module>tomcat-start-project</module>
+        <module>micronaut-start-project</module>
     </modules>
 
     <dependencies>
