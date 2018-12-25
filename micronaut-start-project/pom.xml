@@ -27,6 +27,11 @@
     
     <dependencies>
         <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+        <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-inject</artifactId>
             <scope>compile</scope>
@@ -205,7 +210,6 @@
                     <release>${java.version}</release>
                     <!--source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target-->
-                    <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
                     <showWarnings>true</showWarnings>
