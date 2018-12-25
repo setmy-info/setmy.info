@@ -64,6 +64,7 @@ pipeline {
                 // sh 'cd java-modular-ssn; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
                 sh 'cd documentation; mvn site:site; cd ..'
                 sh 'cd tomcat-start-project; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
+                // sh 'cd micronaut-start-project; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
             }
         }
     }
