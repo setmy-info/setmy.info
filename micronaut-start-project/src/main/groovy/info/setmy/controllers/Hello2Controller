@@ -1,0 +1,19 @@
+package info.setmy.controllers
+
+import io.micronaut.http.annotation.Controller
+import io.micronaut.http.annotation.Get
+import io.micronaut.http.HttpStatus
+
+/**
+ * Exception to roll back transactions.
+ *
+ * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ */
+@Controller("/hello2")
+class Hello2Controller {
+
+    @Get
+    HttpStatus index() {
+        return HttpStatus.OK
+    }
+}
