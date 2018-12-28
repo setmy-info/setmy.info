@@ -1,9 +1,9 @@
-FROM setmyinfo/setmy-info-centos-java:v1.0.1
+FROM setmyinfo/setmy-info-centos-java:v11.0.1
 
 MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 
 LABEL org.label-schema.name="Docker HUB CentOS Spring boot micro service base" \
-      org.label-schema.version="v1.0.0" \
+      org.label-schema.version="v1.2.0" \
       org.label-schema.description="setmy.info Docker HUB Centos Spring boot micro service base" \
       org.label-schema.vendor="Hear And See Systems LLC" \
       org.label-schema.url="https://www.hearandseesystems.com" \

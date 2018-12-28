@@ -37,7 +37,7 @@ preService() {
 }
 
 startService() {
-    java -Dspring.profiles.active=${SPRING_PROFILES} -jar ${JAR_FILE}
+    java -jar ${JAR_FILE}
     RETURN_VALUE=${?}
 }
 

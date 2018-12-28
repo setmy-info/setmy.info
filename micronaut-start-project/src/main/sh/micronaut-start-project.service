@@ -6,9 +6,9 @@ After=syslog.target
 Type=simple
 User=microservice
 Group=microservice
-ExecStart=/opt/has/bin/springboot-start-project start
-ExecStop=/opt/has/bin/springboot-start-project stop
-ExecReload=/opt/has/bin/springboot-start-project reload
+ExecStart=/opt/has/bin/micronaut-start-project start
+ExecStop=/opt/has/bin/micronaut-start-project stop
+ExecReload=/opt/has/bin/micronaut-start-project reload
 
 [Install]
 WantedBy=multi-user.target

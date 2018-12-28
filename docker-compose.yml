@@ -1,0 +1,9 @@
+version: '3'
+services:
+    node-start-project:
+        build: 
+            context: ./node-start-project
+            dockerfile: Dockerfile
+        image: node-start-project:1.2.0-SNAPSHOT
+        ports:
+            - "4000:3000"

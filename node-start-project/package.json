@@ -1,6 +1,6 @@
 {
   "name": "node-start-project",
-  "version": "0.0.0",
+  "version": "1.2.0-SNAPSHOT",
   "private": true,
   "scripts": {
     "start": "node ./src/backend/bin/www"

@@ -29,3 +29,10 @@ cd java-models && mvn org.pitest:pitest-maven:mutationCoverage site:site && cd .
 cd jwt-models && mvn org.pitest:pitest-maven:mutationCoverage site:site && cd .. &&
 cd springboot-start-project && mvn org.pitest:pitest-maven:mutationCoverage site:site && cd ..&&
 cd documentation && mvn site:site && cd ..
+
+1.
+    docker build -t imret/node-start-project .
+    docker run -p 4000:3000 -d imret/node-start-project
+2. Or
+    docker-compose up
+firefox --new-tab http://localhost:4000
