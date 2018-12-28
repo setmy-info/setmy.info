@@ -13,7 +13,7 @@ LABEL org.label-schema.name="Docker HUB Centos Tomcat" \
 
 # docker run -p 8080:8080 setmyinfo/setmy-info-centos-java:v1.0.1
 
-COPY apache-tomcat-9.0.12 /opt/tomcat
+COPY apache-tomcat-9.0.14 /opt/tomcat
 RUN mkdir -p /opt/tomcat/{logs,temp}
 RUN mkdir -p /opt/tomcat/conf/Catalina/
 RUN useradd tomcat --shell /sbin/nologin --no-create-home
