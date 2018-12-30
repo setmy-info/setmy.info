@@ -14,8 +14,8 @@ LABEL org.label-schema.name="Docker HUB CentOS Spring boot micro service base" \
 RUN mkdir -p /opt/has /opt/has/bin /opt/has/lib /opt/has/src /var/opt/has /var/opt/has/microservice
 COPY package*.json /opt/has/src/
 COPY . /opt/has/src/
-RUN npm config set proxy http://cache.kp:8080
-RUN npm config set https-proxy http://cache.kp:8080
+#RUN npm config set proxy http://cache.example.com:8080
+#RUN npm config set https-proxy http://cache.example.com:8080
 RUN node --version
 RUN cd /opt/has/src && npm install
 
