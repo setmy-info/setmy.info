@@ -1,7 +1,7 @@
 # Copyright Imre Tabur
 
-DOCKER_PROJECT_NAME="setmy-info-centos"
-DOCKER_PROJECT_VERSION="v1.0.2"
+DOCKER_PROJECT_NAME="setmy-info-centos-java"
+DOCKER_PROJECT_VERSION="v11.0.1"
 DOCKER_ID_USER="xxxxxx"
 DOCKER_ID_ORGANIZATION="setmyinfo"
 DOCKER_CONTENT_TRUST=1
