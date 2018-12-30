@@ -9,19 +9,19 @@ DOCKER_CONTENT_TRUST=1
 all: build image show-images login push
 
 build:
-        docker build -t  "$DOCKER_ID_ORGANIZATION/$DOCKER_PROJECT_NAME:$DOCKER_PROJECT_VERSION" .
+	docker build -t  "$(DOCKER_ID_ORGANIZATION)/$(DOCKER_PROJECT_NAME):$(DOCKER_PROJECT_VERSION)" .
 
 image:
-        docker image tag "$DOCKER_ID_ORGANIZATION/$DOCKER_PROJECT_NAME:$DOCKER_PROJECT_VERSION" $DOCKER_ID_ORGANIZATION/$DOCKER_PROJECT_NAME:latest
+	docker image tag "$(DOCKER_ID_ORGANIZATION)/$(DOCKER_PROJECT_NAME):$(DOCKER_PROJECT_VERSION)" $(DOCKER_ID_ORGANIZATION)/$(DOCKER_PROJECT_NAME):latest
 
 show-images:
-        docker images
+	docker images
 
-login: build image show-images login push
-        docker login
+login:
+	echo docker login
 
 push: build image show-images login push
-        docker image push $DOCKER_ID_ORGANIZATION/$DOCKER_PROJECT_NAME:latest
-        docker image push $DOCKER_ID_ORGANIZATION/$DOCKER_PROJECT_NAME:$DOCKER_PROJECT_VERSION
+	echo docker image push $(DOCKER_ID_ORGANIZATION)/$(DOCKER_PROJECT_NAME):latest
+	echo docker image push $(DOCKER_ID_ORGANIZATION)/$(DOCKER_PROJECT_NAME:$(DOCKER_PROJECT_VERSION)
 
-.PHONY:
+.PHONY: build image show-images login push

@@ -2,8 +2,9 @@ FROM centos:7
 
 MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 
+# http://label-schema.org/rc1/
 LABEL org.label-schema.name="Docker HUB Centos" \
-      org.label-schema.version="v1.2.0" \
+      org.label-schema.version="v1.0.2" \
       org.label-schema.description="setmy.info Docker HUB Centos" \
       org.label-schema.vendor="Hear And See Systems LLC" \
       org.label-schema.url="https://www.hearandseesystems.com" \
