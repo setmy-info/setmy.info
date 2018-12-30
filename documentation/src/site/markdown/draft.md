@@ -34,5 +34,8 @@ cd documentation && mvn site:site && cd ..
     docker build -t imret/node-start-project .
     docker run -p 4000:3000 -d imret/node-start-project
 2. Or
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    docker-compose --version
     docker-compose up
 firefox --new-tab http://localhost:4000

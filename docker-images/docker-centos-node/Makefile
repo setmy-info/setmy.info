@@ -16,9 +16,9 @@ download: $(NODE_TAR_FILE_NAME)
 $(NODE_TAR_FILE_NAME):
 	wget -c https://nodejs.org/dist/v$(NODE_VERSION)/$(NODE_TAR_FILE_NAME) -O $(NODE_TAR_FILE_NAME)
 
-unback: $(NODE_TAR_FILE_NAME)
+unback: $(NODE_DIR_NAME)
 
-$(NODE_TAR_FILE_NAME):
+$(NODE_DIR_NAME):
 	tar xvJf $(NODE_TAR_FILE_NAME)
 
 build:
