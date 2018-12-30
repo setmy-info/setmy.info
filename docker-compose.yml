@@ -14,3 +14,10 @@ services:
         image: micronaut-start-project:1.2.0-SNAPSHOT
         ports:
             - "8080:8080"
+    springboot-start-project:
+        build: 
+            context: ./springboot-start-project
+            dockerfile: Dockerfile
+        image: springboot-start-project:1.2.0-SNAPSHOT
+        ports:
+            - "8080:8080"
