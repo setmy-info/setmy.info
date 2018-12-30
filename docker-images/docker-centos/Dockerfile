@@ -12,7 +12,12 @@ LABEL org.label-schema.name="Docker HUB Centos" \
       org.label-schema.build-date=$BUILD_DATE
 
 RUN yum -y update
-RUN mkdir -p /opt/has/{bin,lib,doc,man,etc,var}
+RUN mkdir -p /opt/has/bin
+RUN mkdir -p /opt/has/lib
+RUN mkdir -p /opt/has/doc
+RUN mkdir -p /opt/has/man
+RUN mkdir -p /opt/has/etc
+RUN mkdir -p /opt/has/var
 RUN chown -R root:root /opt/has && \
     chmod -R u+rwx /opt/has && \
     chmod -R go+rx /opt/has && \
