@@ -18,10 +18,10 @@ show-images:
 	docker images
 
 login:
-	echo docker login
+	docker login
 
-push: build image show-images login push
-	echo docker image push $(DOCKER_ID_ORGANIZATION)/$(DOCKER_PROJECT_NAME):latest
-	echo docker image push $(DOCKER_ID_ORGANIZATION)/$(DOCKER_PROJECT_NAME:$(DOCKER_PROJECT_VERSION)
+push:
+	docker image push $(DOCKER_ID_ORGANIZATION)/$(DOCKER_PROJECT_NAME):latest
+	docker image push "$(DOCKER_ID_ORGANIZATION)/$(DOCKER_PROJECT_NAME):$(DOCKER_PROJECT_VERSION)"
 
 .PHONY: build image show-images login push
