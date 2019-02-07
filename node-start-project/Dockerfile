@@ -1,4 +1,4 @@
-FROM setmyinfo/setmy-info-centos-node:v10.15.0
+FROM setmyinfo/setmy-info-centos-node:v10.15.1
 
 MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 
