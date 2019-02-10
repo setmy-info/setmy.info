@@ -1,6 +1,10 @@
 version: '3'
+
+# https://docs.docker.com/compose/compose-file/
+
 services:
     node-start-project:
+        container_name: node-start-project
         build: 
             context: ./node-start-project
             dockerfile: Dockerfile
@@ -8,6 +12,7 @@ services:
         ports:
             - "4000:3000"
     micronaut-start-project:
+        container_name: micronaut-start-project
         build: 
             context: ./micronaut-start-project
             dockerfile: Dockerfile
@@ -15,6 +20,7 @@ services:
         ports:
             - "8010:8080"
     springboot-start-project:
+        container_name: springboot-start-project
         build: 
             context: ./springboot-start-project
             dockerfile: Dockerfile
@@ -22,6 +28,7 @@ services:
         ports:
             - "8020:8080"
     tomcat-start-project:
+        container_name: tomcat-start-project
         build: 
             context: ./tomcat-start-project
             dockerfile: Dockerfile
@@ -29,9 +36,12 @@ services:
         ports:
             - "8030:8080"
     docker-centos-nginx:
+        container_name: docker-centos-nginx
         build: 
             context: ./docker-images/docker-centos-nginx
             dockerfile: Dockerfile
-        image: setmy-info-centos-nginx:1.14.2
+        depends_on:
+            - tomcat-start-project
+        image: setmy-info-centos-nginx:1.14.2-3
         ports:
             - "80:80"

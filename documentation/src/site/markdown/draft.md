@@ -41,6 +41,7 @@ cd documentation && mvn site:site && cd ..
     sudo chmod +x /usr/local/bin/docker-compose
     docker-compose --version
     docker-compose up
+        docker-compose up --scale micronaut-start-project=3
     firefox --new-tab http://localhost:4000
     firefox --new-tab http://localhost:8010/hello
     firefox --new-tab http://localhost:8020/rest/hello
