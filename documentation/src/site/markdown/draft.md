@@ -47,6 +47,7 @@ cd documentation && mvn site:site && cd ..
     firefox --new-tab http://localhost:8020/api/example
     firefox --new-tab http://localhost:8030/tomcat-start-project-1.2.0-SNAPSHOT/
     firefox --new-tab http://localhost:8030/tomcat-start-project-1.2.0-SNAPSHOT/rest/hello
+    firefox --new-tab http://localhost/tomcat-start-project/
 
 3.
     docker volume create portainer_data

@@ -15,18 +15,19 @@ LABEL org.label-schema.name="Docker HUB Centos Nginx" \
 #ENV https_proxy http://cache.example.com:8080
 
 COPY ./etc/yum.repos.d/nginx.repo     /etc/yum.repos.d/nginx.repo
-COPY ./etc/yum.repos.d/nginx.repo     /etc/yum.repos.d/nginx.repo
 COPY ./usr/share/nginx/www/index.html /usr/share/nginx/www/index.html
 COPY ./usr/share/nginx/www/error.html /usr/share/nginx/www/error.html
-COPY ./etc/nginx/conf.d/default.conf  /etc/nginx/conf.d/default.conf
 
 RUN yum -y update
 RUN rpm --import https://nginx.org/keys/nginx_signing.key
 RUN yum -y install yum-utils
 #RUN yum-config-manager --enable nginx-mainline
 RUN yum -y install nginx
+
 RUN cat /etc/nginx/nginx.conf
 RUN cat /etc/nginx/conf.d/default.conf
+COPY ./etc/nginx/conf.d/default.conf  /etc/nginx/conf.d/default.conf
+
 RUN systemctl enable nginx
 
 EXPOSE 80/tcp

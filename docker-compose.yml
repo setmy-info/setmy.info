@@ -28,3 +28,10 @@ services:
         image: tomcat-start-project:1.2.0-SNAPSHOT
         ports:
             - "8030:8080"
+    docker-centos-nginx:
+        build: 
+            context: ./docker-images/docker-centos-nginx
+            dockerfile: Dockerfile
+        image: setmy-info-centos-nginx:1.14.2
+        ports:
+            - "80:80"
