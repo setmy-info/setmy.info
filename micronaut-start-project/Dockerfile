@@ -1,4 +1,4 @@
-FROM setmyinfo/setmy-info-centos-java:v11.0.2
+FROM setmyinfo/setmy-info-centos-java:v11.0.2-1
 
 MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 
@@ -10,6 +10,9 @@ LABEL org.label-schema.name="Docker HUB CentOS Micronaut service base" \
       org.label-schema.license="MIT" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.build-date=$BUILD_DATE
+
+#ENV http_proxy http://cache.example.com:8080
+#ENV https_proxy http://cache.example.com:8080
 
 RUN mkdir -p /opt/has /opt/has/bin /opt/has/lib /var/opt/has /var/opt/has/microservice
 COPY target/micronaut-start-project-1.2.0-SNAPSHOT.jar /opt/has/lib/app.jar

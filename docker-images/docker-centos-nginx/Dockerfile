@@ -1,4 +1,4 @@
-FROM setmyinfo/setmy-info-centos:v1.0.2
+FROM setmyinfo/setmy-info-centos:v1.0.3
 
 MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 

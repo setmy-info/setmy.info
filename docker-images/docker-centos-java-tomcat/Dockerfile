@@ -1,9 +1,9 @@
-FROM setmyinfo/setmy-info-centos-java:v11.0.2
+FROM setmyinfo/setmy-info-centos-java:v11.0.2-1
 
 MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 
 LABEL org.label-schema.name="Docker HUB Centos Tomcat" \
-      org.label-schema.version="v9.0.14" \
+      org.label-schema.version="v9.0.16" \
       org.label-schema.description="setmy.info Docker HUB Centos Tomcat" \
       org.label-schema.vendor="Hear And See Systems LLC" \
       org.label-schema.url="https://www.hearandseesystems.com" \
@@ -14,9 +14,7 @@ LABEL org.label-schema.name="Docker HUB Centos Tomcat" \
 #ENV http_proxy http://cache.example.com:8080
 #ENV https_proxy http://cache.example.com:8080
 
-# docker run -p 8080:8080 setmyinfo/setmy-info-centos-java:v1.0.1
-
-COPY apache-tomcat-9.0.14 /opt/tomcat
+COPY apache-tomcat-9.0.16 /opt/tomcat
 RUN mkdir -p /opt/tomcat/{logs,temp}
 RUN mkdir -p /opt/tomcat/conf/Catalina/
 RUN useradd tomcat --shell /sbin/nologin --no-create-home

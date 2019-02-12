@@ -1,9 +1,9 @@
-FROM setmyinfo/setmy-info-centos:v1.0.2
+FROM setmyinfo/setmy-info-centos:v1.0.3
 
 MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 
 LABEL org.label-schema.name="Docker HUB Centos Java" \
-      org.label-schema.version="v11.0.2" \
+      org.label-schema.version="v11.0.2-1" \
       org.label-schema.description="setmy.info Docker HUB Centos Java" \
       org.label-schema.vendor="Hear And See Systems LLC" \
       org.label-schema.url="https://www.hearandseesystems.com" \

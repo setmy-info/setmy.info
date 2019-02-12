@@ -1,4 +1,4 @@
-FROM setmyinfo/setmy-info-centos-java:v11.0.2
+FROM setmyinfo/setmy-info-centos-java:v11.0.2-1
 
 MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 
@@ -10,6 +10,9 @@ LABEL org.label-schema.name="Docker HUB CentOS Spring boot micro service base" \
       org.label-schema.license="MIT" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.build-date=$BUILD_DATE
+
+#ENV http_proxy http://cache.example.com:8080
+#ENV https_proxy http://cache.example.com:8080
 
 # docker run -p 8080:8080 setmyinfo/setmy-info-java-microservice:v1.0.0
 # docker run -e "SPRING_PROFILES_ACTIVE=dev" setmyinfo/setmy-info-java-microservice:v1.0.0
