@@ -11,6 +11,9 @@ LABEL org.label-schema.name="Docker HUB Centos Java" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.build-date=$BUILD_DATE
 
+#ENV http_proxy http://cache.example.com:8080
+#ENV https_proxy http://cache.example.com:8080
+
 COPY jdk-11.0.2 /opt/jdk
 RUN chown -R root:root /opt/jdk
 ENV JAVA_HOME /opt/jdk

@@ -4,13 +4,16 @@ MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 
 # http://label-schema.org/rc1/
 LABEL org.label-schema.name="Docker HUB Centos" \
-      org.label-schema.version="v1.0.2" \
+      org.label-schema.version="v1.0.3" \
       org.label-schema.description="setmy.info Docker HUB Centos" \
       org.label-schema.vendor="Hear And See Systems LLC" \
       org.label-schema.url="https://www.hearandseesystems.com" \
       org.label-schema.license="MIT" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.build-date=$BUILD_DATE
+
+#ENV http_proxy http://cache.example.com:8080
+#ENV https_proxy http://cache.example.com:8080
 
 RUN yum -y update
 RUN mkdir -p /opt/has/bin

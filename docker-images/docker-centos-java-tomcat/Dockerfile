@@ -11,6 +11,9 @@ LABEL org.label-schema.name="Docker HUB Centos Tomcat" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.build-date=$BUILD_DATE
 
+#ENV http_proxy http://cache.example.com:8080
+#ENV https_proxy http://cache.example.com:8080
+
 # docker run -p 8080:8080 setmyinfo/setmy-info-centos-java:v1.0.1
 
 COPY apache-tomcat-9.0.14 /opt/tomcat
