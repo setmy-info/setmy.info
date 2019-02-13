@@ -17,7 +17,7 @@
     <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>java-vcs</name>
-    <description>Java communication project.</description>
+    <description>Java Version Control System project.</description>
     <url>https://bitbucket.org/imreit/setmy.info</url>
 
     <dependencies>
@@ -29,6 +29,21 @@
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>info.setmy</groupId>
+                <artifactId>maven-plugin-start-project</artifactId>
+                <version>${project.version}</version>
+                <configuration>
+                    <exampleValue>EXAMPLE VALUE</exampleValue>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate-sources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

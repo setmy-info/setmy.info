@@ -3,7 +3,9 @@
   "version": "1.2.0-SNAPSHOT",
   "private": true,
   "scripts": {
-    "start": "node ./src/backend/bin/www"
+    "start": "node ./src/backend/bin/www",
+    "docker-build": "docker build -t imret/node-start-project .",
+    "docker-run": "docker run -p 4000:3000 -d imret/node-start-project"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",

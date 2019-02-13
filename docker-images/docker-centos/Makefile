@@ -24,4 +24,4 @@ push:
 	docker image push $(DOCKER_ID_ORGANIZATION)/$(DOCKER_PROJECT_NAME):latest
 	docker image push "$(DOCKER_ID_ORGANIZATION)/$(DOCKER_PROJECT_NAME):$(DOCKER_PROJECT_VERSION)"
 
-.PHONY: build image show-images login push
+.PHONY: all build image show-images login push

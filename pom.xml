@@ -42,6 +42,7 @@
         <pitest.version>1.4.2</pitest.version>
         <jersey.version>2.27</jersey.version>
         <jackson.version>2.9.6</jackson.version>
+        <dockerfile-maven-version>1.4.10</dockerfile-maven-version>
     </properties>
 
     <modules>
@@ -71,7 +72,28 @@
         <module>java-rest-client</module>
         <module>tomcat-start-project</module>
         <module>micronaut-start-project</module>
+        <module>incubation/maven-plugin-start-project</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>info.setmy</groupId>
+                <artifactId>maven-plugin-start-project</artifactId>
+                <version>${project.version}</version>
+                <configuration>
+                    <exampleValue>EXAMPLE VALUE</exampleValue>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate-sources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>

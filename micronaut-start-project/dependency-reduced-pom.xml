@@ -47,6 +47,21 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>info.setmy</groupId>
+        <artifactId>maven-plugin-start-project</artifactId>
+        <version>${project.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate-sources</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <exampleValue>EXAMPLE VALUE</exampleValue>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.1.0</version>
         <executions>
@@ -304,6 +319,18 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>${dockerfile-maven-version}</version>
+        <configuration>
+          <repository>setmyinfo/${project.artifactId}</repository>
+          <tag>${project.version}</tag>
+          <buildArgs>
+            <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+        </configuration>
       </plugin>
     </plugins>
   </build>

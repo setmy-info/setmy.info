@@ -33,7 +33,9 @@ cd documentation && mvn site:site && cd ..
 
 1.
     docker build -t imret/node-start-project .
+        npm run docker-build
     docker run -p 4000:3000 -d imret/node-start-project
+        npm run docker-run
     docker container list
     docker container stop aa467bdcd223
 2. Or
@@ -55,3 +57,15 @@ cd documentation && mvn site:site && cd ..
     docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
     firefox --new-tab http://localhost:9000/#/init/admin
     admin: adminadmin
+
+4. Minikube
+    curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
+    sudo cp minikube /usr/local/bin && rm minikube
+    minikube --vm-driver=none start
+
+5. Docker Registry
+    docker run -d -p 5000:5000 --restart=always --name registry registry:2
+    docker run -d -p 5000:5000 --restart=always --name registry -v /mnt/registry:/var/lib/registry registry:2
+
+6. Dockerize Postgresql
+    https://docs.docker.com/v17.09/engine/examples/postgresql_service/

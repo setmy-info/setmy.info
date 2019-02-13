@@ -99,6 +99,21 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>info.setmy</groupId>
+                <artifactId>maven-plugin-start-project</artifactId>
+                <version>${project.version}</version>
+                <configuration>
+                    <exampleValue>EXAMPLE VALUE</exampleValue>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate-sources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
