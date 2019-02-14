@@ -21,14 +21,11 @@ COPY ./usr/share/nginx/www/error.html /usr/share/nginx/www/error.html
 RUN yum -y update
 RUN rpm --import https://nginx.org/keys/nginx_signing.key
 RUN yum -y install yum-utils
-#RUN yum-config-manager --enable nginx-mainline
 RUN yum -y install nginx
 
 RUN cat /etc/nginx/nginx.conf
 RUN cat /etc/nginx/conf.d/default.conf
 COPY ./etc/nginx/conf.d/default.conf  /etc/nginx/conf.d/default.conf
-
-RUN systemctl enable nginx
 
 EXPOSE 80/tcp
 EXPOSE 443/tcp

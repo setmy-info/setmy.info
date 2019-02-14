@@ -51,6 +51,8 @@ cd documentation && mvn site:site && cd ..
     firefox --new-tab http://localhost:8030/tomcat-start-project-1.2.0-SNAPSHOT/
     firefox --new-tab http://localhost:8030/tomcat-start-project-1.2.0-SNAPSHOT/rest/hello
     firefox --new-tab http://localhost/tomcat-start-project/
+    firefox --new-tab http://localhost/springboot-start-project/api/example
+    firefox --new-tab http://localhost/micronaut-start-project/rest/hello
 
 3.
     docker volume create portainer_data
@@ -69,3 +71,6 @@ cd documentation && mvn site:site && cd ..
 
 6. Dockerize Postgresql
     https://docs.docker.com/v17.09/engine/examples/postgresql_service/
+
+7. Ports
+    Service and debug ports

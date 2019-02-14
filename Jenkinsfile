@@ -14,29 +14,9 @@ pipeline {
                 sh 'mvn --version'
             }
         }
-        stage('Cleaning') {
-            steps {
-                sh 'mvn clean'
-            }
-        }
-        stage('Compiling') {
-            steps {
-                sh 'mvn compile'
-            }
-        }
-        stage('Test Compiling') {
-            steps {
-                sh 'mvn test-compile'
-            }
-        }
-        stage('Unit test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
         stage('Build') {
             steps {
-                sh 'mvn install'
+                sh 'mvn clean install'
             }
         }
         stage('Sites') {
