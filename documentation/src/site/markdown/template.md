@@ -14,11 +14,7 @@
 
 ## Configuration
 
-## Usage
-
-## Control questions
-
-    What is xxxx?
+## Usage, tips and tricks
 
 ## See also
 

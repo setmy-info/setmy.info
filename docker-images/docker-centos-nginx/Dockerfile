@@ -11,9 +11,6 @@ LABEL org.label-schema.name="Docker HUB Centos Nginx" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.build-date=$BUILD_DATE
 
-#ENV http_proxy http://cache.example.com:8080
-#ENV https_proxy http://cache.example.com:8080
-
 COPY ./etc/yum.repos.d/nginx.repo     /etc/yum.repos.d/nginx.repo
 COPY ./usr/share/nginx/www/index.html /usr/share/nginx/www/index.html
 COPY ./usr/share/nginx/www/error.html /usr/share/nginx/www/error.html

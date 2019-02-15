@@ -11,9 +11,6 @@ LABEL org.label-schema.name="Docker HUB Centos Tomcat" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.build-date=$BUILD_DATE
 
-#ENV http_proxy http://cache.example.com:8080
-#ENV https_proxy http://cache.example.com:8080
-
 COPY apache-tomcat-9.0.16 /opt/tomcat
 RUN mkdir -p /opt/tomcat/{logs,temp}
 RUN mkdir -p /opt/tomcat/conf/Catalina/

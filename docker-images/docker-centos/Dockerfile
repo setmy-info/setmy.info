@@ -12,9 +12,6 @@ LABEL org.label-schema.name="Docker HUB Centos" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.build-date=$BUILD_DATE
 
-#ENV http_proxy http://cache.example.com:8080
-#ENV https_proxy http://cache.example.com:8080
-
 RUN yum -y update
 RUN mkdir -p /opt/has/bin
 RUN mkdir -p /opt/has/lib
