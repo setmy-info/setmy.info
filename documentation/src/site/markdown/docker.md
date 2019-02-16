@@ -52,6 +52,7 @@
 
 ## Usage, tips and tricks
 
+    docker pull centos
     docker image list
     docker image rm 41e53a126a5d
 
