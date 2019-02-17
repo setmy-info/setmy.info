@@ -14,22 +14,22 @@ if [ -f "${DEFAULT_PROFILE_NAME}" ]; then
     . ${DEFAULT_PROFILE_NAME}
 fi
 
-for arg in ${DEFAULT_PROFILES}; do
-    PROFILE_FILE_NAME="${HOME}/.${COMMAND_NAME}/${arg}.${PROFILE_SUFFIX}"
-    if [ -f "${PROFILE_FILE_NAME}" ]; then
-	echo "Loading ${PROFILE_FILE_NAME}"
-	. ${PROFILE_FILE_NAME}
-    fi
-done
+loadProfiles() {
+    LOADABLE_PROFILES=${*}
+    PROFILES=
+    for arg in ${LOADABLE_PROFILES}; do
+        PROFILE_FILE_NAME="${HOME}/.${COMMAND_NAME}/${arg}.${PROFILE_SUFFIX}"
+        if [ -f "${PROFILE_FILE_NAME}" ]; then
+    	echo "Loading ${PROFILE_FILE_NAME}"
+    	. ${PROFILE_FILE_NAME}
+    	loadProfiles ${PROFILES}
+        fi
+    done
+    return
+}
 
-for arg; do
-    PROFILE_FILE_NAME="${HOME}/.${COMMAND_NAME}/${arg}.${PROFILE_SUFFIX}"
-    if [ -f "${PROFILE_FILE_NAME}" ]; then
-	echo "Loading ${PROFILE_FILE_NAME}"
-	. ${PROFILE_FILE_NAME}
-    fi
-done
-
+loadProfiles ${DEFAULT_PROFILES}
+loadProfiles ${*}
 konsole --workdir ${PWD}
 
 exit 0
