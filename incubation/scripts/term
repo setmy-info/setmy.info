@@ -6,7 +6,7 @@ PROFILE_SUFFIX="profile"
 DEFAULT_PROFILE_NAME=${COMMAND_USER_FOLDER}/default.${PROFILE_SUFFIX}
 
 if [ ! -d "${COMMAND_USER_FOLDER}" ]; then
-    mkdir -fp ${COMMAND_USER_FOLDER}
+    mkdir -p ${COMMAND_USER_FOLDER}
 fi
 
 if [ -f "${DEFAULT_PROFILE_NAME}" ]; then
