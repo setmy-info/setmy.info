@@ -1,0 +1,35 @@
+#!/bin/sh
+
+COMMAND_NAME=`basename ${0}`
+COMMAND_USER_FOLDER=${HOME}/.${COMMAND_NAME}
+PROFILE_SUFFIX="profile"
+DEFAULT_PROFILE_NAME=${COMMAND_USER_FOLDER}/default.${PROFILE_SUFFIX}
+
+if [ ! -d "${COMMAND_USER_FOLDER}" ]; then
+    mkdir -fp ${COMMAND_USER_FOLDER}
+fi
+
+if [ -f "${DEFAULT_PROFILE_NAME}" ]; then
+    echo "Loading ${DEFAULT_PROFILE_NAME}"
+    . ${DEFAULT_PROFILE_NAME}
+fi
+
+for arg in ${DEFAULT_PROFILES}; do
+    PROFILE_FILE_NAME="${HOME}/.${COMMAND_NAME}/${arg}.${PROFILE_SUFFIX}"
+    if [ -f "${PROFILE_FILE_NAME}" ]; then
+	echo "Loading ${PROFILE_FILE_NAME}"
+	. ${PROFILE_FILE_NAME}
+    fi
+done
+
+for arg; do
+    PROFILE_FILE_NAME="${HOME}/.${COMMAND_NAME}/${arg}.${PROFILE_SUFFIX}"
+    if [ -f "${PROFILE_FILE_NAME}" ]; then
+	echo "Loading ${PROFILE_FILE_NAME}"
+	. ${PROFILE_FILE_NAME}
+    fi
+done
+
+konsole --workdir ${PWD}
+
+exit 0
