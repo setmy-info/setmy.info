@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Copyright 2019 Imre Tabur <imre.tabur@eesti.ee>
+
 COMMAND_NAME=`basename ${0}`
 COMMAND_USER_FOLDER=${HOME}/.${COMMAND_NAME}
 PROFILE_SUFFIX="profile"
