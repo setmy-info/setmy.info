@@ -32,6 +32,6 @@ loadProfiles() {
 
 loadProfiles ${DEFAULT_PROFILES}
 loadProfiles ${*}
-konsole --workdir ${PWD}
+konsole --workdir ${PWD} &
 
 exit 0
