@@ -10,7 +10,7 @@
 
 ### Development machine preparation
 
-    yum -y install mc ansible nano make yum-utils rpmdevtools rpm-build java-1.8.0-openjdk git mercurial
+    yum -y install mc ansible nano make yum-utils rpmdevtools rpm-build java-1.8.0-openjdk git mercurial rpmbuild
     Install postgres tools from Postgre guide.
     Install docker by docker guide.
     Install nginx by Nginx guide.
