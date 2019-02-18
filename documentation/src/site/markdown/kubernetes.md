@@ -70,6 +70,7 @@ minikube start --vm-driver=none
     kubectl get pods
     kubectl logs -f xyz-deployment-596744778-dcgtz
     kubectl logs xyz-deployment-596744778-dcgtz -c containername --previous
+    kubectl describe pod xyz-deployment-596744778-dcgtz
     kubectl delete pod xyz-deployment-596744778-dcgtz
     kubectl proxy
     kubectl port-forward xyz-deployment-596744778-dcgtz LOCALPORT:REMOTEPORT

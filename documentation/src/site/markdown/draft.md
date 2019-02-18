@@ -47,5 +47,37 @@ cd documentation && mvn site:site && cd ..
     firefox --new-tab http://localhost/micronaut-start-project/rest/hello
     firefox --new-tab http://localhost/node-start-project/
 
-7. Ports
+3. Ports
     Service and debug ports
+
+4. Solution levels
+
+    Simplest level: only JWT check with symmetric keys. No session cancellation.
+    Simple level:   DB JWT check with symmetric and as keys. No session cancellation.
+
+4. Example .desktop file
+
+    https://standards.freedesktop.org/menu-spec/latest/
+    https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.1.html
+    localectl list-locales
+
+    [Desktop Entry]
+    Comment[en_US]=Example application konsole
+    Comment=Example application konsole
+    Exec=term exampleApp
+    GenericName[en_US]=Example application konsole
+    GenericName=Example application konsole
+    Icon=utilities-terminal
+    MimeType=
+    Name[en_US]=Example application konsole
+    Name=Example application konsole
+    Path=
+    StartupNotify=true
+    Terminal=false
+    TerminalOptions=
+    Type=Application
+    X-DBUS-ServiceName=
+    X-DBUS-StartupType=
+    X-KDE-SubstituteUID=false
+    X-KDE-Username=
+
