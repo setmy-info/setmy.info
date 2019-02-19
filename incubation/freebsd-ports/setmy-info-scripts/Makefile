@@ -12,7 +12,7 @@ CATEGORIES=    devel
 MASTER_SITES=  ftp://example.com ftp://example.com
 
 MAINTAINER=    imre.tabur@eesti.ee
-COMMENT=       Exampple comment
+COMMENT=       Example comment
 
 MANCOMPRESSED= yes
 
