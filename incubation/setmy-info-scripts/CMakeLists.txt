@@ -7,6 +7,7 @@ cmake_minimum_required (VERSION 3.13.4)
 # 4. Add Changelog file. Add some other fields too for RPM information.
 # 5. clean target
 # 6. etc profile.d
+# 7. Try .term then in installation location profiles
 
 PROJECT (setmy-info-scripts)
 
@@ -70,8 +71,10 @@ SET(CPACK_PACKAGE_VERSION_MAJOR           "${PROJECT_MODULE_VERSION_MAJOR}")
 SET(CPACK_PACKAGE_VERSION_MINOR           "${PROJECT_MODULE_VERSION_MINOR}")
 SET(CPACK_PACKAGE_VERSION_PATCH           "${PROJECT_MODULE_VERSION_PATCH}")
 SET(CPACK_PACKAGE_INSTALL_DIRECTORY       "CPack Component Example")
+SET(CPACK_RPM_PRE_INSTALL_SCRIPT_FILE     "${PROJECT_SOURCE_DIR}/src/main/bash/pre.install.sh")
+SET(CPACK_RPM_PRE_UNINSTALL_SCRIPT_FILE   "${PROJECT_SOURCE_DIR}/src/main/bash/pre.uninstall.sh")
 SET(CPACK_RPM_POST_INSTALL_SCRIPT_FILE    "${PROJECT_SOURCE_DIR}/src/main/bash/post.install.sh")
-SET(CPACK_RPM_POST_UNINSTALL_SCRIPT_FILE  "${PROJECT_SOURCE_DIR}/src/main/bash/un.install.sh")
+SET(CPACK_RPM_POST_UNINSTALL_SCRIPT_FILE  "${PROJECT_SOURCE_DIR}/src/main/bash/post.uninstall.sh")
 SET(CPACK_RPM_PACKAGE_SUMMARY             "Summary")
 SET(CPACK_RPM_PACKAGE_NAME                ${PROJECT_NAME})
 SET(CPACK_GENERATOR                       "TGZ;RPM;STGZ")

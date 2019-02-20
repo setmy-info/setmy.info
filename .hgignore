@@ -46,6 +46,17 @@ docker-images/docker-centos-node/node*
 tomcat-start-project/download/*
 tomcat-start-project/apache-tomcat*
 
+# cmake
+**/_CPack_Packages
+**/CMakeFiles
+**/CMakeCache.txt
+**/*.cmake
+incubation/setmy-info-scripts/Makefile
+incubation/setmy-info-scripts/install_manifest.txt
+incubation/setmy-info-scripts/*.rpm
+incubation/setmy-info-scripts/*.noarch.sh
+incubation/setmy-info-scripts/*.noarch.tar.gz
+
 ### NodeJS ###
 */node_modules/
 
