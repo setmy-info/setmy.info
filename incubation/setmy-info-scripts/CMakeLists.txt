@@ -28,11 +28,12 @@ SET (PROJECT_MODULE_VERSION_REVISION 0)
 SET (BUILD_PATH                ${PROJECT_BINARY_DIR}/build)
 SET (RESOURCES_PATH            ${PROJECT_BINARY_DIR}/resources)
 SET (SOURCES_PATH              ${PROJECT_BINARY_DIR}/src)
-SET (EXECUTABLE_OUTPUT_PATH    ${BUILD_PATH}/bin)
+#SET (EXECUTABLE_OUTPUT_PATH    ${BUILD_PATH}/bin)
 SET (BINARY_OUTPUT_PATH        ${BUILD_PATH}/bin)
 SET (LIBRARY_OUTPUT_PATH       ${BUILD_PATH}/lib)
 SET (MAN_OUTPUT_PATH           ${BUILD_PATH}/man)
 SET (DOC_OUTPUT_PATH           ${BUILD_PATH}/doc)
+SET (ETC_OUTPUT_PATH           ${BUILD_PATH}/etc)
 
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 
@@ -41,11 +42,12 @@ ADD_CUSTOM_TARGET(cleaning    )
 ADD_CUSTOM_TARGET(dirs        mkdir -p ${BUILD_PATH} && mkdir -p ${MAN_OUTPUT_PATH}/man1 && mkdir -p ${LIBRARY_OUTPUT_PATH}/profiles)
 ADD_CUSTOM_TARGET(gzipman     cp ${RESOURCES_PATH}/man/*.1 ${MAN_OUTPUT_PATH}/man1 && gzip -f ${MAN_OUTPUT_PATH}/man1/*.1)
 ADD_CUSTOM_TARGET(setprofiles cp -R ${RESOURCES_PATH}/profiles/* ${LIBRARY_OUTPUT_PATH}/profiles)
+ADD_CUSTOM_TARGET(files       cp ${SOURCES_PATH}/term ${BINARY_OUTPUT_PATH})
 ADD_CUSTOM_TARGET(buildClean  rm -rf ./build)
 ADD_CUSTOM_TARGET(pkgClean    rm -rf ./${PROJECT_NAME}*.tar.gz ./${PROJECT_NAME}*.rpm ${PROJECT_NAME}*.sh)
 ADD_CUSTOM_TARGET(cmakeClean  rm -rf ./*.cmake ./_CPack_Packages install_manifest.txt CMakeCache.txt)
 
-ADD_DEPENDENCIES(build gzipman setprofiles)
+ADD_DEPENDENCIES(build gzipman setprofiles files)
 ADD_DEPENDENCIES(gzipman dirs)
 ADD_DEPENDENCIES(setprofiles dirs)
 ADD_DEPENDENCIES(cleaning cmakeClean buildClean pkgClean)
@@ -58,7 +60,6 @@ INSTALL(FILES "${MAN_OUTPUT_PATH}/man1/example.1.gz" DESTINATION man/man1)
 CONFIGURE_FILE("${SOURCES_PATH}/example" "${BINARY_OUTPUT_PATH}/example")
 
 #https://cmake.org/cmake/help/v3.14/manual/cpack-generators.7.html
-
 #https://cmake.org/cmake/help/v3.14/cpack_gen/rpm.html#cpack_gen:CPack%20RPM%20Generator
 SET(CPACK_RPM_PACKAGE_DEBUG               true)
 SET(CPACK_PACKAGE_NAME                    "${PROJECT_NAME}")
