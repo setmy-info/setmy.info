@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.13.4)
+cmake_minimum_required (VERSION 3.13.2)
 
 # TODO
 # 1. Makefile build without C/C++ check, add bash check instead
@@ -30,7 +30,13 @@ IF(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 ENDIF()
 IF(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
     SET (CMAKE_INSTALL_PREFIX  "/usr/local")
+    set(CPACK_ENABLE_FREEBSD_PKG ON CACHE BOOL "Enable pkg(8) generator in CPack")
 ENDIF()
+
+message("-- CMAKE_SYSTEM_INFO_FILE: ${CMAKE_SYSTEM_INFO_FILE}")
+message("-- CMAKE_SYSTEM_NAME:      ${CMAKE_SYSTEM_NAME}")
+message("-- CMAKE_SYSTEM_PROCESSOR: ${CMAKE_SYSTEM_PROCESSOR}")
+message("-- CMAKE_SYSTEM:           ${CMAKE_SYSTEM}")
 
 SET (PROJECT_PATH              ${PROJECT_BINARY_DIR})
 SET (BUILD_PATH                ${PROJECT_PATH}/build)
@@ -54,7 +60,7 @@ ADD_CUSTOM_TARGET(setprofiles cp -R ${RESOURCES_PATH}/profiles/* ${LIBRARY_OUTPU
 ADD_CUSTOM_TARGET(etcfiles    cp -R ${RESOURCES_PATH}/etc/profile.d/* ${ETC_OUTPUT_PATH}/profile.d)
 ADD_CUSTOM_TARGET(files       cp ${SOURCES_PATH}/* ${BINARY_OUTPUT_PATH})
 ADD_CUSTOM_TARGET(buildClean  rm -rf ./build)
-ADD_CUSTOM_TARGET(pkgClean    rm -rf ./${PROJECT_NAME}*.tar.gz ./${PROJECT_NAME}*.rpm ${PROJECT_NAME}*.sh)
+ADD_CUSTOM_TARGET(pkgClean    rm -rf ./${PROJECT_NAME}*.tar.gz ./${PROJECT_NAME}*.rpm ./${PROJECT_NAME}*.sh ./${PROJECT_NAME}*.deb)
 ADD_CUSTOM_TARGET(cmakeClean  rm -rf ./*.cmake ./_CPack_Packages install_manifest.txt CMakeCache.txt)
 
 ADD_DEPENDENCIES(build gzipman setprofiles files etcfiles)
@@ -71,8 +77,6 @@ INSTALL(DIRECTORY "${MAN_OUTPUT_PATH}/man1"             DESTINATION man)
 INSTALL(DIRECTORY "${ETC_OUTPUT_PATH}/profile.d"        DESTINATION etc)
 
 #https://cmake.org/cmake/help/v3.14/manual/cpack-generators.7.html
-#https://cmake.org/cmake/help/v3.14/cpack_gen/rpm.html#cpack_gen:CPack%20RPM%20Generator
-SET(CPACK_RPM_PACKAGE_DEBUG               true)
 SET(CPACK_PACKAGE_NAME                    "${PROJECT_NAME}")
 SET(CPACK_PACKAGE_VENDOR                  "${PROJECT_VENDOR}")
 SET(CPACK_PACKAGE_DESCRIPTION             "${PROJECT_DESCRIPTION}")
@@ -83,15 +87,17 @@ SET(CPACK_PACKAGE_VERSION_MAJOR           "${PROJECT_MODULE_VERSION_MAJOR}")
 SET(CPACK_PACKAGE_VERSION_MINOR           "${PROJECT_MODULE_VERSION_MINOR}")
 SET(CPACK_PACKAGE_VERSION_PATCH           "${PROJECT_MODULE_VERSION_PATCH}")
 SET(CPACK_PACKAGE_INSTALL_DIRECTORY       "CPack Component Example")
+SET(CPACK_PACKAGING_INSTALL_PREFIX        ${CMAKE_INSTALL_PREFIX})
+SET(CPACK_PACKAGE_RELOCATABLE             TRUE)
+
+#https://cmake.org/cmake/help/v3.14/cpack_gen/rpm.html#cpack_gen:CPack%20RPM%20Generator
+SET(CPACK_RPM_PACKAGE_DEBUG               true)
 SET(CPACK_RPM_PRE_INSTALL_SCRIPT_FILE     "${INSTALL_SCRIPTS_PATH}/pre.install.sh")
 SET(CPACK_RPM_PRE_UNINSTALL_SCRIPT_FILE   "${INSTALL_SCRIPTS_PATH}/pre.uninstall.sh")
 SET(CPACK_RPM_POST_INSTALL_SCRIPT_FILE    "${INSTALL_SCRIPTS_PATH}/post.install.sh")
 SET(CPACK_RPM_POST_UNINSTALL_SCRIPT_FILE  "${INSTALL_SCRIPTS_PATH}/post.uninstall.sh")
 SET(CPACK_RPM_PACKAGE_SUMMARY             "Summary")
 SET(CPACK_RPM_PACKAGE_NAME                ${PROJECT_NAME})
-SET(CPACK_GENERATOR                       "TGZ;RPM;STGZ")
-SET(CPACK_PACKAGING_INSTALL_PREFIX        ${CMAKE_INSTALL_PREFIX})
-SET(CPACK_PACKAGE_RELOCATABLE             TRUE)
 # SET(CPACK_RPM_PACKAGE_REQUIRES            "some-else >= 1.0.0")
 
 # https://cmake.org/cmake/help/v3.14/cpack_gen/deb.html
@@ -101,7 +107,7 @@ SET(CPACK_DEBIAN_PACKAGE_NAME             "${PROJECT_NAME}")
 SET(CPACK_DEBIAN_PACKAGE_VERSION          "${CPACK_PACKAGE_VERSION}")
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER       "${PROJECT_MAINTAINER}")
 SET(CPACK_DEBIAN_PACKAGE_DESCRIPTION      "${PROJECT_DESCRIPTION}")
-#SET(CPACK_DEBIAN_PACKAGE_DEPENDS          "some-else (>= 1.0.0)")
+SET(CPACK_DEBIAN_PACKAGE_DEPENDS          "some-else (>= 1.0.0)")
 SET(CPACK_DEBIAN_PACKAGE_PRIORITY         "optional")
 SET(CPACK_DEBIAN_PACKAGE_SECTION          "libs")
 SET(CPACK_DEBIAN_ARCHITECTURE             "all")
@@ -117,5 +123,8 @@ SET(CPACK_FREEBSD_PACKAGE_MAINTAINER      ${PROJECT_MAINTAINER})
 SET(CPACK_FREEBSD_PACKAGE_ORIGIN          "misc/${PROJECT_NAME}")
 SET(CPACK_FREEBSD_PACKAGE_CATEGORIES      "libs")
 SET(CPACK_FREEBSD_PACKAGE_DEPS            "")
+
+#DEB,RPM
+SET(CPACK_GENERATOR                       "TGZ;STGZ;7Z;TBZ2;TXZ;TZ;ZIP")
 
 include(CPack)
