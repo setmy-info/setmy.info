@@ -25,6 +25,7 @@
             CREATE DATABASE testdb encoding 'UTF8';
             ALTER DATABASE testdb OWNER TO test;
             GRANT ALL PRIVILEGES ON DATABASE testdb TO dev;
+            \q
     In: /var/lib/pgsql/10/data pg_hba.conf and postgresql.conf
     systemctl restart postgresql-10
 

@@ -33,4 +33,11 @@ x. Spring and spring boot, but as much as possible in standard way (javax.*).
 
 x. 
 
+4. Solution levels
+
+    1: Only JWT check with symmetric keys. No session cancellation (JWT revoke). Fully stateless solutions. No central solutions cache for apps. Single node solutions. App backend as GW.
+    2: DB JWT check with symmetric keys. DB based session cancellation and expiration (JWT revoke). Single node solutions. App backend as GW. No central cache solutions for apps.
+    3. DB JWT check with symmetric and assymetric keys. DB based session cancellation and expiration (JWT revoke). Multi node solutions. App backend as GW. No central cache solutions for apps.
+    4. Central Cache and session storage. JWT and session revoke in cache systems. Multi node solutions. Multi HW servers only.
+    5. Central Cache and session storage. JWT and session revoke in identiti management systems. Multi node systesm. Health checks. API GW (rate limiting, security, identity management etc). Multiple hardware (servers, network nodes, powwersuplies, UPS etc) nodes. Storage systems.
 

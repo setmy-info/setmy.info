@@ -49,38 +49,3 @@ cd documentation && mvn site:site && cd ..
 
 3. Ports
     Service and debug ports
-
-4. Solution levels
-
-    1: Only JWT check with symmetric keys. No session cancellation (JWT revoke). Fully stateless solutions. No central solutions cache for apps. Single node solutions. App backend as GW.
-    2: DB JWT check with symmetric keys. DB based session cancellation and expiration (JWT revoke). Single node solutions. App backend as GW. No central cache solutions for apps.
-    3. DB JWT check with symmetric and assymetric keys. DB based session cancellation and expiration (JWT revoke). Multi node solutions. App backend as GW. No central cache solutions for apps.
-    4. Central Cache and session storage. JWT and session revoke in cache systems. Multi node solutions. Multi HW servers only.
-    5. Central Cache and session storage. JWT and session revoke in identiti management systems. Multi node systesm. Health checks. API GW (rate limiting, security, identity management etc). Multiple hardware (servers, network nodes, powwersuplies, UPS etc) nodes. Storage systems.
-
-4. Example .desktop file
-
-    https://standards.freedesktop.org/menu-spec/latest/
-    https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.1.html
-    localectl list-locales
-
-    [Desktop Entry]
-    Comment[en_US]=Example application konsole
-    Comment=Example application konsole
-    Exec=term exampleApp
-    GenericName[en_US]=Example application konsole
-    GenericName=Example application konsole
-    Icon=utilities-terminal
-    MimeType=
-    Name[en_US]=Example application konsole
-    Name=Example application konsole
-    Path=
-    StartupNotify=true
-    Terminal=false
-    TerminalOptions=
-    Type=Application
-    X-DBUS-ServiceName=
-    X-DBUS-StartupType=
-    X-KDE-SubstituteUID=false
-    X-KDE-Username=
-
