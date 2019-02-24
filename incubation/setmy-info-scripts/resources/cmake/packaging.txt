@@ -58,6 +58,7 @@ ENDIF()
 IF(DISTRIBUTION STREQUAL "FreeBSD")
     # What is proper value for that?
     #SET(CPACK_GENERATOR                       "${DEFAULT_PACKAGES};FREEBSD")
+    SET(CPACK_GENERATOR                       "${DEFAULT_PACKAGES}")
 ENDIF()
 
 include(CPack)
