@@ -56,7 +56,8 @@ IF(DISTRIBUTION STREQUAL "Debian")
     SET(CPACK_GENERATOR                       "${DEFAULT_PACKAGES};DEB")
 ENDIF()
 IF(DISTRIBUTION STREQUAL "FreeBSD")
-    SET(CPACK_GENERATOR                       "${DEFAULT_PACKAGES};FREEBSD")
+    # What is proper value for that?
+    #SET(CPACK_GENERATOR                       "${DEFAULT_PACKAGES};FREEBSD")
 ENDIF()
 
 include(CPack)
