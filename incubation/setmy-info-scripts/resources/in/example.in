@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# Author: Imre Tabur
+# Copyright 2018 Imre Tabur <imre.tabur@eesti.ee>
+
 export LD_LIBRARY_PATH=@CMAKE_INSTALL_PREFIX@/lib:$LD_LIBRARY_PATH
 COMMAND_NAME=`basename $0`
 

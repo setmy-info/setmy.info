@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.13.2)
+cmake_minimum_required (VERSION 3.12.1)
 
 PROJECT (setmy-info-scripts)
 
@@ -17,22 +17,17 @@ SET (PROJECT_LICENSE                    "MIT")
 
 INCLUDE(./resources/cmake/variables.txt)
 
-ADD_CUSTOM_TARGET(serviceScripts        cp ${RESOURCES_PATH}/sh/*.service ${BINARY_OUTPUT_PATH})
+ADD_CUSTOM_TARGET(serviceScripts        cp ${RESOURCES_PATH}/in/*.service ${BINARY_OUTPUT_PATH})
 ADD_CUSTOM_TARGET(setprofiles           cp -R ${RESOURCES_PATH}/profiles/* ${LIBRARY_OUTPUT_PATH}/profiles)
 ADD_DEPENDENCIES(build setprofiles serviceScripts)
 ADD_DEPENDENCIES(setprofiles dirs)
 ADD_DEPENDENCIES(serviceScripts dirs)
 
-CONFIGURE_FILE("${SOURCES_PATH}/example" "${BINARY_OUTPUT_PATH}/example")
-CONFIGURE_FILE("${RESOURCES_PATH}/sh/smi-location.in" "${BINARY_OUTPUT_PATH}/smi-location")
+CONFIGURE_FILE("${RESOURCES_PATH}/in/smi-location.in"   "${BINARY_OUTPUT_PATH}/smi-location")
 
 INSTALL(PROGRAMS  "${BINARY_OUTPUT_PATH}/term"          DESTINATION bin)
-INSTALL(PROGRAMS  "${BINARY_OUTPUT_PATH}/example"       DESTINATION bin)
 INSTALL(PROGRAMS  "${BINARY_OUTPUT_PATH}/smi-location"  DESTINATION bin)
 INSTALL(DIRECTORY "${LIBRARY_OUTPUT_PATH}/profiles"     DESTINATION lib)
-IF(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    INSTALL(PROGRAMS "${BINARY_OUTPUT_PATH}/example.service"    DESTINATION bin)
-ENDIF()
 
 INCLUDE(./resources/cmake/install.txt)
 INCLUDE(./resources/cmake/packaging.txt)

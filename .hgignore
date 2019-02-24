@@ -56,6 +56,11 @@ incubation/setmy-info-scripts/install_manifest.txt
 incubation/setmy-info-scripts/*.rpm
 incubation/setmy-info-scripts/*.noarch.sh
 incubation/setmy-info-scripts/*.noarch.tar.gz
+incubation/setmy-info-scripts/setmy-info-scripts-1.0.0.noarch.7z
+incubation/setmy-info-scripts/setmy-info-scripts-1.0.0.noarch.tar.Z
+incubation/setmy-info-scripts/setmy-info-scripts-1.0.0.noarch.tar.bz2
+incubation/setmy-info-scripts/setmy-info-scripts-1.0.0.noarch.tar.xz
+incubation/setmy-info-scripts/setmy-info-scripts-1.0.0.noarch.zip
 
 ### NodeJS ###
 */node_modules/
