@@ -1,0 +1,6 @@
+#!/bin/sh
+
+SMI_HOME=`smi-location`
+echo "${SMI_HOME}/etc"
+
+exit 0
