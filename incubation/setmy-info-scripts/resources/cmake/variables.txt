@@ -31,6 +31,7 @@ message("-- CMAKE_HOST_UNIX:        ${CMAKE_HOST_UNIX}")
 message("-- CMAKE_SYSTEM_VERSION:   ${CMAKE_SYSTEM_VERSION}")
 message("-- DISTRIBUTION:           ${DISTRIBUTION}")
 
+SET (PROJECT_VERSION                ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
 SET (PROJECT_PATH                   ${PROJECT_BINARY_DIR})
 SET (BUILD_PATH                     ${PROJECT_PATH}/build)
 SET (RESOURCES_PATH                 ${PROJECT_PATH}/resources)
