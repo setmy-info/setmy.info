@@ -3,8 +3,8 @@ cmake_minimum_required (VERSION 3.12.1)
 PROJECT (setmy-info-scripts)
 
 SET (PROJECT_VERSION                    5)
-SET (PROJECT_VERSION_MAJOR              1)
-SET (PROJECT_VERSION_MINOR              0)
+SET (PROJECT_VERSION_MAJOR              0)
+SET (PROJECT_VERSION_MINOR              1)
 SET (PROJECT_VERSION_PATCH              0)
 SET (PROJECT_VERSION_TWEAK              0)
 
@@ -25,9 +25,11 @@ ADD_DEPENDENCIES(serviceScripts dirs)
 
 CONFIGURE_FILE("${RESOURCES_PATH}/in/smi-location.in"   "${BINARY_OUTPUT_PATH}/smi-location")
 
-INSTALL(PROGRAMS  "${BINARY_OUTPUT_PATH}/term"          DESTINATION bin)
-INSTALL(PROGRAMS  "${BINARY_OUTPUT_PATH}/smi-location"  DESTINATION bin)
-INSTALL(DIRECTORY "${LIBRARY_OUTPUT_PATH}/profiles"     DESTINATION lib)
+INSTALL(PROGRAMS  "${BINARY_OUTPUT_PATH}/term"              DESTINATION bin)
+INSTALL(PROGRAMS  "${BINARY_OUTPUT_PATH}/smi-location"      DESTINATION bin)
+INSTALL(PROGRAMS  "${BINARY_OUTPUT_PATH}/smi-etc-location"  DESTINATION bin)
+INSTALL(PROGRAMS  "${BINARY_OUTPUT_PATH}/smi-lib-location"  DESTINATION bin)
+INSTALL(DIRECTORY "${LIBRARY_OUTPUT_PATH}/profiles"         DESTINATION lib)
 
 INCLUDE(./resources/cmake/install.txt)
 INCLUDE(./resources/cmake/packaging.txt)
