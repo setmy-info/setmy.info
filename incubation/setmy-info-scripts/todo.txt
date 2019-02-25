@@ -6,3 +6,4 @@
 # 5. DONE: clean target
 # 6. DONE: etc profile.d
 # 7. Try .term then in installation location profiles
+# 8. make remove or deinstall to uninstall files
