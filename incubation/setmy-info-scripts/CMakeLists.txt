@@ -4,7 +4,7 @@ PROJECT (setmy-info-scripts)
 
 SET (PROJECT_VERSION                    5)
 SET (PROJECT_VERSION_MAJOR              0)
-SET (PROJECT_VERSION_MINOR              1)
+SET (PROJECT_VERSION_MINOR              2)
 SET (PROJECT_VERSION_PATCH              0)
 SET (PROJECT_VERSION_TWEAK              0)
 
