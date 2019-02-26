@@ -1,5 +1,7 @@
 # $FreeBSD$
 
+# https://www.freebsd.org/doc/en_US.ISO8859-1/books/porters-handbook/index.html
+
 PORTNAME=      setmy-info-scripts
 PORTVERSION=   0.1.0
 PORTREVISION=  1
@@ -25,15 +27,11 @@ post-clean:
 pre-configure:
 	@$(ECHO_MSG) "###pre-configure###"
 
-#do-configure:
-#	@$(ECHO_MSG) "###do-configure###"
-
 post-configure:
 	@$(ECHO_MSG) "###post-configure###"
 
 pre-build:
 	@$(ECHO_MSG) "###pre-build###"
-#	@cd ${WRKSRC} && ./configure
 
 post-build:
 	@$(ECHO_MSG) "###post-build###"
