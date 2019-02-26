@@ -18,6 +18,7 @@ MANCOMPRESSED= yes
 
 #TAR=tar
 #ECHO_MSG=echo
+#CP=cp
 
 pre-clean:
 	@$(ECHO_MSG) "###pre-clean###"
@@ -52,7 +53,7 @@ $(PORTNAME)-$(PORTVERSION):
 	@$(ECHO_MSG) "Creating source folder $(PORTNAME)-$(PORTVERSION)"
 	mkdir -p $(PORTNAME)-$(PORTVERSION)
 	@$(ECHO_MSG) "Copy all source to $(PORTNAME)-$(PORTVERSION)"
-	cp -Rf ../../setmy-info-scripts/* $(PORTNAME)-$(PORTVERSION)
+	$(CP) -Rf ../../setmy-info-scripts/* $(PORTNAME)-$(PORTVERSION)
 
 install-dist:
 	$(CP) $(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).src.tar.gz $(PORTSDIR)/distfiles
