@@ -45,6 +45,8 @@
 
 ## Configuration
 
+    https://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html
+
 ## Usage
 
 ## See also

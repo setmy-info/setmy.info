@@ -1,9 +1,0 @@
-# TODO
-# 1. Makefile build without C/C++ check, add bash check instead
-# 2. Add FreeBSD package build.
-# 3. pre scripts to add for install and uninstall
-# 4. DONE: Add Changelog file. Add some other fields too for RPM information.
-# 5. DONE: clean target
-# 6. DONE: etc profile.d
-# 7. Try .term then in installation location profiles
-# 8. make remove or deinstall to uninstall files

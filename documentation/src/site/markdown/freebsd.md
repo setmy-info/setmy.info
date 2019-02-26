@@ -23,6 +23,10 @@
     nano ~/.profile
     export PAGER='less -X'
 
+### Services
+
+    https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/configtuning-starting-services.html
+
 ## See also
 
     [xxxx](http://yyyyy)
