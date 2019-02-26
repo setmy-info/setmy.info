@@ -62,6 +62,9 @@ incubation/setmy-info-scripts/setmy-info-scripts-1.0.0.noarch.tar.bz2
 incubation/setmy-info-scripts/setmy-info-scripts-1.0.0.noarch.tar.xz
 incubation/setmy-info-scripts/setmy-info-scripts-1.0.0.noarch.zip
 
+# Ports
+incubation/freebsd-ports/setmy-info-scripts/**
+
 ### NodeJS ###
 */node_modules/
 

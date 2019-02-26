@@ -16,10 +16,6 @@ COMMENT=       Example comment
 
 MANCOMPRESSED= yes
 
-#TAR=tar
-#ECHO_MSG=echo
-#CP=cp
-
 pre-clean:
 	@$(ECHO_MSG) "###pre-clean###"
 
