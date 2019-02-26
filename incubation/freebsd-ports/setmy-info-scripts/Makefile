@@ -1,20 +1,22 @@
-# New ports collection makefile for:	setmy-info-scripts
-# Date Created:				2019.02.19
-# Whom:					Imre Tabur <imre.tabur@eesti.ee>
-#
 # $FreeBSD$
-#
+
+# https://www.freebsd.org/doc/en_US.ISO8859-1/books/porters-handbook/index.html
 
 PORTNAME=      setmy-info-scripts
 PORTVERSION=   0.1.0
-PORTREVISION=  0
+PORTREVISION=  1
 CATEGORIES=    devel
-MASTER_SITES=  ftp://example.com ftp://example.com
+MASTER_SITES=  https://www.hearandseesystems.com/
 
 MAINTAINER=    imre.tabur@eesti.ee
 COMMENT=       Example comment
 
+LICENSE=       MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE
+
 MANCOMPRESSED= yes
+
+HAS_CONFIGURE= yes
 
 pre-clean:
 	@$(ECHO_MSG) "###pre-clean###"
@@ -28,7 +30,7 @@ pre-configure:
 post-configure:
 	@$(ECHO_MSG) "###post-configure###"
 
-pre-build: dist
+pre-build:
 	@$(ECHO_MSG) "###pre-build###"
 
 post-build:
@@ -45,14 +47,19 @@ dist: $(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).src.tar.gz install-dist
 $(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).src.tar.gz: $(PORTNAME)-$(PORTVERSION)
 	$(TAR) -cvzf $(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).src.tar.gz ./$(PORTNAME)-$(PORTVERSION)
 
+$(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).tar.gz: $(PORTNAME)-$(PORTVERSION)
+	$(TAR) -cvzf $(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).tar.gz ./$(PORTNAME)-$(PORTVERSION)
+
 $(PORTNAME)-$(PORTVERSION):
 	@$(ECHO_MSG) "Creating source folder $(PORTNAME)-$(PORTVERSION)"
-	mkdir -p $(PORTNAME)-$(PORTVERSION)
+	$(MKDIR) -p $(PORTNAME)-$(PORTVERSION)
 	@$(ECHO_MSG) "Copy all source to $(PORTNAME)-$(PORTVERSION)"
 	$(CP) -Rf ../../setmy-info-scripts/* $(PORTNAME)-$(PORTVERSION)
 
 install-dist:
-	$(CP) $(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).src.tar.gz $(PORTSDIR)/distfiles
+	$(CP) $(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).src.tar.gz $(PORTSDIR)/distfiles/$(PORTNAME)-$(PORTVERSION).tar.gz
+
+clean-dist: clean-tar clean-co clean-working clean-distfiles
 
 clean-tar:
 	$(RM) -f $(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).src.tar.gz
@@ -60,8 +67,15 @@ clean-tar:
 clean-co:
 	$(RM) -fR  $(PORTNAME)-$(PORTVERSION)
 
-clean-dist: clean-tar clean-co
+clean-working:
+	$(RM) -fR work
 
-.PHONY : clean-tar dist clean-co clean-dist install-dist
+clean-distfiles:
+	$(RM) -f $(PORTSDIR)/distfiles/$(PORTNAME)-$(PORTVERSION).tar.gz
+
+portlint:
+	portlint
+
+.PHONY : clean-tar dist clean-co clean-dist install-dist portlint clean-working clean-distfiles
 
 .include <bsd.port.mk>
