@@ -16,6 +16,9 @@ COMMENT=       Example comment
 
 MANCOMPRESSED= yes
 
+#TAR=tar
+#ECHO_MSG=echo
+
 pre-clean:
 	@$(ECHO_MSG) "###pre-clean###"
 
@@ -43,13 +46,13 @@ post-install:
 dist: $(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).src.tar.gz install-dist
 
 $(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).src.tar.gz: $(PORTNAME)-$(PORTVERSION)
-	$(TAR) --exclude .hg --exclude 'resources/port' -cvzf $(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).src.tar.gz ./$(PORTNAME)-$(PORTVERSION)
+	$(TAR) -cvzf $(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).src.tar.gz ./$(PORTNAME)-$(PORTVERSION)
 
 $(PORTNAME)-$(PORTVERSION):
 	@$(ECHO_MSG) "Creating source folder $(PORTNAME)-$(PORTVERSION)"
 	mkdir -p $(PORTNAME)-$(PORTVERSION)
 	@$(ECHO_MSG) "Copy all source to $(PORTNAME)-$(PORTVERSION)"
-	cd $(PORTNAME)-$(PORTVERSION);ls -la
+	cp -Rf ../../setmy-info-scripts/* $(PORTNAME)-$(PORTVERSION)
 
 install-dist:
 	$(CP) $(PORTNAME)-$(PORTVERSION)-$(PORTREVISION).src.tar.gz $(PORTSDIR)/distfiles
