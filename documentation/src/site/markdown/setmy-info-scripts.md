@@ -44,7 +44,7 @@
 # 7. Try .term then in installation location profiles
 # 8. make remove or deinstall to uninstall files
 # 9. Set of commands
-smi-namespace (or...)
+smi-provider
 smi-network-add
     Network segments: Networks addresses and routers, short name
 smi-domain-add
@@ -73,6 +73,8 @@ term -> smi-term
 Kubernetes
 Docker
 Docker compose
+
+Fix man pages: /opt/xyz/share/man
 
 10. 
 https://www.openca.org/
