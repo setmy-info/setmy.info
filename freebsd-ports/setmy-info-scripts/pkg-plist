@@ -27,3 +27,5 @@ bin/smi-test.bin
 bin/smi-version
 man/man1/example.1.gz
 man/man1/another.1.gz
+bin/smi-provider
+bin/smi-var-location
