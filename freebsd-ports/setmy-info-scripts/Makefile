@@ -4,8 +4,8 @@
 # https://www.freebsd.org/doc/en_US.ISO8859-1/books/porters-handbook/special.html#staging-ex1
 
 PORTNAME=      setmy-info-scripts
-PORTVERSION=   0.1.0
-PORTREVISION=  1
+PORTVERSION=   0.2.0
+#PORTREVISION=  0
 CATEGORIES=    devel
 MASTER_SITES=  https://www.hearandseesystems.com/
 
