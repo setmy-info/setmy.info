@@ -51,14 +51,14 @@ ${PORTNAME}-${PORTVERSION}-${PORTREVISION}.src.tar.gz: ${PORTNAME}-${PORTVERSION
 ${PORTNAME}-${PORTVERSION}-${PORTREVISION}.tar.gz: ${PORTNAME}-${PORTVERSION}
 	${TAR} -cvzf ${PORTNAME}-${PORTVERSION}-${PORTREVISION}.tar.gz ./${PORTNAME}-${PORTVERSION}
 
-${PORTNAME}-${PORTVERSION):
+${PORTNAME}-${PORTVERSION}:
 	@${ECHO_MSG} "Creating source folder ${PORTNAME}-${PORTVERSION}"
 	${MKDIR} -p ${PORTNAME}-${PORTVERSION}
 	@${ECHO_MSG} "Copy all source to ${PORTNAME}-${PORTVERSION}"
 	${CP} -Rf ../../setmy-info-scripts/* ${PORTNAME}-${PORTVERSION}
 
 install-dist:
-	${CP} ${PORTNAME}-${PORTVERSION}-${PORTREVISION}.src.tar.gz ${PORTSDIR)/distfiles/${PORTNAME}-${PORTVERSION}.tar.gz
+	${CP} ${PORTNAME}-${PORTVERSION}-${PORTREVISION}.src.tar.gz ${PORTSDIR}/distfiles/${PORTNAME}-${PORTVERSION}.tar.gz
 
 clean-dist: clean-tar clean-co clean-working clean-distfiles
 
