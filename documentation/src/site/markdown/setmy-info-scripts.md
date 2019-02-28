@@ -44,7 +44,7 @@
 # 7. Try .term then in installation location profiles
 # 8. make remove or deinstall to uninstall files
 # 9. Set of commands
-smi-provider
+
 smi-var-location
 smi-network-add
     Network segments: Networks addresses and routers, short name
