@@ -45,7 +45,7 @@
 # 8. make remove or deinstall to uninstall files
 # 9. Set of commands
 
-smi-var-location
+smi-net-location
 smi-network-add
     Network segments: Networks addresses and routers, short name
 smi-domain-add
