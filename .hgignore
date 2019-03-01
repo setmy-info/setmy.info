@@ -63,7 +63,9 @@ setmy-info-scripts/setmy-info-scripts-1.0.0.noarch.tar.xz
 setmy-info-scripts/setmy-info-scripts-1.0.0.noarch.zip
 
 # Ports
-freebsd-ports/setmy-info-scripts/**
+freebsd-ports/setmy-info-scripts/setmy-info-scripts-**
+freebsd-ports/setmy-info-scripts/work/**
+freebsd-ports/setmy-info-scripts/distinfo
 
 ### NodeJS ###
 */node_modules/
