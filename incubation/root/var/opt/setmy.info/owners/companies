@@ -2,7 +2,7 @@
 
 CUR_DIR=`pwd`
 
-cd /home/has/sources/projects/components/setmy.info/incubation/root/var/opt/setmy.info/companies
+cd ${CUR_DIR} #/home/has/sources/projects/components/setmy.info/incubation/root/var/opt/setmy.info/companies
 ITEMS=`ls -d */`
 RESULT=""
 for ITEM in ${ITEMS}
