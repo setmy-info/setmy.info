@@ -1,9 +1,0 @@
-#!/bin/sh
-
-ITEMS=`./companies`
-for ITEM in ${ITEMS}
-do
-    echo "${ITEM}"
-done
-
-exit 0

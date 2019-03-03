@@ -1,0 +1,4 @@
+KEYBOARD="EE"
+LOOKUP_ORDER="hosts dns"
+DNS_SEARCH="lan Dlink"
+DNS="10.0.0.2"

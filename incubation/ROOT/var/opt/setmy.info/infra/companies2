@@ -1,0 +1,23 @@
+#!/bin/sh
+
+ITEMS=`./companies`
+for ITEM in ${ITEMS}
+do
+    echo "${ITEM}"
+done
+
+foo() {
+    
+    return 1
+}
+
+foo
+echo ${?}
+
+DNS="10.0.0.2 10.0.0.3"
+for SERVER in ${DNS}
+do
+    echo "${SERVER}"
+done
+
+exit 0
