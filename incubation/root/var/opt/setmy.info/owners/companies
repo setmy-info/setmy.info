@@ -1,0 +1,18 @@
+#!/bin/sh
+
+CUR_DIR=`pwd`
+
+cd /home/has/sources/projects/components/setmy.info/incubation/root/var/opt/setmy.info/companies
+ITEMS=`ls -d */`
+RESULT=""
+for ITEM in ${ITEMS}
+do
+    ITEM_PART="${ITEM%%/}"
+    RESULT="${ITEM_PART} ${RESULT}"
+    #echo "${ITEM%%/}"
+done
+echo "${RESULT}"
+
+cd ${CUR_DIR}
+
+exit 0
