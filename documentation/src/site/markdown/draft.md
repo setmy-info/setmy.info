@@ -19,6 +19,8 @@ https://vladmihalcea.com/how-to-use-external-xml-mappings-files-outside-of-jar-w
 http://java.sun.com/xml/ns/persistence/orm_2_0.xsd
 
 export JAVA_HOME=/opt/jdk-11.0.2/ && export PATH=${JAVA_HOME}/bin:${PATH}
+export JAVA_HOME=/opt/jdk-12/ && export PATH=${JAVA_HOME}/bin:${PATH}
+export PATH=/opt/apache-maven-3.6.0/bin:$PATH
 
 mvn cleaninstall &&
 cd groovy-models && mvn org.pitest:pitest-maven:mutationCoverage site:site && cd .. &&
