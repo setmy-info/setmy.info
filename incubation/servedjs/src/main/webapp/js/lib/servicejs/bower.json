@@ -1,0 +1,29 @@
+{
+    "name": "servicejs",
+    "description": "JavaScript dependencies injection based services layer.",
+    "main": [
+        "dist/servicejs.js"
+    ],
+    "moduleType": [
+        "amd",
+        "globals",
+        "node"
+    ],
+    "keywords": [
+        "di",
+        "dependencies injection"
+    ],
+    "authors": [
+        "Imre Tabur <imre.tabur@eesti.ee>"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "src/main",
+        "src/test",
+        "target"
+    ],
+    "private": false
+}
