@@ -272,7 +272,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.12.v20180830</version>
+                <version>${maven.jetty.plugin.version}</version>
                 <configuration>
                     <supportedPackagings>jar</supportedPackagings>
                     <webAppSourceDirectory>src/test/webapp</webAppSourceDirectory>

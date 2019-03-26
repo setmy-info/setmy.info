@@ -3,8 +3,8 @@ pipeline {
     agent any
 
     environment {
-        PATH = "/opt/has/bin:/opt/apache-maven-3.5.4/bin:/usr/local/bin:$PATH"
-        JAVA_HOME = "/opt/jdk-11/"
+        PATH = "/opt/has/bin:/opt/apache-maven-3.6.0/bin:/usr/local/bin:$PATH"
+        JAVA_HOME = "/opt/jdk-12/"
     }
 
     stages {

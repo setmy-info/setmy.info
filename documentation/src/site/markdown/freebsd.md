@@ -27,6 +27,18 @@
 
     https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/configtuning-starting-services.html
 
+## DHCP
+
+    Install:
+
+    pkg install isc-dhcp44-server
+
+## DNS
+
+    Install:
+
+    pkg install bind914
+
 ## See also
 
     [xxxx](http://yyyyy)

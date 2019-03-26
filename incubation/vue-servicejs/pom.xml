@@ -33,7 +33,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.7.v20170914</version>
+                <version>${maven.jetty.plugin.version}</version>
                 <configuration>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
                     <webApp>

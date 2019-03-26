@@ -33,6 +33,8 @@ x. Spring and spring boot, but as much as possible in standard way (javax.*).
 
 x. 
 
+x. Semantic versioning
+    https://semver.org/
 4. Solution levels
 
     1: Only JWT check with symmetric keys. No session cancellation (JWT revoke). Fully stateless solutions. No central solutions cache for apps. Single node solutions. App backend as GW.
