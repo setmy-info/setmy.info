@@ -31,11 +31,11 @@ func structing() *Person {
 	person := new(Person)
 	person.FirstName = "Peeter-Meeter"
 	person.LastName = "Sentimeeter"
-	fmt.Println(Person{"Bob", "Meter 1"})
-	fmt.Println(Person{FirstName: "Alice", LastName: "Meter 2"})
-	fmt.Println(Person{FirstName: "Fred 3"})
-	fmt.Println(&Person{FirstName: "Ann", LastName: "Meter 4"})
-	s := Person{FirstName: "Sean", LastName: "Meter 5"}
+	fmt.Println(Person{"Peeter", "Meeter 1"})
+	fmt.Println(Person{FirstName: "Petrof", LastName: "Meeter 2"})
+	fmt.Println(Person{FirstName: "Meeter 3"})
+	fmt.Println(&Person{FirstName: "Piter", LastName: "Meeter 4"})
+	s := Person{FirstName: "Senti", LastName: "Meeter 5"}
     fmt.Println(s.FirstName)
     sp := &s
     fmt.Println(sp.LastName)
