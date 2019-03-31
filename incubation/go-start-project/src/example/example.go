@@ -1,16 +1,10 @@
 package example
 
 import "fmt"
-import "os"
 
 type Person struct {
 	FirstName string
 	LastName string
-}
-
-func main() {
-	fmt.Println("Hello, 世界")
-	os.Exit(0)
 }
 
 func foo(name string) int {

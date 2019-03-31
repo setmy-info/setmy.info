@@ -37,6 +37,7 @@ example:
 clean:
 	@$(GO) clean -i -x example
 	@$(GO) clean -i -x main
+#	Delete tests to
 
 run:
 	@./bin/main
