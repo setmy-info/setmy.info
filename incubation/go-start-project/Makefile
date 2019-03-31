@@ -1,13 +1,18 @@
 
 CUR_DIR=$(shell pwd)
 GO=go
+GOBUILD=$(GO) build
+GOINSTALL=$(GO) install
+GOCLEAN=$(GO) clean
+GOTEST=$(GO) test
+GOGET=$(GO) test
 GOPATH=$(CUR_DIR)
 PACKAGES=main example
 #TARGET=
 
 all: version build
 
-sub: $(TARGET)
+#sub: $(TARGET)
 
 version:
 	@$(GO) version
@@ -17,26 +22,26 @@ version:
 build: install dobuild build-tests
 
 install:
-	@$(GO) install -v -gcflags "-N -l" ./...
+	$(GOINSTALL) -v -gcflags "-N -l" ./...
 
 dobuild:
-	@$(GO) build -v -gcflags "-N -l" ./...
+	$(GOBUILD) -v -gcflags "-N -l" ./...
 
 build-tests:
 	@$(MAKE) $(PACKAGES)
-	@$(GO) test -v -gcflags "-N -l" ./...
+	$(GOTEST) -v -gcflags "-N -l" ./...
 
 main:
 	@echo Building: $(@)
-	@$(GO) test -c -v -gcflags "-N -l" $(@)
+#	@$(GOTEST) -c -v -gcflags "-N -l" $(@)
 
 example:
 	@echo Building: $(@)
-	@$(GO) test -c -v -gcflags "-N -l" $(@)
+	$(GOTEST) -c -v -gcflags "-N -l" $(@)
 
 clean:
-	@$(GO) clean -i -x example
-	@$(GO) clean -i -x main
+	$(GOCLEAN) -i -x example
+	$(GOCLEAN)  -i -x main
 #	Delete tests to
 
 run:

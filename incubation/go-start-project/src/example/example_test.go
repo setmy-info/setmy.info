@@ -5,10 +5,6 @@ import (
     "fmt"
 )
 
-func TestMain(t *testing.T) {
-	//main()
-}
-
 func TestStructing(t *testing.T) {
 	person := structing()
 	fmt.Println(person)
