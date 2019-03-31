@@ -34,6 +34,7 @@ build-tests:
 main:
 	@echo Building: $(@)
 #	@$(GOTEST) -c -v -gcflags "-N -l" $(@)
+	strip ./bin/main
 
 example:
 	@echo Building: $(@)
