@@ -4,6 +4,6 @@ import (
     "testing"
 )
 
-func TestMain(t *testing.T) {
+func TestTwoMain(t *testing.T) {
 	// TODO
 }

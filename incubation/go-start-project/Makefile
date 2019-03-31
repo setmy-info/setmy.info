@@ -1,51 +1,54 @@
 
 CUR_DIR=$(shell pwd)
+GOPATH=$(CUR_DIR)
+
 GO=go
+STRIP=strip
 GOBUILD=$(GO) build
 GOINSTALL=$(GO) install
 GOCLEAN=$(GO) clean
 GOTEST=$(GO) test
-GOGET=$(GO) test
+GOGET=$(GO) get
+GOLIST=$(GO) list
 GOPATH=$(CUR_DIR)
-PACKAGES=main example
-#TARGET=
+ECHO=echo
+MODULES=example one two service
 
-all: version build
-
-#sub: $(TARGET)
+all: version pkglist install test modules
 
 version:
+	@$(ECHO) "=== Version ==="
 	@$(GO) version
-	@echo Current directory: $(CUR_DIR)
-	@echo "GOPATH=$(CUR_DIR)"
+	@$(ECHO) Current directory: $(CUR_DIR)
+	@$(ECHO) "GOPATH=$(GOPATH)"
 
-build: install dobuild build-tests
+pkglist:
+	@$(ECHO) "=== Modules list ==="
+	@$(GOLIST) ./...
 
 install:
-	$(GOINSTALL) -v -gcflags "-N -l" ./...
+	@$(ECHO) "=== Installing ==="
+	$(GOINSTALL) -v -gcflags "-N -l" ./... $(MODULES)
+	@$(STRIP) ./bin/one
+	@$(STRIP) ./bin/two
+	@$(STRIP) ./bin/service
 
-dobuild:
-	$(GOBUILD) -v -gcflags "-N -l" ./...
-
-build-tests:
-	@$(MAKE) $(PACKAGES)
-	$(GOTEST) -v -gcflags "-N -l" ./...
-
-main:
-	@echo Building: $(@)
-#	@$(GOTEST) -c -v -gcflags "-N -l" $(@)
-	strip ./bin/main
-
-example:
-	@echo Building: $(@)
-	$(GOTEST) -c -v -gcflags "-N -l" $(@)
+test:
+	@$(ECHO) "=== Testing ==="
+	$(GOTEST) -v -gcflags "-N -l" ./... $(MODULES)
 
 clean:
-	$(GOCLEAN) -i -x example
-	$(GOCLEAN)  -i -x main
-#	Delete tests to
+	@$(ECHO) "=== Cleaning ==="
+	$(GOCLEAN) -i -x $(MODULES)
+
+modules: $(MODULES)
+
+$(MODULES):
+	@$(ECHO) $@
 
 run:
-	@./bin/main
+	@./bin/one
+	@./bin/two
+	@./bin/service
 
-.PHONY: all build version build-tests
+.PHONY: all version pkglist install test modules

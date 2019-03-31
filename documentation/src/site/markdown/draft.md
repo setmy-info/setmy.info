@@ -51,3 +51,8 @@ cd documentation && mvn site:site && cd ..
 
 3. Ports
     Service and debug ports
+
+4. Golang Microservice
+
+    docker build -t imret/go-start-project .
+    docker run -p 8080:8080 -d imret/go-start-project
