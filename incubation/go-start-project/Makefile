@@ -1,20 +1,19 @@
+PROJECT=go-start-project
+GO=go
+STRIP=strip
+GOINSTALL=$(GO) install
+GOCLEAN=$(GO) clean
+GOTEST=$(GO) test
+GOLIST=$(GO) list
+ECHO=echo
 
 CUR_DIR=$(shell pwd)
 GOPATH=$(CUR_DIR)
 
-GO=go
-STRIP=strip
-GOBUILD=$(GO) build
-GOINSTALL=$(GO) install
-GOCLEAN=$(GO) clean
-GOTEST=$(GO) test
-GOGET=$(GO) get
-GOLIST=$(GO) list
-GOPATH=$(CUR_DIR)
-ECHO=echo
-MODULES=example one two service
+APPS=one two service
+MODULES=example $(APPS)
 
-all: version pkglist install test modules
+all: version pkglist build strip test
 
 version:
 	@$(ECHO) "=== Version ==="
@@ -24,14 +23,17 @@ version:
 
 pkglist:
 	@$(ECHO) "=== Modules list ==="
-	@$(GOLIST) ./...
+	@$(GOLIST) -e ./...
 
-install:
+build:
 	@$(ECHO) "=== Installing ==="
 	$(GOINSTALL) -v -gcflags "-N -l" ./... $(MODULES)
-	@$(STRIP) ./bin/one
-	@$(STRIP) ./bin/two
-	@$(STRIP) ./bin/service
+
+strip: $(APPS)
+
+$(APPS):
+	@$(ECHO) "Striping ./bin/$@"
+	@$(STRIP) ./bin/$@
 
 test:
 	@$(ECHO) "=== Testing ==="
@@ -41,14 +43,19 @@ clean:
 	@$(ECHO) "=== Cleaning ==="
 	$(GOCLEAN) -i -x $(MODULES)
 
-modules: $(MODULES)
-
-$(MODULES):
-	@$(ECHO) $@
-
 run:
 	@./bin/one
 	@./bin/two
 	@./bin/service
 
-.PHONY: all version pkglist install test modules
+docker:
+	docker build -t setmyinfo/$(PROJECT) .
+
+dockerrun:
+	docker run -p 8040:8080 -d setmyinfo/$(PROJECT)
+
+init:
+#	@$(GO) get -u github.com/kardianos/govendor
+#	govendor init
+
+.PHONY: all version pkglist install strip $(APPS) test docker dockerrun init

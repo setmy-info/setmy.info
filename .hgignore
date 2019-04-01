@@ -67,6 +67,11 @@ freebsd-ports/setmy-info-scripts/setmy-info-scripts-**
 freebsd-ports/setmy-info-scripts/work/**
 freebsd-ports/setmy-info-scripts/distinfo
 
+# Go
+**/github.com/*
+**/go-start-project/bin/*
+**/go-start-project/pkg/**
+
 ### NodeJS ###
 */node_modules/
 

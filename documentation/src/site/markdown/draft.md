@@ -31,9 +31,9 @@ cd springboot-start-project && mvn org.pitest:pitest-maven:mutationCoverage site
 cd documentation && mvn site:site && cd ..
 
 1.
-    docker build -t imret/node-start-project .
+    docker build -t setmyinfo/node-start-project .
         npm run docker-build
-    docker run -p 4000:3000 -d imret/node-start-project
+    docker run -p 4000:3000 -d setmyinfo/node-start-project
         npm run docker-run
 
 2. Or
@@ -54,5 +54,5 @@ cd documentation && mvn site:site && cd ..
 
 4. Golang Microservice
 
-    docker build -t imret/go-start-project .
-    docker run -p 8080:8080 -d imret/go-start-project
+    docker build -t setmyinfo/go-start-project .
+    docker run -p 8040:8080 -d  setmyinfo/go-start-project

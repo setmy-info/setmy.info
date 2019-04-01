@@ -43,6 +43,14 @@ services:
         image: tomcat-start-project:1.2.0-SNAPSHOT
         ports:
             - "8030:8080"
+#    go-start-project:
+#        container_name: go-start-project
+#        build: 
+#            context: ./
+#            dockerfile: Dockerfile
+#        image: go-start-project:1.2.0-SNAPSHOT
+#        ports:
+#            - "8040:8080"
     docker-centos-nginx:
         container_name: docker-centos-nginx
         build: 
