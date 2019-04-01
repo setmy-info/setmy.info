@@ -11,7 +11,7 @@ CUR_DIR=$(shell pwd)
 GOPATH=$(CUR_DIR)
 
 APPS=one two service
-MODULES=example $(APPS)
+PACKAGES=example $(APPS)
 
 all: version pkglist build strip test
 
@@ -22,12 +22,12 @@ version:
 	@$(ECHO) "GOPATH=$(GOPATH)"
 
 pkglist:
-	@$(ECHO) "=== Modules list ==="
+	@$(ECHO) "=== PACKAGES list ==="
 	@$(GOLIST) -e ./...
 
 build:
 	@$(ECHO) "=== Installing ==="
-	$(GOINSTALL) -v -gcflags "-N -l" ./... $(MODULES)
+	$(GOINSTALL) -v -gcflags "-N -l" ./... $(PACKAGES)
 
 strip: $(APPS)
 
@@ -37,11 +37,11 @@ $(APPS):
 
 test:
 	@$(ECHO) "=== Testing ==="
-	$(GOTEST) -v -gcflags "-N -l" ./... $(MODULES)
+	$(GOTEST) -v -gcflags "-N -l" ./... $(PACKAGES)
 
 clean:
 	@$(ECHO) "=== Cleaning ==="
-	$(GOCLEAN) -i -x $(MODULES)
+	$(GOCLEAN) -i -x $(PACKAGES)
 
 run:
 	@./bin/one

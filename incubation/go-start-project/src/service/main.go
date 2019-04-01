@@ -7,6 +7,7 @@ import (
 )
 
 type Message struct {
+    // In lowercase that will not marshal
     Message string `json:"msg"`
 }
 
