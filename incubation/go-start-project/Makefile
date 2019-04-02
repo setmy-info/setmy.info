@@ -1,3 +1,6 @@
+
+.EXPORT_ALL_VARIABLES:
+
 PROJECT=go-start-project
 GO=go
 STRIP=strip
