@@ -2,6 +2,7 @@ package example
 
 import "fmt"
 
+// Upercase - export that
 type Person struct {
 	FirstName string
 	LastName string
