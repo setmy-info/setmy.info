@@ -33,10 +33,9 @@ func externalPointers() {
 	const z int32 = 5
 	fmt.Println(&a)
 	fmt.Println(&x)
-	fmt.Println(&y)
-	//fmt.Println(&z)
+	fmt.Println(&y)	//fmt.Println(&z) - can't show const pointers //fmt.Println(&b)
 	fmt.Println(b)
-	//fmt.Println(&b)
+
 	//var po uintptr = (uintptr) &x
-	//fmt.Println("== externalPointers End ==")
+	fmt.Println("== externalPointers End ==")
 }
