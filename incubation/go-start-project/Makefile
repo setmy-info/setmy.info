@@ -1,4 +1,5 @@
 
+# Probably only GNU Make compatible. Use gmake on FreeBSD.
 .EXPORT_ALL_VARIABLES:
 
 PROJECT=go-start-project
