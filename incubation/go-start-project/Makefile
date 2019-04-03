@@ -58,10 +58,4 @@ docker:
 docker-run:
 	docker run -p 8040:8080 -d setmyinfo/$(PROJECT)
 
-init: init-govendor
-
-init-govendor:
-	@$(GO) get -u github.com/kardianos/govendor
-	govendor init
-
-.PHONY: all version pkglist build strip $(APPS) test clean run docker docker-run init init-govendor
+.PHONY: all version pkglist build strip $(APPS) test clean run docker docker-run
