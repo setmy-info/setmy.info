@@ -55,11 +55,13 @@ run:
 docker:
 	docker build -t setmyinfo/$(PROJECT) .
 
-dockerrun:
+docker-run:
 	docker run -p 8040:8080 -d setmyinfo/$(PROJECT)
 
-init:
-#	@$(GO) get -u github.com/kardianos/govendor
-#	govendor init
+init: init-govendor
 
-.PHONY: all version pkglist install strip $(APPS) test docker dockerrun init
+init-govendor:
+	@$(GO) get -u github.com/kardianos/govendor
+	govendor init
+
+.PHONY: all version pkglist build strip $(APPS) test clean run docker docker-run init init-govendor
