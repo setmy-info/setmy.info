@@ -1,0 +1,11 @@
+abc
+def
+ASENDATUD LÕIK 1
+ghi
+jkl
+ASENDATUD LÕIK 2
+mno
+prs
+tuv
+ASENDATUD LÕIK 1
+ASENDATUD LÕIK 2
