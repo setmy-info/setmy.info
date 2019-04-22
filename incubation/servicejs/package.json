@@ -7,8 +7,7 @@
     "start": "node ./src/main/js/www",
     "unit": "karma start karma.conf.js --single-run",
     "build": "node ./src/main/js/build.js",
-    "program": "node ./src/test/js/unit/example",
-    "prepublish": "nsp check"
+    "program": "node ./src/test/js/unit/example"
   },
   "repository": {
     "type": "git",
@@ -28,25 +27,18 @@
   },
   "homepage": "https://github.com/Krabi/servicejs#readme",
   "dependencies": {
-    "express": "^4.16.2",
-    "body-parser": "~1.18.2",
-    "cookie-parser": "~1.4.3",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
     "debug": "~2.6.9",
-    "morgan": "~1.9.0",
-    "pug": "2.0.0-beta11",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "morgan": "^1.9.1",
+    "pug": "^2.0.3",
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
-    "jasmine": "^2.8.0",
-    "karma": "^1.7.1",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-coverage": "^1.1.1",
-    "karma-firefox-launcher": "^1.0.1",
-    "karma-html-reporter": "^0.2.7",
-    "karma-jasmine": "^1.1.0",
-    "karma-junit-reporter": "^1.2.0",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "uglify-js": "^3.2.0"
+    "jasmine": "^2.99.0",
+    "uglify-js": "^3.5.6"
   },
   "engines": {
     "node": ">= 6.12.0",
