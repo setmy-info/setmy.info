@@ -1,0 +1,41 @@
+{
+  "name": "merged",
+  "description": "Description",
+  "version": "1.0.0-SNAPSHOT",
+  "license": "MIT",
+  "author": "Imre Tabur <imre.tabur@eesti.ee>",
+  "main": "src/doesntexist.js",
+  "scripts": {
+    "start": "echo \"Error: no test specified\" && exit 1",
+    "unit": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"Error: no test specified\" && exit 1",
+    "program": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "JavaScript",
+    "JS",
+    "DI",
+    "dependencies",
+    "injection"
+  ],
+  "dependencies": {
+    "lodash": "4.17.11",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "jsonwebtoken": "^8.4.0",
+    "morgan": "~1.9.0",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "uglify-js": "^3.2.0"
+  },
+  "engines": {
+    "node": ">= 10.15.3",
+    "npm": ">= 6.4.1"
+  }
+}
