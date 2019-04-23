@@ -14,10 +14,7 @@
   },
   "keywords": [
     "JavaScript",
-    "JS",
-    "DI",
-    "dependencies",
-    "injection"
+    "js"
   ],
   "dependencies": {
     "lodash": "4.17.11",
