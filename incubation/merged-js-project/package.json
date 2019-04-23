@@ -9,8 +9,8 @@
     "start": "node ./src/index.js",
     "unit": "echo \"Error: no test specified\" && exit 1",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"Error: no test specified\" && exit 1",
-    "program": "echo \"Error: no test specified\" && exit 1"
+    "build": "echo \"Error: no build specified\" && exit 1",
+    "program": "echo \"Error: no program specified\" && exit 1"
   },
   "keywords": [
     "JavaScript",
