@@ -1,15 +1,10 @@
 "use strict";
 
-var glob = (function (global) {
-    global.jsdi = !!global.jsdi ? global.jsdi : {};
-    return global;
-})(typeof window !== 'undefined' ? window : global);
-
 var jsdi = (function (jsdi, global) {
 
     global.globalVariable = "Global Hello World too!";
 
-    global.jsdi.exampleModuleFooService = {
+    jsdi.exampleModuleFooService = {
         foo: function () {
             return 'Hello World from foo!';
         }
@@ -17,5 +12,4 @@ var jsdi = (function (jsdi, global) {
 
     return jsdi;
 
-})((typeof exports !== 'undefined') ? exports : {}, ((typeof window !== 'undefined') ? window : global));
-
+})((typeof exports !== 'undefined') ? exports : jsdi || {}, (typeof window !== 'undefined') ? window : global);

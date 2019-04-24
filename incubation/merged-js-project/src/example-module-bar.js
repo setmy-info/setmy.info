@@ -8,4 +8,4 @@ var jsdi = (function (jsdi, global) {
 
     return jsdi;
 
-})((typeof exports !== 'undefined') ? exports : {}, (typeof window !== 'undefined') ? window : global);
+})((typeof exports !== 'undefined') ? exports : jsdi || {}, (typeof window !== 'undefined') ? window : global);
