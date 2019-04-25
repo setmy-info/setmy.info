@@ -1,3 +1,5 @@
+"use strict";
+
 jsdi.service("queryService", function () {
 
     var logicService = {

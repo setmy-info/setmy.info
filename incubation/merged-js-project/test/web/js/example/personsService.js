@@ -1,3 +1,5 @@
+"use strict";
+
 jsdi.service("personsService", function () {
 
     var personsService = {

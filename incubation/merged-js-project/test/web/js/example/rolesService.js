@@ -1,3 +1,5 @@
+"use strict";
+
 jsdi.service("rolesService", function () {
 
     var rolesService = {
