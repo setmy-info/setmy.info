@@ -27,8 +27,5 @@
 
 TODO:
 
-1. (OK) Server with node JS. Same way as nodejs microservice server.
-2. (OK) Minification build.
-3. npm deploy to npm.com
-4. Webback integration
+4. Webpack integration
 5. 
