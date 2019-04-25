@@ -26,13 +26,13 @@ release.properties
 
 ### NetBeans ###
 nbproject/private/
-build/
 nbbuild/
-dist/
 nbdist/
 .nb-gradle/
 nbproject/
 */nb-configuration.xml
+
+setmy-info-scripts/build/
 
 ### DB ###
 live.mv.db
