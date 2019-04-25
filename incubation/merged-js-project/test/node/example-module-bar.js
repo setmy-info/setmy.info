@@ -2,7 +2,7 @@
 
 (function (global) {
 
-    global.jsdi = global.jsdi || {};
+    var jsdi = global.jsdi = global.jsdi || {};
 
     var exampleModuleBarService = {
 
