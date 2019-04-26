@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# Copyright 2018 Imre Tabur <imre.tabur@eesti.ee>
-
-echo /usr/local
-
-exit 0
