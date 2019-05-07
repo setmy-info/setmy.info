@@ -65,4 +65,4 @@ cd documentation && mvn site:site && cd ..
         karma init karma.conf.js
 
 6. Node main development tools set
-    npm install -g bower grunt gulp karma-cli express sass less typescript express-cli
+    npm install -g bower grunt gulp karma-cli express sass less typescript express-cli yarn
