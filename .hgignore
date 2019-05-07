@@ -75,5 +75,8 @@ freebsd-ports/setmy-info-scripts/distinfo
 ### NodeJS ###
 */node_modules/
 
+# Logs
+node-start-project/*.log
+
 # switch to regexp syntax.
 syntax: regexp

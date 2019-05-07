@@ -1,5 +1,4 @@
 abc
-def
 ASENDATUD LÕIK 1
 ghi
 jkl
