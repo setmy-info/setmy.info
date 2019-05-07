@@ -56,3 +56,13 @@ cd documentation && mvn site:site && cd ..
 
     docker build -t setmyinfo/go-start-project .
     docker run -p 8040:8080 -d  setmyinfo/go-start-project
+
+5. Karma
+    Fro project:
+        npm install karma karma-jasmine karma-chrome-launcher karma-firefox-launcher jasmine-core jasmine karma-html-reporter --save-dev
+    Globaly:
+        npm install -g karma-cli
+        karma init karma.conf.js
+
+6. Node main development tools set
+    npm install -g bower grunt gulp karma-cli express sass less typescript express-cli
