@@ -1,20 +1,34 @@
 {
-  "name": "node-start-project",
-  "version": "1.2.0-SNAPSHOT",
-  "private": true,
-  "scripts": {
-    "start": "node ./src/backend/bin/www",
-    "docker-build": "docker build -t setmyinfo/node-start-project .",
-    "docker-run": "docker run -p 4000:3000 -d setmyinfo/node-start-project"
-  },
-  "dependencies": {
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "~4.16.0",
-    "http-errors": "~1.6.2",
-    "jsonwebtoken": "^8.4.0",
-    "morgan": "~1.9.0",
-    "winston": "^3.2.1",
-    "pug": "^2.0.3"
-  }
+    "name": "node-start-project",
+    "version": "1.2.0-SNAPSHOT",
+    "private": true,
+    "scripts": {
+        "start": "node ./src/backend/bin/www",
+        "unit": "karma start karma.conf.js --single-run",
+        "tdd": "karma start karma.conf.js",
+        "docker-build": "docker build -t setmyinfo/node-start-project .",
+        "docker-run": "docker run -p 4000:3000 -d setmyinfo/node-start-project"
+    },
+    "dependencies": {
+        "cookie-parser": "~1.4.3",
+        "debug": "~2.6.9",
+        "express": "~4.16.0",
+        "http-errors": "~1.6.2",
+        "jsonwebtoken": "^8.4.0",
+        "morgan": "~1.9.0",
+        "winston": "^3.2.1",
+        "pug": "^2.0.3"
+    },
+    "devDependencies": {
+        "jasmine": "^3.4.0",
+        "jasmine-core": "^3.4.0",
+        "karma": "^4.1.0",
+        "karma-chrome-launcher": "^2.2.0",
+        "karma-firefox-launcher": "^1.1.0",
+        "karma-jasmine": "^2.0.1"
+    },
+    "engines": {
+        "node": ">= 10.15.3",
+        "npm": ">= 6.4.1"
+    }
 }
