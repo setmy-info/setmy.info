@@ -2,7 +2,9 @@
 <html>
     <head>
         <title>My first Vue app</title>
-        <script src="js/backbone-min.js"></script>
+        <script src="https://unpkg.com/underscore@1.9.1/underscore.js"></script>
+        <script src="https://unpkg.com/backbone@1.4.0/backbone.js"></script>
+        <script src="https://unpkg.com/vue@2.6.7/dist/vue.min.js"></script>
 
         <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
@@ -20,12 +22,12 @@
         </div>
 
         <script>
-            var app = new Vue({
-                el: '#app',
-                data: {
-                    message: 'Hello world from Vue!'
-                }
-            });
+var app = new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello world from Vue!'
+    }
+});
         </script>
     </body>
 </html>

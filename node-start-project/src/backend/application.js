@@ -1,8 +1,10 @@
+var configruation = require('./configruation').configruation;
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require("./logger").logger;
+var loggingModule = require("./logger");
+var logger = loggingModule.logger;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -10,14 +12,14 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, '../src/backend/views'));
+app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'pug');
 
-//app.use(logger);
+//app.use(loggingModule);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../src/frontend/public')));
+app.use(express.static(path.join(__dirname, '../frontend/public')));
 
 app.use((req, res, next) => {
     res.append('Access-Control-Allow-Origin', ['*']);
