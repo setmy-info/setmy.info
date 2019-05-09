@@ -67,3 +67,4 @@ cd documentation && mvn site:site && cd ..
 6. Node main development tools set
     npm install -g bower grunt gulp karma-cli sass less typescript express-generator yarn jshint karma-cli @hapi/joi @hapi/topo @hapi/hoek
     npm install -g @vue/cli
+    npm install karma karma-coverage karma-junit-reporter --save-dev
