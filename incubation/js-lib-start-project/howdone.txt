@@ -1,5 +1,0 @@
-mkdir js-lib-start-project && cd js-lib-start-project
-npm init -y
-npm install webpack webpack-cli --save-dev
-touch index.html && mkdir src && touch src/index.js
-npm install --save lodash
