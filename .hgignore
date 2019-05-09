@@ -29,8 +29,9 @@ nbproject/private/
 nbbuild/
 nbdist/
 .nb-gradle/
-nbproject/
 */nb-configuration.xml
+java-models/nbproject/
+tomcat-start-project/
 
 setmy-info-scripts/build/
 
@@ -74,6 +75,7 @@ freebsd-ports/setmy-info-scripts/distinfo
 
 ### NodeJS ###
 */node_modules/
+**/dist/**
 
 # Logs
 node-start-project/*.log

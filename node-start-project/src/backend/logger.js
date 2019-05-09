@@ -1,3 +1,5 @@
+const config = require('./config');
+const env = require('./services/environmentService').env;
 const winston = require('winston');
 const {createLogger, format, transports} = winston;
 const {combine, timestamp, label, printf} = format;
@@ -10,15 +12,19 @@ const logger = winston.createLogger({
     level: "debug",
     format: combine(label({}), timestamp(), customFormat),
     transports: [
-        new winston.transports.File({filename: "error.log", level: "error", maxsize: 1024, tailable: true, maxFiles: 100}),
-        new winston.transports.File({filename: "node.log", maxsize: 1024, tailable: true, maxFiles: 1000})
+        new winston.transports.File({filename: config.log.fileName, maxsize: config.log.maxsize, tailable: config.log.tailable, maxFiles: config.log.maxFiles}),
+        new winston.transports.File({filename: config.log.errorFileName, level: "error", maxsize: config.log.maxsize, tailable: config.log.tailable, maxFiles: config.log.maxFiles})
     ]
 });
 
-if (process.env.NODE_ENV !== "production") {
+if (notInLive()) {
     logger.add(new winston.transports.Console({
         format: winston.format.simple()
     }));
+}
+
+function notInLive() {
+    return env.NODE_ENV !== config.environments.LIVE;
 }
 
 module.exports = logger;

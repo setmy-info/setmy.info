@@ -5,24 +5,13 @@ var debug = require('debug')('node-start-project:server');
 var http = require('http');
 const config = require('../config');
 
-var port = normalizePort(config.serverPort);
+var port = config.serverPort;
 app.set('port', port);
 
 var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-
-function normalizePort(val) {
-    if (isNaN(port)) {// named pipe
-        return val;
-    }
-    var port = parseInt(val, 10);
-    if (port >= 0) {// port number
-        return port;
-    }
-    return false;
-}
 
 function onError(error) {
     if (error.syscall !== 'listen') {
