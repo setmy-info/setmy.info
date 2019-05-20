@@ -1,0 +1,103 @@
+#!/usr/bin/python3
+
+# https://www.python.org/dev/peps/pep-0008/
+
+#########
+def f(x,y):
+    print('You called f(x,y) with the value x = ' + str(x) + ' and y = ' + str(y))
+    print('x * y = ' + str(x*y))
+    z = 4 # cannot reach z, so THIS WON'T WORK
+
+z = 3
+f(3,2)
+#########
+
+#########
+class Animal:
+    def __init__(self,name):
+        self.name = name
+
+    def walk(self):
+        print(self.name + ' walks.')
+
+duck = Animal('Duck')
+duck.walk()
+#########
+
+class Bear(object):
+    def sound(self):
+        print("Groarrr")
+
+#########
+class Dog(object):
+    def sound(self):
+        print("Woof woof!")
+
+def makeSound(animalType):
+    animalType.sound()
+
+bearObj = Bear()
+dogObj = Dog()
+
+makeSound(bearObj)
+makeSound(dogObj)
+#########
+
+#########
+class Document:
+    def __init__(self, name):
+        self.name = name
+    def show(self):
+        raise NotImplementedError("Subclass must implement abstract method")
+
+class Pdf(Document):
+    def show(self):
+        return 'Show pdf contents!'
+
+class Word(Document):
+    def show(self):
+        return 'Show word contents!'
+
+documents = [Pdf('Document1'),Pdf('Document2'),Word('Document3')]
+
+for document in documents:
+    print(document.name + ": " + document.show())
+
+for x in range(0, 3):
+    print("Were on time: " + str(x))
+
+#########
+
+#########
+words = {}
+words["Hello"] = "Bonjour"
+words["Yes"] = "Oui"
+words["No"] = "Non"
+words["Bye"] = "Au Revoir"
+
+print(words["Hello"])
+print(words["No"])
+
+dict = {}
+dict['Ford'] = "Car"
+dict['Python'] = "The Python Programming Language"
+dict[2] = "This sentence is stored here."
+
+print(dict['Ford'])
+print(dict['Python'])
+print(dict[2])
+#########
+
+#########
+words = {}
+words["Hello"] = "Bonjour"
+words["Yes"] = "Oui"
+words["No"] = "Non"
+words["Bye"] = "Au Revoir"
+
+print(words)           # print key-pairs.
+del words["Yes"]       # delete a key-pair.
+print(words)           # print key-pairs.
+words["Yes"] = "Oui!"  # add new key-pair.
+print(words)           # print key-pairs.
+#########
