@@ -13,9 +13,19 @@ run:
 	./application
 
 example:
-	python3 ./example
+	python3 ./src/example
 
 test:
 	python3 unittest rexxxxxx
 
-.PHONY: all prepare run example test
+freeze:
+	pip freeze > requirements.txt
+
+virtual:
+#	python3 -m venv env
+#	source env/bin/activate
+
+deactivate:
+	deactivate
+
+.PHONY: all prepare run example test virtual freeze

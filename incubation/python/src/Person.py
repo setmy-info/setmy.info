@@ -9,7 +9,6 @@ class Person(object):
     classdocs
     '''
 
-
     def __init__(self, firstName = "Imre", lastName= "Tabur"):
         '''
         Constructor
