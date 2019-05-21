@@ -2,7 +2,7 @@
 
 # https://www.python.org/dev/peps/pep-0008/
 
-from Me import Me
+import logging
 
 #########
 def f(x,y):
@@ -105,6 +105,10 @@ print(words)           # print key-pairs.
 #########
 
 #########
-me = Me()
-print("My name: " + me.myName)
+FORMAT = '%(asctime)-15s %(clientip)s %(user)-8s %(message)s'
+logging.basicConfig(format=FORMAT, level=logging.DEBUG)
+logging.warning('Watch out!')
+logging.info('I told you so')
+logging.debug('This message should go to the log file')
+logging.info('Name: ' + __name__ + ' : ' + str((__name__ == '__main__') == True))
 #########

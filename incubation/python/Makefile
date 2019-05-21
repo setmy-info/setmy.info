@@ -13,15 +13,12 @@ prepare:
 	pip install -r requirements.txt --user
 
 run:
-	./application
-
-example:
-	python3 ./src/example
+	./src/application
 
 test:
-	python3 -m unittest discover -s ./src/ -p *Test.py
+	python3 -m unittest discover -s ./test/ -p *Test.py
 
 freeze:
 	pip freeze > requirements.txt
 
-.PHONY: all prepare run example test freeze
+.PHONY: all prepare run test freeze

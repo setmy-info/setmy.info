@@ -4,7 +4,7 @@ Created on 20. mai 2019
 @author: Imre Tabur <imre.tabur@eesti.ee>
 '''
 import unittest
-import Person
+from old import Person
 
 class Test(unittest.TestCase):
 

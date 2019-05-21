@@ -1,4 +1,5 @@
-
+rest:
+  root: ''
 test:
   secondLevel:
     and: value

@@ -73,6 +73,9 @@ freebsd-ports/setmy-info-scripts/distinfo
 **/go-start-project/bin/*
 **/go-start-project/pkg/**
 
+# Python
+**/__pycache__/*
+
 ### NodeJS ###
 */node_modules/
 **/dist/**
