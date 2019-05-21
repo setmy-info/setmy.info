@@ -2,6 +2,8 @@
 
 # https://www.python.org/dev/peps/pep-0008/
 
+from Me import Me
+
 #########
 def f(x,y):
     print('You called f(x,y) with the value x = ' + str(x) + ' and y = ' + str(y))
@@ -100,4 +102,9 @@ del words["Yes"]       # delete a key-pair.
 print(words)           # print key-pairs.
 words["Yes"] = "Oui!"  # add new key-pair.
 print(words)           # print key-pairs.
+#########
+
+#########
+me = Me()
+print("My name: " + me.myName)
 #########

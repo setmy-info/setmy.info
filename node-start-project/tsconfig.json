@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "outDir": "./src/frontend/public/",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "module": "amd",
+        "target": "es5"
+    },
+    "files": [
+        "./src/frontend/ts/probe.ts"
+    ]
+}
+
