@@ -1,42 +1,33 @@
-'''
-Created on 20. mai 2019
+from setmy.info.system import system
 
-@author: Imre Tabur <imre.tabur@eesti.ee>
-'''
-import os
-from flask import Flask
 from flask import render_template
 from flask import send_from_directory
 from flask import request
 from flask import jsonify
-from setmy.info.config import conf, ENVIRONMENT
 from setmy.info.rest.index import index
 import werkzeug
 
-app = Flask(__name__, template_folder="../templates", static_folder="../static", static_url_path='')
-app.config.from_object(os.environ[ENVIRONMENT])
-conf.load()
+system.init()
 
-
-@app.route(conf.path("/"))
+@system.app.route(system.conf.path("/"))
 def idx():
     return index()
 
 
-@app.route('/<name>')
+@system.app.route('/<name>')
 def helloName(name):
     return "Hello {}!".format(name)
 
 
-@app.route('/template/')
-@app.route('/template/index')
+@system.app.route('/template/')
+@system.app.route('/template/index')
 def templates():
     userData = {'firstName': 'Imre'}
     return render_template('index.html', title='Microservice', data=userData)
 
 
 # http://localhost:5000/static/index.html
-@app.route('/static/<path:path>')
+@system.app.route('/static/<path:path>')
 def staticContent(path):
     try:
         return send_from_directory('../static', path)
@@ -46,7 +37,7 @@ def staticContent(path):
         raise e
 
 
-@app.route('/post', methods=['POST'])
+@system.app.route('/post', methods=['POST'])
 def post():
     content = request.get_json()
     print (content)
@@ -54,5 +45,5 @@ def post():
 
 
 if __name__ == '__main__':
-    #app.run(host='0.0.0.0', port= 8090)
-    app.run()
+    system.app.run(host='0.0.0.0', port=5000)
+

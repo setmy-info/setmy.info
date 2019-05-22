@@ -11,15 +11,12 @@ LABEL org.label-schema.name="Docker HUB CentOS Python micro service base" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.build-date=$BUILD_DATE
 
-ENV http_proxy http://cache.example.com:8080
-ENV https_proxy http://cache.example.com:8080
-
-#RUN yum -y update
-RUN yum -y install wget
-#RUN yum -y install python33
-RUN python --version
+RUN dnf -y update
+RUN dnf -y install wget
+RUN dnf -y install python3
+RUN python3 --version
 RUN wget -c https://bootstrap.pypa.io/get-pip.py
-RUN python get-pip.py --proxy=http://cache.example.com:8080
+RUN python3 get-pip.py
 RUN pip --version
 
 RUN mkdir -p /opt/has /opt/has/bin /opt/has/lib /var/opt/has /var/opt/has/microservice
@@ -33,7 +30,7 @@ WORKDIR /opt/has/bin
 RUN pip install -r requirements.txt
 COPY . /opt/has/bin
 
-EXPOSE 3000
+EXPOSE 5000
 
 CMD cd /opt/has/bin && ./src/application
 #docker build -t flask-tutorial:latest .

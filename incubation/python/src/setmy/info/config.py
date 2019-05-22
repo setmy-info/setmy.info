@@ -3,35 +3,33 @@ Created on 20. mai 2019
 
 @author: Imre Tabur <imre.tabur@eesti.ee>
 '''
-
-import yaml
-import logging
+from setmy.info.yamlLoader import YamlLoader
 import os
+from setmy.info.constants import CONFIG_FILE_NAME
 
-global ENVIRONMENT
 global conf
 
-CONFIG_FILE_NAME = "./config/application.yml"
-FORMAT = '%(asctime)-15s %(message)s'
-ENVIRONMENT = 'ENVIRONMENT'
-
 basedir = os.path.abspath(os.path.dirname(__file__))
-logging.basicConfig(filename='log.log', format=FORMAT, level=logging.DEBUG)
 
-class Config(object):
+class Config:
+    
+    yamlLoader = YamlLoader()
+    loaded = None
+
     DEBUG = False
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = 'this-really-needs-to-be-changed'
 
-    def __init__(self):
-        self.yamlLoader = YamlLoader()
+    # def __init__(self):
+    #    '''Constuctor'''
+    #    self.yamlLoader = YamlLoader()
 
     def load(self):
-        self.yamlLoader.load()
+        self.loaded = self.yamlLoader.load(CONFIG_FILE_NAME)
 
     def path(self, pathName):
-        return self.yamlLoader.loaded['rest']['root'] + pathName
+        return self.loaded['rest']['root'] + pathName
 
 
 class ProductionConfig(Config):
@@ -50,27 +48,3 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-
-
-class YamlLoader:
-
-    def load(self):
-        # format=FORMAT, 
-        #logging.basicConfig(filename='log.log', format=FORMAT, level=logging.DEBUG)
-        logging.info(ENVIRONMENT + '=' + os.environ[ENVIRONMENT])
-        logging.warning('### Watch out!')
-        logging.info('### I told you so')
-        logging.debug('### This message should go to the log file')
-        logging.info('### Name: ' + __name__ + ' : ' + str((__name__ == '__main__') == True))
-        with open(CONFIG_FILE_NAME, 'r') as stream:
-            try:
-                self.loaded = yaml.safe_load(stream)
-                val = self.loaded['test']['secondLevel']['and']
-                print('Loaded: ' + val)
-                print(self.loaded)
-            except yaml.YAMLError as exc:
-                print(exc)
-        return self.loaded
-
-
-conf = Config()

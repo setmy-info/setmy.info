@@ -1,9 +1,8 @@
+host: 0.0.0.0
+port: 5000
 rest:
   root: ''
 log:
   directory: ./
   fileName: python-service-log
   leve: DEBUG
-test:
-  secondLevel:
-    and: value

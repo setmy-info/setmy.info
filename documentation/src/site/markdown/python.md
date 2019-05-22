@@ -83,3 +83,4 @@
     https://www.patricksoftwareblog.com/structuring-a-flask-project/
     https://realpython.com/scaffold-a-flask-project/
     https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+    http://flask.pocoo.org/snippets/131/
