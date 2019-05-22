@@ -1,5 +1,9 @@
 rest:
   root: ''
+log:
+  directory: ./
+  fileName: python-service-log
+  leve: DEBUG
 test:
   secondLevel:
     and: value
