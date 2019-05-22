@@ -11,7 +11,7 @@
     <version>1.2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>java-projects</name>
+    <name>multi-projects</name>
     <description>Java and Groovy projects</description>
     <url>https://bitbucket.org/imreit/setmy.info</url>
 

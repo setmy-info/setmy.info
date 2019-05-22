@@ -77,6 +77,9 @@
     [Pip registering](https://pypi.org/account/register/)
     [Packaging vol 1](https://packaging.python.org/tutorials/packaging-projects/)
     [Packaging vol 2](https://packaging.python.org/)
-    
-    https://fossbytes.com/python-fastest-growing-programming-language/
-    https://stackoverflow.blog/2017/09/14/python-growing-quickly/
+    [xxxx](https://fossbytes.com/python-fastest-growing-programming-language/)
+    [xxxx](https://stackoverflow.blog/2017/09/14/python-growing-quickly/)
+
+    https://www.patricksoftwareblog.com/structuring-a-flask-project/
+    https://realpython.com/scaffold-a-flask-project/
+    https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
