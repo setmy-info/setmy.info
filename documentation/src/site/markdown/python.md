@@ -78,3 +78,5 @@
     [Packaging vol 1](https://packaging.python.org/tutorials/packaging-projects/)
     [Packaging vol 2](https://packaging.python.org/)
     
+    https://fossbytes.com/python-fastest-growing-programming-language/
+    https://stackoverflow.blog/2017/09/14/python-growing-quickly/
