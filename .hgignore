@@ -82,6 +82,7 @@ freebsd-ports/setmy-info-scripts/distinfo
 
 # Logs
 node-start-project/*.log
+incubation/**/*.log
 
 # switch to regexp syntax.
 syntax: regexp
