@@ -2,27 +2,27 @@ import os
 
 from flask import Flask
 
-from setmy.info.config import Config
-from setmy.info.logger import Logger
-from setmy.info.environment import Environment
-from setmy.info.commandLine import CommandLine
-from setmy.info.constants import ENVIRONMENT
+from setmy.info.conf.config import Config
+from setmy.info.conf.config import EnvironmentConfig
+from setmy.info.conf.config import CommandLineConfig
+from setmy.info.conf.config import FileConfig
+from setmy.info.conf.loggerConfig import Logger
+from setmy.info.constants.environmentConstants import ENVIRONMENT
 
 global system
 
 
 class System:
-
-    def __init__(self):
-        self.app = None
-        self.conf = Config()
-        self.logger = Logger()
-        self.environment = Environment()
-        self.commandLine = CommandLine()
+    app = None
+    conf = Config()
+    logger = Logger()
+    fileConfig = FileConfig()
+    environment = EnvironmentConfig()
+    commandLine = CommandLineConfig()
 
     def init(self):
         self.environment.load()
-        self.conf.load()
+        self.fileConfig.load()
         self.commandLine.handle()
         self.combineConfig()
         self.logger.init(self.conf)

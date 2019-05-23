@@ -45,5 +45,5 @@ def post():
 
 
 if __name__ == '__main__':
-    system.app.run(host='0.0.0.0', port=5000)
+    system.app.run(host=system.conf.host, port=system.conf.port)
 
