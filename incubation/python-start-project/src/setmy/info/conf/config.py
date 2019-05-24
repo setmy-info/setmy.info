@@ -1,8 +1,12 @@
 import logging
+import os
+import getopt
 
 from setmy.info.constants.loggingConstants import LOG_FORMAT, LOG_FILE_NAME, LOG_DIRECTORY
 from setmy.info.constants.applicationConstants import CONFIG_FILE_NAME
 from setmy.info.services.yamlLoader import YamlLoader
+from setmy.info.model.properties.environmentProperties import EnvironmentProperties
+from os import name
 
 
 class Config:
@@ -34,6 +38,9 @@ class EnvironmentConfig(Config):
 
     def load(self):
         ''' Load '''
+
+    def getEnviron(self, name):
+        return os.environ.get(name)
 
 
 class FileConfig(Config):
