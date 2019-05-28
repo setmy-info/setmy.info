@@ -31,6 +31,12 @@ class System:
 
     def path(self, path):
         return self.applicationProperties.rest.root + path
+    
+    def getHost(self):
+        return self.applicationProperties.server.host
+
+    def getPort(self):
+        return self.applicationProperties.server.port
 
 
 system = System()

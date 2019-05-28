@@ -6,6 +6,7 @@ from flask import request
 from flask import jsonify
 from setmy.info.rest.index import index
 import werkzeug
+import logging
 
 system.init()
 
@@ -29,8 +30,18 @@ def templates():
 # http://localhost:5000/static/index.html
 @system.app.route('/static/<path:path>')
 def staticContent(path):
+    dirName = None
+    pathName = None
+    if path.endswith("/"):
+        dirName = '../static'
+        pathName = './' + path + 'index.html'
+    else:
+        dirName = '../static/'
+        pathName = path + '/index.html'
     try:
-        return send_from_directory('../static', path)
+        logging.debug('Dir Name: ' + dirName)
+        logging.debug('Path Name: ' + pathName)
+        return send_from_directory(dirName, pathName)
     except werkzeug.exceptions.NotFound as e:
         if path.endswith("/"):
             return send_from_directory('../static', path + "index.html")
@@ -45,5 +56,5 @@ def post():
 
 
 if __name__ == '__main__':
-    system.app.run(host=system.applicationProperties.server.host, port=system.applicationProperties.server.port)
+    system.app.run(host=system.getHost(), port=system.getPort())
 
