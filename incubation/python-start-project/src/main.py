@@ -9,7 +9,7 @@ import werkzeug
 
 system.init()
 
-@system.app.route(system.conf.path("/"))
+@system.app.route(system.path("/"))
 def idx():
     return index()
 
@@ -45,5 +45,5 @@ def post():
 
 
 if __name__ == '__main__':
-    system.app.run(host=system.conf.host, port=system.conf.port)
+    system.app.run(host=system.applicationProperties.server.host, port=system.applicationProperties.server.port)
 

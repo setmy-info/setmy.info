@@ -1,42 +1,36 @@
 import os
 
 from flask import Flask
-
-from setmy.info.conf.config import Config
-from setmy.info.conf.config import EnvironmentConfig
-from setmy.info.conf.config import CommandLineConfig
-from setmy.info.conf.config import FileConfig
-from setmy.info.conf.loggerConfig import Logger
-from setmy.info.constants.environmentConstants import ENVIRONMENT
+from setmy.info.services.applicationLoaderService import ApplicationLoaderService
+import logging
 
 global system
 
 
 class System:
-    app = None
-    conf = Config()
-    logger = Logger()
-    fileConfig = FileConfig()
-    environment = EnvironmentConfig()
-    commandLine = CommandLineConfig()
+
+    ENVIRONMENT = 'ENVIRONMENT'
+
+    def __init__(self):
+        self.applicationLoaderService = ApplicationLoaderService.getInstance()
 
     def init(self):
-        self.environment.load()
-        self.fileConfig.load()
-        self.commandLine.handle()
-        self.combineConfig()
-        self.logger.init(self.conf)
-        self.app = Flask(__name__, template_folder="../templates", static_folder="../static", static_url_path='')
-        self.app.config.from_object(os.environ[ENVIRONMENT])
+        self.loadConfig()
+        self.loggerInit(self.applicationProperties.log)
+        self.flaskInit()
 
-    def combineConfig(self):
-        '''
-        Combine configuration in order (overwriting previous):
-            defaults,
-            environment,
-            yaml,
-            commandLine
-        '''
+    def loadConfig(self):
+        self.applicationProperties = self.applicationLoaderService.loadApplicationProperties()
+
+    def loggerInit(self, log):
+        logging.basicConfig(filename=log.directory + log.fileName , format=log.format, level=log.level)
+
+    def flaskInit(self):
+        self.app = Flask(__name__, template_folder=self.applicationProperties.server.templateFolder, static_folder=self.applicationProperties.server.staticFolder, static_url_path='')
+        self.app.config.from_object(os.environ[System.ENVIRONMENT])
+
+    def path(self, path):
+        return self.applicationProperties.rest.root + path
 
 
 system = System()
