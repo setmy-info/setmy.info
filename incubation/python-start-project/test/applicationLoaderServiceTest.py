@@ -23,8 +23,9 @@ class ApplicationLoaderServiceTest(unittest.TestCase):
         self.assertEqual(applicationProperties.server.port, 5000)
         self.assertEqual(applicationProperties.log.level, 'DEBUG')
         self.assertEqual(applicationProperties.log.directory, './')
-        self.assertEqual(applicationProperties.log.fileName, 'python-service-log.log')
+        self.assertEqual(applicationProperties.log.fileName, 'python-start-project.log')
         self.assertEqual(applicationProperties.log.format, '%(asctime)-15s %(message)s')
+        self.assertEqual(applicationProperties.log.size, 1024)
         self.assertEqual(applicationProperties.rest.root, '')
         pass
 

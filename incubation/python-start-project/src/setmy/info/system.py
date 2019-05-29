@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from setmy.info.services.applicationLoaderService import ApplicationLoaderService
 import logging
+from logging.handlers import RotatingFileHandler
 
 global system
 
@@ -24,6 +25,9 @@ class System:
 
     def loggerInit(self, log):
         logging.basicConfig(filename=log.directory + log.fileName , format=log.format, level=log.level)
+        handler = RotatingFileHandler(filename=log.directory + log.fileName, maxBytes=log.size, backupCount=1)
+        log = logging.getLogger()
+        log.addHandler(handler)
 
     def flaskInit(self):
         self.app = Flask(__name__, template_folder=self.applicationProperties.server.templateFolder, static_folder=self.applicationProperties.server.staticFolder, static_url_path='')

@@ -14,6 +14,7 @@ class LoggingProperties:
         self.fileName = loaded['fileName']
         self.level = loaded['level']
         self.format = loaded['format']
+        self.size = loaded['size']
 
 
 class RestProperties:

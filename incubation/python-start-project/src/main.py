@@ -6,9 +6,9 @@ from flask import request
 from flask import jsonify
 from setmy.info.rest.index import index
 import werkzeug
-import logging
 
 system.init()
+
 
 @system.app.route(system.path("/"))
 def idx():
@@ -27,24 +27,11 @@ def templates():
     return render_template('index.html', title='Microservice', data=userData)
 
 
-# http://localhost:5000/static/index.html
 @system.app.route('/static/<path:path>')
 def staticContent(path):
-    dirName = None
-    pathName = None
-    if path.endswith("/"):
-        dirName = '../static'
-        pathName = './' + path + 'index.html'
-    else:
-        dirName = '../static/'
-        pathName = path + '/index.html'
-    try:
-        logging.debug('Dir Name: ' + dirName)
-        logging.debug('Path Name: ' + pathName)
-        return send_from_directory(dirName, pathName)
+    try:       
+        return send_from_directory(system.app.static_folder, path + '/' + 'index.html')
     except werkzeug.exceptions.NotFound as e:
-        if path.endswith("/"):
-            return send_from_directory('../static', path + "index.html")
         raise e
 
 

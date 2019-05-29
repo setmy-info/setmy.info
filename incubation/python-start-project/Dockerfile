@@ -33,5 +33,5 @@ COPY . /opt/has/bin
 EXPOSE 5000
 
 CMD cd /opt/has/bin && ./src/application
-#docker build -t flask-tutorial:latest .
-#docker run -d -p 5000:5000 flask-tutorial
+#docker build -t python-start-project:latest .
+#docker run -d -p 5000:5000 python-start-project
