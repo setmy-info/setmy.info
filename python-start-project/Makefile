@@ -16,7 +16,7 @@ run:
 	./src/application
 
 test:
-	python3 -m unittest discover -s ./test/ -p *Test.py
+	python3 -m unittest discover -s ./test/ -p **Test.py
 
 freeze:
 	pip freeze > requirements.txt
