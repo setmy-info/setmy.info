@@ -12,6 +12,7 @@ pipeline {
             steps {
                 echo "PATH is: $PATH"
                 sh 'mvn --version'
+                sh 'java --version'
             }
         }
         stage('Build') {
