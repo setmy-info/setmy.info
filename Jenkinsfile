@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        PATH = "/opt/has/bin:/opt/apache-maven-3.6.1/bin:/usr/local/bin:$PATH"
+        PATH = "/opt/jdk-12.0.1/bin:/opt/has/bin:/opt/apache-maven-3.6.1/bin:/usr/local/bin:$PATH"
         JAVA_HOME = "/opt/jdk-12.0.1/"
     }
 
@@ -13,6 +13,7 @@ pipeline {
                 echo "PATH is: $PATH"
                 sh 'mvn --version'
                 sh 'java --version'
+                sh 'which java'
             }
         }
         stage('Build') {
