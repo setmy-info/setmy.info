@@ -23,8 +23,13 @@ possibilites - component locations in folder structure, module/component folder 
 
 1. Linux: in priority order (higher to lower) CentOS, Fedora linux, Debian, FreeBSD and OpenIndiana.
 2. Docker, Jail and Zone.
-3. Kubernetes for Docker.
-
+3. Kubernetes for Docker. Probably should change, becase of RedHat new tools. Need to analyze these.
+4.1 Bourne shell and use #!/bin/sh not #!/bin/bash. First one is in base installation of CentOS, Fedora, *BSD, Solaris, Debian (*buntu), OpenIndiana etc.
+4.2 Therefore shell script should be not be written in "bashism" (bash way), but as much as possible in POSIX shell way.
+4.3 Prefer shell first and if not possible or simplier then Python 3.x.
+5. UI because HTML has no rich standard set of components, then we need write components by our selves.
+5.1 IE 11 is still in use, therefore that should be covered too.
+5.2 Prefer CSS tool over JS tools to get UI results.
 
 
 x. Maven with maven site, where site have integrated reports: JavaDoc (for main and test code), pitest, OWASP dependencies check, JaCoCo unit test coverage, style check, version notes, todo notes, findbugs.
