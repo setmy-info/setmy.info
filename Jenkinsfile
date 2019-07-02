@@ -3,8 +3,8 @@ pipeline {
     agent any
 
     environment {
-        PATH = "/opt/has/bin:/opt/apache-maven-3.6.0/bin:/usr/local/bin:$PATH"
-        JAVA_HOME = "/opt/jdk-12/"
+        PATH = "/opt/jdk-12.0.1/bin:/opt/has/bin:/opt/apache-maven-3.6.1/bin:/usr/local/bin:$PATH"
+        JAVA_HOME = "/opt/jdk-12.0.1/"
     }
 
     stages {
@@ -12,6 +12,8 @@ pipeline {
             steps {
                 echo "PATH is: $PATH"
                 sh 'mvn --version'
+                sh 'java --version'
+                sh 'which java'
             }
         }
         stage('Build') {
@@ -52,6 +54,22 @@ pipeline {
     post {
         always {
             junit '**/target/*-reports/*.xml'
+        }
+        success {
+            emailext (
+                subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+                            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+            )
+        }
+        failure {
+            emailext (
+                subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+                            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+            )
         }
     }
 }
