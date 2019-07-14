@@ -1,6 +1,0 @@
-#!/bin/sh
-
-export ENVIRONMENT=setmy.info.conf.flaskConfig.DevelopmentConfig
-python3 ./src/main.py
-
-exit ${?}

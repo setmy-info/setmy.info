@@ -1,2 +1,0 @@
-dataSource:
-    url: jdbc:h2:file:${DB_LOCATION}/springboot-start-project
