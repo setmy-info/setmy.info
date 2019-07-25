@@ -1,3 +1,8 @@
 micronaut:
     application:
         name: micronaut-start-project
+
+example:
+    property:
+        name: application.yml
+        other: application.yml

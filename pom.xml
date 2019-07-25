@@ -176,6 +176,7 @@
                         <argument>-XX:TieredStopAtLevel=1</argument>
                         <argument>-classpath</argument>
                         <classpath/>
+                        <argument>-Dmicronaut.environments=${micronaut.environments}</argument>
                         <argument>${exec.mainClass}</argument>
                     </arguments>
                 </configuration>
@@ -468,21 +469,25 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
+                <micronaut.environments></micronaut.environments>
             </properties>
         </profile>
         <profile>
             <id>test</id>
             <properties>
+                <micronaut.environments>test</micronaut.environments>
             </properties>
         </profile>
         <profile>
             <id>ci</id>
             <properties>
+                <micronaut.environments>ci</micronaut.environments>
             </properties>
         </profile>
         <profile>
             <id>live</id>
             <properties>
+                <micronaut.environments>live</micronaut.environments>
             </properties>
         </profile>
     </profiles>

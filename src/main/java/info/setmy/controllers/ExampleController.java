@@ -1,6 +1,7 @@
 package info.setmy.controllers;
 
 import info.setmy.models.ExampleModel;
+import info.setmy.properties.ExampleProperties;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
@@ -20,12 +21,20 @@ public class ExampleController {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
+    private final ExampleProperties exampleProperties;
+
+    public ExampleController(final ExampleProperties exampleProperties) {
+        this.exampleProperties = exampleProperties;
+    }
+
     @Get("/example")
     @Produces(MediaType.APPLICATION_JSON)
     public ExampleModel example() {
         log.info("Spring controller called!!");
         final ExampleModel exampleModel = new ExampleModel();
         exampleModel.setText("Hello world!");
+        exampleModel.setExampleProperties(exampleProperties);
+        log.info("Returning: {}", exampleModel);
         return exampleModel;
     }
 }

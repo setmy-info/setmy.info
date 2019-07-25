@@ -21,7 +21,7 @@ RUN chown -R root:root                  /opt/has
 RUN chown -R microservice:microservice  /var/opt/has
 RUN ls /dev/urandom
 
-ENV JAVA_OPTS="-Djava.security.egd=file:/dev/urandom"
+ENV JAVA_OPTS="-Djava.security.egd=file:/dev/urandom -Dmicronaut.environments=live"
 
 WORKDIR /var/opt/has/microservice
 
