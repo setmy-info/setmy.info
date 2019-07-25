@@ -6,56 +6,45 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>info.setmy</groupId>
-        <artifactId>multi-projects</artifactId>
-        <version>1.2.0-SNAPSHOT</version>
-    </parent>
-
     <groupId>info.setmy</groupId>
     <artifactId>micronaut-start-project</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>micronaut-start-project</name>
     <description>Containerized microservice starter (seed) project</description>
     <url>https://bitbucket.org/imreit/setmy.info</url>
 
     <properties>
-        <micronaut.version>1.0.2</micronaut.version>
+        <micronaut.version>1.1.4</micronaut.version>
         <exec.mainClass>info.setmy.Application</exec.mainClass>
+
+        <info.setmy.version>1.2.0-SNAPSHOT</info.setmy.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <encoding.level>UTF-8</encoding.level>
+        <maven.compiler.source>1.12</maven.compiler.source>
+        <maven.compiler.target>1.12</maven.compiler.target>
+        <java.version>12</java.version>
+        <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
+        <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
+        <dependency.locations.enabled>false</dependency.locations.enabled>
+
+        <junit5.version>5.2.0</junit5.version>
+        <junit.platform.version>1.2.0</junit.platform.version>
+        <mockito.version>2.21.0</mockito.version>
+        <jacoco.version>0.8.2</jacoco.version>
+        <failsafe.version>2.22.1</failsafe.version>
+        <surefire.version>2.22.1</surefire.version>
+        <log4j2.verions>2.11.1</log4j2.verions>
+        <logback.verions>1.2.3</logback.verions>
+        <slf4j.version>1.7.25</slf4j.version>
+        <cucumber.version>1.2.5</cucumber.version>
+        <pitest.version>1.4.2</pitest.version>
+        <dockerfile-maven-version>1.4.10</dockerfile-maven-version>
+        <dependency.check.version>5.0.0</dependency.check.version>
     </properties>
     
     <dependencies>
-        <!--dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j2.verions}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j2.verions}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.verions}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${logback.verions}</version>
-        </dependency-->
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-inject</artifactId>
@@ -90,12 +79,6 @@
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-inject-java</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -140,6 +123,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
@@ -155,21 +144,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>info.setmy</groupId>
-                <artifactId>maven-plugin-start-project</artifactId>
-                <version>${project.version}</version>
-                <configuration>
-                    <exampleValue>EXAMPLE VALUE</exampleValue>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate-sources</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -347,7 +321,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.9.0</version>
             </plugin-->
-            <plugin>
+            <!--plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>${dependency.check.version}</version>
@@ -358,7 +332,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
