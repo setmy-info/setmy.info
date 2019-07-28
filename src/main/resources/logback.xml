@@ -6,7 +6,18 @@
         <!-- encoders are assigned the type
         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <springProfile name="dev">
+                <pattern>DEV: %d{yy-MMMM-dd HH:mm:ss:SSS} %5p %t %c{2}:%L - %m%n</pattern>
+            </springProfile>
+            <springProfile name="test">
+                <pattern>CI: %d{yy-MM-dd E HH:mm:ss.SSS} %5p %t %c{2}:%L - %m%n</pattern>
+            </springProfile>
+            <springProfile name="ci">
+                <pattern>CI: %d{yy-MM-dd E HH:mm:ss.SSS} %5p %t %c{2}:%L - %m%n</pattern>
+            </springProfile>
+            <springProfile name="live">
+                <pattern>LIVE: %d{yy-MM-dd E HH:mm:ss.SSS} %5p %t %c{2}:%L - %m%n</pattern>
+            </springProfile>
         </encoder>
     </appender>
 
