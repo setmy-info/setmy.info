@@ -6,6 +6,7 @@
         <!-- encoders are assigned the type
         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
+            <!-- springProfile DOESN'T WORK in MICRONAUT (for https://stackoverflow.com/questions/57197647/micronaut-environments-and-logback-profiles) !!! -->
             <springProfile name="dev">
                 <pattern>DEV: %d{yy-MMMM-dd HH:mm:ss:SSS} %5p %t %c{2}:%L - %m%n</pattern>
             </springProfile>
