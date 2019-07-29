@@ -7,11 +7,12 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Produces;
 import javax.inject.Named;
+import org.infinispan.Cache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * REST call: http://localhost:8080/api/example .
+ * REST call: http://localhost:8080/rest/example .
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
@@ -21,10 +22,16 @@ public class ExampleController {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
+    private final String EXAMPLE_MODEL = "exampleModel";
+
     private final ExampleProperties exampleProperties;
 
-    public ExampleController(final ExampleProperties exampleProperties) {
+    private final Cache cache;
+
+    public ExampleController(final ExampleProperties exampleProperties,
+            final Cache cache) {
         this.exampleProperties = exampleProperties;
+        this.cache = cache;
     }
 
     @Get("/example")
@@ -35,6 +42,10 @@ public class ExampleController {
         exampleModel.setText("Hello world!");
         exampleModel.setExampleProperties(exampleProperties);
         log.info("Returning: {}", exampleModel);
-        return exampleModel;
+
+        cache.put("exampleModel", exampleModel);
+        cache.get(EXAMPLE_MODEL);
+
+        return (ExampleModel) cache.get(EXAMPLE_MODEL);
     }
 }
