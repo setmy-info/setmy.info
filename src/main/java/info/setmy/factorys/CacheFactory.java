@@ -1,5 +1,6 @@
 package info.setmy.factorys;
 
+import static info.setmy.constants.CacheConstants.CACHE_NAME;
 import io.micronaut.context.annotation.Factory;
 import javax.inject.Named;
 
@@ -12,11 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Factory
-class CacheFactory {
+public class CacheFactory {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
-
-    private final static String CACHE_NAME = "micronaut-start-project";
 
     @Singleton
     @Named("cacheManager")
