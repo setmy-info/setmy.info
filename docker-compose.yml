@@ -66,6 +66,6 @@ services:
             dockerfile: Dockerfile
         depends_on:
             - tomcat-start-project
-        image: setmy-info-centos-nginx:v1.14.2-4
+        image: setmy-info-centos-nginx:v1.16.1
         ports:
             - "80:80"
