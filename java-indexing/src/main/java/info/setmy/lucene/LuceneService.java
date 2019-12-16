@@ -28,7 +28,7 @@ import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.MMapDirectory;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
-import static org.apache.lucene.util.Version.LUCENE_7_3_0;
+import static org.apache.lucene.util.Version.LUCENE_8_3_1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +40,7 @@ public class LuceneService {
 
     static final Logger LOG = LoggerFactory.getLogger(LuceneService.class);
 
-    private final Version version = LUCENE_7_3_0;
+    private final Version version = LUCENE_8_3_1;
 
     private final String locationDirectory;
 
@@ -123,7 +123,7 @@ public class LuceneService {
             final Query query = new QueryParser(fieldName, analyzer).parse(queryString);
             reader = getReader();
             final IndexSearcher indexSearcher = new IndexSearcher(reader);
-            final TopScoreDocCollector collector = TopScoreDocCollector.create(paging.getResultsOnPage());
+            final TopScoreDocCollector collector = TopScoreDocCollector.create(paging.getResultsOnPage(), 1000000);
             indexSearcher.search(query, collector);
             final ScoreDoc[] hits = collector.topDocs().scoreDocs;
             paging.setResults(hits.length);

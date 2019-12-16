@@ -1,9 +1,10 @@
 package info.setmy.models
 
+//http://blog.andresteingress.com/2014/01/28/functional-testing-with-cucumber
+/*
+
 import static cucumber.api.groovy.EN.*
 import static cucumber.api.groovy.Hooks.*
-
-//http://blog.andresteingress.com/2014/01/28/functional-testing-with-cucumber
 
 Before() {
     println "Before scenario"
@@ -31,8 +32,8 @@ Then(~'^them summary should be (\\d+)$') { int c ->
     println "comparing numbers summary ${result} with expected ${c}"
     assert result == c
 }
-
-/*import cucumber.api.java.en.Given
+*/
+import cucumber.api.java.en.Given
 import cucumber.api.java.en.Then
 import cucumber.api.java.en.When
 import static org.mockito.Mockito.when
@@ -78,4 +79,4 @@ public void "them summary should be b"(int c) {
 println "comparing numbers summary ${result} with expected ${c}"
 assert result == c
 }
-}*/
+}

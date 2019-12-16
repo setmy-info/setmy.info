@@ -81,7 +81,7 @@ public class LuceneIT {
         int hitsPerPage = 10;
         String querystr = "lucene";
         Query q = new QueryParser("title", analyzer).parse(querystr);
-        TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage);
+        TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, 100000);
         searcher.search(q, collector);
         ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
