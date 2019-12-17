@@ -10,7 +10,6 @@ import static org.hamcrest.CoreMatchers.is;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.util.Locale;
 
 /**
  *
@@ -22,7 +21,7 @@ public class FolderStructurePatternTest {
 
     @Before
     public void setUp() {
-        Locale.setDefault(new Locale("et", "EE"));
+        java.util.TimeZone.setDefault(TimeZone.getTimeZone("Europe/Tallinn"));
         folderStructurePattern = new DirectoryStructurePattern();
     }
 
