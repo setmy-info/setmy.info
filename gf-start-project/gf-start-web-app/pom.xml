@@ -160,7 +160,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
-                        <version>${maven.compiler.plugin.version</version>
+                        <version>${maven.compiler.plugin.version}</version>
                         <configuration>
                             <!-- javaee6 contains upgrades of APIs contained within the JDK itself.
                             As such these need to be placed on the bootclasspath, rather than classpath of the
