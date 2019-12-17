@@ -44,7 +44,8 @@
         <jackson.version>2.10.1</jackson.version>
         <dockerfile-maven-version>1.4.10</dockerfile-maven-version>
         <maven.jetty.plugin.version>9.4.24.v20191120</maven.jetty.plugin.version>
-        <dependency.check.version>5.0.0</dependency.check.version>
+        <dependency.check.version>5.2.4</dependency.check.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
     </properties>
 
     <modules>
