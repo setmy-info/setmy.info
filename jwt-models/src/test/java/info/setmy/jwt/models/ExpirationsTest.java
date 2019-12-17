@@ -3,6 +3,7 @@ package info.setmy.jwt.models;
 import info.setmy.exceptions.ExpiredException;
 import info.setmy.exceptions.ForbiddenException;
 import static info.setmy.jwt.models.Data.nowMinus10;
+import java.util.TimeZone;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +17,7 @@ public class ExpirationsTest extends Data {
 
     @BeforeEach
     public void beforeEach() {
+        java.util.TimeZone.setDefault(TimeZone.getTimeZone("Europe/Tallinn"));
         token = new ExtendedJWTToken(SERVICE_NAME);
     }
 
