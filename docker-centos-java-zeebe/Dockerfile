@@ -22,3 +22,5 @@ ENV PATH="${ZEEBE_HOME}/bin:${PATH}"
 RUN cd /opt/zeebe-broker && ls -la
 USER microservice
 RUN whoami
+
+EXPOSE 26500/tcp
