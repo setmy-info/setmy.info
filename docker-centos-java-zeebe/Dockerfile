@@ -3,7 +3,7 @@ FROM setmyinfo/setmy-info-centos-java:13.0.1
 MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 
 LABEL org.label-schema.name="Docker HUB Centos Java Zeebe" \
-      org.label-schema.version="0.20.1-1" \
+      org.label-schema.version="0.21.1" \
       org.label-schema.description="setmy.info Docker HUB Centos Java Zeebe" \
       org.label-schema.vendor="Hear And See Systems LLC" \
       org.label-schema.url="https://www.hearandseesystems.com" \
