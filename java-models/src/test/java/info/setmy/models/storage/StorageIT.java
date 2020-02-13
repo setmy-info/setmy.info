@@ -7,9 +7,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  *
@@ -64,7 +64,7 @@ public class StorageIT {
         new File(storageParentName).delete();
 
         final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setOwner(owner).setName(fileName));
-        assertThat(file.get().getChild().getPath(), is(equalTo(storageFileName)));
+        assertThat(file.get().getChild().getPath(), is(equalTo(os(storageFileName))));
     }
 
     @Test
@@ -93,11 +93,15 @@ public class StorageIT {
 
         assertThat(file.get().getParentName(), is(equalTo(parentName)));
         assertThat(file.get().getChildName(), is(equalTo(fileName)));
-        assertThat(file.get().getParent().getPath(), is(equalTo(storageParentName)));
-        assertThat(file.get().getChild().getPath(), is(equalTo(storageFileName)));
+        assertThat(file.get().getParent().getPath(), is(equalTo(os(storageParentName))));
+        assertThat(file.get().getChild().getPath(), is(equalTo(os(storageFileName))));
 
         final Optional<StorageFile> existingFile = storage.getStorageFile(finalFileName);
         assertThat(existingFile.isPresent(), is(equalTo(true)));
         assertThat(existingFile.get().getChildName(), is(equalTo(finalFileName)));
+    }
+
+    private String os(String os) {
+        return new java.io.File(os).getPath();
     }
 }

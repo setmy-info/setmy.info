@@ -32,14 +32,14 @@ println "comparing numbers summary ${result} with expected ${c}"
 assert result == c
 }
  */
-import cucumber.api.java.en.Given
-import cucumber.api.java.en.Then
-import cucumber.api.java.en.When
+import io.cucumber.java.en.Given
+import io.cucumber.java.en.Then
+import io.cucumber.java.en.When
 import static org.mockito.Mockito.when
 import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.verify
-import cucumber.api.java.After
-import cucumber.api.java.Before
+import io.cucumber.java.After
+import io.cucumber.java.Before
 
 public class ExampleCukesDefinitions {
 
