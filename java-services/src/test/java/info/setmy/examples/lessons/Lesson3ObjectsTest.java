@@ -21,12 +21,19 @@ public class Lesson3ObjectsTest {
         String firstName;
         String lastName;
         Date birthDate;
+
+        String getFullName() {
+            String concatenated = firstName + " " + lastName;
+            return concatenated;
+        }
     }
 
     void example() {
         Person person = new Person();
         person.firstName = "Peeter";
         person.lastName = "Meeter";
+
+        System.out.println("Full name: " + person.getFullName());
     }
 
 // <editor-fold defaultstate="collapsed" desc="Hidden part">
