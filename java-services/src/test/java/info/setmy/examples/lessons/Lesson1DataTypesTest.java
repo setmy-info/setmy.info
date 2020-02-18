@@ -76,13 +76,21 @@ public class Lesson1DataTypesTest {
         Set set;
 
         Map map;
+        /* ====== Classes and objects for primitives ====== */
+        Byte byteObject;
+        Short shortNumberObject;
+        Integer integerObject;
+        Long longNumberObject;
+        Float floatNumberObject;
+        Double doubleNumberObject;
+        Boolean trueOrFalseObject;
 
         // <editor-fold defaultstate="collapsed" desc="Setting values">
         thisIsText = "Hello World";
         date = new Date();
         localDate = LocalDate.now();
         bigDecimal = new BigDecimal("123.45");
-        bigInteger = new BigInteger("543.21");
+        bigInteger = new BigInteger("54321");
         list = new ArrayList();
         set = new HashSet();
         map = new HashMap();
