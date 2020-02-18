@@ -76,7 +76,7 @@ public class Lesson1DataTypes {
         date = new Date();
         localDate = LocalDate.now();
         bigDecimal = new BigDecimal("123.45");
-        bigInteger = new BigInteger("123.45");
+        bigInteger = new BigInteger("543.21");
         list = new ArrayList();
         set = new HashSet();
         // </editor-fold>
