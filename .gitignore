@@ -81,3 +81,5 @@ freebsd-ports/setmy-info-scripts/distinfo
 # Logs
 node-start-project/*.log
 incubation/**/*.log
+
+**/.resourceCache/
