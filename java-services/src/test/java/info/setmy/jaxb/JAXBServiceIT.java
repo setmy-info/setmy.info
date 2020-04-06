@@ -6,10 +6,10 @@ import info.setmy.exceptions.rss.RSSItem;
 import java.util.Date;
 import java.util.UUID;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
