@@ -13,6 +13,7 @@ docker-centos-java-tomcat/apache-tomcat-*
 docker-centos-node/node-v*
 docker-centos-java-zeebe/zeebe-broker-*
 docker-centos-java-zeebe/zeebe-distribution-*
+docker-centos-java-infinispan/infinispan-server-*
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
