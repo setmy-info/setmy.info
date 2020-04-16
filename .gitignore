@@ -36,10 +36,13 @@ setmy-info-scripts/build/
 live.mv.db
 live.trace.db
 
-docker-images/docker-centos-java/jdk*
-docker-images/docker-centos-java/openjdk*
-docker-images/docker-centos-java-tomcat/apache-tomcat*
-docker-images/docker-centos-node/node*
+setmy-info-docker/docker-centos-java/jdk*
+setmy-info-docker/docker-centos-java/openjdk-*.tar.gz
+setmy-info-docker/docker-centos-java-tomcat/apache-tomcat-*
+setmy-info-docker/docker-centos-node/node-v*
+setmy-info-docker/docker-centos-java-zeebe/zeebe-broker-*
+setmy-info-docker/docker-centos-java-zeebe/zeebe-distribution-*
+setmy-info-docker/docker-centos-java-infinispan/infinispan-server-*
 
 tomcat-start-project/download/*
 tomcat-start-project/apache-tomcat*
