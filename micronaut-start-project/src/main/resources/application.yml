@@ -1,0 +1,12 @@
+micronaut:
+    application:
+        name: micronaut-start-project
+    caches:
+        micronaut-start-project:
+            maximumSize: 20
+            expire-after-access: 15s
+
+example:
+    property:
+        name: application.yml
+        other: application.yml
