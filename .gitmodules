@@ -1,0 +1,3 @@
+[submodule "submodules/setmy-info.github.io"]
+	path = submodules/setmy-info.github.io
+	url = git@github.com:setmy-info/setmy-info.github.io.git
