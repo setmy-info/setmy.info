@@ -1,3 +1,84 @@
 [submodule "submodules/setmy-info.github.io"]
 	path = submodules/setmy-info.github.io
 	url = git@github.com:setmy-info/setmy-info.github.io.git
+[submodule "submodules/servicejs"]
+	path = submodules/servicejs
+	url = git@github.com:setmy-info/servicejs.git
+[submodule "submodules/servedjs"]
+	path = submodules/servedjs
+	url = git@github.com:setmy-info/servedjs.git
+[submodule "submodules/servedjs-geo"]
+	path = submodules/servedjs-geo
+	url = git@github.com:setmy-info/servedjs-geo.git
+[submodule "submodules/js-api-extend"]
+	path = submodules/js-api-extend
+	url = git@github.com:setmy-info/js-api-extend.git
+[submodule "submodules/servedjs-test"]
+	path = submodules/servedjs-test
+	url = git@github.com:setmy-info/servedjs-test.git
+[submodule "angular-start-project"]
+	path = angular-start-project
+	url = git@github.com:setmy-info/angular-start-project.git
+[submodule "cmake-start-project"]
+	path = cmake-start-project
+	url = git@github.com:setmy-info/cmake-start-project.git
+[submodule "freebsd-ports"]
+	path = freebsd-ports
+	url = git@github.com:setmy-info/freebsd-ports.git
+[submodule "go-start-project"]
+	path = go-start-project
+	url = git@github.com:setmy-info/go-start-project.git
+[submodule "maven-plugin-start-project"]
+	path = maven-plugin-start-project
+	url = git@github.com:setmy-info/maven-plugin-start-project.git
+[submodule "node-start-project"]
+	path = node-start-project
+	url = git@github.com:setmy-info/node-start-project.git
+[submodule "python-start-project"]
+	path = python-start-project
+	url = git@github.com:setmy-info/python-start-project.git
+[submodule "setmy-info-experiments"]
+	path = setmy-info-experiments
+	url = git@github.com:setmy-info/setmy-info-experiments.git
+[submodule "setmy-info-scripts"]
+	path = setmy-info-scripts
+	url = git@github.com:setmy-info/setmy-info-scripts.git
+[submodule "setmy-info-web-components"]
+	path = setmy-info-web-components
+	url = git@github.com:setmy-info/setmy-info-web-components.git
+[submodule "vue-servicejs"]
+	path = vue-servicejs
+	url = git@github.com:setmy-info/vue-servicejs.git
+[submodule "submodules/angular-start-project"]
+	path = submodules/angular-start-project
+	url = git@github.com:setmy-info/angular-start-project.git
+[submodule "submodules/cmake-start-project"]
+	path = submodules/cmake-start-project
+	url = git@github.com:setmy-info/cmake-start-project.git
+[submodule "submodules/freebsd-ports"]
+	path = submodules/freebsd-ports
+	url = git@github.com:setmy-info/freebsd-ports.git
+[submodule "submodules/go-start-project"]
+	path = submodules/go-start-project
+	url = git@github.com:setmy-info/go-start-project.git
+[submodule "submodules/maven-plugin-start-project"]
+	path = submodules/maven-plugin-start-project
+	url = git@github.com:setmy-info/maven-plugin-start-project.git
+[submodule "submodules/node-start-project"]
+	path = submodules/node-start-project
+	url = git@github.com:setmy-info/node-start-project.git
+[submodule "submodules/python-start-project"]
+	path = submodules/python-start-project
+	url = git@github.com:setmy-info/python-start-project.git
+[submodule "submodules/setmy-info-experiments"]
+	path = submodules/setmy-info-experiments
+	url = git@github.com:setmy-info/setmy-info-experiments.git
+[submodule "submodules/setmy-info-scripts"]
+	path = submodules/setmy-info-scripts
+	url = git@github.com:setmy-info/setmy-info-scripts.git
+[submodule "submodules/setmy-info-web-components"]
+	path = submodules/setmy-info-web-components
+	url = git@github.com:setmy-info/setmy-info-web-components.git
+[submodule "submodules/vue-servicejs"]
+	path = submodules/vue-servicejs
+	url = git@github.com:setmy-info/vue-servicejs.git
