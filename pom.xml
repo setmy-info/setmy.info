@@ -33,15 +33,15 @@
         <jacoco.version>0.8.5</jacoco.version>
         <failsafe.version>2.22.2</failsafe.version>
         <surefire.version>2.22.2</surefire.version>
-        <log4j2.verions>2.13.0</log4j2.verions>
+        <log4j2.verions>2.13.1</log4j2.verions>
         <logback.verions>1.2.3</logback.verions>
         <slf4j.version>1.7.30</slf4j.version>
         <lucene.version>8.3.1</lucene.version>
-        <groovy.version>3.0.1</groovy.version>
+        <groovy.version>3.0.3</groovy.version>
         <cucumber.version>5.2.0</cucumber.version>
         <pitest.version>1.4.11</pitest.version>
         <jersey.version>2.29.1</jersey.version>
-        <jackson.version>2.10.2</jackson.version>
+        <jackson.version>2.10.3</jackson.version>
         <dockerfile-maven-version>1.4.10</dockerfile-maven-version>
         <maven.jetty.plugin.version>9.4.24.v20191120</maven.jetty.plugin.version>
         <dependency.check.version>5.3.2</dependency.check.version>
