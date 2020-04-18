@@ -2,8 +2,8 @@ package info.setmy.models;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

@@ -20,9 +20,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <encoding.level>UTF-8</encoding.level>
-        <maven.compiler.source>1.13</maven.compiler.source>
-        <maven.compiler.target>1.13</maven.compiler.target>
-        <java.version>13</java.version>
+        <maven.compiler.source>1.14</maven.compiler.source>
+        <maven.compiler.target>1.14</maven.compiler.target>
+        <java.version>14</java.version>
         <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
@@ -44,7 +44,7 @@
         <jackson.version>2.10.2</jackson.version>
         <dockerfile-maven-version>1.4.10</dockerfile-maven-version>
         <maven.jetty.plugin.version>9.4.24.v20191120</maven.jetty.plugin.version>
-        <dependency.check.version>5.2.4</dependency.check.version>
+        <dependency.check.version>5.3.2</dependency.check.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
     </properties>
 

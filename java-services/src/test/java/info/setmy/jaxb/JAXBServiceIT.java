@@ -8,8 +8,8 @@ import java.util.UUID;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -19,7 +19,7 @@ public class JAXBServiceIT {
 
     JAXBService service;
 
-    @Before
+    @BeforeAll
     public void setUp() {
         service = new JAXBService();
     }

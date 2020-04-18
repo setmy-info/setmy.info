@@ -5,7 +5,7 @@ import info.setmy.exceptions.LengthValidationException;
 import info.setmy.exceptions.ValidationException;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Test;
 
 /**

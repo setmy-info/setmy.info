@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.Optional;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -23,7 +23,7 @@ public class StorageIT {
 
     Storage storage;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         storage = new Storage(STORAGE_FOLDER);
         storage.init();

@@ -3,8 +3,8 @@ package info.setmy.exceptions.web;
 import info.setmy.models.web.WebError;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

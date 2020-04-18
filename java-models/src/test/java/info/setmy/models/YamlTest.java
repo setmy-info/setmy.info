@@ -6,16 +6,16 @@ import java.io.FileNotFoundException;
 import java.util.Map;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.yaml.snakeyaml.Yaml;
 
 public class YamlTest {
 
     Yaml parser;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         parser = new Yaml();
     }

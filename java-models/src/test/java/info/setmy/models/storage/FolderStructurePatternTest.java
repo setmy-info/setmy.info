@@ -1,7 +1,6 @@
 package info.setmy.models.storage;
 
 import info.setmy.models.storage.DirectoryStructurePattern.DirectoryStructureDepth;
-import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,8 +8,8 @@ import java.util.TimeZone;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -20,7 +19,7 @@ public class FolderStructurePatternTest {
 
     DirectoryStructurePattern folderStructurePattern;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         java.util.TimeZone.setDefault(TimeZone.getTimeZone("Europe/Tallinn"));
         folderStructurePattern = new DirectoryStructurePattern();

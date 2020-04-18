@@ -3,9 +3,9 @@ package info.setmy.models;
 import static info.setmy.models.VariableValue.EMPTY;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -15,7 +15,7 @@ public class VariableValueTest {
 
     VariableValue variableValue;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         variableValue = new VariableValue();
     }

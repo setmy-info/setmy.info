@@ -4,9 +4,10 @@ import info.setmy.exceptions.ForbiddenException;
 import java.util.Optional;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import org.junit.Before;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -18,28 +19,43 @@ public class StorageTest {
 
     private static final String STORAGE_FOLDER = "target";
 
-    @Before
+    @BeforeEach
     public void setUp() {
         storage = new Storage(STORAGE_FOLDER);
         storage.init();
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void initValidation_shouldNotAllowStoragesInRoot() {
         final Storage testStorage = new Storage(" /");
-        testStorage.init();
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> testStorage.init(),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '/' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void initValidation_shouldNotAllowStoragesInHome() {
         final Storage testStorage = new Storage(" ~");
-        testStorage.init();
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> testStorage.init(),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '~' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void initValidation_shouldNotAllowStoragesInUperFolder() {
         final Storage testStorage = new Storage(" .. ");
-        testStorage.init();
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> testStorage.init(),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '..' is not allowed")));
     }
 
     @Test
@@ -48,24 +64,44 @@ public class StorageTest {
         assertThat(file.isPresent(), is(equalTo(false)));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void homeFileTakeOutIsNotAllowed1() {
-        storage.getStorageFile(" ~/just/for/testing ");
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.getStorageFile(" ~/just/for/testing "),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '~/just/for/testing' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void homeFileTakeOutIsNotAllowed2() {
-        storage.getStorageFile(" just/~/for/testing ");
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.getStorageFile(" just/~/for/testing "),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory 'just/~/for/testing' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void uperFileTakeOutIsNotAllowed1() {
-        storage.getStorageFile(" ../just/for/testing ");
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.getStorageFile(" ../just/for/testing "),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '../just/for/testing' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void uperFileTakeOutIsNotAllowed2() {
-        storage.getStorageFile(" just/../for/testing ");
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.getStorageFile(" just/../for/testing "),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory 'just/../for/testing' is not allowed")));
     }
 
     @Test
@@ -74,71 +110,131 @@ public class StorageTest {
         assertThat(file.isPresent(), is(equalTo(false)));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void homeDirTakeOutIsNotAllowed1() {
-        storage.getStorageDirectory(" ~/just/for/testing ");
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.getStorageDirectory(" ~/just/for/testing "),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '~/just/for/testing' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void homeDirTakeOutIsNotAllowed2() {
-        storage.getStorageDirectory(" just/~/for/testing ");
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.getStorageDirectory(" just/~/for/testing "),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory 'just/~/for/testing' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void uperDirTakeOutIsNotAllowed1() {
-        storage.getStorageDirectory(" ../just/for/testing ");
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.getStorageDirectory(" ../just/for/testing "),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '../just/for/testing' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void uperDirTakeOutIsNotAllowed2() {
-        storage.getStorageDirectory(" just/../for/testing ");
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.getStorageDirectory(" just/../for/testing "),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory 'just/../for/testing' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void creatingFileWithUperDirChangeShouldFail() {
         final DirectoryStructurePattern pattern = new DirectoryStructurePattern().setSystem("../");
-        storage.createStorageFile(pattern);
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.createStorageFile(pattern),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '../' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void creatingFileWithHomeDirShouldFail() {
         final DirectoryStructurePattern pattern = new DirectoryStructurePattern().setSystem("~");
-        storage.createStorageFile(pattern);
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.createStorageFile(pattern),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '~' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void creatingFileWithUperDirChangeShouldFail2() {
         final DirectoryStructurePattern pattern = new DirectoryStructurePattern().setOwner("../");
-        storage.createStorageFile(pattern);
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.createStorageFile(pattern),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '../' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void creatingFileWithHomeDirShouldFail2() {
         final DirectoryStructurePattern pattern = new DirectoryStructurePattern().setOwner("~");
-        storage.createStorageFile(pattern);
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.createStorageFile(pattern),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '~' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void creatingFileWithUperDirChangeShouldFail3() {
         final DirectoryStructurePattern pattern = new DirectoryStructurePattern().setSubOwner("../");
-        storage.createStorageFile(pattern);
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.createStorageFile(pattern),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '../' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void creatingFileWithHomeDirShouldFail3() {
         final DirectoryStructurePattern pattern = new DirectoryStructurePattern().setSubOwner("~");
-        storage.createStorageFile(pattern);
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.createStorageFile(pattern),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '~' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void creatingFileWithUperDirChangeShouldFail4() {
         final DirectoryStructurePattern pattern = new DirectoryStructurePattern().setName("../");
-        storage.createStorageFile(pattern);
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.createStorageFile(pattern),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '../' is not allowed")));
     }
 
-    @Test(expected = ForbiddenException.class)
+    @Test
     public void creatingFileWithHomeDirShouldFail4() {
         final DirectoryStructurePattern pattern = new DirectoryStructurePattern().setName("~");
-        storage.createStorageFile(pattern);
+        ForbiddenException thrown = assertThrows(
+                ForbiddenException.class,
+                () -> storage.createStorageFile(pattern),
+                "Expected exception, but it didn't throw"
+        );
+        assertThat(thrown.getMessage(), is(equalTo("File or directory '~' is not allowed")));
     }
 }

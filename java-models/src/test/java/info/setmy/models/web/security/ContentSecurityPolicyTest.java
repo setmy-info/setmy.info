@@ -7,11 +7,13 @@ import static info.setmy.models.web.security.PolicyDirective.DirectiveSourceName
 import java.util.Optional;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import org.junit.Before;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -24,7 +26,7 @@ public class ContentSecurityPolicyTest {
     ContentSecurityPolicy contentSecurityPolicy;
     PolicyDirective policyDirective;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         contentSecurityPolicy = spy(new ContentSecurityPolicy());
         policyDirective = new PolicyDirective(PolicyDirectiveTest.NAME);
@@ -67,9 +69,14 @@ public class ContentSecurityPolicyTest {
         assertFalse(contentSecurityPolicy.getByDirectiveName(DEFAULT_SRC).isPresent());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void addingNullPolicyDirective() {
-        contentSecurityPolicy.addPolicyDirective(null);
+        NullPointerException thrown = assertThrows(
+                NullPointerException.class,
+                () -> contentSecurityPolicy.addPolicyDirective(null),
+                "Expected exception, but it didn't throw"
+        );
+        assertNull(thrown.getMessage());
     }
 
     @Test

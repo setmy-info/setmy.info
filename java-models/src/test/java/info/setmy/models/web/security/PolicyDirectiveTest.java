@@ -3,9 +3,9 @@ package info.setmy.models.web.security;
 import static info.setmy.models.web.security.PolicyDirective.DirectiveSourceNames.SELF;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PolicyDirectiveTest {
 
@@ -13,7 +13,7 @@ public class PolicyDirectiveTest {
 
     public final static String NAME = "script-src";
 
-    @Before
+    @BeforeEach
     public void setUp() {
         policyDirective = new PolicyDirective(NAME);
     }
