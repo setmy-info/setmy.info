@@ -14,15 +14,15 @@ public class ExpiredException extends ForbiddenException {
         super(string);
     }
 
-    public ExpiredException(String string, Throwable throwable) {
+    public ExpiredException(final String string, final Throwable throwable) {
         super(string, throwable);
     }
 
-    public ExpiredException(Throwable throwable) {
+    public ExpiredException(final Throwable throwable) {
         super(throwable);
     }
 
-    protected ExpiredException(String string, Throwable throwable, boolean bln, boolean bln1) {
+    protected ExpiredException(final String string, final Throwable throwable, final boolean bln, final boolean bln1) {
         super(string, throwable, bln, bln1);
     }
 }

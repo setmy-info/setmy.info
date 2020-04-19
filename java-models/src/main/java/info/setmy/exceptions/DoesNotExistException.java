@@ -14,15 +14,17 @@ public class DoesNotExistException extends UncheckedException {
         super(string);
     }
 
-    public DoesNotExistException(String string, Throwable throwable) {
+    public DoesNotExistException(final String string,
+            final Throwable throwable) {
         super(string, throwable);
     }
 
-    public DoesNotExistException(Throwable throwable) {
+    public DoesNotExistException(final Throwable throwable) {
         super(throwable);
     }
 
-    protected DoesNotExistException(String string, Throwable throwable, boolean bln, boolean bln1) {
+    protected DoesNotExistException(final String string,
+            final Throwable throwable, final boolean bln, final boolean bln1) {
         super(string, throwable, bln, bln1);
     }
 }

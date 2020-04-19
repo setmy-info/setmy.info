@@ -1,6 +1,6 @@
 package info.setmy.exceptions.reports;
 
-import info.setmy.exceptions.*;
+import info.setmy.exceptions.UncheckedException;
 
 /**
  *

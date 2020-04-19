@@ -2,7 +2,6 @@ package info.setmy.models;
 
 import info.setmy.exceptions.LengthValidationException;
 import static info.setmy.models.accounting.Validation.newInstance;
-import static info.setmy.models.accounting.Validation.validation;
 import java.util.regex.Pattern;
 
 public class Validation {
@@ -11,10 +10,10 @@ public class Validation {
     private static final Pattern LETTERS_AND_DIGITS_PATTER = Pattern.compile("^[A-Za-z0-9]+$");
     private static final Pattern DIGITS_PATTER = Pattern.compile("^[0-9]+$");
 
-    public static final Validation validation = newInstance();
+    public static final Validation VALIDATION = newInstance();
 
     public static Validation getInstance() {
-        return validation;
+        return VALIDATION;
     }
 
     public static Validation newInstance() {

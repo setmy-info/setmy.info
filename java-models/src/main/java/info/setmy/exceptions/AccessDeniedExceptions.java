@@ -15,15 +15,17 @@ public class AccessDeniedExceptions extends UncheckedException {
         super(string);
     }
 
-    public AccessDeniedExceptions(String string, Throwable throwable) {
+    public AccessDeniedExceptions(final String string,
+            final Throwable throwable) {
         super(string, throwable);
     }
 
-    public AccessDeniedExceptions(Throwable throwable) {
+    public AccessDeniedExceptions(final Throwable throwable) {
         super(throwable);
     }
 
-    protected AccessDeniedExceptions(String string, Throwable throwable, boolean bln, boolean bln1) {
+    protected AccessDeniedExceptions(final String string,
+            final Throwable throwable, final boolean bln, final boolean bln1) {
         super(string, throwable, bln, bln1);
     }
 }

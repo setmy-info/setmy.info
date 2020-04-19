@@ -14,15 +14,15 @@ public class DuplicateException extends UncheckedException {
         super(string);
     }
 
-    public DuplicateException(String string, Throwable throwable) {
+    public DuplicateException(final String string, final Throwable throwable) {
         super(string, throwable);
     }
 
-    public DuplicateException(Throwable throwable) {
+    public DuplicateException(final Throwable throwable) {
         super(throwable);
     }
 
-    protected DuplicateException(String string, Throwable throwable, boolean bln, boolean bln1) {
+    protected DuplicateException(final String string, final Throwable throwable, final boolean bln, final boolean bln1) {
         super(string, throwable, bln, bln1);
     }
 }

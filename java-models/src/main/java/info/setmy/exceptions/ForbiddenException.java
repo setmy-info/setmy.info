@@ -14,15 +14,15 @@ public class ForbiddenException extends UncheckedException {
         super(string);
     }
 
-    public ForbiddenException(String string, Throwable throwable) {
+    public ForbiddenException(final String string, final Throwable throwable) {
         super(string, throwable);
     }
 
-    public ForbiddenException(Throwable throwable) {
+    public ForbiddenException(final Throwable throwable) {
         super(throwable);
     }
 
-    protected ForbiddenException(String string, Throwable throwable, boolean bln, boolean bln1) {
+    protected ForbiddenException(final String string, final Throwable throwable, final boolean bln, final boolean bln1) {
         super(string, throwable, bln, bln1);
     }
 }
