@@ -3,9 +3,7 @@ package info.setmy.microservice.rest;
 import static io.restassured.RestAssured.when;
 import io.restassured.parsing.Parser;
 import static org.hamcrest.Matchers.containsString;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -14,14 +12,6 @@ import org.junit.Test;
 public class ExampleRestIT {
 
     private final String URL = "http://localhost:8777/tomcat-start-project-1.2.0-SNAPSHOT/rest/hello";
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void testHello() {

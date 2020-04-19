@@ -2,9 +2,7 @@ package info.setmy.microservice.controllers;
 
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.equalTo;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -13,14 +11,6 @@ import org.junit.Test;
 public class ExampleControllerIT {
 
     private final String URL = "http://localhost:8777/tomcat-start-project-1.2.0-SNAPSHOT/api/example";
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void testHello() {

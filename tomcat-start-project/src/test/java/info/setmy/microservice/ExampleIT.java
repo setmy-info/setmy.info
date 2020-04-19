@@ -1,6 +1,6 @@
 package info.setmy.microservice;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *
