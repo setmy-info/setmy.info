@@ -18,7 +18,7 @@
     <packaging>jar</packaging>
     <name>java-services</name>
     <description>Base project for commons services, helpers, Utils, DAOs, repositories etc</description>
-    <url>https://bitbucket.org/imreit/setmy.info</url>
+    <url>https://setmy-info.github.io</url>
 
     <dependencies>
         <dependency>
@@ -176,7 +176,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.8.2</version>
+                <version>3.9.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -289,6 +289,10 @@
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>3.0.0</version>
             </plugin>
+            <!--
+            Problem with 3.0.5 plugin, that is crashing in middle of site building.
+            https://issues.apache.org/jira/browse/MPIR-374
+            -->
             <!--plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
@@ -296,6 +300,15 @@
                 <configuration>
                     <excludeFilterFile>${basedir}/src/test/resources/findbugs-exclude.xml</excludeFilterFile>
                     <includeFilterFile>${basedir}/src/test/resources/findbugs-include.xml</includeFilterFile>
+                </configuration>
+            </plugin-->
+            <!--plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>4.0.0</version>
+                <configuration>
+                    <excludeFilterFile>${basedir}/src/test/resources/spotbugs-exclude.xml</excludeFilterFile>
+                    <includeFilterFile>${basedir}/src/test/resources/spotbugs-include.xml</includeFilterFile>
                 </configuration>
             </plugin-->
             <plugin>
@@ -315,6 +328,7 @@
                 <artifactId>maven-changes-plugin</artifactId>
                 <version>2.12.1</version>
             </plugin>
+            <!-- can go broken -->
             <!--plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>javancss-maven-plugin</artifactId>
@@ -429,16 +443,16 @@
                         <vendor>${project.organization.name}</vendor>
                     </doapOptions>
                 </configuration>
-            </plugin>
-            <plugin>
+            </plugin-->
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.8</version>
+                <version>3.13.0</version>
                 <configuration>
                     <targetJdk>${maven.compiler.source}</targetJdk>
                 </configuration>
-            </plugin>
-            <plugin>
+            </plugin-->
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-linkcheck-plugin</artifactId>
                 <version>1.2</version>
@@ -482,15 +496,15 @@
     </developers>
 
     <scm>
-        <connection>scm:hg:https://bitbucket.org/imreit/setmy.info</connection>
-        <developerConnection>scm:hg:ssh://hg@bitbucket.org/imreit/setmy.info</developerConnection>
-        <url>https://bitbucket.org/imreit/setmy.info</url>
+        <connection>scm:git:git@github.com:setmy-info/setmy.info.git</connection>
+        <developerConnection>scm:git:git@github.com:setmy-info/setmy.info.git</developerConnection>
+        <url>https://setmy-info.github.io</url>
         <tag>v1.0.7</tag>
     </scm>
 
     <issueManagement>
-        <system>Bitbucket</system>
-        <url>https://bitbucket.org/imreit/setmy.info/issues</url>
+        <system>GitHub</system>
+        <url>https://github.com/setmy-info/setmy.info/issues</url>
     </issueManagement>
 
     <ciManagement />
@@ -510,7 +524,7 @@
     <licenses>
         <license>
             <name>The MIT License (MIT)</name>
-            <url>https://bitbucket.org/imreit/setmy.info/downloads/MIT.txt</url>
+            <url>https://raw.githubusercontent.com/setmy-info/setmy.info/develop/LICENSE</url>
             <distribution>repo</distribution>
         </license>
     </licenses>

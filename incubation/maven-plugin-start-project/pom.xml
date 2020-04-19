@@ -19,7 +19,7 @@
     <packaging>maven-plugin</packaging>
     <name>maven-plugin-start-project</name>
     <description>Maven plugin starter.</description>
-    <url>https://bitbucket.org/imreit/setmy.info</url>
+    <url>https://setmy-info.github.io</url>
 
     <dependencies>
         <dependency>
@@ -129,7 +129,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.9.0</version>
             </plugin-->
-            <plugin>
+            <!--plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>${dependency.check.version}</version>
@@ -140,11 +140,11 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.7.1</version>
+                <version>3.9.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -165,7 +165,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -175,10 +175,10 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -190,7 +190,7 @@
                 <configuration>
                     <additionalOptions>-html5</additionalOptions>
                 </configuration>
-            </plugin>
+            </plugin-->
             <!--plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.1.0</version>
@@ -210,10 +210,10 @@
                     </execution>
                 </executions>
             </plugin-->
-            <plugin>
+            <!--plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>1.16</version>
+                <version>1.20</version>
                 <executions>
                     <execution>
                         <id>download-licenses</id>
@@ -222,7 +222,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin-->
         </plugins>
     </build>
 
@@ -269,7 +269,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.1</version>
                 <configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
@@ -355,7 +355,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.1.1</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -397,16 +397,16 @@
                         <vendor>${project.organization.name}</vendor>
                     </doapOptions>
                 </configuration>
-            </plugin>
-            <plugin>
+            </plugin-->
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.8</version>
+                <version>3.13.0</version>
                 <configuration>
                     <targetJdk>${maven.compiler.source}</targetJdk>
                 </configuration>
-            </plugin>
-            <plugin>
+            </plugin-->
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-linkcheck-plugin</artifactId>
                 <version>1.2</version>
@@ -416,7 +416,7 @@
                 <artifactId>maven-docck-plugin</artifactId>
                 <version>1.1</version>
             </plugin-->
-            <!--plugin>
+            <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>${dependency.check.version}</version>
@@ -427,7 +427,7 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-            </plugin-->
+            </plugin>
         </plugins>
     </reporting>
 
@@ -450,15 +450,15 @@
     </developers>
 
     <scm>
-        <connection>scm:hg:https://bitbucket.org/imreit/setmy.info</connection>
-        <developerConnection>scm:hg:ssh://hg@bitbucket.org/imreit/setmy.info</developerConnection>
-        <url>https://bitbucket.org/imreit/setmy.info</url>
+        <connection>scm:git:git@github.com:setmy-info/setmy.info.git</connection>
+        <developerConnection>scm:git:git@github.com:setmy-info/setmy.info.git</developerConnection>
+        <url>https://setmy-info.github.io</url>
         <tag>v1.0.7</tag>
     </scm>
 
     <issueManagement>
-        <system>Bitbucket</system>
-        <url>https://bitbucket.org/imreit/setmy.info/issues</url>
+        <system>GitHub</system>
+        <url>https://github.com/setmy-info/setmy.info/issues</url>
     </issueManagement>
 
     <ciManagement />
@@ -478,7 +478,7 @@
     <licenses>
         <license>
             <name>The MIT License (MIT)</name>
-            <url>https://bitbucket.org/imreit/setmy.info/downloads/MIT.txt</url>
+            <url>https://raw.githubusercontent.com/setmy-info/setmy.info/develop/LICENSE</url>
             <distribution>repo</distribution>
         </license>
     </licenses>

@@ -28,7 +28,7 @@ nbdist/
 .nb-gradle/
 */nb-configuration.xml
 java-models/nbproject/
-tomcat-start-project/
+tomcat-start-project/nbproject/
 
 setmy-info-scripts/build/
 

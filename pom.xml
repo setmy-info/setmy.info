@@ -13,7 +13,7 @@
 
     <name>multi-projects</name>
     <description>Java and Groovy projects</description>
-    <url>https://bitbucket.org/imreit/setmy.info</url>
+    <url>https://setmy-info.github.io</url>
 
     <properties>
         <info.setmy.version>1.2.0-SNAPSHOT</info.setmy.version>
@@ -27,25 +27,28 @@
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
 
-        <junit5.version>5.6.0</junit5.version>
-        <junit.platform.version>1.6.0</junit.platform.version>
-        <mockito.version>3.2.4</mockito.version>
+        <junit5.version>5.6.2</junit5.version>
+        <junit.platform.version>1.6.2</junit.platform.version>
+        <mockito.version>3.3.3</mockito.version>
         <jacoco.version>0.8.5</jacoco.version>
         <failsafe.version>2.22.2</failsafe.version>
         <surefire.version>2.22.2</surefire.version>
         <log4j2.verions>2.13.1</log4j2.verions>
         <logback.verions>1.2.3</logback.verions>
         <slf4j.version>1.7.30</slf4j.version>
-        <lucene.version>8.3.1</lucene.version>
+        <lucene.version>8.5.0</lucene.version>
         <groovy.version>3.0.3</groovy.version>
-        <cucumber.version>5.2.0</cucumber.version>
-        <pitest.version>1.4.11</pitest.version>
-        <jersey.version>2.29.1</jersey.version>
+        <cucumber.version>5.6.0</cucumber.version>
+        <pitest.version>1.5.1</pitest.version>
+        <jersey.version>2.30.1</jersey.version>
         <jackson.version>2.10.3</jackson.version>
-        <dockerfile-maven-version>1.4.10</dockerfile-maven-version>
+        <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
         <maven.jetty.plugin.version>9.4.24.v20191120</maven.jetty.plugin.version>
         <dependency.check.version>5.3.2</dependency.check.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <spring.version>5.2.5.RELEASE</spring.version>
+        <rest.assured.version>4.3.0</rest.assured.version>
+        <liquibase.version>3.8.9</liquibase.version>
     </properties>
 
     <modules>
@@ -71,6 +74,7 @@
         <module>java-vcs</module>
         <module>java-modular-ssn</module>
         <module>java-rest-client</module>
+        <module>tomcat-start-project</module>
         <module>incubation/maven-plugin-start-project</module>
     </modules>
 
@@ -150,15 +154,15 @@
     </developers>
 
     <scm>
-        <connection>scm:hg:https://bitbucket.org/imreit/setmy.info</connection>
-        <developerConnection>scm:hg:ssh://hg@bitbucket.org/imreit/setmy.info</developerConnection>
-        <url>https://bitbucket.org/imreit/setmy.info</url>
+        <connection>scm:git:git@github.com:setmy-info/setmy.info.git</connection>
+        <developerConnection>scm:git:git@github.com:setmy-info/setmy.info.git</developerConnection>
+        <url>https://setmy-info.github.io</url>
         <tag>v1.0.7</tag>
     </scm>
 
     <issueManagement>
-        <system>Bitbucket</system>
-        <url>https://bitbucket.org/imreit/setmy.info/issues</url>
+        <system>GitHub</system>
+        <url>https://github.com/setmy-info/setmy.info/issues</url>
     </issueManagement>
 
     <ciManagement />
@@ -178,7 +182,7 @@
     <licenses>
         <license>
             <name>The MIT License (MIT)</name>
-            <url>https://bitbucket.org/imreit/setmy.info/downloads/MIT.txt</url>
+            <url>https://raw.githubusercontent.com/setmy-info/setmy.info/develop/LICENSE</url>
             <distribution>repo</distribution>
         </license>
     </licenses>

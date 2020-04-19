@@ -1,10 +1,8 @@
 package info.setmy.microservice.rest;
 
 import static io.restassured.RestAssured.when;
-import static io.restassured.RestAssured.withNoArgs;
 import io.restassured.parsing.Parser;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

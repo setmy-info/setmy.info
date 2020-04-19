@@ -32,7 +32,8 @@ import org.apache.commons.io.IOUtils;
  */
 public class JWTService {
 
-    private static final Map<String, JWTService> SERVICES_MAP = new ConcurrentHashMap<>();
+    private static final Map<String, JWTService> SERVICES_MAP
+            = new ConcurrentHashMap<>();
 
     private final String serviceName;
 
@@ -94,12 +95,19 @@ public class JWTService {
     public void init() {
         final JWTService instance = SERVICES_MAP.get(getServiceName());
         if (instance != null) {
-            throw new UncheckedException(String.format("Instance of service by name \"%s\" exists!", getServiceName()));
+            throw new UncheckedException(String.format(
+                    "Instance of service by name \"%s\" exists!",
+                    getServiceName()
+            ));
         }
         try {
             algorithm = findAlgorithm();
         } catch (IllegalArgumentException ex) {
-            throw new UncheckedException(String.format("Illegal arguments for \"%s\" algorithm key", getAlgorithmName()), ex);
+            throw new UncheckedException(String.format(
+                    "Illegal arguments for \"%s\" algorithm key",
+                    getAlgorithmName()),
+                    ex
+            );
         } catch (UnsupportedEncodingException ex) {
             throw new UncheckedException("Un supported encoding", ex);
         } catch (NoSuchAlgorithmException ex) {
@@ -114,7 +122,10 @@ public class JWTService {
         SERVICES_MAP.put(getServiceName(), this);
     }
 
-    Algorithm findAlgorithm() throws IllegalArgumentException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeySpecException, InvalidKeyException {
+    Algorithm findAlgorithm()
+            throws IllegalArgumentException, UnsupportedEncodingException,
+            NoSuchAlgorithmException, NoSuchPaddingException,
+            InvalidKeySpecException, InvalidKeyException {
         if (algorithmName == null) {
             throw new UncheckedException("Algorithm name should be set");
         }
@@ -145,10 +156,15 @@ public class JWTService {
                 return Algorithm.ECDSA512(ecdsaSAPublicKey, ecdsaPrivateKey);
             default:
         }
-        throw new UncheckedException(String.format("Algorithm \"%s\" is not supported!", algorithmName));
+        throw new UncheckedException(String.format(
+                "Algorithm \"%s\" is not supported!",
+                algorithmName
+        ));
     }
 
-    private void rsaKeysReading() throws InvalidKeyException, NoSuchPaddingException, InvalidKeySpecException, NoSuchAlgorithmException {
+    private void rsaKeysReading()
+            throws InvalidKeyException, NoSuchPaddingException,
+            InvalidKeySpecException, NoSuchAlgorithmException {
         this.rsaPublicKey = readRSAPublicKey();
         this.rsaPrivateKey = readRSAPrivateKey();
     }
@@ -158,7 +174,9 @@ public class JWTService {
         this.ecdsaPrivateKey = readECDSAPrivateKey();
     }
 
-    RSAPublicKey readRSAPublicKey() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeySpecException, InvalidKeyException {
+    RSAPublicKey readRSAPublicKey()
+            throws NoSuchAlgorithmException, NoSuchPaddingException,
+            InvalidKeySpecException, InvalidKeyException {
         try {
             final String publicKey = IOUtils.toString(new FileInputStream(publicKeyFileName), Charset.forName("UTF-8"));
             final String cleanedPublicKey = cleanPublicKeyParts(publicKey);
