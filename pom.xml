@@ -49,6 +49,7 @@
         <spring.version>5.2.5.RELEASE</spring.version>
         <rest.assured.version>4.3.0</rest.assured.version>
         <liquibase.version>3.8.9</liquibase.version>
+        <infinispan.version>10.1.6.Final</infinispan.version>
     </properties>
 
     <modules>
