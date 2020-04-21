@@ -605,8 +605,9 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <doCheck>true</doCheck>
-                    <doUpdate>true</doUpdate>
+                    <attach>true</attach>
+                    <!--make it available for jar/war classpath resource -->
+                    <addOutputDirectoryToResources>true</addOutputDirectoryToResources>
                 </configuration>
             </plugin>
         </plugins>
