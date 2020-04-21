@@ -598,9 +598,9 @@
                 <version>1.4</version>
                 <executions>
                     <execution>
-                        <phase>validate</phase>
+                        <phase>generate-ressources</phase>
                         <goals>
-                            <goal>create</goal>
+                            <goal>create-metadata</goal>
                         </goals>
                     </execution>
                 </executions>
