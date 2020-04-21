@@ -671,24 +671,28 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
+                <profile>dev</profile>
                 <spring.profiles.active>default,dev</spring.profiles.active>
             </properties>
         </profile>
         <profile>
             <id>test</id>
             <properties>
+                <profile>test</profile>
                 <spring.profiles.active>default,test</spring.profiles.active>
             </properties>
         </profile>
         <profile>
             <id>ci</id>
             <properties>
+                <profile>ci</profile>
                 <spring.profiles.active>default,ci</spring.profiles.active>
             </properties>
         </profile>
         <profile>
             <id>live</id>
             <properties>
+                <profile>live</profile>
                 <spring.profiles.active>default,live</spring.profiles.active>
             </properties>
         </profile>
