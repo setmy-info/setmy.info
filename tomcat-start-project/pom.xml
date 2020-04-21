@@ -123,6 +123,11 @@
             <version>${spring.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>2.2.6.RELEASE</version>
@@ -131,6 +136,21 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.3.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.3.1.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -167,6 +187,16 @@
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>java-db</artifactId>
+            <version>${info.setmy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.setmy</groupId>
+            <artifactId>groovy-services</artifactId>
+            <version>${info.setmy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.setmy</groupId>
+            <artifactId>jwt-models</artifactId>
             <version>${info.setmy.version}</version>
         </dependency>
         <dependency>
@@ -227,9 +257,20 @@
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.ext</groupId>
-            <artifactId>jersey-spring4</artifactId>
+            <artifactId>jersey-spring5</artifactId>
             <version>${jersey.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency-->
     </dependencies>
 
     <build>
@@ -248,6 +289,42 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>addSources</goal>
+                            <goal>addTestSources</goal>
+                            <!--goal>generateStubs</goal-->
+                            <!--goal>testGenerateStubs</goal-->
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                            <goal>removeStubs</goal>
+                            <goal>removeTestStubs</goal>
+                            <goal>groovydoc</goal>
+                            <!--goal>testGroovydoc</goal-->
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scripts>
+                        <script><![CDATA[
+                            // your script here
+                        ]]></script>
+                    </scripts>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy</artifactId>
+                        <version>${groovy.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -515,19 +592,52 @@
                     </buildArgs>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <doCheck>true</doCheck>
+                    <doUpdate>true</doUpdate>
+                </configuration>
+            </plugin>
         </plugins>
 
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>${basedir}/src/main/resources</directory>
                 <targetPath>${project.build.outputDirectory}</targetPath>
                 <filtering>true</filtering>
             </resource>
             <resource>
-                <directory>src/test/resources</directory>
+                <directory>${basedir}/src/test/resources</directory>
                 <targetPath>${project.build.testOutputDirectory}</targetPath>
                 <filtering>true</filtering>
             </resource>
+            <!--resource>
+                <directory>${basedir}/src/main/resources-filtered</directory>
+                <targetPath>${basedir}/src/main/webapp/json</targetPath>
+                <includes>
+                    <include>version.json</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/resources-filtered</directory>
+                <targetPath>${basedir}/src/main/webapp/js</targetPath>
+                <includes>
+                    <include>version.js</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource-->
         </resources>
 
     </build>
