@@ -1,4 +1,4 @@
 /**
  * Beans (injectable item instantination) configuration related classes.
  */
-package info.setmy.microservice.config;
+package info.setmy.microservice.beans;

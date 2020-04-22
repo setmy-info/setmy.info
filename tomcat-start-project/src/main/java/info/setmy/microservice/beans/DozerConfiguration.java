@@ -1,4 +1,4 @@
-package info.setmy.microservice.config;
+package info.setmy.microservice.beans;
 
 import java.util.Arrays;
 import org.dozer.DozerBeanMapper;
