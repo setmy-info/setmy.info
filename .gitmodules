@@ -82,3 +82,6 @@
 [submodule "submodules/vue-servicejs"]
 	path = submodules/vue-servicejs
 	url = git@github.com:setmy-info/vue-servicejs.git
+[submodule "submodules/setmy-info-bom"]
+	path = submodules/setmy-info-bom
+	url = git@github.com:setmy-info/setmy-info-bom.git
