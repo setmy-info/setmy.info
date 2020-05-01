@@ -85,3 +85,6 @@
 [submodule "submodules/setmy-info-bom"]
 	path = submodules/setmy-info-bom
 	url = git@github.com:setmy-info/setmy-info-bom.git
+[submodule "submodules/vue-start-project"]
+	path = submodules/vue-start-project
+	url = git@github.com:setmy-info/vue-start-project.git
