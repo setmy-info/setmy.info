@@ -12,6 +12,10 @@ spring:
         name: springboot-start-project
         console:
             enabled: false
+    security:
+        user:
+            name: admin
+            password: g6p8
 
 dataSource:
     driver-class-name: org.h2.Driver
@@ -22,12 +26,14 @@ dataSource:
 liquibase:
     change-log: classpath:liquibase/master.xml
 
-example:
-    foo: Foo text
-    bar: Bar text
-
 scheduler:
     timeInMillis: 60000
 
-features:
-    foo: false
+system:
+    example:
+        foo: Foo text
+        bar: Bar text
+    cache:
+        infinispanCacheName: cache
+    features:
+        foo: false

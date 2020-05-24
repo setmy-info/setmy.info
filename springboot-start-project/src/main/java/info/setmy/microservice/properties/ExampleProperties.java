@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 @Configuration("exampleProperties")
-@ConfigurationProperties(prefix = "example")
+@ConfigurationProperties(prefix = "system.example")
 public class ExampleProperties {
 
     private String foo;

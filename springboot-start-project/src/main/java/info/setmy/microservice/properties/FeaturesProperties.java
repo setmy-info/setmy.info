@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 @Configuration("featuresProperties")
-@ConfigurationProperties(prefix = "features", ignoreUnknownFields = false)
+@ConfigurationProperties(prefix = "system.features", ignoreUnknownFields = false)
 public class FeaturesProperties {
 
     private boolean foo;

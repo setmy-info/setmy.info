@@ -6,12 +6,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
+    <!--parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.6.RELEASE</version>
+        <version>2.3.0.RELEASE</version>
         <relativePath/>
-    </parent>
+    </parent-->
 
     <groupId>info.setmy</groupId>
     <artifactId>springboot-start-project</artifactId>
@@ -43,14 +43,17 @@
         <log4j2.verions>2.13.1</log4j2.verions>
         <logback.verions>1.2.3</logback.verions>
         <slf4j.version>1.7.30</slf4j.version>
-        <cucumber.version>5.6.0</cucumber.version>
-        <pitest.version>1.5.1</pitest.version>
+        <cucumber.version>5.7.0</cucumber.version>
+        <pitest.version>1.5.2</pitest.version>
         <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
         <dependency.check.version>5.3.2</dependency.check.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <rest.assured.version>4.3.0</rest.assured.version>
         <liquibase.version>3.8.9</liquibase.version>
-        <infinispan.version>10.1.6.Final</infinispan.version>
+        <infinispan.version>10.1.8.Final</infinispan.version>
+        <infinispan.starter.verions>2.2.4.Final</infinispan.starter.verions>
+        <quartz.verions>2.3.2</quartz.verions>
+        <spring.boot.verions>2.3.0.RELEASE</spring.boot.verions>
     </properties>
 
     <dependencies>
@@ -127,6 +130,18 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
             <exclusions>
@@ -146,10 +161,16 @@
             <scope>test</scope>
             <exclusions>
                 <exclusion>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -165,11 +186,59 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-spring-boot-starter-embedded</artifactId>
+            <version>${infinispan.starter.verions}</version>
         </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
@@ -182,16 +251,6 @@
             <version>2.3.2</version>
         </dependency>
         <dependency>
-            <groupId>info.setmy</groupId>
-            <artifactId>java-web</artifactId>
-            <version>${info.setmy.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>info.setmy</groupId>
-            <artifactId>java-db</artifactId>
-            <version>${info.setmy.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
             <version>3.23.1-GA</version>
@@ -201,6 +260,16 @@
             <artifactId>rest-assured</artifactId>
             <version>${rest.assured.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>info.setmy</groupId>
+            <artifactId>java-web</artifactId>
+            <version>${info.setmy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.setmy</groupId>
+            <artifactId>java-db</artifactId>
+            <version>${info.setmy.version}</version>
         </dependency>
     </dependencies>
 
@@ -416,6 +485,30 @@
         </plugins>
     </build>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-bom</artifactId>
+                <version>${infinispan.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring.boot.verions}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-spring-boot-starter</artifactId>
+                <version>${infinispan.starter.verions}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+ 
     <profiles>
         <profile>
             <id>sign</id>
@@ -441,7 +534,7 @@
         <profile>
             <id>dev</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <spring-boot.run.profiles>default,dev</spring-boot.run.profiles>

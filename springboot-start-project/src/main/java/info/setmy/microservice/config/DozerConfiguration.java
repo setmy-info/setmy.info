@@ -1,8 +1,8 @@
 package info.setmy.microservice.config;
 
-import java.util.Arrays;
-import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
+import com.github.dozermapper.core.DozerBeanMapperBuilder;
+import com.github.dozermapper.core.Mapper;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,10 +13,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DozerConfiguration {
 
-    @Bean("dozerBeanMapper")
+    /*@Bean("dozerBeanMapper")
     public Mapper springLiquibase() {
-        final DozerBeanMapper mapper = new DozerBeanMapper();
-        mapper.setMappingFiles(Arrays.asList("dozer.xml"));
+        Mapper mapper = DozerBeanMapperBuilder.create()
+                .withMappingFiles("dozer.xml")
+                .build();
         return mapper;
-    }
+    }*/
 }

@@ -10,6 +10,7 @@ import info.setmy.microservice.models.ExampleModel;
 import info.setmy.microservice.properties.ExampleProperties;
 import javax.inject.Named;
 import javax.transaction.Transactional;
+import org.infinispan.Cache;
 
 /**
  *
@@ -30,39 +31,42 @@ public class ExampleService {
 
     private final PersonRepository personRepository;
 
-    private final DozerService dozerService;
+    //private final DozerService dozerService;
+    //private final Cache cache;
 
     public ExampleService(final ExampleDao exampleDao,
             final ExampleProperties exampleProperties,
-            final DozerService dozerService,
+            //final DozerService dozerService,
             final ExampleRepository exampleRepository,
             final JDBCExampleDao jdbcExampleDao,
             final JPAExampleDao jpaExampleDao,
-            final PersonRepository personRepository) {
+            final PersonRepository personRepository/*,
+            final Cache cache*/) {
         this.exampleDao = exampleDao;
         this.exampleProperties = exampleProperties;
-        this.dozerService = dozerService;
+        //this.dozerService = dozerService;
         this.exampleRepository = exampleRepository;
         this.jdbcExampleDao = jdbcExampleDao;
         this.jpaExampleDao = jpaExampleDao;
         this.personRepository = personRepository;
-    }
-
-    public ExampleDao getExampleDao() {
-        return exampleDao;
+        //this.cache = cache;
     }
 
     @Transactional
     public ExampleModel getExampleModel() {
+        String counterKkey = "counter";
+        Integer counter = 0;//(Integer) cache.get(counterKkey);
+        /*if (counter == null) {
+            counter = 1;
+            cache.put(counterKkey, counter);
+        } else {
+            counter++;
+        }*/
         //insertData();
         //final ExampleModel model = exampleDao.getExampleModel();
         final ExampleModel model = exampleRepository.findAll().get(0);
-        final ExampleModel newModel = dozerService.copyExampleModel(model);
+        final ExampleModel newModel = model;//dozerService.copyExampleModel(model);
         return newModel;
-    }
-
-    public DozerService getDozerService() {
-        return dozerService;
     }
 
     private void insertData() {
