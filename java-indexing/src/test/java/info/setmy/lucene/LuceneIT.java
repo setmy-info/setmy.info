@@ -23,13 +23,11 @@ import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.MMapDirectory;
 import org.apache.lucene.util.Version;
-import static org.apache.lucene.util.Version.LUCENE_7_3_0;
-import org.junit.After;
+import static org.apache.lucene.util.Version.LUCENE_8_5_1;
 import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,26 +37,25 @@ import org.slf4j.LoggerFactory;
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LuceneIT {
 
     private static final Logger LOG = LoggerFactory.getLogger(LuceneIT.class);
     public static final String INDEX_HOME_DIR = "solr";
     public static final String INDEX_DIR = "solr.index";
 
-    @Before
+    @BeforeEach
     public void setUp() {
         deleteDirecotry(INDEX_HOME_DIR);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         deleteDirecotry(INDEX_HOME_DIR);
     }
 
     @Test
     public void testAddData() throws IOException, ParseException {
-        final Version version = LUCENE_7_3_0;
+        final Version version = LUCENE_8_5_1;
         LOG.debug("Version: {}", version);
         Analyzer analyzer = new StandardAnalyzer();
         Path path = FileSystems.getDefault().getPath(INDEX_HOME_DIR, INDEX_DIR);

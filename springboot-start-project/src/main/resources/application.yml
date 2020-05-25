@@ -49,3 +49,18 @@ maven:
     project:
         groupId: ${project.groupId}
         artifactId: ${project.artifactId}
+
+swagger:
+    deepLinking: true
+    defaultModelExpandDepth: 1
+    defaultModelsExpandDepth: 1
+    description: Sample Swagger.
+    displayOperationId: false
+    displayRequestDuration: false
+    enableUrlTemplating: false
+    enabled: true
+    filter: false
+    maxDisplayedTags: 0
+    showExtensions: false
+    title: springboot-start-project API
+    useDefaultResponseMessages: false

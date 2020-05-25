@@ -1,17 +1,16 @@
 package info.setmy.lucene;
 
-import info.setmy.lucene.LuceneService;
 import info.setmy.models.Paging;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
-import org.junit.After;
-import static org.junit.Assert.assertThat;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +32,7 @@ public class LuceneServiceIT {
 
     private final BookDocument[] books = new BookDocument[4];
 
-    @Before
+    @BeforeEach
     public void before() throws IOException {
         FileUtils.deleteDirectory(new File(DIR));
         memoryLuceneService = new LuceneService();
@@ -43,7 +42,7 @@ public class LuceneServiceIT {
         prepareBooks();
     }
 
-    @After
+    @AfterEach
     public void after() {
         memoryLuceneService.close();
         diskLuceneService.close();

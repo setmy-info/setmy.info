@@ -36,7 +36,7 @@
         <log4j2.verions>2.13.1</log4j2.verions>
         <logback.verions>1.2.3</logback.verions>
         <slf4j.version>1.7.30</slf4j.version>
-        <lucene.version>8.5.0</lucene.version>
+        <lucene.version>8.5.1</lucene.version>
         <groovy.version>3.0.3</groovy.version>
         <cucumber.version>5.6.0</cucumber.version>
         <pitest.version>1.5.1</pitest.version>
@@ -75,7 +75,7 @@
         <module>java-vcs</module>
         <module>java-modular-ssn</module>
         <module>java-rest-client</module>
-        <module>tomcat-start-project</module>
+        <!--module>tomcat-start-project</module-->
         <module>incubation/maven-plugin-start-project</module>
     </modules>
 

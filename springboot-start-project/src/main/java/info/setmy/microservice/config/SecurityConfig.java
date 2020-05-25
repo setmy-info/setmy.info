@@ -1,5 +1,7 @@
 package info.setmy.microservice.config;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,9 +25,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/",
                         "/home",
+                        // Public REST
                         "/rest/hello",
                         "/api/example",
-                        "/actuator/**"
+                        // Actuator
+                        "/actuator/**",
+                        // Swagger
+                        "/v2/api-docs/**",
+                        "/swagger-ui.html",
+                        "/webjars/springfox-swagger-ui/**",
+                        "/swagger-resources/**",
+                        "/csrf"
+                // Other
                 ).permitAll()
                 .anyRequest()
                 .authenticated();
