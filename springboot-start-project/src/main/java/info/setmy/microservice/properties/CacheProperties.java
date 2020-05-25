@@ -11,13 +11,23 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "system.cache")
 public class CacheProperties {
 
-    private String infinispanCacheName;
+    private String cacheName;
 
-    public String getInfinispanCacheName() {
-        return infinispanCacheName;
+    private Long cacheTimeoutMillis;
+
+    public Long getCacheTimeoutMillis() {
+        return cacheTimeoutMillis;
     }
 
-    public void setInfinispanCacheName(String infinispanCacheName) {
-        this.infinispanCacheName = infinispanCacheName;
+    public void setCacheTimeoutMillis(Long cacheTimeoutMillis) {
+        this.cacheTimeoutMillis = cacheTimeoutMillis;
+    }
+
+    public String getCacheName() {
+        return cacheName;
+    }
+
+    public void setCacheName(String cacheName) {
+        this.cacheName = cacheName;
     }
 }

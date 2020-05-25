@@ -14,8 +14,8 @@ spring:
             enabled: false
     security:
         user:
-            name: admin
-            password: g6p8
+            name: ${SPRING_USER_NAME}
+            password: ${SPRING_USER_PASSWORD}
 
 dataSource:
     driver-class-name: org.h2.Driver
@@ -34,6 +34,18 @@ system:
         foo: Foo text
         bar: Bar text
     cache:
-        infinispanCacheName: cache
+        cacheName: apiCache
+        cacheTimeoutMillis: 15000
     features:
         foo: false
+
+infinispan:
+    embedded:
+        enabled: true
+    remote:
+        enabled: false
+
+maven:
+    project:
+        groupId: ${project.groupId}
+        artifactId: ${project.artifactId}

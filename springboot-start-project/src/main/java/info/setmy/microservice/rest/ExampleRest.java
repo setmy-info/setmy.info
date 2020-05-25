@@ -1,8 +1,6 @@
 package info.setmy.microservice.rest;
 
 import info.setmy.microservice.services.ExampleService;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,17 +24,17 @@ import org.springframework.stereotype.Component;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ExampleRest {
 
-    final Logger log = LogManager.getLogger(ExampleRest.class);
+    final Logger log = LogManager.getLogger(getClass());
 
     private final ExampleService exampleService;
 
-    @Inject
     public ExampleRest(final ExampleService exampleService) {
         this.exampleService = exampleService;
     }
 
     @GET
     @Produces("text/plain")
+    @Cacheable("apiCache")
     public String hello() {
         log.info("Jersey Hello REST called!!");
         return exampleService.getExampleModel().getText();

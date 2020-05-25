@@ -88,3 +88,4 @@ incubation/**/*.log
 **/.resourceCache/
 temp
 tmp
+**/derby.log

@@ -1,7 +1,6 @@
 package info.setmy.microservice.dao;
 
 import info.setmy.microservice.models.ExampleModel;
-import info.setmy.microservice.rest.ExampleRest;
 import java.util.List;
 
 import javax.inject.Named;
@@ -20,7 +19,7 @@ import org.springframework.jdbc.core.RowMapper;
 @Named("jdbcExampleDao")
 public class JDBCExampleDao extends JDBCBaseDao implements RowMapper<ExampleModel>, IExampleDao {
 
-    final Logger log = LogManager.getLogger(ExampleRest.class);
+    final Logger log = LogManager.getLogger(getClass());
 
     //final String INSERT_SQL = "insert into example (text) values(?)"; // Pg autoincrement
     final String INSERT_SQL = "insert into example (id, text) values(?, ?)";

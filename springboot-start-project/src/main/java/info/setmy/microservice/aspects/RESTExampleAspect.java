@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 @Aspect
 public class RESTExampleAspect {
 
-    final Logger log = LogManager.getLogger(RESTExampleAspect.class);
+    final Logger log = LogManager.getLogger(getClass());
 
     @Pointcut("within(info.setmy.microservice..*Rest)")
     public void restPointcut() {

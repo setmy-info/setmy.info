@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
 @Consumes(MediaType.APPLICATION_JSON)
 public class UniversumRest {
 
-    final Logger log = LogManager.getLogger(this.getClass());
+    final Logger log = LogManager.getLogger(getClass());
 
     private final UniversumService universumService;
 

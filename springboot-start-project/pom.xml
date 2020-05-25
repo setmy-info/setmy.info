@@ -54,6 +54,8 @@
         <infinispan.starter.verions>2.2.4.Final</infinispan.starter.verions>
         <quartz.verions>2.3.2</quartz.verions>
         <spring.boot.verions>2.3.0.RELEASE</spring.boot.verions>
+        <lombok.version>1.18.12</lombok.version>
+        <mapstruct.version>1.3.1.Final</mapstruct.version>
     </properties>
 
     <dependencies>
@@ -157,6 +159,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
             <exclusions>
@@ -196,10 +202,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
@@ -271,13 +277,46 @@
             <artifactId>java-db</artifactId>
             <version>${info.setmy.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-embedded</artifactId>
+            <version>9.1.7.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create-metadata</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <attach>true</attach>
+                    <addOutputDirectoryToResources>true</addOutputDirectoryToResources>
+                    <timestampFormat>${maven.build.timestamp.format}</timestampFormat>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.verions}</version>
+                <configuration>
+                    <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000</jvmArguments>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -291,6 +330,13 @@
                     <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
@@ -483,6 +529,18 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
     </build>
 
     <dependencyManagement>
@@ -532,18 +590,36 @@
             </build>
         </profile>
         <profile>
-            <id>dev</id>
+            <id>local</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <spring-boot.run.profiles>default,dev</spring-boot.run.profiles>
+                <spring-boot.run.profiles>default,local</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>
             <id>test</id>
             <properties>
                 <spring-boot.run.profiles>default,test</spring-boot.run.profiles>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <spring-boot.run.profiles>default,dev</spring-boot.run.profiles>
+            </properties>
+        </profile>
+        <profile>
+            <id>testing</id>
+            <properties>
+                <spring-boot.run.profiles>default,testing</spring-boot.run.profiles>
+            </properties>
+        </profile>
+        <profile>
+            <id>prelive</id>
+            <properties>
+                <spring-boot.run.profiles>default,prelive</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>

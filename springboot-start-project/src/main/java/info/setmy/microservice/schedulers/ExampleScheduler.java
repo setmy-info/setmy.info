@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component("exampleScheduler")
 public class ExampleScheduler {
 
-    final Logger log = LogManager.getLogger(ExampleScheduler.class);
+    final Logger log = LogManager.getLogger(getClass());
 
     @Scheduled(fixedDelayString = "${scheduler.timeInMillis}")
     public void importMessages() {

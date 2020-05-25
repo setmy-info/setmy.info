@@ -1,4 +1,4 @@
-package info.setmy.microservice.config;
+package info.setmy.microservice.beans;
 
 import info.setmy.microservice.aspects.RESTExampleAspect;
 import org.springframework.context.annotation.Bean;

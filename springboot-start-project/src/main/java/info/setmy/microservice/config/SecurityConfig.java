@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 /**
  * https://spring.io/guides/gs/securing-web/
+ * https://www.devglan.com/spring-security/spring-boot-security-rest-basic-authentication
+ * https://www.baeldung.com/spring-security-basic-authentication
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
@@ -21,9 +23,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/",
                         "/home",
-                        "/rest/hello"
-                )
-                .permitAll()
+                        "/rest/hello",
+                        "/api/example",
+                        "/actuator/**"
+                ).permitAll()
                 .anyRequest()
                 .authenticated();
     }

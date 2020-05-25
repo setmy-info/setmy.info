@@ -10,10 +10,10 @@ import org.apache.logging.log4j.Logger;
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-// @Named("dozerService")
+@Named("dozerService")
 public class DozerService {
 
-    private final Logger log = LogManager.getLogger(DozerService.class);
+    private final Logger log = LogManager.getLogger(getClass());
 
     private final Mapper dozerBeanMapper;
 
@@ -22,7 +22,11 @@ public class DozerService {
     }
 
     public ExampleModel copyExampleModel(final ExampleModel model) {
-        return dozerBeanMapper.map(model, ExampleModel.class);
+        //ExampleModel obj = dozerBeanMapper.map(model, ExampleModel.class);// TODO : investigate dozer problems. Probably Dozer doesn't work with JDK14 problem.
+        ExampleModel obj = ExampleModel.builder().
+                text(model.getText()).
+                build();
+        return obj;
     }
 
     public Mapper getDozerBeanMapper() {

@@ -1,4 +1,4 @@
-package info.setmy.microservice.config;
+package info.setmy.microservice.beans;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;

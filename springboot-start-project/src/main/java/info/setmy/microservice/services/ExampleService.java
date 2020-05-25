@@ -5,12 +5,13 @@ import info.setmy.microservice.dao.ExampleRepository;
 import info.setmy.microservice.dao.JDBCExampleDao;
 import info.setmy.microservice.dao.JPAExampleDao;
 import info.setmy.microservice.dao.PersonRepository;
-import info.setmy.microservice.example.model.Person;
 import info.setmy.microservice.models.ExampleModel;
 import info.setmy.microservice.properties.ExampleProperties;
 import javax.inject.Named;
 import javax.transaction.Transactional;
-import org.infinispan.Cache;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.Cache;
 
 /**
  *
@@ -18,6 +19,8 @@ import org.infinispan.Cache;
  */
 @Named("exampleService")
 public class ExampleService {
+
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final ExampleDao exampleDao;
 
@@ -31,41 +34,46 @@ public class ExampleService {
 
     private final PersonRepository personRepository;
 
-    //private final DozerService dozerService;
-    //private final Cache cache;
+    private final Cache cache;
+
+    private final DozerService dozerService;
 
     public ExampleService(final ExampleDao exampleDao,
             final ExampleProperties exampleProperties,
-            //final DozerService dozerService,
             final ExampleRepository exampleRepository,
             final JDBCExampleDao jdbcExampleDao,
             final JPAExampleDao jpaExampleDao,
-            final PersonRepository personRepository/*,
-            final Cache cache*/) {
+            final PersonRepository personRepository,
+            final Cache cache,
+            final DozerService dozerService) {
         this.exampleDao = exampleDao;
         this.exampleProperties = exampleProperties;
-        //this.dozerService = dozerService;
         this.exampleRepository = exampleRepository;
         this.jdbcExampleDao = jdbcExampleDao;
         this.jpaExampleDao = jpaExampleDao;
         this.personRepository = personRepository;
-        //this.cache = cache;
+        this.cache = cache;
+        this.dozerService = dozerService;
     }
 
     @Transactional
     public ExampleModel getExampleModel() {
-        String counterKkey = "counter";
-        Integer counter = 0;//(Integer) cache.get(counterKkey);
-        /*if (counter == null) {
+        String counterKey = "counter";
+        Cache.ValueWrapper wrapper = cache.get(counterKey);
+        Integer counter;
+        if (wrapper == null) {
             counter = 1;
-            cache.put(counterKkey, counter);
+            cache.put(counterKey, counter);
         } else {
+            counter = (Integer) wrapper.get();
             counter++;
-        }*/
+            cache.put(counterKey, counter);
+        }
+        log.info("Counter: {}", counter);
         //insertData();
         //final ExampleModel model = exampleDao.getExampleModel();
         final ExampleModel model = exampleRepository.findAll().get(0);
-        final ExampleModel newModel = model;//dozerService.copyExampleModel(model);
+        final ExampleModel newModel = dozerService.copyExampleModel(model);
         return newModel;
     }
 

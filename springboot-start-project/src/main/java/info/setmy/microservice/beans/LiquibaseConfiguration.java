@@ -1,4 +1,4 @@
-package info.setmy.microservice.config;
+package info.setmy.microservice.beans;
 
 import javax.sql.DataSource;
 import liquibase.integration.spring.SpringLiquibase;
