@@ -1,0 +1,15 @@
+src
+target/classes
+target/generated-sources
+target/maven-archiver
+target/springboot-start-project-1.0.0-SNAPSHOT-sources.jar
+target/cucumber
+target/generated-test-sources
+target/maven-status
+target/surefire-reports
+target/failsafe-reports
+target/jacoco.exec
+target/site
+target/test-classes
+target/generated
+target/jacoco-ut

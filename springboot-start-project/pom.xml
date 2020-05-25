@@ -6,12 +6,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!--parent>
+    <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.0.RELEASE</version>
         <relativePath/>
-    </parent-->
+    </parent>
 
     <groupId>info.setmy</groupId>
     <artifactId>springboot-start-project</artifactId>
@@ -571,30 +571,6 @@
         </testResources>
     </build>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.infinispan</groupId>
-                <artifactId>infinispan-bom</artifactId>
-                <version>${infinispan.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-parent</artifactId>
-                <version>${spring.boot.verions}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.infinispan</groupId>
-                <artifactId>infinispan-spring-boot-starter</artifactId>
-                <version>${infinispan.starter.verions}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
- 
     <profiles>
         <profile>
             <id>sign</id>
