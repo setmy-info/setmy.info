@@ -1,12 +1,8 @@
 // <editor-fold defaultstate="collapsed" desc="Hidden part">
 package info.setmy.examples.lessons.level1;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
-import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 /**
