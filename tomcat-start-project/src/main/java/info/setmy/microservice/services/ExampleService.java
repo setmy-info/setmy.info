@@ -5,7 +5,6 @@ import info.setmy.microservice.dao.ExampleRepository;
 import info.setmy.microservice.dao.JDBCExampleDao;
 import info.setmy.microservice.dao.JPAExampleDao;
 import info.setmy.microservice.dao.PersonRepository;
-import info.setmy.microservice.example.model.Person;
 import info.setmy.microservice.models.ExampleModel;
 import info.setmy.microservice.properties.ExampleProperties;
 import javax.inject.Named;

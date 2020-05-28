@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 /**
  * Example Jersey rest interface (resource).
  *
- * REST call: http://localhost:8080/tomcat-start-project-1.2.0-SNAPSHOT/rest/hello
+ * REST call: http://localhost:8777/tomcat-start-project-1.2.0-SNAPSHOT/rest/hello
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */

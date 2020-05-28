@@ -1,11 +1,10 @@
 package info.setmy.microservice.services;
 
+import com.github.dozermapper.core.Mapper;
 import info.setmy.microservice.models.ExampleModel;
-import info.setmy.microservice.rest.ExampleRest;
 import javax.inject.Named;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.dozer.Mapper;
 
 /**
  *
@@ -14,7 +13,7 @@ import org.dozer.Mapper;
 @Named("dozerService")
 public class DozerService {
 
-    private final Logger log = LogManager.getLogger(DozerService.class);
+    private final Logger log = LogManager.getLogger(getClass());
 
     private final Mapper dozerBeanMapper;
 

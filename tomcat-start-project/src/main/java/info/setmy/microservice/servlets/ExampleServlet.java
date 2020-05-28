@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 
- * http://localhost:8080/tomcat-start-project-1.2.0-SNAPSHOT/ExampleServlet
+ * http://localhost:8777/tomcat-start-project-1.2.0-SNAPSHOT/ExampleServlet
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */

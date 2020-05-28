@@ -23,6 +23,7 @@
     <context:spring-configured />
     <tx:annotation-driven />
     <mvc:annotation-driven/>
+    <context:component-scan base-package="info.setmy.microservice.beans" />
     <context:component-scan base-package="info.setmy.microservice.config" />
     <context:component-scan base-package="info.setmy.microservice.rest" />
     <context:component-scan base-package="info.setmy.microservice.universum.rest" />

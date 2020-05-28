@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class DozerConfiguration {
 
     @Bean("dozerBeanMapper")
-    public Mapper springLiquibase() {
+    public Mapper dozerBeanMapper() {
         return DozerBeanMapperBuilder.create()
                 .withMappingFiles("dozer.xml")
                 .build();
