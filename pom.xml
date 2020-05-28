@@ -75,7 +75,8 @@
         <module>java-vcs</module>
         <module>java-modular-ssn</module>
         <module>java-rest-client</module>
-        <!--module>tomcat-start-project</module-->
+        <module>springboot-start-project</module>
+        <module>tomcat-start-project</module>
         <module>incubation/maven-plugin-start-project</module>
     </modules>
 
