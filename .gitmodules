@@ -88,3 +88,6 @@
 [submodule "submodules/vue-start-project"]
 	path = submodules/vue-start-project
 	url = git@github.com:setmy-info/vue-start-project.git
+[submodule "submodules/react-start-project"]
+	path = submodules/react-start-project
+	url = git@github.com:setmy-info/react-start-project.git
