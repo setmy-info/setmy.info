@@ -1,7 +1,5 @@
 package info.setmy.microservice.config;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/",
                         "/home",
+                        //"/hello",
                         // Public REST
                         "/rest/hello",
                         "/api/example",
@@ -39,6 +38,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Other
                 ).permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
     }
 }

@@ -16,9 +16,23 @@ spring:
         user:
             name: ${SPRING_USER_NAME}
             password: ${SPRING_USER_PASSWORD}
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.H2Dialect
+                #dialect: org.hibernate.dialect.PostgreSQLDialect
+                #dialect: org.hibernate.dialect.HSQLDialect
+                #dialect: org.hibernate.dialect.DerbyTenSevenDialect
+                #dialect: org.hibernate.dialect.Oracle10gDialect
+                id.new_generator_mappings: false
+                format_sql: true
 
 dataSource:
     driver-class-name: org.h2.Driver
+    #driver-class-name: org.postgresql.Driver
+    #driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    #driver-class-name: org.apache.derby.jdbc.ClientDriver
+    #driver-class-name: 
     url: jdbc:h2:file:./live 
     username: sa
     password:
