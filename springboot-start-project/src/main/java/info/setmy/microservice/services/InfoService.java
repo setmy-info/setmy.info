@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.actuate.info.InfoContributor;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,10 +28,16 @@ import org.springframework.stereotype.Service;
 public class InfoService implements InfoContributor {
 
     private final static String HOST_NAME = "hostname";
+    private final static String PORT = "port";
+    private final static String JAVA_HOME = "javaHome";
+    private final static String JAVA_VERSION = "javaVersion";
+    private final static String PROFILES = "profiles";
 
     private final BuildProperties buildProperties;
 
     private final MavenProjectProperties mavenProjectProperties;
+
+    private final Environment environment;
 
     private Map<String, String> microserviceInfo;
 
@@ -47,20 +54,35 @@ public class InfoService implements InfoContributor {
         microserviceInfo.put("version", buildProperties.getVersion());
         microserviceInfo.put("timestamp", buildProperties.getTimestamp());
         microserviceInfo.put("revision", buildProperties.getRevision());
+        microserviceInfo.put(PORT, environment.getProperty("server.port"));
+        microserviceInfo.put(JAVA_HOME, environment.getProperty("JAVA_HOME"));
+        microserviceInfo.put(JAVA_VERSION, environment.getProperty("java.version"));
         try {
             microserviceInfo.put(HOST_NAME, InetAddress.getLocalHost().getHostName());
         } catch (UnknownHostException ex) {
             log.error("Can not find hostname", ex);
         }
+        final StringBuilder stringBuilder = new StringBuilder();
+        for (String profileName : environment.getActiveProfiles()) {
+            if (stringBuilder.length() != 0) {
+                stringBuilder.append(",");
+            }
+            stringBuilder.append(profileName);
+        }
+        microserviceInfo.put(PROFILES, stringBuilder.toString());
         microserviceInfo = Collections.unmodifiableMap(microserviceInfo);
         log.info(
-                "Microservice '{}:{}:{}', host: '{}', timestamp: '{}', SCM revision: '{}'",
+                "Microservice '{}:{}:{}', host: '{}', port: {}, timestamp: '{}', SCM revision: '{}', javaHome: '{}', javaVersion: '{}' profiles: '{}'",
                 mavenProjectProperties.getGroupId(),
                 mavenProjectProperties.getArtifactId(),
                 buildProperties.getVersion(),
                 microserviceInfo.get(HOST_NAME),
+                microserviceInfo.get(PORT),
                 buildProperties.getTimestamp(),
-                buildProperties.getRevision()
+                buildProperties.getRevision(),
+                microserviceInfo.get(JAVA_HOME),
+                microserviceInfo.get(JAVA_VERSION),
+                microserviceInfo.get(PROFILES)
         );
     }
 }

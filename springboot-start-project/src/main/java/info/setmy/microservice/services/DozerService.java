@@ -25,6 +25,7 @@ public class DozerService {
         //ExampleModel obj = dozerBeanMapper.map(model, ExampleModel.class);// TODO : investigate dozer problems. Probably Dozer doesn't work with JDK14 problem.
         ExampleModel obj = ExampleModel.builder().
                 text(model.getText()).
+                dateTime(model.getDateTime()).
                 build();
         return obj;
     }

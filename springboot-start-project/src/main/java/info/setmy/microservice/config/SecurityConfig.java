@@ -22,8 +22,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                         "/",
+                        "favicon.ico",
+                        //"/login",
                         "/home",
+                        "/error",
                         //"/hello",
+                        "/h2-console",
+                        "/h2-console/login.do",
+                        "/h2-console/**",
                         // Public REST
                         "/rest/hello",
                         "/api/example",

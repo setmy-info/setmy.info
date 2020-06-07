@@ -52,6 +52,8 @@ system:
         cacheTimeoutMillis: 15000
     features:
         foo: false
+    rest:
+        datesUTC: true
 
 infinispan:
     embedded:
@@ -61,8 +63,8 @@ infinispan:
 
 maven:
     project:
-        groupId: ${project.groupId}
-        artifactId: ${project.artifactId}
+        groupId: @project.groupId@
+        artifactId: @project.artifactId@
 
 swagger:
     deepLinking: true
