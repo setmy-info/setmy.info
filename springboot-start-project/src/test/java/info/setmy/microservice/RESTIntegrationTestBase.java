@@ -4,15 +4,13 @@ import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import io.restassured.specification.RequestSpecification;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.test.context.ActiveProfiles;
 
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 @Log4j2
-@ActiveProfiles({"default", "test"})
-public abstract class RESTBase {
+public abstract class RESTIntegrationTestBase extends SpringIntegrationTestBase {
 
     protected static final String URL = "http://robot.lan:8080";
 

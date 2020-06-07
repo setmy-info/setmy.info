@@ -1,18 +1,16 @@
 package info.setmy.microservice.services;
 
-import info.setmy.microservice.RESTBase;
+import info.setmy.microservice.RESTIntegrationTestBase;
 import static info.setmy.microservice.controllers.ExampleController.EXAMPLE_REST_RESOURCE;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class RESTExampleRestIT extends RESTBase {
+public class RESTExampleRestIT extends RESTIntegrationTestBase {
 
     @Override
     public String getResource() {
