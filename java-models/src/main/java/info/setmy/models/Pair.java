@@ -1,5 +1,7 @@
 package info.setmy.models;
 
+import java.util.Objects;
+
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
@@ -34,5 +36,25 @@ public class Pair<F, S> {
 
     public void setSecond(S second) {
         this.second = second;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj instanceof Pair) {
+            final Pair another = (Pair) obj;
+            return first.equals(another.first) && second.equals(another.second);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.first);
+        hash = 97 * hash + Objects.hashCode(this.second);
+        return hash;
     }
 }
