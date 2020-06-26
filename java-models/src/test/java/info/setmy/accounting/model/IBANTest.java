@@ -1,9 +1,7 @@
 package info.setmy.accounting.model;
 
 import info.setmy.models.accounting.IBAN;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 /**
@@ -19,6 +17,6 @@ public class IBANTest {
     @Test
     public void parstingAndToString() {
         iban = new IBAN(IBAN_CODE_STRING);
-        assertThat(iban.toString(), is(equalTo(IBAN_CODE_STRING)));
+        assertThat(iban.toString()).isEqualTo(IBAN_CODE_STRING);
     }
 }

@@ -3,9 +3,7 @@ package info.setmy.accounting.model;
 import info.setmy.models.accounting.BICCode;
 import info.setmy.exceptions.LengthValidationException;
 import info.setmy.exceptions.ValidationException;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 /**
@@ -21,7 +19,7 @@ public class BICCodeTest {
     @Test
     public void parstingAndToString() {
         bicCode = new BICCode(BIC_CODE_STRING);
-        assertThat(bicCode.toString(), is(equalTo(BIC_CODE_STRING)));
+        assertThat(bicCode.toString()).isEqualTo(BIC_CODE_STRING);
     }
 
     @Test
@@ -31,7 +29,7 @@ public class BICCodeTest {
         bicCode.setCountryCode("FI");
         bicCode.setLocationCode("HH");
         bicCode.setBranchCode("ECB");
-        assertThat(bicCode.toString(), is(equalTo(BIC_CODE_STRING)));
+        assertThat(bicCode.toString()).isEqualTo(BIC_CODE_STRING);
     }
 
     @Test(expected = ValidationException.class)
