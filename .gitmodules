@@ -91,3 +91,9 @@
 [submodule "submodules/react-start-project"]
 	path = submodules/react-start-project
 	url = git@github.com:setmy-info/react-start-project.git
+[submodule "submodules/stealer-test-b"]
+	path = submodules/stealer-test-b
+	url = git@github.com:setmy-info/stealer-test-b.git
+[submodule "submodules/stealer-test-a"]
+	path = submodules/stealer-test-a
+	url = git@github.com:setmy-info/stealer-test-a.git
