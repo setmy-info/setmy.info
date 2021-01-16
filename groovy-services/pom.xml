@@ -112,20 +112,21 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.5</version>
+                <version>1.12.1</version>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>addSources</goal>
+                            <goal>execute</goal>
+                            <!--goal>addSources</goal>
                             <goal>addTestSources</goal>
-                            <!--goal>generateStubs</goal-->
-                            <!--goal>testGenerateStubs</goal-->
+                            <goal>generateStubs</goal>
+                            <goal>generateTestStubs</goal>
                             <goal>compile</goal>
-                            <goal>testCompile</goal>
+                            <goal>compileTests</goal>
                             <goal>removeStubs</goal>
                             <goal>removeTestStubs</goal>
                             <goal>groovydoc</goal>
-                            <!--goal>testGroovydoc</goal-->
+                            <goal>groovydocTests</goal-->
                         </goals>
                     </execution>
                 </executions>

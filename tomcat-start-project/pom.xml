@@ -23,7 +23,7 @@
     <properties>
         <!--netbeans.hint.deploy.server>gfv4ee7</netbeans.hint.deploy.server-->
         <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
-        <maven.jetty.plugin.version>9.4.28.v20200408</maven.jetty.plugin.version>
+        <maven.jetty.plugin.version>9.4.35.v20201120</maven.jetty.plugin.version>
     </properties>
 
     <dependencies>

@@ -11,11 +11,13 @@ import io.cucumber.junit.CucumberOptions
  */
 @RunWith(Cucumber)
 @CucumberOptions(
-        plugin = [
-                "pretty", "html:target/cucumber",
-                "json:target/cucumber/cucumber.json"],
-        strict = true,
-        features = ["src/test/cucumber"]
+    plugin = [
+                "pretty",
+                "html:target/cucumber/cucumber.html",
+                "json:target/cucumber/cucumber.json"
+    ],
+    strict = true,
+    features = ["src/test/cucumber"]
 )
 public class CukesTest {
 }
