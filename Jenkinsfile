@@ -11,8 +11,14 @@ pipeline {
         stage('Environment') {
             steps {
                 echo "PATH is: $PATH"
+            }
+            steps {
                 sh 'mvn --version'
+            }
+            steps {
                 sh 'java --version'
+            }
+            steps {
                 sh 'which java'
             }
         }
