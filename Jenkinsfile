@@ -48,11 +48,9 @@ pipeline {
     }
 
     post {
-
         always {
             junit '**/target/*-reports/*.xml'
         }
-
         success {
             emailext (
                 subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
@@ -61,7 +59,6 @@ pipeline {
                 recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
         }
-
         failure {
             emailext (
                 subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
