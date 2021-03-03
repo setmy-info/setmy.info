@@ -16,10 +16,13 @@ import javax.cache.Caching;
 import javax.cache.configuration.MutableConfiguration;
 import javax.cache.spi.CachingProvider;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 public class Lesson1InfinispanIT {
 
     @Test
+    @EnabledOnOs({OS.WINDOWS, OS.LINUX, OS.MAC})
     public void defaultInfinispan() {
         final String cacheName = "exampleCache";
         final String key = "firstName";
