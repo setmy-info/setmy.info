@@ -18,6 +18,6 @@ public class JUnit5Test {
     }
 
     private boolean foo() {
-        return true;
+        return false;
     }
 }
