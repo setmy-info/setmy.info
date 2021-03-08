@@ -3,7 +3,6 @@ package info.setmy.microservice.example.model;
 import info.setmy.models.Entity;
 
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 public class Person extends Entity {
@@ -26,5 +25,14 @@ public class Person extends Entity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+            "id='" + super.getId() + '\'' +
+            "firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            '}';
     }
 }

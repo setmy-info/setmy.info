@@ -5,7 +5,7 @@ server:
         enabled: true
         mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
 
-spring: 
+spring:
     main:
         banner-mode: "off"
     application:
@@ -32,8 +32,8 @@ dataSource:
     #driver-class-name: org.postgresql.Driver
     #driver-class-name: org.hsqldb.jdbc.JDBCDriver
     #driver-class-name: org.apache.derby.jdbc.ClientDriver
-    #driver-class-name: 
-    url: jdbc:h2:file:./live 
+    #driver-class-name:
+    url: jdbc:h2:file:./live
     username: sa
     password:
 
@@ -42,6 +42,7 @@ liquibase:
 
 scheduler:
     timeInMillis: 60000
+    transactionTimeInMillis: 60000
 
 system:
     example:

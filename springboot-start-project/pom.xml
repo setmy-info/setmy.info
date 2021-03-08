@@ -9,7 +9,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.2</version>
+        <version>2.4.3</version>
         <relativePath/>
     </parent>
 
@@ -38,8 +38,8 @@
         <mockito.version>3.7.0</mockito.version>
         <assertj.version>3.18.1</assertj.version>
         <jacoco.version>0.8.6</jacoco.version>
-        <failsafe.version>3.0.0-M5</failsafe.version>
-        <surefire.version>3.0.0-M5</surefire.version>
+        <failsafe.version>2.22.2</failsafe.version>
+        <surefire.version>2.22.2</surefire.version>
         <log4j.verions>1.2.17</log4j.verions>
         <log4j2.verions>2.14.0</log4j2.verions>
         <logback.verions>1.2.3</logback.verions>

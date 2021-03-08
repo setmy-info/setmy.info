@@ -4,13 +4,13 @@
 
 ## Preparations for development
 
-**Java JDK 10**
+**Java JDK 15**
 
 Under: /opt/jdk-10.0.2
 
-**maven >= 3.5.4**
+**maven >= 3.6.6**
 
-Under: /opt/apache-maven-3.5.4
+Under: /opt/apache-maven-3.6.3
 
 **NetBeans or IntelliJ Idea or Eclipse**
 
