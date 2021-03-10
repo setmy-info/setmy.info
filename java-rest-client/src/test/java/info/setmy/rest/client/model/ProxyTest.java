@@ -1,7 +1,6 @@
 package info.setmy.rest.client.model;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -28,6 +27,6 @@ public class ProxyTest {
     @Test
     public void xxx() {
         proxy = new Proxy("Name", 1234);
-        assertThat(proxy.toString(), is(equalTo("Name:1234")));
+        assertThat(proxy.toString()).isEqualTo("Name:1234");
     }
 }

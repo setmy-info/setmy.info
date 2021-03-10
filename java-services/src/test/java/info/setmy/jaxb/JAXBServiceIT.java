@@ -5,9 +5,7 @@ import info.setmy.exceptions.rss.RSSChannel;
 import info.setmy.exceptions.rss.RSSItem;
 import java.util.Date;
 import java.util.UUID;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -55,6 +53,6 @@ public class JAXBServiceIT {
     @Test
     public void xmlParsing() {
         final RSS rss = service.parse("./src/test/resources/rss.xml", "./src/test/resources/rss.xsd", RSS.class);
-        assertThat(rss.getChannel().getTitle(), is(equalTo("Imre Tabur")));
+        assertThat(rss.getChannel().getTitle()).isEqualTo("Imre Tabur");
     }
 }

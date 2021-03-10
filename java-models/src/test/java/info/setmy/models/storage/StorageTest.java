@@ -2,9 +2,7 @@ package info.setmy.models.storage;
 
 import info.setmy.exceptions.ForbiddenException;
 import java.util.Optional;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +31,7 @@ public class StorageTest {
                 () -> testStorage.init(),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '/' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '/' is not allowed");
     }
 
     @Test
@@ -44,7 +42,7 @@ public class StorageTest {
                 () -> testStorage.init(),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '~' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '~' is not allowed");
     }
 
     @Test
@@ -55,13 +53,13 @@ public class StorageTest {
                 () -> testStorage.init(),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '..' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '..' is not allowed");
     }
 
     @Test
     public void rootFileTakeOutIsAllowed() {
         final Optional<StorageFile> file = storage.getStorageFile(" /just/for/testing ");
-        assertThat(file.isPresent(), is(equalTo(false)));
+        assertThat(file.isPresent()).isEqualTo(false);
     }
 
     @Test
@@ -71,7 +69,7 @@ public class StorageTest {
                 () -> storage.getStorageFile(" ~/just/for/testing "),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '~/just/for/testing' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '~/just/for/testing' is not allowed");
     }
 
     @Test
@@ -81,7 +79,7 @@ public class StorageTest {
                 () -> storage.getStorageFile(" just/~/for/testing "),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory 'just/~/for/testing' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory 'just/~/for/testing' is not allowed");
     }
 
     @Test
@@ -91,7 +89,7 @@ public class StorageTest {
                 () -> storage.getStorageFile(" ../just/for/testing "),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '../just/for/testing' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '../just/for/testing' is not allowed");
     }
 
     @Test
@@ -101,13 +99,13 @@ public class StorageTest {
                 () -> storage.getStorageFile(" just/../for/testing "),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory 'just/../for/testing' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory 'just/../for/testing' is not allowed");
     }
 
     @Test
     public void rootDirTakeOutIsAllowed() {
         final Optional<StorageFile> file = storage.getStorageDirectory(" /just/for/testing ");
-        assertThat(file.isPresent(), is(equalTo(false)));
+        assertThat(file.isPresent()).isEqualTo(false);
     }
 
     @Test
@@ -117,7 +115,7 @@ public class StorageTest {
                 () -> storage.getStorageDirectory(" ~/just/for/testing "),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '~/just/for/testing' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '~/just/for/testing' is not allowed");
     }
 
     @Test
@@ -127,7 +125,7 @@ public class StorageTest {
                 () -> storage.getStorageDirectory(" just/~/for/testing "),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory 'just/~/for/testing' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory 'just/~/for/testing' is not allowed");
     }
 
     @Test
@@ -137,7 +135,7 @@ public class StorageTest {
                 () -> storage.getStorageDirectory(" ../just/for/testing "),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '../just/for/testing' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '../just/for/testing' is not allowed");
     }
 
     @Test
@@ -147,7 +145,7 @@ public class StorageTest {
                 () -> storage.getStorageDirectory(" just/../for/testing "),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory 'just/../for/testing' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory 'just/../for/testing' is not allowed");
     }
 
     @Test
@@ -158,7 +156,7 @@ public class StorageTest {
                 () -> storage.createStorageFile(pattern),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '../' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '../' is not allowed");
     }
 
     @Test
@@ -169,7 +167,7 @@ public class StorageTest {
                 () -> storage.createStorageFile(pattern),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '~' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '~' is not allowed");
     }
 
     @Test
@@ -180,7 +178,7 @@ public class StorageTest {
                 () -> storage.createStorageFile(pattern),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '../' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '../' is not allowed");
     }
 
     @Test
@@ -191,7 +189,7 @@ public class StorageTest {
                 () -> storage.createStorageFile(pattern),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '~' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '~' is not allowed");
     }
 
     @Test
@@ -202,7 +200,7 @@ public class StorageTest {
                 () -> storage.createStorageFile(pattern),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '../' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '../' is not allowed");
     }
 
     @Test
@@ -213,7 +211,7 @@ public class StorageTest {
                 () -> storage.createStorageFile(pattern),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '~' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '~' is not allowed");
     }
 
     @Test
@@ -224,7 +222,7 @@ public class StorageTest {
                 () -> storage.createStorageFile(pattern),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '../' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '../' is not allowed");
     }
 
     @Test
@@ -235,6 +233,6 @@ public class StorageTest {
                 () -> storage.createStorageFile(pattern),
                 "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage(), is(equalTo("File or directory '~' is not allowed")));
+        assertThat(thrown.getMessage()).isEqualTo("File or directory '~' is not allowed");
     }
 }

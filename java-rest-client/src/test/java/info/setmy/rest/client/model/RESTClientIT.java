@@ -4,9 +4,7 @@ import info.setmy.rest.client.RESTClient;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -29,7 +27,7 @@ public class RESTClientIT {
                 accept(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML).
                 header(HttpHeaders.AUTHORIZATION, "jwtstring.ss.ss");
         final ExampleModel result = builder.get(ExampleModel.class);
-        assertThat(result.getText(), is(equalTo("Hello World")));
+        assertThat(result.getText()).isEqualTo("Hello World");
     }
 
 }

@@ -1,8 +1,6 @@
 package info.setmy.models;
 
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,34 +19,34 @@ public class CharLimitedQueueTest {
 
     @Test
     public void add() {
-        assertThat(buffer.getRemainingCapacity(), is(equalTo(5)));
+        assertThat(buffer.getRemainingCapacity()).isEqualTo(5);
         buffer.add('a');
-        assertThat(buffer.getRemainingCapacity(), is(equalTo(4)));
-        assertThat(buffer.getArray()[0], is(equalTo('a')));
-        assertThat(buffer.toString(), is(equalTo("a")));
+        assertThat(buffer.getRemainingCapacity()).isEqualTo(4);
+        assertThat(buffer.getArray()[0]).isEqualTo('a');
+        assertThat(buffer.toString()).isEqualTo("a");
         buffer.add('b');
-        assertThat(buffer.getRemainingCapacity(), is(equalTo(3)));
-        assertThat(buffer.getArray()[0], is(equalTo('a')));
-        assertThat(buffer.getArray()[1], is(equalTo('b')));
-        assertThat(buffer.toString(), is(equalTo("ab")));
+        assertThat(buffer.getRemainingCapacity()).isEqualTo(3);
+        assertThat(buffer.getArray()[0]).isEqualTo('a');
+        assertThat(buffer.getArray()[1]).isEqualTo('b');
+        assertThat(buffer.toString()).isEqualTo("ab");
         buffer.add('c');
         buffer.add('d');
         buffer.add('e');
-        assertThat(buffer.getRemainingCapacity(), is(equalTo(0)));
-        assertThat(buffer.getArray()[0], is(equalTo('a')));
-        assertThat(buffer.getArray()[1], is(equalTo('b')));
-        assertThat(buffer.getArray()[2], is(equalTo('c')));
-        assertThat(buffer.getArray()[3], is(equalTo('d')));
-        assertThat(buffer.getArray()[4], is(equalTo('e')));
-        assertThat(buffer.toString(), is(equalTo("abcde")));
+        assertThat(buffer.getRemainingCapacity()).isEqualTo(0);
+        assertThat(buffer.getArray()[0]).isEqualTo('a');
+        assertThat(buffer.getArray()[1]).isEqualTo('b');
+        assertThat(buffer.getArray()[2]).isEqualTo('c');
+        assertThat(buffer.getArray()[3]).isEqualTo('d');
+        assertThat(buffer.getArray()[4]).isEqualTo('e');
+        assertThat(buffer.toString()).isEqualTo("abcde");
         buffer.add('f');
-        assertThat(buffer.getRemainingCapacity(), is(equalTo(0)));
-        assertThat(buffer.getArray()[0], is(equalTo('b')));
-        assertThat(buffer.getArray()[1], is(equalTo('c')));
-        assertThat(buffer.getArray()[2], is(equalTo('d')));
-        assertThat(buffer.getArray()[3], is(equalTo('e')));
-        assertThat(buffer.getArray()[4], is(equalTo('f')));
-        assertThat(buffer.toString(), is(equalTo("bcdef")));
+        assertThat(buffer.getRemainingCapacity()).isEqualTo(0);
+        assertThat(buffer.getArray()[0]).isEqualTo('b');
+        assertThat(buffer.getArray()[1]).isEqualTo('c');
+        assertThat(buffer.getArray()[2]).isEqualTo('d');
+        assertThat(buffer.getArray()[3]).isEqualTo('e');
+        assertThat(buffer.getArray()[4]).isEqualTo('f');
+        assertThat(buffer.toString()).isEqualTo("bcdef");
     }
 
     @Test

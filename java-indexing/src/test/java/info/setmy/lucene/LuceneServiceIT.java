@@ -5,9 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsEqual.equalTo;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -58,11 +56,11 @@ public class LuceneServiceIT {
         final List<BookDocument> documentList = memoryLuceneService.query("lucene", "title", new Paging(), BookDocument.class);
 
         LOG.info("Book: '{}' ISBN: {}", documentList.get(0).getTitle(), documentList.get(0).getISBN());
-        assertThat(documentList.get(0).getISBN(), is(equalTo("193398817")));
-        assertThat(documentList.get(0).getTitle(), is(equalTo("Lucene in Action")));
+        assertThat(documentList.get(0).getISBN()).isEqualTo("193398817");
+        assertThat(documentList.get(0).getTitle()).isEqualTo("Lucene in Action");
         LOG.info("Book: '{}' ISBN: {}", documentList.get(1).getTitle(), documentList.get(0).getISBN());
-        assertThat(documentList.get(1).getISBN(), is(equalTo("55320055Z")));
-        assertThat(documentList.get(1).getTitle(), is(equalTo("Lucene for Dummies")));
+        assertThat(documentList.get(1).getISBN()).isEqualTo("55320055Z");
+        assertThat(documentList.get(1).getTitle()).isEqualTo("Lucene for Dummies");
     }
 
     @Test
@@ -75,11 +73,11 @@ public class LuceneServiceIT {
         final List<BookDocument> documentList = diskLuceneService.query("lucene", "title", new Paging(), BookDocument.class);
 
         LOG.info("Book: '{}' ISBN: {}", documentList.get(0).getTitle(), documentList.get(0).getISBN());
-        assertThat(documentList.get(0).getISBN(), is(equalTo("193398817")));
-        assertThat(documentList.get(0).getTitle(), is(equalTo("Lucene in Action")));
+        assertThat(documentList.get(0).getISBN()).isEqualTo("193398817");
+        assertThat(documentList.get(0).getTitle()).isEqualTo("Lucene in Action");
         LOG.info("Book: '{}' ISBN: {}", documentList.get(1).getTitle(), documentList.get(0).getISBN());
-        assertThat(documentList.get(1).getISBN(), is(equalTo("55320055Z")));
-        assertThat(documentList.get(1).getTitle(), is(equalTo("Lucene for Dummies")));
+        assertThat(documentList.get(1).getISBN()).isEqualTo("55320055Z");
+        assertThat(documentList.get(1).getTitle()).isEqualTo("Lucene for Dummies");
     }
 
     public void prepareBooks() {

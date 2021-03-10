@@ -3,9 +3,7 @@ package info.setmy.examples.junit5;
 import info.setmy.examples.junit5.RandomParametersExtension.Random;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import org.junit.jupiter.api.AfterAll;
@@ -106,11 +104,11 @@ public class JUnit5CollectedExamplesTest {
     @Order(2)
     @Tag("evenFaster")
     @FastTest// Same as: @Tag("fast") @Test
-    @Timeout(value = 100, unit = TimeUnit.MILLISECONDS)
+    @Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
     public void fastTest() throws InterruptedException {
         LOG.info("fastTest");
         assumeTrue(true);
-        assertThat(true, is(equalTo(true)));
+        assertThat(true).isEqualTo(true);
         assumingThat("value".equals("another value"), () -> {
             assertEquals(2, 3);
         });

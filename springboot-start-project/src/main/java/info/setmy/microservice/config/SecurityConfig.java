@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         //"/hello",
                         "/h2-console",
                         "/h2-console/login.do",
+                        "/h2-console/test.do",
                         "/h2-console/**",
                         // Public REST
                         "/rest/hello",

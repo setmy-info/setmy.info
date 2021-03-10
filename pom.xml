@@ -37,7 +37,7 @@
         <log4j2.verions>2.14.0</log4j2.verions>
         <logback.verions>1.2.3</logback.verions>
         <slf4j.version>1.7.30</slf4j.version>
-        <lucene.version>8.7.0</lucene.version>
+        <lucene.version>8.8.1</lucene.version>
         <groovy.version>3.0.7</groovy.version>
         <cucumber.version>6.9.1</cucumber.version>
         <pitest.version>1.6.2</pitest.version>
@@ -50,7 +50,7 @@
         <spring.version>5.3.3</spring.version>
         <rest.assured.version>4.3.3</rest.assured.version>
         <liquibase.version>4.2.2</liquibase.version>
-        <infinispan.version>11.0.8.Final</infinispan.version>
+        <infinispan.version>12.0.1.Final</infinispan.version>
     </properties>
 
     <modules>
@@ -149,6 +149,23 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-bom</artifactId>
+                <version>${infinispan.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-spring-boot-starter</artifactId>
+                <version>${version.infinispan.starter}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <developers>
         <developer>

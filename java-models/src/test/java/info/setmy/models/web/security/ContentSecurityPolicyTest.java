@@ -5,9 +5,7 @@ import static info.setmy.models.web.security.PolicyDirective.DirectiveNames.SCRI
 import static info.setmy.models.web.security.PolicyDirective.DirectiveNames.STYLE_SRC;
 import static info.setmy.models.web.security.PolicyDirective.DirectiveSourceNames.SELF;
 import java.util.Optional;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -34,12 +32,12 @@ public class ContentSecurityPolicyTest {
 
     @Test
     public void nameConstantShouldBeCorrect() {
-        assertThat(ContentSecurityPolicy.NAME, is(equalTo("Content-Security-Policy")));
+        assertThat(ContentSecurityPolicy.NAME).isEqualTo("Content-Security-Policy");
     }
 
     @Test
     public void nameShouldBeCorrect() {
-        assertThat(contentSecurityPolicy.getVariableValue().getName(), is(equalTo(ContentSecurityPolicy.NAME)));
+        assertThat(contentSecurityPolicy.getVariableValue().getName()).isEqualTo(ContentSecurityPolicy.NAME);
     }
 
     @Test
@@ -62,8 +60,8 @@ public class ContentSecurityPolicyTest {
                 add("setmy.info");
         contentSecurityPolicy.getByDirectiveName("abc").get().clearValues();//Removing one directive and result string should bee without;
         contentSecurityPolicy.getByDirectiveName("mno").get().clearValues();
-        assertThat(contentSecurityPolicy.getVariableValue().getValue(), is(equalTo(contentSecurityPolicy.toString())));
-        assertThat(contentSecurityPolicy.toString(), is(equalTo("script-src 'nonce-2726c7f26c' 'self' setmy.info; style-src 'nonce-2726c7f26c' 'self' setmy.info")));
+        assertThat(contentSecurityPolicy.getVariableValue().getValue()).isEqualTo(contentSecurityPolicy.toString());
+        assertThat(contentSecurityPolicy.toString()).isEqualTo("script-src 'nonce-2726c7f26c' 'self' setmy.info; style-src 'nonce-2726c7f26c' 'self' setmy.info");
         assertTrue(contentSecurityPolicy.getByDirectiveName(SCRIPT_SRC).isPresent());
         assertTrue(contentSecurityPolicy.getByDirectiveName(STYLE_SRC).isPresent());
         assertFalse(contentSecurityPolicy.getByDirectiveName(DEFAULT_SRC).isPresent());

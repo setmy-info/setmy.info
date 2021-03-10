@@ -34,6 +34,7 @@ dataSource:
     #driver-class-name: org.apache.derby.jdbc.ClientDriver
     #driver-class-name:
     url: jdbc:h2:file:./live
+    #url: jdbc:hsqldb:hsql://localhost:8877
     username: sa
     password:
 

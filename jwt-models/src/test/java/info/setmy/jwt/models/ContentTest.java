@@ -1,10 +1,10 @@
 package info.setmy.jwt.models;
 
 import static info.setmy.jwt.models.Data.SERVICE_NAME;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.doReturn;
@@ -45,19 +45,19 @@ public class ContentTest extends Data {
 
         final ExtendedJWTToken newToken = new ExtendedJWTToken(SERVICE_NAME);
         newToken.parse(tokenString);
-        assertThat(newToken.getSubject(), is(equalTo("312121212120000")));
-        assertThat(newToken.getAudience(), is(equalTo(new String[]{"Hello", "World", "audience"})));
-        assertThat(newToken.getUserId(), is(equalTo("#12345")));
-        assertThat(newToken.getRoles(), is(equalTo(new String[]{"ADMINISTRATOR", "USER"})));
-        assertThat(newToken.getClaimAsDate("dateClaim"), is(equalTo(MOMENT)));
-        assertThat(newToken.getClaimAsInteger("intClaim"), is(equalTo((Integer) 123)));
-        assertThat(newToken.getClaimAsLong("longClaim"), is(equalTo((Long) 321L)));
-        assertThat(newToken.getClaimAsBoolean("booleanClaim"), is(true));
-        assertThat(newToken.getClaimAsString("stringClaim"), is(equalTo("something")));
-        assertThat(newToken.getClaimAsDouble("doubleClaim"), is(equalTo(1.2d)));
-        assertThat(newToken.getFirstName(), is(equalTo("FirstName")));
-        assertThat(newToken.getMiddleName(), is(equalTo("MiddleName")));
-        assertThat(newToken.getLastName(), is(equalTo("LastName")));
+        assertThat(newToken.getSubject()).isEqualTo("312121212120000");
+        assertThat(newToken.getAudience()).isEqualTo(new String[]{"Hello", "World", "audience"});
+        assertThat(newToken.getUserId()).isEqualTo("#12345");
+        assertThat(newToken.getRoles()).isEqualTo(new String[]{"ADMINISTRATOR", "USER"});
+        assertThat(newToken.getClaimAsDate("dateClaim")).isEqualTo(MOMENT);
+        assertThat(newToken.getClaimAsInteger("intClaim")).isEqualTo((Integer) 123);
+        assertThat(newToken.getClaimAsLong("longClaim")).isEqualTo((Long) 321L);
+        assertTrue(newToken.getClaimAsBoolean("booleanClaim"));
+        assertThat(newToken.getClaimAsString("stringClaim")).isEqualTo("something");
+        assertThat(newToken.getClaimAsDouble("doubleClaim")).isEqualTo(1.2d);
+        assertThat(newToken.getFirstName()).isEqualTo("FirstName");
+        assertThat(newToken.getMiddleName()).isEqualTo("MiddleName");
+        assertThat(newToken.getLastName()).isEqualTo("LastName");
     }
 
     @Test
@@ -68,19 +68,19 @@ public class ContentTest extends Data {
 
         final ExtendedJWTToken newToken = new ExtendedJWTToken(RSA_SERVICE_NAME);
         newToken.parse(tokenString);
-        assertThat(newToken.getSubject(), is(equalTo("312121212120000")));
-        assertThat(newToken.getAudience(), is(equalTo(new String[]{"Hello", "World", "audience"})));
-        assertThat(newToken.getUserId(), is(equalTo("#12345")));
-        assertThat(newToken.getRoles(), is(equalTo(new String[]{"ADMINISTRATOR", "USER"})));
-        assertThat(newToken.getClaimAsDate("dateClaim"), is(equalTo(MOMENT)));
-        assertThat(newToken.getClaimAsInteger("intClaim"), is(equalTo((Integer) 123)));
-        assertThat(newToken.getClaimAsLong("longClaim"), is(equalTo((Long) 321L)));
-        assertThat(newToken.getClaimAsBoolean("booleanClaim"), is(true));
-        assertThat(newToken.getClaimAsString("stringClaim"), is(equalTo("something")));
-        assertThat(newToken.getClaimAsDouble("doubleClaim"), is(equalTo(1.2d)));
-        assertThat(newToken.getFirstName(), is(equalTo("FirstName")));
-        assertThat(newToken.getMiddleName(), is(equalTo("MiddleName")));
-        assertThat(newToken.getLastName(), is(equalTo("LastName")));
+        assertThat(newToken.getSubject()).isEqualTo("312121212120000");
+        assertThat(newToken.getAudience()).isEqualTo(new String[]{"Hello", "World", "audience"});
+        assertThat(newToken.getUserId()).isEqualTo("#12345");
+        assertThat(newToken.getRoles()).isEqualTo(new String[]{"ADMINISTRATOR", "USER"});
+        assertThat(newToken.getClaimAsDate("dateClaim")).isEqualTo(MOMENT);
+        assertThat(newToken.getClaimAsInteger("intClaim")).isEqualTo((Integer) 123);
+        assertThat(newToken.getClaimAsLong("longClaim")).isEqualTo((Long) 321L);
+        assertTrue(newToken.getClaimAsBoolean("booleanClaim"));
+        assertThat(newToken.getClaimAsString("stringClaim")).isEqualTo("something");
+        assertThat(newToken.getClaimAsDouble("doubleClaim")).isEqualTo(1.2d);
+        assertThat(newToken.getFirstName()).isEqualTo("FirstName");
+        assertThat(newToken.getMiddleName()).isEqualTo("MiddleName");
+        assertThat(newToken.getLastName()).isEqualTo("LastName");
     }
 
     public static void makeFullyPopulatedToken(final ExtendedJWTToken methodToken) {

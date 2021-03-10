@@ -1,9 +1,7 @@
 package info.setmy.models;
 
 import static info.setmy.models.VariableValue.EMPTY;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,8 +17,8 @@ public class VariableValuesTest {
     @Test
     public void createdObjectShouldHaveEmptyNotNullName() {
         variableValues = new VariableValues();
-        assertThat(variableValues.getName(), is(equalTo("")));
-        assertThat(variableValues.getName(), is(equalTo(EMPTY)));
+        assertThat(variableValues.getName()).isEqualTo("");
+        assertThat(variableValues.getName()).isEqualTo(EMPTY);
     }
 
     @Test
@@ -28,7 +26,7 @@ public class VariableValuesTest {
         final String valueString = "something for name";
         variableValues = new VariableValues();
         variableValues.setName(valueString);
-        assertThat(variableValues.getName(), is(equalTo(valueString)));
+        assertThat(variableValues.getName()).isEqualTo(valueString);
     }
 
     @Test

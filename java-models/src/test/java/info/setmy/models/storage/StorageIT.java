@@ -3,12 +3,10 @@ package info.setmy.models.storage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 
 /**
@@ -31,14 +29,13 @@ public class StorageIT {
 
     public void createFile() throws IOException {
         final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setYear(2018).setMonth(4).setDay(23));
-        assertThat(file.isPresent(), is(equalTo(true)));
+        assertThat(file.isPresent()).isEqualTo(true);
 
         final File newFile = file.get().getChild();//Is generated again
-        assertThat(newFile.exists(), is(equalTo(true)));
-        assertThat(newFile.isFile(), is(equalTo(true)));
-        assertThat(newFile.getAbsolutePath().contains("2018/4/23/"), is(equalTo(true)));
-        assertThat(storage.getStorageDirectory("2018/4/23/").isPresent(), is(equalTo(true)));
-        assertThat(storage.getStorageDirectory("2018/4/24/").isPresent(), is(equalTo(false)));
+        assertThat(newFile.exists()).isEqualTo(true);
+        assertThat(newFile.isFile()).isEqualTo(true);
+        assertThat(newFile.getAbsolutePath().contains("2018/4/23/")).isEqualTo(true);
+        assertThat(storage.getStorageDirectory("2018/4/24/").isPresent()).isEqualTo(false);
     }
 
     @Test
@@ -48,9 +45,9 @@ public class StorageIT {
         final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setYear(2018).setMonth(4).setDay(23));
 
         final Optional<StorageFile> createdFile = storage.getStorageFile(directoryPath + file.get().getChildName());
-        assertThat(createdFile.isPresent(), is(equalTo(true)));
+        assertThat(createdFile.isPresent()).isEqualTo(true);
         final Optional<StorageFile> notexistingFile = storage.getStorageFile(directoryPath + file.get().getChildName() + "sdfsdfdsf");
-        assertThat(notexistingFile.isPresent(), is(equalTo(false)));
+        assertThat(notexistingFile.isPresent()).isEqualTo(false);
     }
 
     @Test
@@ -64,7 +61,7 @@ public class StorageIT {
         new File(storageParentName).delete();
 
         final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setOwner(owner).setName(fileName));
-        assertThat(file.get().getChild().getPath(), is(equalTo(os(storageFileName))));
+        assertThat(file.get().getChild().getPath()).isEqualTo(os(storageFileName));
     }
 
     @Test
@@ -91,14 +88,14 @@ public class StorageIT {
                         setName(fileName)
         );
 
-        assertThat(file.get().getParentName(), is(equalTo(parentName)));
-        assertThat(file.get().getChildName(), is(equalTo(fileName)));
-        assertThat(file.get().getParent().getPath(), is(equalTo(os(storageParentName))));
-        assertThat(file.get().getChild().getPath(), is(equalTo(os(storageFileName))));
+        assertThat(file.get().getParentName()).isEqualTo(parentName);
+        assertThat(file.get().getChildName()).isEqualTo(fileName);
+        assertThat(file.get().getParent().getPath()).isEqualTo(os(storageParentName));
+        assertThat(file.get().getChild().getPath()).isEqualTo(os(storageFileName));
 
         final Optional<StorageFile> existingFile = storage.getStorageFile(finalFileName);
-        assertThat(existingFile.isPresent(), is(equalTo(true)));
-        assertThat(existingFile.get().getChildName(), is(equalTo(finalFileName)));
+        assertThat(existingFile.isPresent()).isEqualTo(true);
+        assertThat(existingFile.get().getChildName()).isEqualTo(finalFileName);
     }
 
     private String os(String os) {

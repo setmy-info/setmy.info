@@ -1,9 +1,7 @@
 package info.setmy.exceptions.web;
 
 import info.setmy.models.web.WebError;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 /**
@@ -17,28 +15,28 @@ public class ExceptionWebMessageTest {
     @Test
     public void gettingWebErrorObjectFromBadRequestWebException() {
         final WebError webError = new BadRequestWebException(KEY).getWebError();
-        assertThat(webError.getKey(), is(equalTo(KEY)));
-        assertThat(webError.getStatusCode(), is(equalTo(400)));
+        assertThat(webError.getKey()).isEqualTo(KEY);
+        assertThat(webError.getStatusCode()).isEqualTo(400);
     }
 
     @Test
     public void gettingWebErrorObjectFromUnauthorizedWebException() {
         final WebError webError = new UnauthorizedWebException(KEY).getWebError();
-        assertThat(webError.getKey(), is(equalTo(KEY)));
-        assertThat(webError.getStatusCode(), is(equalTo(401)));
+        assertThat(webError.getKey()).isEqualTo(KEY);
+        assertThat(webError.getStatusCode()).isEqualTo(401);
     }
 
     @Test
     public void gettingWebErrorObjectFromForbiddenWebException() {
         final WebError webError = new ForbiddenWebException(KEY).getWebError();
-        assertThat(webError.getKey(), is(equalTo(KEY)));
-        assertThat(webError.getStatusCode(), is(equalTo(403)));
+        assertThat(webError.getKey()).isEqualTo(KEY);
+        assertThat(webError.getStatusCode()).isEqualTo(403);
     }
 
     @Test
     public void gettingWebErrorObjectFromNotFoundWebException() {
         final WebError webError = new NotFoundWebException(KEY).getWebError();
-        assertThat(webError.getKey(), is(equalTo(KEY)));
-        assertThat(webError.getStatusCode(), is(equalTo(404)));
+        assertThat(webError.getKey()).isEqualTo(KEY);
+        assertThat(webError.getStatusCode()).isEqualTo(404);
     }
 }

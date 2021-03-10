@@ -1,9 +1,7 @@
 package info.setmy.models;
 
 import static info.setmy.models.VariableValue.EMPTY;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,13 +20,13 @@ public class VariableValueTest {
 
     @Test
     public void emptyIsEmptyString() {
-        assertThat(EMPTY, is(equalTo("")));
+        assertThat(EMPTY).isEqualTo("");
     }
 
     @Test
     public void initialStateShouldHaveNulls() {
-        assertThat(variableValue.getName(), is(equalTo("")));
-        assertThat(variableValue.getValue(), is(equalTo("")));
+        assertThat(variableValue.getName()).isEqualTo("");
+        assertThat(variableValue.getValue()).isEqualTo("");
     }
 
     @Test
@@ -36,8 +34,8 @@ public class VariableValueTest {
         final String name = "Name";
         final String value = "Value";
         variableValue = new VariableValue(name, value);
-        assertThat(variableValue.getName(), is(equalTo(name)));
-        assertThat(variableValue.getValue(), is(equalTo(value)));
+        assertThat(variableValue.getName()).isEqualTo(name);
+        assertThat(variableValue.getValue()).isEqualTo(value);
     }
 
     @Test
@@ -46,7 +44,7 @@ public class VariableValueTest {
         final String value = "Value";
         variableValue.setName(name);
         variableValue.setValue(value);
-        assertThat(variableValue.getName(), is(equalTo(name)));
-        assertThat(variableValue.getValue(), is(equalTo(value)));
+        assertThat(variableValue.getName()).isEqualTo(name);
+        assertThat(variableValue.getValue()).isEqualTo(value);
     }
 }

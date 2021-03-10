@@ -10,8 +10,7 @@ import java.util.Optional;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsEqual.equalTo;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -46,9 +45,9 @@ public class HttpServiceTest {
 
     @Test
     public void someDefaults() {
-        assertThat(httpService.getJwtCookieName(), is(equalTo("JWT")));
-        assertThat(httpService.getCsrfCookieName(), is(equalTo("CSRF")));
-        assertThat(httpService.getCsrfHeaderName(), is(equalTo("X-Csrf-Token")));
+        assertThat(httpService.getJwtCookieName()).isEqualTo("JWT");
+        assertThat(httpService.getCsrfCookieName()).isEqualTo("CSRF");
+        assertThat(httpService.getCsrfHeaderName()).isEqualTo("X-Csrf-Token");
     }
 
     @Test
@@ -69,7 +68,7 @@ public class HttpServiceTest {
 
         final Cookie resultCookie = httpService.setCookieExpirationMinutes(cookie, minutes);
 
-        assertThat(resultCookie.getMaxAge(), is(equalTo(expectedSeconds)));
+        assertThat(resultCookie.getMaxAge()).isEqualTo(expectedSeconds);
     }
 
     @Test
@@ -91,7 +90,7 @@ public class HttpServiceTest {
 
         final String result = httpService.getJWTCookieString();
 
-        assertThat(result, is(equalTo(cookieValue)));
+        assertThat(result).isEqualTo(cookieValue);
     }
 
     @Test
@@ -100,7 +99,7 @@ public class HttpServiceTest {
 
         final Optional<Cookie> jwtCookie = httpService.getJWTCookie();
 
-        assertThat(jwtCookie.get().getValue(), is(equalTo("jwt.cookie.value")));
+        assertThat(jwtCookie.get().getValue()).isEqualTo("jwt.cookie.value");
     }
 
     @Test
@@ -109,7 +108,7 @@ public class HttpServiceTest {
 
         final Optional<Cookie> jwtCookie = httpService.getCSRFCookie();
 
-        assertThat(jwtCookie.get().getValue(), is(equalTo("csrf.cookie.value")));
+        assertThat(jwtCookie.get().getValue()).isEqualTo("csrf.cookie.value");
     }
 
     @Test
@@ -131,7 +130,7 @@ public class HttpServiceTest {
 
         final String result = httpService.getCSRFCookieString();
 
-        assertThat(result, is(equalTo(cookieValue)));
+        assertThat(result).isEqualTo(cookieValue);
     }
 
     @Test
@@ -142,7 +141,7 @@ public class HttpServiceTest {
 
         Optional<String> result = httpService.getHeader(headerName);
 
-        assertThat(result.isPresent(), is(equalTo(false)));
+        assertThat(result.isPresent()).isEqualTo(false);
     }
 
     @Test
@@ -153,7 +152,7 @@ public class HttpServiceTest {
 
         Optional<String> result = httpService.getHeader(headerName);
 
-        assertThat(result.isPresent(), is(equalTo(false)));
+        assertThat(result.isPresent()).isEqualTo(false);
     }
 
     @Test
@@ -164,7 +163,7 @@ public class HttpServiceTest {
 
         Optional<String> result = httpService.getHeader(headerName);
 
-        assertThat(result.isPresent(), is(equalTo(false)));
+        assertThat(result.isPresent()).isEqualTo(false);
     }
 
     @Test
@@ -175,7 +174,7 @@ public class HttpServiceTest {
 
         Optional<String> result = httpService.getHeader(headerName);
 
-        assertThat(result.isPresent(), is(equalTo(true)));
+        assertThat(result.isPresent()).isEqualTo(true);
     }
 
     @Test
@@ -186,7 +185,7 @@ public class HttpServiceTest {
 
         final Optional<Cookie> result = httpService.getCookie(cookieName);
 
-        assertThat(result.isPresent(), is(equalTo(false)));
+        assertThat(result.isPresent()).isEqualTo(false);
     }
 
     @Test
@@ -197,7 +196,7 @@ public class HttpServiceTest {
 
         final Optional<Cookie> result = httpService.getCookie(cookieName);
 
-        assertThat(result.isPresent(), is(equalTo(false)));
+        assertThat(result.isPresent()).isEqualTo(false);
     }
 
     @Test
@@ -209,7 +208,7 @@ public class HttpServiceTest {
 
         final Optional<Cookie> result = httpService.getCookie(cookieName);
 
-        assertThat(result.isPresent(), is(equalTo(false)));
+        assertThat(result.isPresent()).isEqualTo(false);
     }
 
     @Test
@@ -221,7 +220,7 @@ public class HttpServiceTest {
 
         final Optional<Cookie> result = httpService.getCookie(cookieName);
 
-        assertThat(result.isPresent(), is(equalTo(false)));
+        assertThat(result.isPresent()).isEqualTo(false);
     }
 
     @Test
@@ -233,7 +232,7 @@ public class HttpServiceTest {
 
         final Optional<Cookie> result = httpService.getCookie(cookieName);
 
-        assertThat(result.isPresent(), is(equalTo(false)));
+        assertThat(result.isPresent()).isEqualTo(false);
     }
 
     @Test
@@ -245,7 +244,7 @@ public class HttpServiceTest {
 
         final Optional<Cookie> result = httpService.getCookie(cookieName);
 
-        assertThat(result.isPresent(), is(equalTo(false)));
+        assertThat(result.isPresent()).isEqualTo(false);
     }
 
     @Test
@@ -257,17 +256,17 @@ public class HttpServiceTest {
 
         final Optional<Cookie> result = httpService.getCookie(cookieName);
 
-        assertThat(result.isPresent(), is(equalTo(true)));
+        assertThat(result.isPresent()).isEqualTo(true);
     }
 
     @Test
     public void sessionCookieMaxAge() {
-        assertThat(SESSION_COOKIE_MAX_AGE, is(equalTo(-1)));
+        assertThat(SESSION_COOKIE_MAX_AGE).isEqualTo(-1);
     }
 
     @Test
     public void deletableCookieMaxAge() {
-        assertThat(DELETABLE_COOKIE_MAX_AGE, is(equalTo(0)));
+        assertThat(DELETABLE_COOKIE_MAX_AGE).isEqualTo(0);
     }
 
     @Test
@@ -280,13 +279,13 @@ public class HttpServiceTest {
         final Cookie cookie = httpService.createDefaultCookie(name, value);
 
         assertNotNull(cookie);
-        assertThat(cookie.getName(), is(equalTo(name)));
-        assertThat(cookie.getValue(), is(equalTo(value)));
-        assertThat(cookie.isHttpOnly(), is(equalTo(true)));
-        assertThat(cookie.getSecure(), is(equalTo(true)));
-        assertThat(cookie.getMaxAge(), is(equalTo(SESSION_COOKIE_MAX_AGE)));
-        assertThat(cookie.getDomain(), is(equalTo(serverName)));
-        assertThat(cookie.getPath(), is(equalTo("/")));
+        assertThat(cookie.getName()).isEqualTo(name);
+        assertThat(cookie.getValue()).isEqualTo(value);
+        assertThat(cookie.isHttpOnly()).isEqualTo(true);
+        assertThat(cookie.getSecure()).isEqualTo(true);
+        assertThat(cookie.getMaxAge()).isEqualTo(SESSION_COOKIE_MAX_AGE);
+        assertThat(cookie.getDomain()).isEqualTo(serverName);
+        assertThat(cookie.getPath()).isEqualTo("/");
     }
 
     @Test
@@ -299,7 +298,7 @@ public class HttpServiceTest {
         final Cookie resultCookie = httpService.setCookieForDeletion(cookie);
 
         assertNotNull(resultCookie);
-        assertThat(resultCookie.getMaxAge(), is(equalTo(DELETABLE_COOKIE_MAX_AGE)));
+        assertThat(resultCookie.getMaxAge()).isEqualTo(DELETABLE_COOKIE_MAX_AGE);
     }
 
     @Test
@@ -312,7 +311,7 @@ public class HttpServiceTest {
         final Cookie resultCookie = httpService.setCookieForSession(cookie);
 
         assertNotNull(resultCookie);
-        assertThat(resultCookie.getMaxAge(), is(equalTo(SESSION_COOKIE_MAX_AGE)));
+        assertThat(resultCookie.getMaxAge()).isEqualTo(SESSION_COOKIE_MAX_AGE);
     }
 
     @Test
@@ -324,13 +323,13 @@ public class HttpServiceTest {
         final Cookie cookie = httpService.newJWTCookie(value);
 
         assertNotNull(cookie);
-        assertThat(cookie.getName(), is(equalTo(DEFAULT_JWT_COOKIE_NAME)));
-        assertThat(cookie.getValue(), is(equalTo(value)));
-        assertThat(cookie.isHttpOnly(), is(equalTo(true)));
-        assertThat(cookie.getSecure(), is(equalTo(true)));
-        assertThat(cookie.getMaxAge(), is(equalTo(SESSION_COOKIE_MAX_AGE)));
-        assertThat(cookie.getDomain(), is(equalTo(serverName)));
-        assertThat(cookie.getPath(), is(equalTo("/")));
+        assertThat(cookie.getName()).isEqualTo(DEFAULT_JWT_COOKIE_NAME);
+        assertThat(cookie.getValue()).isEqualTo(value);
+        assertThat(cookie.isHttpOnly()).isEqualTo(true);
+        assertThat(cookie.getSecure()).isEqualTo(true);
+        assertThat(cookie.getMaxAge()).isEqualTo(SESSION_COOKIE_MAX_AGE);
+        assertThat(cookie.getDomain()).isEqualTo(serverName);
+        assertThat(cookie.getPath()).isEqualTo("/");
     }
 
     @Test
@@ -342,13 +341,13 @@ public class HttpServiceTest {
         final Cookie cookie = httpService.newCSRFCookie(value);
 
         assertNotNull(cookie);
-        assertThat(cookie.getName(), is(equalTo(DEFAULT_CSRF_COOKIE_NAME)));
-        assertThat(cookie.getValue(), is(equalTo(value)));
-        assertThat(cookie.isHttpOnly(), is(equalTo(false)));// Should be readable from JS
-        assertThat(cookie.getSecure(), is(equalTo(true)));
-        assertThat(cookie.getMaxAge(), is(equalTo(SESSION_COOKIE_MAX_AGE)));
-        assertThat(cookie.getDomain(), is(equalTo(serverName)));
-        assertThat(cookie.getPath(), is(equalTo("/")));
+        assertThat(cookie.getName()).isEqualTo(DEFAULT_CSRF_COOKIE_NAME);
+        assertThat(cookie.getValue()).isEqualTo(value);
+        assertThat(cookie.isHttpOnly()).isEqualTo(false);// Should be readable from JS
+        assertThat(cookie.getSecure()).isEqualTo(true);
+        assertThat(cookie.getMaxAge()).isEqualTo(SESSION_COOKIE_MAX_AGE);
+        assertThat(cookie.getDomain()).isEqualTo(serverName);
+        assertThat(cookie.getPath()).isEqualTo("/");
     }
 
     @Test
@@ -359,7 +358,7 @@ public class HttpServiceTest {
 
         final String resultName = httpService.getRequestedServerName();
 
-        assertThat(resultName, is(equalTo("server.name")));
+        assertThat(resultName).isEqualTo("server.name");
     }
 
     @Test
@@ -370,7 +369,7 @@ public class HttpServiceTest {
 
         final String resultName = httpService.getRequestedServerName();
 
-        assertThat(resultName, is(equalTo("server.name.from.request")));
+        assertThat(resultName).isEqualTo("server.name.from.request");
     }
 
     @Test
@@ -381,7 +380,7 @@ public class HttpServiceTest {
 
         final String resultIp = httpService.getRemoteIp();
 
-        assertThat(resultIp, is(equalTo("192.168.40.10")));
+        assertThat(resultIp).isEqualTo("192.168.40.10");
     }
 
     @Test
@@ -392,7 +391,7 @@ public class HttpServiceTest {
 
         final String resultIp = httpService.getRemoteIp();
 
-        assertThat(resultIp, is(equalTo("192.168.40.10")));
+        assertThat(resultIp).isEqualTo("192.168.40.10");
     }
 
     @Test
@@ -447,7 +446,7 @@ public class HttpServiceTest {
 
         final Optional<String> origin = httpService.getOrigin();
 
-        assertThat(origin.get(), is(equalTo("origin.address")));
+        assertThat(origin.get()).isEqualTo("origin.address");
     }
 
     @Test
@@ -456,7 +455,7 @@ public class HttpServiceTest {
 
         final Optional<String> referer = httpService.getReferer();
 
-        assertThat(referer.get(), is(equalTo("referrer.address")));
+        assertThat(referer.get()).isEqualTo("referrer.address");
     }
 
     @Test
@@ -465,7 +464,7 @@ public class HttpServiceTest {
 
         final Optional<String> userAgent = httpService.getUserAgent();
 
-        assertThat(userAgent.get(), is(equalTo("Mozilla/5.0 (X11; Linux x86_64; rv:59.0) Gecko/20100101 Firefox/59.0")));
+        assertThat(userAgent.get()).isEqualTo("Mozilla/5.0 (X11; Linux x86_64; rv:59.0) Gecko/20100101 Firefox/59.0");
     }
 
     @Test
@@ -474,7 +473,7 @@ public class HttpServiceTest {
 
         final Optional<String> csrfHeaderValue = httpService.getCSRFHeader();
 
-        assertThat(csrfHeaderValue.get(), is(equalTo("csrf.value")));
+        assertThat(csrfHeaderValue.get()).isEqualTo("csrf.value");
     }
 
     @Test

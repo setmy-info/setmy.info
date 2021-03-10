@@ -1,8 +1,6 @@
 package info.setmy.models;
 
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 /**
@@ -15,20 +13,20 @@ public class LimitedQueueTest {
     public void add() {
         final LimitedQueue<Character> buffer = new LimitedQueue<>(5);
         buffer.add('a');
-        assertThat(buffer.toArray().length, is(equalTo(1)));
-        assertThat(buffer.toArray()[0], is(equalTo('a')));
+        assertThat(buffer.toArray().length).isEqualTo(1);
+        assertThat(buffer.toArray()[0]).isEqualTo('a');
         buffer.add('b');
-        assertThat(buffer.toArray().length, is(equalTo(2)));
-        assertThat(buffer.toArray()[0], is(equalTo('a')));
-        assertThat(buffer.toArray()[1], is(equalTo('b')));
+        assertThat(buffer.toArray().length).isEqualTo(2);
+        assertThat(buffer.toArray()[0]).isEqualTo('a');
+        assertThat(buffer.toArray()[1]).isEqualTo('b');
         buffer.add('c');
         buffer.add('d');
         buffer.add('e');
-        assertThat(buffer.toArray().length, is(equalTo(5)));
-        assertThat(buffer.toArray()[0], is(equalTo('a')));
-        assertThat(buffer.toArray()[1], is(equalTo('b')));
-        assertThat(buffer.toArray()[2], is(equalTo('c')));
-        assertThat(buffer.toArray()[3], is(equalTo('d')));
-        assertThat(buffer.toArray()[4], is(equalTo('e')));
+        assertThat(buffer.toArray().length).isEqualTo(5);
+        assertThat(buffer.toArray()[0]).isEqualTo('a');
+        assertThat(buffer.toArray()[1]).isEqualTo('b');
+        assertThat(buffer.toArray()[2]).isEqualTo('c');
+        assertThat(buffer.toArray()[3]).isEqualTo('d');
+        assertThat(buffer.toArray()[4]).isEqualTo('e');
     }
 }

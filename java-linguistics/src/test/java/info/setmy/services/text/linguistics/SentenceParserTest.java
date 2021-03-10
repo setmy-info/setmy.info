@@ -2,11 +2,8 @@ package info.setmy.services.text.linguistics;
 
 import info.setmy.services.text.linguistics.model.TextItem;
 import java.util.List;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsEqual.equalTo;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -23,27 +20,27 @@ public class SentenceParserTest {
 
     @Test
     public void abc() {
-        /*assertThat(sentenceParser.getTextSeparatorType('.'), is(equalTo(TextSeparatorType.SENTENCE_SEPARATOR))); // end and start new sentence, clause, block, workd if any.
-        assertThat(sentenceParser.getTextSeparatorType(','), is(equalTo(TextSeparatorType.CLAUSE_SEPARATOR)));
-        assertThat(sentenceParser.getTextSeparatorType('('), is(equalTo(TextSeparatorType.BLOCK_SEPARATOR_BEGINNING)));
-        assertThat(sentenceParser.getTextSeparatorType(')'), is(equalTo(TextSeparatorType.BLOCK_SEPARATOR_END)));
-        assertThat(sentenceParser.getTextSeparatorType('\''), is(equalTo(TextSeparatorType.QUOTE_BLOCK_CLAUSE_SEPARATOR)));*/
+        /*assertThat(sentenceParser.getTextSeparatorType('.')).isEqualTo(TextSeparatorType.SENTENCE_SEPARATOR); // end and start new sentence, clause, block, workd if any.
+        assertThat(sentenceParser.getTextSeparatorType(',')).isEqualTo(TextSeparatorType.CLAUSE_SEPARATOR);
+        assertThat(sentenceParser.getTextSeparatorType('(')).isEqualTo(TextSeparatorType.BLOCK_SEPARATOR_BEGINNING);
+        assertThat(sentenceParser.getTextSeparatorType(')')).isEqualTo(TextSeparatorType.BLOCK_SEPARATOR_END);
+        assertThat(sentenceParser.getTextSeparatorType('\'')).isEqualTo(TextSeparatorType.QUOTE_BLOCK_CLAUSE_SEPARATOR);*/
     }
 
     @Test
     public void parsing1() {
         /*final String text = "This is longer sentence, with some sentence ending characters. Maybe text have questions? Maybe text ends with!";
         sentenceParser.parse(text);
-        assertThat(sentenceParser.getSentences().size(), is(equalTo(3)));
-        assertThat(sentenceParser.getSentences().get(0).getEndingCharacter(), is(equalTo('.')));
-        assertThat(sentenceParser.getSentences().get(1).getEndingCharacter(), is(equalTo('?')));
-        assertThat(sentenceParser.getSentences().get(2).getEndingCharacter(), is(equalTo('!')));*/
+        assertThat(sentenceParser.getSentences().size()).isEqualTo(3);
+        assertThat(sentenceParser.getSentences().get(0).getEndingCharacter()).isEqualTo('.');
+        assertThat(sentenceParser.getSentences().get(1).getEndingCharacter()).isEqualTo('?');
+        assertThat(sentenceParser.getSentences().get(2).getEndingCharacter()).isEqualTo('!');*/
     }
 
     @Test
     public void parse2() {
         sentenceParser.parse("Aaa, bbb (ccc, ddd, eee), fff (ggg; hhh; iii), jjj - kkk, lll mmm nnn: \"ooo, ppp, rrr sss - ttt (uuu; vvv õõõ, äää ööö!)\". Üüü (xxx, yyy, zzz [aaa, bbb, ccc {ddd, eee, fff ggg hhh}])! Iii, jjj, kkk: lll, mmm nnn? Ooo: \"ppp rrr sss?\"");
         final List<TextItem> sentences = sentenceParser.getSentences();
-        //assertThat(sentences.size(), is(equalTo(2)));
+        //assertThat(sentences.size()).isEqualTo(2);
     }
 }

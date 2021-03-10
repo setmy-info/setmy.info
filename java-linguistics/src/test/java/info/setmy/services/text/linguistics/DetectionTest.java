@@ -1,10 +1,8 @@
 package info.setmy.services.text.linguistics;
 
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsEqual.equalTo;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class DetectionTest {
 
@@ -17,11 +15,11 @@ public class DetectionTest {
 
     @Test
     public void pairingTest() {
-        assertThat(detection.arePairedQuotes('«', '»'), is(equalTo(true)));
-        assertThat(detection.arePairedQuotes('‘', '’'), is(equalTo(true)));
-        assertThat(detection.arePairedQuotes('“', '”'), is(equalTo(true)));
-        assertThat(detection.arePairedQuotes('„', '”'), is(equalTo(true)));
-        assertThat(detection.arePairedQuotes('«', '’'), is(equalTo(false)));
-        assertThat(detection.arePairedQuotes('«', ' '), is(equalTo(false)));
+        assertThat(detection.arePairedQuotes('«', '»')).isEqualTo(true);
+        assertThat(detection.arePairedQuotes('‘', '’')).isEqualTo(true);
+        assertThat(detection.arePairedQuotes('“', '”')).isEqualTo(true);
+        assertThat(detection.arePairedQuotes('„', '”')).isEqualTo(true);
+        assertThat(detection.arePairedQuotes('«', '’')).isEqualTo(false);
+        assertThat(detection.arePairedQuotes('«', ' ')).isEqualTo(false);
     }
 }

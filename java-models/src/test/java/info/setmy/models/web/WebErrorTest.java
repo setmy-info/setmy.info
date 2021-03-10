@@ -2,9 +2,7 @@ package info.setmy.models.web;
 
 import java.util.ArrayList;
 import java.util.List;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +20,8 @@ public class WebErrorTest {
         final int statusCode = 1234;
         final List<String> parameters = new ArrayList<>();
         webError = new WebError(key, statusCode, parameters);
-        assertThat(webError.getKey(), is(equalTo(key)));
-        assertThat(webError.getStatusCode(), is(equalTo(statusCode)));
+        assertThat(webError.getKey()).isEqualTo(key);
+        assertThat(webError.getStatusCode()).isEqualTo(statusCode);
         assertSame(parameters, webError.getParameters());
     }
 }

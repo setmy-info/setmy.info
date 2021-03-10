@@ -1,8 +1,7 @@
 package info.setmy.jwt.models;
 
 import static info.setmy.jwt.models.Data.SERVICE_NAME;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,17 +22,17 @@ public class ExtendedTokenTest extends Data {
     @Test
     @DisplayName("Given token should have key from service")
     public void keyFromService() {
-        assertThat(token.getKey(), is(equalTo(EXAMPLE_SECRET_KEY)));
+        assertThat(token.getKey()).isEqualTo(EXAMPLE_SECRET_KEY);
     }
 
     @Test
     @DisplayName("Given token should have issuer from service")
     public void issuerFromService() {
-        assertThat(token.getIssuer(), is(equalTo(ISSUER)));
+        assertThat(token.getIssuer()).isEqualTo(ISSUER);
     }
 
     @Test
     public void sessionMinutesFromService() {
-        assertThat(token.getExpirationMinutes(), is(equalTo(EXAMPLE_SESSION_MINUTES)));
+        assertThat(token.getExpirationMinutes()).isEqualTo(EXAMPLE_SESSION_MINUTES);
     }
 }
