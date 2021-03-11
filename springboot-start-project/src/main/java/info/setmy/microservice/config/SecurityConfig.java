@@ -1,5 +1,7 @@
 package info.setmy.microservice.config;
 
+import info.setmy.microservice.properties.SecurityProperties;
+import static java.lang.Boolean.TRUE;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,9 +18,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final SecurityProperties securityProperties;
+
+    public SecurityConfig(SecurityProperties securityProperties) {
+        this.securityProperties = securityProperties;
+    }
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
+    protected void configure(final HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
                 .authorizeRequests()
                 .antMatchers(
                         "/",
@@ -53,5 +61,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+
+        if (!securityProperties.getCsrf().orElse(TRUE)) {
+            httpSecurity.csrf().disable();
+        }
+        if (!securityProperties.getFrameOptions().orElse(TRUE)) {
+            httpSecurity.headers().frameOptions().disable();
+        }
     }
 }

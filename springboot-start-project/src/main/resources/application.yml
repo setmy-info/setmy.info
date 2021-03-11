@@ -56,6 +56,9 @@ system:
         foo: false
     rest:
         datesUTC: true
+    httpSecurity:
+        csrf: false
+        frameOptions: false
 
 infinispan:
     embedded:
