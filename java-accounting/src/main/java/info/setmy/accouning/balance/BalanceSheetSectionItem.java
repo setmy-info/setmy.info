@@ -24,4 +24,8 @@ public class BalanceSheetSectionItem extends BalanceSheetItem {
     public List<BalanceSheetItem> getBalanceSheetItems() {
         return balanceSheetItems;
     }
+
+    public boolean add(final BalanceSheetItem balanceSheetItem) {
+        return balanceSheetItems.add(balanceSheetItem);
+    }
 }
