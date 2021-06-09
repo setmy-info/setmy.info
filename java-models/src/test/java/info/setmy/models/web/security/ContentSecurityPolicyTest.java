@@ -26,7 +26,7 @@ public class ContentSecurityPolicyTest {
 
     @BeforeEach
     public void setUp() {
-        contentSecurityPolicy = spy(new ContentSecurityPolicy());
+        contentSecurityPolicy = new ContentSecurityPolicy();//spy(new ContentSecurityPolicy());
         policyDirective = new PolicyDirective(PolicyDirectiveTest.NAME);
     }
 
@@ -79,6 +79,7 @@ public class ContentSecurityPolicyTest {
 
     @Test
     public void addingDoesnNotSucceed() {
+        contentSecurityPolicy = spy(contentSecurityPolicy);
         doReturn(false).when(contentSecurityPolicy).add(policyDirective);
 
         final Optional<PolicyDirective> resultOptional = contentSecurityPolicy.addPolicyDirective(policyDirective);
