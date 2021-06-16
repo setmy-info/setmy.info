@@ -1,4 +1,4 @@
-FROM setmyinfo/setmy-info-centos-java-tomcat:v9.0.33
+FROM setmyinfo/setmy-info-centos-java-tomcat:latest
 
 MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 

@@ -1,9 +1,9 @@
-FROM setmyinfo/setmy-info-centos-java:v12.0.2-1
+FROM setmyinfo/setmy-info-centos-java:latest
 
 MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 
 LABEL org.label-schema.name="Docker HUB CentOS Micronaut service base" \
-      org.label-schema.version="1.0.0-SNAPSHOT" \
+      org.label-schema.version="1.2.0-SNAPSHOT" \
       org.label-schema.description="setmy.info Docker HUB CentOS Micronaut service base" \
       org.label-schema.vendor="Hear And See Systems LLC" \
       org.label-schema.url="https://www.hearandseesystems.com" \
