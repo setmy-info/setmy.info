@@ -97,3 +97,6 @@
 [submodule "submodules/stealer-test-a"]
 	path = submodules/stealer-test-a
 	url = git@github.com:setmy-info/stealer-test-a.git
+[submodule "submodules/jenkinsfile-starter"]
+	path = submodules/jenkinsfile-starter
+	url = git@github.com:setmy-info/jenkinsfile-starter.git

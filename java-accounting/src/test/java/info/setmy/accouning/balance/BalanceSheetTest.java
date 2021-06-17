@@ -3,6 +3,7 @@ package info.setmy.accouning.balance;
 import static info.setmy.accouning.balance.LocalDateForTests.parseLocalDate;
 import static java.time.Month.FEBRUARY;
 import static java.util.Currency.getInstance;
+import java.util.Locale;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,9 +17,11 @@ public class BalanceSheetTest {
     private BalanceSheet balanceSheet;
 
     private final static String COMAPNY_NAME = "Example Company";
+    private final Locale EE = new Locale("et", "EE");
 
     @BeforeEach
     public void before() {
+        Locale.setDefault(EE);
         balanceSheet = new BalanceSheet(COMAPNY_NAME, parseLocalDate("15.02.2021"), getInstance("EUR"));
     }
 
