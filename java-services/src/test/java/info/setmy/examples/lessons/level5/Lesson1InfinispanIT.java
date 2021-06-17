@@ -9,7 +9,7 @@ import org.infinispan.manager.DefaultCacheManager;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.infinispan.configuration.cache.CacheMode.DIST_SYNC;
+import static org.infinispan.configuration.cache.CacheMode.LOCAL;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class Lesson1InfinispanIT {
@@ -21,9 +21,9 @@ public class Lesson1InfinispanIT {
     @Test
     public void jcache() throws IOException {
         final GlobalConfigurationBuilder global = GlobalConfigurationBuilder.defaultClusteredBuilder();
-        try (DefaultCacheManager cacheManager = new DefaultCacheManager(global.build())) {
+        try ( DefaultCacheManager cacheManager = new DefaultCacheManager(global.build())) {
             final ConfigurationBuilder builder = new ConfigurationBuilder();
-            builder.clustering().cacheMode(DIST_SYNC);//LOCAL
+            builder.clustering().cacheMode(LOCAL);//LOCAL, DIST_SYNC
             final Cache<Object, Object> cache = cacheManager.administration().withFlags(CacheContainerAdmin.AdminFlag.VOLATILE).getOrCreateCache(cacheName, builder.build());
             final Cache<Object, Object> sameCache = cacheManager.getCache(cacheName);
 
