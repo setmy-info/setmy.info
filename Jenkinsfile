@@ -25,7 +25,6 @@ pipeline {
             parallel {
                 stage('Build tools') {
                     steps {
-                        echo 'Put here commands to check, that build tools are installed'
                         sh 'mvn --version'
                         sh 'java --version'
                         sh 'which java'
@@ -38,8 +37,7 @@ pipeline {
             parallel {
                 stage('Install') {
                     steps {
-                        echo 'Installation commands go here'
-                        echo 'no tools onstallations and preparations'
+                        echo 'no tools onstallations and build setup'
                     }
                 }
             }
