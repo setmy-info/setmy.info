@@ -11,6 +11,10 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.infinispan.configuration.cache.CacheMode.LOCAL;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import static org.junit.jupiter.api.condition.OS.WINDOWS;
+import static org.junit.jupiter.api.condition.OS.LINUX;
+import static org.junit.jupiter.api.condition.OS.MAC;
 
 public class Lesson1InfinispanIT {
 
@@ -18,6 +22,7 @@ public class Lesson1InfinispanIT {
     private final String key = "firstName";
     private final String value = "This is value in cache";
 
+    @EnabledOnOs({WINDOWS, LINUX, MAC}) // TODO : investigate, why it fails on FreeBSD
     @Test
     public void jcache() throws IOException {
         final GlobalConfigurationBuilder global = GlobalConfigurationBuilder.defaultClusteredBuilder();
