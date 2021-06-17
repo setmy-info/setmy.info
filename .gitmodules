@@ -100,3 +100,6 @@
 [submodule "submodules/jenkinsfile-starter"]
 	path = submodules/jenkinsfile-starter
 	url = git@github.com:setmy-info/jenkinsfile-starter.git
+[submodule "submodules/person-names"]
+	path = submodules/person-names
+	url = git@github.com:setmy-info/person-names.git
