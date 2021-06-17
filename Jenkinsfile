@@ -203,6 +203,5 @@ pipeline {
                 recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
         }
-    }                echo 'Put here resource copy commands'
-
+    }
 }
