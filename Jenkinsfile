@@ -47,20 +47,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn resources'
-                sh 'mvn compile'
-                sh 'mvn test'
-                echo 'Put here unit tests coverage'
-                echo 'mvn test'
-                echo 'Put here mutation tests coverage'
-                echo 'mvn test'
-                echo 'Put here integration tests'
-                sh 'mvn verify'
-                echo 'Put here findbug/stopbug, style check'
-                echo 'dependencies vulnreability checks'
-                echo 'Put here system tests'
-                echo 'Put here acceptance tests'
-                echo 'Put here reporting builds steps can include (unit tests coverage, mutation test coverage, findbugs, vuln. checks, )'
+                sh 'mvn clean install'
 
                 // Sites
                 sh 'cd groovy-models; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
@@ -83,9 +70,6 @@ pipeline {
                 // sh 'cd java-communication; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
                 // sh 'cd java-vcs; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
                 // sh 'cd java-modular-ssn; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
-
-                sh 'mvn package -DskipTests'
-                sh 'mvn install -DskipTests'
             }
         }
 
