@@ -35,11 +35,6 @@ public class Lesson1MoneyIT {
         CurrencyUnit copUnit = Monetary.getCurrency("COP");
         CurrencyUnit eurUnit = Monetary.getCurrency("EUR");
         CurrencyUnit usdUnit = Monetary.getCurrency(Locale.US);
-        CurrencyQuery bitcoinQuery = CurrencyQueryBuilder.of()
-                .setCurrencyCodes(new String[]{"XBT"})
-                .setNumericCodes(1)
-                .build();
-        CurrencyUnit bitcoinUnit = Monetary.getCurrency(bitcoinQuery);
 
         MonetaryAmount usdAmount = Monetary.getDefaultAmountFactory()
                 .setCurrency(usdUnit)

@@ -12,7 +12,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public abstract class RESTIntegrationTestBase extends SpringIntegrationTestBase {
 
-    protected static final String URL = "http://robot.lan:8080";
+    protected static final String URL = "http://localhost:8080";
 
     public abstract String getResource();
 

@@ -1,11 +1,10 @@
 package info.setmy.rest.client.model;
 
 import info.setmy.rest.client.RESTClient;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.client.Invocation;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.MediaType;
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**

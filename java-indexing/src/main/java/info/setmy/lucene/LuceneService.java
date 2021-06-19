@@ -28,7 +28,7 @@ import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.MMapDirectory;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
-import static org.apache.lucene.util.Version.LUCENE_8_8_1;
+import static org.apache.lucene.util.Version.LUCENE_8_8_2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +40,7 @@ public class LuceneService {
 
     static final Logger LOG = LoggerFactory.getLogger(LuceneService.class);
 
-    private final Version version = LUCENE_8_8_1;
+    private final Version version = LUCENE_8_8_2;
 
     private final String locationDirectory;
 

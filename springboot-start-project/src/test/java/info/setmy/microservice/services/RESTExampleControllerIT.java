@@ -1,7 +1,6 @@
 package info.setmy.microservice.services;
 
 import info.setmy.microservice.RESTIntegrationTestBase;
-import static info.setmy.microservice.controllers.ExampleController.EXAMPLE_REST_RESOURCE;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import org.junit.jupiter.api.Test;
@@ -10,11 +9,11 @@ import org.junit.jupiter.api.Test;
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class RESTExampleRestIT extends RESTIntegrationTestBase {
+public class RESTExampleControllerIT extends RESTIntegrationTestBase {
 
     @Override
     public String getResource() {
-        return EXAMPLE_REST_RESOURCE;
+        return "/api/example";
     }
 
     @Test

@@ -6,6 +6,5 @@ package info.setmy.microservice.constances;
  */
 public class RESTConstantces {
 
-    public static final String REST_RESOURCE_PATH = "/rest";
     public static final String API_RESOURCE_PATH = "/api";// Just for exmaple. Use rest resources
 }
