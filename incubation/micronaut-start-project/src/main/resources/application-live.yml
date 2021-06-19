@@ -1,7 +1,0 @@
-micronaut:
-    application:
-        name: live-micronaut-start-project
-
-example:
-    property:
-        name: application-live.yml
