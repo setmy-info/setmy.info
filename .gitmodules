@@ -103,3 +103,6 @@
 [submodule "submodules/person-names"]
 	path = submodules/person-names
 	url = git@github.com:setmy-info/person-names.git
+[submodule "submodules/stealer"]
+	path = submodules/stealer
+	url = git@github.com:setmy-info/stealer.git
