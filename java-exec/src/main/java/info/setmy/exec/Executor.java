@@ -1,6 +1,7 @@
 package info.setmy.exec;
 
 import info.setmy.exec.exceptions.ExecutionError;
+import java.io.File;
 import java.io.IOException;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecuteResultHandler;
@@ -23,6 +24,8 @@ public class Executor {
 
     private int programSuccessReturnValue;
 
+    private File workingDirectory;
+
     public void exec(final String... params) {
         if (params == null) {
             throw new ExecutionError("Parameters are not passed for execution");
@@ -31,15 +34,19 @@ public class Executor {
             throw new ExecutionError("Parameters passed have zero items");
         }
         exitValue = 0;
-        final String programName = params[0];
+        final String programName = toCommandLine(params);
         final CommandLine cmdLine = CommandLine.parse(programName);
         if (isNotBlocking()) {
             resultHandler = new DefaultExecuteResultHandler();
         }
         final DefaultExecutor executor = new DefaultExecutor();
-        final ExecuteWatchdog watchdog = new ExecuteWatchdog(timeout * 1000);
         executor.setExitValue(programSuccessReturnValue); // Setting 1 when executed program is returning 1 in case of success (usually notn null like 1 means error)
-        executor.setWatchdog(watchdog);
+        if (timeout > 0) {
+            executor.setWatchdog(new ExecuteWatchdog(timeout * 1000));
+        }
+        if (haveWorkingDirectorySet()) {
+            executor.setWorkingDirectory(workingDirectory);
+        }
         try {
             if (isBlocking()) {
                 exitValue = executor.execute(cmdLine);
@@ -99,5 +106,35 @@ public class Executor {
     public Executor setProgramSuccessReturnValue(final int programSuccessReturnValue) {
         this.programSuccessReturnValue = programSuccessReturnValue;
         return this;
+    }
+
+    public boolean haveWorkingDirectorySet() {
+        return workingDirectory != null;
+    }
+
+    public File getWorkingDirectory() {
+        return workingDirectory;
+    }
+
+    public Executor setWorkingDirectory(final String workingDirectory) {
+        return setWorkingDirectory(new File(workingDirectory));
+    }
+
+    public Executor setWorkingDirectory(final File workingDirectory) {
+        this.workingDirectory = workingDirectory;
+        return this;
+    }
+
+    private String toCommandLine(final String[] params) {
+        final StringBuilder stringBuilder = new StringBuilder();
+        boolean add = false;
+        for (var param : params) {
+            if (add) {
+                stringBuilder.append(" ");
+            }
+            stringBuilder.append(param);
+            add = true;
+        }
+        return stringBuilder.toString();
     }
 }
