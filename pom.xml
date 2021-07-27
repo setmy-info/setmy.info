@@ -79,6 +79,7 @@
         <module>java-communication</module>
         <module>java-vcs</module>
         <module>java-exec</module>
+        <module>java-stealer</module>
         <module>java-modular-ssn</module>
         <module>java-rest-client</module>
         <module>springboot-start-project</module>

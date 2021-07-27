@@ -13,11 +13,11 @@
     </parent>
 
     <groupId>info.setmy</groupId>
-    <artifactId>java-exec</artifactId>
+    <artifactId>java-stealer</artifactId>
     <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>java-exec</name>
-    <description>Execution library.</description>
+    <name>java-stealer</name>
+    <description>Stealer Java library.</description>
     <url>https://setmy-info.github.io</url>
 
     <dependencies>
@@ -27,9 +27,9 @@
             <version>${info.setmy.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-exec</artifactId>
-            <version>1.3</version>
+            <groupId>info.setmy</groupId>
+            <artifactId>java-vcs</artifactId>
+            <version>${info.setmy.version}</version>
         </dependency>
     </dependencies>
 

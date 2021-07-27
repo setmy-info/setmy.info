@@ -1,12 +1,14 @@
 package info.setmy.exec;
 
 import info.setmy.exec.exceptions.ExecutionError;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteWatchdog;
+import org.apache.commons.exec.PumpStreamHandler;
 
 /**
  *
@@ -47,6 +49,14 @@ public class Executor {
         if (haveWorkingDirectorySet()) {
             executor.setWorkingDirectory(workingDirectory);
         }
+        /*
+        TODO : design tools for calles, to get results
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        final PumpStreamHandler pumpStreamHandler = new PumpStreamHandler(outputStream);
+        executor.setStreamHandler(pumpStreamHandler);
+        ...
+        System.out.println(outputStream.toString());
+         */
         try {
             if (isBlocking()) {
                 exitValue = executor.execute(cmdLine);

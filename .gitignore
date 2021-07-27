@@ -91,3 +91,5 @@ tmp
 **/derby.log
 /java-accounting/nbproject/
 /java-exec/nbproject/
+/java-vcs/nbproject/
+/java-stealer/nbproject/
