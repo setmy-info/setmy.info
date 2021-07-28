@@ -49,6 +49,7 @@ public class ExecutorIT {
         });
         assertThat(thownException).isExactlyInstanceOf(ExecutionError.class);
         assertThat(thownException.getMessage()).isEqualTo("Coldn't execute command");
+        assertThat(thownException.getCause().getMessage()).isEqualTo("Cannot run program \"nonExisting\" (in directory \".\"): error=2, No such file or directory");
     }
 
     @Test
@@ -75,16 +76,20 @@ public class ExecutorIT {
     @Test
     public void exec_normal() {
         final String[] params = {NORMAL_PROGRAM, "parameter1", "parameter2"};
+
         executor.exec(params);
+
         assertThat(executor.getExitValue()).isEqualTo(0);
     }
 
     @Test
     public void exec_normal_nonblocking() {
-        executor = new Executor().setTimeout(60).setBlocking(false);
+        executor = executor.setTimeout(60).nonBlocking();
         final String[] params = {NORMAL_TIMEOUT_PROGRAM, "parameter1", "parameter2"};
+
         executor.exec(params);
         executor.waitFor();
+
         assertThat(executor.getExitValue()).isEqualTo(0);
     }
 
@@ -92,16 +97,48 @@ public class ExecutorIT {
     public void exec_error_overiding_normal_return() {
         executor = executor.setProgramSuccessReturnValue(1);
         final String[] params = {ERROR_PROGRAM, "parameter1", "parameter2"};
+
         executor.exec(params);
+
+        assertThat(executor.getExitValue()).isEqualTo(1);
+    }
+
+    @Test
+    public void exec_error_overiding_normal_return_nonblocking() {
+        executor = executor.setProgramSuccessReturnValue(1).nonBlocking();
+        final String[] params = {ERROR_PROGRAM, "parameter1", "parameter2"};
+
+        executor.exec(params);
+        executor.waitFor();
+
         assertThat(executor.getExitValue()).isEqualTo(1);
     }
 
     @Test
     public void exec_when_error() {
+        final String[] params = {ERROR_PROGRAM, "parameter1", "parameter2"};
+
         final Exception thownException = assertThrows(ExecutionError.class, () -> {
-            final String[] params = {ERROR_PROGRAM, "parameter1", "parameter2"};
             executor.exec(params);
         });
+
         assertThat(thownException).isExactlyInstanceOf(ExecutionError.class);
+        assertThat(thownException.getMessage()).isEqualTo("Coldn't execute command");
+        assertThat(thownException.getCause().getMessage()).isEqualTo("Process exited with an error: 1 (Exit value: 1)");
+    }
+
+    @Test
+    public void exec_when_error_nonblocking() {
+        executor = executor.nonBlocking();
+        final String[] params = {ERROR_PROGRAM, "parameter1", "parameter2"};
+
+        executor.exec(params);
+        final Exception thownException = assertThrows(ExecutionError.class, () -> {
+            executor.waitFor();
+        });
+
+        assertThat(thownException).isExactlyInstanceOf(ExecutionError.class);
+        assertThat(thownException.getMessage()).isEqualTo("Coldn't execute command");
+        assertThat(thownException.getCause().getMessage()).isEqualTo("Process exited with an error: 1 (Exit value: 1)");
     }
 }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.PumpStreamHandler;
 
@@ -16,6 +17,9 @@ import org.apache.commons.exec.PumpStreamHandler;
  */
 public class Executor {
 
+    /**
+     * In seconds
+     */
     private int timeout = 60;
 
     private boolean blocking = true;
@@ -78,6 +82,10 @@ public class Executor {
         try {
             resultHandler.waitFor();
             exitValue = resultHandler.getExitValue();
+            if (exitValue == programSuccessReturnValue) {
+                return;
+            }
+            throw new ExecutionError("Coldn't execute command", new ExecuteException("Process exited with an error: " + exitValue, exitValue));
         } catch (InterruptedException ex) {
             throw new ExecutionError("Coldn't wait for executed program", ex);
         }
@@ -98,6 +106,16 @@ public class Executor {
 
     public boolean isBlocking() {
         return blocking;
+    }
+
+    public Executor blocking() {
+        setBlocking(true);
+        return this;
+    }
+
+    public Executor nonBlocking() {
+        setBlocking(false);
+        return this;
     }
 
     public Executor setBlocking(final boolean blocking) {
