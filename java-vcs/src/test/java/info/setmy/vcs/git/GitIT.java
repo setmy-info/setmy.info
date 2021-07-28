@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -28,6 +30,8 @@ public class GitIT {
     }
 
     @Test
+    @Disabled
+    @DisplayName("manual execution test for cloning and branch change")
     public void clone_and_update() {
         gitA.doClone();
         gitA.doCheckout("master");
