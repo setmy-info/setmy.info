@@ -43,7 +43,7 @@ public class Stealer {
     }
 
     private void init() {
-        final File clonesDir = new File(makeCloneDirString());
+        final File clonesDir = getClonesDir();
         if (clonesDir.exists()) {
             if (clonesDir.isDirectory()) {
                 return;
@@ -62,17 +62,21 @@ public class Stealer {
     private BaseVcs repoTypeToVcs(final Repository repository) {
         switch (repository.getRepoType()) {
             case GIT -> {
-                return new Git(repository.getUrl(), makeCloneDirString());
+                return new Git(repository.getUrl(), getClonesDirString());
             }
             case HG -> {
-                return new Hg(repository.getUrl(), makeCloneDirString());
+                return new Hg(repository.getUrl(), getClonesDirString());
             }
             default ->
                 throw new StealerException("Not suported repo type: " + repository.getRepoType().toString());
         }
     }
 
-    public String makeCloneDirString() {
+    public File getClonesDir() {
+        return new File(getClonesDirString());
+    }
+
+    public String getClonesDirString() {
         final StringBuilder stringBuilder = new StringBuilder();
         fillWorkingDirectory(stringBuilder);
         stringBuilder.append(CLONES_DIR);
@@ -81,6 +85,7 @@ public class Stealer {
 
     private void fillWorkingDirectory(final StringBuilder stringBuilder) {
         if (workingDirectory != null) {
+            // TODO : avoid ./ .\ ..\ ../ parts in working dir
             stringBuilder.append(workingDirectory).append("/");
         }
     }

@@ -93,7 +93,7 @@ public class RepositoryCloningDefinitions {
 
     @Then("{string} folder should exist")
     public void folderShouldExist(final String folderName) {
-        final String testableDir = stealer.makeCloneDirString();
+        final String testableDir = stealer.getClonesDirString();
         LOG.info("Checking directory: {}", testableDir);
         assertThat(new File(testableDir).isDirectory()).isTrue();
     }
