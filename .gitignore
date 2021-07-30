@@ -47,6 +47,8 @@ setmy-info-docker/setmy-info-centos-java-infinispan/infinispan-server-*
 tomcat-start-project/download/*
 tomcat-start-project/apache-tomcat*
 
+java-stealer/test-data/
+
 # cmake
 **/_CPack_Packages
 **/CMakeFiles
