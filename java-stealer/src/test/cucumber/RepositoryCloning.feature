@@ -1,5 +1,5 @@
 # language: en
-Feature: repository cloning and checkoing out
+Feature: repository cloning and checking out
 
     Scenario: repository cloning
         Given git repository "git@github.com:setmy-info/stealer-test-a.git" with short name "stealer-test-a"

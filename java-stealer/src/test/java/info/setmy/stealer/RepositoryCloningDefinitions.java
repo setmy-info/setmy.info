@@ -3,12 +3,14 @@ package info.setmy.stealer;
 import info.setmy.stealer.models.RepoType;
 import info.setmy.stealer.models.Repository;
 import info.setmy.stealer.models.Stealer;
-import static info.setmy.stealer.models.Stealer.STEALER_DIR;
 import io.cucumber.java.Before;
-import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,13 +18,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.io.FileUtils;
+
+import static info.setmy.stealer.models.Stealer.STEALER_DIR;
 import static org.assertj.core.api.Assertions.assertThat;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 public class RepositoryCloningDefinitions {
@@ -45,11 +45,6 @@ public class RepositoryCloningDefinitions {
 
     private Stealer stealer;
 
-    @ParameterType(".*")
-    public RepoType repoType(final String repoTypeString) {
-        return RepoType.valueOf(repoTypeString.toUpperCase());
-    }
-
     @Before
     public void before() throws IOException {
         repositories.clear();
@@ -71,18 +66,18 @@ public class RepositoryCloningDefinitions {
         LOG.info("Before scenario created test data folder: {}", testDataDirString);
         LOG.info("Before scenario created test data stealer folder: {}", testDataStealerDirString);
         stealer = Stealer.builder()
-                .repositories(repositories)
-                .workingDirectory(testDataDirString)
-                .build();
+            .repositories(repositories)
+            .workingDirectory(testDataDirString)
+            .build();
     }
 
     @Given("{repoType} repository {string} with short name {string}")
     public void repository(final RepoType repoType, final String url, final String name) {
         repositories.add(Repository.builder()
-                .repoType(repoType)
-                .url(url)
-                .name(name)
-                .build()
+            .repoType(repoType)
+            .url(url)
+            .name(name)
+            .build()
         );
     }
 
