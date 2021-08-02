@@ -1,8 +1,8 @@
 package info.setmy.stealer;
 
 import info.setmy.stealer.models.RepoType;
-import info.setmy.stealer.models.Repository;
 import info.setmy.stealer.models.Stealer;
+import info.setmy.stealer.models.config.Repository;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -81,9 +81,14 @@ public class RepositoryCloningDefinitions {
         );
     }
 
-    @When("cloning them")
-    public void cloningThem() {
-        stealer.doClone();
+    @When("initializing")
+    public void init() {
+        stealer.init();
+    }
+
+    @When("stealing")
+    public void stealing() {
+        stealer.steal();
     }
 
     @Then("{string} folder should exist")
@@ -91,5 +96,6 @@ public class RepositoryCloningDefinitions {
         final String testableDir = stealer.getClonesDirString();
         LOG.info("Checking directory: {}", testableDir);
         assertThat(new File(testableDir).isDirectory()).isTrue();
+        assertThat(new File(testableDir + "/" + folderName).isDirectory()).isTrue();
     }
 }

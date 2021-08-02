@@ -2,24 +2,34 @@ package info.setmy.vcs;
 
 import info.setmy.exec.Executor;
 import info.setmy.vcs.exceptions.VcsException;
+
 import java.io.File;
 
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 public abstract class BaseVcs {
 
     private final String url;
-    private final File directory;
+    private final File cloneWorkingDirectory;
+    private final File workingDirectory;
+    private String moduleName;
 
-    public BaseVcs(final String url, final String workingDirectory) {
+    public BaseVcs(final String url, final String cloneWorkingDirectory) {
         this.url = url;
-        this.directory = new File(workingDirectory);
+        this.cloneWorkingDirectory = new File(cloneWorkingDirectory);
+        this.workingDirectory = new File(makeWorkingDirectoryAndSetModuleName(url));
+    }
+
+    public BaseVcs(final String url, final String cloneWorkingDirectory, final String moduleName) {
+        this.url = url;
+        this.cloneWorkingDirectory = new File(cloneWorkingDirectory);
+        this.moduleName = moduleName;
+        this.workingDirectory = new File(this.cloneWorkingDirectory.getAbsolutePath() + "/" + this.moduleName);
     }
 
     public void doClone() {
-        final Executor executor = newExecutor().setWorkingDirectory(directory);
+        final Executor executor = newExecutor().setWorkingDirectory(cloneWorkingDirectory);
         final String[] params = buildCloneCommand();
         executor.exec(params);
         executor.waitFor();
@@ -27,7 +37,7 @@ public abstract class BaseVcs {
     }
 
     public void doCheckout(final String branchName) {
-        final Executor executor = newExecutor().setWorkingDirectory(makeCheckoutWorkingDirectory(url));
+        final Executor executor = newExecutor().setWorkingDirectory(workingDirectory);
         final String[] params = buildCheckoutCommand(branchName);
         executor.exec(params);
         executor.waitFor();
@@ -36,8 +46,8 @@ public abstract class BaseVcs {
 
     protected Executor newExecutor() {
         final Executor executor = new Executor()
-                .setTimeout(0)
-                .setBlocking(false);
+            .setTimeout(0)
+            .setBlocking(false);
         return executor;
     }
 
@@ -77,10 +87,20 @@ public abstract class BaseVcs {
         }
     }
 
-    private String makeCheckoutWorkingDirectory(final String url) {
+    private String makeWorkingDirectoryAndSetModuleName(final String url) {
+        // repo module name
         final String[] parts = url.split("/");
         final String lastPart = parts[parts.length - 1];
         final String[] name = lastPart.split("\\.");
-        return directory.getAbsolutePath() + "/" + name[0];
+        this.moduleName = name[0];
+        return cloneWorkingDirectory.getAbsolutePath() + "/" + this.moduleName;
+    }
+
+    public File getCloneWorkingDirectory() {
+        return cloneWorkingDirectory;
+    }
+
+    public File getWorkingDirectory() {
+        return workingDirectory;
     }
 }

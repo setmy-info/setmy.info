@@ -1,23 +1,26 @@
 package info.setmy.stealer.models;
 
 import info.setmy.stealer.exceptions.StealerException;
+import info.setmy.stealer.models.config.Repository;
+import info.setmy.stealer.models.steps.SVCCloneStep;
 import info.setmy.vcs.BaseVcs;
 import info.setmy.vcs.git.Git;
 import info.setmy.vcs.hg.Hg;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 @Getter
@@ -35,14 +38,14 @@ public class Stealer {
 
     private final String workingDirectory;
 
-    public void doClone() {
-        init();
-        repositories.forEach(repository -> {
-            repoTypeToVcs(repository).doClone();
-        });
+    private final List<RepositoryScript> repositoryScripts = new ArrayList<>();
+
+    public void init() {
+        initDirectories();
+        initRepositoryScripts();
     }
 
-    private void init() {
+    private void initDirectories() {
         final File clonesDir = getClonesDir();
         if (clonesDir.exists()) {
             if (clonesDir.isDirectory()) {
@@ -55,8 +58,27 @@ public class Stealer {
         try {
             Files.createDirectories(clonesPath);
         } catch (IOException ex) {
-            throw new StealerException("Coldn't create directory:" + clonesDir.getAbsolutePath(), ex);
+            throw new StealerException("Couldn't create directory:" + clonesDir.getAbsolutePath(), ex);
         }
+    }
+
+    private void initRepositoryScripts() {
+        repositories.forEach(repository -> {
+            final RepositoryScript repositoryScript = new RepositoryScript(repository, repoTypeToVcs(repository));
+            repositoryScript.addStep(new SVCCloneStep());// TODO move to ordinary configured steps?
+            addConfiguredSteps(repositoryScript);
+            repositoryScripts.add(repositoryScript);
+        });
+    }
+
+    private void addConfiguredSteps(final RepositoryScript repositoryScript) {
+        // TODO
+    }
+
+    public void steal() {
+        repositoryScripts.forEach(repositoryScript -> {
+            repositoryScript.execute();
+        });
     }
 
     private BaseVcs repoTypeToVcs(final Repository repository) {
@@ -67,8 +89,7 @@ public class Stealer {
             case HG -> {
                 return new Hg(repository.getUrl(), getClonesDirString());
             }
-            default ->
-                throw new StealerException("Not suported repo type: " + repository.getRepoType().toString());
+            default -> throw new StealerException("Not supported repo type: " + repository.getRepoType().toString());
         }
     }
 

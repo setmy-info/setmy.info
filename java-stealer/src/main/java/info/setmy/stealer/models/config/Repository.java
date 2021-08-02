@@ -1,11 +1,11 @@
-package info.setmy.stealer.models;
+package info.setmy.stealer.models.config;
 
+import info.setmy.stealer.models.RepoType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 @Getter
