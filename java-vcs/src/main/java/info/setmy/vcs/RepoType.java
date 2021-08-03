@@ -1,4 +1,4 @@
-package info.setmy.stealer.models;
+package info.setmy.vcs;
 
 /**
  *

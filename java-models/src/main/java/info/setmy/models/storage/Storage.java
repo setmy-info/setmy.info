@@ -1,7 +1,7 @@
 package info.setmy.models.storage;
 
-import info.setmy.exceptions.ForbiddenException;
 import info.setmy.exceptions.UncheckedException;
+import static info.setmy.models.storage.StorageValidator.instance;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,7 +14,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class Storage {
+public final class Storage {
 
     private final String directoryLocation;
 
@@ -28,7 +28,7 @@ public class Storage {
         if (directoryLocation == null) {
             throw new UncheckedException("Storage directory is not set");
         }
-        validateFileName(directoryLocation);
+        instance().validateFileName(directoryLocation);
         final File file = new File(directoryLocation);
         if (!file.isDirectory()) {
             throw new UncheckedException(String.format("Storage location '%s' is not directory", directoryLocation));
@@ -36,11 +36,7 @@ public class Storage {
         storageDirectory = file;
     }
 
-    public Optional<StorageFile> createStorageFile() {
-        return createStorageFile(new DirectoryStructurePattern().setDefault());
-    }
-
-    public Optional<StorageFile> createStorageFile(final DirectoryStructurePattern pattern) {
+    public Optional<StorageFile> createStorageFile(final StoragePattern pattern) {
         final String directoryName = StringUtils.trim(pattern.toString());
         String fileName;
         if (pattern.getName() == null) {
@@ -49,7 +45,7 @@ public class Storage {
         } else {
             fileName = pattern.getName();
         }
-        validateFileName(fileName);
+        instance().validateFileName(fileName);
         final Optional<File> directory = newDirectory(directoryName);
         if (directory.isPresent()) { // dir is created
             final File directoryFile = directory.get();
@@ -97,7 +93,7 @@ public class Storage {
     }
 
     private Optional<File> newDirectory(final String directoryName) {
-        validateFileName(directoryName);
+        instance().validateFileName(directoryName);
         final String dirFullPath = getPath(directoryName);
         final File directory = new File(dirFullPath);
         if (directory.exists()) {
@@ -112,37 +108,9 @@ public class Storage {
     }
 
     private File getValidatedFileObject(final String directoryPath) {
-        validateUperAndHomeChange(directoryPath);
+        instance().validateUperAndHomeChange(directoryPath);
         final File file = new File(storageDirectory, directoryPath);
         return file;
-    }
-
-    private void validateFileName(final String fileName) {
-        validateRootChange(fileName);
-        validateUperAndHomeChange(fileName);
-    }
-
-    private void validateUperAndHomeChange(final String fileName) throws ForbiddenException {
-        validateUperChange(fileName);
-        validateHomeChange(fileName);// TODO : is it needed?
-    }
-
-    private void validateRootChange(final String fileName) throws ForbiddenException {
-        if (fileName.indexOf("/") == 0) {
-            throw new ForbiddenException(String.format("File or directory '%s' is not allowed", fileName));
-        }
-    }
-
-    private void validateUperChange(final String fileName) throws ForbiddenException {
-        if (-1 != fileName.indexOf("..")) {
-            throw new ForbiddenException(String.format("File or directory '%s' is not allowed", fileName));
-        }
-    }
-
-    private void validateHomeChange(final String fileName) throws ForbiddenException {
-        if (-1 != fileName.indexOf("~")) {
-            throw new ForbiddenException(String.format("File or directory '%s' is not allowed", fileName));
-        }
     }
 
     private String getPath(final String directoryPath) {

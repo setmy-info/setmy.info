@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class DirectoryStructurePattern {
+public class DirectoryStructurePattern implements StoragePattern {
 
     private String system;
     private String owner;
@@ -48,6 +48,7 @@ public class DirectoryStructurePattern {
         this.subOwner = subOwner;
     }
 
+    @Override
     public DirectoryStructurePattern setDefault() {
         return setDate(newDate(), DirectoryStructureDepth.MINUTE);
     }
@@ -160,6 +161,7 @@ public class DirectoryStructurePattern {
         }
     }
 
+    @Override
     public String getName() {
         return name;
     }

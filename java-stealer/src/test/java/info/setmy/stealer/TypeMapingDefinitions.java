@@ -1,9 +1,9 @@
 package info.setmy.stealer;
 
-import info.setmy.stealer.models.RepoType;
+import info.setmy.vcs.RepoType;
 import io.cucumber.java.ParameterType;
 
-import static info.setmy.stealer.models.RepoType.valueOf;
+import static info.setmy.vcs.RepoType.valueOf;
 
 /**
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>

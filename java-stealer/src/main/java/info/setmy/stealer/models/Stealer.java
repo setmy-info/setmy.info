@@ -3,9 +3,8 @@ package info.setmy.stealer.models;
 import info.setmy.stealer.exceptions.StealerException;
 import info.setmy.stealer.models.config.Repository;
 import info.setmy.stealer.models.steps.SVCCloneStep;
-import info.setmy.vcs.BaseVcs;
-import info.setmy.vcs.git.Git;
-import info.setmy.vcs.hg.Hg;
+import info.setmy.vcs.Vcs;
+import info.setmy.vcs.VcsFactory;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +18,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AccessLevel;
 
 /**
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 @Getter
 @Builder
-@RequiredArgsConstructor
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Stealer {
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
@@ -81,16 +81,8 @@ public class Stealer {
         });
     }
 
-    private BaseVcs repoTypeToVcs(final Repository repository) {
-        switch (repository.getRepoType()) {
-            case GIT -> {
-                return new Git(repository.getUrl(), getClonesDirString());
-            }
-            case HG -> {
-                return new Hg(repository.getUrl(), getClonesDirString());
-            }
-            default -> throw new StealerException("Not supported repo type: " + repository.getRepoType().toString());
-        }
+    private Vcs repoTypeToVcs(final Repository repository) {
+        return VcsFactory.instanceOf(repository.getRepoType(), repository.getUrl(), getClonesDirString());
     }
 
     public File getClonesDir() {

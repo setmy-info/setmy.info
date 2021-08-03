@@ -2,7 +2,7 @@ package info.setmy.stealer.models;
 
 import info.setmy.stealer.models.config.Repository;
 import info.setmy.stealer.models.steps.Step;
-import info.setmy.vcs.BaseVcs;
+import info.setmy.vcs.Vcs;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +20,7 @@ public class RepositoryScript {
 
     private final Repository repository;
 
-    private final BaseVcs vcs;
+    private final Vcs vcs;
 
     private final List<Step> steps = new ArrayList<>();
 

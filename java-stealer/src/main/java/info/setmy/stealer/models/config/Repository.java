@@ -1,6 +1,6 @@
 package info.setmy.stealer.models.config;
 
-import info.setmy.stealer.models.RepoType;
+import info.setmy.vcs.RepoType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

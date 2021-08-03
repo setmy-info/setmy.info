@@ -1,17 +1,15 @@
-package info.setmy.vcs.git;
-
-import info.setmy.vcs.BaseVcs;
+package info.setmy.vcs;
 
 /**
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class Git extends BaseVcs {
+public class Git extends Vcs {
 
-    public Git(final String url, final String cloneWorkingDirectory) {
+    Git(final String url, final String cloneWorkingDirectory) {
         super(url, cloneWorkingDirectory);
     }
 
-    public Git(final String url, final String cloneWorkingDirectory, final String moduleName) {
+    Git(final String url, final String cloneWorkingDirectory, final String moduleName) {
         super(url, cloneWorkingDirectory, moduleName);
     }
 

@@ -8,20 +8,20 @@ import java.io.File;
 /**
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public abstract class BaseVcs {
+public abstract class Vcs {
 
     private final String url;
     private final File cloneWorkingDirectory;
     private final File workingDirectory;
     private String moduleName;
 
-    public BaseVcs(final String url, final String cloneWorkingDirectory) {
+    protected Vcs(final String url, final String cloneWorkingDirectory) {
         this.url = url;
         this.cloneWorkingDirectory = new File(cloneWorkingDirectory);
         this.workingDirectory = new File(makeWorkingDirectoryAndSetModuleName(url));
     }
 
-    public BaseVcs(final String url, final String cloneWorkingDirectory, final String moduleName) {
+    protected Vcs(final String url, final String cloneWorkingDirectory, final String moduleName) {
         this.url = url;
         this.cloneWorkingDirectory = new File(cloneWorkingDirectory);
         this.moduleName = moduleName;
@@ -46,13 +46,13 @@ public abstract class BaseVcs {
 
     protected Executor newExecutor() {
         final Executor executor = new Executor()
-            .setTimeout(0)
-            .setBlocking(false);
+                .setTimeout(0)
+                .setBlocking(false);
         return executor;
     }
 
     protected String[] buildCloneCommand() {
-        final String[] params = {getCommand(), getCloneSubCommand(), url};
+        final String[] params = {getCommand(), getCloneSubCommand(), url, moduleName};
         return params;
     }
 

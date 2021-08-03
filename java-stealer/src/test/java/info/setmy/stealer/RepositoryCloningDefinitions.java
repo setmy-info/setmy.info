@@ -1,6 +1,6 @@
 package info.setmy.stealer;
 
-import info.setmy.stealer.models.RepoType;
+import info.setmy.vcs.RepoType;
 import info.setmy.stealer.models.Stealer;
 import info.setmy.stealer.models.config.Repository;
 import io.cucumber.java.Before;
@@ -66,18 +66,18 @@ public class RepositoryCloningDefinitions {
         LOG.info("Before scenario created test data folder: {}", testDataDirString);
         LOG.info("Before scenario created test data stealer folder: {}", testDataStealerDirString);
         stealer = Stealer.builder()
-            .repositories(repositories)
-            .workingDirectory(testDataDirString)
-            .build();
+                .repositories(repositories)
+                .workingDirectory(testDataDirString)
+                .build();
     }
 
     @Given("{repoType} repository {string} with short name {string}")
     public void repository(final RepoType repoType, final String url, final String name) {
         repositories.add(Repository.builder()
-            .repoType(repoType)
-            .url(url)
-            .name(name)
-            .build()
+                .repoType(repoType)
+                .url(url)
+                .name(name)
+                .build()
         );
     }
 
