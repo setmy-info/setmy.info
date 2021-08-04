@@ -27,7 +27,7 @@ public class StealerTest {
     @Test
     public void getClonesDir() throws IOException {
         final File directory = stealer.getClonesDir();
-        assertThat(directory.getAbsolutePath()).endsWith("/setmy.info/java-stealer/./.stealer/clones");
+        assertThat(directory.getAbsolutePath()).endsWith("/java-stealer/./.stealer/clones");
     }
 
     @Test
@@ -38,7 +38,7 @@ public class StealerTest {
 
         final File directory = stealer.getClonesDir();
 
-        assertThat(directory.getAbsolutePath()).endsWith("/setmy.info/java-stealer/.stealer/clones");
+        assertThat(directory.getAbsolutePath()).endsWith("/java-stealer/.stealer/clones");
     }
 
     @Test
