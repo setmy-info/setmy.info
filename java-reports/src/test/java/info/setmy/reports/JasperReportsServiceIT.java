@@ -46,7 +46,7 @@ public class JasperReportsServiceIT {
 
     @Test
     public void testExport() {
-        final Optional<StorageFile> file = storage.createStorageFile();
+        final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setDefault());
         jasperReportsService.export(model, file.get().getChild());
     }
 }
