@@ -1,4 +1,4 @@
-package info.setmy.accouning.balance;
+package info.setmy.models.accounting.balance;
 
 import java.time.LocalDate;
 import java.util.Currency;

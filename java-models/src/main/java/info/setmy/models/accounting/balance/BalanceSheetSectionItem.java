@@ -1,4 +1,4 @@
-package info.setmy.accouning.balance;
+package info.setmy.models.accounting.balance;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
