@@ -1,7 +1,10 @@
 package info.setmy.models.accounting.balance;
 
-import java.time.LocalDate;
-import java.util.Currency;
+import info.setmy.models.Currency;
+import info.setmy.models.Organization;
+import static info.setmy.models.accounting.balance.BalanceSheetTerms.ASSETS;
+import static info.setmy.models.accounting.balance.BalanceSheetTerms.LIABILITIES;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -9,30 +12,36 @@ import java.util.Currency;
  */
 public class BalanceSheet {
 
-    private final String organizationName;
+    private final Organization organization;
 
-    private final LocalDate date;
-
-    private final BalanceSheetBody balanceSheetBody = new BalanceSheetBody();
+    private final LocalDateTime date;
 
     private final Currency currency;
 
-    public BalanceSheet(final String organizationName, final LocalDate date, final Currency currency) {
-        this.organizationName = organizationName;
-        this.date = date;
+    private final BalanceSheetSectionItem assets = new BalanceSheetSectionItem(ASSETS);
+
+    private final BalanceSheetSectionItem liabilities = new BalanceSheetSectionItem(LIABILITIES);
+
+    public BalanceSheet(final Organization organization, final LocalDateTime localDateTime, final Currency currency) {
+        this.organization = organization;
+        this.date = localDateTime;
         this.currency = currency;
     }
 
-    public String getOrganizationName() {
-        return organizationName;
+    public Organization getOrganization() {
+        return organization;
     }
 
-    public LocalDate getDate() {
+    public BalanceSheetSectionItem getAssets() {
+        return assets;
+    }
+
+    public BalanceSheetSectionItem getLiabilities() {
+        return liabilities;
+    }
+
+    public LocalDateTime getDate() {
         return date;
-    }
-
-    public BalanceSheetBody getBalanceSheetBody() {
-        return balanceSheetBody;
     }
 
     public Currency getCurrency() {
