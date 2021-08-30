@@ -1,16 +1,18 @@
 package info.setmy.models.accounting;
 
+import info.setmy.models.Currency;
+import info.setmy.models.Entity;
 import java.math.BigDecimal;
 
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class Money {
+public class Money extends Entity {
 
     private BigDecimal amount;
 
-    private String currency;
+    private Currency currency;
 
     public BigDecimal getAmount() {
         return amount;
@@ -20,11 +22,11 @@ public class Money {
         this.amount = amount;
     }
 
-    public String getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 
-    public void setCurrency(String currency) {
+    public void setCurrency(final Currency currency) {
         this.currency = currency;
     }
 }

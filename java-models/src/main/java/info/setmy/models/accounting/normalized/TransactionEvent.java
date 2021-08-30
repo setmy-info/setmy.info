@@ -1,18 +1,16 @@
-package info.setmy.models.accounting;
+package info.setmy.models.accounting.normalized;
 
-import java.time.LocalDateTime;
+import info.setmy.models.accounting.Money;
 
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class TransactionEvent {
+public class TransactionEvent extends Event {
 
     private String from;
 
     private String to;
-
-    private LocalDateTime dateTime;
 
     private final Money money = new Money();
 
@@ -30,14 +28,6 @@ public class TransactionEvent {
 
     public void setTo(String to) {
         this.to = to;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
     }
 
     public Money getMoney() {
