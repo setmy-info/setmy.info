@@ -1,6 +1,6 @@
-package info.setmy.accouning.balance;
+package info.setmy.models.accounting.balance;
 
-import static info.setmy.accouning.balance.LocalDateForTests.parseLocalDate;
+import static info.setmy.models.accounting.balance.LocalDateForTests.parseLocalDate;
 import static java.time.Month.FEBRUARY;
 import static java.util.Currency.getInstance;
 import java.util.Locale;

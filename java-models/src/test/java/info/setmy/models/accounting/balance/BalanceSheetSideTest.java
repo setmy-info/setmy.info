@@ -1,5 +1,8 @@
-package info.setmy.accouning.balance;
+package info.setmy.models.accounting.balance;
 
+import info.setmy.models.accounting.balance.BalanceSheetSectionItem;
+import info.setmy.models.accounting.balance.BalanceSheetValueItem;
+import info.setmy.models.accounting.balance.BalanceSheetSide;
 import java.math.BigDecimal;
 import static java.math.BigDecimal.ZERO;
 import static org.assertj.core.api.Assertions.assertThat;
