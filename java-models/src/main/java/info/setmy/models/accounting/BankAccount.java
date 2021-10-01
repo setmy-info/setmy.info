@@ -1,12 +1,13 @@
 package info.setmy.models.accounting;
 
 import info.setmy.models.Bank;
+import info.setmy.models.Entity;
 
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class BankAccount {
+public class BankAccount extends Entity {
 
     private Bank bank;
 

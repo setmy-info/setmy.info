@@ -1,6 +1,6 @@
 package info.setmy.models.accounting.balance;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 /**
@@ -9,9 +9,9 @@ import static java.time.format.DateTimeFormatter.ofPattern;
  */
 public class LocalDateForTests {
 
-    public static final String DATE_FORMAT = "dd.MM.yyyy";
+    public static final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
 
-    public static LocalDate parseLocalDate(final String dateString) {
-        return LocalDate.parse(dateString, ofPattern(DATE_FORMAT));
+    public static LocalDateTime parseLocalDate(final String dateString) {
+        return LocalDateTime.parse(dateString, ofPattern(DATE_TIME_FORMAT));
     }
 }
