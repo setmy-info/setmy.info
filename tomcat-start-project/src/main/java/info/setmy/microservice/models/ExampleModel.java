@@ -34,15 +34,17 @@ public class ExampleModel {
         return text;
     }
 
-    public void setText(String text) {
+    public ExampleModel setText(String text) {
         this.text = text;
+        return this;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public ExampleModel setId(Long id) {
         this.id = id;
+        return this;
     }
 }

@@ -12,20 +12,22 @@ import org.apache.logging.log4j.Logger;
 @Aspect
 public class RESTExampleAspect {
 
-    final Logger log = LogManager.getLogger(RESTExampleAspect.class);
+    final Logger log = LogManager.getLogger(this.getClass());
 
-    @Pointcut("within(info.setmy.microservice..*Rest)")
+    // Jersey related things
+    /*@Pointcut("within(info.setmy.microservice..*Rest)")
     public void restPointcut() {
-    }
+    }*/
 
     @Pointcut("within(info.setmy.microservice..*Controller)")
     public void controllerPointcut() {
     }
 
-    @AfterThrowing(pointcut = "restPointcut()", throwing = "e")
+    // Jersey related things
+    /*@AfterThrowing(pointcut = "restPointcut()", throwing = "e")
     public void doAfterThrowingInRest(final JoinPoint joinPoint, final Throwable e) {
         doAfterThrowing(joinPoint);
-    }
+    }*/
 
     @AfterThrowing(pointcut = "controllerPointcut()", throwing = "e")
     public void doAfterThrowingInController(final JoinPoint joinPoint, final Throwable e) {
@@ -37,10 +39,11 @@ public class RESTExampleAspect {
         log.info("AOP got exception in {}", methodName);
     }
 
-    @Around("restPointcut()")
+    // Jersey related things
+    /*@Around("restPointcut()")
     public Object doAroundRest(final ProceedingJoinPoint joinPoint) throws Throwable {
         return doAround(joinPoint);
-    }
+    }*/
 
     @Around("controllerPointcut()")
     public Object doAroundController(final ProceedingJoinPoint joinPoint) throws Throwable {

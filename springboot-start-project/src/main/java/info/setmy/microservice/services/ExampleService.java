@@ -25,33 +25,30 @@ import org.springframework.scheduling.annotation.Async;
  */
 @Named("exampleService")
 public class ExampleService {
-    
+
     private final Logger log = LoggerFactory.getLogger(getClass());
-    
+
     private final ExampleDao exampleDao;
-    
+
     private final ExampleProperties exampleProperties;
-    
+
     private final ExampleRepository exampleRepository;
-    
+
     private final JDBCExampleDao jdbcExampleDao;
-    
+
     private final JPAExampleDao jpaExampleDao;
-    
+
     private final PersonRepository personRepository;
-    
+
     private final Cache cache;
-    
-    private final DozerService dozerService;
-    
+
     public ExampleService(final ExampleDao exampleDao,
             final ExampleProperties exampleProperties,
             final ExampleRepository exampleRepository,
             final JDBCExampleDao jdbcExampleDao,
             final JPAExampleDao jpaExampleDao,
             final PersonRepository personRepository,
-            final Cache cache,
-            final DozerService dozerService) {
+            final Cache cache) {
         this.exampleDao = exampleDao;
         this.exampleProperties = exampleProperties;
         this.exampleRepository = exampleRepository;
@@ -59,9 +56,8 @@ public class ExampleService {
         this.jpaExampleDao = jpaExampleDao;
         this.personRepository = personRepository;
         this.cache = cache;
-        this.dozerService = dozerService;
     }
-    
+
     @Transactional
     public ExampleModel getExampleModel() {
         String counterKey = "counter";
@@ -79,25 +75,25 @@ public class ExampleService {
         //insertData();
         //final ExampleModel model = exampleDao.getExampleModel();
         final ExampleModel model = exampleRepository.findAll().get(0);
-        final ExampleModel newModel = dozerService.copyExampleModel(model);
+        final ExampleModel newModel = new ExampleModel().setId(model.getId()).setDateTime(model.getDateTime()).setText(model.getText());
         return newModel;
     }
-    
+
     private void insertData() {
         ExampleModel model = new ExampleModel();
         model.setText("Hello World from JPA inserted data!");
         exampleRepository.save(model);
-        
+
         model = new ExampleModel();
         model.setId(10L);// Not needed with autoincrement DB
         model.setText("Hello World from JDBC inserted data vol 2!");
         jdbcExampleDao.save(model);
-        
+
         model = new ExampleModel();
         model.setText("Hello World from JPA inserted data vol 3!");
         jpaExampleDao.save(model);
     }
-    
+
     public String getAsyncCallsResults() {
         final CompletableFuture<String> foo = getFoo();
         final CompletableFuture<String> bar = getBar();
@@ -112,25 +108,25 @@ public class ExampleService {
             throw new MicroServiceException(ex);
         }
     }
-    
+
     @Async
     public CompletableFuture<String> getFoo() {
         sleep(1000L);
         return completedFuture("Foo");
     }
-    
+
     @Async
     public CompletableFuture<String> getBar() {
         sleep(1200L);
         return completedFuture("Bar");
     }
-    
+
     @Async
     public CompletableFuture<String> getMore() {
         sleep(500L);
         return completedFuture("More");
     }
-    
+
     private void sleep(final long timeout) {
         try {
             Thread.sleep(timeout);

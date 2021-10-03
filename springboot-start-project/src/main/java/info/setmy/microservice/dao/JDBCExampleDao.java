@@ -45,7 +45,7 @@ public class JDBCExampleDao extends JDBCBaseDao implements RowMapper<ExampleMode
     public List<ExampleModel> findByText(final String exampleText) {
         log.debug("FIND BY TEXT");
         final String searchText = builder("%", exampleText, "%").toString();
-        final List<ExampleModel> examples = jdbcTemplate.query(FIND_BY_TEXT, placeholders(searchText), this);
+        final List<ExampleModel> examples = jdbcTemplate.query(FIND_BY_TEXT, this, placeholders(searchText));
         return examples;
     }
 

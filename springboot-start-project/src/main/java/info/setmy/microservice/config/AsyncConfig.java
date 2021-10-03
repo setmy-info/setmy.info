@@ -1,7 +1,8 @@
 package info.setmy.microservice.config;
 
 import java.util.concurrent.Executor;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -11,8 +12,9 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 @Configuration
-@Log4j2
 public class AsyncConfig {
+
+    public Logger log = LogManager.getLogger(this.getClass());
 
     @Bean
     public Executor taskExecutor() {
