@@ -13,11 +13,12 @@ import io.cucumber.junit.CucumberOptions
 @CucumberOptions(
     plugin = [
                 "pretty",
-                "html:target/cucumber/cucumber.html",
-                "json:target/cucumber/cucumber.json"
+                "summary",
+                "html:target/cucumber/examples/cucumber.html",
+                "json:target/cucumber/examples/cucumber.json"
     ],
     strict = true,
-    features = ["src/test/cucumber"]
+    features = ["src/test/cucumber/examples"]
 )
-public class CukesTest {
+public class CukesVintageTest {
 }

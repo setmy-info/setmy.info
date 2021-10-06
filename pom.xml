@@ -56,6 +56,7 @@
         <maven.project.info.reports.plugin.version>3.1.2</maven.project.info.reports.plugin.version>
         <maven.checkstyle.plugin.versoin>3.1.2</maven.checkstyle.plugin.versoin>
         <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
+        <gmavenplus.plugin.version>1.13.0</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>1.4</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.6.8</nexus.staging.plugin.version>
         <taglist.maven.plugin.version>2.4</taglist.maven.plugin.version>

@@ -314,21 +314,18 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.13.0</version>
+                <version>${gmavenplus.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>execute</goal>
-                            <!--goal>addSources</goal>
+                            <goal>addSources</goal>
                             <goal>addTestSources</goal>
                             <goal>generateStubs</goal>
-                            <goal>generateTestStubs</goal>
                             <goal>compile</goal>
+                            <goal>generateTestStubs</goal>
                             <goal>compileTests</goal>
                             <goal>removeStubs</goal>
                             <goal>removeTestStubs</goal>
-                            <goal>groovydoc</goal>
-                            <goal>groovydocTests</goal-->
                         </goals>
                     </execution>
                 </executions>
@@ -530,7 +527,7 @@
                 </executions>
             </plugin-->
             <plugin>
-        	<!-- https://www.eclipse.org/jetty/documentation/jetty-10/programming-guide/index.html#jetty-maven-plugin -->
+                <!-- https://www.eclipse.org/jetty/documentation/jetty-10/programming-guide/index.html#jetty-maven-plugin -->
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${maven.jetty.plugin.version}</version>

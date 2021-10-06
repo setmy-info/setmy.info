@@ -61,6 +61,7 @@
         <maven.project.info.reports.plugin.version>3.1.2</maven.project.info.reports.plugin.version>
         <maven.checkstyle.plugin.versoin>3.1.2</maven.checkstyle.plugin.versoin>
         <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
+        <gmavenplus.plugin.version>1.13.0</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>1.4</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.6.8</nexus.staging.plugin.version>
         <spring.boot.verions>2.5.5</spring.boot.verions>
@@ -289,19 +290,16 @@
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
             <version>${groovy.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-json</artifactId>
             <version>${groovy.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-xml</artifactId>
             <version>${groovy.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.gatling.highcharts</groupId>
@@ -536,6 +534,40 @@
                 <configuration>
                     <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000</jvmArguments>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>${gmavenplus.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>addSources</goal>
+                            <goal>addTestSources</goal>
+                            <goal>generateStubs</goal>
+                            <goal>compile</goal>
+                            <goal>generateTestStubs</goal>
+                            <goal>compileTests</goal>
+                            <goal>removeStubs</goal>
+                            <goal>removeTestStubs</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scripts>
+                        <script><![CDATA[
+                            // your script here
+                        ]]></script>
+                    </scripts>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy</artifactId>
+                        <version>${groovy.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

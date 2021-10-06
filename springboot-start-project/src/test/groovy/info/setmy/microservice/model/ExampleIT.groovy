@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-class ExampleGroovyModelTest {
-
+class ExampleIT {
+    
     ExampleGroovyModel example
     
     @BeforeEach
@@ -22,4 +22,3 @@ class ExampleGroovyModelTest {
         assert example.name == "Imre"
     }
 }
-

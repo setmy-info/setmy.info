@@ -112,21 +112,18 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.12.1</version>
+                <version>${gmavenplus.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>execute</goal>
-                            <!--goal>addSources</goal>
+                            <goal>addSources</goal>
                             <goal>addTestSources</goal>
                             <goal>generateStubs</goal>
-                            <goal>generateTestStubs</goal>
                             <goal>compile</goal>
+                            <goal>generateTestStubs</goal>
                             <goal>compileTests</goal>
                             <goal>removeStubs</goal>
                             <goal>removeTestStubs</goal>
-                            <goal>groovydoc</goal>
-                            <goal>groovydocTests</goal-->
                         </goals>
                     </execution>
                 </executions>
@@ -373,7 +370,7 @@
             <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.1</version>
                 <configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
@@ -455,11 +452,11 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-            </plugin>
-            <plugin>
+            </plugin-->
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.1.1</version>
                 <reportSets>
                     <reportSet>
                         <reports>

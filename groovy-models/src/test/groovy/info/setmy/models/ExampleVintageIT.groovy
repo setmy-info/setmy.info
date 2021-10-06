@@ -1,17 +1,17 @@
 package info.setmy.models
 
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.Before
+import org.junit.Test
 
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-class ExampleIT {
+class ExampleVintageIT {
     
     Example example
     
-    @BeforeEach
+    @Before
     void before() {
         example = new Example()
         example.firstName = "Imre"

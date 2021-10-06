@@ -11,7 +11,6 @@ import org.junit.jupiter.api.TestInfo
 import org.junit.jupiter.api.Timeout
 import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
-import static org.junit.Assert.*
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

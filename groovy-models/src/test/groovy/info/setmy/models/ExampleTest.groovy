@@ -1,8 +1,7 @@
 package info.setmy.models
 
-import org.junit.Before
-import org.junit.Test
-import static org.junit.Assert.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  *
@@ -12,7 +11,7 @@ class ExampleTest {
     
     Example example
     
-    @Before
+    @BeforeEach
     void before() {
         example = new Example()
         example.firstName = "Imre"
