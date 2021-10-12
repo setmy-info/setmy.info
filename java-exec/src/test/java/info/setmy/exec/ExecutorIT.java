@@ -1,6 +1,7 @@
 package info.setmy.exec;
 
 import info.setmy.exec.exceptions.ExecutionError;
+import org.apache.commons.lang3.SystemUtils;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,10 +15,11 @@ public class ExecutorIT {
 
     private Executor executor;
 
-    private final String NORMAL_PROGRAM = "./src/test/sh/normal.sh";
-    private final String NORMAL_TIMEOUT_PROGRAM = "./src/test/sh/timeout.sh";
-    private final String ERROR_PROGRAM = "./src/test/sh/error.sh";
-    private final String WITHOUT_EXEC_BIT_PROGRAM = "./src/test/sh/withoutexec.sh";
+    private final String SUFFIX = SystemUtils.IS_OS_WINDOWS ? ".cmd" : ".sh";
+    private final String NORMAL_PROGRAM = "./src/test/sh/normal" + SUFFIX;
+    private final String NORMAL_TIMEOUT_PROGRAM = "./src/test/sh/timeout" + SUFFIX;
+    private final String ERROR_PROGRAM = "./src/test/sh/error" + SUFFIX;
+    private final String WITHOUT_EXEC_BIT_PROGRAM = "./src/test/sh/withoutexec" + SUFFIX;
 
     @BeforeEach
     public void before() {
