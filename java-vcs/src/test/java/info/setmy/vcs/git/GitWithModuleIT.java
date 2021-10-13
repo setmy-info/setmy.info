@@ -12,6 +12,9 @@ import java.io.File;
 import java.io.IOException;
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import static org.junit.jupiter.api.condition.OS.WINDOWS;
 
 /**
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
@@ -35,11 +38,21 @@ public class GitWithModuleIT {
     }
 
     @Test
+    @DisabledOnOs(WINDOWS)
     public void initial_directories() {
         assertThat(vcsA.getCloneWorkingDirectory().getAbsolutePath()).endsWith("/java-vcs/target");
         assertThat(vcsA.getWorkingDirectory().getAbsolutePath()).endsWith("/java-vcs/target/module-a");
         assertThat(vcsB.getCloneWorkingDirectory().getAbsolutePath()).endsWith("/java-vcs/target");
         assertThat(vcsB.getWorkingDirectory().getAbsolutePath()).endsWith("/java-vcs/target/module-b");
+    }
+
+    @Test
+    @EnabledOnOs(WINDOWS)
+    public void initial_directoriesWin() {
+        assertThat(vcsA.getCloneWorkingDirectory().getAbsolutePath()).endsWith("\\java-vcs\\target");
+        assertThat(vcsA.getWorkingDirectory().getAbsolutePath()).endsWith("\\target\\module-a");
+        assertThat(vcsB.getCloneWorkingDirectory().getAbsolutePath()).endsWith("\\java-vcs\\target");
+        assertThat(vcsB.getWorkingDirectory().getAbsolutePath()).endsWith("\\target\\module-b");
     }
 
     @Test
