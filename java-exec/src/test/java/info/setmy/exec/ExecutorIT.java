@@ -18,7 +18,7 @@ public class ExecutorIT {
     private Executor executor;
 
     private final String SUFFIX = SystemUtils.IS_OS_WINDOWS ? ".cmd" : ".sh";
-    private final String FOLDER = SystemUtils.IS_OS_WINDOWS ? "cmd" : ".sh";
+    private final String FOLDER = SystemUtils.IS_OS_WINDOWS ? "cmd" : "sh";
     private final String NORMAL_PROGRAM = "./src/test/" + FOLDER + "/normal" + SUFFIX;
     private final String NORMAL_TIMEOUT_PROGRAM = "./src/test/" + FOLDER + "/timeout" + SUFFIX;
     private final String ERROR_PROGRAM = "./src/test/" + FOLDER + "/error" + SUFFIX;
