@@ -36,13 +36,14 @@ setmy-info-scripts/build/
 live.mv.db
 live.trace.db
 
-setmy-info-docker/setmy-info-centos-java/jdk*
-setmy-info-docker/setmy-info-centos-java/openjdk-*.tar.gz
-setmy-info-docker/setmy-info-centos-java-tomcat/apache-tomcat-*
-setmy-info-docker/setmy-info-centos-node/node-v*
-setmy-info-docker/setmy-info-centos-java-zeebe/zeebe-broker-*
-setmy-info-docker/setmy-info-centos-java-zeebe/zeebe-distribution-*
-setmy-info-docker/setmy-info-centos-java-infinispan/infinispan-server-*
+setmy-info-docker/setmy-info-rocky-java/jdk*
+setmy-info-docker/setmy-info-rocky-java/openjdk-*.tar.gz
+setmy-info-docker/setmy-info-rocky-java-tomcat/apache-tomcat-*
+setmy-info-docker/setmy-info-rocky-node/node-v*
+setmy-info-docker/setmy-info-rocky-java-zeebe/zeebe-broker-*
+setmy-info-docker/setmy-info-rocky-java-zeebe/zeebe-distribution-*
+setmy-info-docker/setmy-info-rocky-java-zeebe/camunda-cloud-zeebe-*
+setmy-info-docker/setmy-info-rocky-java-infinispan/infinispan-server-*
 
 tomcat-start-project/download/*
 tomcat-start-project/apache-tomcat*
