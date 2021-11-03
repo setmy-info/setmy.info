@@ -1,6 +1,6 @@
 # Copyright Imre Tabur
 
-DOCKER_PROJECT_NAME="springboot-start-project"
+DOCKER_PROJECT_NAME="tomcat-start-project"
 DOCKER_PROJECT_VERSION="1.2.0-SNAPSHOT"
 DOCKER_ID_ORGANIZATION="setmyinfo"
 
