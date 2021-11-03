@@ -2,6 +2,7 @@ package info.setmy.stealer.models;
 
 import java.io.File;
 import java.io.IOException;
+import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +28,7 @@ public class StealerTest {
     @Test
     public void getClonesDir() throws IOException {
         final File directory = stealer.getClonesDir();
-        assertThat(directory.getAbsolutePath()).endsWith("/java-stealer/./.stealer/clones");
+        assertThat(directory.getAbsolutePath()).endsWith(byOS("/java-stealer/./.stealer/clones"));
     }
 
     @Test
@@ -38,7 +39,7 @@ public class StealerTest {
 
         final File directory = stealer.getClonesDir();
 
-        assertThat(directory.getAbsolutePath()).endsWith("/java-stealer/.stealer/clones");
+        assertThat(directory.getAbsolutePath()).endsWith(byOS("/java-stealer/.stealer/clones"));
     }
 
     @Test
@@ -50,6 +51,14 @@ public class StealerTest {
 
         final File directory = stealer.getClonesDir();
 
-        assertThat(directory.getAbsolutePath()).isEqualTo("/some/dir/.stealer/clones");
+        if(IS_OS_WINDOWS) {
+            assertThat(directory.getAbsolutePath()).isEqualTo("C:\\some\\dir\\.stealer\\clones");
+        } else {
+            assertThat(directory.getAbsolutePath()).isEqualTo("/some/dir/.stealer/clones");
+        }
+    }
+
+    private String byOS(final String inputString) {
+        return IS_OS_WINDOWS ? inputString.replace("/", "\\"): inputString;
     }
 }
