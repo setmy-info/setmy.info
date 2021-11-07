@@ -1,0 +1,24 @@
+FROM base
+
+MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
+
+# http://label-schema.org/rc1/
+LABEL org.label-schema.name="Base FreeBSD file strucure for FreeBSD based jails" \
+      org.label-schema.version="13.0-RELEASE" \
+      org.label-schema.description="setmy.info base jail" \
+      org.label-schema.vendor="Hear And See Systems LLC" \
+      org.label-schema.url="https://www.hearandseesystems.com" \
+      org.label-schema.license="MIT" \
+      org.label-schema.schema-version="1.0" \
+      org.label-schema.build-date=$BUILD_DATE
+
+FB_UPDATE
+UPDATE
+UPGRADE
+INSTALL pkg mc nano bash dash
+
+SYSRC sendmail_enable=NONE
+SYSRC syslogd_flags=-ss
+SYSRC rpcbind_enable=NO
+
+PACKAGE

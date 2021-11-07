@@ -1,11 +1,11 @@
-FROM base
+FROM setmy-info-base-freebsd:13.0-RELEASE
 
 MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 
 # http://label-schema.org/rc1/
-LABEL org.label-schema.name="Base Jail for FreeBSD" \
+LABEL org.label-schema.name="FreeBSD file strucure for FreeBSD based jails" \
       org.label-schema.version="13.0-RELEASE" \
-      org.label-schema.description="setmy.info base jail" \
+      org.label-schema.description="setmy.info FreeBSD SOE jail" \
       org.label-schema.vendor="Hear And See Systems LLC" \
       org.label-schema.url="https://www.hearandseesystems.com" \
       org.label-schema.license="MIT" \
@@ -15,16 +15,32 @@ LABEL org.label-schema.name="Base Jail for FreeBSD" \
 FB_UPDATE
 UPDATE
 UPGRADE
-INSTALL pkg mc nano bash
+RUN freebsd-version
+PW addgroup -n microservice
+PW adduser microservice -g microservice -d /nonexistent -s /usr/sbin/nologin -c "Microservice nologin user"
+RUN mkdir -p /opt/has/bin
+RUN mkdir -p /opt/has/lib
+RUN mkdir -p /opt/has/doc
+RUN mkdir -p /opt/has/man
+RUN mkdir -p /opt/has/etc
+RUN mkdir -p /var/opt/has
+RUN mkdir -p /var/opt/has/microservice
+RUN chown -R root:root /opt/has
+RUN chown -R microservice:microservice /var/opt/has
+RUN chmod -R u+rwx /opt/has
+RUN chmod -R go+rx /opt/has
+RUN chmod -R go-w  /opt/has
 
-SYSRC sendmail_enable=\"NONE\"
-SYSRC syslogd_flags=\"-ss\"
-SYSRC echo rpcbind_enable=\"NO\"
+CD /opt
+RUN ls -la
 
-# Are not going into base
-#PW addgroup -n microservice
-#PW adduser microservice -g microservice -d /nonexistent -s /usr/sbin/nologin -c "Microservice nologin user"
-#COPY /etc/resolv.conf /etc/resolv.conf
-#RUN cat /etc/resolv.conf
+CD /opt/has
+RUN ls -la
+
+CD /var/opt
+RUN ls -la
+
+CD /var/opt/has
+RUN ls -ls
 
 PACKAGE
