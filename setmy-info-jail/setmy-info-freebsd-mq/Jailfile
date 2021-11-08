@@ -1,0 +1,25 @@
+FROM setmy-info-freebsd:13.0-RELEASE
+
+MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
+
+# http://label-schema.org/rc1/
+LABEL org.label-schema.name="FreeBSD file strucure for FreeBSD Mosquitto, RabbitMQ, Kafka jails" \
+      org.label-schema.version="13.0-RELEASE" \
+      org.label-schema.description="setmy.info FreeBSD SOE jail" \
+      org.label-schema.vendor="Hear And See Systems LLC" \
+      org.label-schema.url="https://www.hearandseesystems.com" \
+      org.label-schema.license="MIT" \
+      org.label-schema.schema-version="1.0" \
+      org.label-schema.build-date=$BUILD_DATE
+
+FB_UPDATE
+UPDATE
+UPGRADE
+INSTALL mosquitto rabbitmq
+INSTALL kafka zookeeper
+SYSRC mosquitto_enable=YES
+SYSRC rabbitmq_enable=YES
+SYSRC zookeeper_enable=YES
+SYSRC kafka_enable=YES
+
+PACKAGE
