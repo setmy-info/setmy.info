@@ -1,6 +1,6 @@
-# setmy-info-freebsd-node
+# setmy-info-freebsd-tomcat
 
-setmy.info FreeBSD Java node project.
+setmy.info FreeBSD Java Tomcat project.
 
 ## Development
 

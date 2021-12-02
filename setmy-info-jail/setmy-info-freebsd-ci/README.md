@@ -1,6 +1,6 @@
-# setmy-info-freebsd-node
+# setmy-info-freebsd-ci
 
-setmy.info FreeBSD Java node project.
+setmy.info FreeBSD Java Jenkins CI project.
 
 ## Development
 

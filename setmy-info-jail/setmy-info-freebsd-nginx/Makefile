@@ -1,7 +1,7 @@
 # Copyright Imre Tabur
 
 JAIL_PROJECT_NAME="setmy-info-freebsd-nginx"
-JAIL_PROJECT_VERSION="13.0-RELEASE"
+JAIL_PROJECT_VERSION="1.20.2"
 
 all: build
 

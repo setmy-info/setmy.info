@@ -1,6 +1,6 @@
-# setmy-info-freebsd-nginx
+# setmy-info-freebsd-mq
 
-setmy.info FreeBSD Java Nginx project.
+setmy.info FreeBSD Java message queue project.
 
 ## Development
 

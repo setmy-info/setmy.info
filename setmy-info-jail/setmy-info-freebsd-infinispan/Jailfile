@@ -4,7 +4,7 @@ MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
 
 # http://label-schema.org/rc1/
 LABEL org.label-schema.name="FreeBSD file strucure for FreeBSD Infinispan jail" \
-      org.label-schema.version="13.0-RELEASE" \
+      org.label-schema.version="13.0.2" \
       org.label-schema.description="setmy.info FreeBSD SOE jail" \
       org.label-schema.vendor="Hear And See Systems LLC" \
       org.label-schema.url="https://www.hearandseesystems.com" \
@@ -15,7 +15,7 @@ LABEL org.label-schema.name="FreeBSD file strucure for FreeBSD Infinispan jail" 
 FB_UPDATE
 UPDATE
 UPGRADE
-COPY infinispan-server-13.0.1.Final /usr/local/infinispan-server
+COPY infinispan-server-13.0.2.Final /usr/local/infinispan-server
 COPY src/infinispan-starter /usr/local/infinispan-server/bin
 
 RUN chown -R root:root /usr/local/infinispan-server

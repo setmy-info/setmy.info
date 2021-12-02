@@ -1,6 +1,6 @@
-# setmy-info-freebsd-node
+# setmy-info-freebsd-infinispan
 
-setmy.info FreeBSD Java node project.
+setmy.info FreeBSD Java Infinispan project.
 
 ## Development
 
