@@ -2,17 +2,17 @@ package info.setmy.jaxb;
 
 import info.setmy.exceptions.ParsingException;
 import info.setmy.exceptions.RenderingException;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Marshaller.Listener;
+import jakarta.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Marshaller.Listener;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import org.apache.logging.log4j.LogManager;
@@ -183,5 +183,5 @@ public class JAXBService {
         }
 
     }
-    */
+     */
 }

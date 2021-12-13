@@ -17,7 +17,6 @@ import io.cucumber.junit.CucumberOptions
                 "html:target/cucumber/examples/cucumber.html",
                 "json:target/cucumber/examples/cucumber.json"
     ],
-    strict = true,
     features = ["src/test/cucumber/examples"]
 )
 public class CukesTest {

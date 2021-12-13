@@ -20,8 +20,6 @@ public class LuceneServiceIT {
 
     static final Logger LOG = LoggerFactory.getLogger(LuceneServiceIT.class);
 
-    private LuceneService memoryLuceneService;
-
     private LuceneService diskLuceneService;
 
     private final static String DIR = "target/lucene";
@@ -33,34 +31,14 @@ public class LuceneServiceIT {
     @BeforeEach
     public void before() throws IOException {
         FileUtils.deleteDirectory(new File(DIR));
-        memoryLuceneService = new LuceneService();
         diskLuceneService = new LuceneService(DIR, INDEX);
-        memoryLuceneService.init();
         diskLuceneService.init();
         prepareBooks();
     }
 
     @AfterEach
     public void after() {
-        memoryLuceneService.close();
         diskLuceneService.close();
-    }
-
-    @Test
-    public void memoryIndexing() throws IOException {
-        memoryLuceneService.write(books[0]);
-        memoryLuceneService.write(books[1]);
-        memoryLuceneService.write(books[2]);
-        memoryLuceneService.write(books[3]);
-
-        final List<BookDocument> documentList = memoryLuceneService.query("lucene", "title", new Paging(), BookDocument.class);
-
-        LOG.info("Book: '{}' ISBN: {}", documentList.get(0).getTitle(), documentList.get(0).getISBN());
-        assertThat(documentList.get(0).getISBN()).isEqualTo("193398817");
-        assertThat(documentList.get(0).getTitle()).isEqualTo("Lucene in Action");
-        LOG.info("Book: '{}' ISBN: {}", documentList.get(1).getTitle(), documentList.get(0).getISBN());
-        assertThat(documentList.get(1).getISBN()).isEqualTo("55320055Z");
-        assertThat(documentList.get(1).getTitle()).isEqualTo("Lucene for Dummies");
     }
 
     @Test
