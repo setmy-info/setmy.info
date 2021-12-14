@@ -41,12 +41,12 @@
         <lucene.version>9.0.0</lucene.version>
         <groovy.version>3.0.9</groovy.version>
         <cucumber.version>7.1.0</cucumber.version>
-        <pitest.version>1.7.0</pitest.version>
+        <pitest.version>1.7.3</pitest.version>
         <jersey.version>3.0.2</jersey.version>
         <jackson.version>2.13.0</jackson.version>
         <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
         <maven.jetty.plugin.version>11.0.6</maven.jetty.plugin.version>
-        <dependency.check.version>6.3.1</dependency.check.version>
+        <dependency.check.version>6.5.0</dependency.check.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.site.plugin.version>3.9.1</maven.site.plugin.version>
         <maven.release.plugin.version>2.5.3</maven.release.plugin.version>
