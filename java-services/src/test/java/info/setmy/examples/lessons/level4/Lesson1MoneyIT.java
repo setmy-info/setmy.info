@@ -2,8 +2,6 @@ package info.setmy.examples.lessons.level4;
 
 import java.math.BigDecimal;
 import java.util.Locale;
-import javax.money.CurrencyQuery;
-import javax.money.CurrencyQueryBuilder;
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
@@ -16,21 +14,24 @@ import javax.money.convert.MonetaryConversions;
 import javax.money.format.AmountFormatQueryBuilder;
 import javax.money.format.MonetaryAmountFormat;
 import javax.money.format.MonetaryFormats;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.javamoney.moneta.Money;
 import org.javamoney.moneta.format.CurrencyStyle;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
+ * Commented out becaus of later decision.
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 public class Lesson1MoneyIT {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    final Logger log = LogManager.getLogger(this.getClass());
 
     @Test
+    @Disabled
     public void money() {
         CurrencyUnit copUnit = Monetary.getCurrency("COP");
         CurrencyUnit eurUnit = Monetary.getCurrency("EUR");

@@ -2,7 +2,7 @@
 dataSource:
     jdbc:
         driverClassName: org.h2.Driver
-        url: jdbc:h2:file:./live
+        url: jdbc:h2:file:./target/live
         username: sa
         password:
 # PostgreSQL

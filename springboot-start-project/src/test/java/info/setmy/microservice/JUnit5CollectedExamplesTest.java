@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -22,35 +22,35 @@ import org.slf4j.LoggerFactory;
 @TestMethodOrder(OrderAnnotation.class)
 public class JUnit5CollectedExamplesTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JUnit5CollectedExamplesTest.class);
+    private static final Logger log = LogManager.getLogger(JUnit5CollectedExamplesTest.class);
 
     @BeforeAll
     public static void initAll() {
-        LOG.info("beforeEach");
+        log.info("beforeEach");
     }
 
     @BeforeEach
     public void beforeEach(final TestInfo testInfo) throws InterruptedException {
-        LOG.info("beforeEach: {}", testInfo.getDisplayName());
+        log.info("beforeEach: {}", testInfo.getDisplayName());
     }
 
     @AfterEach
     public void afterEach() {
-        LOG.info("afterEach");
+        log.info("afterEach");
     }
 
     @AfterEach
     public void afterEach(final TestInfo testInfo) {
-        LOG.info("afterEach: {}", testInfo.getDisplayName());
+        log.info("afterEach: {}", testInfo.getDisplayName());
     }
 
     @AfterAll
     public static void afterAll() {
-        LOG.info("afterAll");
+        log.info("afterAll");
     }
 
     @Test
     public void skippedTest() {
-        LOG.info("skippedTest");
+        log.info("skippedTest");
     }
 }

@@ -14,8 +14,8 @@ import static java.util.concurrent.CompletableFuture.completedFuture;
 import java.util.concurrent.ExecutionException;
 import javax.inject.Named;
 import javax.transaction.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.cache.Cache;
 import org.springframework.scheduling.annotation.Async;
 
@@ -26,7 +26,7 @@ import org.springframework.scheduling.annotation.Async;
 @Named("exampleService")
 public class ExampleService {
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LogManager.getLogger(getClass());
 
     private final ExampleDao exampleDao;
 

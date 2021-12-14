@@ -46,8 +46,8 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.NullSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -59,45 +59,45 @@ import org.slf4j.LoggerFactory;
 @TestMethodOrder(OrderAnnotation.class)
 public class JUnit5CollectedExamplesTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JUnit5CollectedExamplesTest.class);
+    private final static Logger log = LogManager.getLogger(JUnit5CollectedExamplesTest.class);
 
     @BeforeAll
     public static void initAll() {
-        LOG.info("beforeEach");
+        log.info("beforeEach");
     }
 
     @BeforeEach
     @Timeout(2)
     public void beforeEach(final TestInfo testInfo) throws InterruptedException {
-        LOG.info("beforeEach: {}", testInfo.getDisplayName());
+        log.info("beforeEach: {}", testInfo.getDisplayName());
         //Thread.sleep(seconds(3));
     }
 
     @Before
     public void before() {
-        LOG.info("before");
+        log.info("before");
     }
 
     @After
     public void after() {
-        LOG.info("after");
+        log.info("after");
     }
 
     @AfterEach
     public void afterEach(final TestInfo testInfo) {
-        LOG.info("afterEach: {}", testInfo.getDisplayName());
+        log.info("afterEach: {}", testInfo.getDisplayName());
     }
 
     @AfterAll
     public static void afterAll() {
-        LOG.info("afterAll");
+        log.info("afterAll");
     }
 
     @Order(1)
     @Test
     @Disabled("for demonstration purposes")
     public void skippedTest() {
-        LOG.info("skippedTest");
+        log.info("skippedTest");
         fail("test should have not been executed");
     }
 
@@ -106,7 +106,7 @@ public class JUnit5CollectedExamplesTest {
     @FastTest// Same as: @Tag("fast") @Test
     @Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
     public void fastTest() throws InterruptedException {
-        LOG.info("fastTest");
+        log.info("fastTest");
         assumeTrue(true);
         assertThat(true).isEqualTo(true);
         assumingThat("value".equals("another value"), () -> {
@@ -139,28 +139,28 @@ public class JUnit5CollectedExamplesTest {
     @EmptySource
     @ValueSource(strings = {" ", "   ", "\t", "\n", "Hello", "World", ""})
     public void texts(String text) {
-        LOG.info("testing texts: {}", text);
+        log.info("testing texts: {}", text);
     }
 
     @Order(4)
     @RepeatedTest(3)
     @DisplayName("display name: test 1 ")
     public void test1() {
-        LOG.info("### Testing 1 ###");
+        log.info("### Testing 1 ###");
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"Hello", "World"})
     @DisplayName("display name: test 2 ")
     public void test2(final String word) {
-        LOG.info("### Testing 2 {} ###", word);
+        log.info("### Testing 2 {} ###", word);
     }
 
     @Order(5)
     @Test
     @DisplayName(", display name: test 3 ")
     public void test3() {
-        LOG.info("### Testing 3 ###");
+        log.info("### Testing 3 ###");
     }
 
     @Order(6)
@@ -168,7 +168,7 @@ public class JUnit5CollectedExamplesTest {
     @Disabled
     @DisplayName(" example test 4 ")
     public void test4(final TestInfo testInfo) {
-        LOG.info("### Testing 4 ###");
+        log.info("### Testing 4 ###");
         fail("Just failing {}" + testInfo.getDisplayName());
     }
 
@@ -176,7 +176,7 @@ public class JUnit5CollectedExamplesTest {
     @Test
     @EnabledOnOs({LINUX, MAC, WINDOWS})
     public void osActive(final TestInfo testInfo, TestReporter testReporter) {
-        LOG.info("Executed on some OS-s");
+        log.info("Executed on some OS-s");
         testReporter.publishEntry("a status message");
     }
 
@@ -184,21 +184,21 @@ public class JUnit5CollectedExamplesTest {
     @Test
     @DisabledOnOs(WINDOWS)
     void notOnWindows() {
-        LOG.info("Not executed on Windows");
+        log.info("Not executed on Windows");
     }
 
     @Order(9)
     @Test
     @EnabledOnJre({JAVA_8, JAVA_9, JAVA_10, JAVA_11, JAVA_12, JAVA_13})
     void onlyOnSomeJREs() {
-        LOG.info("executed on correct JRE versions!");
+        log.info("executed on correct JRE versions!");
     }
 
     @Order(10)
     @Test
     @EnabledForJreRange(max = JAVA_12)
     void onJRERange() {
-        LOG.info("Up to {} JRE not allowed", JAVA_12);
+        log.info("Up to {} JRE not allowed", JAVA_12);
         fail("Not allowed JRE!");
     }
 
@@ -206,21 +206,21 @@ public class JUnit5CollectedExamplesTest {
     @Test
     @EnabledIfSystemProperty(named = "os.arch", matches = ".*64.*")
     void onlyOn64BitArchitectures() {
-        LOG.info("Allowed architecture!");
+        log.info("Allowed architecture!");
     }
 
     @Order(12)
     @Test
     @EnabledIfEnvironmentVariable(named = "TEST_ENVIRONMENT", matches = "CI")
     void onlyOnCIServer() {
-        LOG.info("executed when environment variable is set with correct value");
+        log.info("executed when environment variable is set with correct value");
     }
 
     @Order(13)
     @Test
     @DisabledIfEnvironmentVariable(named = "TEST_ENVIRONMENT", matches = "CI")
     void notOnCIServer() {
-        LOG.info("execute is disabled when environment variable is set with correct value");
+        log.info("execute is disabled when environment variable is set with correct value");
     }
 
     @Order(14)
@@ -228,7 +228,7 @@ public class JUnit5CollectedExamplesTest {
     @DisplayName("repeated test")
     @RepeatedTest(value = 5, name = "Current {displayName}: {currentRepetition} to {totalRepetitions}")
     void repeatedTestInGerman() {
-        LOG.info("repeating");
+        log.info("repeating");
     }
 
     @Order(15)
@@ -236,7 +236,7 @@ public class JUnit5CollectedExamplesTest {
     @NullSource
     @EnumSource(value = NumbersEnum.class, mode = EnumSource.Mode.EXCLUDE, names = {"ONE"})
     void testWithEnumSource(NumbersEnum number) {
-        LOG.info("Enum: {}", number);
+        log.info("Enum: {}", number);
     }
 
     @Order(15)
@@ -244,14 +244,14 @@ public class JUnit5CollectedExamplesTest {
     @ValueSource(strings = "ONE")
     void testWithImplicitArgumentConversion(NumbersEnum number) {
         assertNotNull(number.name());
-        LOG.info("Enum: {}", number);
+        log.info("Enum: {}", number);
     }
 
     @Order(16)
     @ParameterizedTest
     @ArgumentsSource(ForTestingrgumentsProvider.class)
     void testWithArgumentsSource(String argument) {
-        LOG.info("From provider: {}", argument);
+        log.info("From provider: {}", argument);
         assertNotNull(argument);
     }
 
@@ -293,13 +293,13 @@ public class JUnit5CollectedExamplesTest {
 
         @Test
         void if_it_is_divisible_by_4_but_not_by_100() {
-            LOG.info("if_it_is_divisible_by_4_but_not_by_100");
+            log.info("if_it_is_divisible_by_4_but_not_by_100");
         }
 
         @ParameterizedTest(name = "Year {0} is a leap year.")
         @ValueSource(ints = {2016, 2020, 2048})
         void if_it_is_one_of_the_following_years(int year) {
-            LOG.info("if_it_is_one_of_the_following_years");
+            log.info("if_it_is_one_of_the_following_years");
         }
 
     }
@@ -318,7 +318,7 @@ public class JUnit5CollectedExamplesTest {
 
         @Override
         public String generateDisplayNameForMethod(Class<?> testClass, Method testMethod) {
-            LOG.info("generateDisplayNameForMethod");
+            log.info("generateDisplayNameForMethod");
             String name = testClass.getSimpleName() + ' ' + testMethod.getName();
             return name.replace('_', ' ') + '.';
         }
