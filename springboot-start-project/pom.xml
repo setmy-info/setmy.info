@@ -841,43 +841,43 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <spring-boot.run.profiles>default,local</spring-boot.run.profiles>
+                <spring-boot.run.profiles>local</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>
             <id>test</id>
             <properties>
-                <spring-boot.run.profiles>default,test</spring-boot.run.profiles>
+                <spring-boot.run.profiles>test</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>
             <id>dev</id>
             <properties>
-                <spring-boot.run.profiles>default,dev</spring-boot.run.profiles>
+                <spring-boot.run.profiles>dev</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>
             <id>testing</id>
             <properties>
-                <spring-boot.run.profiles>default,testing</spring-boot.run.profiles>
+                <spring-boot.run.profiles>testing</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>
             <id>prelive</id>
             <properties>
-                <spring-boot.run.profiles>default,prelive</spring-boot.run.profiles>
+                <spring-boot.run.profiles>prelive</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>
             <id>ci</id>
             <properties>
-                <spring-boot.run.profiles>default,ci</spring-boot.run.profiles>
+                <spring-boot.run.profiles>ci</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>
             <id>live</id>
             <properties>
-                <spring-boot.run.profiles>default,live</spring-boot.run.profiles>
+                <spring-boot.run.profiles>live</spring-boot.run.profiles>
             </properties>
         </profile>
     </profiles>
