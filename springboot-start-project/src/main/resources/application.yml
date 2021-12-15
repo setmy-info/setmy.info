@@ -38,6 +38,17 @@ dataSource:
     username: sa
     password:
 
+liquibaseDataSource:
+    driver-class-name: org.h2.Driver
+    #driver-class-name: org.postgresql.Driver
+    #driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    #driver-class-name: org.apache.derby.jdbc.ClientDriver
+    #driver-class-name:
+    url: jdbc:h2:file:./target/live
+    #url: jdbc:hsqldb:hsql://localhost:8877
+    username: sa
+    password:
+
 liquibase:
     change-log: classpath:liquibase/master.xml
 

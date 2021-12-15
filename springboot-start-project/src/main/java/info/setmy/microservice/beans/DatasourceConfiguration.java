@@ -27,23 +27,21 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class DatasourceConfiguration {
 
     @Primary
-    @Bean(name = "dataSourceProperties")
+    @Bean
     @ConfigurationProperties("data-source")
     public DataSourceProperties dataSourceProperties() {
         return new DataSourceProperties();
     }
 
     @Primary
-    @Bean(name = "dataSource")
+    @Bean
     @ConfigurationProperties("data-source")
-    public DataSource dataSource(
-            @Qualifier("dataSourceProperties")
-            final DataSourceProperties dataSourceProperties) {
+    public DataSource dataSource(final DataSourceProperties dataSourceProperties) {
         return dataSourceProperties.initializeDataSourceBuilder().build();
     }
 
     @Primary
-    @Bean(name = "entityManagerFactory")
+    @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(
             final EntityManagerFactoryBuilder builder,
             @Qualifier("dataSource") final DataSource dataSource,
@@ -60,7 +58,7 @@ public class DatasourceConfiguration {
         return entityManagerFactory;
     }
 
-    @Bean(name = "jpaAdapter")
+    @Bean
     public HibernateJpaVendorAdapter jpaAdapter() {
         /*<!--property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect"/-->
         <!--property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect"/-->
@@ -68,13 +66,13 @@ public class DatasourceConfiguration {
         return new HibernateJpaVendorAdapter();
     }
 
-    @Bean(name = "loadTimeWeaver")
+    @Bean
     public InstrumentationLoadTimeWeaver loadTimeWeaver() {
         return new InstrumentationLoadTimeWeaver();
     }
 
     @Primary
-    @Bean(name = "transactionManager")
+    @Bean
     public PlatformTransactionManager transactionManager(@Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
