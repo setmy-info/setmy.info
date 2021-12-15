@@ -1,4 +1,4 @@
-package ee.imre.test.task.microservice.components;
+package info.setmy.microservice.components;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
