@@ -85,6 +85,7 @@
         <quartz.verions>2.3.2</quartz.verions>
         <lombok.version>1.18.22</lombok.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <springdoc.version>1.6.0</springdoc.version>
     </properties>
 
     <modules>

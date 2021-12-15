@@ -33,7 +33,7 @@ dataSource:
     #driver-class-name: org.hsqldb.jdbc.JDBCDriver
     #driver-class-name: org.apache.derby.jdbc.ClientDriver
     #driver-class-name:
-    url: jdbc:h2:file:./live
+    url: jdbc:h2:file:./target/live
     #url: jdbc:hsqldb:hsql://localhost:8877
     username: sa
     password:
@@ -71,17 +71,13 @@ maven:
         groupId: @project.groupId@
         artifactId: @project.artifactId@
 
-swagger:
-    deepLinking: true
-    defaultModelExpandDepth: 1
-    defaultModelsExpandDepth: 1
-    description: Sample Swagger.
-    displayOperationId: false
-    displayRequestDuration: false
-    enableUrlTemplating: false
-    enabled: true
-    filter: false
-    maxDisplayedTags: 0
-    showExtensions: false
+apiDocumentation:
     title: springboot-start-project API
-    useDefaultResponseMessages: false
+    description: Sample API.
+    docsUrl: https://setmy-info.github.io/
+
+springdoc:
+    packagesToScan: info.setmy.microservice.controllers, info.setmy.microservice.*
+    pathsToMatch: /api, /api/*
+    swagger-ui:
+        path: /swagger-ui.html
