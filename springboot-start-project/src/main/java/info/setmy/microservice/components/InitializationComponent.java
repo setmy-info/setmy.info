@@ -1,6 +1,8 @@
 package info.setmy.microservice.components;
 
 import info.setmy.microservice.properties.ExampleProperties;
+import info.setmy.microservice.properties.RESTProperties;
+import java.util.TimeZone;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -12,11 +14,16 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class InitializationComponent implements InitializingBean {
 
+    private final RESTProperties restProperties;
+
     private final ExampleProperties exampleProperties;
 
     @PostConstruct
-    public void preDestroy() throws Exception {
+    public void postConstruct() throws Exception {
         log.info("======== IS CONSTRUCTED ===========");
+        if (restProperties.getDatesUTC()) {
+            TimeZone.setDefault(TimeZone.getTimeZone("Etc/UTC"));
+        }
     }
 
     @Override
