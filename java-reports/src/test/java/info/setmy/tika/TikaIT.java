@@ -4,15 +4,15 @@ import info.setmy.models.storage.Storage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.tika.Tika;
 import org.apache.tika.config.TikaConfig;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.io.TikaInputStream;
 import org.apache.tika.metadata.Metadata;
-import org.junit.Before;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 /**
@@ -23,14 +23,14 @@ import org.xml.sax.SAXException;
 public class TikaIT {
 
     private Storage storage;
-    private static final Logger LOG = LoggerFactory.getLogger(TikaIT.class);
+    private final Logger log = LogManager.getLogger(this.getClass());
 
     private final String DOC = "Lorem-impsum.doc";
     private final String PDF = "Lorem-impsum.pdf";
     private final String ODT = "Lorem-impsum.odt";
     private final String DOCX = "Lorem-impsum.docx";
 
-    @Before
+    @BeforeEach
     public void before() {
         storage = new Storage("target/test-classes/docs");
         storage.init();

@@ -5,8 +5,8 @@ import info.setmy.models.storage.Storage;
 import info.setmy.models.storage.StorageFile;
 import java.util.Arrays;
 import java.util.Optional;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -28,7 +28,7 @@ public class JasperReportsServiceIT {
 
     SubReportExampleModel subReportModel;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         final DirectoryStructurePattern pattern = new DirectoryStructurePattern().setOwner("target").setSubOwner("reports");
         storage = new Storage(pattern.toString());
