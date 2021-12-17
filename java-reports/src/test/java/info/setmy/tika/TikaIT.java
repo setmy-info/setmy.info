@@ -43,12 +43,12 @@ public class TikaIT {
             Metadata metadata = new Metadata();
             metadata.set(Metadata.RESOURCE_NAME_KEY, file.toString());
             String mimetype = tika.getDetector().detect(TikaInputStream.get(storage.getStorageFileStream(file.getName()).get()), metadata).toString();
-            LOG.debug("File {} is {}", file, mimetype);
+            log.debug("File {} is {}", file, mimetype);
         }
-        LOG.debug("DOC content: {}", parseToStringExample(DOC));
-        LOG.debug("PDF content: {}", parseToStringExample(PDF));
-        LOG.debug("ODT content: {}", parseToStringExample(ODT));
-        LOG.debug("DOCX content: {}", parseToStringExample(DOCX));
+        log.debug("DOC content: {}", parseToStringExample(DOC));
+        log.debug("PDF content: {}", parseToStringExample(PDF));
+        log.debug("ODT content: {}", parseToStringExample(ODT));
+        log.debug("DOCX content: {}", parseToStringExample(DOCX));
     }
 
     private String parseToStringExample(final String fileName) throws IOException, SAXException, TikaException {
