@@ -14,7 +14,7 @@ public abstract class RESTIntegrationTestBase extends SpringIntegrationTestBase 
 
     final Logger log = LogManager.getLogger(this.getClass());
 
-    protected static final String URL = "http://localhost:8080";
+    protected static final String URL = "http://localhost:8777";
 
     public abstract String getResource();
 
