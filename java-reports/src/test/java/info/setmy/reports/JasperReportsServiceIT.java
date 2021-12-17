@@ -49,7 +49,7 @@ public class JasperReportsServiceIT {
     }
 
     @Test
-    @EnabledOnOs({OS.LINUX})
+    @EnabledOnOs({OS.LINUX, OS.WINDOWS, OS.MAC})
     public void testExport() {
         final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setDefault());
         final File child = file.get().getChild();
