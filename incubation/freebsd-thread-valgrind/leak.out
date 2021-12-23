@@ -1,0 +1,137 @@
+==21598== Memcheck, a memory error detector
+==21598== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==21598== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
+==21598== Command: ./program
+==21598== Parent PID: 21589
+==21598== 
+--21598-- 
+--21598-- Valgrind options:
+--21598--    --leak-check=full
+--21598--    --show-leak-kinds=all
+--21598--    --track-origins=yes
+--21598--    --verbose
+--21598--    --log-file=leak.out
+--21598-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--21598-- Page sizes: currently 4096, max supported 4096
+--21598-- Valgrind library directory: /usr/local/libexec/valgrind
+--21598-- Reading syms from /usr/home/has/sources/components/setmy.info/incubation/freebsd-thread-valgrind/program
+--21598-- Set osrel for current process with value 1300139
+--21598-- Reading syms from /libexec/ld-elf.so.1
+--21598-- Set osrel for current process with value 1300139
+--21598--    object doesn't have a symbol table
+--21598-- Reading syms from /usr/local/libexec/valgrind/memcheck-amd64-freebsd
+--21598-- ELF section outside all mapped regions
+--21598-- Scheduler: using generic scheduler lock implementation.
+--21598-- Reading suppressions file: /usr/local/libexec/valgrind/default.supp
+==21598== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-21598-by-has-on-???
+==21598== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-21598-by-has-on-???
+==21598== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-21598-by-has-on-???
+==21598== 
+==21598== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==21598== don't want to do, unless you know exactly what you're doing,
+==21598== or are doing some strange experiment):
+==21598==   /usr/local/libexec/valgrind/../../bin/vgdb --pid=21598 ...command...
+==21598== 
+==21598== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==21598==   /path/to/gdb ./program
+==21598== and then give GDB the following command
+==21598==   target remote | /usr/local/libexec/valgrind/../../bin/vgdb --pid=21598
+==21598== --pid is optional if only one valgrind process is running
+==21598== 
+--21598-- Reading syms from /usr/local/libexec/valgrind/vgpreload_core-amd64-freebsd.so
+--21598-- Set osrel for current process with value 1300139
+--21598--    object doesn't have a symbol table
+--21598-- Reading syms from /usr/local/libexec/valgrind/vgpreload_memcheck-amd64-freebsd.so
+--21598-- Set osrel for current process with value 1300139
+--21598--    object doesn't have a symbol table
+--21598-- Reading syms from /usr/lib/libc++.so.1
+--21598-- ELF section outside all mapped regions
+--21598-- Reading syms from /usr/lib/libc++.so.1
+--21598-- Set osrel for current process with value 1300139
+--21598--    object doesn't have a symbol table
+--21598-- Reading syms from /lib/libcxxrt.so.1
+--21598-- Set osrel for current process with value 1300139
+--21598--    object doesn't have a symbol table
+--21598-- Reading syms from /lib/libm.so.5
+--21598-- ELF section outside all mapped regions
+--21598-- Reading syms from /lib/libm.so.5
+--21598-- Set osrel for current process with value 1300139
+--21598--    object doesn't have a symbol table
+--21598-- Reading syms from /lib/libgcc_s.so.1
+--21598-- Set osrel for current process with value 1300139
+--21598--    object doesn't have a symbol table
+--21598-- Reading syms from /lib/libthr.so.3
+--21598-- ELF section outside all mapped regions
+--21598-- Reading syms from /lib/libthr.so.3
+--21598-- Set osrel for current process with value 1300139
+--21598--    object doesn't have a symbol table
+--21598-- Reading syms from /lib/libc.so.7
+--21598-- ELF section outside all mapped regions
+--21598-- Reading syms from /lib/libc.so.7
+--21598-- Set osrel for current process with value 1300139
+--21598--    object doesn't have a symbol table
+--21598-- REDIR: 0x4b238b0 (libc.so.7:memset) redirected to 0x4855a40 (memset)
+--21598-- REDIR: 0x4b984c0 (libc.so.7:strncmp) redirected to 0x4853b00 (strncmp)
+--21598-- REDIR: 0x4b233d0 (libc.so.7:memcpy) redirected to 0x4854020 (memcpy)
+--21598-- REDIR: 0x4b98240 (libc.so.7:strlen) redirected to 0x4852ed0 (strlen)
+--21598-- REDIR: 0x4b42e70 (libc.so.7:calloc) redirected to 0x48512c0 (calloc)
+--21598-- REDIR: 0x4b41930 (libc.so.7:malloc) redirected to 0x484c820 (malloc)
+==21598== 
+==21598== HEAP SUMMARY:
+==21598==     in use at exit: 5,308 bytes in 4 blocks
+==21598==   total heap usage: 4 allocs, 0 frees, 5,308 bytes allocated
+==21598== 
+==21598== Searching for pointers to 4 not-freed blocks
+==21598== Checked 11,115,200 bytes
+==21598== 
+==21598== 20 bytes in 1 blocks are still reachable in loss record 1 of 4
+==21598==    at 0x4851381: calloc (in /usr/local/libexec/valgrind/vgpreload_memcheck-amd64-freebsd.so)
+==21598==    by 0x49ABC99: ??? (in /lib/libthr.so.3)
+==21598==    by 0x49ABB46: pthread_cond_broadcast (in /lib/libthr.so.3)
+==21598==    by 0x4910A8B: std::__1::__call_once(unsigned long volatile&, void*, void (*)(void*)) (in /usr/lib/libc++.so.1)
+==21598==    by 0x48F68C3: ??? (in /usr/lib/libc++.so.1)
+==21598==    by 0x48FCD6A: std::__1::locale::__global() (in /usr/lib/libc++.so.1)
+==21598==    by 0x48FCDCD: std::__1::locale::locale() (in /usr/lib/libc++.so.1)
+==21598==    by 0x48D29CF: std::__1::basic_streambuf<char, std::__1::char_traits<char> >::basic_streambuf() (in /usr/lib/libc++.so.1)
+==21598==    by 0x48DE627: std::__1::DoIOSInit::DoIOSInit() (in /usr/lib/libc++.so.1)
+==21598==    by 0x48DFA4B: ??? (in /usr/lib/libc++.so.1)
+==21598==    by 0x400A03C: ??? (in /libexec/ld-elf.so.1)
+==21598==    by 0x4008C5A: ??? (in /libexec/ld-elf.so.1)
+==21598== 
+==21598== 64 bytes in 1 blocks are still reachable in loss record 2 of 4
+==21598==    at 0x4851381: calloc (in /usr/local/libexec/valgrind/vgpreload_memcheck-amd64-freebsd.so)
+==21598==    by 0x49B5F72: ??? (in /lib/libthr.so.3)
+==21598==    by 0x49AF001: ??? (in /lib/libthr.so.3)
+==21598==    by 0x49AE11C: ??? (in /lib/libthr.so.3)
+==21598==    by 0x400A03C: ??? (in /libexec/ld-elf.so.1)
+==21598==    by 0x4008C5A: ??? (in /libexec/ld-elf.so.1)
+==21598==    by 0x4006488: ??? (in /libexec/ld-elf.so.1)
+==21598== 
+==21598== 1,128 bytes in 1 blocks are still reachable in loss record 3 of 4
+==21598==    at 0x4851381: calloc (in /usr/local/libexec/valgrind/vgpreload_memcheck-amd64-freebsd.so)
+==21598==    by 0x49AEFF0: ??? (in /lib/libthr.so.3)
+==21598==    by 0x49AE11C: ??? (in /lib/libthr.so.3)
+==21598==    by 0x400A03C: ??? (in /libexec/ld-elf.so.1)
+==21598==    by 0x4008C5A: ??? (in /libexec/ld-elf.so.1)
+==21598==    by 0x4006488: ??? (in /libexec/ld-elf.so.1)
+==21598== 
+==21598== 4,096 bytes in 1 blocks are still reachable in loss record 4 of 4
+==21598==    at 0x484C8A4: malloc (in /usr/local/libexec/valgrind/vgpreload_memcheck-amd64-freebsd.so)
+==21598==    by 0x4AE2AA3: ??? (in /lib/libc.so.7)
+==21598==    by 0x4AF5278: ??? (in /lib/libc.so.7)
+==21598==    by 0x4AE17D2: ??? (in /lib/libc.so.7)
+==21598==    by 0x4AE20A3: fwrite (in /lib/libc.so.7)
+==21598==    by 0x202F18: std::__1::basic_streambuf<char, std::__1::char_traits<char> >::sputn(char const*, long) (in /usr/home/has/sources/components/setmy.info/incubation/freebsd-thread-valgrind/program)
+==21598==    by 0x202D2F: std::__1::ostreambuf_iterator<char, std::__1::char_traits<char> > std::__1::__pad_and_output<char, std::__1::char_traits<char> >(std::__1::ostreambuf_iterator<char, std::__1::char_traits<char> >, char const*, char const*, char const*, std::__1::ios_base&, char) (in /usr/home/has/sources/components/setmy.info/incubation/freebsd-thread-valgrind/program)
+==21598==    by 0x202A35: std::__1::basic_ostream<char, std::__1::char_traits<char> >& std::__1::__put_character_sequence<char, std::__1::char_traits<char> >(std::__1::basic_ostream<char, std::__1::char_traits<char> >&, char const*, unsigned long) (in /usr/home/has/sources/components/setmy.info/incubation/freebsd-thread-valgrind/program)
+==21598==    by 0x20289B: std::__1::basic_ostream<char, std::__1::char_traits<char> >& std::__1::operator<< <std::__1::char_traits<char> >(std::__1::basic_ostream<char, std::__1::char_traits<char> >&, char const*) (in /usr/home/has/sources/components/setmy.info/incubation/freebsd-thread-valgrind/program)
+==21598==    by 0x2026E7: main (in /usr/home/has/sources/components/setmy.info/incubation/freebsd-thread-valgrind/program)
+==21598== 
+==21598== LEAK SUMMARY:
+==21598==    definitely lost: 0 bytes in 0 blocks
+==21598==    indirectly lost: 0 bytes in 0 blocks
+==21598==      possibly lost: 0 bytes in 0 blocks
+==21598==    still reachable: 5,308 bytes in 4 blocks
+==21598==         suppressed: 0 bytes in 0 blocks
+==21598== 
+==21598== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
