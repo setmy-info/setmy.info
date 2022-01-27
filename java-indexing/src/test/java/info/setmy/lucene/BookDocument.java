@@ -1,6 +1,5 @@
 package info.setmy.lucene;
 
-import info.setmy.lucene.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
 

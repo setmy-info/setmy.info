@@ -26,9 +26,8 @@ import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.MMapDirectory;
-import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
-import static org.apache.lucene.util.Version.LUCENE_8_8_2;
+import static org.apache.lucene.util.Version.LUCENE_9_0_0;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +39,7 @@ public class LuceneService {
 
     static final Logger LOG = LoggerFactory.getLogger(LuceneService.class);
 
-    private final Version version = LUCENE_8_8_2;
+    private final Version version = LUCENE_9_0_0;
 
     private final String locationDirectory;
 
@@ -55,14 +54,6 @@ public class LuceneService {
     private IndexWriterConfig config;
 
     private IndexWriter indexWriter;//IndexWriter is threadsafe
-
-    /**
-     * Constructor to create RAM based DB.
-     */
-    public LuceneService() {
-        this.locationDirectory = null;
-        this.indexDirectory = null;
-    }
 
     /**
      * Constructor to create storage based DB.
@@ -89,21 +80,13 @@ public class LuceneService {
     }
 
     private void initDirectory() throws IOException {
-        if (isFileSystemDB()) {
-            path = FileSystems.getDefault().getPath(locationDirectory, indexDirectory);
-            directory = FSDirectory.open(path);
-        } else {
-            directory = new RAMDirectory();
-        }
+        path = FileSystems.getDefault().getPath(locationDirectory, indexDirectory);
+        directory = FSDirectory.open(path);
     }
 
     private void initWriter() throws IOException {
         indexWriter = new IndexWriter(directory, config);
         indexWriter.commit();
-    }
-
-    private boolean isFileSystemDB() {
-        return locationDirectory != null && indexDirectory != null;
     }
 
     public long write(final info.setmy.lucene.Document doc) throws IOException {
@@ -148,12 +131,7 @@ public class LuceneService {
     }
 
     private IndexReader getReader() throws IOException {
-        IndexReader reader;
-        if (isFileSystemDB()) {
-            reader = DirectoryReader.open(MMapDirectory.open(path));
-        } else {
-            reader = DirectoryReader.open(indexWriter);
-        }
+        final IndexReader reader = DirectoryReader.open(MMapDirectory.open(path));
         return reader;
     }
 

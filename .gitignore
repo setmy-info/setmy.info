@@ -52,6 +52,8 @@ setmy-info-jail/setmy-info-freebsd-infinispan/infinispan-server-*
 tomcat-start-project/download/*
 tomcat-start-project/apache-tomcat*
 
+springboot-start-project/logback.log
+
 java-stealer/test-data/
 
 # cmake

@@ -1,19 +1,19 @@
 package info.setmy;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class LoggingProbesTest {
 
-    static final Logger LOG = LoggerFactory.getLogger(LoggingProbesTest.class);
+    final Logger log = LogManager.getLogger(this.getClass());
 
     @Test
     public void logging() {
-        LOG.trace("Hello World {}!", "from me");
-        LOG.debug("How are {} today?", "you");
-        LOG.info("I am fine.");
-        LOG.warn("I love programming.");
-        LOG.error("I am programming.");
+        log.trace("Hello World {}!", "from me");
+        log.debug("How are {} today?", "you");
+        log.info("I am fine.");
+        log.warn("I love programming.");
+        log.error("I am programming.");
     }
 }
