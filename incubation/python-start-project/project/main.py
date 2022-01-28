@@ -1,5 +1,4 @@
-from src.models.person import Person
-
+from project.models.person import Person
 
 def main():
     person = Person()

@@ -1,34 +1,89 @@
 # python-start-project
 
-## Setup
+## Project preparation
 
 Install Python and set it to PATH.
 
-Then:
+### Directory layout
 
+Prepare files structure
+
+```shell
+mkdir python-start-project
+cd python-start-project
+mkdir project
+mkdir docs
+mkdir scripts
+echo "" > README.md
+echo "" > TODO.md
+echo "" > LICENSE
+```
+
+### Install PIP
+
+On:
+
+**Windows**
 ```shell
 py -m ensurepip --upgrade
 ```
 
-Set the PIP in to the PATH variable as it shows.
-
-Execute the app on Windows:
-
+**\*nix**
 ```shell
-py -m src.application.main
+python -m ensurepip --upgrade
 ```
 
-Other commands used to build setup:
+Set the PIP in to the PATH variable as it shows.
+
+### Prepare venv
+
+To prepare and switch to virtual environment on:
+
+**Windows**
+```shell
+py -m venv ./.venv
+.\.venv\Scripts\activate
+```
+**\*nix**
+```shell
+python -m venv ./.venv
+source ./.venv/bin/activate
+```
+
+Then install pip
 
 ```shell
-py -m venv ./venv
-.\venv\Scripts\activate
 pip install --upgrade pip
-pip install schedule
-pip freeze > requirements.txt
+```
+and dependencies (Django, Flask) like:
+
+```shell
+pip install PACKAGENAME
+```
+
+or pre saved packages with versions
+
+```shell
 pip install -r requirements.txt
 ```
 
-TODO
+After install make or update dependencies list:
 
-1. How to do so, that binaries are not commited into the git and requirements.txt contains python version too and that can be installed into venv?
+```shell
+pip freeze > requirements.txt
+```
+
+### Execute the app
+
+Execute the app on:
+
+**Windows**
+```shell
+py -m project.application.main
+```
+**\*nix**
+```shell
+python -m project.application.main
+```
+
+## TODO
