@@ -55,7 +55,7 @@ Then install pip
 ```shell
 pip install --upgrade pip
 ```
-and dependencies (Django, Flask) like:
+and dependencies (Django, Flask, numpy, pandas) like:
 
 ```shell
 pip install PACKAGENAME
@@ -84,6 +84,12 @@ py -m project.application.main
 **\*nix**
 ```shell
 python -m project.application.main
+```
+
+## Executing test
+
+```shell
+python -m unittest discover -s ./project/models/test -p test_*.py
 ```
 
 ## TODO
