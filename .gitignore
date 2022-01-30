@@ -85,6 +85,7 @@ freebsd-ports/setmy-info-scripts/distinfo
 
 # Python
 **/__pycache__/*
+**/.venv
 
 ### NodeJS ###
 */node_modules/
