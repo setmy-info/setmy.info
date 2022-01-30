@@ -55,7 +55,7 @@ Then install pip
 ```shell
 pip install --upgrade pip
 ```
-and dependencies (Django Flask numpy pandas scipy matplotlib ipython jupyter sympy nose scikit-learn theano tensorflow keras torch torchvision torchaudio nltk) like:
+and dependencies (Django Flask numpy pandas scipy matplotlib ipython jupyter sympy nose scikit-learn theano tensorflow keras torch torchvision torchaudio nltk pyyaml) like:
 
 ```shell
 pip install PACKAGENAME
