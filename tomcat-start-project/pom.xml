@@ -33,7 +33,7 @@
             <scope>test</scope>
             <exclusions>
                 <exclusion>
-                    <artifactId>org.codehaus.groovy</artifactId>
+                    <artifactId>org.apache.groovy</artifactId>
                     <groupId>groovy</groupId>
                 </exclusion>
             </exclusions>
@@ -59,12 +59,12 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>${log4j2.verions}</version>
+            <version>${log4j2.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>${log4j2.verions}</version>
+            <version>${log4j2.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -74,7 +74,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>${logback.verions}</version>
+            <version>${logback.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -178,7 +178,7 @@
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
-            <version>${quartz.verions}</version>
+            <version>${quartz.verion}</version>
         </dependency>
         <dependency>
             <groupId>info.setmy</groupId>
@@ -292,6 +292,21 @@
             <artifactId>javax.inject</artifactId>
             <version>${javax.inject.version}</version>
         </dependency>
+        <dependency>
+            <groupId>jakarta.transaction</groupId>
+            <artifactId>jakarta.transaction-api</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>2.1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -338,7 +353,7 @@
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
+                        <groupId>org.apache.groovy</groupId>
                         <artifactId>groovy</artifactId>
                         <version>${groovy.version}</version>
                         <scope>runtime</scope>

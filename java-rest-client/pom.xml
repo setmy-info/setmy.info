@@ -46,6 +46,11 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+            <version>2.13.2</version>
+        </dependency>
         <!--dependency>
             <groupId>javax.activation</groupId>
             <artifactId>activation</artifactId>
@@ -262,11 +267,11 @@
                 <configuration>
                     <supportedPackagings>jar</supportedPackagings>
                     <webAppSourceDirectory>src/test/webapp</webAppSourceDirectory>
-                    <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <!--scanIntervalSeconds>0</scanIntervalSeconds -->
                     <webApp>
                         <contextPath>/</contextPath>
                     </webApp>
-                    <useTestClasspath>true</useTestClasspath>
+                    <!-- useTestClasspath>true</useTestClasspath -->
                     <contextXml>${project.basedir}/src/test/webapp/WEB-INF/jetty-context.xml</contextXml>
                     <jvmArgs>-Dorg.eclipse.jetty.webapp.LEVEL=DEBUG</jvmArgs>
                     <jettyProperties>
@@ -286,12 +291,12 @@
                 <executions>
                     <execution>
                         <id>start-jetty</id>
-                        <phase>pre-integration-test</phase>                       
+                        <phase>pre-integration-test</phase>
                         <goals>
                             <goal>start</goal>
                         </goals>
                         <configuration>
-                            <daemon>true</daemon>
+                            <!--daemon>true</daemon-->
                             <stopPort>8005</stopPort>
                             <stopKey>STOP</stopKey>
                         </configuration>
@@ -557,8 +562,8 @@
         <url>https://github.com/setmy-info/setmy.info/issues</url>
     </issueManagement>
 
-    <ciManagement />
-    <contributors />
+    <ciManagement/>
+    <contributors/>
 
     <distributionManagement>
         <snapshotRepository>

@@ -31,8 +31,8 @@
         <jacoco.version>0.8.5</jacoco.version>
         <failsafe.version>2.22.2</failsafe.version>
         <surefire.version>2.22.2</surefire.version>
-        <log4j2.verions>2.13.0</log4j2.verions>
-        <logback.verions>1.2.3</logback.verions>
+        <log4j2.verion>2.13.0</log4j2.verion>
+        <logback.verion>1.2.3</logback.verion>
         <slf4j.version>1.7.25</slf4j.version>
         <cucumber.version>4.7.4</cucumber.version>
         <pitest.version>1.4.10</pitest.version>
@@ -46,12 +46,12 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>${log4j2.verions}</version>
+            <version>${log4j2.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>${log4j2.verions}</version>
+            <version>${log4j2.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -66,12 +66,12 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${logback.verions}</version>
+            <version>${logback.verion}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>${logback.verions}</version>
+            <version>${logback.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

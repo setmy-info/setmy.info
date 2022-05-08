@@ -86,8 +86,28 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
+            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-json</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-xml</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-toml</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-yaml</artifactId>
             <version>${groovy.version}</version>
         </dependency>
         <!-- EXPERIMENTAL CODE -->
@@ -136,7 +156,7 @@
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
+                        <groupId>org.apache.groovy</groupId>
                         <artifactId>groovy</artifactId>
                         <version>${groovy.version}</version>
                         <scope>runtime</scope>
@@ -152,7 +172,7 @@
                     <target>${maven.compiler.target}</target-->
                     <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
+                    <!--outputEncoding>${project.build.sourceEncoding}</outputEncoding-->
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
@@ -206,11 +226,11 @@
                         </configuration>
                     </execution>
                 </executions>
-                <configuration>
+                <!--configuration>
                     <systemPropertyVariables>
                         <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
                     </systemPropertyVariables>
-                </configuration>
+                </configuration-->
             </plugin>
             <!--plugin>
                 <groupId>org.pitest</groupId>

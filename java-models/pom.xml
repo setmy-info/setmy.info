@@ -24,12 +24,12 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>${log4j2.verions}</version>
+            <version>${log4j2.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>${log4j2.verions}</version>
+            <version>${log4j2.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -44,12 +44,12 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${logback.verions}</version>
+            <version>${logback.verion}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>${logback.verions}</version>
+            <version>${logback.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -111,7 +111,7 @@
                     <target>${maven.compiler.target}</target-->
                     <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
+                    <!-- outputEncoding>${project.build.sourceEncoding}</outputEncoding -->
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
@@ -165,11 +165,11 @@
                         </configuration>
                     </execution>
                 </executions>
-                <configuration>
+                <!--configuration>
                     <systemPropertyVariables>
                         <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
                     </systemPropertyVariables>
-                </configuration>
+                </configuration-->
             </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>
