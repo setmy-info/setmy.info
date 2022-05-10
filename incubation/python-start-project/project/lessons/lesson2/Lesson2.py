@@ -14,3 +14,7 @@ if __name__ == "__main__":
     print(add_ten(6))
     lamb = get_lambda(5)
     print(lamb(3))
+    def l1(x): return 2 * x
+    def l2(x, y): return x + y
+    print(l1(4))
+    print(l2(4, 2))
