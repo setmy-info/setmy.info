@@ -1,6 +1,7 @@
 // <editor-fold defaultstate="collapsed" desc="Hidden part">
 package info.setmy.examples.lessons.level2;
 
+import info.setmy.examples.junit5.JUnit5CollectedExamplesTest;
 import java.util.ArrayList;
 import static java.util.Collections.unmodifiableList;
 import java.util.List;
@@ -8,8 +9,8 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -17,7 +18,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Lesson6StreamsTest {
 
-    private final static Logger log = LoggerFactory.getLogger(Lesson6StreamsTest.class);
+    private final static Logger log = LogManager.getLogger(Lesson6StreamsTest.class);
 // </editor-fold>
 
     private class Person {

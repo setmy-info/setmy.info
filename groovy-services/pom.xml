@@ -86,8 +86,28 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
+            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-json</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-xml</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-toml</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-yaml</artifactId>
             <version>${groovy.version}</version>
         </dependency>
         <!-- EXPERIMENTAL CODE -->
@@ -112,21 +132,18 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.12.1</version>
+                <version>${gmavenplus.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>execute</goal>
-                            <!--goal>addSources</goal>
+                            <goal>addSources</goal>
                             <goal>addTestSources</goal>
                             <goal>generateStubs</goal>
-                            <goal>generateTestStubs</goal>
                             <goal>compile</goal>
+                            <goal>generateTestStubs</goal>
                             <goal>compileTests</goal>
                             <goal>removeStubs</goal>
                             <goal>removeTestStubs</goal>
-                            <goal>groovydoc</goal>
-                            <goal>groovydocTests</goal-->
                         </goals>
                     </execution>
                 </executions>
@@ -139,7 +156,7 @@
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
+                        <groupId>org.apache.groovy</groupId>
                         <artifactId>groovy</artifactId>
                         <version>${groovy.version}</version>
                         <scope>runtime</scope>
@@ -155,7 +172,7 @@
                     <target>${maven.compiler.target}</target-->
                     <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
+                    <!--outputEncoding>${project.build.sourceEncoding}</outputEncoding-->
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
@@ -209,11 +226,11 @@
                         </configuration>
                     </execution>
                 </executions>
-                <configuration>
+                <!--configuration>
                     <systemPropertyVariables>
                         <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
                     </systemPropertyVariables>
-                </configuration>
+                </configuration-->
             </plugin>
             <!--plugin>
                 <groupId>org.pitest</groupId>
@@ -373,7 +390,7 @@
             <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.1</version>
                 <configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
@@ -455,11 +472,11 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-            </plugin>
-            <plugin>
+            </plugin-->
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.1.1</version>
                 <reportSets>
                     <reportSet>
                         <reports>

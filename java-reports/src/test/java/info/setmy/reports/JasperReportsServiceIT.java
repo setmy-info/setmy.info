@@ -3,10 +3,14 @@ package info.setmy.reports;
 import info.setmy.models.storage.DirectoryStructurePattern;
 import info.setmy.models.storage.Storage;
 import info.setmy.models.storage.StorageFile;
+import java.io.File;
 import java.util.Arrays;
 import java.util.Optional;
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 /**
  *
@@ -28,7 +32,7 @@ public class JasperReportsServiceIT {
 
     SubReportExampleModel subReportModel;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         final DirectoryStructurePattern pattern = new DirectoryStructurePattern().setOwner("target").setSubOwner("reports");
         storage = new Storage(pattern.toString());
@@ -45,8 +49,11 @@ public class JasperReportsServiceIT {
     }
 
     @Test
+    @EnabledOnOs({OS.LINUX, OS.WINDOWS, OS.MAC})
     public void testExport() {
         final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setDefault());
-        jasperReportsService.export(model, file.get().getChild());
+        final File child = file.get().getChild();
+        assertThat(child).isNotNull();
+        jasperReportsService.export(model, child);
     }
 }

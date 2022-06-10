@@ -2,7 +2,6 @@ package info.setmy.jwt.models;
 
 import static info.setmy.jwt.models.Data.SERVICE_NAME;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;

@@ -1,21 +1,24 @@
 package info.setmy.models
 
-import org.junit.Before
-import org.junit.Test
-import static org.junit.Assert.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
- * Exception to roll back transactions.
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 class ExampleIT {
     
-    @Before
+    Example example
+    
+    @BeforeEach
     void before() {
+        example = new Example()
+        example.firstName = "Imre"
     }
 
     @Test
     void test() {
+        assert example.firstName == "Imre"
     }
 }

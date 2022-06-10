@@ -7,32 +7,32 @@ import static cucumber.api.groovy.EN.*
 import static cucumber.api.groovy.Hooks.*
 
 Before() {
-    println "Before scenario"
-    this.numberA = 0
-    this.numberB = 0
-    this.result = 0
+println "Before scenario"
+this.numberA = 0
+this.numberB = 0
+this.result = 0
 }
 
 After() {
-    println "After scenario"
+println "After scenario"
 }
 // FOR STRINGS: "([^"]*)"
 Given(~'^two numbers (\\d+) and (\\d+)$') { int a, int b ->
-    println "givern numbers ${a} ${b}"
-    this.numberA = a
-    this.numberB = b
+println "givern numbers ${a} ${b}"
+this.numberA = a
+this.numberB = b
 }
 
 When(~'^adding them$') { ->
-    this.result = numberA + numberB
-    println "adding ${numberA} and ${numberB} = ${result}"
+this.result = numberA + numberB
+println "adding ${numberA} and ${numberB} = ${result}"
 }
 
 Then(~'^them summary should be (\\d+)$') { int c ->
-    println "comparing numbers summary ${result} with expected ${c}"
-    assert result == c
+println "comparing numbers summary ${result} with expected ${c}"
+assert result == c
 }
-*/
+ */
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
@@ -44,39 +44,39 @@ import io.cucumber.java.Before
 
 public class ExampleCukesDefinitions {
 
-int numberA
-int numberB
-int result
+    int numberA
+    int numberB
+    int result
 
-@Before
-public void before() {
-println "Before scenario"
-this.numberA = 0
-this.numberB = 0
-this.result = 0
-}
+    @Before
+    public void before() {
+        println "Before scenario"
+        this.numberA = 0
+        this.numberB = 0
+        this.result = 0
+    }
 
-@After
-public void after() {
-println "After scenario"
-}
+    @After
+    public void after() {
+        println "After scenario"
+    }
     
-@Given("^two numbers (\\d+) and (\\d+)")//String: "^\"([^\"]*)\""
-public void "two numbers a and b"(int a, int b) {
-println "givern numbers ${a} ${b}"
-this.numberA = a
-this.numberB = b
-}
+    @Given("^two numbers (\\d+) and (\\d+)")//String: "^\"([^\"]*)\""
+    public void "two numbers a and b"(int a, int b) {
+        println "givern numbers ${a} ${b}"
+        this.numberA = a
+        this.numberB = b
+    }
 
-@When("^adding them")
-public void "adding them"() {
-result = numberA +  numberB
-println "adding ${numberA} and ${numberB} = ${result}"
-}
+    @When("^adding them")
+    public void "adding them"() {
+        result = numberA +  numberB
+        println "adding ${numberA} and ${numberB} = ${result}"
+    }
 
-@Then("^them summary should be (\\d+)")
-public void "them summary should be b"(int c) {
-println "comparing numbers summary ${result} with expected ${c}"
-assert result == c
-}
+    @Then("^them summary should be (\\d+)")
+    public void "them summary should be b"(int c) {
+        println "comparing numbers summary ${result} with expected ${c}"
+        assert result == c
+    }
 }

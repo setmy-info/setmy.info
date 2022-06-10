@@ -19,14 +19,6 @@ services:
         image: node-start-project:1.2.0-SNAPSHOT
         ports:
             - "4000:3000"
-    micronaut-start-project:
-        container_name: micronaut-start-project
-        build: 
-            context: ./micronaut-start-project
-            dockerfile: Dockerfile
-        image: micronaut-start-project:1.2.0-SNAPSHOT
-        ports:
-            - "8010:8080"
     springboot-start-project:
         container_name: springboot-start-project
         build: 
@@ -59,13 +51,13 @@ services:
         image: python-start-project:1.2.0-SNAPSHOT
         ports:
             - "8050:5000"
-    docker-centos-nginx:
-        container_name: docker-centos-nginx
+    docker-rocky-nginx:
+        container_name: docker-rocky-nginx
         build: 
-            context: ./docker-images/docker-centos-nginx
+            context: ./docker-images/docker-rocky-nginx
             dockerfile: Dockerfile
         depends_on:
             - tomcat-start-project
-        image: setmy-info-centos-nginx:v1.16.1
+        image: setmy-info-rocky-nginx:v1.16.1
         ports:
             - "80:80"

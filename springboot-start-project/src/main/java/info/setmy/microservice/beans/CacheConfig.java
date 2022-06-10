@@ -3,8 +3,8 @@ package info.setmy.microservice.beans;
 import info.setmy.microservice.properties.CacheProperties;
 import org.infinispan.configuration.cache.ConfigurationBuilder;
 import org.infinispan.spring.starter.embedded.InfinispanCacheConfigurer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.infinispan.configuration.cache.Configuration;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ import org.springframework.cache.CacheManager;
 @Component
 public class CacheConfig {
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LogManager.getLogger(this.getClass());
 
     @Bean
     public InfinispanCacheConfigurer cacheConfigurer(final CacheProperties cacheProperties) {

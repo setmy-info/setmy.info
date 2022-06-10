@@ -1,7 +1,5 @@
 package info.setmy.microservice.properties;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,11 +9,25 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration("mavenProjectProperties")
 @ConfigurationProperties(prefix = "maven.project")
-@Getter
-@Setter
 public class MavenProjectProperties {
 
     private String groupId;
 
     private String artifactId;
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getArtifactId() {
+        return artifactId;
+    }
+
+    public void setArtifactId(String artifactId) {
+        this.artifactId = artifactId;
+    }
 }

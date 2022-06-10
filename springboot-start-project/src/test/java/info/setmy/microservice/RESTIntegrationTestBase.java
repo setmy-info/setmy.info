@@ -3,16 +3,18 @@ package info.setmy.microservice;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import io.restassured.specification.RequestSpecification;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-@Log4j2
 public abstract class RESTIntegrationTestBase extends SpringIntegrationTestBase {
 
-    protected static final String URL = "http://localhost:8080";
+    final Logger log = LogManager.getLogger(this.getClass());
+
+    protected static final String URL = "http://localhost:8777";
 
     public abstract String getResource();
 

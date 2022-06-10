@@ -29,18 +29,14 @@ public class ExampleService {
 
     private final PersonRepository personRepository;
 
-    private final DozerService dozerService;
-
     public ExampleService(final ExampleDao exampleDao,
             final ExampleProperties exampleProperties,
-            final DozerService dozerService,
             final ExampleRepository exampleRepository,
             final JDBCExampleDao jdbcExampleDao,
             final JPAExampleDao jpaExampleDao,
             final PersonRepository personRepository) {
         this.exampleDao = exampleDao;
         this.exampleProperties = exampleProperties;
-        this.dozerService = dozerService;
         this.exampleRepository = exampleRepository;
         this.jdbcExampleDao = jdbcExampleDao;
         this.jpaExampleDao = jpaExampleDao;
@@ -56,12 +52,8 @@ public class ExampleService {
         //insertData();
         //final ExampleModel model = exampleDao.getExampleModel();
         final ExampleModel model = exampleRepository.findAll().get(0);
-        final ExampleModel newModel = dozerService.copyExampleModel(model);
+        final ExampleModel newModel = new ExampleModel().setId(model.getId()).setText(model.getText());
         return newModel;
-    }
-
-    public DozerService getDozerService() {
-        return dozerService;
     }
 
     private void insertData() {

@@ -1,7 +1,7 @@
 package info.setmy.microservice.model
 
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 /**
  *
@@ -11,7 +11,7 @@ class ExampleGroovyModelTest {
 
     ExampleGroovyModel example
     
-    @Before
+    @BeforeEach
     void before() {
         example = new ExampleGroovyModel()
         example.name = "Imre"

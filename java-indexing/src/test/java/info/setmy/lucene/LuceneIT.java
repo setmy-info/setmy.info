@@ -23,7 +23,7 @@ import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.MMapDirectory;
 import org.apache.lucene.util.Version;
-import static org.apache.lucene.util.Version.LUCENE_8_8_2;
+import static org.apache.lucene.util.Version.LUCENE_9_0_0;
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,7 +55,7 @@ public class LuceneIT {
 
     @Test
     public void testAddData() throws IOException, ParseException {
-        final Version version = LUCENE_8_8_2;
+        final Version version = LUCENE_9_0_0;
         LOG.debug("Version: {}", version);
         Analyzer analyzer = new StandardAnalyzer();
         Path path = FileSystems.getDefault().getPath(INDEX_HOME_DIR, INDEX_DIR);
@@ -63,7 +63,7 @@ public class LuceneIT {
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
 
         //IndexWriter is threadsafe
-        try (IndexWriter indexWriter = new IndexWriter(fsDirectory, config)) {//Directory index = new RAMDirectory(); IndexWriter indexWriter = new IndexWriter(index, config);
+        try ( IndexWriter indexWriter = new IndexWriter(fsDirectory, config)) {//Directory index = new RAMDirectory(); IndexWriter indexWriter = new IndexWriter(index, config);
             addDoc(indexWriter, "Lucene in Action", "193398817");
             addDoc(indexWriter, "Lucene for Dummies", "55320055Z");
             addDoc(indexWriter, "Managing Gigabytes", "55063554A");

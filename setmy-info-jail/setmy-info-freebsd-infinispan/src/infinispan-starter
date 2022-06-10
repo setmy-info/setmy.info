@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Copyright 2021 Imre Tabur <imre.tabur@eesti.ee>
+
+USR_LOCAL_DIR=/usr/local
+INFINISPAN_USR_LOCAL_DIR=${USR_LOCAL_DIR}/infinispan-server
+INFINISPAN_BIN_DIR=${INFINISPAN_USR_LOCAL_DIR}/bin
+INFINISPAN_WORKING_DIR=${INFINISPAN_OPT_DIR}
+
+cd ${INFINISPAN_WORKING_DIR}
+${INFINISPAN_BIN_DIR}/server.sh -Dinfinispan.bind.address=0.0.0.0
+
+exit ${?}

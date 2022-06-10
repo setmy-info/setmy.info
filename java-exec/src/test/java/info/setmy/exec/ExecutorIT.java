@@ -1,10 +1,13 @@
 package info.setmy.exec;
 
 import info.setmy.exec.exceptions.ExecutionError;
+import org.apache.commons.lang3.SystemUtils;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import static org.junit.jupiter.api.condition.OS.WINDOWS;
 
 /**
  *
@@ -14,10 +17,12 @@ public class ExecutorIT {
 
     private Executor executor;
 
-    private final String NORMAL_PROGRAM = "./src/test/sh/normal.sh";
-    private final String NORMAL_TIMEOUT_PROGRAM = "./src/test/sh/timeout.sh";
-    private final String ERROR_PROGRAM = "./src/test/sh/error.sh";
-    private final String WITHOUT_EXEC_BIT_PROGRAM = "./src/test/sh/withoutexec.sh";
+    private final String SUFFIX = SystemUtils.IS_OS_WINDOWS ? ".cmd" : ".sh";
+    private final String FOLDER = SystemUtils.IS_OS_WINDOWS ? "cmd" : "sh";
+    private final String NORMAL_PROGRAM = "./src/test/" + FOLDER + "/normal" + SUFFIX;
+    private final String NORMAL_TIMEOUT_PROGRAM = "./src/test/" + FOLDER + "/timeout" + SUFFIX;
+    private final String ERROR_PROGRAM = "./src/test/" + FOLDER + "/error" + SUFFIX;
+    private final String WITHOUT_EXEC_BIT_PROGRAM = "./src/test/" + FOLDER + "/withoutexec" + SUFFIX;
 
     @BeforeEach
     public void before() {
@@ -43,6 +48,7 @@ public class ExecutorIT {
     }
 
     @Test
+    @DisabledOnOs(WINDOWS)
     public void exec_when_executing_non_existing_program() {
         final Exception thownException = assertThrows(ExecutionError.class, () -> {
             executor.exec("nonExisting");
@@ -53,6 +59,7 @@ public class ExecutorIT {
     }
 
     @Test
+    @DisabledOnOs(WINDOWS)
     public void exec_when_executing_program_without_exec_bit() {
         final Exception thownException = assertThrows(ExecutionError.class, () -> {
             executor.exec(WITHOUT_EXEC_BIT_PROGRAM);
@@ -63,6 +70,7 @@ public class ExecutorIT {
     }
 
     @Test
+    @DisabledOnOs(WINDOWS)
     public void exec_watchdog() {
         final Exception thownException = assertThrows(ExecutionError.class, () -> {
             final String[] params = {NORMAL_TIMEOUT_PROGRAM, "parameter1", "parameter2"};

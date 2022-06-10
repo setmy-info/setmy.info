@@ -1,0 +1,22 @@
+FROM setmy-info-freebsd-java:17.0.1
+
+MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
+
+# http://label-schema.org/rc1/
+LABEL org.label-schema.name="FreeBSD file strucure for FreeBSD Tomcat jail" \
+      org.label-schema.version="10.0.12" \
+      org.label-schema.description="setmy.info FreeBSD SOE jail" \
+      org.label-schema.vendor="Hear And See Systems LLC" \
+      org.label-schema.url="https://www.hearandseesystems.com" \
+      org.label-schema.license="MIT" \
+      org.label-schema.schema-version="1.0" \
+      org.label-schema.build-date=$BUILD_DATE
+
+FB_UPDATE
+UPDATE
+UPGRADE
+INSTALL tomcat10
+SYSRC tomcat10_java_home="/usr/local/openjdk17"
+SYSRC tomcat10_enable=YES
+
+PACKAGE

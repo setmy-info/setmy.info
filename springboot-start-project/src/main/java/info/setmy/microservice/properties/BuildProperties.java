@@ -1,7 +1,5 @@
 package info.setmy.microservice.properties;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -12,8 +10,6 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Configuration("buildProperties")
 @PropertySource("classpath:build.properties")
-@Getter
-@Setter
 public class BuildProperties {
 
     @Value("${name}")
@@ -27,4 +23,36 @@ public class BuildProperties {
 
     @Value("${revision}")
     private String revision;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getRevision() {
+        return revision;
+    }
+
+    public void setRevision(String revision) {
+        this.revision = revision;
+    }
 }

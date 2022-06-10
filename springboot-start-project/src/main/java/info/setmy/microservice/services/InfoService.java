@@ -8,8 +8,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.actuate.info.InfoContributor;
 import org.springframework.core.env.Environment;
@@ -23,9 +23,9 @@ import org.springframework.stereotype.Service;
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 @Service("mavenService")
-@RequiredArgsConstructor
-@Log4j2
 public class InfoService implements InfoContributor {
+
+    public Logger log = LogManager.getLogger(this.getClass());
 
     private final static String HOST_NAME = "hostname";
     private final static String PORT = "port";
@@ -38,6 +38,12 @@ public class InfoService implements InfoContributor {
     private final MavenProjectProperties mavenProjectProperties;
 
     private final Environment environment;
+
+    public InfoService(final BuildProperties buildProperties, final MavenProjectProperties mavenProjectProperties, final Environment environment) {
+        this.buildProperties = buildProperties;
+        this.mavenProjectProperties = mavenProjectProperties;
+        this.environment = environment;
+    }
 
     private Map<String, String> microserviceInfo;
 

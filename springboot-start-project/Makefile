@@ -1,7 +1,7 @@
 # Copyright Imre Tabur
 
 DOCKER_PROJECT_NAME="springboot-start-project"
-DOCKER_PROJECT_VERSION="1.0.0-SNAPSHOT"
+DOCKER_PROJECT_VERSION="1.2.0-SNAPSHOT"
 DOCKER_ID_ORGANIZATION="setmyinfo"
 
 all: build image show-images

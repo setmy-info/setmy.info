@@ -9,7 +9,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.3</version>
+        <version>2.6.7</version>
         <relativePath/>
     </parent>
 
@@ -33,36 +33,63 @@
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
 
-        <junit5.version>5.7.2</junit5.version>
-        <junit.platform.version>1.7.2</junit.platform.version>
-        <mockito.version>3.11.1</mockito.version>
-        <assertj.version>3.19.0</assertj.version>
-        <jacoco.version>0.8.7</jacoco.version>
+        <junit5.version>5.8.2</junit5.version>
+        <junit.platform.version>1.8.2</junit.platform.version>
+        <mockito.version>4.5.1</mockito.version>
+        <assertj.version>3.22.0</assertj.version>
+        <jacoco.version>0.8.8</jacoco.version>
         <failsafe.version>2.22.2</failsafe.version>
         <surefire.version>2.22.2</surefire.version>
-        <log4j.verions>1.2.17</log4j.verions>
-        <log4j2.verions>2.14.1</log4j2.verions>
-        <logback.verions>1.2.3</logback.verions>
-        <slf4j.version>1.7.30</slf4j.version>
-        <lucene.version>8.8.2</lucene.version>
-        <groovy.version>3.0.8</groovy.version>
-        <cucumber.version>6.10.4</cucumber.version>
-        <pitest.version>1.6.7</pitest.version>
-        <jersey.version>3.0.2</jersey.version>
-        <jackson.version>2.12.3</jackson.version>
-        <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
-        <dependency.check.version>6.2.2</dependency.check.version>
-        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <spring.boot.verions>2.5.3</spring.boot.verions>
-        <rest.assured.version>4.4.0</rest.assured.version>
-        <liquibase.version>4.4.0</liquibase.version>
-        <infinispan.version>12.1.4.Final</infinispan.version>
-        <quartz.verions>2.3.2</quartz.verions>
-        <lombok.version>1.18.20</lombok.version>
+        <!--log4j.verion>1.2.17</log4j.verion -->
+        <log4j2.verion>2.17.2</log4j2.verion>
+        <logback.verion>1.2.11</logback.verion>
+        <slf4j.version>1.7.36</slf4j.version>
+        <lucene.version>9.1.0</lucene.version>
+        <groovy.version>4.0.2</groovy.version>
+        <cucumber.version>7.3.4</cucumber.version>
+        <pitest.version>1.7.3</pitest.version>
+        <jersey.version>3.0.4</jersey.version>
+        <jackson.version>2.13.2</jackson.version>
+        <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
+        <dependency.check.version>7.1.0</dependency.check.version>
+        <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
+        <maven.site.plugin.version>3.12.0</maven.site.plugin.version>
+        <maven.release.plugin.version>2.5.3</maven.release.plugin.version>
+        <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
+        <maven.javadoc.plugin.version>3.3.1</maven.javadoc.plugin.version>
+        <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
+        <maven.project.info.reports.plugin.version>3.3.0</maven.project.info.reports.plugin.version>
+        <maven.checkstyle.plugin.versoin>3.1.2</maven.checkstyle.plugin.versoin>
+        <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
+        <gmavenplus.plugin.version>1.13.1</gmavenplus.plugin.version>
+        <buildnumber.maven.plugin.version>3.0.0</buildnumber.maven.plugin.version>
+        <nexus.staging.plugin.version>1.6.8</nexus.staging.plugin.version>
+        <spring.boot.verion>2.6.7</spring.boot.verion>
+        <taglist.maven.plugin.version>3.0.0</taglist.maven.plugin.version>
+        <servlet.api.version>4.0.1</servlet.api.version>
+        <jaxb.api.version>2.3.1</jaxb.api.version>
+        <hibernate.version>6.0.0.Final</hibernate.version>
+        <hibernate.validator.version>7.0.4.Fina</hibernate.validator.version>
+        <ehcache.version>3.9.7</ehcache.version>
+        <commons.dbcp.version>1.4</commons.dbcp.version>
+        <commons.io.version>2.11.0</commons.io.version>
+        <commons.codec.version>1.15</commons.codec.version>
+        <commons.lang3.version>3.12.0</commons.lang3.version>
+        <snakeyaml.version>1.30</snakeyaml.version>
+        <javax.validation.api.version>2.0.1.Final</javax.validation.api.version>
+        <javax.inject.version>1</javax.inject.version>
+        <javax.cache.api.version>1.1.1</javax.cache.api.version>
+        <java.jwt.version>3.19.1</java.jwt.version>
+        <rest.assured.version>5.0.1</rest.assured.version>
+        <liquibase.version>4.9.1</liquibase.version>
+        <infinispan.version>13.0.2.Final</infinispan.version>
+        <quartz.verion>2.3.2</quartz.verion>
+        <lombok.version>1.18.24</lombok.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <swagger.version>3.0.0</swagger.version>
-        <swagger.annotations.version>1.6.2</swagger.annotations.version>
-        <swagger.models.version>1.6.1</swagger.models.version>
+        <swagger.annotations.version>1.6.3</swagger.annotations.version>
+        <swagger.models.version>1.6.3</swagger.models.version>
+        <springdoc.version>1.6.0</springdoc.version>
     </properties>
 
     <dependencies>
@@ -115,7 +142,7 @@
             <groupId>jakarta.servlet.jsp</groupId>
             <artifactId>jakarta.servlet.jsp-api</artifactId>
             <version>3.0.0</version>
-        </dependency>
+        </dependency>           
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>
             <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
@@ -124,12 +151,12 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>${log4j2.verions}</version>
+            <version>${log4j2.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>${log4j2.verions}</version>
+            <version>${log4j2.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -144,13 +171,14 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${logback.verions}</version>
+            <version>${logback.verion}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>${logback.verions}</version>
+            <version>${logback.verion}</version>
         </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -188,14 +216,32 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-engine</artifactId>
+            <version>${junit.platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-commons</artifactId>
+            <version>${junit.platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-api</artifactId>
+            <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
@@ -212,10 +258,20 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>${rest.assured.version}</version>
             <exclusions>
+                <exclusion>
+                    <artifactId>org.apache.groovy</artifactId>
+                    <groupId>groovy</groupId>
+                </exclusion>
                 <exclusion>
                     <artifactId>org.codehaus.groovy</artifactId>
                     <groupId>groovy</groupId>
@@ -242,27 +298,34 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
+            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy</artifactId>
             <version>${groovy.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
+            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-json</artifactId>
             <version>${groovy.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
+            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-xml</artifactId>
             <version>${groovy.version}</version>
-            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-toml</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-yaml</artifactId>
+            <version>${groovy.version}</version>
         </dependency>
         <dependency>
             <groupId>io.gatling.highcharts</groupId>
             <artifactId>gatling-charts-highcharts</artifactId>
-            <version>3.3.1</version>
+            <version>3.7.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -281,8 +344,16 @@
             <scope>test</scope>
             <exclusions>
                 <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+                <exclusion>
                     <groupId>org.junit.vintage</groupId>
                     <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.junit.jupiter</groupId>
+                    <artifactId>junit-jupiter</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -383,12 +454,12 @@
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
-            <version>${quartz.verions}</version>
+            <version>${quartz.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
-            <version>3.23.1-GA</version>
+            <version>3.28.0-GA</version>
         </dependency>
         <dependency>
             <groupId>info.setmy</groupId>
@@ -412,24 +483,14 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${swagger.version}</version>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>${swagger.annotations.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-models</artifactId>
-            <version>${swagger.models.version}</version>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-webmvc-core</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -451,6 +512,11 @@
             <artifactId>jackson-core</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-component-annotations</artifactId>
+            <version>${infinispan.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -458,7 +524,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.4</version>
+                <version>${buildnumber.maven.plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>validate</phase>
@@ -481,15 +547,49 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>${gmavenplus.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>addSources</goal>
+                            <goal>addTestSources</goal>
+                            <goal>generateStubs</goal>
+                            <goal>compile</goal>
+                            <goal>generateTestStubs</goal>
+                            <goal>compileTests</goal>
+                            <goal>removeStubs</goal>
+                            <goal>removeTestStubs</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scripts>
+                        <script><![CDATA[
+                            // your script here
+                        ]]></script>
+                    </scripts>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.groovy</groupId>
+                        <artifactId>groovy</artifactId>
+                        <version>${groovy.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <!--source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target-->
                     <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
+                    <!--outputEncoding>${project.build.sourceEncoding}</outputEncoding -->
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                     <annotationProcessorPaths>
@@ -504,7 +604,7 @@
             <plugin>
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>
-                <version>3.0.5</version>
+                <version>4.0.1</version>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -594,17 +694,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.9.0</version>
+                <version>${maven.site.plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
+                <version>${maven.release.plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.8</version>
+                <version>${nexus.staging.plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
@@ -615,7 +715,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>${maven.source.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -628,7 +728,7 @@
             <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${maven.javadoc.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -677,7 +777,7 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>${dockerfile-maven-version}</version>
+                <version>${dockerfile.maven.version}</version>
                 <!--executions>
                     <execution>
                         <id>default</id>
@@ -735,7 +835,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>${maven.gpg.plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -755,43 +855,43 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <spring-boot.run.profiles>default,local</spring-boot.run.profiles>
+                <spring-boot.run.profiles>local</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>
             <id>test</id>
             <properties>
-                <spring-boot.run.profiles>default,test</spring-boot.run.profiles>
+                <spring-boot.run.profiles>test</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>
             <id>dev</id>
             <properties>
-                <spring-boot.run.profiles>default,dev</spring-boot.run.profiles>
+                <spring-boot.run.profiles>dev</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>
             <id>testing</id>
             <properties>
-                <spring-boot.run.profiles>default,testing</spring-boot.run.profiles>
+                <spring-boot.run.profiles>testing</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>
             <id>prelive</id>
             <properties>
-                <spring-boot.run.profiles>default,prelive</spring-boot.run.profiles>
+                <spring-boot.run.profiles>prelive</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>
             <id>ci</id>
             <properties>
-                <spring-boot.run.profiles>default,ci</spring-boot.run.profiles>
+                <spring-boot.run.profiles>ci</spring-boot.run.profiles>
             </properties>
         </profile>
         <profile>
             <id>live</id>
             <properties>
-                <spring-boot.run.profiles>default,live</spring-boot.run.profiles>
+                <spring-boot.run.profiles>live</spring-boot.run.profiles>
             </properties>
         </profile>
     </profiles>
@@ -801,7 +901,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${maven.project.info.reports.plugin.version}</version>
             </plugin>
             <!--
             Problem with 3.0.5 plugin, that is crashing in middle of site building.
@@ -828,7 +928,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${maven.checkstyle.plugin.versoin}</version>
                 <configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
@@ -840,7 +940,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
-                <version>2.12.1</version>
+                <version>${maven.changes.plugin.version}</version>
             </plugin>
             <!-- can go broken -->
             <!--plugin>
@@ -856,7 +956,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>taglist-maven-plugin</artifactId>
-                <version>2.4</version>
+                <version>${taglist.maven.plugin.version}</version>
                 <configuration>
                     <tagListOptions>
                         <tagClasses>
@@ -915,7 +1015,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${maven.javadoc.plugin.version}</version>
                 <reportSets>
                     <reportSet>
                         <reports>

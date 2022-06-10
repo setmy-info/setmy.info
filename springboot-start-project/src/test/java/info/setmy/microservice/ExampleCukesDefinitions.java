@@ -16,8 +16,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ExampleCukesDefinitions {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ExampleCukesDefinitions.class);
+    private static final Logger log = LogManager.getLogger(ExampleCukesDefinitions.class);
 
     String firstName;
     String lastName;
@@ -60,7 +60,7 @@ public class ExampleCukesDefinitions {
 
     @Before
     public void before() {
-        LOG.info("Before scenario");
+        log.info("Before scenario");
         this.a = 0;
         this.b = 0;
         this.c = 0;
@@ -74,103 +74,103 @@ public class ExampleCukesDefinitions {
 
     @After
     public void after() {
-        LOG.info("After scenario");
+        log.info("After scenario");
     }
 
     @BeforeStep
     public void doSomethingBeforeStep(Scenario scenario) {
-        LOG.info("Before step: {}", scenario.getName());
+        log.info("Before step: {}", scenario.getName());
     }
 
     @AfterStep
     public void doSomethingAfterStep(Scenario scenario) {
-        LOG.info("After step: {}", scenario.getName());
+        log.info("After step: {}", scenario.getName());
     }
 
     @Given("first name is {string}")
     public void first_name_is(String firstName) {
-        LOG.info("And firstName={}", firstName);
+        log.info("And firstName={}", firstName);
         this.firstName = firstName;
     }
 
     @Given("last name is {string}")
     public void last_name_is(String lastName) {
-        LOG.info("And lastName={}", lastName);
+        log.info("And lastName={}", lastName);
         this.lastName = lastName;
     }
 
     @And("calculation date is {localDate}")
     public void calculation_date_is(LocalDate localDate) {
-        LOG.info("And date={}", localDate);
+        log.info("And date={}", localDate);
         this.date = localDate;
     }
 
     @Given("book name is {book}")
     public void book_name_is(Book book) {
-        LOG.info("And book={}", book);
+        log.info("And book={}", book);
         this.book = book;
     }
 
     @Given("money is {}")
     public void money_is(BigDecimal money) {
-        LOG.info("And money={}", money);
+        log.info("And money={}", money);
         this.money = money;
     }
 
     @Given("two numbers {int} and {int}")
     public void two_numbers_and(Integer a, Integer b) {
-        LOG.info("Given: a={} and b={}", a, b);
+        log.info("Given: a={} and b={}", a, b);
         this.a = a;
         this.b = b;
     }
 
     @Given("the following users exist:")
     public void the_following_users_exist(List<Map<String, String>> dataTable) {
-        LOG.info("Given table: {}", dataTable);
+        log.info("Given table: {}", dataTable);
         this.dataTable = dataTable;
     }
 
     @Given("the following animals:")
     public void the_following_animals(List<String> animals) {
-        LOG.info("Given anumals: {}", animals);
+        log.info("Given anumals: {}", animals);
         this.animals = animals;
     }
 
     @And("third number is {int}")
     public void third_number_is(Integer c) {
-        LOG.info("And c={}", c);
+        log.info("And c={}", c);
         this.c = c;
     }
 
     @But("initial sum is {int}")
     public void initial_sum_is(Integer sum) {
-        LOG.info("But sum={}", sum);
+        log.info("But sum={}", sum);
         this.sum = sum;
     }
 
     @When("adding them")
     public void adding_them() {
-        LOG.info("When adding them");
+        log.info("When adding them");
         this.sum = this.a + this.b + this.c;
     }
 
     @Then("sum should be {int}")
     public void them_summary_should_be(Integer sum) {
-        LOG.info("Then sum should be: {} and actual sum is: {}", sum, this.sum);
+        log.info("Then sum should be: {} and actual sum is: {}", sum, this.sum);
     }
 
     @Given("there are {int} cucumbers")
     public void there_are_cucumbers(Integer num) {
-        LOG.info("there_are_cucumbers: {}", num);
+        log.info("there_are_cucumbers: {}", num);
     }
 
     @When("I eat {int} cucumbers")
     public void i_eat_cucumbers(Integer num) {
-        LOG.info("there_are_cucumbers: {}", num);
+        log.info("there_are_cucumbers: {}", num);
     }
 
     @Then("I should have {int} cucumbers")
     public void i_should_have_cucumbers(Integer num) {
-        LOG.info("there_are_cucumbers: {}", num);
+        log.info("there_are_cucumbers: {}", num);
     }
 }
