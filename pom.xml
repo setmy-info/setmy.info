@@ -20,9 +20,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <encoding.level>UTF-8</encoding.level>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <java.version>17</java.version>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+        <java.version>18</java.version>
         <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
@@ -39,7 +39,7 @@
         <logback.verion>1.2.11</logback.verion>
         <slf4j.version>1.7.36</slf4j.version>
         <lucene.version>9.1.0</lucene.version>
-        <groovy.version>4.0.2</groovy.version>
+        <groovy.version>4.0.3</groovy.version>
         <cucumber.version>7.3.4</cucumber.version>
         <pitest.version>1.7.3</pitest.version>
         <jersey.version>3.0.4</jersey.version>
@@ -114,7 +114,7 @@
         <module>java-modular-ssn</module>
         <module>java-rest-client</module>
         <!-- module>tomcat-start-project</module -->
-        <module>springboot-start-project</module>
+        <!--module>springboot-start-project</module-->
         <module>incubation/maven-plugin-start-project</module>
     </modules>
 

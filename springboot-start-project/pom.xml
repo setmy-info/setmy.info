@@ -9,7 +9,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.7</version>
+        <version>2.7.0</version>
         <relativePath/>
     </parent>
 
@@ -26,9 +26,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <encoding.level>UTF-8</encoding.level>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <java.version>17</java.version>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+        <java.version>18</java.version>
         <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
@@ -45,7 +45,7 @@
         <logback.verion>1.2.11</logback.verion>
         <slf4j.version>1.7.36</slf4j.version>
         <lucene.version>9.1.0</lucene.version>
-        <groovy.version>4.0.2</groovy.version>
+        <groovy.version>4.0.3</groovy.version>
         <cucumber.version>7.3.4</cucumber.version>
         <pitest.version>1.7.3</pitest.version>
         <jersey.version>3.0.4</jersey.version>
@@ -64,7 +64,7 @@
         <gmavenplus.plugin.version>1.13.1</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.0.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.6.8</nexus.staging.plugin.version>
-        <spring.boot.verion>2.6.7</spring.boot.verion>
+        <spring.boot.verion>2.7.0</spring.boot.verion>
         <taglist.maven.plugin.version>3.0.0</taglist.maven.plugin.version>
         <servlet.api.version>4.0.1</servlet.api.version>
         <jaxb.api.version>2.3.1</jaxb.api.version>
