@@ -6,12 +6,13 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
+    <!-- because of groovy language is in starter parent 3.x and that is still in org.codehaus.groovy -->
+    <!-- parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.0</version>
         <relativePath/>
-    </parent>
+    </parent -->
 
     <groupId>info.setmy</groupId>
     <artifactId>springboot-start-project</artifactId>
@@ -49,7 +50,7 @@
         <cucumber.version>7.3.4</cucumber.version>
         <pitest.version>1.7.3</pitest.version>
         <jersey.version>3.0.4</jersey.version>
-        <jackson.version>2.13.2</jackson.version>
+        <jackson.version>2.13.3</jackson.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
         <dependency.check.version>7.1.0</dependency.check.version>
         <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
@@ -142,7 +143,7 @@
             <groupId>jakarta.servlet.jsp</groupId>
             <artifactId>jakarta.servlet.jsp-api</artifactId>
             <version>3.0.0</version>
-        </dependency>           
+        </dependency>
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>
             <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
@@ -272,10 +273,6 @@
                     <artifactId>org.apache.groovy</artifactId>
                     <groupId>groovy</groupId>
                 </exclusion>
-                <exclusion>
-                    <artifactId>org.codehaus.groovy</artifactId>
-                    <groupId>groovy</groupId>
-                </exclusion>
             </exclusions>
             <scope>test</scope>
         </dependency>
@@ -300,6 +297,11 @@
         <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-contracts</artifactId>
             <version>${groovy.version}</version>
         </dependency>
         <dependency>
@@ -823,6 +825,19 @@
                 <groupId>org.infinispan</groupId>
                 <artifactId>infinispan-spring-boot-starter</artifactId>
                 <version>${version.infinispan.starter}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.verion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-bom</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>

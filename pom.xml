@@ -58,7 +58,8 @@
         <gmavenplus.plugin.version>1.13.1</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.0.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.6.8</nexus.staging.plugin.version>
-        <taglist.maven.plugin.version>2.4</taglist.maven.plugin.version>
+        <spring.boot.verion>2.7.0</spring.boot.verion>
+        <taglist.maven.plugin.version>3.0.0</taglist.maven.plugin.version>
         <servlet.api.version>4.0.1</servlet.api.version>
         <jaxb.api.version>2.3.1</jaxb.api.version>
         <jsp.api.version>2.3.3</jsp.api.version>
@@ -85,6 +86,9 @@
         <quartz.verion>2.3.2</quartz.verion>
         <lombok.version>1.18.24</lombok.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <swagger.version>3.0.0</swagger.version>
+        <swagger.annotations.version>1.6.3</swagger.annotations.version>
+        <swagger.models.version>1.6.3</swagger.models.version>
         <springdoc.version>1.6.0</springdoc.version>
     </properties>
 
@@ -114,7 +118,7 @@
         <module>java-modular-ssn</module>
         <module>java-rest-client</module>
         <!-- module>tomcat-start-project</module -->
-        <!--module>springboot-start-project</module-->
+        <module>springboot-start-project</module>
         <module>incubation/maven-plugin-start-project</module>
     </modules>
 
