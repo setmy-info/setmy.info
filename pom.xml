@@ -57,7 +57,7 @@
         <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
         <gmavenplus.plugin.version>1.13.1</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.0.0</buildnumber.maven.plugin.version>
-        <nexus.staging.plugin.version>1.6.8</nexus.staging.plugin.version>
+        <nexus.staging.plugin.version>1.6.13</nexus.staging.plugin.version>
         <spring.boot.verion>2.7.0</spring.boot.verion>
         <taglist.maven.plugin.version>3.0.0</taglist.maven.plugin.version>
         <servlet.api.version>4.0.1</servlet.api.version>
