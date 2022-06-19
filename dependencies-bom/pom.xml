@@ -7,12 +7,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>info.setmy</groupId>
-    <artifactId>multi-projects</artifactId>
+    <artifactId>dependencies-bom</artifactId>
     <version>1.2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>multi-projects</name>
-    <description>Java and Groovy projects</description>
+    <name>dependencies-bom</name>
+    <description>BOM module</description>
     <url>https://setmy-info.github.io</url>
 
     <properties>
@@ -92,108 +92,74 @@
         <springdoc.version>1.6.0</springdoc.version>
     </properties>
 
-    <modules>
-        <module>java-models</module>
-        <module>java-services</module>
-        <module>groovy-models</module>
-        <module>groovy-services</module>
-        <module>jwt-models</module>
-        <module>java-linguistics</module>
-        <module>java-accounting</module>
-        <module>java-db</module>
-        <module>java-document-db</module>
-        <module>java-graph-db</module>
-        <module>java-hr</module>
-        <module>java-indexing</module>
-        <module>java-reports</module>
-        <module>java-scripting</module>
-        <module>java-storage</module>
-        <module>java-web-doc-format</module>
-        <module>java-web</module>
-        <module>java-wf</module>
-        <module>java-communication</module>
-        <module>java-vcs</module>
-        <module>java-exec</module>
-        <module>java-stealer</module>
-        <module>java-modular-ssn</module>
-        <module>java-rest-client</module>
-        <!-- module>tomcat-start-project</module -->
-        <module>springboot-start-project</module>
-        <module>incubation/maven-plugin-start-project</module>
-        <module>dependencies-bom</module>
-    </modules>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit5.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>${junit5.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit5.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>${junit5.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-runner</artifactId>
-            <version>${junit.platform.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <version>${junit.platform.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>${cucumber.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>${cucumber.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit5.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.vintage</groupId>
+                <artifactId>junit-vintage-engine</artifactId>
+                <version>${junit5.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit5.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
+                <version>${junit5.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-runner</artifactId>
+                <version>${junit.platform.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-launcher</artifactId>
+                <version>${junit.platform.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-java</artifactId>
+                <version>${cucumber.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-junit</artifactId>
+                <version>${cucumber.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>org.infinispan</groupId>
                 <artifactId>infinispan-bom</artifactId>
@@ -206,13 +172,15 @@
                 <artifactId>infinispan-spring-boot-starter</artifactId>
                 <version>${version.infinispan.starter}</version>
             </dependency>
-            <dependency>
-                <groupId>info.setmy</groupId>
-                <artifactId>dependencies-bom</artifactId>
-                <version>${project.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+            </plugins>
+        </pluginManagement>
+    </build>
 
     <developers>
         <developer>
