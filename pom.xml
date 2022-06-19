@@ -90,9 +90,12 @@
         <swagger.annotations.version>1.6.3</swagger.annotations.version>
         <swagger.models.version>1.6.3</swagger.models.version>
         <springdoc.version>1.6.0</springdoc.version>
+        <jakarta.xml.bind.api.version>3.0.1</jakarta.xml.bind.api.version>
+        <picocli.version>4.6.3</picocli.version>
     </properties>
 
     <modules>
+        <module>dependencies-bom</module>
         <module>java-models</module>
         <module>java-services</module>
         <module>groovy-models</module>
@@ -120,7 +123,6 @@
         <!-- module>tomcat-start-project</module -->
         <module>springboot-start-project</module>
         <module>incubation/maven-plugin-start-project</module>
-        <module>dependencies-bom</module>
     </modules>
 
     <dependencies>
@@ -195,21 +197,11 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.infinispan</groupId>
-                <artifactId>infinispan-bom</artifactId>
-                <version>${infinispan.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.infinispan</groupId>
-                <artifactId>infinispan-spring-boot-starter</artifactId>
-                <version>${version.infinispan.starter}</version>
-            </dependency>
-            <dependency>
                 <groupId>info.setmy</groupId>
                 <artifactId>dependencies-bom</artifactId>
                 <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
