@@ -15,7 +15,6 @@
 
     <groupId>info.setmy</groupId>
     <artifactId>java-services</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>java-services</name>
     <description>Base project for commons services, helpers, Utils, DAOs, repositories etc</description>

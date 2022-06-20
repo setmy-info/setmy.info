@@ -15,7 +15,6 @@
 
     <groupId>info.setmy</groupId>
     <artifactId>java-storage</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>java-storage</name>
     <description>Base project for human text parsing and analyze.</description>

@@ -15,7 +15,6 @@
 
     <groupId>info.setmy</groupId>
     <artifactId>java-models</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>java-models</name>
     <description>Common model, exception tree, interfaces, annotations.</description>

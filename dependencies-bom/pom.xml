@@ -16,7 +16,6 @@
     <url>https://setmy-info.github.io</url>
 
     <properties>
-        <info.setmy.version>1.2.0-SNAPSHOT</info.setmy.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <encoding.level>UTF-8</encoding.level>

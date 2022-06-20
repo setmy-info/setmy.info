@@ -15,7 +15,6 @@
 
     <groupId>info.setmy</groupId>
     <artifactId>java-modular-ssn</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>java-modular-ssn</name>
     <description>Java communication project.</description>
@@ -25,7 +24,7 @@
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>java-services</artifactId>
-            <version>${info.setmy.version}</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <build>
