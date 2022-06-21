@@ -311,15 +311,15 @@
                     <includeFilterFile>${basedir}/src/test/resources/findbugs-include.xml</includeFilterFile>
                 </configuration>
             </plugin-->
-            <!--plugin>
+            <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.0.0</version>
-                <configuration>
+                <version>4.7.0.0</version>
+                <!--configuration>
                     <excludeFilterFile>${basedir}/src/test/resources/spotbugs-exclude.xml</excludeFilterFile>
                     <includeFilterFile>${basedir}/src/test/resources/spotbugs-include.xml</includeFilterFile>
-                </configuration>
-            </plugin-->
+                </configuration-->
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -329,7 +329,7 @@
                     <consoleOutput>true</consoleOutput>
                     <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
                     <!-- configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation -->
-                    <!-- configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation -->
+                    <!-- configLocation>${basedir}/src/test/resources/google-checks.xml</configLocation -->
                 </configuration>
             </plugin>
             <plugin>
@@ -399,13 +399,13 @@
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
                 <version>${pitest.version}</version>
-                <reportSets>
+                <!--reportSets>
                     <reportSet>
                         <reports>
                             <report>report</report>
                         </reports>
                     </reportSet>
-                </reportSets>
+                </reportSets-->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
