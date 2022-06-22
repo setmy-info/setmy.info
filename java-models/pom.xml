@@ -265,6 +265,31 @@
                 </executions>
             </plugin-->
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${maven.checkstyle.plugin.versoin}</version>
+                    <configuration>
+                        <violationSeverity>warning</violationSeverity>
+                        <consoleOutput>true</consoleOutput>
+                        <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
+                        <!-- configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation -->
+                        <!-- configLocation>${basedir}/src/test/resources/google-checks.xml</configLocation -->
+                    </configuration>                   
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>10.3</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <profiles>
@@ -322,15 +347,7 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven.checkstyle.plugin.versoin}</version>
-                <configuration>
-                    <violationSeverity>warning</violationSeverity>
-                    <consoleOutput>true</consoleOutput>
-                    <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
-                    <!-- configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation -->
-                    <!-- configLocation>${basedir}/src/test/resources/google-checks.xml</configLocation -->
-                </configuration>
+                <artifactId>maven-checkstyle-plugin</artifactId>              
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -399,13 +416,13 @@
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
                 <version>${pitest.version}</version>
-                <!--reportSets>
+                <reportSets>
                     <reportSet>
                         <reports>
                             <report>report</report>
                         </reports>
                     </reportSet>
-                </reportSets-->
+                </reportSets>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -427,6 +444,12 @@
                     </reportSet>
                 </reportSets>
                 <configuration>
+                    <additionalparam>-Xdoclint:all -Xdoclint:-missing</additionalparam>
+                    <additionalOptions>-Xdoclint:all -Xdoclint:-missing</additionalOptions>
+                    <additionalJOptions>
+                        <additionalJOption>-Xdoclint:all</additionalJOption>
+                        <additionalJOption>-Xdoclint:-missing</additionalJOption>
+                    </additionalJOptions>
                     <additionalOptions>-html5</additionalOptions>
                 </configuration>
             </plugin>
