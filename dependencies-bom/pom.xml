@@ -296,6 +296,11 @@
                 <artifactId>groovy-yaml</artifactId>
                 <version>${groovy.version}</version>
             </dependency>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-contracts</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
             <dependency>
                 <groupId>org.apache.lucene</groupId>
                 <artifactId>lucene-core</artifactId>
