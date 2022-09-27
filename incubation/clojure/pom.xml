@@ -19,7 +19,7 @@
         <release.version>17</release.version>
         <micronaut.version>3.7.0</micronaut.version>
         <exec.mainClass>info.setmy.ClojureCommand</exec.mainClass>
-        <groovyVersion>3.0.13</groovyVersion>
+        <groovyVersion>4.0.5</groovyVersion>
     </properties>
 
     <repositories>
@@ -31,15 +31,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-inject-groovy</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
+            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy</artifactId>
             <version>${groovyVersion}</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-contracts</artifactId>
+            <version>${groovyVersion}</version>
         </dependency>
         <dependency>
             <groupId>info.picocli</groupId>
@@ -162,6 +161,14 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.groovy</groupId>
+                        <artifactId>groovy</artifactId>
+                        <version>${groovyVersion}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
