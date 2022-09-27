@@ -1,0 +1,6 @@
+applicationType: cli
+defaultPackage: info.setmy
+testFramework: junit
+sourceLanguage: groovy
+buildTool: maven
+features: [annotation-api, app-name, groovy, jackson-databind, junit, logback, maven, picocli, picocli-groovy-application, picocli-junit, readme, shade, yaml]
