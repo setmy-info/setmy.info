@@ -1,3 +1,11 @@
 micronaut:
     application:
         name: clojure
+
+#logger:
+#    levels:
+#        io:
+#            micronaut:
+#                context: INFO
+#                condition: INFO
+#                lifecycle: INFO
