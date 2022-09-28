@@ -1,0 +1,4 @@
+logger:
+    root: ERROR
+    levels:
+        root: ERROR

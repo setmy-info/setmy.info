@@ -2,9 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>info.setmy</groupId>
     <artifactId>clojure</artifactId>
-    <version>0.1</version>
+    <version>0.0.0-SNAPSHOT</version>
     <packaging>${packaging}</packaging>
 
     <parent>
@@ -139,7 +140,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <script>src/main/clojure/info/setmy/main.clj</script>
+                    <mainClass>info.setmy.ClojureCommand</mainClass>
+                    <!-- script>src/main/clojure/info/setmy/main.clj</script -->
                     <testScript>src/test/clojure/test.clj</testScript>
                 </configuration>
             </plugin>
