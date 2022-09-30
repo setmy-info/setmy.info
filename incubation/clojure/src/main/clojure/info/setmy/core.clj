@@ -8,6 +8,8 @@
 (def aDouble 11.12345)
 (def aXyz)
 (def aRatioFraction 1/2)
+(def aBigInt 15N)
+(def aBigDecimal 16M)
 
 (println "Boolean type: " (type false))
 (println "aString type: " (type aString))
@@ -15,6 +17,15 @@
 (println "aDouble type: " (type aDouble))
 (println "aBoolean type: " (type aBoolean))
 (println "aRatioFraction type: " (type aRatioFraction))
+(println "aBigInt type: " (type aBigInt))
+(println "aBigDecimal type: " (type aBigDecimal))
+
+(defn ishe
+    [name]
+    (if (= name "Minime")
+        (println "Yes, he is Minime")
+        (println "No, he is not Minime")))
+
 
 (defn -main
     "I don't do a whole lot ... yet."
@@ -116,5 +127,7 @@
     (println "inc: " (inc 5))
     (println "dec: " (dec 5))
 
+    (println "Minime: " (ishe "Minime"))
+    (println "Minime: " (ishe "Me"))
     ;;
     )
