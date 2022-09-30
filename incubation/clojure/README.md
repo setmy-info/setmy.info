@@ -47,4 +47,6 @@ lein new app tutorial
 cd tutorial
 lein run
 lein test
+lein uberjar
+java -jar ".\target\default+uberjar\tutorial-0.1.0-SNAPSHOT-standalone.jar" fff
 ```
