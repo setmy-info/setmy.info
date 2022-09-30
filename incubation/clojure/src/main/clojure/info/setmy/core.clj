@@ -26,6 +26,7 @@
         (println "Yes, he is Minime")
         (println "No, he is not Minime")))
 
+(defn return-true [] true)
 
 (defn -main
     "I don't do a whole lot ... yet."
@@ -129,5 +130,6 @@
 
     (println "Minime: " (ishe "Minime"))
     (println "Minime: " (ishe "Me"))
+    (println "Returned: " (return-true))
     ;;
     )
