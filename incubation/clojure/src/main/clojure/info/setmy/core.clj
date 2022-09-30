@@ -1,4 +1,4 @@
-(ns tutorial.core
+(ns info.setmy.core
     (:require [clojure.string :as str])
     (:gen-class))
 

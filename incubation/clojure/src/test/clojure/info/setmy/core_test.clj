@@ -1,6 +1,6 @@
-(ns tutorial.core-test
+(ns info.setmy.core-test
     (:require [clojure.test :refer :all]
-              [tutorial.core :refer :all]))
+              [info.setmy.core :refer :all]))
 
 (deftest a-test
     (testing "FIXME, I fail."
