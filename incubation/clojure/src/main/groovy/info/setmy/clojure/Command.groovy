@@ -13,10 +13,22 @@ import java.util.concurrent.Callable
 @CommandLine.Command(name = "clojure", mixinStandardHelpOptions = true, version = "0.0.0-SNAPSHOT", description = "Clojure learning")
 class Command implements Callable<Integer> {
 
-    @CommandLine.Option(names = ["-o", "--ooo"], required = false, paramLabel = "sms", description = "sms usage number")
-    private String ooo;
+    private static final String DEFAULT_MAIN_CLJ_SCRIPT = "info/setmy/main.clj"
+    private static final String DEFAULT_NAME_SPACE = "info.setmy.main"
+    private static final String DEFAULT_MAIN_NAME = "default-main"
+
+    @CommandLine.Option(names = ["-n", "--namespace"], required = false, paramLabel = "namespace", description = "namespace")
+    private Optional<String> namespace;
+
+    @CommandLine.Option(names = ["-s", "--scriptName"], required = false, paramLabel = "scriptName", description = "scriptName")
+    private Optional<String> scriptName;
+
+    @CommandLine.Option(names = ["-m", "--mainFunctionName"], required = false, paramLabel = "mainFunctionName", description = "mainFunctionName")
+    private Optional<String> mainFunctionName;
 
     final ClojureService clojureService
+
+    private String[] args
 
     Command(final ClojureService clojureService) {
         this.clojureService = clojureService
@@ -24,8 +36,14 @@ class Command implements Callable<Integer> {
 
     @Override
     Integer call() {
-        log.info("Logging works in command {}", ooo)
-        clojureService.executeClojure()
+        def clojureExec = ClojureExec.builder()
+            .ns(namespace.orElse(DEFAULT_NAME_SPACE))
+            .scriptName(scriptName.orElse(DEFAULT_MAIN_CLJ_SCRIPT))
+            .mainFunctionName(mainFunctionName.orElse(DEFAULT_MAIN_NAME))
+            .args(args)
+            .build()
+        log.info("Executing {}", clojureExec)
+        clojureService.exec(clojureExec)
         return 0;
     }
 }

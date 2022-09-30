@@ -11,3 +11,6 @@
     (println (greet "Imre"))
     (println "Java main called clojure function with args: "
              (apply str (interpose " " args))))
+
+(defn default-main [args]
+    (println "Hello World from Clojure!" (apply str (interpose " " args))))

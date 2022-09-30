@@ -11,15 +11,15 @@
 ### Execution
 
 ```shell
-.\mvnw spring-boot:run -Dspring-boot.run.arguments="-o param"
+.\mvnw spring-boot:run -Dspring-boot.run.arguments="-n info.setmy.main -s info/setmy/main.clj -m default-main"
 ```
 
 ```shell
-./mvnw spring-boot:run -Dspring-boot.run.arguments="-o param"
+./mvnw spring-boot:run -Dspring-boot.run.arguments="-n info.setmy.main -s info/setmy/main.clj -m default-main"
 ```
 
 ```shell
-java -jar .\target\clojure-0.0.0-SNAPSHOT.jar -o param
+java -jar .\target\clojure-0.0.0-SNAPSHOT.jar -n info.setmy.main -s info/setmy/main.clj -m default-main
 ```
 
 #### Clojure run

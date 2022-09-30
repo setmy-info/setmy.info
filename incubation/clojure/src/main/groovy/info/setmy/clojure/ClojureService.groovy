@@ -8,15 +8,11 @@ import org.springframework.stereotype.Service
 @Service
 class ClojureService {
 
-    private static final String MAIN_CLJ = "info/setmy/main.clj"
-
-    private String[] args
-
-    void executeClojure() {
+    void exec(final ClojureExec clojureExec) {
         log.info("Execute clojure")
         try {
-            RT.loadResourceScript(MAIN_CLJ);
-            RT.var("info.setmy.main", "main").invoke(args);
+            RT.loadResourceScript(clojureExec.scriptName);
+            RT.var(clojureExec.ns, clojureExec.mainFunctionName).invoke(clojureExec.args);
         } catch (Exception e) {
             e.printStackTrace();
         }

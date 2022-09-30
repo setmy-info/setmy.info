@@ -28,8 +28,7 @@ class Runner implements CommandLineRunner, ExitCodeGenerator {
 
     @Override
     void run(final String... args) throws Exception {
-        log.info("Logging Works in runner")
-        clojureService.args = args
+        command.args = args
         exitCode = new CommandLine(command, factory).execute(args);
     }
 
