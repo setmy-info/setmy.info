@@ -31,3 +31,20 @@ java -jar .\target\clojure-0.0.0-SNAPSHOT.jar -o param
 ```shell
 ./mvnw clojure:run
 ```
+
+# Leiningen
+
+[Leiningen](https://leiningen.org/)
+
+[Lein tutorial](https://codeberg.org/leiningen/leiningen/src/branch/stable/doc/TUTORIAL.md)
+
+## How it's done
+
+```shell
+mkdir leiningen
+cd leiningen
+lein new app tutorial
+cd tutorial
+lein run
+lein test
+```
