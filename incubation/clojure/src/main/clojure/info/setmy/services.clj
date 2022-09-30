@@ -4,7 +4,7 @@
 
 (defn greet  [name] (str "Hello, " name))
 
-(def barService info.setmy.BarService/barService)
+(def barService info.setmy.clojure.BarService/barService)
 
-;(defn getBar [name] (.. info.setmy.BarService/barService (getBar name)))
+;(defn getBar [name] (.. info.setmy.clojure.BarService/barService (getBar name)))
 (defn getBar [name] (.. barService (getBar name)))

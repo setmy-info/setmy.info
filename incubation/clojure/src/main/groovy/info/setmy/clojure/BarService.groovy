@@ -1,4 +1,4 @@
-package info.setmy
+package info.setmy.clojure
 
 
 import groovy.util.logging.Slf4j
@@ -15,5 +15,9 @@ class BarService {
 
     void getInjectionWorks() {
         log.info("Works!!")
+    }
+
+    static getFoo() {
+        "Foo"
     }
 }

@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.4</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <groupId>info.setmy</groupId>
     <artifactId>clojure</artifactId>
     <version>0.0.0-SNAPSHOT</version>
-    <packaging>${packaging}</packaging>
+    <name>clojure</name>
 
-    <parent>
-        <groupId>io.micronaut</groupId>
-        <artifactId>micronaut-parent</artifactId>
-        <version>3.7.0</version>
-    </parent>
+    <description>Clojure project for Spring Boot</description>
 
     <properties>
-        <packaging>jar</packaging>
+        <java.version>17</java.version>
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
-        <micronaut.version>3.7.0</micronaut.version>
-        <exec.mainClass>info.setmy.ClojureCommand</exec.mainClass>
         <groovyVersion>4.0.5</groovyVersion>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
-    </repositories>
-
     <dependencies>
+        <dependency>
+            <groupId>info.picocli</groupId>
+            <artifactId>picocli-spring-boot-starter</artifactId>
+            <version>4.6.3</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy</artifactId>
@@ -42,68 +42,8 @@
             <version>${groovyVersion}</version>
         </dependency>
         <dependency>
-            <groupId>info.picocli</groupId>
-            <artifactId>picocli-codegen</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-inject</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-validation</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-http-client</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>info.picocli</groupId>
-            <artifactId>picocli</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-jackson-databind</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut.groovy</groupId>
-            <artifactId>micronaut-runtime-groovy</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut.picocli</groupId>
-            <artifactId>micronaut-picocli</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.annotation</groupId>
-            <artifactId>jakarta.annotation-api</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut.test</groupId>
-            <artifactId>micronaut-test-junit5</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -116,8 +56,8 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>io.micronaut.build</groupId>
-                <artifactId>micronaut-maven-plugin</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>com.theoryinpractise</groupId>
@@ -140,7 +80,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>info.setmy.ClojureCommand</mainClass>
+                    <mainClass>info.setmy.clojure.Application</mainClass>
                     <!-- script>src/main/clojure/info/setmy/main.clj</script -->
                     <testScript>src/test/clojure/test.clj</testScript>
                 </configuration>
@@ -148,7 +88,7 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.13.0</version>
+                <version>1.13.1</version>
                 <executions>
                     <execution>
                         <goals>
@@ -173,40 +113,14 @@
                 </dependencies>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>1.0.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>set-system-properties</goal>
-                        </goals>
-                        <configuration>
-                            <properties>
-                                <property>
-                                    <name>groovy.target.directory</name>
-                                    <value>${project.build.directory}/classes</value>
-                                </property>
-                                <property>
-                                    <name>groovy.parameters</name>
-                                    <value>true</value>
-                                </property>
-                            </properties>
-                        </configuration>
-                    </execution>
-                </executions>
+                <configuration>
+                    <source>18</source>
+                    <target>18</target>
+                </configuration>
             </plugin>
         </plugins>
-        <!--resources>
-            <resource>
-                <directory>src/main/clojure</directory>
-            </resource>
-        </resources-->
     </build>
 
-    <pluginRepositories>
-    </pluginRepositories>
 </project>
