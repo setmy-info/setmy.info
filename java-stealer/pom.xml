@@ -10,12 +10,11 @@
         <groupId>info.setmy</groupId>
         <artifactId>multi-projects</artifactId>
         <version>1.2.0-SNAPSHOT</version>
-        <relativePath>..</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>info.setmy</groupId>
     <artifactId>java-stealer</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>java-stealer</name>
     <description>Stealer Java library.</description>
@@ -25,17 +24,16 @@
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>java-services</artifactId>
-            <version>${info.setmy.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>java-vcs</artifactId>
-            <version>${info.setmy.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

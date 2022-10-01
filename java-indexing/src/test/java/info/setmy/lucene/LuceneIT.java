@@ -23,7 +23,7 @@ import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.MMapDirectory;
 import org.apache.lucene.util.Version;
-import static org.apache.lucene.util.Version.LUCENE_9_0_0;
+import static org.apache.lucene.util.Version.LATEST;
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,7 +55,7 @@ public class LuceneIT {
 
     @Test
     public void testAddData() throws IOException, ParseException {
-        final Version version = LUCENE_9_0_0;
+        final Version version = LATEST;
         LOG.debug("Version: {}", version);
         Analyzer analyzer = new StandardAnalyzer();
         Path path = FileSystems.getDefault().getPath(INDEX_HOME_DIR, INDEX_DIR);

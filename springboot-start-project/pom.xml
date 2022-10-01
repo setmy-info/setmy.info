@@ -17,19 +17,17 @@
         <groupId>info.setmy</groupId>
         <artifactId>multi-projects</artifactId>
         <version>1.2.0-SNAPSHOT</version>
-        <relativePath>..</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>info.setmy</groupId>
     <artifactId>springboot-start-project</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>springboot-start-project</name>
     <description>Containerized microservice starter (seed) project</description>
     <url>https://setmy-info.github.io</url>
 
     <properties>
-        <info.setmy.version>1.2.0-SNAPSHOT</info.setmy.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <encoding.level>UTF-8</encoding.level>
@@ -472,17 +470,17 @@
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>java-web</artifactId>
-            <version>${info.setmy.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>java-db</artifactId>
-            <version>${info.setmy.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>java-indexing</artifactId>
-            <version>${info.setmy.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

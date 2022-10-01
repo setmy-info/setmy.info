@@ -16,7 +16,6 @@
     <url>https://setmy-info.github.io</url>
 
     <properties>
-        <info.setmy.version>1.2.0-SNAPSHOT</info.setmy.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <encoding.level>UTF-8</encoding.level>
@@ -27,10 +26,10 @@
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
 
-        <junit5.version>5.8.2</junit5.version>
-        <junit.platform.version>1.8.2</junit.platform.version>
-        <mockito.version>4.5.1</mockito.version>
-        <assertj.version>3.22.0</assertj.version>
+        <junit5.version>5.9.0</junit5.version>
+        <junit.platform.version>1.9.0</junit.platform.version>
+        <mockito.version>4.6.1</mockito.version>
+        <assertj.version>3.23.1</assertj.version>
         <jacoco.version>0.8.8</jacoco.version>
         <failsafe.version>2.22.2</failsafe.version>
         <surefire.version>2.22.2</surefire.version>
@@ -38,26 +37,26 @@
         <log4j2.verion>2.17.2</log4j2.verion>
         <logback.verion>1.2.11</logback.verion>
         <slf4j.version>1.7.36</slf4j.version>
-        <lucene.version>9.1.0</lucene.version>
+        <lucene.version>9.2.0</lucene.version>
         <groovy.version>4.0.3</groovy.version>
         <cucumber.version>7.3.4</cucumber.version>
-        <pitest.version>1.7.3</pitest.version>
+        <pitest.version>1.8.1</pitest.version>
         <jersey.version>3.0.4</jersey.version>
-        <jackson.version>2.13.2</jackson.version>
+        <jackson.version>2.13.3</jackson.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
-        <dependency.check.version>7.1.0</dependency.check.version>
+        <dependency.check.version>7.1.1</dependency.check.version>
         <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
         <maven.site.plugin.version>3.12.0</maven.site.plugin.version>
         <maven.release.plugin.version>2.5.3</maven.release.plugin.version>
         <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
-        <maven.javadoc.plugin.version>3.3.1</maven.javadoc.plugin.version>
+        <maven.javadoc.plugin.version>3.4.0</maven.javadoc.plugin.version>
         <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
-        <maven.project.info.reports.plugin.version>3.3.0</maven.project.info.reports.plugin.version>
+        <maven.project.info.reports.plugin.version>3.4.0</maven.project.info.reports.plugin.version>
         <maven.checkstyle.plugin.versoin>3.1.2</maven.checkstyle.plugin.versoin>
         <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
         <gmavenplus.plugin.version>1.13.1</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.0.0</buildnumber.maven.plugin.version>
-        <nexus.staging.plugin.version>1.6.8</nexus.staging.plugin.version>
+        <nexus.staging.plugin.version>1.6.13</nexus.staging.plugin.version>
         <spring.boot.verion>2.7.0</spring.boot.verion>
         <taglist.maven.plugin.version>3.0.0</taglist.maven.plugin.version>
         <servlet.api.version>4.0.1</servlet.api.version>
@@ -65,10 +64,10 @@
         <jsp.api.version>2.3.3</jsp.api.version>
         <!--jaxb.impl.version>2.1</jaxb.impl.version-->
         <maven.jetty.plugin.version>11.0.9</maven.jetty.plugin.version>
-        <spring.version>5.3.19</spring.version>
-        <spring.security.version>5.6.3</spring.security.version>
-        <spring.data.jpa.version>2.6.4</spring.data.jpa.version>
-        <hibernate.version>6.0.0.Final</hibernate.version>
+        <spring.version>5.3.20</spring.version>
+        <spring.security.version>5.7.1</spring.security.version>
+        <spring.data.jpa.version>2.7.0</spring.data.jpa.version>
+        <hibernate.version>6.1.0.Final</hibernate.version>
         <hibernate.validator.version>7.0.4.Final</hibernate.validator.version>
         <ehcache.version>3.9.7</ehcache.version>
         <commons.dbcp.version>1.4</commons.dbcp.version>
@@ -90,9 +89,14 @@
         <swagger.annotations.version>1.6.3</swagger.annotations.version>
         <swagger.models.version>1.6.3</swagger.models.version>
         <springdoc.version>1.6.0</springdoc.version>
+        <jakarta.xml.bind.api.version>3.0.1</jakarta.xml.bind.api.version>
+        <picocli.version>4.6.3</picocli.version>
+        <find.bugs.version>3.0.5</find.bugs.version>
+        <spot.bugs.version>4.7.0.0</spot.bugs.version>
     </properties>
 
     <modules>
+        <module>dependencies-bom</module>
         <module>java-models</module>
         <module>java-services</module>
         <module>groovy-models</module>
@@ -125,68 +129,52 @@
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit5.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-            <version>${junit5.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit5.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>${junit5.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-runner</artifactId>
-            <version>${junit.platform.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>${cucumber.version}</version>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -194,16 +182,11 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.infinispan</groupId>
-                <artifactId>infinispan-bom</artifactId>
-                <version>${infinispan.version}</version>
+                <groupId>info.setmy</groupId>
+                <artifactId>dependencies-bom</artifactId>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.infinispan</groupId>
-                <artifactId>infinispan-spring-boot-starter</artifactId>
-                <version>${version.infinispan.starter}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

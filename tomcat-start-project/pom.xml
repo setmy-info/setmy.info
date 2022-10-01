@@ -10,11 +10,11 @@
         <groupId>info.setmy</groupId>
         <artifactId>multi-projects</artifactId>
         <version>1.2.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>info.setmy</groupId>
     <artifactId>tomcat-start-project</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>tomcat-start-project</name>
     <description>Simple tomcat microservice.</description>
@@ -22,7 +22,7 @@
 
     <properties>
         <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
-        <maven.jetty.plugin.version>10.0.6</maven.jetty.plugin.version>
+        <maven.jetty.plugin.version>11.0.9</maven.jetty.plugin.version>
     </properties>
 
     <dependencies>
@@ -59,22 +59,18 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>${log4j2.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>${log4j2.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>${logback.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -173,7 +169,6 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>${liquibase.version}</version>
         </dependency>
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
@@ -183,47 +178,42 @@
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>java-web</artifactId>
-            <version>${info.setmy.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>java-db</artifactId>
-            <version>${info.setmy.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>groovy-services</artifactId>
-            <version>${info.setmy.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>jwt-models</artifactId>
-            <version>${info.setmy.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-ehcache</artifactId>
-            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate.validator.version}</version>
         </dependency>
         <dependency>
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>${ehcache.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-dbcp</groupId>
@@ -279,7 +269,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
