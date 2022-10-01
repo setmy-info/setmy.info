@@ -19,9 +19,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <encoding.level>UTF-8</encoding.level>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
-        <java.version>18</java.version>
+        <maven.compiler.source>19</maven.compiler.source>
+        <maven.compiler.target>19</maven.compiler.target>
+        <java.version>19</java.version>
         <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
@@ -38,10 +38,10 @@
         <logback.verion>1.2.11</logback.verion>
         <slf4j.version>1.7.36</slf4j.version>
         <lucene.version>9.2.0</lucene.version>
-        <groovy.version>4.0.3</groovy.version>
+        <groovy.version>4.0.5</groovy.version>
         <cucumber.version>7.3.4</cucumber.version>
         <pitest.version>1.8.1</pitest.version>
-        <jersey.version>3.0.4</jersey.version>
+        <jersey.version>3.0.8</jersey.version>
         <jackson.version>2.13.3</jackson.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
         <dependency.check.version>7.1.1</dependency.check.version>
@@ -63,7 +63,7 @@
         <jaxb.api.version>2.3.1</jaxb.api.version>
         <jsp.api.version>2.3.3</jsp.api.version>
         <!--jaxb.impl.version>2.1</jaxb.impl.version-->
-        <maven.jetty.plugin.version>11.0.9</maven.jetty.plugin.version>
+        <maven.jetty.plugin.version>11.0.12</maven.jetty.plugin.version>
         <spring.version>5.3.20</spring.version>
         <spring.security.version>5.7.1</spring.security.version>
         <spring.data.jpa.version>2.7.0</spring.data.jpa.version>
