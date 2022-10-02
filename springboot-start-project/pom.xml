@@ -49,7 +49,7 @@
         <!--log4j.verion>1.2.17</log4j.verion -->
         <log4j2.verion>2.19.0</log4j2.verion>
         <logback.verion>1.4.1</logback.verion>
-        <slf4j.version>1.7.36</slf4j.version><!-- slf4j.version>2.0.1</slf4j.version -->
+        <slf4j.version>2.0.1</slf4j.version>
         <lucene.version>9.3.0</lucene.version>
         <groovy.version>4.0.5</groovy.version>
         <cucumber.version>7.8.0</cucumber.version>
@@ -171,17 +171,17 @@
             <artifactId>log4j-api</artifactId>
             <version>${log4j2.verion}</version>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
+        </dependency-->
+        <!--dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
             <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
+        </dependency-->
+        <!--dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.verion}</version>
@@ -190,7 +190,7 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>${logback.verion}</version>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -345,6 +345,16 @@
             <groupId>org.springframework.amqp</groupId>
             <artifactId>spring-rabbit-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.codehaus.groovy</groupId>
+                    <artifactId>groovy</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.codehaus.groovy</groupId>
+                    <artifactId>groovy-json</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -373,12 +383,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <exclusions>
+            <!--exclusions>
                 <exclusion>
                     <groupId>org.apache.logging.log4j</groupId>
                     <artifactId>log4j-to-slf4j</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
