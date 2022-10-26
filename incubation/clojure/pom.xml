@@ -22,7 +22,7 @@
         <java.version>17</java.version>
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
-        <groovyVersion>4.0.5</groovyVersion>
+        <groovyVersion>4.0.6</groovyVersion>
     </properties>
 
     <dependencies>
@@ -82,7 +82,7 @@
                 <configuration>
                     <mainClass>info.setmy.clojure.Application</mainClass>
                     <!-- script>src/main/clojure/info/setmy/main.clj</script -->
-                    <testScript>src/test/clojure/test.clj</testScript>
+                    <testScript>src/test/clojure/testing.clj</testScript>
                 </configuration>
             </plugin>
             <plugin>
