@@ -1,7 +1,7 @@
-(defpackage :info.setmy.lesson
-  ;(:use :common-lisp)
-  )
-;(in-package :info.setmy.lesson)
+(defpackage first-app/lesson
+  (:use :cl)
+  (:export :show-math))
+(in-package :first-app/lesson)
 
 (defun println (str)
   "Print line"
