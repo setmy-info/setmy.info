@@ -4,13 +4,18 @@
 
 ## Installation
 
+dds
+
+sdfdfs
+sss
+
 ## Author
 
 * imret
 
 ## Copyright
 
-Copyright (c) 2022 imret
+Copyright (c) 2022 Imre Tabur
 
 ## License
 
