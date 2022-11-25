@@ -1,19 +1,15 @@
-(require "asdf")
+;;;; Application main execution file.
 
-(format t "ASDF version: ~a ~1%" (asdf:asdf-version))
-
-(load #p"./src/style.lisp")
-(load #p"./src/foo.lisp")
-(load #p"./src/lesson.lisp")
-;; TODO : ASDF systems
-;; (asdf:load-system :foo)
-
-(defpackage first-app
-  ;(:use :cl :first-app/foo :first-app/lesson))
+(in-package :cl-user)
+(defpackage first-app/main
   (:use :cl)
   (:import-from :first-app/foo :hello-world)
-  (:import-from ::first-app/lesson show-math))
-(in-package :first-app)
+  (:import-from :first-app/style :+golden-ratio+)
+  (:import-from :first-app/lesson :show-math)
+  (:export :show-math))
+(in-package :first-app/main)
+
+(format t "~%ASDF version: ~a ~1%" (asdf:asdf-version))
 
 (hello-world)
 (show-math)

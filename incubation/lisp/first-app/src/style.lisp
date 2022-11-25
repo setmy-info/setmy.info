@@ -18,7 +18,7 @@
 
 ;;; Region 1. Three semicolons.
 
-(defconstant +golden-ratio+ "Global constants should be with plus sign.")
+(defconstant +golden-ratio+ 575 "Global constants should be with plus sign.")
 (defconstant +mix32+ #x12b9b0a1 "pi, an arbitrary number")
 (defconstant +mix64+ #x2b992ddfa23249d6 "more digits of pi")
 

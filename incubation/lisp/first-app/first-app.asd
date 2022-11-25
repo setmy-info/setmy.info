@@ -8,7 +8,12 @@
   :depends-on ("alexandria")
   :components ((:module "src"
                 :components
-                ((:file "main"))))
+                (
+                  (:file "foo")
+                  (:file "lesson")
+                  (:file "style")
+                  (:file "main" :depends-on ("style" "lesson" "foo"))
+                )))
   :description "A sample Lisp system(project)."
   :in-order-to ((test-op (test-op "first-app/tests"))))
 

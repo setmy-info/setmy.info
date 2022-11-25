@@ -1,3 +1,5 @@
+;;;; Collected code lessons and examples.
+
 (in-package :cl-user)
 (defpackage first-app/lesson
   (:use :cl)
@@ -33,7 +35,7 @@
 
 ; Creates array for 5 elements, looks 2 size with NIL filled and made as rezisable - without 
 ; asjustable it can crow only to 5 elements.
-(defparameter *initialized-array* (make-array 5 :initial-element nil :fill-pointer 2 :adjustable T :element-type 'integer))
+(defparameter *initialized-array* (make-array 5 :initial-element nil :fill-pointer 2 :adjustable T))
 
 (defun show-math ()
   "Showcalculations"

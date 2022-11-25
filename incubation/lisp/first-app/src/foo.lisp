@@ -1,3 +1,6 @@
+;;;; Just simple Hello world function example.
+
+(in-package :cl-user)
 (defpackage first-app/foo
   (:use :cl)
   (:export :hello-world))
