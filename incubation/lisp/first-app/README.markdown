@@ -13,7 +13,7 @@
 
 ## Author
 
-* imret
+* Imre Tabur
 
 ## Copyright
 

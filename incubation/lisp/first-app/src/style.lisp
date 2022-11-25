@@ -11,7 +11,7 @@
   |#
 (in-package :first-app/style)
 
-;;; Max line length -------------------------------------------------------------------------------- 
+;;; Max line length --------------------------------------------------------------------------------
 
 (defparameter *global-variable* "Global variable in earmuffs. All variables should be writen 
     complete words. You should use lower case. You must not use / or . instead of -")
@@ -51,6 +51,7 @@
    (warn-passengers car))
   |#
 
-;;--- TODO(info@setmy.info): Refactor to provide a better API.  Remove this code after release 1.7 or before 2099-12-31.
+;;--- TODO(info@setmy.info): Refactor to provide a better API.  Remove this code after release 1.7
+;; or before 2099-12-31.
 (defun foo-bar ()
     (format t "Hello, world~1%"))
