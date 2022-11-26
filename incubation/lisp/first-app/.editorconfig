@@ -9,5 +9,5 @@ indent_style = space
 [*.{lisp,asd}]
 indent_size = 2
 
-[*.bat]
+[*.{bat,cmd}]
 end_of_line = crlf
