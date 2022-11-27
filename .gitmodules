@@ -106,3 +106,9 @@
 [submodule "submodules/stealer"]
 	path = submodules/stealer
 	url = git@github.com:setmy-info/stealer.git
+[submodule "submodules/clojure-start-project"]
+	path = submodules/clojure-start-project
+	url = git@github.com:setmy-info/clojure-start-project.git
+[submodule "submodules/cl-start-project"]
+	path = submodules/cl-start-project
+	url = git@github.com:setmy-info/cl-start-project.git
