@@ -37,6 +37,7 @@ live.mv.db
 live.trace.db
 
 setmy-info-docker/setmy-info-rocky-java/jdk*
+setmy-info-docker/setmy-info-rocky-java/openjdk*
 setmy-info-docker/setmy-info-rocky-java/openjdk-*.tar.gz
 setmy-info-docker/setmy-info-rocky-java-tomcat/apache-tomcat-*
 setmy-info-docker/setmy-info-rocky-node/node-v*
