@@ -41,9 +41,7 @@ setmy-info-docker/setmy-info-rocky-java/openjdk*
 setmy-info-docker/setmy-info-rocky-java/openjdk-*.tar.gz
 setmy-info-docker/setmy-info-rocky-java-tomcat/apache-tomcat-*
 setmy-info-docker/setmy-info-rocky-node/node-v*
-setmy-info-docker/setmy-info-rocky-java-zeebe/zeebe-broker-*
-setmy-info-docker/setmy-info-rocky-java-zeebe/zeebe-distribution-*
-setmy-info-docker/setmy-info-rocky-java-zeebe/camunda-cloud-zeebe-*
+setmy-info-docker/setmy-info-rocky-java-zeebe/camunda-zeebe-*
 setmy-info-docker/setmy-info-rocky-java-infinispan/infinispan-server-*
 setmy-info-docker/setmy-info-rocky-java-hsqldb/hsqldb-*.zip
 setmy-info-docker/setmy-info-rocky-java-hsqldb/hsqldb-*/
