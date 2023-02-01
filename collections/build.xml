@@ -4,7 +4,7 @@
 
     <property file="build.properties"/>
 
-    <target name="all" depends="jdk,ant,maven,gradle,node,cmake,julia,go"/>
+    <target name="all" depends="jdk,ant,maven,gradle,node,cmake,julia,go,setmy-info-scripts"/>
 
     <!-- ######################## -->
 
@@ -119,5 +119,12 @@
     </target>
 
     <!-- ######################## -->
+
+    <target name="setmy-info-scripts">
+        <ant antfile="build.xml" dir="${SMI_SCRIPTS_DIR}" target="all"/>
+        <copy todir="./">
+            <fileset dir="${SMI_SCRIPTS_DIR}" includes="*.rpm"/>
+        </copy>
+    </target>
 
 </project>
