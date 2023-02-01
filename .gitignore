@@ -45,15 +45,15 @@ setmy-info-docker/setmy-info-rocky-java-zeebe/camunda-zeebe-*
 setmy-info-docker/setmy-info-rocky-java-infinispan/infinispan-server-*
 setmy-info-docker/setmy-info-rocky-java-hsqldb/hsqldb-*.zip
 setmy-info-docker/setmy-info-rocky-java-hsqldb/hsqldb-*/
-setmy-info-docker/downloads/apache-ant-*
-setmy-info-docker/downloads/apache-maven-*
-setmy-info-docker/downloads/cmake-*
-setmy-info-docker/downloads/go*
-setmy-info-docker/downloads/gradle-*
-setmy-info-docker/downloads/julia-*
-setmy-info-docker/downloads/node-*
-setmy-info-docker/downloads/openjdk-*
-setmy-info-docker/downloads/openjdk-*
+
+collections/openjdk-*
+collections/apache-ant-*
+collections/apache-maven-*
+collections/gradle-*
+collections/cmake-*
+collections/go*
+collections/julia-*
+collections/node-*
 
 setmy-info-jail/setmy-info-freebsd-infinispan/infinispan-server-*
 
