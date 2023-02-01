@@ -125,6 +125,10 @@
         <copy todir="./">
             <fileset dir="${SMI_SCRIPTS_DIR}" includes="*.rpm"/>
         </copy>
+        <mkdir dir="${SMI_ROCKY_DOCKER_COLLECTIONS_DIR}"/>
+        <copy todir="${SMI_ROCKY_DOCKER_COLLECTIONS_DIR}">
+            <fileset dir="./" includes="*.rpm"/>
+        </copy>
     </target>
 
 </project>
