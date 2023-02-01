@@ -52,6 +52,8 @@ setmy-info-docker/downloads/go*
 setmy-info-docker/downloads/gradle-*
 setmy-info-docker/downloads/julia-*
 setmy-info-docker/downloads/node-*
+setmy-info-docker/downloads/openjdk-*
+setmy-info-docker/downloads/openjdk-*
 
 setmy-info-jail/setmy-info-freebsd-infinispan/infinispan-server-*
 
