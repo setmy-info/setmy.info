@@ -147,6 +147,9 @@
         <copy todir="${SMI_ROCKY_DOCKER_COLLECTIONS_DIR}">
             <fileset dir="./" includes="*.rpm"/>
         </copy>
+        <copy todir="${SMI_ROCKY_JAVA_COLLECTIONS_DIR}">
+            <fileset dir="${JDK_DIR_NAME}"/>
+        </copy>
         <!-- copy todir="${SMI_CI_DOCKER_COLLECTIONS_DIR}/${ANT_DIR_NAME}">
             <fileset dir="${ANT_DIR_NAME}"/>
         </copy>
@@ -172,6 +175,7 @@
 
     <target name="make-docker-collection-dir">
         <mkdir dir="${SMI_ROCKY_DOCKER_COLLECTIONS_DIR}"/>
+        <mkdir dir="${SMI_ROCKY_JAVA_COLLECTIONS_DIR}"/>
         <mkdir dir="${SMI_CI_DOCKER_COLLECTIONS_DIR}"/>
     </target>
 
