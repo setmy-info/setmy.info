@@ -14,9 +14,9 @@
     </parent>
 
     <groupId>info.setmy</groupId>
-    <artifactId>jwt-models</artifactId>
+    <artifactId>java-jwt-models</artifactId>
     <packaging>jar</packaging>
-    <name>jwt-models</name>
+    <name>java-jwt-models</name>
     <description>JWT library driven by domain driven design</description>
     <url>https://setmy-info.github.io</url>
 
