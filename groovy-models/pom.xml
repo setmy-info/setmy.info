@@ -20,13 +20,6 @@
     <description>Common model, exception tree, interfaces, annotations.</description>
     <url>https://setmy-info.github.io</url>
 
-    <!-- TODO : until Groovy or gmavenplus-plugin suports JDK 19 -->
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <java.version>17</java.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.groovy</groupId>
@@ -169,7 +162,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>

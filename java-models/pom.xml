@@ -89,8 +89,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <!--source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target-->
                     <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showWarnings>true</showWarnings>
@@ -113,7 +113,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -265,30 +264,6 @@
                 </executions>
             </plugin-->
         </plugins>
-
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>${maven.checkstyle.plugin.versoin}</version>
-                    <configuration>
-                        <violationSeverity>warning</violationSeverity>
-                        <consoleOutput>true</consoleOutput>
-                        <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
-                        <!-- configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation -->
-                        <!-- configLocation>${basedir}/src/test/resources/google-checks.xml</configLocation -->
-                    </configuration>                   
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.puppycrawl.tools</groupId>
-                            <artifactId>checkstyle</artifactId>
-                            <version>10.3</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-            </plugins>
-        </pluginManagement>
     </build>
 
     <profiles>

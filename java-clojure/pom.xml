@@ -16,7 +16,7 @@
     <groupId>info.setmy</groupId>
     <artifactId>java-clojure</artifactId>
     <packaging>jar</packaging>
-    <name>java-clojures</name>
+    <name>java-clojure</name>
     <description>Java Clojure.</description>
     <url>https://setmy-info.github.io</url>
 

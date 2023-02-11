@@ -20,13 +20,6 @@
     <description>Base project for commons services, helpers, Utils, DAOs, repositories etc</description>
     <url>https://setmy-info.github.io</url>
 
-    <!-- TODO : until Groovy or gmavenplus-plugin suports JDK 19 -->
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <java.version>17</java.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>info.setmy</groupId>
@@ -190,7 +183,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>

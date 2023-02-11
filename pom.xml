@@ -38,7 +38,7 @@
         <logback.verion>1.4.1</logback.verion>
         <slf4j.version>2.0.1</slf4j.version>
         <lucene.version>9.3.0</lucene.version>
-        <groovy.version>4.0.5</groovy.version>
+        <groovy.version>4.0.9</groovy.version>
         <cucumber.version>7.8.0</cucumber.version>
         <pitest.version>1.9.5</pitest.version>
         <jersey.version>3.0.8</jersey.version>
@@ -54,7 +54,7 @@
         <maven.project.info.reports.plugin.version>3.4.1</maven.project.info.reports.plugin.version>
         <maven.checkstyle.plugin.versoin>3.2.0</maven.checkstyle.plugin.versoin>
         <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
-        <gmavenplus.plugin.version>1.13.1</gmavenplus.plugin.version>
+        <gmavenplus.plugin.version>2.1.0</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.0.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.6.13</nexus.staging.plugin.version>
         <spring.boot.verion>2.7.0</spring.boot.verion>

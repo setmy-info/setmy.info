@@ -85,8 +85,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <!--source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target-->
                     <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showWarnings>true</showWarnings>
@@ -109,7 +109,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -142,6 +141,11 @@
                         </configuration>
                     </execution>
                 </executions>
+                <!--configuration>
+                    <systemPropertyVariables>
+                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+                    </systemPropertyVariables>
+                </configuration-->
             </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>
@@ -314,14 +318,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven.checkstyle.plugin.versoin}</version>
-                <configuration>
+                <!-- configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
                     <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
-                    <!-- configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation -->
-                    <!-- configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation -->
-                </configuration>
+                    <configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation>
+                </configuration -->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
