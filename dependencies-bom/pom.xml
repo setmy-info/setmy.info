@@ -79,7 +79,7 @@
         <javax.validation.api.version>2.0.1.Final</javax.validation.api.version>
         <javax.inject.version>1</javax.inject.version>
         <javax.cache.api.version>1.1.1</javax.cache.api.version>
-        <java.jwt.version>3.19.2</java.jwt.version><!--java.jwt.version>4.0.0</java.jwt.version-->
+        <java.jwt.version>4.2.2</java.jwt.version><!--java.jwt.version>4.0.0</java.jwt.version-->
         <rest.assured.version>5.0.1</rest.assured.version>
         <liquibase.version>4.16.1</liquibase.version>
         <infinispan.version>13.0.11.Final</infinispan.version>

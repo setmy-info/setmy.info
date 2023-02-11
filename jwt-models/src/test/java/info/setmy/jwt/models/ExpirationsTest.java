@@ -3,6 +3,8 @@ package info.setmy.jwt.models;
 import info.setmy.exceptions.ExpiredException;
 import info.setmy.exceptions.ForbiddenException;
 import static info.setmy.jwt.models.Data.nowMinus10;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimeZone;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,7 +30,7 @@ public class ExpirationsTest extends Data {
         Throwable exception = Assertions.assertThrows(ExpiredException.class, () -> {
             token.parse(tokenString);
         });
-        assertEquals("com.auth0.jwt.exceptions.TokenExpiredException: The Token has expired on " + nowMinus10.toString() + ".", exception.getMessage());
+        assertEquals("com.auth0.jwt.exceptions.TokenExpiredException: The Token has expired on " + s(nowMinus10) + ".", exception.getMessage());
     }
 
     @Test
@@ -40,7 +42,7 @@ public class ExpirationsTest extends Data {
         Throwable exception = Assertions.assertThrows(ExpiredException.class, () -> {
             token.parse(tokenString);
         });
-        assertEquals("com.auth0.jwt.exceptions.TokenExpiredException: The Token has expired on " + nowMinus10.toString() + ".", exception.getMessage());
+        assertEquals("com.auth0.jwt.exceptions.TokenExpiredException: The Token has expired on " + s(nowMinus10) + ".", exception.getMessage());
     }
 
     @Test
@@ -51,7 +53,7 @@ public class ExpirationsTest extends Data {
         Throwable exception = Assertions.assertThrows(ForbiddenException.class, () -> {
             token.parse(tokenString);
         });
-        assertEquals("com.auth0.jwt.exceptions.InvalidClaimException: The Token can't be used before " + nowPlus10.toString() + ".", exception.getMessage());
+        assertEquals("com.auth0.jwt.exceptions.IncorrectClaimException: The Token can't be used before " + s(nowPlus10) + ".", exception.getMessage());
     }
 
     @Test
@@ -62,7 +64,7 @@ public class ExpirationsTest extends Data {
         Throwable exception = Assertions.assertThrows(ForbiddenException.class, () -> {
             token.parse(tokenString);
         });
-        assertEquals("com.auth0.jwt.exceptions.InvalidClaimException: The Token can't be used before " + nowPlus10.toString() + ".", exception.getMessage());
+        assertEquals("com.auth0.jwt.exceptions.IncorrectClaimException: The Token can't be used before " + s(nowPlus10) + ".", exception.getMessage());
     }
 
     @Test
@@ -74,7 +76,7 @@ public class ExpirationsTest extends Data {
         Throwable exception = Assertions.assertThrows(ForbiddenException.class, () -> {
             token.parse(tokenString);
         });
-        assertEquals("com.auth0.jwt.exceptions.InvalidClaimException: The Token can't be used before " + nowPlus10.toString() + ".", exception.getMessage());
+        assertEquals("com.auth0.jwt.exceptions.IncorrectClaimException: The Token can't be used before " + s(nowPlus10) + ".", exception.getMessage());
     }
 
     @Test
@@ -106,6 +108,14 @@ public class ExpirationsTest extends Data {
             final String CREATED_DEFAULTS_EXPIRED = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE1MjA0Mjc2MTksImlzcyI6IkhlYXIgQW5kIFNlZSBTeXN0ZW1zIExMQyIsImV4cCI6MTUyMDQyODUxOSwiaWF0IjoxNTIwNDI3NjE5LCJqdGkiOiI2NWZkYjRjNS05MWQwLTRkNDktOGQzZC1hNGY3OGNiOTkzYTkifQ.n_gGkkovkq1LttmGKAhMu88oz9pJOhBt3Kd7o4Oy7Fo";
             token.parse(CREATED_DEFAULTS_EXPIRED);
         });
-        assertEquals("com.auth0.jwt.exceptions.TokenExpiredException: The Token has expired on Wed Mar 07 15:15:19 EET 2018.", exception.getMessage());
+        assertEquals("com.auth0.jwt.exceptions.TokenExpiredException: The Token has expired on 2018-03-07T13:15:19Z.", exception.getMessage());
+    }
+
+    private String s(final Date date) {
+        final String format = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        final TimeZone utc = TimeZone.getTimeZone("UTC");
+        simpleDateFormat.setTimeZone(utc);
+        return simpleDateFormat.format(date);
     }
 }
