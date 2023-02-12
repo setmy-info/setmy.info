@@ -96,6 +96,9 @@
         <find.bugs.version>3.0.5</find.bugs.version>
         <spot.bugs.version>4.7.2.0</spot.bugs.version>
         <clojure.version>1.11.1</clojure.version>
+        <tensorflow.core.version>0.3.3</tensorflow.core.version>
+        <tensorflow.ndarray.version>0.4.0</tensorflow.ndarray.version>
+        <tensorflow.framework.version>0.4.2</tensorflow.framework.version>
     </properties>
 
     <modules>
@@ -226,8 +229,8 @@
         <url>https://github.com/setmy-info/setmy.info/issues</url>
     </issueManagement>
 
-    <ciManagement />
-    <contributors />
+    <ciManagement/>
+    <contributors/>
 
     <distributionManagement>
         <snapshotRepository>
