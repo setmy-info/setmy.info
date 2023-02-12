@@ -73,7 +73,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -106,11 +105,8 @@
                         </configuration>
                     </execution>
                 </executions>
-                <!--configuration>
-                    <systemPropertyVariables>
-                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-                    </systemPropertyVariables>
-                </configuration-->
+                <configuration>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>

@@ -26,8 +26,8 @@
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
 
-        <junit5.version>5.9.0</junit5.version>
-        <junit.platform.version>1.9.0</junit.platform.version>
+        <junit5.version>5.9.2</junit5.version>
+        <junit.platform.version>1.9.2</junit.platform.version>
         <mockito.version>4.7.0</mockito.version>
         <assertj.version>3.23.1</assertj.version>
         <jacoco.version>0.8.8</jacoco.version>
@@ -108,6 +108,7 @@
         <module>java-jwt-models</module>
         <module>java-linguistics</module>
         <module>java-accounting</module>
+        <module>java-ai</module>
         <module>java-db</module>
         <module>java-document-db</module>
         <module>java-graph-db</module>
