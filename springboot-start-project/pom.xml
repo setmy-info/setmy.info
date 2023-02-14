@@ -901,12 +901,6 @@
             </properties>
         </profile>
         <profile>
-            <id>testing</id>
-            <properties>
-                <spring-boot.run.profiles>testing</spring-boot.run.profiles>
-            </properties>
-        </profile>
-        <profile>
             <id>prelive</id>
             <properties>
                 <spring-boot.run.profiles>prelive</spring-boot.run.profiles>
