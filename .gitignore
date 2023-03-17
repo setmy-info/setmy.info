@@ -103,3 +103,13 @@ tmp
 /java-vcs/nbproject/
 /java-stealer/nbproject/
 submodules/system-index.txt
+
+# Python Tensorflow
+python-ai/docs/.ipynb_checkpoints/
+python-ai/.ipynb_checkpoints/
+python-ai/docs/logs/
+python-ai/docs/models/
+python-ai/docs/fashion-models/
+python-ai/test
+python-ai/titanic.tfsnap/
+python-ai/traffic/

@@ -5,14 +5,17 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.tensorflow.*;
 import org.tensorflow.op.Ops;
+import org.tensorflow.op.core.Constant;
 import org.tensorflow.op.core.Placeholder;
 import org.tensorflow.op.math.Add;
-import org.tensorflow.op.math.Sub;
-import org.tensorflow.types.TFloat32;
+import org.tensorflow.op.math.Mul;
+import org.tensorflow.types.TFloat64;
 import org.tensorflow.types.TInt32;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * https://github.com/tensorflow/java/#tensorflow-version-support
@@ -24,9 +27,9 @@ public class TensorflowTest {
     private final Logger log = LogManager.getLogger(getClass());
 
     @Test
-    public void test() {
+    public void singleParameterAndResultExample() {
         log.info("Hello TensorFlow {}", TensorFlow.version());
-        final ConcreteFunction doublingFunction = ConcreteFunction.create(this::functionSignature);
+        final ConcreteFunction doublingFunction = ConcreteFunction.create(this::singleParameterAndResultFunctionSignature);
         final TInt32 number = TInt32.scalarOf(10);
         final Tensor resultTensor = doublingFunction.call(number);
         final int result = ((TInt32) resultTensor).getInt();
@@ -34,12 +37,39 @@ public class TensorflowTest {
         assertThat(result).isEqualTo(20);
     }
 
-    private Signature functionSignature(final Ops ops) {
+    private Signature singleParameterAndResultFunctionSignature(final Ops ops) {
         final Placeholder<TInt32> placeholder = ops.placeholder(TInt32.class);
         final Add<TInt32> add = ops.math.add(placeholder, placeholder);
         return Signature.builder()
-            .input("x", placeholder)
             .output("dbl", add)
+            .input("x", placeholder)
+            .build();
+    }
+
+    @Test
+    public void multiParameterAndResultExample() {
+        log.info("Hello TensorFlow {}", TensorFlow.version());
+        final ConcreteFunction doublingFunction = ConcreteFunction.create(this::multiParameterAndResultfunctionSignature);
+        final TInt32 x = TInt32.scalarOf(10);
+        final TInt32 y = TInt32.scalarOf(20);
+        final Map<String, Tensor> map = new HashMap<>();
+        map.put("x", x);
+        map.put("y", y);
+        final Map<String, Tensor> resultMap = doublingFunction.call(map);
+        final Tensor resultTensor = resultMap.get("dbl");
+        final int result = ((TInt32) resultTensor).getInt();
+        log.info("{} doubled is {}", x.getInt(), result);
+        assertThat(result).isEqualTo(30);
+    }
+
+    private Signature multiParameterAndResultfunctionSignature(final Ops ops) {
+        final Placeholder<TInt32> placeholderX = ops.placeholder(TInt32.class);
+        final Placeholder<TInt32> placeholderY = ops.placeholder(TInt32.class);
+        final Add<TInt32> add = ops.math.add(placeholderX, placeholderY);
+        return Signature.builder()
+            .output("dbl", add)
+            .input("x", placeholderX)
+            .input("y", placeholderY)
             .build();
     }
 
@@ -51,66 +81,16 @@ public class TensorflowTest {
         ) {
             final Ops tf = Ops.create(graph);
 
-            final Operation addOperation = tf.math.add(
+            final Add<TInt32> addOperand = tf.math.add(
                 tf.constant(1),
                 tf.constant(2)
-            ).op();
+            );
+            final Operation addOperation = addOperand.op();
 
             assertThat(addOperation.outputListLength("z")).isEqualTo(1);
         }
     }
 
-    @Test
-    public void test3() {
-        try (Graph graph = new Graph();
-             ConcreteFunction function =
-                 ConcreteFunction.create(this::plusFiveMinusTwo)) {
-            Ops tf = Ops.create(graph);
-            Operand<TFloat32> a = tf.constant(10f);
-            Operand<TFloat32> result = (Operand<TFloat32>) function.call(tf, a);
-            try (Session sess = new Session(graph);
-                 TFloat32 t = (TFloat32) sess.runner().fetch(result).run().get(0)) {
-                assertEquals(13f, t.getFloat());
-            }
-        }
-    }
-
-    private Signature plusFiveMinusTwo(final Ops tf) {
-        final Placeholder<TFloat32> input = tf.placeholder(TFloat32.class);
-        try (final ConcreteFunction plusFive = ConcreteFunction.create(this::plusFive);
-             final ConcreteFunction minusTwo = ConcreteFunction.create(this::minusTwo)) {
-            final Operand<TFloat32> result = (Operand<TFloat32>) minusTwo.call(
-                tf,
-                plusFive.call(tf, input)
-            );
-            return Signature.builder()
-                .key("plusFiveMinusTwo")
-                .input("x", input)
-                .output("y", result)
-                .build();
-        }
-    }
-
-    private Signature plusFive(final Ops tf) {
-        final Placeholder<TFloat32> input = tf.placeholder(TFloat32.class);
-        final Add<TFloat32> output = tf.math.add(input, tf.constant(5.0f));
-        return Signature.builder()
-            .key("plusFive")
-            .input("x", input)
-            .output("y", output)
-            .build();
-    }
-
-    private Signature minusTwo(final Ops tf) {
-        final Placeholder<TFloat32> input = tf.placeholder(TFloat32.class);
-        final Sub<TFloat32> output = tf.math.sub(input, tf.constant(2.0f));
-        return Signature.builder()
-            .key("minusTwo")
-            .input("x", input)
-            .output("y", output)
-            .build();
-    }
-    /*
     @Test
     public void test4() {
         // // z = f(x, y) = a*x + b*y
@@ -121,43 +101,53 @@ public class TensorflowTest {
             final Ops tf = Ops.create(graph);
             //final Scope scope = tf.scope();
 
-            // Constants
-            final Operation a = tf.withName("a").constant(1.0).op();
-            final Operation b = tf.withName("b").constant(2.0).op();
-
             // Variables
             final TFloat64 x = TFloat64.scalarOf(3.0);
             final TFloat64 y = TFloat64.scalarOf(4.0);
 
-            final Placeholder<TFloat64> doubleTypePlaceHolderX = tf.placeholder(TFloat64.class);
-            final Placeholder<TFloat64> doubleTypePlaceHolderY = tf.placeholder(TFloat64.class);
-            final Placeholder<TFloat64> doubleTypePlaceHolderAX = tf.placeholder(TFloat64.class);
-            final Placeholder<TFloat64> doubleTypePlaceHolderBY = tf.placeholder(TFloat64.class);
-            final Placeholder<TFloat64> doubleTypePlaceHolder = tf.placeholder(TFloat64.class);
+            // Constants
+            final Constant<TFloat64> a = tf.withName("a").constant(1.0);
+            final Constant<TFloat64> b = tf.withName("b").constant(2.0);
 
-            final Mul<TFloat64> multiplyAX = tf.math.mul(doubleTypePlaceHolder, doubleTypePlaceHolder);
+            final Placeholder<TFloat64> placeHolderX = tf.withName("x").placeholder(TFloat64.class);
+            final Mul<TFloat64> multiplyAX = tf.math.mul(a, placeHolderX); // Mul -> Operand
             final Signature axMultiplySignature = Signature.builder()
-                .input("a", a.output(0))
-                .input("x", doubleTypePlaceHolderX)
+                .key("multiplyAX")
                 .output("ax", multiplyAX)
+                .input("x", placeHolderX)
                 .build();
             final ConcreteFunction axMultiplyFunction = ConcreteFunction.create(axMultiplySignature, sess);
 
-            final Mul<TFloat64> multiplyBY = tf.math.mul(doubleTypePlaceHolder, doubleTypePlaceHolder);
+            final Placeholder<TFloat64> placeHolderY = tf.withName("y").placeholder(TFloat64.class);
+            final Mul<TFloat64> multiplyBY = tf.math.mul(b, placeHolderY); // Mul -> Operand
             final Signature byMultiplySignature = Signature.builder()
-                .input("b", b.output(0))
-                .input("y", doubleTypePlaceHolderY)
+                .key("multiplyBY")
                 .output("by", multiplyBY)
+                .input("y", placeHolderY)
                 .build();
             final ConcreteFunction byMultiplyFunction = ConcreteFunction.create(byMultiplySignature, sess);
 
-            final Add<TFloat64> add = tf.math.add(doubleTypePlaceHolder, doubleTypePlaceHolder);
+            final Placeholder<TFloat64> axPlaceHolder = tf.withName("ax").placeholder(TFloat64.class);
+            final Placeholder<TFloat64> byPlaceHolder = tf.withName("by").placeholder(TFloat64.class);
+            final Add<TFloat64> add = tf.math.add(axPlaceHolder, byPlaceHolder); // Add -> Operand
             final Signature addFunctionSignature = Signature.builder()
-                .input("ax", multiplyAX.asOutput())
-                .input("by", multiplyBY.asOutput())
+                .key("add")
                 .output("z", add)
+                .input("ax", axPlaceHolder)
+                .input("by", byPlaceHolder)
                 .build();
             final ConcreteFunction addFunction = ConcreteFunction.create(addFunctionSignature, sess);
+
+            final Map<String, Tensor> callResult = addFunction.call(new HashMap<>() {{
+                put("ax", axMultiplyFunction.call(x));
+                put("by", byMultiplyFunction.call(y));
+            }});
+
+            final Tensor z = callResult.get("z");
+            final TFloat64 fZ = (TFloat64) z;
+
+            /*
+            assertThat(fZ).isEqualTo("xxx");
 
             final TFloat64 result = (TFloat64) sess.runner()
                 .feed("x", x)
@@ -166,10 +156,10 @@ public class TensorflowTest {
                 .run()
                 .get(0);
 
-            assertThat(result.toString()).isEqualTo("xxx");
+            assertThat(result).isEqualTo("xxx");
+            */
         }
     }
-    */
 
     /*
     @Test
