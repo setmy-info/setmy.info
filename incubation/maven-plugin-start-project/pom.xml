@@ -20,8 +20,8 @@
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
         <java.version>19</java.version>
-        <failsafe.version>2.22.2</failsafe.version>
-        <surefire.version>2.22.2</surefire.version>
+        <failsafe.version>3.0.0</failsafe.version>
+        <surefire.version>3.0.0</surefire.version>
         <jacoco.version>0.8.8</jacoco.version>
         <pitest.version>1.7.3</pitest.version>
         <dependency.check.version>7.1.0</dependency.check.version>
@@ -32,13 +32,13 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>3.9.0</version>
+            <version>3.9.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
-            <version>3.9.0</version>
+            <version>3.9.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

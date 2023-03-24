@@ -3,7 +3,14 @@ package info.setmy.ai.tensoflow;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
-import org.tensorflow.*;
+import org.tensorflow.ConcreteFunction;
+import org.tensorflow.Graph;
+import org.tensorflow.Operation;
+import org.tensorflow.Result;
+import org.tensorflow.Session;
+import org.tensorflow.Signature;
+import org.tensorflow.Tensor;
+import org.tensorflow.TensorFlow;
 import org.tensorflow.op.Ops;
 import org.tensorflow.op.core.Constant;
 import org.tensorflow.op.core.Placeholder;
@@ -14,6 +21,7 @@ import org.tensorflow.types.TInt32;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -55,9 +63,9 @@ public class TensorflowTest {
         final Map<String, Tensor> map = new HashMap<>();
         map.put("x", x);
         map.put("y", y);
-        final Map<String, Tensor> resultMap = doublingFunction.call(map);
-        final Tensor resultTensor = resultMap.get("dbl");
-        final int result = ((TInt32) resultTensor).getInt();
+        final Result resultMap = doublingFunction.call(map);
+        final Optional<Tensor> resultTensor = resultMap.get("dbl");
+        final int result = ((TInt32) resultTensor.get()).getInt();
         log.info("{} doubled is {}", x.getInt(), result);
         assertThat(result).isEqualTo(30);
     }
@@ -138,12 +146,12 @@ public class TensorflowTest {
                 .build();
             final ConcreteFunction addFunction = ConcreteFunction.create(addFunctionSignature, sess);
 
-            final Map<String, Tensor> callResult = addFunction.call(new HashMap<>() {{
+            final Result callResult = addFunction.call(new HashMap<>() {{
                 put("ax", axMultiplyFunction.call(x));
                 put("by", byMultiplyFunction.call(y));
             }});
 
-            final Tensor z = callResult.get("z");
+            final Tensor z = callResult.get("z").get();
             final TFloat64 fZ = (TFloat64) z;
 
             /*
