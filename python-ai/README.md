@@ -1,9 +1,6 @@
-# Documentation
+# README
 
-```sh
-smi-venv-prepare
-jupyter-lab
-```
+## Preparations
 
 ## Julia
 
@@ -11,10 +8,14 @@ jupyter-lab
 2. Execute Julia
 3. Install Julia packages with:
 
-```julia
-using Pkg
-Pkg.add("IJulia")
-Pkg.add("DataFrames")
-Pkg.add("CSV")
-Pkg.add("Plots")
+```sh
+julia install.jl
+```
+
+## Documentation
+
+```sh
+venv-prepare
+smi-venv
+jupyter-lab
 ```
