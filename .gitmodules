@@ -112,3 +112,6 @@
 [submodule "submodules/cl-start-project"]
 	path = submodules/cl-start-project
 	url = git@github.com:setmy-info/cl-start-project.git
+[submodule "submodules/firefox-extension-start-project"]
+	path = submodules/firefox-extension-start-project
+	url = git@github.com:setmy-info/firefox-extension-start-project.git
