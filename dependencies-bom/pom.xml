@@ -19,9 +19,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <encoding.level>UTF-8</encoding.level>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
-        <java.version>19</java.version>
+        <maven.compiler.source>20</maven.compiler.source>
+        <maven.compiler.target>20</maven.compiler.target>
+        <java.version>20</java.version>
         <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
@@ -30,7 +30,7 @@
         <junit.platform.version>1.9.2</junit.platform.version>
         <mockito.version>4.7.0</mockito.version>
         <assertj.version>3.24.2</assertj.version>
-        <jacoco.version>0.8.8</jacoco.version>
+        <jacoco.version>0.8.9</jacoco.version>
         <failsafe.version>2.22.2</failsafe.version>
         <surefire.version>2.22.2</surefire.version>
         <!--log4j.verion>1.2.17</log4j.verion -->
@@ -38,7 +38,7 @@
         <logback.verion>1.4.6</logback.verion>
         <slf4j.version>2.0.7</slf4j.version>
         <lucene.version>9.5.0</lucene.version>
-        <groovy.version>4.0.10</groovy.version>
+        <groovy.version>4.0.11</groovy.version>
         <cucumber.version>7.11.1</cucumber.version>
         <pitest.version>1.9.5</pitest.version>
         <jersey.version>3.0.8</jersey.version>
