@@ -12,8 +12,12 @@ public class LambdaReturnTest {
     public void returningFromLambda() {
         final LambdaReturn<String> lambdaReturn = new LambdaReturn<>();
         ((Consumer<String>) string -> {
-            lambdaReturn.setValue(string + "-suffix");
+            lambdaReturn.setValue(string + getSuffix());
         }).accept("prefix");
         assertThat(lambdaReturn.getValue()).isPresent().get().isEqualTo("prefix-suffix");
+    }
+
+    private String getSuffix() {
+        return "-suffix";
     }
 }
