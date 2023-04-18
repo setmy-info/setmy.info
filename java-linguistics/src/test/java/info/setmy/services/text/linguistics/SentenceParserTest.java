@@ -1,5 +1,6 @@
 package info.setmy.services.text.linguistics;
 
+import info.setmy.models.FileRows;
 import info.setmy.services.text.linguistics.model.TextItem;
 import java.util.List;
 import org.junit.Before;
@@ -12,10 +13,12 @@ import org.junit.Test;
 public class SentenceParserTest {
 
     SentenceParser sentenceParser;
+    List<String> sentences;
 
     @Before
     public void setUp() {
         sentenceParser = new SentenceParser();
+        sentences = new FileRows("./src/test/resources/sentences/sentences.txt").getRows();
     }
 
     @Test
