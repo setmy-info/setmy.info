@@ -6,8 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-//import org.hibernate.annotations.Type;
-//import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 @Entity
 @Table(name = "path")
@@ -18,14 +17,12 @@ public class Path {
     private Long id;
 
     @Column(name = "trajectory", columnDefinition = "geometry")
-    //@Type("org.hibernate.spatial.dialect.postgis.PGGeometryJdbcType")
-    //@Type("org.hibernate.spatial.GeometryType")
-    private String trajectory;
+    private Geometry trajectory;
 
     public Path() {
     }
 
-    public Path(String trajectory) {
+    public Path(Geometry trajectory) {
         this.trajectory = trajectory;
     }
 
@@ -37,11 +34,11 @@ public class Path {
         this.id = id;
     }
 
-    public String getTrajectory() {
+    public Geometry getTrajectory() {
         return trajectory;
     }
 
-    public void setTrajectory(String trajectory) {
+    public void setTrajectory(Geometry trajectory) {
         this.trajectory = trajectory;
     }
 }
