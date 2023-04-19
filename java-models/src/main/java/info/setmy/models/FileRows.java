@@ -6,6 +6,7 @@ import info.setmy.exceptions.UncheckedException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,37 +23,38 @@ import static java.util.Optional.*;
 
 public class FileRows {
 
-    private Optional<URL> url = empty();
+    private Optional<Object> urlOrInputStream = empty();
 
     private List<String> result;
+
+    public static Optional<FileRows> newClasspathFileRows(final String classPath) {
+        final InputStream inputStream = FileRows.class.getClassLoader().getResourceAsStream(classPath);
+        return of(new FileRows(inputStream));
+    }
 
     public static Optional<FileRows> newFileRows(final String fileOrUrl) {
         final LambdaReturn<FileRows> lambdaReturn = new LambdaReturn<>();
         urlService.toUrl(fileOrUrl).ifPresentOrElse(
-            url -> lambdaReturn.setValue(newFileRows(url)),
-            () -> lambdaReturn.setValue(newFileRows(new File(fileOrUrl)))
+            url -> lambdaReturn.setValue(new FileRows(url)),
+            () -> lambdaReturn.setValue(new FileRows(new File(fileOrUrl)))
         );
         return lambdaReturn.getValue();
     }
 
-    public static FileRows newFileRows(final URL url) {
-        return new FileRows(url);
+    public FileRows(final URL url) {
+        this.urlOrInputStream = ofNullable(url);
     }
 
-    public static FileRows newFileRows(final File file) {
-        return new FileRows(file);
+    public FileRows(final InputStream inputStream) {
+        this.urlOrInputStream = ofNullable(inputStream);
     }
 
-    private FileRows(final URL url) {
-        this.url = ofNullable(url);
-    }
-
-    private FileRows(final File file) {
+    public FileRows(final File file) {
         if (isNull(file)) {
             return;
         }
         try {
-            url = of(file.toURI().toURL());
+            urlOrInputStream = of(file.toURI().toURL());
         } catch (MalformedURLException e) {
             throw new UncheckedException(e);
         }
@@ -79,16 +81,26 @@ public class FileRows {
     }
 
     private Optional<Scanner> newScanner() {
-        LambdaReturn<Scanner> lambdaReturn = new LambdaReturn<>();
-        this.url.ifPresent(url -> {
-            try {
-                lambdaReturn.setValue(of(new Scanner(url.openStream())));
-            } catch (FileNotFoundException fileNotFoundException) {
-                throw new NotFoundException(fileNotFoundException);
-            } catch (IOException ioException) {
-                throw new UncheckedException(ioException);
-            }
-        });
+        final LambdaReturn<Scanner> lambdaReturn = new LambdaReturn<>();
+        this.urlOrInputStream.ifPresent(urlOrInputStream -> lambdaReturn.setValue(
+                of(new Scanner(getStream(urlOrInputStream)))
+            )
+        );
         return lambdaReturn.getValue();
+    }
+
+    private InputStream getStream(final Object urlOrInputStream) {
+        if (urlOrInputStream instanceof URL url) {
+            try {
+                return url.openStream();
+            } catch (FileNotFoundException e) {
+                throw new NotFoundException(e);
+            } catch (IOException e) {
+                throw new UncheckedException(e);
+            }
+        } else if (urlOrInputStream instanceof InputStream inputStream) {
+            return inputStream;
+        }
+        return null;
     }
 }
