@@ -6,8 +6,9 @@
 
 <hibernate-configuration>
     <session-factory>
-        <!-- property name="hibernate.dialect">org.hibernate.spatial.dialect.postgis.PostgisDialect</property -->
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.dialect">org.hibernate.spatial.dialect.postgis.PostgisDialect</property>
+        <!-- Hibernate Caused by: org.postgresql.util.PSQLException: ERROR: Invalid endian flag value encountered. -->
+        <!-- property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/mydb</property>
         <property name="hibernate.connection.username">myuser</property>

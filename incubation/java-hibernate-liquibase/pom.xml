@@ -12,7 +12,9 @@
     
     <properties>
         <maven.compiler.target>20</maven.compiler.target>
-        <maven.compiler.source>20</maven.compiler.source> 
+        <maven.compiler.source>20</maven.compiler.source>
+        <!-- hibernate.version>6.2.0.Final</hibernate.version -->
+        <hibernate.version>5.6.10.Final</hibernate.version>
     </properties>
 
     <dependencies>
@@ -78,11 +80,11 @@
         </dependency>
 
         <!-- this works too -->
-        <!-- dependency>
+        <!--dependency>
             <groupId>net.postgis</groupId>
             <artifactId>postgis-jdbc</artifactId>
             <version>2.5.1</version>
-        </dependency -->
+        </dependency-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -98,23 +100,29 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.2.0.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-spatial</artifactId>
-            <version>6.2.0.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
-            <version>6.2.0.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
-        <dependency>
+        <!-- dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>8.0.0.Final</version>
-        </dependency>
+        </dependency -->
+        <!-- dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+            <type>jar</type>
+        </dependency-->
         <dependency>
             <groupId>org.geolatte</groupId>
             <artifactId>geolatte-geom</artifactId>
