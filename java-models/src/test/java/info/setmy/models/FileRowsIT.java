@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static info.setmy.models.FileRows.newFileRows;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThrows;
 
@@ -15,22 +16,24 @@ class FileRowsIT {
 
     @Test
     public void readRows() {
-        final List<String> rows = new FileRows(FILE_NAME).getRows();
+        final List<String> rows = newFileRows(FILE_NAME).get().getRows();
         assertThat(rows).hasSize(3).containsExactly("Row 1", "Row 2", "Row 3");
     }
 
     @Test
     public void readRowsException() {
         final NotFoundException exception = assertThrows(NotFoundException.class, () -> {
-            new FileRows("non.existing.file.txt").getRows();
+            newFileRows("non.existing.file.txt").get().getRows();
         });
-        assertThat(exception.getMessage()).isEqualTo("java.io.FileNotFoundException: non.existing.file.txt (The system cannot find the file specified)");
+        assertThat(exception.getMessage())
+            .contains("java.io.FileNotFoundException: ")
+            .contains("non.existing.file.txt (The system cannot find the file specified)");
     }
 
     @Test
     public void readRowsWithConsumer() {
         final List<String> rows = new ArrayList<>();
-        new FileRows(FILE_NAME).getRows(row -> rows.add(row));
+        newFileRows(FILE_NAME).get().getRows(row -> rows.add(row));
         assertThat(rows).hasSize(3).containsExactly("Row 1", "Row 2", "Row 3");
     }
 }

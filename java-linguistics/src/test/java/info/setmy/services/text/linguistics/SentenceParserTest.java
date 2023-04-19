@@ -6,6 +6,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import static info.setmy.models.FileRows.newFileRows;
+
 /**
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
@@ -18,7 +20,7 @@ public class SentenceParserTest {
     @Before
     public void setUp() {
         sentenceParser = new SentenceParser();
-        sentences = new FileRows("./src/test/resources/sentences/sentences.txt").getRows();
+        sentences = newFileRows("./src/test/resources/sentences/sentences.txt").get().getRows();
     }
 
     @Test

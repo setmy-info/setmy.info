@@ -21,7 +21,7 @@ public class LambdaReturn<T> {
     }
 
     public LambdaReturn<T> setValue(final T value) {
-        this.value = ofNullable(value);
+        this.setValue(ofNullable(value));
         return this;
     }
 
