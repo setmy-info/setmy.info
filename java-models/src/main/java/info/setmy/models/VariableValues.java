@@ -1,12 +1,12 @@
 package info.setmy.models;
 
-import static info.setmy.models.VariableValue.EMPTY;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static info.setmy.models.VariableValue.EMPTY;
+
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 public class VariableValues extends VariableObject<String, List<String>> {
@@ -17,10 +17,6 @@ public class VariableValues extends VariableObject<String, List<String>> {
 
     public VariableValues(final String name) {
         super(name, new ArrayList<String>());
-    }
-
-    public void setName(final String name) {
-        setKey(name);
     }
 
     public String getName() {

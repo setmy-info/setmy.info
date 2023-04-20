@@ -15,7 +15,6 @@ public class VariableValueTest {
 
     @BeforeEach
     public void setUp() {
-        variableValue = new VariableValue();
     }
 
     @Test
@@ -23,27 +22,12 @@ public class VariableValueTest {
         assertThat(EMPTY).isEqualTo("");
     }
 
-    @Test
-    public void initialStateShouldHaveNulls() {
-        assertThat(variableValue.getName()).isEqualTo("");
-        assertThat(variableValue.getValue()).isEqualTo("");
-    }
 
     @Test
     public void initialStateWithconstructorShouldHaveCorrectValues() {
         final String name = "Name";
         final String value = "Value";
         variableValue = new VariableValue(name, value);
-        assertThat(variableValue.getName()).isEqualTo(name);
-        assertThat(variableValue.getValue()).isEqualTo(value);
-    }
-
-    @Test
-    public void gettersSetters() {
-        final String name = "Name";
-        final String value = "Value";
-        variableValue.setName(name);
-        variableValue.setValue(value);
         assertThat(variableValue.getName()).isEqualTo(name);
         assertThat(variableValue.getValue()).isEqualTo(value);
     }

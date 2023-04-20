@@ -22,14 +22,6 @@ public class VariableValuesTest {
     }
 
     @Test
-    public void setName() {
-        final String valueString = "something for name";
-        variableValues = new VariableValues();
-        variableValues.setName(valueString);
-        assertThat(variableValues.getName()).isEqualTo(valueString);
-    }
-
-    @Test
     public void createdObjectShouldHaveExistingEmptyValueList() {
         variableValues = new VariableValues();
         assertNotNull(variableValues.getObject());
