@@ -6,25 +6,78 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static info.setmy.models.textfunctions.tokens.TokenType.PLACEHOLDER;
+import static info.setmy.models.textfunctions.tokens.TokenType.USER_TEXT;
 import static java.util.Objects.hash;
 import static java.util.Objects.nonNull;
 
 public class Template {
 
+    public static final char PLACEHOLDER_BEGIN_CHAR = '{';
+    public static final char PLACEHOLDER_END_CHAR = '}';
+    public static final int NO_POSITION = -1;
+
     private final String templateString;
 
-    private final List<Token> templateList = new ArrayList<>();
+    private final char[] characters;
 
-    public Template(String templateString) {
+    private final List<Token> tokenList = new ArrayList<>();
+
+    private TokenBuilder tokenBuilder;
+
+    public Template(final String templateString) {
         this.templateString = templateString;
+        this.characters = templateString.toCharArray();
+    }
+
+    public Template tokenize() {
+        for (int i = 0; i < characters.length; i++) {
+            handleCharacter(characters[i]);
+        }
+        addCurrentTokenBuilder();
+        return this;
+    }
+
+    private void handleCharacter(final char character) {
+        switch (character) {
+            case PLACEHOLDER_BEGIN_CHAR:
+                handleBeginChar(character);
+                break;
+            case PLACEHOLDER_END_CHAR:
+                handleEndChar(character);
+                break;
+            default:
+                handleTextChar(character);
+        }
+    }
+
+    private void handleTextChar(final char character) {
+        if (tokenBuilder == null) {
+            tokenBuilder = new TokenBuilder(USER_TEXT);
+        }
+        tokenBuilder.add(character);
+    }
+
+    private void handleBeginChar(final char character) {
+        addCurrentTokenBuilder();
+        tokenBuilder = new TokenBuilder(PLACEHOLDER)
+            .add(character);
+    }
+
+    private void handleEndChar(final char character) {
+        tokenBuilder.add(character);
+        addCurrentTokenBuilder();
+        tokenBuilder = null;
+    }
+
+    private void addCurrentTokenBuilder() {
+        if (nonNull(tokenBuilder)) {
+            add(new Token(tokenBuilder.getTokenType(), tokenBuilder.toString()));
+        }
     }
 
     public boolean add(final Token token) {
-        return templateList.add(token);
-    }
-
-    public List<Token> getTemplateList() {
-        return templateList;
+        return tokenList.add(token);
     }
 
     @Override
@@ -42,10 +95,8 @@ public class Template {
 
     @Override
     public int hashCode() {
-        return hash(templateList);
+        return hash(tokenList);
     }
-
-    private final static int NO_POSITION = -1;
 
     public List<Token> parse(final String parse) {
         final List<Token> result = new ArrayList<>();
@@ -74,8 +125,8 @@ public class Template {
     }
 
     private List<Token> getUserTextTokens() {
-        return templateList.stream()
-            .filter(token -> token.getTokenType() == TokenType.USER_TEXT)
+        return tokenList.stream()
+            .filter(token -> token.getTokenType() == USER_TEXT)
             .toList();
     }
 }

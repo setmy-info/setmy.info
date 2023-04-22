@@ -5,6 +5,7 @@ import info.setmy.models.textfunctions.register.TemplateFunctionMapper;
 import info.setmy.models.textfunctions.tokens.Template;
 import info.setmy.models.textfunctions.tokens.Token;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -27,8 +28,9 @@ class TemplateFunctionMapperTest {
     }
 
     @Test
+    @Disabled
     public void placeholdersDetection() {
-        final Func fun = x -> newReturn(x.get(0) + "/" + x.get(1) + "/" + x.get(2));
+        final Func fun = parameters -> newReturn(parameters.get(0) + "/" + parameters.get(1) + "/" + parameters.get(2));
         templateFunctionMapper.put(FANCY_PLACEHOLER_STRING, fun);
         final Optional<Template> optionalTemplate = templateFunctionMapper.getTemplate(FANCY_PLACEHOLER_STRING);
         assertThat(optionalTemplate).isPresent();

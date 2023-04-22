@@ -7,17 +7,15 @@ import static java.util.Arrays.stream;
 
 public class Return {
 
+    private final List<Object> returnList = new ArrayList<>();
+
     public static Return newReturn() {
         return new Return();
     }
 
     public static Return newReturn(final Object... objects) {
         final Return result = new Return();
-        stream(objects).forEach(object -> {
-            result.returnList.add(object);
-        });
+        stream(objects).forEach(object -> result.returnList.add(object));
         return result;
     }
-
-    private final List<Object> returnList = new ArrayList<>();
 }
