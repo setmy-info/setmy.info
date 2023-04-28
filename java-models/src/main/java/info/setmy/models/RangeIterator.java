@@ -42,7 +42,7 @@ public class RangeIterator<T extends Number> implements Iterable<T>, Iterator<T>
                 return current;
             },
             // hasNext
-            (rangeIterator) -> rangeIterator.getCurrent() < rangeIterator.getRange().getTo()
+            (rangeIterator) -> rangeIterator.getCurrent() < rangeIterator.getRange().to()
         );
     }
 
