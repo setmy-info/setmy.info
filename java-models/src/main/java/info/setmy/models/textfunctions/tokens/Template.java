@@ -1,6 +1,6 @@
 package info.setmy.models.textfunctions.tokens;
 
-import info.setmy.models.Pair;
+import info.setmy.models.TripleCursor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,6 @@ public class Template {
 
     public static final char PLACEHOLDER_BEGIN_CHAR = '{';
     public static final char PLACEHOLDER_END_CHAR = '}';
-    public static final int NO_POSITION = -1;
 
     private final String templateString;
 
@@ -98,35 +97,73 @@ public class Template {
         return hash(tokenList);
     }
 
-    public List<Token> parse(final String parse) {
+    public List<Token> parse(final String text) {
         final List<Token> result = new ArrayList<>();
-        final List<Token> userTokens = getUserTextTokens();
-        final List<Pair<Integer, Integer>> userTextTokenPositions = new ArrayList<>();
-        int position;
-        Pair<Integer, Integer> currentFragment;
-        Pair<Integer, Integer> previousFragment = null;
-        for (Token userToken : userTokens) {
-            final String textPart = userToken.getValue();
-            position = parse.indexOf(textPart);
-            if (position > NO_POSITION) {
-                currentFragment = new Pair<>(position, position + textPart.length()); // fount text begin index and to index;
-                if (nonNull(previousFragment)) {//have fragment found
-                    if (currentFragment.getFirst() < previousFragment.getSecond()) {
-                        break; // No further parsing
-                    }
-                } else {//no any fragments found
-                    userTextTokenPositions.add(currentFragment);
-                }
-                previousFragment = currentFragment;
-            }
+        final TripleCursor<Token> tripleCursor = new TripleCursor<>(tokenList);
+        final Data data = new Data(
+            tripleCursor,
+            result,
+            text
+        );
+        while (tripleCursor.hasNext()) {
+            handle(data);
+            tripleCursor.next();
         }
-        // TODO : find placeholder fragments and make fragments list (and call transform functions ?)
         return result;
     }
 
-    private List<Token> getUserTextTokens() {
-        return tokenList.stream()
-            .filter(token -> token.getTokenType() == USER_TEXT)
-            .toList();
+    private void handle(final Data data) {
+        switch (data.tripleCursor.getOptionalCurrent().get().getTokenType()) {
+            case USER_TEXT:
+                handleUserText(data);
+                break;
+            case PLACEHOLDER:
+                handlePlaceHolder(data);
+                break;
+        }
+    }
+
+    private void handleUserText(final Data data) {
+        final TripleCursor<Token> tripleCursor = data.tripleCursor;
+        final Token current = tripleCursor.getOptionalCurrent().get();
+        data.begin = data.begin + current.getValue().length();
+    }
+
+    private void handlePlaceHolder(final Data data) {
+        final TripleCursor<Token> tripleCursor = data.tripleCursor;
+        final Token current = tripleCursor.getOptionalCurrent().get();
+        final int nextIndex = nextIndex(data);
+        data.result.add(
+            new Token(
+                current.getTokenType(),
+                data.text.substring(data.begin, nextIndex(data)))
+        );
+
+        data.begin = nextIndex;
+    }
+
+    private int nextIndex(final Data data) {
+        final TripleCursor<Token> tripleCursor = data.tripleCursor;
+        int result;
+        if (tripleCursor.getOptionalNext().isPresent()) {
+            result = data.text.indexOf(tripleCursor.getOptionalNext().get().getValue());
+        } else {
+            result = data.text.length();
+        }
+        return result;
+    }
+
+    class Data {
+
+        public final TripleCursor<Token> tripleCursor;
+        public final List<Token> result;
+        public final String text;
+        public int begin;
+
+        public Data(final TripleCursor<Token> tripleCursor, List<Token> result, String text) {
+            this.tripleCursor = tripleCursor;
+            this.result = result;
+            this.text = text;
+        }
     }
 }
