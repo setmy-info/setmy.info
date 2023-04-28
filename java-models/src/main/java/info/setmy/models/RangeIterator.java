@@ -27,7 +27,7 @@ public class RangeIterator<T extends Number> implements Iterable<T>, Iterator<T>
         return integerRange(from, to, 1);
     }
 
-    private static RangeIterator<Integer> integerRange(final int from, final int to, final int step) {
+    public static RangeIterator<Integer> integerRange(final int from, final int to, final int step) {
         return new RangeIterator<>(
             new Range<>(from, to),
             (rangeIterator) -> {// init
@@ -97,6 +97,10 @@ public class RangeIterator<T extends Number> implements Iterable<T>, Iterator<T>
     @Override
     public Spliterator<T> spliterator() {
         return Iterable.super.spliterator();
+    }
+
+    public boolean hasNoNext() {
+        return !hasNext();
     }
 
     @Override

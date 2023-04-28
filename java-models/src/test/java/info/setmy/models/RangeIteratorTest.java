@@ -23,11 +23,24 @@ class RangeIteratorTest {
         int i = 0;
         int sum = 0;
         for (Integer value : rangeIterator) {
-            System.out.println("Value: " + value);
             i++;
             sum += value;
         }
         assertThat(i).isEqualTo(10);//1, 2, 3, ...
-        assertThat(sum).isEqualTo(45);
+        assertThat(sum).isEqualTo(45);//https://www.calculatorsoup.com/calculators/statistics/sum-calculator.php
+    }
+
+    @Test
+    public void rangWithStep() {
+        rangeIterator = integerRange(3, 10, 3);
+        int i = 0;
+        int sum = 0;
+        for (Integer value : rangeIterator) {
+            System.out.println("Value: " + value);
+            i++;
+            sum += value;
+        }
+        assertThat(i).isEqualTo(3);
+        assertThat(sum).isEqualTo(18);
     }
 }
