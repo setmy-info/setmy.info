@@ -310,7 +310,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.7.0.0</version>
+                <version>${spot.bugs.version}</version>
                 <!--configuration>
                     <excludeFilterFile>${basedir}/src/test/resources/spotbugs-exclude.xml</excludeFilterFile>
                     <includeFilterFile>${basedir}/src/test/resources/spotbugs-include.xml</includeFilterFile>
