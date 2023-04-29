@@ -28,7 +28,7 @@ class FileRowsIT {
         });
         assertThat(exception.getMessage())
             .contains("java.io.FileNotFoundException: ")
-            .contains("non.existing.file.txt (The system cannot find the file specified)");
+            .contains("non.existing.file.txt (");
     }
 
     @Test

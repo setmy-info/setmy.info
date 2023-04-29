@@ -34,8 +34,8 @@ public class TripleCursor<T> {
         return this;
     }
 
-    public boolean hasNext() {
-        return optionalNext.isPresent();
+    public boolean haveCurrent() {
+        return optionalCurrent.isPresent();
     }
 
     public void next() {

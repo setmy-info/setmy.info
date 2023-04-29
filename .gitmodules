@@ -115,3 +115,6 @@
 [submodule "submodules/firefox-extension-start-project"]
 	path = submodules/firefox-extension-start-project
 	url = git@github.com:setmy-info/firefox-extension-start-project.git
+[submodule "submodules/java-text-function"]
+	path = submodules/java-text-function
+	url = git@github.com:setmy-info/java-text-function.git
