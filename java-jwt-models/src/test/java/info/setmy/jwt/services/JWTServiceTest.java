@@ -133,7 +133,7 @@ public class JWTServiceTest extends Data {
         final JWTToken methodToken = new ExtendedJWTToken(newServiceName);
         makeFullyPopulatedToken((ExtendedJWTToken) methodToken);
         final String tokenString = methodToken.toString();
-        assertEquals(0, tokenString.indexOf("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9"));//{"typ":"JWT","alg":"HS384"}
+        assertEquals(0, tokenString.indexOf("eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9"));//{"alg":"HS384","typ":"JWT"}
 
         final ExtendedJWTToken newToken = new ExtendedJWTToken(newServiceName);
         newToken.parse(tokenString);
@@ -165,7 +165,7 @@ public class JWTServiceTest extends Data {
         final JWTToken methodToken = new ExtendedJWTToken(newServiceName);
         makeFullyPopulatedToken((ExtendedJWTToken) methodToken);
         final String tokenString = methodToken.toString();
-        assertEquals(0, tokenString.indexOf("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9"));//{"typ":"JWT","alg":"HS512"}
+        assertEquals(0, tokenString.indexOf("eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9"));//{"alg":"HS512","typ":"JWT"}
 
         final ExtendedJWTToken newToken = new ExtendedJWTToken(newServiceName);
         newToken.parse(tokenString);

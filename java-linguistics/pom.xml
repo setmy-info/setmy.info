@@ -26,6 +26,11 @@
             <artifactId>java-services</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>info.setmy</groupId>
+            <artifactId>groovy-services</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

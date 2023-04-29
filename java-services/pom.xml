@@ -507,8 +507,8 @@
         <url>https://github.com/setmy-info/setmy.info/issues</url>
     </issueManagement>
 
-    <ciManagement />
-    <contributors />
+    <ciManagement/>
+    <contributors/>
 
     <distributionManagement>
         <snapshotRepository>

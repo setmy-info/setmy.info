@@ -1,0 +1,86 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------< info.setmy.hibernate:java-hibernate-liquibase >------------
+[INFO] Building java-hibernate-liquibase 1.0.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] The artifact org.hibernate:hibernate-core:jar:6.2.0.Final has been relocated to org.hibernate.orm:hibernate-core:jar:6.2.0.Final
+[WARNING] The artifact org.hibernate:hibernate-spatial:jar:6.2.0.Final has been relocated to org.hibernate.orm:hibernate-spatial:jar:6.2.0.Final
+[INFO] 
+[INFO] --- dependency:2.8:tree (default-cli) @ java-hibernate-liquibase ---
+[WARNING] Parameter 'localRepository' is deprecated core expression; Avoid use of ArtifactRepository type. If you need access to local repository, switch to '${repositorySystemSession}' expression and get LRM from it instead.
+[WARNING] The artifact org.hibernate:hibernate-core:jar:6.2.0.Final has been relocated to org.hibernate.orm:hibernate-core:jar:6.2.0.Final
+[WARNING] The artifact org.hibernate:hibernate-spatial:jar:6.2.0.Final has been relocated to org.hibernate.orm:hibernate-spatial:jar:6.2.0.Final
+[INFO] info.setmy.hibernate:java-hibernate-liquibase:jar:1.0.0-SNAPSHOT
+[INFO] +- org.junit.jupiter:junit-jupiter-api:jar:5.9.2:test
+[INFO] |  +- org.opentest4j:opentest4j:jar:1.2.0:test
+[INFO] |  +- org.junit.platform:junit-platform-commons:jar:1.9.2:test
+[INFO] |  \- org.apiguardian:apiguardian-api:jar:1.1.2:test
+[INFO] +- org.junit.jupiter:junit-jupiter-engine:jar:5.9.2:test
+[INFO] |  \- org.junit.platform:junit-platform-engine:jar:1.9.2:test
+[INFO] +- org.junit.vintage:junit-vintage-engine:jar:5.9.2:test
+[INFO] |  \- junit:junit:jar:4.13.2:test
+[INFO] |     \- org.hamcrest:hamcrest-core:jar:1.3:test
+[INFO] +- org.junit.jupiter:junit-jupiter-params:jar:5.9.2:test
+[INFO] +- org.mockito:mockito-core:jar:4.8.1:test
+[INFO] |  +- net.bytebuddy:byte-buddy:jar:1.12.16:runtime
+[INFO] |  +- net.bytebuddy:byte-buddy-agent:jar:1.12.16:test
+[INFO] |  \- org.objenesis:objenesis:jar:3.2:test
+[INFO] +- org.mockito:mockito-junit-jupiter:jar:5.2.0:test
+[INFO] +- io.cucumber:cucumber-java:jar:7.11.2:test
+[INFO] |  \- io.cucumber:cucumber-core:jar:7.11.2:test
+[INFO] |     +- io.cucumber:cucumber-gherkin:jar:7.11.2:test
+[INFO] |     +- io.cucumber:cucumber-gherkin-messages:jar:7.11.2:test
+[INFO] |     |  \- io.cucumber:gherkin:jar:26.0.3:test
+[INFO] |     +- io.cucumber:messages:jar:21.0.1:test
+[INFO] |     +- io.cucumber:tag-expressions:jar:5.0.1:test
+[INFO] |     +- io.cucumber:cucumber-expressions:jar:16.1.2:test
+[INFO] |     +- io.cucumber:datatable:jar:7.11.2:test
+[INFO] |     +- io.cucumber:cucumber-plugin:jar:7.11.2:test
+[INFO] |     +- io.cucumber:docstring:jar:7.11.2:test
+[INFO] |     +- io.cucumber:html-formatter:jar:20.2.1:test
+[INFO] |     +- io.cucumber:junit-xml-formatter:jar:0.1.0:test
+[INFO] |     \- io.cucumber:ci-environment:jar:9.1.0:test
+[INFO] +- io.cucumber:cucumber-junit-platform-engine:jar:7.11.2:test
+[INFO] +- org.junit.platform:junit-platform-suite:jar:1.9.2:test
+[INFO] |  +- org.junit.platform:junit-platform-suite-api:jar:1.9.2:test
+[INFO] |  \- org.junit.platform:junit-platform-suite-engine:jar:1.9.2:test
+[INFO] |     \- org.junit.platform:junit-platform-suite-commons:jar:1.9.2:test
+[INFO] |        \- org.junit.platform:junit-platform-launcher:jar:1.9.2:test
+[INFO] +- org.assertj:assertj-core:jar:3.24.2:test
+[INFO] +- org.postgresql:postgresql:jar:42.6.0:compile
+[INFO] |  \- org.checkerframework:checker-qual:jar:3.31.0:runtime
+[INFO] +- org.liquibase:liquibase-core:jar:4.20.0:compile
+[INFO] |  +- javax.xml.bind:jaxb-api:jar:2.3.1:compile
+[INFO] |  |  \- javax.activation:javax.activation-api:jar:1.2.0:compile
+[INFO] |  +- org.yaml:snakeyaml:jar:1.33:compile
+[INFO] |  \- com.opencsv:opencsv:jar:5.7.1:compile
+[INFO] |     +- org.apache.commons:commons-lang3:jar:3.12.0:compile
+[INFO] |     +- org.apache.commons:commons-text:jar:1.10.0:compile
+[INFO] |     \- org.apache.commons:commons-collections4:jar:4.4:compile
+[INFO] +- org.hibernate.orm:hibernate-core:jar:6.2.0.Final:compile
+[INFO] |  +- jakarta.persistence:jakarta.persistence-api:jar:3.1.0:compile
+[INFO] |  +- jakarta.transaction:jakarta.transaction-api:jar:2.0.1:compile
+[INFO] |  +- org.jboss.logging:jboss-logging:jar:3.5.0.Final:runtime
+[INFO] |  +- org.hibernate.common:hibernate-commons-annotations:jar:6.0.6.Final:runtime
+[INFO] |  +- io.smallrye:jandex:jar:3.0.5:runtime
+[INFO] |  +- com.fasterxml:classmate:jar:1.5.1:runtime
+[INFO] |  +- jakarta.xml.bind:jakarta.xml.bind-api:jar:4.0.0:runtime
+[INFO] |  |  \- jakarta.activation:jakarta.activation-api:jar:2.1.0:runtime
+[INFO] |  +- org.glassfish.jaxb:jaxb-runtime:jar:4.0.2:runtime
+[INFO] |  |  \- org.glassfish.jaxb:jaxb-core:jar:4.0.2:runtime
+[INFO] |  |     +- org.eclipse.angus:angus-activation:jar:2.0.0:runtime
+[INFO] |  |     +- org.glassfish.jaxb:txw2:jar:4.0.2:runtime
+[INFO] |  |     \- com.sun.istack:istack-commons-runtime:jar:4.1.1:runtime
+[INFO] |  +- jakarta.inject:jakarta.inject-api:jar:2.0.1:runtime
+[INFO] |  \- org.antlr:antlr4-runtime:jar:4.10.1:runtime
+[INFO] +- org.hibernate.orm:hibernate-spatial:jar:6.2.0.Final:compile
+[INFO] \- org.geolatte:geolatte-geom:jar:1.9.0:compile
+[INFO]    +- org.locationtech.jts:jts-core:jar:1.19.0:compile
+[INFO]    \- org.slf4j:slf4j-api:jar:1.6.1:compile
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.159 s
+[INFO] Finished at: 2023-04-18T08:41:48+03:00
+[INFO] ------------------------------------------------------------------------

@@ -41,7 +41,7 @@
         <groovy.version>4.0.11</groovy.version>
         <cucumber.version>7.11.2</cucumber.version>
         <pitest.version>1.13.0</pitest.version>
-        <jersey.version>3.0.8</jersey.version>
+        <jersey.version>3.1.1</jersey.version>
         <jackson.version>2.15.0</jackson.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
         <dependency.check.version>8.2.1</dependency.check.version>
@@ -52,7 +52,7 @@
         <maven.javadoc.plugin.version>3.5.0</maven.javadoc.plugin.version>
         <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
         <maven.project.info.reports.plugin.version>3.4.3</maven.project.info.reports.plugin.version>
-        <maven.checkstyle.plugin.versoin>3.2.0</maven.checkstyle.plugin.versoin>
+        <maven.checkstyle.plugin.versoin>3.2.1</maven.checkstyle.plugin.versoin>
         <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
         <gmavenplus.plugin.version>2.1.0</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.0.0</buildnumber.maven.plugin.version>
@@ -63,7 +63,7 @@
         <jaxb.api.version>2.3.1</jaxb.api.version>
         <jsp.api.version>2.3.3</jsp.api.version>
         <!--jaxb.impl.version>2.1</jaxb.impl.version-->
-        <maven.jetty.plugin.version>11.0.12</maven.jetty.plugin.version>
+        <maven.jetty.plugin.version>11.0.14</maven.jetty.plugin.version>
         <spring.version>5.3.20</spring.version>
         <spring.security.version>5.7.1</spring.security.version>
         <spring.data.jpa.version>2.7.0</spring.data.jpa.version>
@@ -79,7 +79,7 @@
         <javax.validation.api.version>2.0.1.Final</javax.validation.api.version>
         <javax.inject.version>1</javax.inject.version>
         <javax.cache.api.version>1.1.1</javax.cache.api.version>
-        <java.jwt.version>4.4.0</java.jwt.version>
+        <java.jwt.version>4.4.0</java.jwt.version><!--java.jwt.version>4.0.0</java.jwt.version-->
         <rest.assured.version>5.0.1</rest.assured.version>
         <liquibase.version>4.21.1</liquibase.version>
         <infinispan.version>14.0.8.Final</infinispan.version>
@@ -215,6 +215,11 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jdk8</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
             <dependency>
@@ -379,7 +384,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.3.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -400,11 +405,11 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.1.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.1.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
@@ -485,7 +490,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.4.2</version>
+                    <version>3.5.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
