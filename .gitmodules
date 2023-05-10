@@ -118,3 +118,6 @@
 [submodule "submodules/java-text-function"]
 	path = submodules/java-text-function
 	url = git@github.com:setmy-info/java-text-function.git
+[submodule "submodules/cpp-start-project"]
+	path = submodules/cpp-start-project
+	url = git@github.com:setmy-info/cpp-start-project.git
