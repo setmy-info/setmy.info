@@ -1,0 +1,17 @@
+{
+    "name": "selenium-js",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "mocha --timeout 10000 firstScript.spec.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "mocha": "^10.2.0",
+        "selenium-webdriver": "^4.8.2"
+    }
+}

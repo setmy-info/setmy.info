@@ -358,7 +358,6 @@
                     <target>${maven.compiler.target}</target-->
                     <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
@@ -413,9 +412,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <systemPropertyVariables>
-                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-                    </systemPropertyVariables>
                 </configuration>
             </plugin>
             <plugin>
@@ -537,12 +533,12 @@
                 <version>${maven.jetty.plugin.version}</version>
                 <configuration>
                     <supportedPackagings>war</supportedPackagings>
-                    <webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
-                    <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <!--webAppSourceDirectory>src/main/webapp</webAppSourceDirectory-->
+                    <!--scanIntervalSeconds>0</scanIntervalSeconds-->
                     <webApp>
                         <contextPath>/${project.name}-${project.version}</contextPath>
                     </webApp>
-                    <useTestClasspath>true</useTestClasspath>
+                    <!--useTestClasspath>true</useTestClasspath-->
                     <contextXml>${project.basedir}/src/main/webapp/WEB-INF/jetty-context.xml</contextXml>
                     <jvmArgs>-Dorg.eclipse.jetty.webapp.LEVEL=DEBUG</jvmArgs>
                     <jettyProperties>
@@ -567,7 +563,7 @@
                             <goal>start</goal>
                         </goals>
                         <configuration>
-                            <daemon>true</daemon>
+                            <!--daemon>true</daemon-->
                             <stopPort>8005</stopPort>
                             <stopKey>STOP</stopKey>
                         </configuration>

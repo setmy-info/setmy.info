@@ -13,5 +13,5 @@ def result3 = doublerSecond(6)
 def result4 = quadruple(7)
 def result5 = quadruple2(7)
 
-println result1
-println "$result2 $result3 $result4 $result5"
+print result1
+println " $result2 $result3 $result4 $result5"

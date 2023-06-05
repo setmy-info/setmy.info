@@ -79,27 +79,22 @@
         <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy</artifactId>
-            <version>${groovy.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-json</artifactId>
-            <version>${groovy.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-xml</artifactId>
-            <version>${groovy.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-toml</artifactId>
-            <version>${groovy.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-yaml</artifactId>
-            <version>${groovy.version}</version>
         </dependency>
         <!-- EXPERIMENTAL CODE -->
     </dependencies>
@@ -183,7 +178,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -216,11 +210,8 @@
                         </configuration>
                     </execution>
                 </executions>
-                <!--configuration>
-                    <systemPropertyVariables>
-                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-                    </systemPropertyVariables>
-                </configuration-->
+                <configuration>
+                </configuration>
             </plugin>
             <!--plugin>
                 <groupId>org.pitest</groupId>

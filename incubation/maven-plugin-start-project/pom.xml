@@ -17,33 +17,34 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
-        <java.version>18</java.version>
-        <failsafe.version>2.22.2</failsafe.version>
-        <surefire.version>2.22.2</surefire.version>
-        <jacoco.version>0.8.8</jacoco.version>
-        <pitest.version>1.7.3</pitest.version>
-        <dependency.check.version>7.1.0</dependency.check.version>
-        <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
+        <maven.compiler.source>20</maven.compiler.source>
+        <maven.compiler.target>20</maven.compiler.target>
+        <java.version>20</java.version>
+        <failsafe.version>3.0.0</failsafe.version>
+        <surefire.version>3.0.0</surefire.version>
+        <jacoco.version>0.8.9</jacoco.version>
+        <pitest.version>1.13.0</pitest.version>
+        <dependency.check.version>8.2.1</dependency.check.version>
+        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>3.8.4</version>
+            <version>3.9.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
-            <version>3.8.4</version>
+            <version>3.9.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
-            <version>3.6.4</version>
+            <version>3.8.2</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -58,7 +59,6 @@
                     <target>${maven.compiler.target}</target>
                     <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
@@ -79,7 +79,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -113,9 +112,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <systemPropertyVariables>
-                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-                    </systemPropertyVariables>
                 </configuration>
             </plugin>
             <plugin>
@@ -151,12 +147,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.12.0</version>
+                <version>3.12.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
+                <version>3.0.0</version>
             </plugin>
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
@@ -241,7 +237,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>3.0.1</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -262,7 +258,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.4.3</version>
             </plugin>
             <!--
             Problem with 3.0.5 plugin, that is crashing in middle of site building.
@@ -289,7 +285,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.2.2</version>
                 <configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
@@ -317,7 +313,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>taglist-maven-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.0.0</version>
                 <configuration>
                     <tagListOptions>
                         <tagClasses>
@@ -376,7 +372,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.5.0</version>
                 <reportSets>
                     <reportSet>
                         <reports>

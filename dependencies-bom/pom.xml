@@ -19,42 +19,42 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <encoding.level>UTF-8</encoding.level>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
-        <java.version>18</java.version>
+        <maven.compiler.source>20</maven.compiler.source>
+        <maven.compiler.target>20</maven.compiler.target>
+        <java.version>20</java.version>
         <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
 
-        <junit5.version>5.9.0</junit5.version>
-        <junit.platform.version>1.9.0</junit.platform.version>
-        <mockito.version>4.6.1</mockito.version>
-        <assertj.version>3.23.1</assertj.version>
-        <jacoco.version>0.8.8</jacoco.version>
-        <failsafe.version>2.22.2</failsafe.version>
-        <surefire.version>2.22.2</surefire.version>
+        <junit5.version>5.9.2</junit5.version>
+        <junit.platform.version>1.9.2</junit.platform.version>
+        <mockito.version>5.3.1</mockito.version>
+        <assertj.version>3.24.2</assertj.version>
+        <jacoco.version>0.8.9</jacoco.version>
+        <failsafe.version>3.0.0</failsafe.version>
+        <surefire.version>3.0.0</surefire.version>
         <!--log4j.verion>1.2.17</log4j.verion -->
-        <log4j2.verion>2.17.2</log4j2.verion>
-        <logback.verion>1.2.11</logback.verion>
-        <slf4j.version>1.7.36</slf4j.version>
-        <lucene.version>9.2.0</lucene.version>
-        <groovy.version>4.0.3</groovy.version>
-        <cucumber.version>7.3.4</cucumber.version>
-        <pitest.version>1.8.1</pitest.version>
-        <jersey.version>3.0.4</jersey.version>
-        <jackson.version>2.13.3</jackson.version>
+        <log4j2.verion>2.20.0</log4j2.verion>
+        <logback.verion>1.4.7</logback.verion>
+        <slf4j.version>2.0.7</slf4j.version>
+        <lucene.version>9.5.0</lucene.version>
+        <groovy.version>4.0.11</groovy.version>
+        <cucumber.version>7.11.2</cucumber.version>
+        <pitest.version>1.13.0</pitest.version>
+        <jersey.version>3.1.1</jersey.version>
+        <jackson.version>2.15.0</jackson.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
-        <dependency.check.version>7.1.1</dependency.check.version>
-        <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
-        <maven.site.plugin.version>3.12.0</maven.site.plugin.version>
-        <maven.release.plugin.version>2.5.3</maven.release.plugin.version>
+        <dependency.check.version>8.2.1</dependency.check.version>
+        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+        <maven.site.plugin.version>3.12.1</maven.site.plugin.version>
+        <maven.release.plugin.version>3.0.0</maven.release.plugin.version>
         <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
-        <maven.javadoc.plugin.version>3.4.0</maven.javadoc.plugin.version>
+        <maven.javadoc.plugin.version>3.5.0</maven.javadoc.plugin.version>
         <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
-        <maven.project.info.reports.plugin.version>3.4.0</maven.project.info.reports.plugin.version>
-        <maven.checkstyle.plugin.versoin>3.1.2</maven.checkstyle.plugin.versoin>
+        <maven.project.info.reports.plugin.version>3.4.3</maven.project.info.reports.plugin.version>
+        <maven.checkstyle.plugin.versoin>3.2.1</maven.checkstyle.plugin.versoin>
         <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
-        <gmavenplus.plugin.version>1.13.1</gmavenplus.plugin.version>
+        <gmavenplus.plugin.version>2.1.0</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.0.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.6.13</nexus.staging.plugin.version>
         <spring.boot.verion>2.7.0</spring.boot.verion>
@@ -63,36 +63,42 @@
         <jaxb.api.version>2.3.1</jaxb.api.version>
         <jsp.api.version>2.3.3</jsp.api.version>
         <!--jaxb.impl.version>2.1</jaxb.impl.version-->
-        <maven.jetty.plugin.version>11.0.9</maven.jetty.plugin.version>
+        <maven.jetty.plugin.version>11.0.14</maven.jetty.plugin.version>
         <spring.version>5.3.20</spring.version>
         <spring.security.version>5.7.1</spring.security.version>
         <spring.data.jpa.version>2.7.0</spring.data.jpa.version>
-        <hibernate.version>6.1.0.Final</hibernate.version>
-        <hibernate.validator.version>7.0.4.Final</hibernate.validator.version>
-        <ehcache.version>3.9.7</ehcache.version>
+        <hibernate.version>6.2.1.Final</hibernate.version>
+        <hibernate.validator.version>8.0.0.Final</hibernate.validator.version>
+        <hibernate.ehcache.version>5.6.15.Final</hibernate.ehcache.version>
+        <ehcache.version>3.10.8</ehcache.version>
         <commons.dbcp.version>1.4</commons.dbcp.version>
         <commons.io.version>2.11.0</commons.io.version>
         <commons.codec.version>1.15</commons.codec.version>
         <commons.lang3.version>3.12.0</commons.lang3.version>
-        <snakeyaml.version>1.30</snakeyaml.version>
+        <snakeyaml.version>2.0</snakeyaml.version>
         <javax.validation.api.version>2.0.1.Final</javax.validation.api.version>
         <javax.inject.version>1</javax.inject.version>
         <javax.cache.api.version>1.1.1</javax.cache.api.version>
-        <java.jwt.version>3.19.1</java.jwt.version>
+        <java.jwt.version>4.4.0</java.jwt.version><!--java.jwt.version>4.0.0</java.jwt.version-->
         <rest.assured.version>5.0.1</rest.assured.version>
-        <liquibase.version>4.9.1</liquibase.version>
-        <infinispan.version>13.0.2.Final</infinispan.version>
+        <liquibase.version>4.21.1</liquibase.version>
+        <infinispan.version>14.0.8.Final</infinispan.version>
+        <infinispan.starter.version>2.3.6.Final</infinispan.starter.version>
         <quartz.verion>2.3.2</quartz.verion>
-        <lombok.version>1.18.24</lombok.version>
+        <lombok.version>1.18.26</lombok.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <swagger.version>3.0.0</swagger.version>
         <swagger.annotations.version>1.6.3</swagger.annotations.version>
         <swagger.models.version>1.6.3</swagger.models.version>
         <springdoc.version>1.6.0</springdoc.version>
-        <jakarta.xml.bind.api.version>3.0.1</jakarta.xml.bind.api.version>
-        <picocli.version>4.6.3</picocli.version>
+        <jakarta.xml.bind.api.version>4.0.0</jakarta.xml.bind.api.version>
+        <picocli.version>4.7.3</picocli.version>
         <find.bugs.version>3.0.5</find.bugs.version>
-        <spot.bugs.version>4.7.0.0</spot.bugs.version>
+        <spot.bugs.version>4.7.3.4</spot.bugs.version>
+        <clojure.version>1.11.1</clojure.version>
+        <tensorflow.core.version>0.5.0</tensorflow.core.version>
+        <tensorflow.ndarray.version>0.4.0</tensorflow.ndarray.version>
+        <tensorflow.framework.version>0.5.0</tensorflow.framework.version>
     </properties>
 
     <dependencyManagement>
@@ -145,7 +151,7 @@
             <dependency>
                 <groupId>io.cucumber</groupId>
                 <artifactId>cucumber-bom</artifactId>
-                <version>7.5.0</version>
+                <version>${cucumber.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -164,7 +170,7 @@
             <dependency>
                 <groupId>org.infinispan</groupId>
                 <artifactId>infinispan-spring-boot-starter</artifactId>
-                <version>${version.infinispan.starter}</version>
+                <version>${infinispan.starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
@@ -212,6 +218,11 @@
                 <version>${jackson.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jdk8</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>jakarta.xml.bind</groupId>
                 <artifactId>jakarta.xml.bind-api</artifactId>
                 <version>${jakarta.xml.bind.api.version}</version>
@@ -254,7 +265,7 @@
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-impl</artifactId>
-                <version>3.0.2</version>
+                <version>4.0.2</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.groovy</groupId>
@@ -319,7 +330,7 @@
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-ehcache</artifactId>
-                <version>5.6.9.Final</version>
+                <version>${hibernate.ehcache.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
@@ -341,9 +352,29 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.clojure</groupId>
+                <artifactId>clojure</artifactId>
+                <version>${clojure.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tensorflow</groupId>
+                <artifactId>tensorflow-core-platform</artifactId>
+                <version>${tensorflow.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tensorflow</groupId>
+                <artifactId>ndarray</artifactId>
+                <version>${tensorflow.ndarray.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tensorflow</groupId>
+                <artifactId>tensorflow-framework</artifactId>
+                <version>${tensorflow.framework.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
- 
+
     <build>
         <pluginManagement>
             <plugins>
@@ -353,7 +384,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.3.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -370,15 +401,15 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.2</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.1.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.1.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
@@ -459,7 +490,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.5.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>

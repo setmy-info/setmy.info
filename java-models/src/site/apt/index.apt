@@ -20,7 +20,7 @@ Introduction
     Prepare service in side Spring boot beans for example. Alternatively in XML.
 
     * <<JWTService jwtService = JWTService(SERVICE_NAME,ISSUER, EXAMPLE_SECRET_KEY, ALGORITHM_NAME, EXAMPLE_SESSION_MINUTES);>>
-    
+
     * <<service.init();>>
 
     Create JWT model object and JWT string:

@@ -65,6 +65,11 @@
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.15.4</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -89,8 +94,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <!--source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target-->
                     <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showWarnings>true</showWarnings>
@@ -113,7 +118,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -146,11 +150,8 @@
                         </configuration>
                     </execution>
                 </executions>
-                <!--configuration>
-                    <systemPropertyVariables>
-                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-                    </systemPropertyVariables>
-                </configuration-->
+                <configuration>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>
@@ -265,30 +266,6 @@
                 </executions>
             </plugin-->
         </plugins>
-
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>${maven.checkstyle.plugin.versoin}</version>
-                    <configuration>
-                        <violationSeverity>warning</violationSeverity>
-                        <consoleOutput>true</consoleOutput>
-                        <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
-                        <!-- configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation -->
-                        <!-- configLocation>${basedir}/src/test/resources/google-checks.xml</configLocation -->
-                    </configuration>                   
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.puppycrawl.tools</groupId>
-                            <artifactId>checkstyle</artifactId>
-                            <version>10.3</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-            </plugins>
-        </pluginManagement>
     </build>
 
     <profiles>
@@ -338,7 +315,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.7.0.0</version>
+                <version>${spot.bugs.version}</version>
                 <!--configuration>
                     <excludeFilterFile>${basedir}/src/test/resources/spotbugs-exclude.xml</excludeFilterFile>
                     <includeFilterFile>${basedir}/src/test/resources/spotbugs-include.xml</includeFilterFile>
@@ -346,7 +323,7 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>              
+                <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -538,8 +515,8 @@
         <url>https://github.com/setmy-info/setmy.info/issues</url>
     </issueManagement>
 
-    <ciManagement />
-    <contributors />
+    <ciManagement/>
+    <contributors/>
 
     <distributionManagement>
         <snapshotRepository>

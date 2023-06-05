@@ -1,23 +1,26 @@
 FROM setmyinfo/setmy-info-rocky-java:latest
 
-MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
+# http://label-schema.org/rc1/ replaced with https://github.com/opencontainers/image-spec/blob/main/annotations.md
+LABEL org.opencontainers.image.title="Docker HUB Centos Java Infinispan" \
+      org.opencontainers.image.description="setmy.info Docker HUB Centos Java Infinispan" \
+      org.opencontainers.image.version="14.0.6-1" \
+      org.opencontainers.image.revision="14.0.6-1" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.vendor="Hear And See Systems LLC" \
+      org.opencontainers.image.created=$BUILD_DATE \
+      org.opencontainers.image.documentation="" \
+      org.opencontainers.image.authors="Imre Tabur <imre.tabur@eesti.ee>" \
+      org.opencontainers.image.source="" \
+      org.opencontainers.image.url="" \
+      org.opencontainers.image.ref.name=""
 
-LABEL org.label-schema.name="Docker HUB Centos Java Infinispan" \
-      org.label-schema.version="13.0.2" \
-      org.label-schema.description="setmy.info Docker HUB Centos Java Infinispan" \
-      org.label-schema.vendor="Hear And See Systems LLC" \
-      org.label-schema.url="https://www.hearandseesystems.com" \
-      org.label-schema.license="MIT" \
-      org.label-schema.schema-version="1.0" \
-      org.label-schema.build-date=$BUILD_DATE
-
-COPY infinispan-server-13.0.2.Final /opt/infinispan-server
+COPY infinispan-server-14.0.6.Final /opt/infinispan-server
 COPY src/infinispan-starter /opt/infinispan-server/bin
-RUN chown -R root:root /opt/infinispan-server
-RUN mkdir /opt/infinispan-server/server/data
-RUN mkdir /opt/infinispan-server/server/logs
-RUN chown -R microservice:microservice /opt/infinispan-server/server/data
-RUN chown -R microservice:microservice /opt/infinispan-server/server/logs
+RUN chown -R root:root /opt/infinispan-server && \
+    mkdir /opt/infinispan-server/server/data && \
+    mkdir /opt/infinispan-server/server/logs && \
+    chown -R microservice:microservice /opt/infinispan-server/server/data && \
+    chown -R microservice:microservice /opt/infinispan-server/server/logs
 ENV INFINISPAN_HOME /opt/infinispan-server
 ENV PATH="${INFINISPAN_HOME}/bin:${PATH}"
 RUN cd /opt/infinispan-server && ls -la

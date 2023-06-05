@@ -37,12 +37,11 @@ live.mv.db
 live.trace.db
 
 setmy-info-docker/setmy-info-rocky-java/jdk*
+setmy-info-docker/setmy-info-rocky-java/openjdk*
 setmy-info-docker/setmy-info-rocky-java/openjdk-*.tar.gz
 setmy-info-docker/setmy-info-rocky-java-tomcat/apache-tomcat-*
 setmy-info-docker/setmy-info-rocky-node/node-v*
-setmy-info-docker/setmy-info-rocky-java-zeebe/zeebe-broker-*
-setmy-info-docker/setmy-info-rocky-java-zeebe/zeebe-distribution-*
-setmy-info-docker/setmy-info-rocky-java-zeebe/camunda-cloud-zeebe-*
+setmy-info-docker/setmy-info-rocky-java-zeebe/camunda-zeebe-*
 setmy-info-docker/setmy-info-rocky-java-infinispan/infinispan-server-*
 setmy-info-docker/setmy-info-rocky-java-hsqldb/hsqldb-*.zip
 setmy-info-docker/setmy-info-rocky-java-hsqldb/hsqldb-*/
@@ -103,3 +102,14 @@ tmp
 /java-exec/nbproject/
 /java-vcs/nbproject/
 /java-stealer/nbproject/
+submodules/system-index.txt
+
+# Python Tensorflow
+python-ai/docs/.ipynb_checkpoints/
+python-ai/.ipynb_checkpoints/
+python-ai/docs/logs/
+python-ai/docs/models/
+python-ai/docs/fashion-models/
+python-ai/test
+python-ai/titanic.tfsnap/
+python-ai/traffic/

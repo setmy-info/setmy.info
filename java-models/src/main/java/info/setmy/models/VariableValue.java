@@ -10,15 +10,8 @@ public class VariableValue extends VariableObject<String, String> {
 
     public static final String EMPTY = "";
 
-    public VariableValue() {
-    }
-
     public VariableValue(final String name, final String value) {
         super(name, value);
-    }
-
-    public void setName(final String name) {
-        setKey(name);
     }
 
     public String getName() {
@@ -27,10 +20,6 @@ public class VariableValue extends VariableObject<String, String> {
 
     public Optional<String> getNameOptional() {
         return super.getKeyOptional();
-    }
-
-    public void setValue(final String value) {
-        setObject(value);
     }
 
     public String getValue() {

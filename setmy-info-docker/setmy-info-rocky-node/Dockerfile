@@ -1,20 +1,23 @@
 FROM setmyinfo/setmy-info-rocky:latest
 
-MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
+# http://label-schema.org/rc1/ replaced with https://github.com/opencontainers/image-spec/blob/main/annotations.md
+LABEL org.opencontainers.image.title="Docker HUB Centos NodeJS" \
+      org.opencontainers.image.description="setmy.info Docker HUB Centos Node" \
+      org.opencontainers.image.version="18.14.0" \
+      org.opencontainers.image.revision="18.14.0" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.vendor="Hear And See Systems LLC" \
+      org.opencontainers.image.created=$BUILD_DATE \
+      org.opencontainers.image.documentation="" \
+      org.opencontainers.image.authors="Imre Tabur <imre.tabur@eesti.ee>" \
+      org.opencontainers.image.source="" \
+      org.opencontainers.image.url="" \
+      org.opencontainers.image.ref.name=""
 
-LABEL org.label-schema.name="Docker HUB Centos NodeJS" \
-      org.label-schema.version="16.13.1" \
-      org.label-schema.description="setmy.info Docker HUB Centos Node" \
-      org.label-schema.vendor="Hear And See Systems LLC" \
-      org.label-schema.url="https://www.hearandseesystems.com" \
-      org.label-schema.license="MIT" \
-      org.label-schema.schema-version="1.0" \
-      org.label-schema.build-date=$BUILD_DATE
-
-COPY node-v16.13.1-linux-x64 /opt/node
-RUN useradd node --shell /sbin/nologin --no-create-home
-RUN chown -R root:root /opt/node
+COPY node-v18.14.0-linux-x64 /opt/node
+RUN useradd node --shell /sbin/nologin --no-create-home && \
+    chown -R root:root /opt/node && \
+    chmod ugo+rx /opt/node/bin/*
 ENV NODE_HOME /opt/node
 ENV PATH="${NODE_HOME}/bin:${PATH}"
-RUN cd /opt/node && ls -la
-RUN node --version
+RUN cd /opt/node && ls -la && node --version
