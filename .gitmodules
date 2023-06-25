@@ -121,3 +121,6 @@
 [submodule "submodules/cpp-start-project"]
 	path = submodules/cpp-start-project
 	url = git@github.com:setmy-info/cpp-start-project.git
+[submodule "submodules/tbi-start-project"]
+	path = submodules/tbi-start-project
+	url = git@github.com:setmy-info/tbi-start-project.git
