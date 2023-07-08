@@ -53,6 +53,8 @@ tomcat-start-project/download/*
 tomcat-start-project/apache-tomcat*
 
 springboot-start-project/logback.log
+springboot-start-project/archived/
+springboot-start-project/log4j2.log
 
 java-stealer/test-data/
 
