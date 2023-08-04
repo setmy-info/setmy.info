@@ -8,4 +8,5 @@ pip install -r requirements.txt --upgrade
 pip install twine wheel
 python -m unittest tests.test_foo
 python setup.py sdist bdist_wheel
+twine upload dist/*
 ```
