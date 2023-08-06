@@ -17,5 +17,6 @@ julia install.jl
 ```sh
 venv-prepare
 smi-venv
+cd docs
 jupyter-lab
 ```
