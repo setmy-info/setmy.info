@@ -6,6 +6,7 @@
     {:name "MIT License"
      :url  "https://opensource.org/licenses/MIT"}
     :dependencies [[org.clojure/clojure "1.11.1"]]
+    :plugins [[lein-codox "0.10.8"]]
     :main ^:skip-aot foo-bar-lib-probe.core
     :target-path "target/%s"
     :profiles
