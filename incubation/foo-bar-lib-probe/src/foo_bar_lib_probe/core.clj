@@ -14,7 +14,7 @@
        The sum of the two input numbers.
 
      See also:
-        - [Google](http://www.google.com): A popular search engine."
+        - http://www.google.com: A popular search engine."
     [a b]
     (+ a b))
 
