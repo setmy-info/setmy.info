@@ -127,3 +127,6 @@
 [submodule "submodules/clj-file-traversal"]
 	path = submodules/clj-file-traversal
 	url = git@github.com:setmy-info/clj-file-traversal.git
+[submodule "submodules/clj-file-indexing"]
+	path = submodules/clj-file-indexing
+	url = git@github.com:setmy-info/clj-file-indexing.git
