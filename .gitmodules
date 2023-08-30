@@ -124,12 +124,12 @@
 [submodule "submodules/tbi-start-project"]
 	path = submodules/tbi-start-project
 	url = git@github.com:setmy-info/tbi-start-project.git
-[submodule "submodules/clj-file-traversal"]
-	path = submodules/clj-file-traversal
-	url = git@github.com:setmy-info/clj-file-traversal.git
 [submodule "submodules/clj-file-indexing"]
 	path = submodules/clj-file-indexing
 	url = git@github.com:setmy-info/clj-file-indexing.git
 [submodule "submodules/clj-commons"]
 	path = submodules/clj-commons
 	url = git@github.com:setmy-info/clj-commons.git
+[submodule "submodules/clj-file-traversal"]
+	path = submodules/clj-file-traversal
+	url = git@github.com:setmy-info/clj-file-traversal.git
