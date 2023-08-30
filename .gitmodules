@@ -130,3 +130,6 @@
 [submodule "submodules/clj-commons"]
 	path = submodules/clj-commons
 	url = git@github.com:setmy-info/clj-commons.git
+[submodule "submodules/clj-file-traversal"]
+	path = submodules/clj-file-traversal
+	url = git@github.com:setmy-info/clj-file-traversal.git
