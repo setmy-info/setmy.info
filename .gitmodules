@@ -16,38 +16,38 @@
 [submodule "submodules/servedjs-test"]
 	path = submodules/servedjs-test
 	url = git@github.com:setmy-info/servedjs-test.git
-[submodule "angular-start-project"]
-	path = angular-start-project
+[submodule "submodules/angular-start-project"]
+	path = submodules/angular-start-project
 	url = git@github.com:setmy-info/angular-start-project.git
-[submodule "cmake-start-project"]
-	path = cmake-start-project
+[submodule "submodules/cmake-start-project"]
+	path = submodules/cmake-start-project
 	url = git@github.com:setmy-info/cmake-start-project.git
-[submodule "freebsd-ports"]
-	path = freebsd-ports
+[submodule "submodules/freebsd-ports"]
+	path = submodules/freebsd-ports
 	url = git@github.com:setmy-info/freebsd-ports.git
-[submodule "go-start-project"]
-	path = go-start-project
+[submodule "submodules/go-start-project"]
+	path = submodules/go-start-project
 	url = git@github.com:setmy-info/go-start-project.git
-[submodule "maven-plugin-start-project"]
-	path = maven-plugin-start-project
+[submodule "submodules/maven-plugin-start-project"]
+	path = submodules/maven-plugin-start-project
 	url = git@github.com:setmy-info/maven-plugin-start-project.git
-[submodule "node-start-project"]
-	path = node-start-project
+[submodule "submodules/node-start-project"]
+	path = submodules/node-start-project
 	url = git@github.com:setmy-info/node-start-project.git
-[submodule "python-start-project"]
-	path = python-start-project
+[submodule "submodules/python-start-project"]
+	path = submodules/python-start-project
 	url = git@github.com:setmy-info/python-start-project.git
-[submodule "setmy-info-experiments"]
-	path = setmy-info-experiments
+[submodule "submodules/setmy-info-experiments"]
+	path = submodules/setmy-info-experiments
 	url = git@github.com:setmy-info/setmy-info-experiments.git
-[submodule "setmy-info-scripts"]
-	path = setmy-info-scripts
+[submodule "submodules/setmy-info-scripts"]
+	path = submodules/setmy-info-scripts
 	url = git@github.com:setmy-info/setmy-info-scripts.git
-[submodule "setmy-info-web-components"]
-	path = setmy-info-web-components
+[submodule "submodules/setmy-info-web-components"]
+	path = submodules/setmy-info-web-components
 	url = git@github.com:setmy-info/setmy-info-web-components.git
-[submodule "vue-servicejs"]
-	path = vue-servicejs
+[submodule "submodules/vue-servicejs"]
+	path = submodules/vue-servicejs
 	url = git@github.com:setmy-info/vue-servicejs.git
 [submodule "submodules/angular-start-project"]
 	path = submodules/angular-start-project
@@ -124,12 +124,6 @@
 [submodule "submodules/tbi-start-project"]
 	path = submodules/tbi-start-project
 	url = git@github.com:setmy-info/tbi-start-project.git
-[submodule "submodules/clj-file-indexing"]
-	path = submodules/clj-file-indexing
-	url = git@github.com:setmy-info/clj-file-indexing.git
-[submodule "submodules/clj-commons"]
-	path = submodules/clj-commons
-	url = git@github.com:setmy-info/clj-commons.git
 [submodule "submodules/clj-file-traversal"]
 	path = submodules/clj-file-traversal
 	url = git@github.com:setmy-info/clj-file-traversal.git
