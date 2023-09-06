@@ -100,3 +100,6 @@
 [submodule "submodules/clj-file-indexing"]
 	path = submodules/clj-file-indexing
 	url = git@github.com:setmy-info/clj-file-indexing.git
+[submodule "submodules/python-commons"]
+	path = submodules/python-commons
+	url = git@github.com:setmy-info/python-commons.git
