@@ -1,6 +1,6 @@
 server:
     port: 8080
-    context-path: /rest
+#    context-path: /rest
     compression:
         enabled: true
         mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json

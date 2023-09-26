@@ -29,7 +29,7 @@
         <dependency>
             <groupId>org.camunda.bpm</groupId>
             <artifactId>camunda-bom</artifactId>
-            <version>7.15.0</version>
+            <version>7.19.0</version>
             <type>pom</type>
         </dependency>
     </dependencies>
@@ -449,7 +449,7 @@
     <developers>
         <developer>
             <id>imreit</id>
-            <email>imre.tabur@eesti.ee</email>
+            <email>imre.tabur@mail.ee</email>
             <name>Imre Tabur</name>
             <organization>Hear And See Systems LLC</organization>
             <roles>
