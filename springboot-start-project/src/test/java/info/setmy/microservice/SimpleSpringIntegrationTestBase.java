@@ -8,7 +8,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {SpringbootStartProjectApplication.class})
-@ActiveProfiles(profiles = {"test"})
+@ActiveProfiles(profiles = {"default", "test"})
 @SpringBootTest
 public abstract class SimpleSpringIntegrationTestBase {
 }

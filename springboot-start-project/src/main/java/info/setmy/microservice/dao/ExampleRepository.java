@@ -1,13 +1,14 @@
 package info.setmy.microservice.dao;
 
 import info.setmy.microservice.models.ExampleModel;
-import javax.inject.Named;
+import jakarta.inject.Named;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
-@Named("exampleRepository")
+@Repository
 public interface ExampleRepository extends JpaRepository<ExampleModel, Long> {
 }

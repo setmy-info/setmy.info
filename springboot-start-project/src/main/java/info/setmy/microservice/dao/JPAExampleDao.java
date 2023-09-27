@@ -1,7 +1,7 @@
 package info.setmy.microservice.dao;
 
 import info.setmy.microservice.models.ExampleModel;
-import javax.inject.Named;
+import jakarta.inject.Named;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {

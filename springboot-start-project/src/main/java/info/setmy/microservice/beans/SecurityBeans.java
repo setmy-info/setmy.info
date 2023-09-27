@@ -1,34 +1,40 @@
-package info.setmy.microservice.config;
+package info.setmy.microservice.beans;
 
 import info.setmy.microservice.properties.SecurityProperties;
 import static java.lang.Boolean.TRUE;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.filter.CorsFilter;
 
 /**
  * https://spring.io/guides/gs/securing-web/
  * https://www.devglan.com/spring-security/spring-boot-security-rest-basic-authentication
  * https://www.baeldung.com/spring-security-basic-authentication
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+public class SecurityBeans {
 
     private final SecurityProperties securityProperties;
+    //private final CorsFilter corsFilter;
 
-    public SecurityConfig(SecurityProperties securityProperties) {
+    public SecurityBeans(SecurityProperties securityProperties) {
         this.securityProperties = securityProperties;
     }
 
-    @Override
-    protected void configure(final HttpSecurity httpSecurity) throws Exception {
+    @Bean
+    protected SecurityFilterChain filterChain(final HttpSecurity httpSecurity) throws Exception {
+        /*
         httpSecurity
                 .authorizeRequests()
-                .antMatchers(
+                .ignoringAntMatchers(
                         "/",
                         "favicon.ico",
                         //"/login",
@@ -68,5 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         if (!securityProperties.getFrameOptions().orElse(TRUE)) {
             httpSecurity.headers().frameOptions().disable();
         }
+        */
+        return httpSecurity.build();
     }
 }

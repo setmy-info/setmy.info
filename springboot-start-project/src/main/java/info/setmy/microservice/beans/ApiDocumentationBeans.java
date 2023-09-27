@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
  *
  * http://localhost:8080/swagger-ui/index.html
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @Component
-public class ApiDocumentationConfig {
+public class ApiDocumentationBeans {
 
     @Bean
     Info apiInfo(final ApiDocumentationProperties apiDocumentation,

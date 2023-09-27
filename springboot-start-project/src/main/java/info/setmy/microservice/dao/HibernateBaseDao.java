@@ -1,12 +1,12 @@
 package info.setmy.microservice.dao;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import org.hibernate.SessionFactory;
 
 /**
  * Hibernate specific DAO class.
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class HibernateBaseDao {
 

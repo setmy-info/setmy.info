@@ -303,18 +303,19 @@
                     <includeFilterFile>${basedir}/src/test/resources/findbugs-include.xml</includeFilterFile>
                 </configuration>
             </plugin-->
-            <!--plugin>
+            <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.0.0</version>
-                <configuration>
+                <version>${spot.bugs.version}</version>
+                <!--configuration>
                     <excludeFilterFile>${basedir}/src/test/resources/spotbugs-exclude.xml</excludeFilterFile>
                     <includeFilterFile>${basedir}/src/test/resources/spotbugs-include.xml</includeFilterFile>
-                </configuration>
-            </plugin-->
+                </configuration-->
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven.checkstyle.plugin.version}</version>
                 <!-- configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
@@ -418,6 +419,12 @@
                     </reportSet>
                 </reportSets>
                 <configuration>
+                    <additionalparam>-Xdoclint:all -Xdoclint:-missing</additionalparam>
+                    <additionalOptions>-Xdoclint:all -Xdoclint:-missing</additionalOptions>
+                    <additionalJOptions>
+                        <additionalJOption>-Xdoclint:all</additionalJOption>
+                        <additionalJOption>-Xdoclint:-missing</additionalJOption>
+                    </additionalJOptions>
                     <additionalOptions>-html5</additionalOptions>
                 </configuration>
             </plugin>

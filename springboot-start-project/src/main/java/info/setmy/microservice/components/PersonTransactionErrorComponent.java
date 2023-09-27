@@ -1,7 +1,7 @@
 package info.setmy.microservice.components;
 
 import info.setmy.microservice.exceptions.MicroServiceException;
-import javax.inject.Named;
+import jakarta.inject.Named;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

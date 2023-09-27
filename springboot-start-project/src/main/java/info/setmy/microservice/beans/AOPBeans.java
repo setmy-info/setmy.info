@@ -7,11 +7,11 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @Configuration
 @EnableAspectJAutoProxy
-public class AOPConfiguration {
+public class AOPBeans {
 
     @Bean
     public RESTExampleAspect exampleAspect() {

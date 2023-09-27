@@ -5,7 +5,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @ActiveProfiles({"default", "test"})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)

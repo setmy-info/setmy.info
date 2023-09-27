@@ -1,6 +1,7 @@
 server:
     port: 8080
-#    context-path: /rest
+#    servlet:
+#        context-path: /rest
     compression:
         enabled: true
         mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
@@ -26,26 +27,28 @@ spring:
                 #dialect: org.hibernate.dialect.Oracle10gDialect
                 id.new_generator_mappings: false
                 format_sql: true
-
-dataSource:
-    driver-class-name: org.h2.Driver
-    #driver-class-name: org.postgresql.Driver
-    #driver-class-name: org.hsqldb.jdbc.JDBCDriver
-    #driver-class-name: org.apache.derby.jdbc.ClientDriver
-    #driver-class-name:
-    url: jdbc:h2:file:./target/live
-    #url: jdbc:hsqldb:hsql://localhost:8877
-    username: sa
-    password:
+    liquibase:
+        change-log: classpath:db/changelog/db.changelog-master.xml
+    datasource:
+        driver-class-name: org.h2.Driver
+        #driver-class-name: org.postgresql.Driver
+        #driver-class-name: org.hsqldb.jdbc.JDBCDriver
+        #driver-class-name: org.apache.derby.jdbc.ClientDriver
+        #driver-class-name:
+        url: jdbc:h2:file:./target/live
+        #url: jdbc:hsqldb:hsql://localhost:8877
+        username: sa
+        password:
+        hikari:
+            maximum-pool-size: 10
+            minimum-idle: 5
+            connection-timeout: 30000
+            idle-timeout: 600000
+            max-lifetime: 1800000
 
 liquibaseDataSource:
     driver-class-name: org.h2.Driver
-    #driver-class-name: org.postgresql.Driver
-    #driver-class-name: org.hsqldb.jdbc.JDBCDriver
-    #driver-class-name: org.apache.derby.jdbc.ClientDriver
-    #driver-class-name:
     url: jdbc:h2:file:./target/live
-    #url: jdbc:hsqldb:hsql://localhost:8877
     username: sa
     password:
 
