@@ -2,12 +2,12 @@ package info.setmy.microservice.services;
 
 import info.setmy.microservice.properties.BuildProperties;
 import info.setmy.microservice.properties.MavenProjectProperties;
+import jakarta.annotation.PostConstruct;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.PostConstruct;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.actuate.info.Info;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  *
  * http://localhost:8080/actuator/info
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @Service("mavenService")
 public class InfoService implements InfoContributor {

@@ -3,7 +3,7 @@ package info.setmy.microservice.controllers;
 import static info.setmy.microservice.constances.RESTConstantces.API_RESOURCE_PATH;
 import info.setmy.microservice.models.ExampleModel;
 import info.setmy.microservice.services.ExampleService;
-import javax.inject.Named;
+import jakarta.inject.Named;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * JSON headers needed.
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @Named("exampleController")
 @RestController

@@ -1,68 +1,57 @@
 package info.setmy.microservice.beans;
 
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @Configuration
 @EnableJpaRepositories(value = {"info.setmy.microservice.dao"})
 @EnableTransactionManagement
-public class DatasourceConfiguration {
+public class DatasourceBeans {
 
-    @Primary
+    /*
     @Bean
-    @ConfigurationProperties("data-source")
+    @ConfigurationProperties("spring.datasource")
     public DataSourceProperties dataSourceProperties() {
         return new DataSourceProperties();
     }
 
-    @Primary
-    @Bean
-    @ConfigurationProperties("data-source")
+    @Bean("dataSource")
     public DataSource dataSource(final DataSourceProperties dataSourceProperties) {
         return dataSourceProperties.initializeDataSourceBuilder().build();
     }
-
-    @Primary
+    
+    
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            final EntityManagerFactoryBuilder builder,
             @Qualifier("dataSource") final DataSource dataSource,
             @Qualifier("jpaAdapter") final HibernateJpaVendorAdapter jpaAdapter,
             @Qualifier("loadTimeWeaver") final InstrumentationLoadTimeWeaver loadTimeWeaver) {
-        final LocalContainerEntityManagerFactoryBean entityManagerFactory = builder
-                .dataSource(dataSource)
-                .packages(new String[]{"info.setmy.microservice.models"})
-                .persistenceUnit("default")// persistenceUnitName ?
-                .build();
+        final LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactory.setDataSource(dataSource);
+        entityManagerFactory.setPackagesToScan(new String[]{"info.setmy.microservice.models"});
+        entityManagerFactory.setPersistenceUnitName("default");
         entityManagerFactory.setJpaVendorAdapter(jpaAdapter);
         entityManagerFactory.setPersistenceXmlLocation("classpath*:META-INF/persistence.xml");
-        entityManagerFactory.setLoadTimeWeaver(loadTimeWeaver);
+        //entityManagerFactory.setLoadTimeWeaver(loadTimeWeaver);
         return entityManagerFactory;
     }
-
+     
     @Bean
     public HibernateJpaVendorAdapter jpaAdapter() {
-        /*<!--property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect"/-->
-        <!--property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect"/-->
-        <!--property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect"/-->*/
+        //<!--property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect"/-->
+        //<!--property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect"/-->
+        //<!--property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect"/-->
         return new HibernateJpaVendorAdapter();
     }
 
@@ -71,7 +60,16 @@ public class DatasourceConfiguration {
         return new InstrumentationLoadTimeWeaver();
     }
 
-    @Primary
+    @Bean
+    public PlatformTransactionManager transactionManager(@Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
+    }
+     */
+    @Bean
+    public HibernateJpaVendorAdapter jpaAdapter() {
+        return new HibernateJpaVendorAdapter();
+    }
+
     @Bean
     public PlatformTransactionManager transactionManager(@Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);

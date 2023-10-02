@@ -4,24 +4,23 @@ import info.setmy.microservice.dao.ExampleDao;
 import info.setmy.microservice.dao.ExampleRepository;
 import info.setmy.microservice.dao.JDBCExampleDao;
 import info.setmy.microservice.dao.JPAExampleDao;
-import info.setmy.microservice.dao.PersonRepository;
 import info.setmy.microservice.exceptions.MicroServiceException;
 import info.setmy.microservice.models.ExampleModel;
 import info.setmy.microservice.properties.ExampleProperties;
+import jakarta.inject.Named;
+import jakarta.transaction.Transactional;
 import java.util.concurrent.CompletableFuture;
 import static java.util.concurrent.CompletableFuture.allOf;
 import static java.util.concurrent.CompletableFuture.completedFuture;
 import java.util.concurrent.ExecutionException;
-import javax.inject.Named;
-import javax.transaction.Transactional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.cache.Cache;
+import org.infinispan.Cache;
 import org.springframework.scheduling.annotation.Async;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @Named("exampleService")
 public class ExampleService {
@@ -38,40 +37,21 @@ public class ExampleService {
 
     private final JPAExampleDao jpaExampleDao;
 
-    private final PersonRepository personRepository;
-
-    private final Cache cache;
-
     public ExampleService(final ExampleDao exampleDao,
             final ExampleProperties exampleProperties,
             final ExampleRepository exampleRepository,
             final JDBCExampleDao jdbcExampleDao,
-            final JPAExampleDao jpaExampleDao,
-            final PersonRepository personRepository,
-            final Cache cache) {
+            final JPAExampleDao jpaExampleDao) {
         this.exampleDao = exampleDao;
         this.exampleProperties = exampleProperties;
         this.exampleRepository = exampleRepository;
         this.jdbcExampleDao = jdbcExampleDao;
         this.jpaExampleDao = jpaExampleDao;
-        this.personRepository = personRepository;
-        this.cache = cache;
     }
 
     @Transactional
     public ExampleModel getExampleModel() {
-        String counterKey = "counter";
-        Cache.ValueWrapper wrapper = cache.get(counterKey);
-        Integer counter;
-        if (wrapper == null) {
-            counter = 1;
-            cache.put(counterKey, counter);
-        } else {
-            counter = (Integer) wrapper.get();
-            counter++;
-            cache.put(counterKey, counter);
-        }
-        log.info("Counter: {}", counter);
+        log.info("getExampleModel");
         //insertData();
         //final ExampleModel model = exampleDao.getExampleModel();
         final ExampleModel model = exampleRepository.findAll().get(0);

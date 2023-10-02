@@ -2,8 +2,8 @@ package info.setmy.microservice.components;
 
 import info.setmy.microservice.properties.ExampleProperties;
 import info.setmy.microservice.properties.RESTProperties;
+import jakarta.annotation.PostConstruct;
 import java.util.TimeZone;
-import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.InitializingBean;

@@ -1,11 +1,11 @@
 package info.setmy.microservice.dao;
 
 import info.setmy.microservice.models.ExampleModel;
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @Named("exampleDao")
 public class ExampleDao {

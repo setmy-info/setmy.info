@@ -1,4 +1,4 @@
-package info.setmy.microservice.config;
+package info.setmy.microservice.beans;
 
 import java.util.concurrent.Executor;
 import org.apache.logging.log4j.LogManager;
@@ -9,10 +9,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @Configuration
-public class AsyncConfig {
+public class AsyncBeans {
 
     public Logger log = LogManager.getLogger(this.getClass());
 

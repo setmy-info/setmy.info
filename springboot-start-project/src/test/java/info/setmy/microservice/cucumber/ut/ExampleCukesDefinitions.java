@@ -1,5 +1,6 @@
-package info.setmy.microservice;
+package info.setmy.microservice.cucumber.ut;
 
+import info.setmy.microservice.Book;
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
@@ -25,7 +26,7 @@ import org.apache.logging.log4j.Logger;
  * https://cucumber.io/docs/cucumber/api/
  * https://github.com/cucumber/cucumber-jvm/tree/master/java
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class ExampleCukesDefinitions {
 
