@@ -103,3 +103,6 @@
 [submodule "submodules/python-commons"]
 	path = submodules/python-commons
 	url = git@github.com:setmy-info/python-commons.git
+[submodule "submodules/python-tbi-parser"]
+	path = submodules/python-tbi-parser
+	url = git@github.com:setmy-info/python-tbi-parser.git
