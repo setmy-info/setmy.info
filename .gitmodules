@@ -106,6 +106,6 @@
 [submodule "submodules/python-tbi-parser"]
 	path = submodules/python-tbi-parser
 	url = git@github.com:setmy-info/python-tbi-parser.git
-[submodule "submodules/python-tbi-runner"]
-	path = submodules/python-tbi-runner
-	url = git@github.com:setmy-info/python-tbi-runner.git
+[submodule "submodules/python-runner"]
+	path = submodules/python-runner
+	url = git@github.com:setmy-info/python-runner.git
