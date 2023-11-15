@@ -1,0 +1,13 @@
+.idea
+*.abcl
+*.fasl
+*.dx32fsl
+*.dx64fsl
+*.lx32fsl
+*.lx64fsl
+*.x86f
+*~
+.#*
+*.exe
+*.bin
+system-index.txt
