@@ -1,5 +1,0 @@
-#!/bin/sh
-
-sbcl --load builder.lisp
-
-exit ${?}
