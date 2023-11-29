@@ -13,4 +13,4 @@ valgrind:
 clean:
 	rm -f ./main
 
-
+.PHONY: all run valgrind clean
