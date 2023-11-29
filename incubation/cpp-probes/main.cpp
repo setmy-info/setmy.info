@@ -4,6 +4,7 @@
 using namespace std;
 
 int global = 1;
+const int constant = 112233;
 
 class Example {
 public:
@@ -16,7 +17,7 @@ public:
 
     // Ctor
     Example(int a_value) : a(a_value) {
-        cout << "Example(a) : " << a << this << endl;
+        cout << "Example(a) : " << a << " " << this << endl;
     }
 
     // CCtor
@@ -116,17 +117,74 @@ void six() {
     cout << "======== End SIX" << endl;
 }
 
+class MyException : public std::exception {
+public:
+    // Ctor
+    MyException() {
+        cout << "MyException() : " << this << endl;
+    }
+
+    // CCtor
+    MyException(const MyException &other) {
+        cout << "MyException(const MyException& other) : " << this << " from " << &other << endl;
+    }
+
+    // Move Ctor
+    MyException(MyException &&other) noexcept {
+        cout << "MyException(MyException&& other) : " << this << " from " << &other << endl;
+    }
+
+    // Dtor
+    ~MyException() {
+        cout << "~MyException() : " << this << endl;
+    }
+
+    const char *what() const noexcept override {
+        return "My custom exception";
+    }
+};
+
+void function_that_throws_custom_exception() {
+    cout << "======== Begin function_that_throws_custom_exception" << endl;
+    int k;
+    Example example(321);
+    int l;
+    cout << "k=" << &k << " l=" << &l << " example=" << &example << endl;
+    throw MyException();
+    cout << "======== Begin function_that_throws_custom_exception" << endl;
+}
+
+void seven() {
+    cout << "======== Begin SEVEN" << endl;
+    int i;
+    try {
+        function_that_throws_custom_exception();
+    } catch (const MyException &e) {
+        cerr << "Caught MyException: " << e.what() << " e=" << &e << " i=" << &i << endl;
+    }
+    cout << "======== End SEVEN" << endl;
+}
+
+/**
+ * Conclusion
+ * 1. Return class instances by value (return by value) like in five() and caller should use const for object got
+ * from function to avoid class copy. Compiler optimizes and uses caller instance.
+ * 2. Or return pointer and put it immediately into smart pointer, to be released when exiting scope.
+ * 3. Exceptions are in heap. Throw Exception classes and catch by reference.
+ * */
 int main() {
     int i = 0;
     int *j = new int;
-    cout << &i << " : i with size: " << sizeof(i) << endl;
-    cout << j << " : j with size: " << sizeof(*j) << ", with pointer size: " << sizeof(j) << endl;
-    cout << &global << " : global with size: " << sizeof(*j) << endl;
+    cout << &i << " (in stack): i with size: " << sizeof(i) << endl;
+    cout << j << " (in heap): j with size: " << sizeof(*j) << ", with pointer size: " << sizeof(j) << endl;
+    cout << &global << " (in data block): global with size: " << sizeof(global) << endl;
+    cout << &constant << " (in data block): global constant with size: " << sizeof(constant) << endl;
     one();
     two();
     three();
     four();
     five();
     six();
+    seven();
     delete j;
 }
