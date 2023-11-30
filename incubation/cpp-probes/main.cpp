@@ -10,30 +10,30 @@ class Example {
 public:
     int a;
 
-    // Ctor
+    // ctor
     Example() : a(0) {
-        cout << "Example() : " << this << endl;
+        cout << "ctor Example() : " << this << endl;
     }
 
-    // Ctor
+    // ctor
     Example(int a_value) : a(a_value) {
-        cout << "Example(a) : " << a << " " << this << endl;
+        cout << "ctor Example(a) : " << a << " " << this << endl;
     }
 
-    // CCtor
+    // cctor
     Example(const Example &other) : a(other.a) {
-        cout << "Example(const Example& other) : " << this << " from " << &other << endl;
+        cout << "cctor Example(const Example& other) : " << this << " from " << &other << endl;
     }
 
-    // Move Ctor
+    // Move ctor (mctor)
     Example(Example &&other) noexcept: a(other.a) {
         other.a = 0;
-        cout << "Example(Example&& other) : " << this << " from " << &other << endl;
+        cout << "mctor Example(Example&& other) : " << this << " from " << &other << endl;
     }
 
-    // Dtor
+    // dtor
     ~Example() {
-        cout << "~Example() : " << this << endl;
+        cout << "dtor ~Example() : " << this << endl;
     }
 };
 
@@ -80,7 +80,7 @@ Example get_example_return_by_value() {
     int k;
     Example example(123);
     int l;
-    cout << "k=" << &k << " l=" << &l << " example=" << &example << endl;
+    cout << "l=" << &l << " example=" << &example << "k=" << &k << endl;
     cout << "======== End get_example_by_variable" << endl;
     return example;
 }
@@ -88,10 +88,37 @@ Example get_example_return_by_value() {
 void five() {
     cout << "======== Begin FIVE" << endl;
     int i;
-    Example example = get_example_return_by_value();
+    const Example example = get_example_return_by_value();
     int j;
-    cout << "i=" << &i << " j=" << &j << " example=" << &example << endl;
+    cout << "j=" << &j << " example=" << &example << " i=" << &i << endl;
     cout << "======== End FIVE" << endl;
+}
+
+Example *get_example_return_by_pointer() {
+    cout << "======== Begin get_example_return_by_pointer" << endl;
+    Example *example = new Example(123);
+    cout << "======== End get_example_return_by_pointer" << endl;
+    return example;
+}
+
+void five_two() {
+    cout << "======== Begin FIVE TWO" << endl;
+    std::unique_ptr<Example> example_smart_pointer(get_example_return_by_pointer());
+    cout << "======== End FIVE TWO" << endl;
+}
+
+Example &get_new_example_return_by_reference() {
+    cout << "======== Begin get_example_return_by_pointer" << endl;
+    Example *example = new Example(123);
+    cout << "======== End get_example_return_by_pointer" << endl;
+    return *example;
+}
+
+void five_three() {
+    cout << "======== Begin FIVE THREE" << endl;
+    // Most cases returning reference means that function in returning static or global value reference and that should not be released. Therefore, that is not good practice.
+    std::unique_ptr<Example> example_smart_pointer(&get_new_example_return_by_reference());
+    cout << "======== End FIVE THREE" << endl;
 }
 
 Example &get_example_return_by_reference() {
@@ -99,7 +126,7 @@ Example &get_example_return_by_reference() {
     int k;
     Example example(123);
     int l;
-    cout << "k=" << &k << " l=" << &l << " example=" << &example << endl;
+    cout << "l=" << &l << " example=" << &example << "k=" << &k << endl;
     cout << "======== End get_example_by_variable" << endl;
     // Returns address of example, but that is function local variable (from stack and disappears after return).
     // Can return global or function static variables (non thread safe).
@@ -111,32 +138,42 @@ void six() {
     int i;
     Example &example = get_example_return_by_reference();
     int j;
-    cout << "i=" << &i << " j=" << &j << " example="
+    cout << "j="
+         << &j
+         << " example="
          << &example // example address is 0, so getting segmentation fault on calling anything on that instance.
+         << " i="
+         << &i
          << endl;
     cout << "======== End SIX" << endl;
 }
 
 class MyException : public std::exception {
 public:
-    // Ctor
+    // ctor
     MyException() {
-        cout << "MyException() : " << this << endl;
+        cout << "ctor MyException() : " << this << endl;
     }
 
-    // CCtor
+    // cctor
     MyException(const MyException &other) {
-        cout << "MyException(const MyException& other) : " << this << " from " << &other << endl;
+        cout << "cctor MyException(const MyException& other) : " << this << " from " << &other << endl;
     }
 
-    // Move Ctor
+    // mctor
     MyException(MyException &&other) noexcept {
-        cout << "MyException(MyException&& other) : " << this << " from " << &other << endl;
+        cout << "mctor MyException(MyException&& other) : " << this << " from " << &other << endl;
     }
 
-    // Dtor
+    // dtor
     ~MyException() {
-        cout << "~MyException() : " << this << endl;
+        cout << "dtor ~MyException() : " << this << endl;
+    }
+
+    // Copy operator
+    MyException &operator=(const MyException &other) {
+        cout << "operator = : " << this << " from " << &other << endl;
+        return *this;
     }
 
     const char *what() const noexcept override {
@@ -149,7 +186,7 @@ void function_that_throws_custom_exception() {
     int k;
     Example example(321);
     int l;
-    cout << "k=" << &k << " l=" << &l << " example=" << &example << endl;
+    cout << "l=" << &l << " example=" << &example << " k=" << &k << endl;
     throw MyException();
     cout << "======== Begin function_that_throws_custom_exception" << endl;
 }
@@ -163,6 +200,47 @@ void seven() {
         cerr << "Caught MyException: " << e.what() << " e=" << &e << " i=" << &i << endl;
     }
     cout << "======== End SEVEN" << endl;
+}
+
+struct A {
+    char a;
+};
+
+struct B {
+    char a;
+    char b;
+};
+
+struct C {
+    char a;
+    char b;
+    char c;
+};
+
+struct D {
+    char a;
+    char b;
+    char c;
+    char d;
+};
+
+struct E {
+    char a;
+    short b;
+    int c;
+};
+
+void eight() {
+    cout << "Size of char=" << sizeof(char) << endl;
+    cout << "Size of short=" << sizeof(short) << endl;
+    cout << "Size of int=" << sizeof(int) << endl;
+    cout << "Size of long=" << sizeof(long) << endl;
+    cout << "Size of long long=" << sizeof(long long) << endl;
+    cout << "Size of A=" << sizeof(A) << endl;
+    cout << "Size of B=" << sizeof(B) << endl;
+    cout << "Size of C=" << sizeof(C) << endl;
+    cout << "Size of D=" << sizeof(D) << endl;
+    cout << "Size of E=" << sizeof(E) << endl;
 }
 
 /**
@@ -184,7 +262,10 @@ int main() {
     three();
     four();
     five();
+    five_two();
+    five_three();
     six();
     seven();
+    eight();
     delete j;
 }
