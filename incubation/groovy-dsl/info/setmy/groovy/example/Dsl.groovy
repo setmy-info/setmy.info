@@ -1,5 +1,8 @@
 package info.setmy.groovy.example
 
+import groovy.transform.NamedParam
+import groovy.transform.NamedParams
+
 import java.util.concurrent.ConcurrentHashMap
 
 import static groovy.lang.Closure.DELEGATE_FIRST
@@ -83,6 +86,24 @@ class StageDsl {
 class Steps {
     void sh(final String txt) {
         println "Shell: ${txt}"
+        sh(script: txt, returnStdout: false)
+    }
+
+    Object sh(@NamedParams([
+        @NamedParam(value = "script", type = String, required = true),
+        @NamedParam(value = "returnStdout", type = Boolean)
+    ]) final Map params) {
+        final Process process = params.script.toString().execute()
+        process.waitFor()
+        println "-> ${params.script}"
+        if (process.exitValue() == 0) {
+            if (params.returnStdout) {
+                return process.text
+            }
+            println process.text
+        } else {
+            println process.err.text
+        }
     }
 
     void echo(final String txt) {

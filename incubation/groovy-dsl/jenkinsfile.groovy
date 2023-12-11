@@ -17,6 +17,7 @@ pipeline {
         stage("Stage I") {
             steps {
                 sh "groovy --version"
+                sh(script: "date")
                 echo "Hello"
             }
         }
