@@ -1,5 +1,5 @@
 #!/bin/sh
 
-groovy jenkinsfile.groovy
+groovy Jenkinsfile
 
 exit 0
