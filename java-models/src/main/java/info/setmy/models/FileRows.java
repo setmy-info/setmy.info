@@ -82,24 +82,29 @@ public class FileRows {
 
     private Optional<Scanner> newScanner() {
         final LambdaReturn<Scanner> lambdaReturn = new LambdaReturn<>();
-        this.urlOrInputStream.ifPresent(urlOrInputStream -> lambdaReturn.setValue(
-                of(new Scanner(getStream(urlOrInputStream)))
+        this.urlOrInputStream.ifPresent(stream -> lambdaReturn.setValue(
+                of(new Scanner(getStream(stream)))
             )
         );
         return lambdaReturn.getValue();
     }
 
     private InputStream getStream(final Object urlOrInputStream) {
-        if (urlOrInputStream instanceof URL url) {
-            try {
-                return url.openStream();
-            } catch (FileNotFoundException e) {
-                throw new NotFoundException(e);
-            } catch (IOException e) {
-                throw new UncheckedException(e);
+        switch (urlOrInputStream) {
+            case URL url -> {
+                try {
+                    return url.openStream();
+                } catch (FileNotFoundException e) {
+                    throw new NotFoundException(e);
+                } catch (IOException e) {
+                    throw new UncheckedException(e);
+                }
             }
-        } else if (urlOrInputStream instanceof InputStream inputStream) {
-            return inputStream;
+            case InputStream inputStream -> {
+                return inputStream;
+            }
+            default -> {
+            }
         }
         return null;
     }
