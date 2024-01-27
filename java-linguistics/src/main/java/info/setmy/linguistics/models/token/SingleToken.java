@@ -1,6 +1,6 @@
 package info.setmy.linguistics.models.token;
 
-public class SingleToken extends Token {
+public abstract class SingleToken extends Token {
 
     public SingleToken(char value) {
         super(value);

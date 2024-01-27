@@ -14,7 +14,7 @@ public final class TokenConstants {
     apostrophe   ’ ' „ “
     curved quotation marks “”
      */
-    public static final Token[] LINE_ENDING_TOKENS = {new SingleToken('\n')};
+    public static final Token[] LINE_ENDING_TOKENS = {new LineEndingSingleToken('\n')};
     public static final Token[] WHITE_CHAR_TOKENS = {new WhiteCharSingleToken(' '), new WhiteCharSingleToken('\r'), new WhiteCharSingleToken('\t')};
     public static final Token[] SENTENCE_ENDING_TOKENS = {new SentenceEndingSingleToken('.'), new SentenceEndingSingleToken('!'), new SentenceEndingSingleToken('?')};
     public static final Token[] CLAUSE_SEPARATOR_TOKENS = {new ClauseSeparatorSingleToken(','), new ClauseSeparatorSingleToken('-'), new ClauseSeparatorSingleToken(';'), new ClauseSeparatorSingleToken(':')};

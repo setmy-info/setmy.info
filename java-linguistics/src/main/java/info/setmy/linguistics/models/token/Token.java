@@ -19,13 +19,6 @@ public abstract class Token {
         return value;
     }
 
-    /*public boolean is(final char chr) {
-        return is("" + chr);
-    }
-
-    public boolean is(final String str) {
-        return equals((Object) str);
-    }*/
     @Override
     public boolean equals(final Object obj) {
         if (obj == null) {
@@ -39,6 +32,10 @@ public abstract class Token {
         }
         if (obj.getClass() == String.class) {
             final String str = (String) obj;
+            return Objects.equals(value, str);
+        }
+        if (obj.getClass() == Character.class) {
+            final String str = "" + (Character) obj;
             return Objects.equals(value, str);
         }
         return false;
