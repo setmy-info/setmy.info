@@ -10,31 +10,35 @@ public class ParsingInfo {
     private int position;
     private int lineNumber = 1;
 
-    public void incrementLineNumber() {
-        lineNumber++;
-    }
-
     public char getCharacter() {
         return character;
     }
 
-    public void setCharacter(char character) {
+    public ParsingInfo setCharacter(char character) {
         this.character = character;
+        return this;
     }
 
     public int getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public ParsingInfo setPosition(int position) {
         this.position = position;
+        return this;
     }
 
     public int getLineNumber() {
         return lineNumber;
     }
 
-    public void setLineNumber(int lineNumber) {
+    public ParsingInfo setLineNumber(int lineNumber) {
         this.lineNumber = lineNumber;
+        return this;
+    }
+
+    public ParsingInfo incrementLineNumber() {
+        lineNumber++;
+        return this;
     }
 }
