@@ -115,3 +115,6 @@
 [submodule "submodules/cl-commons"]
 	path = submodules/cl-commons
 	url = git@github.com:setmy-info/cl-commons.git
+[submodule "submodules/firefox-scripts-extension"]
+	path = submodules/firefox-scripts-extension
+	url = git@github.com:setmy-info/firefox-scripts-extension.git
