@@ -4,11 +4,11 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
     <properties>
-        <title>Java linquistics library</title>
+        <title>Java Selenium based crawler.</title>
         <author email="imre.tabur@eesti.ee">Imre Tabur</author>
     </properties>
     <body>
-        <release version="1.0.7" date="2018-08-09" description="First release">
+        <release version="1.0.7" date="2024-03-01" description="First release">
             <action dev="imreit" type="add" due-to="Imre Tabur" due-to-email="imre.tabur@eesti.ee">Initial release.</action>
         </release>
     </body>
