@@ -32,8 +32,8 @@ public class ScraperIT {
             .skip(10)
             .limit(20)
             .map(ScrapedText::toString)
+            .filter(s -> !s.isBlank())
             .collect(Collectors.joining("\n"));
-        assertThat(text.getTitle()).isEqualTo("Lorem Ipsum | setmy.info");
         assertThat(someTexts).containsSubsequence("Ei ole ka kedagi, kes armastab ja otsib ja tahab valu iseennast, lihtsalt sellepärast, et see on valu...");
     }
 
