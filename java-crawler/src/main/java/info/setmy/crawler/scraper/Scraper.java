@@ -24,7 +24,7 @@ public class Scraper {
         this.scraperConfig = scraperConfig;
     }
 
-    public Text parse(final String urlString) {
+    public ScrapedContent parse(final String urlString) {
         final DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("firefox");
         /*capabilities.setCapability("se:headers", new HashMap<String, String>() {{
@@ -46,16 +46,16 @@ public class Scraper {
         //final WebDriverWait wait = new WebDriverWait(driver, duration);
         //wait.until(ExpectedConditions.visibilityOf(smiTextArea));
         final String smiTextAreaText = smiTextArea.getAttribute("value");
-        System.out.println("smiTextAreaText: " + smiTextAreaText);
-        final Text text = new Text();
+        final ScrapedContent scrapedContent = new ScrapedContent();
+        scrapedContent.setUrl(urlString);
         try {
             final ObjectMapper objectMapper = new ObjectMapper();
             final ScrapedText[] result = objectMapper.readValue(smiTextAreaText, ScrapedText[].class);
-            text.setScrapedText(result);
+            scrapedContent.setScrapedText(result);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
         driver.quit();
-        return text;
+        return scrapedContent;
     }
 }

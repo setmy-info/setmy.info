@@ -27,14 +27,15 @@ public class ScraperIT {
     @Test
     @Disabled
     public void loremIpsum() {
-        final Text text = scraper.parse("https://setmy-info.github.io/src/site/markdown/loremipsum.html");
-        final String someTexts = text.getScrapedText().stream()
+        final ScrapedContent scrapedContent = scraper.parse("https://setmy-info.github.io/src/site/markdown/loremipsum.html");
+        final String someTexts = scrapedContent.getScrapedText().stream()
             .skip(10)
             .limit(20)
             .map(ScrapedText::toString)
             .filter(s -> !s.isBlank())
             .collect(Collectors.joining("\n"));
         assertThat(someTexts).containsSubsequence("Ei ole ka kedagi, kes armastab ja otsib ja tahab valu iseennast, lihtsalt sellepärast, et see on valu...");
+        assertThat(scrapedContent.getUrl()).isEqualTo("https://setmy-info.github.io/src/site/markdown/loremipsum.html");
     }
 
     private static String getFileName(final String name) {

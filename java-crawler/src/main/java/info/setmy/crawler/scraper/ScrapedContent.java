@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Text {
+public class ScrapedContent {
 
+    private String url;
     private List<ScrapedText> scrapedText = new ArrayList<>();
 
     public void setScrapedText(final ScrapedText[] result) {
@@ -14,5 +15,13 @@ public class Text {
 
     public List<ScrapedText> getScrapedText() {
         return scrapedText;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
