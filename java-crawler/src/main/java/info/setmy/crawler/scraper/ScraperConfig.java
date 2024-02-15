@@ -18,7 +18,7 @@ public class ScraperConfig {
 
     private final Optional<Integer> port;
 
-    private final Map<String, String> scripts = new HashMap<>();
+    private final Map<String, List<String>> scripts = new HashMap<>();
 
     public ScraperConfig(final String hostName, final int port) {
         this.hostName = of(hostName);
@@ -43,11 +43,11 @@ public class ScraperConfig {
         try {
             final URL url = new URL(urlString);
             final String host = url.getHost();
-            for (Map.Entry<String, String> entry : scripts.entrySet()) {
+            for (Map.Entry<String, List<String>> entry : scripts.entrySet()) {
                 final String hostEnding = entry.getKey();
-                final String scriptUrl = entry.getValue();
+                final List<String> scriptUrls = entry.getValue();
                 if (host.endsWith(hostEnding)) {
-                    result.add(scriptUrl);
+                    result.addAll(scriptUrls);
                 }
             }
         } catch (MalformedURLException e) {
@@ -57,6 +57,11 @@ public class ScraperConfig {
     }
 
     public void addScript(final String hostEnding, final String scriptUrl) {
-        scripts.put(hostEnding, scriptUrl);
+        List<String> list = scripts.get(hostEnding);
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        list.add(scriptUrl);
+        scripts.put(hostEnding, list);
     }
 }

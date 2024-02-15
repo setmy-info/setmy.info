@@ -17,6 +17,7 @@ public class ScraperIT {
     @BeforeEach
     public void before() {
         scraperConfig = new ScraperConfig("localhost", 4444);
+        scraperConfig.addScript("setmy-info.github.io", getFileName("smiControls.js"));
         scraperConfig.addScript("setmy-info.github.io", getFileName("ScraperIT.js"));
         scraperConfig.addScript("setmy-info.github.io", getFileName("smiTextSearchService.js"));
         scraper = new Scraper(scraperConfig);

@@ -26,13 +26,13 @@ public class Scraper {
         final Duration duration = ofSeconds(10);
         selenium.getWebDriver().manage().timeouts().implicitlyWait(duration);
 
+        // TODO : read files and concatenate into big one.
         scraperConfig.findScripts(scrapedContent.getUrl()).forEach(script -> selenium.executeScript(script));
 
         selenium.findElementByIdValue("smiTextArea")
             .ifPresent(smiTextAreaText -> scrapedContent.setScrapedText(
                 parseScrapedTexts(smiTextAreaText)
             ));
-
 
         selenium.quit();
         return scrapedContent;
