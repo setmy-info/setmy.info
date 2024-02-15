@@ -1,6 +1,10 @@
 package info.setmy.crawler.scraper;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static java.lang.Long.parseLong;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class ScrapedText {
 
@@ -43,6 +47,12 @@ public class ScrapedText {
     @JsonProperty("backgroundColor")
     private String backgroundColor;
 
+    @JsonProperty("location")
+    private String location;
+
+    @JsonIgnore
+    private Location[] locationArray;
+
     public String getNodeName() {
         return nodeName;
     }
@@ -53,6 +63,10 @@ public class ScrapedText {
 
     public String getText() {
         return text;
+    }
+
+    public boolean haveTextOrUrl() {
+        return isNotBlank(text) || isNotBlank(url);
     }
 
     public void setText(String text) {
@@ -149,5 +163,48 @@ public class ScrapedText {
 
     public String toString() {
         return text;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(final String location) {
+        this.location = location;
+        setLocationArray(location);
+    }
+
+    public Location[] getLocationArray() {
+        return locationArray;
+    }
+
+    public void setLocationArray(final String locationString) {
+        if (isNotBlank(locationString)) {
+            final String[] parts = locationString.split(";");
+            setLocationArray(parse(parts));
+        }
+    }
+
+    private Location[] parse(final String[] parts) {
+        if (parts.length > 0) {
+            final Location[] result = new Location[parts.length];
+            for (int i = 0; i < parts.length; i++) {
+                result[i] = parse(parts[i]);
+            }
+            return result;
+        }
+        return new Location[0];
+    }
+
+    private Location parse(final String part) {
+        final String[] split = part.split(":");
+        if (split.length >= 2) {
+            return new Location(parseLong(split[0]), split[1]);
+        }
+        return new Location(-1, "");
+    }
+
+    public void setLocationArray(final Location[] locationArray) {
+        this.locationArray = locationArray;
     }
 }

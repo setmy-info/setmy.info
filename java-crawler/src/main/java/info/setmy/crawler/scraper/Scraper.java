@@ -2,19 +2,12 @@ package info.setmy.crawler.scraper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.Duration;
 
 import static java.time.Duration.ofSeconds;
-import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.openqa.selenium.By.id;
 
 public class Scraper {
 
@@ -25,37 +18,52 @@ public class Scraper {
     }
 
     public ScrapedContent parse(final String urlString) {
-        final DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName("firefox");
-        /*capabilities.setCapability("se:headers", new HashMap<String, String>() {{
-            put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0");
-        }});*/
-        final WebDriver driver = new RemoteWebDriver(scraperConfig.getUrl(), capabilities);
-        driver.get(urlString);
+        final ScrapedContent scrapedContent = new ScrapedContent(urlString);
+
+        final Selenium selenium = newSelenium();
+        selenium.get(scrapedContent.getUrl());
+
         final Duration duration = ofSeconds(10);
-        driver.manage().timeouts().implicitlyWait(duration);
-        scraperConfig.findScripts(urlString).forEach(script -> {
-            try {
-                final String javaScript = readFileToString(new File(script));
-                ((JavascriptExecutor) driver).executeScript(javaScript);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        final WebElement smiTextArea = driver.findElement(id("smiTextArea"));
-        //final WebDriverWait wait = new WebDriverWait(driver, duration);
-        //wait.until(ExpectedConditions.visibilityOf(smiTextArea));
-        final String smiTextAreaText = smiTextArea.getAttribute("value");
-        final ScrapedContent scrapedContent = new ScrapedContent();
-        scrapedContent.setUrl(urlString);
+        selenium.getWebDriver().manage().timeouts().implicitlyWait(duration);
+
+        scraperConfig.findScripts(scrapedContent.getUrl()).forEach(script -> selenium.executeScript(script));
+
+        selenium.findElementByIdValue("smiTextArea")
+            .ifPresent(smiTextAreaText -> scrapedContent.setScrapedText(
+                parseScrapedTexts(smiTextAreaText)
+            ));
+
+
+        selenium.quit();
+        return scrapedContent;
+    }
+
+    private ScrapedText[] parseScrapedTexts(final String jsonString) {
         try {
             final ObjectMapper objectMapper = new ObjectMapper();
-            final ScrapedText[] result = objectMapper.readValue(smiTextAreaText, ScrapedText[].class);
-            scrapedContent.setScrapedText(result);
+            return objectMapper.readValue(jsonString, ScrapedText[].class);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        driver.quit();
-        return scrapedContent;
+    }
+
+    private Selenium newSelenium() {
+        return new Selenium(
+            new RemoteWebDriver(
+                scraperConfig.getUrl(),
+                newDesiredCapabilities()
+            )
+        );
+    }
+
+    private DesiredCapabilities newDesiredCapabilities() {
+        final DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+        desiredCapabilities.setBrowserName("firefox");
+        /*
+        desiredCapabilities.setCapability("se:headers", new HashMap<String, String>() {{
+            put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0");
+        }});
+        */
+        return desiredCapabilities;
     }
 }

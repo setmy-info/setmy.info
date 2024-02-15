@@ -11,8 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ScraperIT {
 
-    private final static String TEST_NAME = ScraperIT.class.getSimpleName();
-
     Scraper scraper;
     ScraperConfig scraperConfig;
 
@@ -29,8 +27,6 @@ public class ScraperIT {
     public void loremIpsum() {
         final ScrapedContent scrapedContent = scraper.parse("https://setmy-info.github.io/src/site/markdown/loremipsum.html");
         final String someTexts = scrapedContent.getScrapedText().stream()
-            .skip(10)
-            .limit(20)
             .map(ScrapedText::toString)
             .filter(s -> !s.isBlank())
             .collect(Collectors.joining("\n"));
@@ -38,7 +34,7 @@ public class ScraperIT {
         assertThat(scrapedContent.getUrl()).isEqualTo("https://setmy-info.github.io/src/site/markdown/loremipsum.html");
     }
 
-    private static String getFileName(final String name) {
-        return "./src/test/resources/" + TEST_NAME + "/" + name;
+    private String getFileName(final String name) {
+        return "./src/test/resources/" + getClass().getSimpleName() + "/" + name;
     }
 }
