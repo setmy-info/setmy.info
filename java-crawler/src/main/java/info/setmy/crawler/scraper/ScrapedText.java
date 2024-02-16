@@ -50,6 +50,30 @@ public class ScrapedText {
     @JsonProperty("location")
     private String location;
 
+    @JsonProperty("paddingLeft")
+    private int paddingLeft;
+
+    @JsonProperty("paddingTop")
+    private int paddingTop;
+
+    @JsonProperty("paddingRight")
+    private int paddingRight;
+
+    @JsonProperty("paddingBottom")
+    private int paddingBottom;
+
+    @JsonProperty("marginLeft")
+    private int marginLeft;
+
+    @JsonProperty("marginTop")
+    private int marginTop;
+
+    @JsonProperty("marginRight")
+    private int marginRight;
+
+    @JsonProperty("marginBottom")
+    private int marginBottom;
+
     @JsonIgnore
     private Location[] locationArray;
 
@@ -85,7 +109,7 @@ public class ScrapedText {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(final int y) {
         this.y = y;
     }
 
@@ -93,7 +117,7 @@ public class ScrapedText {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(final int x) {
         this.x = x;
     }
 
@@ -101,7 +125,7 @@ public class ScrapedText {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(final int width) {
         this.width = width;
     }
 
@@ -109,7 +133,7 @@ public class ScrapedText {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(final int height) {
         this.height = height;
     }
 
@@ -117,7 +141,7 @@ public class ScrapedText {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(final String color) {
         this.color = color;
     }
 
@@ -125,7 +149,7 @@ public class ScrapedText {
         return fontSize;
     }
 
-    public void setFontSize(String fontSize) {
+    public void setFontSize(final String fontSize) {
         this.fontSize = fontSize;
     }
 
@@ -133,7 +157,7 @@ public class ScrapedText {
         return fontStyle;
     }
 
-    public void setFontStyle(String fontStyle) {
+    public void setFontStyle(final String fontStyle) {
         this.fontStyle = fontStyle;
     }
 
@@ -141,7 +165,7 @@ public class ScrapedText {
         return bold;
     }
 
-    public void setBold(boolean bold) {
+    public void setBold(final boolean bold) {
         this.bold = bold;
     }
 
@@ -149,7 +173,7 @@ public class ScrapedText {
         return italic;
     }
 
-    public void setItalic(boolean italic) {
+    public void setItalic(final boolean italic) {
         this.italic = italic;
     }
 
@@ -157,8 +181,83 @@ public class ScrapedText {
         return backgroundColor;
     }
 
-    public void setBackgroundColor(String backgroundColor) {
+    public void setBackgroundColor(final String backgroundColor) {
         this.backgroundColor = backgroundColor;
+    }
+
+    public int getPaddingLeft() {
+        return paddingLeft;
+    }
+
+    public void setPaddingLeft(final int paddingLeft) {
+        this.paddingLeft = paddingLeft;
+    }
+
+    public int getPaddingTop() {
+        return paddingTop;
+    }
+
+    public void setPaddingTop(final int paddingTop) {
+        this.paddingTop = paddingTop;
+    }
+
+    public int getPaddingRight() {
+        return paddingRight;
+    }
+
+    public void setPaddingRight(final int paddingRight) {
+        this.paddingRight = paddingRight;
+    }
+
+    public int getPaddingBottom() {
+        return paddingBottom;
+    }
+
+    public void setPaddingBottom(final int paddingBottom) {
+        this.paddingBottom = paddingBottom;
+    }
+
+    public int getMarginLeft() {
+        return marginLeft;
+    }
+
+    public void setMarginLeft(final int marginLeft) {
+        this.marginLeft = marginLeft;
+    }
+
+    public int getMarginTop() {
+        return marginTop;
+    }
+
+    public void setMarginTop(final int marginTop) {
+        this.marginTop = marginTop;
+    }
+
+    public int getMarginRight() {
+        return marginRight;
+    }
+
+    public void setMarginRight(final int marginRight) {
+        this.marginRight = marginRight;
+    }
+
+    public int getMarginBottom() {
+        return marginBottom;
+    }
+
+    public void setMarginBottom(final int marginBottom) {
+        this.marginBottom = marginBottom;
+    }
+
+    public void setLocationArray(final String locationString) {
+        if (isNotBlank(locationString)) {
+            final String[] parts = locationString.split(";");
+            setLocationArray(parse(parts));
+        }
+    }
+
+    public void setLocationArray(final Location[] locationArray) {
+        this.locationArray = locationArray;
     }
 
     public String toString() {
@@ -178,13 +277,6 @@ public class ScrapedText {
         return locationArray;
     }
 
-    public void setLocationArray(final String locationString) {
-        if (isNotBlank(locationString)) {
-            final String[] parts = locationString.split(";");
-            setLocationArray(parse(parts));
-        }
-    }
-
     private Location[] parse(final String[] parts) {
         if (parts.length > 0) {
             final Location[] result = new Location[parts.length];
@@ -202,9 +294,5 @@ public class ScrapedText {
             return new Location(parseLong(split[0]), split[1]);
         }
         return new Location(-1, "");
-    }
-
-    public void setLocationArray(final Location[] locationArray) {
-        this.locationArray = locationArray;
     }
 }

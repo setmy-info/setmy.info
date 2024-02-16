@@ -3,34 +3,38 @@ package info.setmy.crawler.scraper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ScrapedContent {
 
     private final String url;
-    private List<ScrapedText> scrapedText = new ArrayList<>();
+    private List<ScrapedText> scrapedTexts = new ArrayList<>();
     private final MetaData metaData = new MetaData();
 
     public ScrapedContent(final String url) {
         this.url = url;
     }
 
-    public void setScrapedText(final ScrapedText[] result) {
-        scrapedText = Arrays.stream(result)
+    public void setScrapedTexts(final ScrapedText[] result) {
+        final List<ScrapedText> list = Arrays.stream(result)
             .filter(scrapedText1 -> scrapedText1.haveTextOrUrl())
             .toList();
+        scrapedTexts = list.stream()
+            .limit(list.size() - 10) // 10 control buttons with texts
+            .collect(Collectors.toUnmodifiableList());
         calcMetaDataStatistics();
     }
 
     private void calcMetaDataStatistics() {
-        scrapedText.forEach(scraped -> {
+        scrapedTexts.forEach(scraped -> {
             metaData.getStatisticsData().addFontSize(scraped.getFontSize());
             metaData.getStatisticsData().addColor(scraped.getColor());
             metaData.getStatisticsData().addBackgroundColor(scraped.getBackgroundColor());
         });
     }
 
-    public List<ScrapedText> getScrapedText() {
-        return scrapedText;
+    public List<ScrapedText> getScrapedTexts() {
+        return scrapedTexts;
     }
 
     public String getUrl() {

@@ -10,4 +10,12 @@ public class Location {
         this.index = index;
         this.name = name;
     }
+
+    public long getIndex() {
+        return index;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

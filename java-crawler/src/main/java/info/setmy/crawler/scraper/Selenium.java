@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
@@ -41,15 +42,30 @@ public class Selenium {
         webDriver.quit();
     }
 
-    public void executeScript(final String fileName) {
-        getOptionalWebDriver().ifPresent(driver -> {
-            try {
-                final String javaScript = readFileToString(new File(fileName));
-                ((JavascriptExecutor) driver).executeScript(javaScript);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+    public void executeScripts(final List<String> scriptFileNames) {
+        final String fullScript = scriptFileNames.stream()
+            .map(scriptFileName -> {
+                try {
+                    final String javaScript = readFileToString(new File(scriptFileName));
+                    return javaScript;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            })
+            .reduce("", (final String collectedScripts, final String scriptContent) -> new StringBuilder()
+                .append(collectedScripts)
+                .append("\n")
+                .append(scriptContent)
+                .toString());
+        executeScript(fullScript);
+    }
+
+    private void executeScript(final String javaScript) {
+        getJavascriptExecutor().ifPresent(javascriptExecutor -> javascriptExecutor.executeScript(javaScript));
+    }
+
+    private Optional<JavascriptExecutor> getJavascriptExecutor() {
+        return getOptionalWebDriver().map(driver -> ((JavascriptExecutor) driver));
     }
 
     public Optional<String> findElementByIdValue(final String id) {

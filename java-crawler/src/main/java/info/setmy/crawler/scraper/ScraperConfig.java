@@ -10,7 +10,9 @@ import java.util.Optional;
 
 import static info.setmy.crawler.scraper.Constants.DEFAULT_HUB_HOST_NAME;
 import static info.setmy.crawler.scraper.Constants.DEFAULT_HUB_PORT;
+import static java.util.Collections.unmodifiableList;
 import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 
 public class ScraperConfig {
 
@@ -53,15 +55,24 @@ public class ScraperConfig {
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
-        return result;
+        return unmodifiableList(result);
     }
 
     public void addScript(final String hostEnding, final String scriptUrl) {
-        List<String> list = scripts.get(hostEnding);
-        if (list == null) {
-            list = new ArrayList<>();
+        getNullAsNew(hostEnding).get().add(scriptUrl);
+    }
+
+    public Optional<List<String>> getNullAsNew(final String hostEnding) {
+        final Optional<List<String>> mapEntryOptionalList = get(hostEnding);
+        if (mapEntryOptionalList.isPresent()) {
+            return mapEntryOptionalList;
         }
-        list.add(scriptUrl);
+        final List<String> list = new ArrayList<>();
         scripts.put(hostEnding, list);
+        return of(list);
+    }
+
+    public Optional<List<String>> get(final String hostEnding) {
+        return ofNullable(scripts.get(hostEnding));
     }
 }
