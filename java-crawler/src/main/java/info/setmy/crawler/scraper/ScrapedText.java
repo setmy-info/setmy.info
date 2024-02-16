@@ -3,7 +3,7 @@ package info.setmy.crawler.scraper;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static java.lang.Long.parseLong;
+import static java.lang.Integer.parseInt;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class ScrapedText {
@@ -291,7 +291,7 @@ public class ScrapedText {
     private Location parse(final String part) {
         final String[] split = part.split(":");
         if (split.length >= 2) {
-            return new Location(parseLong(split[0]), split[1]);
+            return new Location(parseInt(split[0]), split[1]);
         }
         return new Location(-1, "");
     }

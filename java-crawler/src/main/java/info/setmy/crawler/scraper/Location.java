@@ -2,16 +2,16 @@ package info.setmy.crawler.scraper;
 
 public class Location {
 
-    private final long index;
+    private final int index;
 
     private final String name;
 
-    public Location(long index, String name) {
+    public Location(final int index, final String name) {
         this.index = index;
         this.name = name;
     }
 
-    public long getIndex() {
+    public int getIndex() {
         return index;
     }
 
