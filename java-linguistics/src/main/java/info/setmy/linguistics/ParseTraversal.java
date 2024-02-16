@@ -1,30 +1,35 @@
 package info.setmy.linguistics;
 
+import info.setmy.linguistics.models.token.ParsingEventType;
 import info.setmy.linguistics.models.token.Token;
-import java.util.ArrayList;
-import java.util.List;
+
+import static info.setmy.linguistics.models.token.TokenUtils.toToken;
 
 public class ParseTraversal {
 
-    private StringBuilder wordTokenBuilder;
+    private ParsingEventType parsingEventType;
 
-    private final List<Token> parsedTokens = new ArrayList<>();
+    private Token token;
 
-    public StringBuilder getTokenBuilder() {
-        return wordTokenBuilder;
+    public ParsingEventType getParsingEventType() {
+        return parsingEventType;
     }
 
-    public ParseTraversal setTokenBuilder(final StringBuilder wordBuilder) {
-        this.wordTokenBuilder = wordBuilder;
+    public ParseTraversal setParsingEventType(final ParsingEventType parsingEventType) {
+        this.parsingEventType = parsingEventType;
         return this;
     }
 
-    public ParseTraversal setTokenBuilder() {
-        this.wordTokenBuilder = new StringBuilder();
-        return this;
+    public Token getToken() {
+        return token;
     }
 
-    public void append(final String value) {
-        wordTokenBuilder.append(value);
+    public ParseTraversal setToken(final char character) {
+        return setToken(toToken(character));
+    }
+
+    public ParseTraversal setToken(final Token token) {
+        this.token = token;
+        return this;
     }
 }

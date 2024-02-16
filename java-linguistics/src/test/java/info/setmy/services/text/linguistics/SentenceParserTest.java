@@ -1,15 +1,14 @@
 package info.setmy.services.text.linguistics;
 
-import info.setmy.models.FileRows;
 import info.setmy.services.text.linguistics.model.TextItem;
-import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 import static info.setmy.models.FileRows.newFileRows;
 
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 public class SentenceParserTest {

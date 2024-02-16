@@ -1,6 +1,7 @@
 package info.setmy.linguistics.models.token;
 
 import java.util.Objects;
+
 import static java.util.Objects.hash;
 
 public abstract class Token {

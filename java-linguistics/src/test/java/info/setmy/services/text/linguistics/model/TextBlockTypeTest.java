@@ -1,9 +1,10 @@
 package info.setmy.services.text.linguistics.model;
 
-import static info.setmy.services.text.linguistics.model.TextBlockType.UNKNOWN;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
+
+import static info.setmy.services.text.linguistics.model.TextBlockType.UNKNOWN;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TextBlockTypeTest {
 

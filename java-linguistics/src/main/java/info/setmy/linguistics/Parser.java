@@ -1,22 +1,37 @@
 package info.setmy.linguistics;
 
-import info.setmy.linguistics.models.token.TextCharacterToken;
-import info.setmy.linguistics.models.token.Token;
-import static info.setmy.linguistics.models.token.TokenUtils.toToken;
+import info.setmy.linguistics.models.token.ParsingEventType;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static info.setmy.linguistics.models.token.ParsingEventType.CHARACTER_HANDLING;
+import static info.setmy.linguistics.models.token.ParsingEventType.PARSING_END;
+import static info.setmy.linguistics.models.token.ParsingEventType.PARSING_START;
 
 public class Parser {
 
+    private final List<ParsingHandler> handlers = new ArrayList<>();
+
     public void parse(final String content) {
         final char[] chars = content.toCharArray();
-        var parseTraversal = new ParseTraversal();
+        final ParseTraversal traversal = new ParseTraversal();
+        emitEvent(traversal.setParsingEventType(PARSING_START));
         for (char character : chars) {
-            parse(toToken(character), parseTraversal);
+            detectEvents(traversal.setToken(character))
+                .forEach(parsingEventType -> emitEvent(traversal.setParsingEventType(parsingEventType)));
+            emitEvent(traversal.setParsingEventType(CHARACTER_HANDLING));
         }
+        emitEvent(traversal.setParsingEventType(PARSING_END));
     }
 
-    private void parse(final Token token, final ParseTraversal parseTraversal) {
-        if (token instanceof TextCharacterToken) {
-            parseTraversal.append(token.getValue());
-        }
+    private void emitEvent(final ParseTraversal traversal) {
+        handlers.forEach(parsingHandler -> parsingHandler.handle(traversal));
+    }
+
+    private List<ParsingEventType> detectEvents(final ParseTraversal parseTraversal) {
+        final List<ParsingEventType> result = new ArrayList<>();
+
+        return result;
     }
 }

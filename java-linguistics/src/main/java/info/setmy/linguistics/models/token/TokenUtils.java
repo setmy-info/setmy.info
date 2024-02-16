@@ -1,7 +1,8 @@
 package info.setmy.linguistics.models.token;
 
-import static info.setmy.linguistics.models.token.TokenConstants.ALL_TOKENS;
 import java.util.regex.Pattern;
+
+import static info.setmy.linguistics.models.token.TokenConstants.ALL_TOKENS;
 
 public class TokenUtils {
 
@@ -9,9 +10,9 @@ public class TokenUtils {
 
     public static Token toToken(final char character) {
         return ALL_TOKENS.stream()
-                .filter(token -> token.equals(character))
-                .findFirst()
-                .orElse(toTextualToken(character));
+            .filter(token -> token.equals(character))
+            .findFirst()
+            .orElse(toTextualToken(character));
     }
 
     private static Token toTextualToken(final char character) {
