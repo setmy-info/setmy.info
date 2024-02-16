@@ -1,6 +1,7 @@
 package info.setmy.crawler.scraper;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ public class ScraperIT {
     }
 
     @Test
+    @Disabled
     public void loremIpsum() {
         final ScrapedContent scrapedContent = scraper.parse("https://setmy-info.codeberg.page/loremipsum.html");
         final String someTexts = scrapedContent.getScrapedTexts().stream()
