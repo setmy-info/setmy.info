@@ -1,37 +1,33 @@
 package info.setmy.linguistics;
 
-import info.setmy.linguistics.models.token.ParsingEventType;
+import info.setmy.linguistics.models.token.Token;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static info.setmy.linguistics.models.token.ParsingEventType.CHARACTER_HANDLING;
-import static info.setmy.linguistics.models.token.ParsingEventType.PARSING_END;
-import static info.setmy.linguistics.models.token.ParsingEventType.PARSING_START;
 
 public class Parser {
 
-    private final List<ParsingHandler> handlers = new ArrayList<>();
+    private final ParsingHandler parsingHandler = new ParsingHandler();
 
-    public void parse(final String content) {
+    public List<Token> parse(final String content) {
         final char[] chars = content.toCharArray();
         final ParseTraversal traversal = new ParseTraversal();
-        emitEvent(traversal.setParsingEventType(PARSING_START));
+        parsingHandler.handleStartParsing(traversal);
         for (char character : chars) {
-            detectEvents(traversal.setToken(character))
-                .forEach(parsingEventType -> emitEvent(traversal.setParsingEventType(parsingEventType)));
-            emitEvent(traversal.setParsingEventType(CHARACTER_HANDLING));
+            traversal.setToken(character);
+            detectTokenTypeChange(traversal);
+            parsingHandler.handleToken(traversal);
         }
-        emitEvent(traversal.setParsingEventType(PARSING_END));
+        parsingHandler.handleEndParsing(traversal);
+        return traversal.getParsedTokens();
     }
 
-    private void emitEvent(final ParseTraversal traversal) {
-        handlers.forEach(parsingHandler -> parsingHandler.handle(traversal));
+    private void detectTokenTypeChange(final ParseTraversal traversal) {
+        if (parsingHandler.isChanged(traversal)) {
+            typeChange(traversal);
+        }
     }
 
-    private List<ParsingEventType> detectEvents(final ParseTraversal parseTraversal) {
-        final List<ParsingEventType> result = new ArrayList<>();
-
-        return result;
+    private void typeChange(final ParseTraversal traversal) {
+        parsingHandler.handleTypeChange(traversal);
     }
 }

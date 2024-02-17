@@ -1,6 +1,6 @@
 package info.setmy.linguistics.models.token;
 
-public abstract class WordToken extends Token {
+public class WordToken extends Token {
 
     public WordToken(char value) {
         super(value);

@@ -1,8 +1,9 @@
 package info.setmy.linguistics.models.token;
 
+import org.junit.jupiter.api.Test;
+
 import static info.setmy.linguistics.models.token.TokenUtils.toToken;
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
 
 public class TokenUtilsTest {
 
