@@ -6,12 +6,12 @@ import info.setmy.services.text.linguistics.model.Quote;
 import info.setmy.services.text.linguistics.model.Sentence;
 import info.setmy.services.text.linguistics.model.TextItem;
 import info.setmy.services.text.linguistics.model.Word;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 public class SentenceParser {

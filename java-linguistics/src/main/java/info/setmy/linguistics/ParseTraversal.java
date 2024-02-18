@@ -17,36 +17,55 @@ import static info.setmy.linguistics.models.token.TokenUtils.toToken;
 public class ParseTraversal {
 
     private Token previousToken;
-    private Token token;
+    private Token currentToken;
 
     private List<Token> parsedTokens = new ArrayList<>();
-    private StringBuilder parsingToken = new StringBuilder();
+    private StringBuilder textTokenBuilder = new StringBuilder();
 
-    public ParseTraversal setToken(final char character) {
+    public ParseTraversal setCurrentToken(final char character) {
         setPreviousToken();
-        return this.setToken(toToken(character));
+        return setCurrentToken(toToken(character));
     }
 
-    public ParseTraversal setToken(final Token token) {
-        this.token = token;
+    public ParseTraversal setCurrentToken(final Token token) {
+        this.currentToken = token;
         return this;
     }
 
     public void finishParsingToken() {
-        final Token textToken = new WordToken(parsingToken.toString());
-        parsingToken = new StringBuilder();
-        parsedTokens.add(textToken);
+        addNewWordToken();
+        newStringBuilder();
+    }
+
+    public boolean addNewWordToken() {
+        return parsedTokens.add(newWordToken());
+    }
+
+    public Token newWordToken() {
+        return new WordToken(textTokenBuilder.toString());
+    }
+
+    public void newStringBuilder() {
+        textTokenBuilder = new StringBuilder();
     }
 
     public ParseTraversal setPreviousToken() {
-        return setPreviousToken(getToken());
+        return setPreviousToken(getCurrentToken());
     }
 
-    public boolean previousTokenDoesntExists() {
-        return !previousTokenExists();
+    public boolean isClassTypeChange() {
+        return getPreviousToken().getClass() != getCurrentToken().getClass();
     }
 
-    public boolean previousTokenExists() {
-        return previousToken != null;
+    public boolean isTextToNonTextChange() {
+        return getPreviousToken().isTextCharacterToken() || !getCurrentToken().isTextCharacterToken();
+    }
+
+    public boolean isNonTextToTextChange() {
+        return !getPreviousToken().isTextCharacterToken() || getCurrentToken().isTextCharacterToken();
+    }
+
+    public boolean isPreviousNullToAnyChange() {
+        return getPreviousToken() == null && getCurrentToken() != null;
     }
 }

@@ -13,7 +13,7 @@ public class Parser {
         final ParseTraversal traversal = new ParseTraversal();
         parsingHandler.handleStartParsing(traversal);
         for (char character : chars) {
-            traversal.setToken(character);
+            traversal.setCurrentToken(character);
             detectTokenTypeChange(traversal);
             parsingHandler.handleToken(traversal);
         }
@@ -22,12 +22,8 @@ public class Parser {
     }
 
     private void detectTokenTypeChange(final ParseTraversal traversal) {
-        if (parsingHandler.isChanged(traversal)) {
-            typeChange(traversal);
+        if (parsingHandler.isTypeChanged(traversal)) {
+            parsingHandler.handleTypeChange(traversal);
         }
-    }
-
-    private void typeChange(final ParseTraversal traversal) {
-        parsingHandler.handleTypeChange(traversal);
     }
 }

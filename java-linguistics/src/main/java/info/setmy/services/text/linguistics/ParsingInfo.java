@@ -1,7 +1,6 @@
 package info.setmy.services.text.linguistics;
 
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 public class ParsingInfo {

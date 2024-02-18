@@ -19,9 +19,32 @@ public class ParserTest {
     }
 
     @Test
-    public void parsing() {
+    public void parsingSingle() {
         final List<Token> parsedTokens = parser.parse("Tere");
         assertThat(parsedTokens).hasSize(1);
         assertThat(parsedTokens.get(0).toString()).isEqualTo("Tere");
+    }
+
+    @Test
+    public void parsingSingleWithWhiteExclusion() {
+        final List<Token> parsedTokens = parser.parse("  Tere  ");
+        assertThat(parsedTokens).hasSize(1);
+        assertThat(parsedTokens.get(0).toString()).isEqualTo("Tere");
+    }
+
+    @Test
+    public void parsingTwo() {
+        final List<Token> parsedTokens = parser.parse("Tere maailm");
+        assertThat(parsedTokens).hasSize(2);
+        assertThat(parsedTokens.get(0).toString()).isEqualTo("Tere");
+        assertThat(parsedTokens.get(1).toString()).isEqualTo("maailm");
+    }
+
+    @Test
+    public void parsingTwoWithWhiteExclusion() {
+        final List<Token> parsedTokens = parser.parse("  Tere   maailm ");
+        assertThat(parsedTokens).hasSize(2);
+        assertThat(parsedTokens.get(0).toString()).isEqualTo("Tere");
+        assertThat(parsedTokens.get(1).toString()).isEqualTo("maailm");
     }
 }
