@@ -1,6 +1,6 @@
 package info.setmy.linguistics.models.token;
 
-public class NumericCharacterToken extends TextCharacterToken {
+public class NumericCharacterToken extends AlphaNumericCharacterToken {
 
     public NumericCharacterToken(char value) {
         super(value);

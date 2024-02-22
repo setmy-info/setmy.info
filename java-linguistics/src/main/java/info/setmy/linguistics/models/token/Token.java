@@ -57,7 +57,7 @@ public abstract class Token {
         return this instanceof NumericCharacterToken;
     }
 
-    public boolean isTextCharacterToken() {
-        return this instanceof TextCharacterToken;
+    public boolean isAlphanumericCharacterToken() {
+        return this instanceof AlphaNumericCharacterToken;
     }
 }

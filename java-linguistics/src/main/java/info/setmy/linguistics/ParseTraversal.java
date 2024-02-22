@@ -3,6 +3,7 @@ package info.setmy.linguistics;
 import info.setmy.linguistics.models.token.Token;
 import info.setmy.linguistics.models.token.WordToken;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -14,13 +15,20 @@ import static info.setmy.linguistics.models.token.TokenUtils.toToken;
 @Getter
 @Setter
 @Accessors(chain = true)
+@RequiredArgsConstructor
 public class ParseTraversal {
 
+    private final char[] characters;
     private Token previousToken;
     private Token currentToken;
+    private int index;
 
     private List<Token> parsedTokens = new ArrayList<>();
     private StringBuilder textTokenBuilder = new StringBuilder();
+
+    public ParseTraversal(final String string) {
+        this(string.toCharArray());
+    }
 
     public ParseTraversal setCurrentToken(final char character) {
         setPreviousToken();
@@ -53,19 +61,7 @@ public class ParseTraversal {
         return setPreviousToken(getCurrentToken());
     }
 
-    public boolean isClassTypeChange() {
-        return getPreviousToken().getClass() != getCurrentToken().getClass();
-    }
-
-    public boolean isTextToNonTextChange() {
-        return getPreviousToken().isTextCharacterToken() || !getCurrentToken().isTextCharacterToken();
-    }
-
-    public boolean isNonTextToTextChange() {
-        return !getPreviousToken().isTextCharacterToken() || getCurrentToken().isTextCharacterToken();
-    }
-
-    public boolean isPreviousNullToAnyChange() {
-        return getPreviousToken() == null && getCurrentToken() != null;
+    public void incrementIndex() {
+        index++;
     }
 }

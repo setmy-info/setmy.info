@@ -1,32 +1,55 @@
 package info.setmy.linguistics;
 
-public class ParsingHandler {
+import info.setmy.linguistics.models.token.EventType;
 
-    public void handleStartParsing(final ParseTraversal traversal) {
+public class ParsingHandler implements EventHandler {
+
+    @Override
+    public void hande(final EventType eventType, final ParseTraversal traversal) {
+        switch (eventType) {
+            case PARSING_BEGIN:
+                doHandleStartParsing(traversal);
+                break;
+            case PARSING_END:
+                doHandleEndParsing(traversal);
+                break;
+            case NULL_TO_ANY:
+                doNullToAny(traversal);
+                break;
+            case ALPHABETIC_TO_WHITE:
+                doAlphabeticToWhite(traversal);
+                break;
+            case ALPHA_NUMERIC_TO_ANY:
+                doAlphaNumericToWhite(traversal);
+                break;
+            case WHITE_TO_ALPHABETIC:
+                doWhiteToAlphabetic(traversal);
+                break;
+            case ANY_TO_ALPHA_NUMERIC:
+                doWhiteToAlphaNumeric(traversal);
+            default:
+        }
     }
 
-    public void handleEndParsing(final ParseTraversal traversal) {
+    private void doHandleStartParsing(final ParseTraversal traversal) {
+    }
+
+    private void doNullToAny(final ParseTraversal traversal) {
+    }
+
+    private void doAlphabeticToWhite(final ParseTraversal traversal) {
+    }
+
+    private void doAlphaNumericToWhite(final ParseTraversal traversal) {
+    }
+
+    private void doWhiteToAlphabetic(final ParseTraversal traversal) {
+    }
+
+    private void doWhiteToAlphaNumeric(final ParseTraversal traversal) {
+    }
+
+    private void doHandleEndParsing(final ParseTraversal traversal) {
         traversal.finishParsingToken();
-    }
-
-    public boolean isTypeChanged(final ParseTraversal traversal) {
-        if (traversal.isPreviousNullToAnyChange()) {
-            return true;
-        }
-        if (traversal.isClassTypeChange()
-            && traversal.isNonTextToTextChange()
-            && traversal.isTextToNonTextChange()) {
-            return true;
-        }
-        return false;
-    }
-
-    public void handleTypeChange(final ParseTraversal traversal) {
-    }
-
-    public void handleToken(final ParseTraversal traversal) {
-        if (traversal.getCurrentToken().isAlphabeticCharacterToken()) {
-            traversal.getTextTokenBuilder().append(traversal.getCurrentToken().getValue());
-        }
     }
 }

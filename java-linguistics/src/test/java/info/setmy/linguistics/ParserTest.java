@@ -1,6 +1,5 @@
-package info.setmy.services.text.linguistics;
+package info.setmy.linguistics;
 
-import info.setmy.linguistics.Parser;
 import info.setmy.linguistics.models.token.Token;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,7 @@ public class ParserTest {
 
     @BeforeEach
     public void before() {
-        parser = new Parser();
+        parser = new Parser().addEventHandler(new ParsingHandler());
     }
 
     @Test
