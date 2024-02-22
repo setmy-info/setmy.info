@@ -50,14 +50,26 @@ public abstract class Token {
     }
 
     public boolean isAlphabeticCharacterToken() {
-        return this instanceof AlphabeticCharacterToken;
+        return isInstanceOf(AlphabeticCharacterToken.class);
     }
 
     public boolean isNumericCharacterToken() {
-        return this instanceof NumericCharacterToken;
+        return isInstanceOf(NumericCharacterToken.class);
     }
 
-    public boolean isAlphanumericCharacterToken() {
-        return this instanceof AlphaNumericCharacterToken;
+    public boolean isAlphaNumericCharacterToken() {
+        return isInstanceOf(AlphaNumericCharacterToken.class);
+    }
+
+    public boolean isNotWhiteCharSingleToken() {
+        return !isWhiteCharSingleToken();
+    }
+
+    public boolean isWhiteCharSingleToken() {
+        return isInstanceOf(WhiteCharSingleToken.class);
+    }
+
+    public boolean isInstanceOf(final Class<? extends Token> clazz) {
+        return clazz.isInstance(this);
     }
 }

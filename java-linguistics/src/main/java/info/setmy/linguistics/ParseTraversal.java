@@ -40,7 +40,7 @@ public class ParseTraversal {
         return this;
     }
 
-    public void finishParsingToken() {
+    public void finishParsingWord() {
         addNewWordToken();
         newStringBuilder();
     }
@@ -63,5 +63,13 @@ public class ParseTraversal {
 
     public void incrementIndex() {
         index++;
+    }
+
+    boolean haveNoPreviousToken() {
+        return !havePreviousToken();
+    }
+
+    boolean havePreviousToken() {
+        return previousToken != null;
     }
 }

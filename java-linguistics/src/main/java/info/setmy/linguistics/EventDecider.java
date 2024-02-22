@@ -1,53 +1,34 @@
 package info.setmy.linguistics;
 
 import info.setmy.linguistics.models.token.EventType;
+import static info.setmy.linguistics.models.token.EventType.END_WORD;
+import static info.setmy.linguistics.models.token.EventType.START_WORD;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static info.setmy.linguistics.models.token.EventType.ALPHA_NUMERIC_TO_ANY;
-import static info.setmy.linguistics.models.token.EventType.ANY_TO_ALPHA_NUMERIC;
-import static info.setmy.linguistics.models.token.EventType.CLASS_TYPE_CHANGE;
-import static info.setmy.linguistics.models.token.EventType.NULL_TO_ANY;
 
 public class EventDecider {
 
     public List<EventType> decide(final ParseTraversal traversal) {
         final List<EventType> result = new ArrayList<>();
-        if (isNullToAnyChange(traversal)) {
-            result.add(NULL_TO_ANY);
-        }
-        if (isClassTypeChange(traversal)) {
-            result.add(CLASS_TYPE_CHANGE);
-        }
-        if (isAlphaNumericToAny(traversal)) {
-            result.add(ALPHA_NUMERIC_TO_ANY);
-        }
-        if (isAnyToAlphaNumericChange(traversal)) {
-            result.add(ANY_TO_ALPHA_NUMERIC);
-        }
+        wordStarting(traversal, result);
+        wordEnding(traversal, result);
         return result;
     }
 
-    boolean isNullToAnyChange(final ParseTraversal traversal) {
-        return traversal.getPreviousToken() == null && traversal.getCurrentToken() != null;
-    }
-
-    boolean isClassTypeChange(final ParseTraversal traversal) {
-        return traversal.getPreviousToken().getClass() != traversal.getCurrentToken().getClass();
-    }
-
-    boolean isAlphaNumericToAny(final ParseTraversal traversal) {
-        if (traversal.getPreviousToken() == null) {
-            return false;
+    private void wordStarting(final ParseTraversal traversal, final List<EventType> result) {
+        if ((traversal.haveNoPreviousToken() || traversal.getPreviousToken().isWhiteCharSingleToken())
+                && traversal.getCurrentToken().isNotWhiteCharSingleToken()) { // Current is any non white
+            result.add(START_WORD);
         }
-        return traversal.getPreviousToken().isAlphanumericCharacterToken() && !traversal.getCurrentToken().isAlphanumericCharacterToken();
     }
 
-    boolean isAnyToAlphaNumericChange(final ParseTraversal traversal) {
-        if (traversal.getPreviousToken() == null) {
-            return false;
+    private void wordEnding(final ParseTraversal traversal, final List<EventType> result) {
+        if ((traversal.havePreviousToken()
+                && traversal.getPreviousToken().isNotWhiteCharSingleToken() // Prev token is any non white
+                && traversal.getCurrentToken().isWhiteCharSingleToken())
+                || (traversal.getCurrentToken().isAlphaNumericCharacterToken() && traversal.getIndex() == traversal.getCharacters().length - 1)) { // aplhanumeric is last character in char array
+            result.add(END_WORD);
         }
-        return !traversal.getPreviousToken().isAlphanumericCharacterToken() && traversal.getCurrentToken().isAlphanumericCharacterToken();
     }
 }
