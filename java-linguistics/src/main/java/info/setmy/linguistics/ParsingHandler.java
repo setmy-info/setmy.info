@@ -30,6 +30,8 @@ public class ParsingHandler {
     }
 
     private void appendCurrentToken(final ParseTraversal traversal) {
-        traversal.getParsingData().getWordTokenBuilder().append(traversal.getCurrentToken().getValue());
+        traversal.getParsingData().getWordTokenBuilder().append(
+            traversal.getCurrentToken().getValue()
+        );
     }
 }

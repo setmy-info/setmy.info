@@ -2,6 +2,7 @@ package info.setmy.linguistics;
 
 import info.setmy.linguistics.models.token.Token;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -127,6 +128,73 @@ public class ParserTest {
         assertThat(parsedTokens.get(4).toString()).isEqualTo("population");
         assertThat(parsedTokens.get(5).toString()).isEqualTo(".");
     }
+
+    @Test
+    public void manySentences() {
+        final String string = "This is longer sentence, with some sentence ending characters. Maybe text have questions? Maybe text ends with!";
+        final List<Token> parsedTokens = parser.parse(string);
+        assertThat(parsedTokens).hasSize(21);
+        assertThat(parsedTokens.get(0).toString()).isEqualTo("This");
+        assertThat(parsedTokens.get(1).toString()).isEqualTo("is");
+        assertThat(parsedTokens.get(2).toString()).isEqualTo("longer");
+        assertThat(parsedTokens.get(3).toString()).isEqualTo("sentence");
+        assertThat(parsedTokens.get(4).toString()).isEqualTo(",");
+        assertThat(parsedTokens.get(5).toString()).isEqualTo("with");
+        assertThat(parsedTokens.get(6).toString()).isEqualTo("some");
+        assertThat(parsedTokens.get(7).toString()).isEqualTo("sentence");
+        assertThat(parsedTokens.get(8).toString()).isEqualTo("ending");
+        assertThat(parsedTokens.get(9).toString()).isEqualTo("characters");
+        assertThat(parsedTokens.get(10).toString()).isEqualTo(".");
+        assertThat(parsedTokens.get(11).toString()).isEqualTo("Maybe");
+        assertThat(parsedTokens.get(12).toString()).isEqualTo("text");
+        assertThat(parsedTokens.get(13).toString()).isEqualTo("have");
+        assertThat(parsedTokens.get(14).toString()).isEqualTo("questions");
+        assertThat(parsedTokens.get(15).toString()).isEqualTo("?");
+        assertThat(parsedTokens.get(16).toString()).isEqualTo("Maybe");
+        assertThat(parsedTokens.get(17).toString()).isEqualTo("text");
+        assertThat(parsedTokens.get(18).toString()).isEqualTo("ends");
+        assertThat(parsedTokens.get(19).toString()).isEqualTo("with");
+        assertThat(parsedTokens.get(20).toString()).isEqualTo("!");
+    }
+
+    @Test
+    public void manySentences2() {
+        final String string = "Kesk-Aasia elanik";
+        final List<Token> parsedTokens = parser.parse(string);
+        assertThat(parsedTokens).hasSize(2);
+        assertThat(parsedTokens.get(0).toString()).isEqualTo("Kesk-Aasia");
+        assertThat(parsedTokens.get(1).toString()).isEqualTo("elanik");
+    }
+
+    @Test
+    @Disabled
+    public void manySentences3() {
+        final String string = "tulekahju avastanud isik(ud), teis(t)ele võimalus(t)ele, ega ta (ei) tule.";
+        final List<Token> parsedTokens = parser.parse(string);
+        assertThat(parsedTokens).hasSize(12);
+        assertThat(parsedTokens.get(0).toString()).isEqualTo("tulekahju");
+        assertThat(parsedTokens.get(1).toString()).isEqualTo("avastanud");
+        assertThat(parsedTokens.get(2).toString()).isEqualTo("isik(ud)");
+        assertThat(parsedTokens.get(3).toString()).isEqualTo(",");
+        assertThat(parsedTokens.get(4).toString()).isEqualTo("teis(t)ele");
+        assertThat(parsedTokens.get(5).toString()).isEqualTo("võimalus(t)ele");
+        assertThat(parsedTokens.get(6).toString()).isEqualTo(",");
+        assertThat(parsedTokens.get(7).toString()).isEqualTo("ega");
+        assertThat(parsedTokens.get(8).toString()).isEqualTo("ta");
+        assertThat(parsedTokens.get(9).toString()).isEqualTo("(ei)");
+        assertThat(parsedTokens.get(10).toString()).isEqualTo("tule");
+        assertThat(parsedTokens.get(11).toString()).isEqualTo(".");
+    }
+
+    /*
+    @Test
+    public void manySentencesXXX() {
+        final String string = "Aaa, bbb (ccc, ddd, eee), fff (ggg; hhh; iii), jjj - kkk, lll mmm nnn: \"ooo, ppp, rrr sss - ttt (uuu; vvv õõõ, äää ööö!)\". Üüü (xxx, yyy, zzz [aaa, bbb, ccc {ddd, eee, fff ggg hhh}])! Iii, jjj, kkk: lll, mmm nnn? Ooo: \"ppp rrr sss?\"";
+        final List<Token> parsedTokens = parser.parse(string);
+        assertThat(parsedTokens).hasSize(21);
+        assertThat(parsedTokens.get(0).toString()).isEqualTo("This");
+    }
+    */
 
     /*@Test
     public void onlySentenceEndings() {
