@@ -167,7 +167,7 @@ public class ParserTest {
     }
 
     @Test
-    @Disabled
+    @Disabled // TODO : parsing () etc character correctly into words or separate tokens
     public void manySentences3() {
         final String string = "tulekahju avastanud isik(ud), teis(t)ele võimalus(t)ele, ega ta (ei) tule.";
         final List<Token> parsedTokens = parser.parse(string);
@@ -186,22 +186,32 @@ public class ParserTest {
         assertThat(parsedTokens.get(11).toString()).isEqualTo(".");
     }
 
-    /*
     @Test
+    @Disabled // TODO : parsing () etc character correctly into words or separate tokens
+    public void manySentences4() {
+        final String string = "2) seletavad ja täiendavad kiilmärkused, nt sõnaseletused, viited, nimede hääldus: brokoli (spargelkapsas); sajab kõikjal (välja arvatud saartel ~ välja arvatud saared); elamute (Pärnu, Sireli 17 ja 17a) lammutamine; Tambet Lepik (edaspidi: töövõtja); Ita (õieti Ilse) Ever; Nike (loe: naiki) jalatsid;";
+        final List<Token> parsedTokens = parser.parse(string);
+        assertThat(parsedTokens).hasSize(12);
+        assertThat(parsedTokens.get(0).toString()).isEqualTo("xxx");
+    }
+
+    @Test
+    @Disabled // TODO : make string correct by estonian language rules
     public void manySentencesXXX() {
         final String string = "Aaa, bbb (ccc, ddd, eee), fff (ggg; hhh; iii), jjj - kkk, lll mmm nnn: \"ooo, ppp, rrr sss - ttt (uuu; vvv õõõ, äää ööö!)\". Üüü (xxx, yyy, zzz [aaa, bbb, ccc {ddd, eee, fff ggg hhh}])! Iii, jjj, kkk: lll, mmm nnn? Ooo: \"ppp rrr sss?\"";
         final List<Token> parsedTokens = parser.parse(string);
         assertThat(parsedTokens).hasSize(21);
         assertThat(parsedTokens.get(0).toString()).isEqualTo("This");
     }
-    */
 
-    /*@Test
+    @Test
+    @Disabled
+    // TODO : decide, should it be word or separate tokens. Most probably one single word token, because it is continuous characters and should be handled in post processing/oparsing.
     public void onlySentenceEndings() {
         final List<Token> parsedTokens = parser.parse(".!?");
         assertThat(parsedTokens).hasSize(3);
         assertThat(parsedTokens.get(0).toString()).isEqualTo(".");
         assertThat(parsedTokens.get(1).toString()).isEqualTo("!");
         assertThat(parsedTokens.get(2).toString()).isEqualTo("?");
-    }*/
+    }
 }
