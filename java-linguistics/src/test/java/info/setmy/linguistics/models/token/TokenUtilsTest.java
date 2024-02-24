@@ -1,6 +1,5 @@
 package info.setmy.linguistics.models.token;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -13,7 +12,7 @@ public class TokenUtilsTest {
     Token token;
 
     @ParameterizedTest
-    @ValueSource(chars = {'a', 'A'})
+    @ValueSource(chars = {'a', 'A', 'ü'})
     public void alphabet(final Character character) {
         token = toToken(character);
         assertThat(token).isInstanceOf(AlphabeticCharacterToken.class);
@@ -59,50 +58,46 @@ public class TokenUtilsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(chars = {',', '-', ';', ':'})
-    public void clauseSeparatorChars(final Character character) {
+    @ValueSource(chars = {',', '-', '~', ';', ':'})
+    public void phraseSeparatorChars(final Character character) {
         token = toToken(character);
         assertThat(token).isInstanceOf(PhraseSeparatorToken.class);
         assertTrue(token.isPhraseSeparatorToken());
         assertTrue(token.isNotWhiteCharToken());
     }
 
-    @Test
-    public void soloQuoteSeparatorChars() {
-        assertThat(toToken('\'')).isInstanceOf(SoloQuotationToken.class);
-        assertThat(toToken('\"')).isInstanceOf(SoloQuotationToken.class);
-        assertThat(toToken('`')).isInstanceOf(SoloQuotationToken.class);
-        assertThat(toToken('´')).isInstanceOf(SoloQuotationToken.class);
+    @ParameterizedTest
+    @ValueSource(chars = {'\'', '\"', '`', '´'})
+    public void soloQuoteSeparatorChars(final Character character) {
+        token = toToken(character);
+        assertThat(token).isInstanceOf(SoloQuotationToken.class);
     }
 
-    @Test
-    public void pairedBeginChars() {
-        assertThat(toToken('«')).isInstanceOf(BeginPairedQuotationToken.class);
-        assertThat(toToken('‘')).isInstanceOf(BeginPairedQuotationToken.class);
-        assertThat(toToken('“')).isInstanceOf(BeginPairedQuotationToken.class);
-        assertThat(toToken('„')).isInstanceOf(BeginPairedQuotationToken.class);
+    @ParameterizedTest
+    @ValueSource(chars = {'«', '‘', '“', '„'})
+    public void pairedBeginChars(final Character character) {
+        token = toToken(character);
+        assertThat(token).isInstanceOf(BeginPairedQuotationToken.class);
     }
 
-    @Test
-    public void pairedEndChars() {
-        assertThat(toToken('»')).isInstanceOf(EndPairedQuotationToken.class);
-        assertThat(toToken('’')).isInstanceOf(EndPairedQuotationToken.class);
-        assertThat(toToken('”')).isInstanceOf(EndPairedQuotationToken.class);
+    @ParameterizedTest
+    @ValueSource(chars = {'»', '’', '”'})
+    public void pairedEndChars(final Character character) {
+        token = toToken(character);
+        assertThat(token).isInstanceOf(EndPairedQuotationToken.class);
     }
 
-    @Test
-    public void pairedBlockBeginChars() {
-        assertThat(toToken('(')).isInstanceOf(BeginBlockToken.class);
-        assertThat(toToken('{')).isInstanceOf(BeginBlockToken.class);
-        assertThat(toToken('[')).isInstanceOf(BeginBlockToken.class);
-        assertThat(toToken('<')).isInstanceOf(BeginBlockToken.class);
+    @ParameterizedTest
+    @ValueSource(chars = {'(', '{', '[', '<'})
+    public void pairedBlockBeginChars(final Character character) {
+        token = toToken(character);
+        assertThat(token).isInstanceOf(BeginBlockToken.class);
     }
 
-    @Test
-    public void pairedBlockEndChars() {
-        assertThat(toToken(')')).isInstanceOf(EndBlockToken.class);
-        assertThat(toToken('}')).isInstanceOf(EndBlockToken.class);
-        assertThat(toToken(']')).isInstanceOf(EndBlockToken.class);
-        assertThat(toToken('>')).isInstanceOf(EndBlockToken.class);
+    @ParameterizedTest
+    @ValueSource(chars = {')', '}', ']', '>'})
+    public void pairedBlockEndChars(final Character character) {
+        token = toToken(character);
+        assertThat(token).isInstanceOf(EndBlockToken.class);
     }
 }

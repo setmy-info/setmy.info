@@ -81,6 +81,30 @@ public abstract class Token {
         return isInstanceOf(SentenceEndingToken.class);
     }
 
+    public boolean isPairedQuotationToken() {
+        return isBeginPairedQuotationToken() || isEndPairedQuotationToken();
+    }
+
+    public boolean isBeginPairedQuotationToken() {
+        return isInstanceOf(BeginPairedQuotationToken.class);
+    }
+
+    public boolean isEndPairedQuotationToken() {
+        return isInstanceOf(EndPairedQuotationToken.class);
+    }
+
+    public boolean isBlockToken() {
+        return isBeginBlockToken() || isEndBlockToken();
+    }
+
+    public boolean isBeginBlockToken() {
+        return isInstanceOf(BeginBlockToken.class);
+    }
+
+    public boolean isEndBlockToken() {
+        return isInstanceOf(EndBlockToken.class);
+    }
+
     public boolean isInstanceOf(final Class<? extends Token> clazz) {
         return clazz.isInstance(this);
     }

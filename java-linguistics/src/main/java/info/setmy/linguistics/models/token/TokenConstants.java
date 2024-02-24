@@ -17,7 +17,7 @@ public final class TokenConstants {
     public static final Token[] LINE_ENDING_TOKENS = {new LineEndingToken('\n')};
     public static final Token[] WHITE_CHAR_TOKENS = {new WhiteCharToken(' '), new WhiteCharToken('\r'), new WhiteCharToken('\t')};
     public static final Token[] SENTENCE_ENDING_TOKENS = {new SentenceEndingToken('.'), new SentenceEndingToken('!'), new SentenceEndingToken('?')};
-    public static final Token[] CLAUSE_SEPARATOR_TOKENS = {new PhraseSeparatorToken(','), new PhraseSeparatorToken('-'), new PhraseSeparatorToken('~'), new PhraseSeparatorToken(';'), new PhraseSeparatorToken(':')};
+    public static final Token[] PHRASE_SEPARATOR_TOKENS = {new PhraseSeparatorToken(','), new PhraseSeparatorToken('-'), new PhraseSeparatorToken('~'), new PhraseSeparatorToken(';'), new PhraseSeparatorToken(':')};
 
     // APOSTROPHE, QUOTATION, GRAVE_ACCENT, ACUTE_ACCENT
     public static final Token SOLO_QUOTE_SEPARATORS[] = {new SoloQuotationToken('\''), new SoloQuotationToken('\"'), new SoloQuotationToken('`'), new SoloQuotationToken('´')};
@@ -38,7 +38,7 @@ public final class TokenConstants {
         all.addAll(Arrays.asList(LINE_ENDING_TOKENS));
         all.addAll(Arrays.asList(WHITE_CHAR_TOKENS));
         all.addAll(Arrays.asList(SENTENCE_ENDING_TOKENS));
-        all.addAll(Arrays.asList(CLAUSE_SEPARATOR_TOKENS));
+        all.addAll(Arrays.asList(PHRASE_SEPARATOR_TOKENS));
         all.addAll(Arrays.asList(SOLO_QUOTE_SEPARATORS));
         all.addAll(Arrays.asList(PAIRED_QUOTE_SEPARATOR_BEGINNINGS));
         all.addAll(Arrays.asList(PAIRED_QUOTE_SEPARATOR_ENDINGS));
