@@ -61,12 +61,24 @@ public abstract class Token {
         return isInstanceOf(AlphaNumericCharacterToken.class);
     }
 
-    public boolean isNotWhiteCharSingleToken() {
-        return !isWhiteCharSingleToken();
+    public boolean isLineEndingToken() {
+        return isInstanceOf(LineEndingToken.class);
     }
 
-    public boolean isWhiteCharSingleToken() {
-        return isInstanceOf(WhiteCharSingleToken.class);
+    public boolean isNotWhiteCharToken() {
+        return !isWhiteCharToken();
+    }
+
+    public boolean isWhiteCharToken() {
+        return isInstanceOf(WhiteCharToken.class) || isInstanceOf(LineEndingToken.class);
+    }
+
+    public boolean isPhraseSeparatorToken() {
+        return isInstanceOf(PhraseSeparatorToken.class);
+    }
+
+    public boolean isSentenceEndingToken() {
+        return isInstanceOf(SentenceEndingToken.class);
     }
 
     public boolean isInstanceOf(final Class<? extends Token> clazz) {

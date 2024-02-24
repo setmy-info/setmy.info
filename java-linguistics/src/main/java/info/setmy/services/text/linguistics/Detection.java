@@ -1,7 +1,7 @@
 package info.setmy.services.text.linguistics;
 
 /**
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class Detection {
 
@@ -39,7 +39,7 @@ public class Detection {
         return have(character, CLAUSE_SEPARATORS);
     }
 
-    boolean isSingleQuoteSeparator(final char character) {
+    boolean isUnPairedQuoteSeparator(final char character) {
         return have(character, SOLO_QUOTE_SEPARATORS);
     }
 

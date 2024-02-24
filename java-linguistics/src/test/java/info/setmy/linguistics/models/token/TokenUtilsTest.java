@@ -1,94 +1,108 @@
 package info.setmy.linguistics.models.token;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static info.setmy.linguistics.models.token.TokenUtils.toToken;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TokenUtilsTest {
 
-    @Test
-    public void alphabet() {
-        assertThat(toToken('a')).isInstanceOf(AlphabeticCharacterToken.class);
+    Token token;
+
+    @ParameterizedTest
+    @ValueSource(chars = {'a', 'A'})
+    public void alphabet(final Character character) {
+        token = toToken(character);
+        assertThat(token).isInstanceOf(AlphabeticCharacterToken.class);
+        assertTrue(token.isAlphabeticCharacterToken());
+        assertTrue(token.isAlphaNumericCharacterToken());
+        assertTrue(token.isNotWhiteCharToken());
     }
 
-    @Test
-    public void numeric() {
-        assertThat(toToken('1')).isInstanceOf(NumericCharacterToken.class);
-        assertThat(toToken('2')).isInstanceOf(NumericCharacterToken.class);
-        assertThat(toToken('3')).isInstanceOf(NumericCharacterToken.class);
-        assertThat(toToken('4')).isInstanceOf(NumericCharacterToken.class);
-        assertThat(toToken('5')).isInstanceOf(NumericCharacterToken.class);
-        assertThat(toToken('6')).isInstanceOf(NumericCharacterToken.class);
-        assertThat(toToken('7')).isInstanceOf(NumericCharacterToken.class);
-        assertThat(toToken('8')).isInstanceOf(NumericCharacterToken.class);
-        assertThat(toToken('9')).isInstanceOf(NumericCharacterToken.class);
-        assertThat(toToken('0')).isInstanceOf(NumericCharacterToken.class);
+    @ParameterizedTest
+    @ValueSource(chars = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'})
+    public void numeric(final Character character) {
+        token = toToken(character);
+        assertThat(token).isInstanceOf(NumericCharacterToken.class);
+        assertTrue(token.isNumericCharacterToken());
+        assertTrue(token.isAlphaNumericCharacterToken());
+        assertTrue(token.isNotWhiteCharToken());
     }
 
-    @Test
-    public void lineEnding() {
-        assertThat(toToken('\n')).isInstanceOf(LineEndingSingleToken.class);
+    @ParameterizedTest
+    @ValueSource(chars = {'\n'})
+    public void lineEnding(final Character character) {
+        token = toToken(character);
+        assertThat(token).isInstanceOf(LineEndingToken.class);
+        assertTrue(token.isLineEndingToken());
+
     }
 
-    @Test
-    public void whiteChars() {
-        assertThat(toToken(' ')).isInstanceOf(WhiteCharSingleToken.class);
-        assertThat(toToken('\r')).isInstanceOf(WhiteCharSingleToken.class);
-        assertThat(toToken('\t')).isInstanceOf(WhiteCharSingleToken.class);
+    @ParameterizedTest
+    @ValueSource(chars = {' ', '\r', '\n', '\t'})
+    public void whiteChars(final Character character) {
+        token = toToken(character);
+        assertThat(token).isInstanceOfAny(WhiteCharToken.class, LineEndingToken.class);
+        assertTrue(token.isWhiteCharToken());
     }
 
-    @Test
-    public void sentenceEndingChars() {
-        assertThat(toToken('.')).isInstanceOf(SentenceEndingSingleToken.class);
-        assertThat(toToken('!')).isInstanceOf(SentenceEndingSingleToken.class);
-        assertThat(toToken('?')).isInstanceOf(SentenceEndingSingleToken.class);
+    @ParameterizedTest
+    @ValueSource(chars = {'.', '!', '?'})
+    public void sentenceEndingChars(final Character character) {
+        token = toToken(character);
+        assertThat(token).isInstanceOf(SentenceEndingToken.class);
+        assertTrue(token.isSentenceEndingToken());
+        assertTrue(token.isNotWhiteCharToken());
     }
 
-    @Test
-    public void clauseSeparatorChars() {
-        assertThat(toToken(',')).isInstanceOf(ClauseSeparatorSingleToken.class);
-        assertThat(toToken('-')).isInstanceOf(ClauseSeparatorSingleToken.class);
-        assertThat(toToken(';')).isInstanceOf(ClauseSeparatorSingleToken.class);
-        assertThat(toToken(':')).isInstanceOf(ClauseSeparatorSingleToken.class);
+    @ParameterizedTest
+    @ValueSource(chars = {',', '-', ';', ':'})
+    public void clauseSeparatorChars(final Character character) {
+        token = toToken(character);
+        assertThat(token).isInstanceOf(PhraseSeparatorToken.class);
+        assertTrue(token.isPhraseSeparatorToken());
+        assertTrue(token.isNotWhiteCharToken());
     }
 
     @Test
     public void soloQuoteSeparatorChars() {
-        assertThat(toToken('\'')).isInstanceOf(SoloCharacterPairedToken.class);
-        assertThat(toToken('\"')).isInstanceOf(SoloCharacterPairedToken.class);
-        assertThat(toToken('`')).isInstanceOf(SoloCharacterPairedToken.class);
-        assertThat(toToken('´')).isInstanceOf(SoloCharacterPairedToken.class);
+        assertThat(toToken('\'')).isInstanceOf(SoloQuotationToken.class);
+        assertThat(toToken('\"')).isInstanceOf(SoloQuotationToken.class);
+        assertThat(toToken('`')).isInstanceOf(SoloQuotationToken.class);
+        assertThat(toToken('´')).isInstanceOf(SoloQuotationToken.class);
     }
 
     @Test
     public void pairedBeginChars() {
-        assertThat(toToken('«')).isInstanceOf(BeginDoubleCharacterPairedToken.class);
-        assertThat(toToken('‘')).isInstanceOf(BeginDoubleCharacterPairedToken.class);
-        assertThat(toToken('“')).isInstanceOf(BeginDoubleCharacterPairedToken.class);
-        assertThat(toToken('„')).isInstanceOf(BeginDoubleCharacterPairedToken.class);
+        assertThat(toToken('«')).isInstanceOf(BeginPairedQuotationToken.class);
+        assertThat(toToken('‘')).isInstanceOf(BeginPairedQuotationToken.class);
+        assertThat(toToken('“')).isInstanceOf(BeginPairedQuotationToken.class);
+        assertThat(toToken('„')).isInstanceOf(BeginPairedQuotationToken.class);
     }
 
     @Test
     public void pairedEndChars() {
-        assertThat(toToken('»')).isInstanceOf(EndDoubleCharacterPairedToken.class);
-        assertThat(toToken('’')).isInstanceOf(EndDoubleCharacterPairedToken.class);
-        assertThat(toToken('”')).isInstanceOf(EndDoubleCharacterPairedToken.class);
+        assertThat(toToken('»')).isInstanceOf(EndPairedQuotationToken.class);
+        assertThat(toToken('’')).isInstanceOf(EndPairedQuotationToken.class);
+        assertThat(toToken('”')).isInstanceOf(EndPairedQuotationToken.class);
     }
 
     @Test
     public void pairedBlockBeginChars() {
-        assertThat(toToken('(')).isInstanceOf(BeginPairedBlockToken.class);
-        assertThat(toToken('{')).isInstanceOf(BeginPairedBlockToken.class);
-        assertThat(toToken('[')).isInstanceOf(BeginPairedBlockToken.class);
-        assertThat(toToken('<')).isInstanceOf(BeginPairedBlockToken.class);
+        assertThat(toToken('(')).isInstanceOf(BeginBlockToken.class);
+        assertThat(toToken('{')).isInstanceOf(BeginBlockToken.class);
+        assertThat(toToken('[')).isInstanceOf(BeginBlockToken.class);
+        assertThat(toToken('<')).isInstanceOf(BeginBlockToken.class);
     }
 
     @Test
     public void pairedBlockEndChars() {
-        assertThat(toToken(')')).isInstanceOf(EndPairedBlockToken.class);
-        assertThat(toToken('}')).isInstanceOf(EndPairedBlockToken.class);
-        assertThat(toToken(']')).isInstanceOf(EndPairedBlockToken.class);
-        assertThat(toToken('>')).isInstanceOf(EndPairedBlockToken.class);
+        assertThat(toToken(')')).isInstanceOf(EndBlockToken.class);
+        assertThat(toToken('}')).isInstanceOf(EndBlockToken.class);
+        assertThat(toToken(']')).isInstanceOf(EndBlockToken.class);
+        assertThat(toToken('>')).isInstanceOf(EndBlockToken.class);
     }
 }

@@ -14,22 +14,22 @@ public final class TokenConstants {
     apostrophe   ’ ' „ “
     curved quotation marks “”
      */
-    public static final Token[] LINE_ENDING_TOKENS = {new LineEndingSingleToken('\n')};
-    public static final Token[] WHITE_CHAR_TOKENS = {new WhiteCharSingleToken(' '), new WhiteCharSingleToken('\r'), new WhiteCharSingleToken('\t')};
-    public static final Token[] SENTENCE_ENDING_TOKENS = {new SentenceEndingSingleToken('.'), new SentenceEndingSingleToken('!'), new SentenceEndingSingleToken('?')};
-    public static final Token[] CLAUSE_SEPARATOR_TOKENS = {new ClauseSeparatorSingleToken(','), new ClauseSeparatorSingleToken('-'), new ClauseSeparatorSingleToken(';'), new ClauseSeparatorSingleToken(':')};
+    public static final Token[] LINE_ENDING_TOKENS = {new LineEndingToken('\n')};
+    public static final Token[] WHITE_CHAR_TOKENS = {new WhiteCharToken(' '), new WhiteCharToken('\r'), new WhiteCharToken('\t')};
+    public static final Token[] SENTENCE_ENDING_TOKENS = {new SentenceEndingToken('.'), new SentenceEndingToken('!'), new SentenceEndingToken('?')};
+    public static final Token[] CLAUSE_SEPARATOR_TOKENS = {new PhraseSeparatorToken(','), new PhraseSeparatorToken('-'), new PhraseSeparatorToken(';'), new PhraseSeparatorToken(':')};
 
     // APOSTROPHE, QUOTATION, GRAVE_ACCENT, ACUTE_ACCENT
-    public static final Token SOLO_QUOTE_SEPARATORS[] = {new SoloCharacterPairedToken('\''), new SoloCharacterPairedToken('\"'), new SoloCharacterPairedToken('`'), new SoloCharacterPairedToken('´')};
+    public static final Token SOLO_QUOTE_SEPARATORS[] = {new SoloQuotationToken('\''), new SoloQuotationToken('\"'), new SoloQuotationToken('`'), new SoloQuotationToken('´')};
 
     // angular quotation marks, curved apostrophe, Double curved apostrophe, diagonal curved quotation marks
-    public static final Token[] PAIRED_QUOTE_SEPARATOR_BEGINNINGS = {new BeginDoubleCharacterPairedToken('«'), new BeginDoubleCharacterPairedToken('‘'), new BeginDoubleCharacterPairedToken('“'), new BeginDoubleCharacterPairedToken('„')};
-    public static final Token[] PAIRED_QUOTE_SEPARATOR_ENDINGS = {new EndDoubleCharacterPairedToken('»'), new EndDoubleCharacterPairedToken('’'), new EndDoubleCharacterPairedToken('”')};
+    public static final Token[] PAIRED_QUOTE_SEPARATOR_BEGINNINGS = {new BeginPairedQuotationToken('«'), new BeginPairedQuotationToken('‘'), new BeginPairedQuotationToken('“'), new BeginPairedQuotationToken('„')};
+    public static final Token[] PAIRED_QUOTE_SEPARATOR_ENDINGS = {new EndPairedQuotationToken('»'), new EndPairedQuotationToken('’'), new EndPairedQuotationToken('”')};
     public static final int[][] QUOTE_PAIRS = new int[][]{{0, 0}, {1, 1}, {2, 2}, {3, 2}};
 
     //ROUND_BRACKETS_BLOCK, CURLY_BRACKETS_BLOCK, SQUARE_BRACKETS_BLOCK, ANGLE_BRACKETS_BLOCK
-    public static final Token[] PAIRED_BLOCK_SEPARATOR_BEGINNINGS = {new BeginPairedBlockToken('('), new BeginPairedBlockToken('{'), new BeginPairedBlockToken('['), new BeginPairedBlockToken('<')};
-    public static final Token[] PAIRED_BLOCK_SEPARATOR_ENDINGS = {new EndPairedBlockToken(')'), new EndPairedBlockToken('}'), new EndPairedBlockToken(']'), new EndPairedBlockToken('>')};
+    public static final Token[] PAIRED_BLOCK_SEPARATOR_BEGINNINGS = {new BeginBlockToken('('), new BeginBlockToken('{'), new BeginBlockToken('['), new BeginBlockToken('<')};
+    public static final Token[] PAIRED_BLOCK_SEPARATOR_ENDINGS = {new EndBlockToken(')'), new EndBlockToken('}'), new EndBlockToken(']'), new EndBlockToken('>')};
 
     public static final List<Token> ALL_TOKENS;
 

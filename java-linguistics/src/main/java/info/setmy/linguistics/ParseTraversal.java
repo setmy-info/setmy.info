@@ -1,14 +1,11 @@
 package info.setmy.linguistics;
 
 import info.setmy.linguistics.models.token.Token;
-import info.setmy.linguistics.models.token.WordToken;
+import info.setmy.linguistics.models.token.WhiteCharToken;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static info.setmy.linguistics.models.token.TokenUtils.toToken;
 
@@ -19,19 +16,18 @@ import static info.setmy.linguistics.models.token.TokenUtils.toToken;
 public class ParseTraversal {
 
     private final char[] characters;
+    private final ParsingData parsingData = new ParsingData();
     private Token previousToken;
     private Token currentToken;
+    private Token nextToken;
     private int index;
-
-    private List<Token> parsedTokens = new ArrayList<>();
-    private StringBuilder textTokenBuilder = new StringBuilder();
 
     public ParseTraversal(final String string) {
         this(string.toCharArray());
     }
 
     public ParseTraversal setCurrentToken(final char character) {
-        setPreviousToken();
+        previousToken = currentToken;
         return setCurrentToken(toToken(character));
     }
 
@@ -40,36 +36,24 @@ public class ParseTraversal {
         return this;
     }
 
-    public void finishParsingWord() {
-        addNewWordToken();
-        newStringBuilder();
+    public ParseTraversal setNextToken() {
+        final int nextIndex = index + 1;
+        if (nextIndex < characters.length) {
+            return setNextToken(characters[nextIndex]);
+        }
+        return setNextToken(new WhiteCharToken(" "));
     }
 
-    public boolean addNewWordToken() {
-        return parsedTokens.add(newWordToken());
+    public ParseTraversal setNextToken(final char character) {
+        return setNextToken(toToken(character));
     }
 
-    public Token newWordToken() {
-        return new WordToken(textTokenBuilder.toString());
-    }
-
-    public void newStringBuilder() {
-        textTokenBuilder = new StringBuilder();
-    }
-
-    public ParseTraversal setPreviousToken() {
-        return setPreviousToken(getCurrentToken());
+    public ParseTraversal setNextToken(final Token token) {
+        this.nextToken = token;
+        return this;
     }
 
     public void incrementIndex() {
         index++;
-    }
-
-    boolean haveNoPreviousToken() {
-        return !havePreviousToken();
-    }
-
-    boolean havePreviousToken() {
-        return previousToken != null;
     }
 }

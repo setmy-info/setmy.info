@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class SentenceParser {
 
@@ -61,7 +61,7 @@ public class SentenceParser {
             quoteSeparatorBeginning(parsingInfo);
         } else if (detection.isPairedQuotesEnd(character)) {
             quoteSeparatorEnd(parsingInfo);
-        } else if (detection.isSingleQuoteSeparator(character)) {
+        } else if (detection.isUnPairedQuoteSeparator(character)) {
             singleQuoteSeparator(parsingInfo);
         } else if (detection.isWhiteCharacter(character)) {
             whiteSeparator(parsingInfo);

@@ -1,38 +1,35 @@
 package info.setmy.linguistics;
 
-import info.setmy.linguistics.models.token.EventType;
+public class ParsingHandler {
 
-public class ParsingHandler implements EventHandler {
+    public void hande(final ParseTraversal traversal) {
+        if (traversal.getCurrentToken().isAlphaNumericCharacterToken()) {
+            appendCurrentToken(traversal);
+        } else if (traversal.getCurrentToken().isWhiteCharToken()) {
+            finishParsingWord(traversal);
+        } else if (traversal.getCurrentToken().isPhraseSeparatorToken()) {
+            if (traversal.getNextToken().isWhiteCharToken()) {
+                finishParsingWord(traversal);
+                traversal.getParsingData().add(traversal.getCurrentToken());
+            } else {
+                appendCurrentToken(traversal);
+            }
+        } else if (traversal.getCurrentToken().isSentenceEndingToken()) {
+            if (traversal.getNextToken().isWhiteCharToken()) {
+                finishParsingWord(traversal);
+                traversal.getParsingData().add(traversal.getCurrentToken());
+            } else {
+                appendCurrentToken(traversal);
 
-    @Override
-    public void hande(final EventType eventType, final ParseTraversal traversal) {
-        switch (eventType) {
-            case CHARACTER:
-                doHandleCharacter(traversal);
-                break;
-            case START_WORD:
-                doStartWord(traversal);
-                break;
-            case END_WORD:
-                doEndWord(traversal);
-                break;
-            default:
+            }
         }
     }
 
-
-    private void doStartWord(final ParseTraversal traversal) {
+    private void finishParsingWord(ParseTraversal traversal) {
+        traversal.getParsingData().addWordTokenAndNewBuilder();
     }
 
-    private void doEndWord(final ParseTraversal traversal) {
-        traversal.getTextTokenBuilder().append(traversal.getCurrentToken().getValue());
-        traversal.finishParsingWord();
-    }
-
-
-    private void doHandleCharacter(final ParseTraversal traversal) {
-        if(traversal.getCurrentToken().isNotWhiteCharSingleToken()) {
-            traversal.getTextTokenBuilder().append(traversal.getCurrentToken().getValue());
-        }
+    private void appendCurrentToken(final ParseTraversal traversal) {
+        traversal.getParsingData().getWordTokenBuilder().append(traversal.getCurrentToken().getValue());
     }
 }
