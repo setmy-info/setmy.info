@@ -1,15 +1,15 @@
 Feature: URL-s as word
 
-  Scenario: xx
-    Given text is "https://example.com/url/atr?abs=123%2C"
+  Scenario: striped url
+    Given the text is "https://example.com/url/atr?abs=123%2C"
     When parsing it
     Then it should be parsed into 1 tokens
-    And should have token "https://example.com/url/atr?abs=123%2C"
-    And no more tokens
+    And the token should be "https://example.com/url/atr?abs=123%2C"
+    And there should be no more tokens
 
-  Scenario: xx
-    Given text is " https://example.com/url/atr?abs=123%2C  "
+  Scenario: non striped url
+    Given the text is " https://example.com/url/atr?abs=123%2C  "
     When parsing it
     Then it should be parsed into 1 tokens
-    And should have token "https://example.com/url/atr?abs=123%2C"
-    And no more tokens
+    And the token should be "https://example.com/url/atr?abs=123%2C"
+    And there should be no more tokens
