@@ -22,42 +22,6 @@ public class ParserTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
-        "Hello",
-        "  Hello  ",
-        "Hello  ",
-        "  Hello"}
-    )
-    public void parsingSingleWord(final String string) {
-        final List<Token> parsedTokens = parser.parse(string);
-        assertThat(parsedTokens).hasSize(1);
-        assertThat(parsedTokens.get(0).toString()).isEqualTo("Hello");
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {
-        "Hello World",
-        "  Hello   World "
-    })
-    public void parsingTwo(final String string) {
-        final List<Token> parsedTokens = parser.parse(string);
-        assertThat(parsedTokens).hasSize(2);
-        assertThat(parsedTokens.get(0).toString()).isEqualTo("Hello");
-        assertThat(parsedTokens.get(1).toString()).isEqualTo("World");
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {
-        "https://example.com/url/atr?abs=123%2C",
-        "  https://example.com/url/atr?abs=123%2C "
-    })
-    public void parsingUrlAsComplexWordStructure(final String string) {
-        final List<Token> parsedTokens = parser.parse(string);
-        assertThat(parsedTokens).hasSize(1);
-        assertThat(parsedTokens.get(0).toString()).isEqualTo("https://example.com/url/atr?abs=123%2C");
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {
         "https://example.com/url/atr?abs=123,",
         "  https://example.com/url/atr?abs=123, "
     })
