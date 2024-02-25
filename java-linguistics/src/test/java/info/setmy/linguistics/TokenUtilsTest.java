@@ -1,9 +1,10 @@
-package info.setmy.linguistics.models.token;
+package info.setmy.linguistics;
 
+import info.setmy.linguistics.models.token.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static info.setmy.linguistics.models.token.TokenUtils.toToken;
+import static info.setmy.linguistics.TokenUtils.toToken;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

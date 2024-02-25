@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import static info.setmy.linguistics.models.token.TokenUtils.toToken;
+import static info.setmy.linguistics.TokenUtils.toToken;
 
 @Getter
 @Setter

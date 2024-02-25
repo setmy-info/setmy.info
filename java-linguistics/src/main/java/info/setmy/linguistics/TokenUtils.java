@@ -1,4 +1,8 @@
-package info.setmy.linguistics.models.token;
+package info.setmy.linguistics;
+
+import info.setmy.linguistics.models.token.AlphabeticCharacterToken;
+import info.setmy.linguistics.models.token.NumericCharacterToken;
+import info.setmy.linguistics.models.token.Token;
 
 import java.util.regex.Pattern;
 

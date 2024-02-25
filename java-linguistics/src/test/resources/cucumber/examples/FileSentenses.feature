@@ -1,6 +1,6 @@
 Feature: sentences.txt
 
-  Scenario: striped url
+  Scenario: simple sentence from file
     Given text from row 1
     When parsing it
     Then it should be parsed into 3 tokens
