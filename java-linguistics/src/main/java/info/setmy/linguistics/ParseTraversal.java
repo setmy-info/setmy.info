@@ -17,6 +17,7 @@ public class ParseTraversal {
 
     private final char[] characters;
     private final ParsingData parsingData = new ParsingData();
+    private Token whiteCharToken;
     private Token previousToken;
     private Token currentToken;
     private Token nextToken;
@@ -55,5 +56,13 @@ public class ParseTraversal {
 
     public void incrementIndex() {
         index++;
+    }
+
+    public boolean haveNoWhiteCharTokenSet() {
+        return !haveWhiteCharToken();
+    }
+
+    public boolean haveWhiteCharToken() {
+        return whiteCharToken != null;
     }
 }

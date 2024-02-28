@@ -81,6 +81,10 @@ public abstract class Token {
         return isInstanceOf(SentenceEndingToken.class);
     }
 
+    public boolean isSoloQuotationToken() {
+        return isInstanceOf(SoloQuotationToken.class);
+    }
+
     public boolean isPairedQuotationToken() {
         return isBeginPairedQuotationToken() || isEndPairedQuotationToken();
     }

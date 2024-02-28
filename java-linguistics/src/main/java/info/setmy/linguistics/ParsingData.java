@@ -16,12 +16,12 @@ public class ParsingData {
 
     private List<Token> parsedTokens = new ArrayList<>();
 
-    private StringBuilder wordTokenBuilder = new StringBuilder();
+    private StringBuilder alphanumericsCollector = new StringBuilder();
 
-    public void addWordTokenAndNewBuilder() {
-        if (wordTokenBuilder.length() > 0) {
-            parsedTokens.add(new WordToken(wordTokenBuilder.toString()));
-            wordTokenBuilder = new StringBuilder();
+    public void addWordTokenAndMakeNewCollector() {
+        if (alphanumericsCollector.length() > 0) {
+            parsedTokens.add(new WordToken(alphanumericsCollector.toString()));
+            alphanumericsCollector = new StringBuilder();
         }
     }
 

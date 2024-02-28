@@ -1,11 +1,23 @@
 package info.setmy.linguistics;
 
-import info.setmy.linguistics.models.token.*;
+import info.setmy.linguistics.models.token.AlphabeticCharacterToken;
+import info.setmy.linguistics.models.token.BeginBlockToken;
+import info.setmy.linguistics.models.token.BeginPairedQuotationToken;
+import info.setmy.linguistics.models.token.EndBlockToken;
+import info.setmy.linguistics.models.token.EndPairedQuotationToken;
+import info.setmy.linguistics.models.token.LineEndingToken;
+import info.setmy.linguistics.models.token.NumericCharacterToken;
+import info.setmy.linguistics.models.token.PhraseSeparatorToken;
+import info.setmy.linguistics.models.token.SentenceEndingToken;
+import info.setmy.linguistics.models.token.SoloQuotationToken;
+import info.setmy.linguistics.models.token.Token;
+import info.setmy.linguistics.models.token.WhiteCharToken;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static info.setmy.linguistics.TokenUtils.toToken;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TokenUtilsTest {
@@ -47,6 +59,9 @@ public class TokenUtilsTest {
         token = toToken(character);
         assertThat(token).isInstanceOfAny(WhiteCharToken.class, LineEndingToken.class);
         assertTrue(token.isWhiteCharToken());
+        assertFalse(token.isAlphaNumericCharacterToken());
+        assertFalse(token.isAlphabeticCharacterToken());
+        assertFalse(token.isNumericCharacterToken());
     }
 
     @ParameterizedTest

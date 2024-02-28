@@ -14,7 +14,7 @@ public class Parser {
             parsingHandler.hande(traversal.setCurrentToken(character).setNextToken());
             traversal.incrementIndex();
         }
-        traversal.getParsingData().addWordTokenAndNewBuilder();
+        traversal.getParsingData().addWordTokenAndMakeNewCollector();
         return traversal.getParsingData().getParsedTokens();
     }
 }
