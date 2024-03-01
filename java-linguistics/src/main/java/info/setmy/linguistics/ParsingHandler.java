@@ -36,6 +36,7 @@ public class ParsingHandler {
     }
 
     private void handleOtherTextualCharacterToken(final ParseTraversal traversal) {
+        traversal.setWhiteCharToken(null);
         finishParsingWord(traversal);
         appendToken(traversal);
     }
@@ -43,45 +44,43 @@ public class ParsingHandler {
     private void handleWhiteCharacterToken(final ParseTraversal traversal) {
         if (traversal.haveNoWhiteCharTokenSet()) {
             traversal.setWhiteCharToken(traversal.getCurrentToken());
-            //appendCurrentAsAlphanumericToken(traversal);
             finishParsingWord(traversal);
             appendToken(traversal);
         }
     }
 
     private void handleSentenceEndingToken(final ParseTraversal traversal) {
-        //if (traversal.getNextToken().isWhiteCharToken()) {
-            finishParsingWord(traversal);
-            traversal.getParsingData().add(traversal.getCurrentToken());
-        /*} else {
-            appendCurrentAsAlphanumericToken(traversal);
-        }*/
+        traversal.setWhiteCharToken(null);
+        finishParsingWord(traversal);
+        appendToken(traversal);
     }
 
     private void handlePhraseSeparatorToken(final ParseTraversal traversal) {
-        //if (traversal.getNextToken().isWhiteCharToken()) {
+        traversal.setWhiteCharToken(null);
         finishParsingWord(traversal);
         appendToken(traversal);
-        /*} else {
-            appendCurrentAsAlphanumericToken(traversal);
-        }*/
     }
 
     private void handleSoloQuotationToken(final ParseTraversal traversal) {
     }
 
     private void handleBlockToke(final ParseTraversal traversal) {
+        traversal.setWhiteCharToken(null);
         if (traversal.getCurrentToken().isBeginBlockToken()) {
             handleBeginBlockToken(traversal);
         } else if (traversal.getCurrentToken().isEndBlockToken()) {
             handleEndBlockToken(traversal);
         }
+        finishParsingWord(traversal);
+        appendToken(traversal);
     }
 
     private void handleBeginBlockToken(final ParseTraversal traversal) {
+        //appendToken(traversal);
     }
 
     private void handleEndBlockToken(final ParseTraversal traversal) {
+        //appendToken(traversal);
     }
 
     private void handlePairedQuotationToken(final ParseTraversal traversal) {

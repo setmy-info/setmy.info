@@ -48,7 +48,7 @@ public final class TokenConstants {
     public static final Token[] PAIRED_BLOCK_SEPARATOR_ENDINGS = {new EndBlockToken(')'), new EndBlockToken('}'), new EndBlockToken(']'), new EndBlockToken('>')};
 
     // Textual other characters
-    public static final Token[] OTHER_TEXTUAL_CHARACTERS = {new OtherTextualCharacterToken('/'), new OtherTextualCharacterToken('\\'), new OtherTextualCharacterToken('|')};
+    public static final Token[] OTHER_TEXTUAL_CHARACTERS = {new OtherTextualCharacterToken('/'), new OtherTextualCharacterToken('\\'), new OtherTextualCharacterToken('|'), new OtherTextualCharacterToken('='), new OtherTextualCharacterToken('%')};
 
     public static final List<Token> ALL_TOKENS;
 

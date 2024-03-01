@@ -7,3 +7,6 @@ EKI kohanimeandmebaasi (KNAB) Ukraina ainestik veebis on nüüd uuendatud ja sel
 EKI keelenõuande lühikirjutised ilmuvad edaspidi EKI teatmiku artiklitena.
 Kavas on kujundada teatmiku avaleht selliselt, et uudisartiklid tõuseksid esile.
 Kuni selle ajani dubleerime uute lühikirjutiste pealkirju ka keeleabi.eki.ee lehel.
+Tulekahju avastanud isik(ud), teis(t)ele võimalus(t)ele, ega ta (ei) tule.
+Kesk-Aasia elanik
+Hello, World!

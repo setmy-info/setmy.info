@@ -3,7 +3,6 @@ package info.setmy.linguistics.cucumber;
 import info.setmy.linguistics.Parser;
 import info.setmy.linguistics.models.token.Token;
 import io.cucumber.java.Before;
-import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,23 +10,21 @@ import io.cucumber.java.en.When;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import static info.setmy.linguistics.ResourcesUtil.getTestFileName;
 import static info.setmy.models.FileRows.newFileRows;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserDefinitions {
 
-    private static List<String> sentences;
     private Parser parser;
     private String string;
     private List<Token> result;
     private int tokenCounter;
 
-    @BeforeAll
-    public static void beforeAll() {
-        sentences = newFileRows(getTestFileName(ParserDefinitions.class, "sentences.txt")).get().getRows();
-    }
+    private List<String> sentences;
 
     @Before
     public void before() {
@@ -35,6 +32,11 @@ public class ParserDefinitions {
         string = "";
         result = new ArrayList<>();
         tokenCounter = 0;
+    }
+
+    @Given("file {string} is read in as lines in list")
+    public void readFileIn(final String fileName) {
+        sentences = newFileRows(getTestFileName(ParserDefinitions.class, fileName)).get().getRows();
     }
 
     @Given("the text is {string}")
@@ -60,6 +62,14 @@ public class ParserDefinitions {
     @And("the token should be {string}")
     public void andShouldHave(final String string) {
         assertThat(result.get(tokenCounter).toString()).isEqualTo(string);
+        tokenCounter++;
+    }
+
+    @And("the token should be {string}, that is {isInType}")
+    public void andShouldHaveInType(final String string, final Function<Token, Boolean> isInType) {
+        final Token token = result.get(tokenCounter);
+        assertThat(token.toString()).isEqualTo(string);
+        assertTrue(isInType.apply(token));
         tokenCounter++;
     }
 
