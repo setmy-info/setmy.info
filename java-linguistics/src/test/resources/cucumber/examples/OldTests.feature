@@ -75,12 +75,3 @@ Feature: old and new uncovered tests
 		Given the text is "This is longer sentence, with some sentence ending characters. Maybe text have questions? Maybe text ends with!"
 		When parsing it
     # TODO : ...
-
-#
-#
-#
-#
-#
-#
-#
-#

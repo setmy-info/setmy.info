@@ -61,6 +61,10 @@ public abstract class Token {
         return isInstanceOf(AlphaNumericCharacterToken.class);
     }
 
+    public boolean isOtherTextualCharacterToken() {
+        return isInstanceOf(OtherTextualCharacterToken.class);
+    }
+
     public boolean isLineEndingToken() {
         return isInstanceOf(LineEndingToken.class);
     }

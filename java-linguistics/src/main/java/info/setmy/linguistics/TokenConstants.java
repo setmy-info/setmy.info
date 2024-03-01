@@ -1,9 +1,25 @@
-package info.setmy.linguistics.models.token;
+package info.setmy.linguistics;
+
+import info.setmy.linguistics.models.token.BeginBlockToken;
+import info.setmy.linguistics.models.token.BeginPairedQuotationToken;
+import info.setmy.linguistics.models.token.EndBlockToken;
+import info.setmy.linguistics.models.token.EndPairedQuotationToken;
+import info.setmy.linguistics.models.token.LineEndingToken;
+import info.setmy.linguistics.models.token.OtherTextualCharacterToken;
+import info.setmy.linguistics.models.token.PhraseSeparatorToken;
+import info.setmy.linguistics.models.token.SentenceEndingToken;
+import info.setmy.linguistics.models.token.SoloQuotationToken;
+import info.setmy.linguistics.models.token.Token;
+import info.setmy.linguistics.models.token.WhiteCharToken;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static lombok.AccessLevel.PRIVATE;
+
+@NoArgsConstructor(access = PRIVATE)
 public final class TokenConstants {
 
     /*
@@ -31,6 +47,9 @@ public final class TokenConstants {
     public static final Token[] PAIRED_BLOCK_SEPARATOR_BEGINNINGS = {new BeginBlockToken('('), new BeginBlockToken('{'), new BeginBlockToken('['), new BeginBlockToken('<')};
     public static final Token[] PAIRED_BLOCK_SEPARATOR_ENDINGS = {new EndBlockToken(')'), new EndBlockToken('}'), new EndBlockToken(']'), new EndBlockToken('>')};
 
+    // Textual other characters
+    public static final Token[] OTHER_TEXTUAL_CHARACTERS = {new OtherTextualCharacterToken('/'), new OtherTextualCharacterToken('\\'), new OtherTextualCharacterToken('|')};
+
     public static final List<Token> ALL_TOKENS;
 
     static {
@@ -44,9 +63,7 @@ public final class TokenConstants {
         all.addAll(Arrays.asList(PAIRED_QUOTE_SEPARATOR_ENDINGS));
         all.addAll(Arrays.asList(PAIRED_BLOCK_SEPARATOR_BEGINNINGS));
         all.addAll(Arrays.asList(PAIRED_BLOCK_SEPARATOR_ENDINGS));
+        all.addAll(Arrays.asList(OTHER_TEXTUAL_CHARACTERS));
         ALL_TOKENS = all;
-    }
-
-    private TokenConstants() {
     }
 }

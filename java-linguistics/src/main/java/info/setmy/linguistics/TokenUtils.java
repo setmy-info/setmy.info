@@ -6,7 +6,7 @@ import info.setmy.linguistics.models.token.Token;
 
 import java.util.regex.Pattern;
 
-import static info.setmy.linguistics.models.token.TokenConstants.ALL_TOKENS;
+import static info.setmy.linguistics.TokenConstants.ALL_TOKENS;
 
 public class TokenUtils {
 

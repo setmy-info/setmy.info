@@ -7,6 +7,7 @@ import info.setmy.linguistics.models.token.EndBlockToken;
 import info.setmy.linguistics.models.token.EndPairedQuotationToken;
 import info.setmy.linguistics.models.token.LineEndingToken;
 import info.setmy.linguistics.models.token.NumericCharacterToken;
+import info.setmy.linguistics.models.token.OtherTextualCharacterToken;
 import info.setmy.linguistics.models.token.PhraseSeparatorToken;
 import info.setmy.linguistics.models.token.SentenceEndingToken;
 import info.setmy.linguistics.models.token.SoloQuotationToken;
@@ -115,5 +116,12 @@ public class TokenUtilsTest {
     public void pairedBlockEndChars(final Character character) {
         token = toToken(character);
         assertThat(token).isInstanceOf(EndBlockToken.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(chars = {'/', '\\', '|'})
+    public void pairedOtherTextualChars(final Character character) {
+        token = toToken(character);
+        assertThat(token).isInstanceOf(OtherTextualCharacterToken.class);
     }
 }

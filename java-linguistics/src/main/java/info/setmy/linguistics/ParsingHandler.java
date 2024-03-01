@@ -9,6 +9,8 @@ public class ParsingHandler {
         final Token currentToken = traversal.getCurrentToken();
         if (currentToken.isAlphaNumericCharacterToken()) {
             handleAlphaNumericCharacterToken(traversal);
+        } else if (currentToken.isOtherTextualCharacterToken()) {
+            handleOtherTextualCharacterToken(traversal);
         } else if (currentToken.isWhiteCharToken()) {
             handleWhiteCharacterToken(traversal);
         } else if (currentToken.isSentenceEndingToken()) {
@@ -33,31 +35,36 @@ public class ParsingHandler {
         appendCurrentAsAlphanumericToken(traversal);
     }
 
+    private void handleOtherTextualCharacterToken(final ParseTraversal traversal) {
+        finishParsingWord(traversal);
+        appendToken(traversal);
+    }
+
     private void handleWhiteCharacterToken(final ParseTraversal traversal) {
         if (traversal.haveNoWhiteCharTokenSet()) {
             traversal.setWhiteCharToken(traversal.getCurrentToken());
             //appendCurrentAsAlphanumericToken(traversal);
             finishParsingWord(traversal);
-            appendCurrentAsWhiteCharToken(traversal);
+            appendToken(traversal);
         }
     }
 
     private void handleSentenceEndingToken(final ParseTraversal traversal) {
-        if (traversal.getNextToken().isWhiteCharToken()) {
+        //if (traversal.getNextToken().isWhiteCharToken()) {
             finishParsingWord(traversal);
             traversal.getParsingData().add(traversal.getCurrentToken());
-        } else {
+        /*} else {
             appendCurrentAsAlphanumericToken(traversal);
-        }
+        }*/
     }
 
     private void handlePhraseSeparatorToken(final ParseTraversal traversal) {
-        if (traversal.getNextToken().isWhiteCharToken()) {
-            finishParsingWord(traversal);
-            traversal.getParsingData().add(traversal.getCurrentToken());
-        } else {
+        //if (traversal.getNextToken().isWhiteCharToken()) {
+        finishParsingWord(traversal);
+        appendToken(traversal);
+        /*} else {
             appendCurrentAsAlphanumericToken(traversal);
-        }
+        }*/
     }
 
     private void handleSoloQuotationToken(final ParseTraversal traversal) {
@@ -104,7 +111,7 @@ public class ParsingHandler {
         );
     }
 
-    private void appendCurrentAsWhiteCharToken(final ParseTraversal traversal) {
+    private void appendToken(final ParseTraversal traversal) {
         traversal.getParsingData().add(traversal.getCurrentToken());
     }
 }
