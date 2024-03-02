@@ -1,5 +1,32 @@
 Feature: parsing only alphanumeric and white character sentences, without any other characters
 
+	Scenario: string without length
+		Given the text is ""
+		When parsing it
+		Then it should be parsed into 0 tokens
+		And there should be no more tokens
+
+	Scenario: empty string
+		Given the text is " "
+		When parsing it
+		Then it should be parsed into 1 tokens
+		And the token should be " ", that is WhiteCharToken
+		And there should be no more tokens
+
+	Scenario: empty string 2 empty chars
+		Given the text is "  "
+		When parsing it
+		Then it should be parsed into 1 tokens
+		And the token should be " ", that is WhiteCharToken
+		And there should be no more tokens
+
+	Scenario: empty string 3 tabs
+		Given the text is "			"
+		When parsing it
+		Then it should be parsed into 1 tokens
+		And the token should be "	", that is WhiteCharToken
+		And there should be no more tokens
+
 	Scenario: single alphabetic words
 		Given the text is "Hello"
 		When parsing it
@@ -7,7 +34,7 @@ Feature: parsing only alphanumeric and white character sentences, without any ot
 		And the token should be "Hello", that is WordToken
 		And there should be no more tokens
 
-	Scenario: single alphabetic words both sides un striped
+	Scenario: single alphabetic words both sides Un-striped
 		Given the text is "  Hello  "
 		When parsing it
 		Then it should be parsed into 3 tokens
@@ -16,7 +43,7 @@ Feature: parsing only alphanumeric and white character sentences, without any ot
 		And the token should be " ", that is WhiteCharToken
 		And there should be no more tokens
 
-	Scenario: single alphabetic words right side un striped
+	Scenario: single alphabetic words right side Un-striped
 		Given the text is "Hello  "
 		When parsing it
 		Then it should be parsed into 2 tokens
@@ -24,7 +51,7 @@ Feature: parsing only alphanumeric and white character sentences, without any ot
 		And the token should be " ", that is WhiteCharToken
 		And there should be no more tokens
 
-	Scenario: single alphabetic words left side un striped
+	Scenario: single alphabetic words left side Un-striped
 		Given the text is "  Hello"
 		When parsing it
 		Then it should be parsed into 2 tokens
@@ -41,7 +68,7 @@ Feature: parsing only alphanumeric and white character sentences, without any ot
 		And the token should be "World", that is WordToken
 		And there should be no more tokens
 
-	Scenario: double word sentence un striped
+	Scenario: Un-striped double word sentences
 		Given the text is " 	 Hello 	 World 	 "
 		When parsing it
 		Then it should be parsed into 5 tokens

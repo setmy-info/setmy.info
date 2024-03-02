@@ -1,6 +1,7 @@
 Feature: old and new uncovered tests
+
 	'''
-	asdasd
+	Miscellaneous test steps.
 	'''
 
 	Scenario: difficult sentence 1
@@ -73,7 +74,7 @@ Feature: old and new uncovered tests
 		And there should be no more tokens
 
 	Scenario: difficult sentence 11
-		Given the text is "   Hello,    World.   "
+		Given the text is "   Hello,   World.   "
 		When parsing it
 		Then it should be parsed into 7 tokens
 		And the token should be " ", that is WhiteCharToken
@@ -161,5 +162,27 @@ Feature: old and new uncovered tests
 		And the token should be "ends", that is WordToken
 		And the token should be " ", that is WhiteCharToken
 		And the token should be "with", that is WordToken
+		And the token should be "!", that is SentenceEndingToken
+		And there should be no more tokens
+
+	Scenario: EKI hyphen usage
+		Given the text is "Kesk-Aasia elanik"
+		When parsing it
+		Then it should be parsed into 5 tokens
+		And the token should be "Kesk"
+		And the token should be "-"
+		And the token should be "Aasia"
+		And the token should be " "
+		And the token should be "elanik"
+		And there should be no more tokens
+
+	Scenario: Hello, World!
+		Given the text is "Hello, World!"
+		When parsing it
+		Then it should be parsed into 5 tokens
+		And the token should be "Hello", that is WordToken
+		And the token should be ",", that is PhraseSeparatorToken
+		And the token should be " ", that is WhiteCharToken
+		And the token should be "World", that is WordToken
 		And the token should be "!", that is SentenceEndingToken
 		And there should be no more tokens

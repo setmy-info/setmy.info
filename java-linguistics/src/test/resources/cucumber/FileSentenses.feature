@@ -4,7 +4,7 @@ Feature: sentences.txt
 		Given file "sentences.txt" is read in as lines in list
 
 	Scenario: Hello World in estonian
-		Given text from row 1
+		Given the text is "Tere maailm!"
 		When parsing it
 		Then it should be parsed into 4 tokens
 		And the token should be "Tere", that is WordToken
@@ -14,7 +14,7 @@ Feature: sentences.txt
 		And there should be no more tokens
 
 	Scenario: EKI organization sentence
-		Given text from row 2
+		Given the text is "Eesti Keele Instituut on riiklik teadus- ja  arendusasutus."
 		When parsing it
 		Then it should be parsed into 17 tokens
 		And the token should be "Eesti", that is WordToken
@@ -37,7 +37,7 @@ Feature: sentences.txt
 		And there should be no more tokens
 
 	Scenario: EKI parentheses usage sentence
-		Given text from row 10
+		Given the text is "Tulekahju avastanud isik(ud), teis(t)ele võimalus(t)ele, ega ta (ei) tule."
 		When parsing it
 		Then it should be parsed into 33 tokens
 		And the token should be "Tulekahju"
@@ -73,26 +73,4 @@ Feature: sentences.txt
 		And the token should be " "
 		And the token should be "tule"
 		And the token should be "."
-		And there should be no more tokens
-
-	Scenario: EKI hyphen usage
-		Given text from row 11
-		When parsing it
-		Then it should be parsed into 5 tokens
-		And the token should be "Kesk"
-		And the token should be "-"
-		And the token should be "Aasia"
-		And the token should be " "
-		And the token should be "elanik"
-		And there should be no more tokens
-
-	Scenario: Hello, World!
-		Given text from row 12
-		When parsing it
-		Then it should be parsed into 5 tokens
-		And the token should be "Hello", that is WordToken
-		And the token should be ",", that is PhraseSeparatorToken
-		And the token should be " ", that is WhiteCharToken
-		And the token should be "World", that is WordToken
-		And the token should be "!", that is SentenceEndingToken
 		And there should be no more tokens
