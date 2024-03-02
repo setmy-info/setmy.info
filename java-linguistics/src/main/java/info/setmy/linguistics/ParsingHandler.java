@@ -76,11 +76,9 @@ public class ParsingHandler {
     }
 
     private void handleBeginBlockToken(final ParseTraversal traversal) {
-        //appendToken(traversal);
     }
 
     private void handleEndBlockToken(final ParseTraversal traversal) {
-        //appendToken(traversal);
     }
 
     private void handlePairedQuotationToken(final ParseTraversal traversal) {

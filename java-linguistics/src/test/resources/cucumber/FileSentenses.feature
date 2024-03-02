@@ -1,4 +1,4 @@
-Feature: sentences.txt
+Feature: texts from sentences.txt from https://keeleabi.eki.ee/viki/Sulud.html
 
 	Background:
 		Given file "sentences.txt" is read in as lines in list

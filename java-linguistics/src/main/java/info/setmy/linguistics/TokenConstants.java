@@ -1,16 +1,6 @@
 package info.setmy.linguistics;
 
-import info.setmy.linguistics.models.token.BeginBlockToken;
-import info.setmy.linguistics.models.token.BeginPairedQuotationToken;
-import info.setmy.linguistics.models.token.EndBlockToken;
-import info.setmy.linguistics.models.token.EndPairedQuotationToken;
-import info.setmy.linguistics.models.token.LineEndingToken;
-import info.setmy.linguistics.models.token.OtherTextualCharacterToken;
-import info.setmy.linguistics.models.token.PhraseSeparatorToken;
-import info.setmy.linguistics.models.token.SentenceEndingToken;
-import info.setmy.linguistics.models.token.SoloQuotationToken;
-import info.setmy.linguistics.models.token.Token;
-import info.setmy.linguistics.models.token.WhiteCharToken;
+import info.setmy.linguistics.models.token.*;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -48,7 +38,19 @@ public final class TokenConstants {
     public static final Token[] PAIRED_BLOCK_SEPARATOR_ENDINGS = {new EndBlockToken(')'), new EndBlockToken('}'), new EndBlockToken(']'), new EndBlockToken('>')};
 
     // Textual other characters
-    public static final Token[] OTHER_TEXTUAL_CHARACTERS = {new OtherTextualCharacterToken('/'), new OtherTextualCharacterToken('\\'), new OtherTextualCharacterToken('|'), new OtherTextualCharacterToken('='), new OtherTextualCharacterToken('%')};
+    public static final Token[] OTHER_TEXTUAL_CHARACTERS = {
+        new OtherTextualCharacterToken('/'),
+        new OtherTextualCharacterToken('\\'),
+        new OtherTextualCharacterToken('|'),
+        new OtherTextualCharacterToken('='),
+        new OtherTextualCharacterToken('%'),
+        new OtherTextualCharacterToken('‰'),
+        new OtherTextualCharacterToken('§'),
+        new OtherTextualCharacterToken('&'),
+        new OtherTextualCharacterToken('@'),
+        new OtherTextualCharacterToken('§'),
+        new OtherTextualCharacterToken('°')
+    };
 
     public static final List<Token> ALL_TOKENS;
 
