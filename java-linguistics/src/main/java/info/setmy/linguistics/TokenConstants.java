@@ -48,7 +48,6 @@ public final class TokenConstants {
         new OtherTextualCharacterToken('§'),
         new OtherTextualCharacterToken('&'),
         new OtherTextualCharacterToken('@'),
-        new OtherTextualCharacterToken('§'),
         new OtherTextualCharacterToken('°')
     };
 

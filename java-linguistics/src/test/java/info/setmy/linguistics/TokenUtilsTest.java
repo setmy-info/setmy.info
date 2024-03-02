@@ -1,18 +1,6 @@
 package info.setmy.linguistics;
 
-import info.setmy.linguistics.models.token.AlphabeticCharacterToken;
-import info.setmy.linguistics.models.token.BeginBlockToken;
-import info.setmy.linguistics.models.token.BeginPairedQuotationToken;
-import info.setmy.linguistics.models.token.EndBlockToken;
-import info.setmy.linguistics.models.token.EndPairedQuotationToken;
-import info.setmy.linguistics.models.token.LineEndingToken;
-import info.setmy.linguistics.models.token.NumericCharacterToken;
-import info.setmy.linguistics.models.token.OtherTextualCharacterToken;
-import info.setmy.linguistics.models.token.PhraseSeparatorToken;
-import info.setmy.linguistics.models.token.SentenceEndingToken;
-import info.setmy.linguistics.models.token.SoloQuotationToken;
-import info.setmy.linguistics.models.token.Token;
-import info.setmy.linguistics.models.token.WhiteCharToken;
+import info.setmy.linguistics.models.token.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -119,7 +107,7 @@ public class TokenUtilsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(chars = {'/', '\\', '|'})
+    @ValueSource(chars = {'/', '\\', '|', '=', '%', '‰', '§', '&', '@', '°'})
     public void pairedOtherTextualChars(final Character character) {
         token = toToken(character);
         assertThat(token).isInstanceOf(OtherTextualCharacterToken.class);
