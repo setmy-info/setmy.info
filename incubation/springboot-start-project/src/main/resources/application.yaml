@@ -1,0 +1,42 @@
+server:
+    port: 8080
+    #    servlet:
+    #        context-path: /api
+    compression:
+        enabled: true
+        mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+
+spring:
+    application:
+        name: springboot-start-project
+        console:
+            #           TODO : by default (LIVE) false, in development and local developer true
+            #            enabled: false
+            enabled: true
+    main:
+        banner-mode: "console"
+    datasource:
+        url: jdbc:h2:file:./target/local
+        driverClassName: org.h2.Driver
+        username: sa
+        password:
+    h2:
+        console:
+            enabled: true
+    liquibase:
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.H2Dialect
+                id:
+                    new_generator_mappings: false
+                # TODO : by default false (LIVE) and developers true
+                #format_sql: false
+                format_sql: true
+
+# TODO : by default liquibase should use separate datasource (separate rights)
+#liquibaseDataSource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:file:./target/default
+#    username: sa
+#    password:
