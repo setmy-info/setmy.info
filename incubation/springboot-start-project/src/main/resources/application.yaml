@@ -1,7 +1,7 @@
 server:
     port: 8080
-    #    servlet:
-    #        context-path: /api
+    servlet:
+        context-path: /
     compression:
         enabled: true
         mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
@@ -14,7 +14,7 @@ spring:
             #            enabled: false
             enabled: true
     main:
-        banner-mode: "console"
+        banner-mode: "off"
     datasource:
         url: jdbc:h2:file:./target/local
         driverClassName: org.h2.Driver
@@ -24,6 +24,8 @@ spring:
         console:
             enabled: true
     liquibase:
+        # With profiles in dev only
+        contexts: load_example_data
     jpa:
         properties:
             hibernate:

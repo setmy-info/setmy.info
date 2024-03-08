@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1.0.0_example" author="Imre Tabur">
+
+        <createSequence sequenceName="EXAMPLE_ID_SEQ" incrementBy="1" startValue="2"/>
+
+        <createTable tableName="EXAMPLE">
+            <column name="ID" type="bigint">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="text" type="varchar(512)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="EXAMPLE"/>
+            <dropSequence sequenceName="EXAMPLE_ID_SEQ"/>
+        </rollback>
+
+    </changeSet>
+
+    <changeSet id="1.0.0_example_data" author="Imre Tabur" context="load_example_data">
+        <loadData file="example.csv" tableName="EXAMPLE" relativeToChangelogFile="true"></loadData>
+    </changeSet>
+
+</databaseChangeLog>

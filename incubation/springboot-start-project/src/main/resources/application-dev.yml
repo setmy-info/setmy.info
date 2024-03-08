@@ -1,0 +1,3 @@
+spring:
+    liquibase:
+        contexts: load_example_data

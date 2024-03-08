@@ -25,11 +25,11 @@ The following guides illustrate how to use some features concretely:
 # TODO
 
 1. Liquibase with separate higher rights datasource, to change DB structure.
-1. JDBC, JPA, H2, PostgreSQL, HSQLDB, Derby, ...
-1. Example Model, Repo, DAO, Service, Controller. JSON(B).
+1. JDBC, JPA/Hibernate, H2, PostgreSQL, HSQLDB, Derby, ...
+1. Example Model, Repository, DAO, Service, Controller. JSON(B).
 1. Quartz.
 1. Profiles + application.yaml
-1. JUnit 5 +  JUnit Vintage + Mockito + AssertJ + Cucumber + PITest.
+1. JUnit 5 + JUnit Vintage + Mockito + AssertJ + Cucumber + PITest.
 1. Log4J2.
 1. Lombok.
 1. Mapstruct.
@@ -39,7 +39,7 @@ The following guides illustrate how to use some features concretely:
 1. Groovy.
 1. Clojure + Leiningen.
 1. Docker file(s).
-1. K8S files.
+1. K8S files. Minikube.
 1. Spring security, simple security basic auth with username and password.
 1. CLI example or separate main. Picocli.
 1. PostGIS. H2Gis.
@@ -47,7 +47,8 @@ The following guides illustrate how to use some features concretely:
 1. AOP example.
 1. Hibernate + Infinispan 2nd level cache.
 1. Build number component.
-1. Spring Actuators. 
+1. Spring Actuators.
 1. H2 Development console.
 1. Thymeleaf MPA.
 1. Keycloak IM integration.
+1. Exception handler in Spring boot @ControllerAdvice and @ExceptionHandler
