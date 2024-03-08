@@ -35,8 +35,10 @@ spring:
                 # TODO : by default false (LIVE) and developers true
                 #format_sql: false
                 format_sql: true
-
-# TODO : by default liquibase should use separate datasource (separate rights)
+    graphql:
+        graphiql:
+            enabled: true
+# TODO: by default liquibase should use separate datasource (separate rights)
 #liquibaseDataSource:
 #    driver-class-name: org.h2.Driver
 #    url: jdbc:h2:file:./target/default

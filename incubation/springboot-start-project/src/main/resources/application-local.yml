@@ -1,4 +1,7 @@
 spring:
+    application:
+        console:
+            enabled: true
     main:
         banner-mode: "log"
     security:
