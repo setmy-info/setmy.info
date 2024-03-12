@@ -27,6 +27,7 @@
         <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
+        <spring.boot.main.class>info.setmy.microservice.Application</spring.boot.main.class>
 
         <junit5.version>5.10.2</junit5.version>
         <junit.platform.version>1.10.2</junit.platform.version>
@@ -331,7 +332,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <!-- mainClass>${spring.boot.main.class}</mainClass -->
+                    <mainClass>${spring.boot.main.class}</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -366,7 +367,7 @@
         </plugins>
     </build>
 
-    <!-- profiles>
+    <profiles>
         <profile>
             <id>e2e</id>
             <build>
@@ -384,6 +385,6 @@
                 </plugins>
             </build>
         </profile>
-    </profiles -->
+    </profiles>
 
 </project>

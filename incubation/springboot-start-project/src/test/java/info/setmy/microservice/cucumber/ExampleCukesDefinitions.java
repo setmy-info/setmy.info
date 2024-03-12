@@ -1,16 +1,7 @@
 package info.setmy.microservice.cucumber;
 
-import io.cucumber.java.After;
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.Before;
-import io.cucumber.java.BeforeStep;
-import io.cucumber.java.ParameterType;
-import io.cucumber.java.Scenario;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.But;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.*;
+import io.cucumber.java.en.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +18,6 @@ import java.util.Map;
  * https://cucumber.io/docs/cucumber/api/#step-arguments
  * https://cucumber.io/docs/cucumber/api/
  * https://github.com/cucumber/cucumber-jvm/tree/master/java
- *
  */
 public class ExampleCukesDefinitions {
 

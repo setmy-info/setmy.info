@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
 
-
+// http://localhost:8080/listExample
 @Log4j2
 @Controller
 @RequestMapping("/listExample")

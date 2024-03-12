@@ -25,8 +25,8 @@ public class CLIApplication implements CommandLineRunner, ExitCodeGenerator {
     @Override
     public void run(final String... args) throws Exception {
         var exampleModel = exampleService.getExampleModel();
-        exitCode = 0;
         // Also changes in exitCode
+        exitCode = 0;
     }
 
     @Override
