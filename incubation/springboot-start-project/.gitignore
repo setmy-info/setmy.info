@@ -33,3 +33,5 @@ build/
 ### VS Code ###
 .vscode/
 /.mvn/wrapper/maven-wrapper.jar
+
+derby.log

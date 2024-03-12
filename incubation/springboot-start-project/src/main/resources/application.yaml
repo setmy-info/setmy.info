@@ -14,7 +14,7 @@ spring:
             #            enabled: false
             enabled: true
     main:
-        banner-mode: "off"
+        banner-mode: "console"
     datasource:
         url: jdbc:h2:file:./target/local
         driverClassName: org.h2.Driver
@@ -35,10 +35,8 @@ spring:
                 # TODO : by default false (LIVE) and developers true
                 #format_sql: false
                 format_sql: true
-    graphql:
-        graphiql:
-            enabled: true
-# TODO: by default liquibase should use separate datasource (separate rights)
+
+# TODO : by default liquibase should use separate datasource (separate rights)
 #liquibaseDataSource:
 #    driver-class-name: org.h2.Driver
 #    url: jdbc:h2:file:./target/default

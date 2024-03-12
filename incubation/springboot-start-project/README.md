@@ -29,7 +29,7 @@ The following guides illustrate how to use some features concretely:
 1. Example Model, Repository, DAO, Service, Controller. JSON(B).
 1. Quartz.
 1. Profiles + application.yaml
-1. JUnit 5 + JUnit Vintage + Mockito + AssertJ + Cucumber + PITest.
+1. JUnit 5 + JUnit Vintage + Mockito + AssertJ + Cucumber (+ Spring Boot integration + unit and integration separation = 2x are executed) + PITest.
 1. Log4J2.
 1. Lombok.
 1. Mapstruct.
@@ -52,14 +52,3 @@ The following guides illustrate how to use some features concretely:
 1. Thymeleaf MPA.
 1. Keycloak IM integration.
 1. Exception handler in Spring boot @ControllerAdvice and @ExceptionHandler
-
-# Testing
-
-1. http://localhost:8080/
-2. http://localhost:8080/home
-3. http://localhost:8080/login
-3. http://localhost:8080/h2-console
-4. http://localhost:8080/listExample
-5. http://localhost:8080/example.html
-6. http://localhost:8080/graphiql?path=/graphql
-7. curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -i http://localhost:8080/api/example

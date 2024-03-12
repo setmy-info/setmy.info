@@ -1,6 +1,7 @@
 package info.setmy.microservice;
 
 import jakarta.persistence.EntityManagerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -24,8 +25,8 @@ public class DatasourceBeans {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-        final DataSource dataSource,
-        final HibernateJpaVendorAdapter jpaAdapter
+        /*@Qualifier("dataSource")*/ final DataSource dataSource,
+        /*@Qualifier("jpaAdapter")*/ final HibernateJpaVendorAdapter jpaAdapter
     ) {
         final var entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(dataSource);
@@ -36,7 +37,7 @@ public class DatasourceBeans {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+    public PlatformTransactionManager transactionManager(/*@Qualifier("entityManagerFactory")*/ EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }
