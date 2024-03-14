@@ -20,7 +20,6 @@
         </rollingPolicy>
     </appender>
 
-
     <springProfile name="local">
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
@@ -39,6 +38,13 @@
         <logger name="org.springframework.web" level="DEBUG"/>
     </springProfile>
 
+    <springProfile name="ci">
+        <root level="INFO">
+            <!-- appender-ref ref="CONSOLE"/ -->
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
     <springProfile name="test">
         <root level="INFO">
             <!-- appender-ref ref="CONSOLE"/ -->
@@ -47,13 +53,6 @@
     </springProfile>
 
     <springProfile name="prelive">
-        <root level="INFO">
-            <!-- appender-ref ref="CONSOLE"/ -->
-            <appender-ref ref="FILE"/>
-        </root>
-    </springProfile>
-
-    <springProfile name="ci">
         <root level="INFO">
             <!-- appender-ref ref="CONSOLE"/ -->
             <appender-ref ref="FILE"/>

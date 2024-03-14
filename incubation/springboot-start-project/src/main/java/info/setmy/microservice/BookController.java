@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 POST (Content-Type: ation/json; Accept: application/json) : http://localhost:8080/graphql
 BODY: {"query":"query bookDetails {\n  bookById(id: \"book-1\") {\n    id\n    name\n    pageCount\n    author {\n      id\n      firstName\n      lastName\n    }\n  }\n}","operationName":"bookDetails"}
 
+Actual Query: {bookById(id: "book-1") {id name pageCount author {id firstName lastName}}}
+
  */
 @Controller
 class BookController {
