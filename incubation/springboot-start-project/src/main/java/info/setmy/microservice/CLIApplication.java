@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 //@SpringBootApplication
+//@EnableScheduling
 @RequiredArgsConstructor
 public class CLIApplication implements CommandLineRunner, ExitCodeGenerator {
 

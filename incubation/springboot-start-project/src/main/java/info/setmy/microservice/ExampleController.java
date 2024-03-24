@@ -3,6 +3,8 @@ package info.setmy.microservice;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,9 +25,19 @@ public class ExampleController {
 
     private final ExampleService exampleService;
 
-    @GetMapping(value = "")
-    public ExampleModel example() {
-        log.info("Spring controller called!!");
-        return exampleService.getExampleModel();
+    private final ExampleMapper exampleMapper;
+
+    @GetMapping//(value = "")
+    public ExampleDTO example() {
+        log.info("Example GET called");
+        return exampleMapper.toDto(exampleService.getExampleModel());
+    }
+
+    @PostMapping//(value = "")
+    public ExampleDTO example(@RequestBody final ExampleDTO exampleDTO) {
+        log.info("Example POST called {}", exampleDTO);
+        return exampleMapper.toDto(
+            exampleMapper.toEntity(exampleDTO)
+        );
     }
 }
