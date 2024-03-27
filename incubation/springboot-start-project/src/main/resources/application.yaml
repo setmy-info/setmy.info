@@ -10,8 +10,8 @@ spring:
     application:
         name: springboot-start-project
         console:
-            #           TODO : by default (LIVE) false, in development and local developer true
-            #            enabled: false
+            # TODO : by default (LIVE) false, in development and local developer true
+            # enabled: false
             enabled: true
     main:
         banner-mode: "console"
@@ -94,6 +94,14 @@ springdoc:
     api-docs:
         version: openapi_3_1
     enable-groovy: true
+
+infinispan:
+    remote:
+        server-list: 127.0.0.1
+        marshaller: org.infinispan.commons.marshall.ProtoStreamMarshaller
+        java-serial-allowlist: info.setmy.microservice.*
+        auth-username: admin
+        auth-password: password
 
 maven:
     project:

@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+//import org.infinispan.client.hotrod.RemoteCacheManager;
+import org.infinispan.manager.EmbeddedCacheManager;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +29,16 @@ public class ExampleService {
 
     private final JPAExampleDao jpaExampleDao;
 
+    private final EmbeddedCacheManager cacheManager;
+    //private final RemoteCacheManager cacheManager;
+
     @Transactional
     public ExampleModel getExampleModel() {
         log.info("getExampleModel");
         //insertData();
         //final ExampleModel model = exampleDao.getExampleModel();
+        cacheManager.getCache("exampleCache").put("exampleKey", "Hello World from Cache!");
+        log.info("Cache: {}", cacheManager.getCache("exampleCache").get("exampleKey"));
         final ExampleModel model = exampleRepository.findAll().get(0);
         final ExampleModel newModel = new ExampleModel().setId(model.getId()).setDateTime(model.getDateTime()).setText(model.getText());
         return newModel;

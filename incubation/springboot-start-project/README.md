@@ -23,6 +23,20 @@ The following guides illustrate how to use some features concretely:
 
 * [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
 
+#### Docker composer services
+
+```shell
+docker-compose -f ./src/test/docker/docker-compose.yml up
+```
+
+##### Infinispan
+
+http://localhost:11222
+
+##### Keycloak
+
+http://localhost:8080
+
 # TODO and requirements list
 
 1. Liquibase with separate higher rights datasource, to change DB structure. Multi node ready by default?
