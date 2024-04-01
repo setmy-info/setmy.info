@@ -40,7 +40,7 @@ http://localhost:8080
 # TODO and requirements list
 
 1. Liquibase with separate higher rights datasource, to change DB structure. Multi node ready by default?
-1. JDBC, JPA/Hibernate, H2, PostgreSQL, HSQLDB, Derby, ...
+1. JDBC, JPA/Hibernate, H2, PostgreSQL, HSQLDB, Derby, ... Multi tenant, tenant per table partition.
 1. Example Model, Repository, DAO, Service, Controller. JSON(B).
 1. Quartz top on DB - multi node ready.
 1. Profiles (by envs, like: local, dev, test, prelive, live) + application.yaml
@@ -50,7 +50,7 @@ http://localhost:8080
 1. Lombok.
 1. Mapstruct.
 1. Maven site with different reports: JavaDoc, Test Coverage,PITest, StopPugs, etc.
-1. Cache with Local Infinispan. Multi node ready. Hibernate 2nd level cache?
+1. Cache with Local Infinispan. Multi node ready.
 1. Swagger.
 1. Groovy.
 1. Clojure + Leiningen.
@@ -67,7 +67,7 @@ http://localhost:8080
 1. Spring Actuators.
 1. H2 Development console.
 1. Thymeleaf MPA.
-1. Keycloak IM integration.
+1. Keycloak IM integration. Multi tenant. Multi tenant single realm.
 1. Exception handler in Spring boot @ControllerAdvice and @ExceptionHandler
 1. REST Client and example
 1. GraphQL Client and example

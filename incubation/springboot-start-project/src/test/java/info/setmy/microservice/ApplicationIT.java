@@ -1,12 +1,21 @@
 package info.setmy.microservice;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@SpringBootTest(classes = Application.class)
-class ApplicationIT {
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+public class ApplicationIT extends SpringBase {
+
+    @Autowired
+    private ExampleProperties exampleProperties;
 
     @Test
     void contextLoads() {
+    }
+
+    @Test
+    void exampleProperties() {
+        assertThat(exampleProperties.getFoo()).isEqualTo("Integration test application.yaml");
     }
 }

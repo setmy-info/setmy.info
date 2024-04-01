@@ -1,0 +1,7 @@
+spring:
+    main:
+        banner-mode: "console"
+
+springBootStartProject:
+    example:
+        foo: Integration test application.yaml

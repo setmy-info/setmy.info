@@ -4,6 +4,7 @@
 Feature: example cukes
 
     Background:
+        Given spring boot environment is started
         Given first name is "Imre"
         And last name is "Tabur"
         And book name is "Best Seller"

@@ -1,0 +1,4 @@
+
+springBootStartProject:
+    example:
+        foo: application-ci.yaml

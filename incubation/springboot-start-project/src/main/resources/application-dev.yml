@@ -1,3 +1,7 @@
 spring:
     liquibase:
         contexts: load_example_data
+
+springBootStartProject:
+    example:
+        foo: application-dev.yaml
