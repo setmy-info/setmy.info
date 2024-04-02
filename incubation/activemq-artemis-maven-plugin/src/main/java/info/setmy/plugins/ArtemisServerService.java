@@ -2,59 +2,44 @@ package info.setmy.plugins;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.apache.activemq.artemis.api.core.client.ActiveMQClient;
+import org.apache.activemq.artemis.api.core.client.ClientSession;
 import org.apache.activemq.artemis.api.core.client.ClientSessionFactory;
 import org.apache.activemq.artemis.api.core.client.ServerLocator;
 import org.apache.activemq.artemis.core.config.Configuration;
-import org.apache.activemq.artemis.core.config.impl.ConfigurationImpl;
 import org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ;
 
-import static java.util.Objects.isNull;
-
+@Setter
 @Getter
 @RequiredArgsConstructor
 public class ArtemisServerService {
 
-    private final EmbeddedActiveMQ server;
-    private final Configuration configuration;
-
+    private EmbeddedActiveMQ embeddedActiveMQ;
+    private Configuration configuration;
     private ServerLocator serverLocator;
     private ClientSessionFactory factory;
 
-    private static ArtemisServerService artemisServerService;
-
-    public static synchronized ArtemisServerService getInstance() {
-        if (artemisServerService != null) {
-            return artemisServerService;
-        }
+    public static synchronized ArtemisServerService newInstance() {
         try {
-            final ConfigurationImpl conf = new ConfigurationImpl();
-            conf.addAcceptorConfiguration("in-vm", "vm://0");
-            conf.addAcceptorConfiguration("tcp", "tcp://127.0.0.1:61616");
-            artemisServerService = new ArtemisServerService(new EmbeddedActiveMQ(), conf);
-            artemisServerService.getServer().setConfiguration(conf);
+            final ArtemisServerService artemisServerService = new ArtemisServerService();
+            final EmbeddedActiveMQ embeddedActiveMQ = new EmbeddedActiveMQ();
+            artemisServerService.setEmbeddedActiveMQ(embeddedActiveMQ);
+            /*
+            final ConfigurationImpl config = new ConfigurationImpl();
+            config.addAcceptorConfiguration("in-vm", "vm://0");
+            config.addAcceptorConfiguration("tcp", "tcp://127.0.0.1:61616");
+            embeddedActiveMQ.setConfiguration(config);
+            */
             return artemisServerService;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public ArtemisServerService init() {
-        if (!isNull(serverLocator) && !isNull(factory)) {
-            return this;
-        }
-        try {
-            //serverLocator = ActiveMQClient.createServerLocator("vm://0");
-            //factory = serverLocator.createSessionFactory();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return this;
     }
 
     public ArtemisServerService start() {
         try {
-            server.start();
+            embeddedActiveMQ.start();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -64,10 +49,21 @@ public class ArtemisServerService {
 
     public ArtemisServerService stop() {
         try {
-            server.stop();
+            embeddedActiveMQ.stop();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return this;
+    }
+
+    public ClientSession getClientSession() {
+        try {
+            final ServerLocator serverLocator = ActiveMQClient.createServerLocator("vm://0");
+            final ClientSessionFactory factory = serverLocator.createSessionFactory();
+            final ClientSession session = factory.createSession();
+            return session;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

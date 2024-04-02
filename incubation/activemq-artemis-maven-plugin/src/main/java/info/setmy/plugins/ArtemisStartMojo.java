@@ -16,10 +16,12 @@ public class ArtemisStartMojo extends AbstractMojo {
     private MavenProject project;
 
     public void execute() throws MojoExecutionException {
-        ArtemisServerService artemisServerService = ArtemisServerService
-            .getInstance()
-            .init()
+        final ArtemisServerService artemisServerService = ArtemisServerService
+            .newInstance()
             .start();
-        project.getProperties().put("artemisServerService", artemisServerService);
+        project.getProperties().put(
+            ArtemisServerService.class.getSimpleName(),
+            artemisServerService
+        );
     }
 }
