@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static info.setmy.microservice.ApiConstants.API_BASE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 //curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -i http://localhost:8080/api/example
@@ -21,7 +22,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 public class ExampleController {
 
-    public static final String EXAMPLE_REST_RESOURCE = "/api/example";
+    public static final String EXAMPLE_REST_RESOURCE = API_BASE + "/example";
 
     private final ExampleService exampleService;
 
