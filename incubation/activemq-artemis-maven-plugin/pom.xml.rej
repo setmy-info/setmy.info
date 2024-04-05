@@ -1,0 +1,50 @@
+diff a/incubation/activemq-artemis-maven-plugin/pom.xml b/incubation/activemq-artemis-maven-plugin/pom.xml	(rejected hunks)
+@@ -38,6 +38,10 @@
+         <maven.version>3.9.6</maven.version>
+         <surefire.version>3.2.5</surefire.version>
+         <failsafe.version>3.2.5</failsafe.version>
++
++        <log4j2.verion>2.23.1</log4j2.verion>
++        <logback.verion>1.4.11</logback.verion>
++        <slf4j.version>2.0.9</slf4j.version>
+     </properties>
+ 
+     <dependencies>
+@@ -164,6 +168,37 @@
+             <artifactId>artemis-jms-client</artifactId>
+             <version>2.33.0</version>
+         </dependency>
++
++        <dependency>
++            <groupId>org.apache.logging.log4j</groupId>
++            <artifactId>log4j-core</artifactId>
++            <version>${log4j2.verion}</version>
++        </dependency>
++        <dependency>
++            <groupId>org.apache.logging.log4j</groupId>
++            <artifactId>log4j-api</artifactId>
++            <version>${log4j2.verion}</version>
++        </dependency>
++        <dependency>
++            <groupId>org.slf4j</groupId>
++            <artifactId>slf4j-api</artifactId>
++            <version>${slf4j.version}</version>
++        </dependency>
++        <!--dependency>
++            <groupId>org.slf4j</groupId>
++            <artifactId>jcl-over-slf4j</artifactId>
++            <version>${slf4j.version}</version>
++        </dependency-->
++        <dependency>
++            <groupId>ch.qos.logback</groupId>
++            <artifactId>logback-classic</artifactId>
++            <version>${logback.verion}</version>
++        </dependency>
++        <dependency>
++            <groupId>ch.qos.logback</groupId>
++            <artifactId>logback-core</artifactId>
++            <version>${logback.verion}</version>
++        </dependency>
+     </dependencies>
+ 
+     <build>

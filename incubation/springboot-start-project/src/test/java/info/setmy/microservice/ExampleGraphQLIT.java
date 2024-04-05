@@ -9,24 +9,21 @@ import static org.hamcrest.Matchers.not;
 
 public class ExampleGraphQLIT extends RestBase {
 
-    @Override
-    public String getResource() {
-        return "/graphql";
-    }
-
+    //https://devqa.io/rest-assured-api-requests-examples/
     @Test
     public void testFindAll() {
-        /*
-        getRequest().get(getUrl(""))
+        getRestRequest()
+            .and()
+            .body("{\"query\":\"{bookById(id: \\\"book-1\\\") {id name pageCount author {id firstName lastName}}}\",\"variables\":{},\"operationName\":null}")
+            .post(getGraphQLUrl())
             .then()
             .assertThat()
-            .contentType("application/json")
+            //.contentType("application/json")
             .statusCode(200)
             .header("Connection", "keep-alive")
             //.header("Content-Encoding", "gzip") ???
             .header("Date", not(isEmptyOrNullString()))
             .body("size()", is(1))
-            .body("exampleString", equalTo("Hello World from DB"));
-        */
+            .body("data.bookById.name", equalTo("Harry Potter and the Philosopher's Stone"));
     }
 }

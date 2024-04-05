@@ -9,14 +9,12 @@ import static org.hamcrest.Matchers.not;
 
 public class ExampleRestIT extends RestBase {
 
-    @Override
-    public String getResource() {
-        return "/example";
-    }
+    private final static String RESOURCE_URL = "/example";
 
     @Test
     public void testFindAll() {
-        getRequest().get(getUrl(""))
+        getRestRequest()
+            .get(getRestUrl(RESOURCE_URL))
             .then()
             .assertThat()
             .contentType("application/json")

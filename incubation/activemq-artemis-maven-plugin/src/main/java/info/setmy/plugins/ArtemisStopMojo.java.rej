@@ -1,0 +1,24 @@
+diff a/incubation/activemq-artemis-maven-plugin/src/main/java/info/setmy/plugins/ArtemisStopMojo.java b/incubation/activemq-artemis-maven-plugin/src/main/java/info/setmy/plugins/ArtemisStopMojo.java	(rejected hunks)
+@@ -7,6 +7,7 @@ import org.apache.maven.plugins.annotations.Mojo;
+ import org.apache.maven.plugins.annotations.Parameter;
+ import org.apache.maven.project.MavenProject;
+ 
++import static java.util.Objects.isNull;
+ import static org.apache.maven.plugins.annotations.LifecyclePhase.POST_INTEGRATION_TEST;
+ 
+ @Mojo(name = "stop", defaultPhase = POST_INTEGRATION_TEST)
+@@ -16,8 +17,12 @@ public class ArtemisStopMojo extends AbstractMojo {
+     private MavenProject project;
+ 
+     public void execute() throws MojoExecutionException {
+-        ArtemisServerService artemisServerService = (ArtemisServerService) project.getProperties().get("artemisServerService");
+-        if (artemisServerService != null) {
++        final ArtemisServerService artemisServerService = (ArtemisServerService) project
++            .getProperties()
++            .get(
++                ArtemisServerService.class.getSimpleName()
++            );
++        if (!isNull(artemisServerService)) {
+             artemisServerService.stop();
+         }
+     }

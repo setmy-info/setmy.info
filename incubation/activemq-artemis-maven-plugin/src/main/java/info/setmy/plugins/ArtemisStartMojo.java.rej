@@ -1,0 +1,18 @@
+diff a/incubation/activemq-artemis-maven-plugin/src/main/java/info/setmy/plugins/ArtemisStartMojo.java b/incubation/activemq-artemis-maven-plugin/src/main/java/info/setmy/plugins/ArtemisStartMojo.java	(rejected hunks)
+@@ -16,10 +16,12 @@ public class ArtemisStartMojo extends AbstractMojo {
+     private MavenProject project;
+ 
+     public void execute() throws MojoExecutionException {
+-        ArtemisServerService artemisServerService = ArtemisServerService
+-            .getInstance()
+-            .init()
++        final ArtemisServerService artemisServerService = ArtemisServerService
++            .newInstance()
+             .start();
+-        project.getProperties().put("artemisServerService", artemisServerService);
++        project.getProperties().put(
++            ArtemisServerService.class.getSimpleName(),
++            artemisServerService
++        );
+     }
+ }

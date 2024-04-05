@@ -2,35 +2,33 @@ package info.setmy.microservice;
 
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
+import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 
 import static info.setmy.microservice.ApiConstants.API_BASE;
 import static info.setmy.microservice.ApiConstants.GRAPHQL_BASE;
 import static io.restassured.RestAssured.given;
 
+@Getter
 @Log4j2
 public abstract class RestBase extends WebSpringBase {
 
-    protected static final String URL = "http://localhost:8777" + API_BASE;
-    protected static final String GRAPHQL_URL = "http://localhost:8777" + GRAPHQL_BASE;
+    private static final String REST_URL = "http://localhost:8777" + API_BASE;
 
-    protected String getUrl() {
-        return URL + getResource();
+    private static final String GRAPHQL_URL = "http://localhost:8777" + GRAPHQL_BASE;
+
+    public String getRestUrl(final String resourceUrl) {
+        return new StringBuilder(REST_URL.length() + resourceUrl.length() + 1)
+            .append(REST_URL)
+            .append(resourceUrl)
+            .toString();
     }
 
-    protected String getGraphQLUrl() {
+    public String getGraphQLUrl() {
         return GRAPHQL_URL;
     }
 
-    public abstract String getResource();
-
-    protected String getUrl(final String path) {
-        final String requestUrl = getUrl() + path;
-        log.info("Requesting URL: '{}'", requestUrl);
-        return getUrl() + path;
-    }
-
-    protected RequestSpecification getRequest() {
+    public RequestSpecification getRestRequest() {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         final RequestSpecification requestSpecification = given()
             // Taken from RESTClient headers
