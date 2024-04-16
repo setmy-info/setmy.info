@@ -134,6 +134,9 @@ http://localhost:8080
 
 ## Docker (files), docker compose
 
+* docker build -t setmyinfo/springboot-start-project:latest -f ./src/main/docker/Dockerfile .
+* docker run -p 8080:8080 setmyinfo/springboot-start-project:latest
+
 ## K8S, Minikube
 
 ## HTTP(S) client, REST and GraphQL calls
