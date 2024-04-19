@@ -318,6 +318,12 @@
             <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency-->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>${junit.platform.version}</version>
+            <scope>test</scope>
+        </dependency>
         <!-- Vintage JUnit needs these two deps: junint 4 and vintage engine -->
         <dependency>
             <groupId>junit</groupId>

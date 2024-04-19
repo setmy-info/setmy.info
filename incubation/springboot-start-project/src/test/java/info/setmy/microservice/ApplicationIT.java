@@ -1,5 +1,7 @@
 package info.setmy.microservice;
 
+import info.setmy.microservice.it.SpringBase;
+import info.setmy.microservice.property.ExampleProperties;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,13 +1,18 @@
 package info.setmy.microservice;
 
-final class Switches {
+import lombok.NoArgsConstructor;
 
-    static boolean UNIT_TEST_FAILS = false;
-    static boolean VINTAGE_UNIT_TEST_FAILS = false;
+import static lombok.AccessLevel.PRIVATE;
 
-    static boolean INTEGRATION_TEST_FAILS = false;
-    static boolean VINTAGE_INTEGRATION_TEST_FAILS = false;
+@NoArgsConstructor(access = PRIVATE)
+public final class Switches {
 
-    private Switches() {
-    }
+    public static final boolean UNIT_TEST_FAILS = false;
+    public static final boolean VINTAGE_UNIT_TEST_FAILS = false;
+
+    public static final boolean INTEGRATION_TEST_FAILS = false;
+    public static final boolean VINTAGE_INTEGRATION_TEST_FAILS = false;
+
+    public static final boolean E2E_TEST_FAILS = false;
+    public static final boolean E2E_VINTAGE_INTEGRATION_TEST_FAILS = false;
 }

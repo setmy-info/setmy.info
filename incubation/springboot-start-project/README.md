@@ -85,6 +85,8 @@ http://localhost:8080
 * Pre, post IT, JUnit 5 + JUnit Vintage + Mockito + AssertJ + Cucumber (+ Spring Boot integration + unit and integration
   separation = 2x are executed) + PITest.)
 * Levels: DAO/Repo (?), Service, Controller
+* UT and IT: **mvn clean install**
+* E2E tests after UT+IT: mvn install -Pe2e
 
 ## Exception Handlers, Error transform, @ControllerAdvice and @ExceptionHandler
 
@@ -172,7 +174,8 @@ http://localhost:8080
 
 # TODO and requirements list
 
-1.
+1. Failing cucumber test does not make maven build fail
+2. Cucumber doesn't run separately in unit test and integration test phases. Some configurations execute cucumber tests twice.
 
 # Testing
 

@@ -1,4 +1,3 @@
-
 springBootStartProject:
     example:
         foo: application-prelive.yaml

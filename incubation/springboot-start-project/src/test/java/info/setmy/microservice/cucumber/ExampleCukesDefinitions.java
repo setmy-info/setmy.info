@@ -23,6 +23,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Fail.fail;
+
 /**
  * https://cucumber.io/docs/cucumber/api/#step-arguments
  * https://cucumber.io/docs/cucumber/api/
@@ -173,6 +176,26 @@ public class ExampleCukesDefinitions {
     @Then("I should have {int} cucumbers")
     public void i_should_have_cucumbers(final Integer num) {
         log.info("there_are_cucumbers: {}", num);
+    }
+
+    boolean expectToFail = false;
+
+
+    @Given("expectation for fail is {string}")
+    public void expectation_for_fail_is(final String expectToFailString) {
+        expectToFail = expectToFailString.equalsIgnoreCase("true");
+        log.info("Should fail: {}", expectToFail);
+    }
+
+    @When("doing nothing here")
+    public void doing_nothing() {
+    }
+
+    @Then("this test should fail")
+    public void it_should_fail() {
+        if (expectToFail) {
+            fail("Script is failing");
+        }
     }
 
     @Getter

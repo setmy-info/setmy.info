@@ -1,13 +1,14 @@
 package info.setmy.microservice;
 
+import info.setmy.microservice.service.ExampleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 //@SpringBootApplication
 //@EnableScheduling
+//@ComponentScan(basePackages = {"info.setmy.microservice", "info.setmy.microservice.dal"})
 @RequiredArgsConstructor
 public class CLIApplication implements CommandLineRunner, ExitCodeGenerator {
 

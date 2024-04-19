@@ -1,5 +1,7 @@
 package info.setmy.microservice;
 
+import info.setmy.microservice.property.BuildProperties;
+import info.setmy.microservice.property.MavenProjectProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.actuate.info.InfoContributor;

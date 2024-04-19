@@ -1,11 +1,9 @@
 package info.setmy.microservice;
 
+import info.setmy.microservice.it.RestBase;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isEmptyOrNullString;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 public class ExampleGraphQLIT extends RestBase {
 

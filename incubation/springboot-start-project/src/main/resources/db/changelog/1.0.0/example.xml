@@ -20,7 +20,7 @@
 
         <rollback>
             <dropTable tableName="EXAMPLE"/>
-            <dropSequence sequenceName="EXAMPLE_ID_SEQ" />
+            <dropSequence sequenceName="EXAMPLE_ID_SEQ"/>
         </rollback>
 
     </changeSet>
