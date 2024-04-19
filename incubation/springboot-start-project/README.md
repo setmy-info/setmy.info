@@ -175,7 +175,9 @@ http://localhost:8080
 # TODO and requirements list
 
 1. Failing cucumber test does not make maven build fail
-2. Cucumber doesn't run separately in unit test and integration test phases. Some configurations execute cucumber tests twice.
+2. Cucumber doesn't run separately in unit test and integration test phases. Some configurations execute cucumber tests
+   twice.
+3. Multiple Spring tests executed. Same time maven pre-integration step starts server.
 
 # Testing
 
