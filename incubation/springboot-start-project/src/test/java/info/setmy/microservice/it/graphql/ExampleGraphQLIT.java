@@ -1,4 +1,4 @@
-package info.setmy.microservice;
+package info.setmy.microservice.it.graphql;
 
 import info.setmy.microservice.it.RestBase;
 import org.junit.jupiter.api.Test;
