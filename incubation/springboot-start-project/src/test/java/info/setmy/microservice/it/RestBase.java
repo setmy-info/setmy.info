@@ -17,6 +17,8 @@ public abstract class RestBase extends WebSpringBase {
 
     private static final String GRAPHQL_URL = "http://localhost:8777" + GRAPHQL_BASE;
 
+    private static final String HTML_URL = "http://localhost:8777";
+
     public String getRestUrl(final String resourceUrl) {
         return new StringBuilder(REST_URL.length() + resourceUrl.length() + 1)
             .append(REST_URL)
@@ -26,6 +28,13 @@ public abstract class RestBase extends WebSpringBase {
 
     public String getGraphQLUrl() {
         return GRAPHQL_URL;
+    }
+
+    public String getHTMLUrl(final String resourceUrl) {
+        return new StringBuilder(HTML_URL.length() + resourceUrl.length() + 1)
+            .append(HTML_URL)
+            .append(resourceUrl)
+            .toString();
     }
 
     public RequestSpecification getRestRequest() {

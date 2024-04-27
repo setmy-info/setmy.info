@@ -1,29 +1,31 @@
-package info.setmy.microservice.it.rest;
+package info.setmy.microservice.it.html;
 
 import info.setmy.microservice.it.RestBase;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.not;
 
-public class ExampleRestIT extends RestBase {
+public class ListExampleIT extends RestBase {
 
-    private final static String RESOURCE_URL = "/example";
+    private final static String RESOURCE_URL = "/listExample";
 
     @Test
     public void testFindAll() {
         getRestRequest()
-            .get(getRestUrl(RESOURCE_URL))
+            .get(getHTMLUrl(RESOURCE_URL))
             .then()
             .assertThat()
-            .contentType("application/json")
+            .contentType("text/html;charset=UTF-8")
             .statusCode(200)
             .header("Connection", "keep-alive")
             //.header("Content-Encoding", "gzip") ???
             .header("Date", not(isEmptyOrNullString()))
-            .body("size()", is(1))
-            .body("exampleString", equalTo("Hello World from DB"));
+            .body("html.head.title", equalTo("List Example"))
+            .body("html.body.h1", equalTo("List Example"))
+            .body("html.body.ul.li[0]", equalTo("a"))
+            .body("html.body.ul.li[1]", equalTo("b"))
+            .body("html.body.ul.li[2]", equalTo("c"));
     }
 }

@@ -6,14 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class ApplicationIT extends SpringBase {
+public class ExamplePropertiesIT extends SpringBase {
 
     @Autowired
     private ExampleProperties exampleProperties;
-
-    @Test
-    void contextLoads() {
-    }
 
     @Test
     void exampleProperties() {

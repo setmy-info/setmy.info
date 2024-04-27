@@ -20,6 +20,7 @@ import static java.util.concurrent.CompletableFuture.allOf;
 import static java.util.concurrent.CompletableFuture.completedFuture;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ExampleService {
 
