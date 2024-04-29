@@ -1,0 +1,34 @@
+{
+    "nodes": [
+        {
+            "id": "A",
+            "data": {
+                "property1": "value1",
+                "property2": "value2"
+            }
+        },
+        {
+            "id": "B",
+            "data": {
+                "property1": "value3",
+                "property2": "value4"
+            }
+        }
+    ],
+    "edges": [
+        {
+            "source": "A",
+            "target": "B",
+            "data": {
+                "weight": 5
+            }
+        },
+        {
+            "source": "B",
+            "target": "A",
+            "data": {
+                "weight": 3
+            }
+        }
+    ]
+}
