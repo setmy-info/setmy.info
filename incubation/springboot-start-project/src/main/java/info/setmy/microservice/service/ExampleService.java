@@ -5,7 +5,7 @@ import info.setmy.microservice.dal.ExampleRepository;
 import info.setmy.microservice.dal.JDBCExampleDao;
 import info.setmy.microservice.dal.JPAExampleDao;
 import info.setmy.microservice.domain.ExampleModel;
-import info.setmy.microservice.web.exception.RollbackException;
+import info.setmy.microservice.exception.ExampleRollbackException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -115,7 +115,7 @@ public class ExampleService {
 
     private void doCallThatThrowsForRollback(final boolean doRollback) {
         if (doRollback) {
-            throw new RollbackException("Should not save");
+            throw new ExampleRollbackException("Should not save");
         }
     }
 }

@@ -1,4 +1,4 @@
-package info.setmy.microservice.web.controller.advice;
+package info.setmy.microservice.web.component;
 
 import info.setmy.microservice.web.exception.MicroWebServiceException;
 import lombok.RequiredArgsConstructor;
@@ -11,25 +11,27 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.Map;
 
+import static info.setmy.microservice.web.constant.ErrorConstants.UNKNOWN_ERROR_KEY_VALUE;
+
 @ControllerAdvice
 @RequiredArgsConstructor
-public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
+public class ExceptionHandlerComponent extends ResponseEntityExceptionHandler {
+
+    private final static String KEY = "key";
 
     private final CustomErrorAttributesComponent customErrorAttributesComponent;
 
     @ExceptionHandler(MicroWebServiceException.class)
     public ResponseEntity<Map<String, Object>> handleMicroWebServiceException(MicroWebServiceException ex, WebRequest request) {
-        final String errorMessage = "Found WEB exception.";
         final Map<String, Object> errorAttributes = customErrorAttributesComponent.getErrorAttributes(request);
-        errorAttributes.put("microservice_message", errorMessage);
+        errorAttributes.put(KEY, ex.getKey());
         return new ResponseEntity<>(errorAttributes, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleAllExceptions(Exception ex, WebRequest request) {
-        final String errorMessage = "Found exception.";
         final Map<String, Object> errorAttributes = customErrorAttributesComponent.getErrorAttributes(request);
-        errorAttributes.put("microservice_message", errorMessage);
+        errorAttributes.put(KEY, UNKNOWN_ERROR_KEY_VALUE);
         return new ResponseEntity<>(errorAttributes, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

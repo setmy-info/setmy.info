@@ -1,13 +1,17 @@
 package info.setmy.microservice.web.controller;
 
+import info.setmy.microservice.exception.MicroServiceException;
 import info.setmy.microservice.mapper.ExampleMapper;
 import info.setmy.microservice.service.ExampleService;
 import info.setmy.microservice.web.dto.ExampleDTO;
+import info.setmy.microservice.web.exception.ServiceUnavailableException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 
 import static info.setmy.microservice.web.constant.ApiConstants.API_BASE;
+import static info.setmy.microservice.web.constant.ErrorConstants.KEY_FOR_ANOTHER_ERROR_KEY_VALUE;
+import static info.setmy.microservice.web.constant.ErrorConstants.KEY_FOR_SOME_ERROR_KEY_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 //curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -i http://localhost:8080/api/example
@@ -45,7 +49,11 @@ public class ExampleController {
     @PostMapping(value = "rollback")
     public ExampleDTO rollback(@RequestBody final ExampleDTO exampleDTO) {
         log.info("Example POST called with {} to be rolled back", exampleDTO);
-        exampleService.doWithRollback(exampleMapper.toEntity(exampleDTO), true);
+        try {
+            exampleService.doWithRollback(exampleMapper.toEntity(exampleDTO), true);
+        } catch (MicroServiceException e) {
+            throw new ServiceUnavailableException(KEY_FOR_SOME_ERROR_KEY_VALUE, e);
+        }
         return exampleMapper.toDto(
             exampleMapper.toEntity(exampleDTO)
         );
@@ -54,8 +62,12 @@ public class ExampleController {
     //curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -d '{"exampleString": "Example string that should go into DB"}' -i http://localhost:8080/api/example/norollback
     @PostMapping(value = "norollback")
     public ExampleDTO noRollback(@RequestBody final ExampleDTO exampleDTO) {
-        log.info("Example POST called with {} to be rolled back", exampleDTO);
-        exampleService.doWithRollback(exampleMapper.toEntity(exampleDTO), false);
+        log.info("Example POST called with {} to be not rolled back", exampleDTO);
+        try {
+            exampleService.doWithRollback(exampleMapper.toEntity(exampleDTO), false);
+        } catch (MicroServiceException e) {
+            throw new ServiceUnavailableException(KEY_FOR_ANOTHER_ERROR_KEY_VALUE, e);
+        }
         return exampleMapper.toDto(
             exampleMapper.toEntity(exampleDTO)
         );

@@ -1,12 +1,16 @@
 package info.setmy.microservice.web.exception;
 
 import info.setmy.microservice.exception.MicroServiceException;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public class MicroWebServiceException extends MicroServiceException {
+import static lombok.AccessLevel.PRIVATE;
 
-    public MicroWebServiceException() {
-        super();
-    }
+@Getter
+@Setter
+@NoArgsConstructor(access = PRIVATE)
+public abstract class MicroWebServiceException extends MicroServiceException {
 
     public MicroWebServiceException(String message) {
         super(message);
@@ -16,13 +20,15 @@ public class MicroWebServiceException extends MicroServiceException {
         super(message, cause);
     }
 
-    public MicroWebServiceException(Throwable cause) {
-        super(cause);
-    }
-
     protected MicroWebServiceException(String message, Throwable cause,
                                        boolean enableSuppression,
                                        boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
+
+    public String getKey() {
+        return getMessage();
+    }
+
+    public abstract int getErrorCode();
 }
