@@ -5,6 +5,7 @@ import info.setmy.microservice.dal.ExampleRepository;
 import info.setmy.microservice.dal.JDBCExampleDao;
 import info.setmy.microservice.dal.JPAExampleDao;
 import info.setmy.microservice.domain.ExampleModel;
+import info.setmy.microservice.web.exception.RollbackException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -101,6 +102,20 @@ public class ExampleService {
         try {
             Thread.sleep(timeout);
         } catch (InterruptedException ex) {
+        }
+    }
+
+    public ExampleModel doWithRollback(final ExampleModel exampleModel, final boolean doRollback) {
+        exampleRepository.save(exampleModel);
+        doCallThatThrowsForRollback(doRollback);
+        return ExampleModel.builder()
+            .text(exampleModel.getText())
+            .build();
+    }
+
+    private void doCallThatThrowsForRollback(final boolean doRollback) {
+        if (doRollback) {
+            throw new RollbackException("Should not save");
         }
     }
 }
