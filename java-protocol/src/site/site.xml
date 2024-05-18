@@ -3,10 +3,10 @@
 <project xmlns="http://maven.apache.org/DECORATION/1.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd"
-         name="java-linguistics">
+         name="java-protocol">
 
     <bannerLeft>
-        <name>ava library to run protocols like a workflow.</name>
+        <name>Java library to run protocols like a workflow.</name>
         <href>https://github.com/setmy-info</href>
     </bannerLeft>
 
