@@ -42,7 +42,7 @@ http://localhost:8080
 ## DB
 
 * H2, Postgres (Derby, HSQLDB) conf ready
-* JDBC, JPA/Hibernate, H2, PostgreSQL, HSQLDB, Derby, ... Multi tenant, tenant per table partition.
+* JDBC, JPA/Hibernate, H2, PostgresSQL, HSQLDB, Derby, ... Multi tenant, tenant per table partition.
 
 ## Liquibase
 
@@ -56,12 +56,12 @@ http://localhost:8080
 
 ## Services
 
-* DB transaction rollback
+* DB transaction rollback should work
 * Example Model, Repository, DAO, Service, Controller. JSON(B).
 
 ## REST
 
-* Controller, DTO validation, Jackson, Hibernate validation
+* Controller, DTO validation (bean validation?), Jackson, Hibernate validation
 
 ## GraphQL
 
@@ -83,7 +83,7 @@ http://localhost:8080
 
 * [UT, IT, E2E] x [JUnit 5, Vintage] x [none, Spring test]
 * Pre, post IT, JUnit 5 + JUnit Vintage + Mockito + AssertJ + Cucumber (+ Spring Boot integration + unit and integration
-  separation = 2x are executed) + PITest.)
+  separation = 2x are executed) + PITest (mutation tests).)
 * Levels: DAO/Repo (?), Service, Controller
 * UT and IT: **mvn clean install**
 * E2E tests after UT+IT: mvn install -Pe2e
@@ -100,6 +100,9 @@ http://localhost:8080
 
 ## Actuators
 
+* Version
+* Git hash
+
 ## Logging
 
 * Log4j2
@@ -108,11 +111,11 @@ http://localhost:8080
 
 ## Mapstruct
 
-## Quartz top on DB - multi node ready.
+## Scheduler with Quartz top on DB - multi node ready.
 
 ## Site
 
-* reports: JavaDoc, Test Coverage,PITest, StopPugs, etc
+* reports: JavaDoc, Test Coverage, PITest, StopPugs, Vulnerability, etc
 
 ## Developer local execution
 
@@ -124,7 +127,9 @@ http://localhost:8080
 
 ## GIS (H2, Postgres, Hibernate column)
 
-## Cache (Infinispan, 2nd level cache for Hibernate, with Local Infinispan. Multi node ready.)
+## Cache
+
+* Infinispan, 2nd level cache for Hibernate, with Local Infinispan. Multi node ready.
 
 ## Keycloak (IM integration. Multi tenant. Multi tenant single realm.)
 
@@ -141,6 +146,15 @@ http://localhost:8080
 
 ## K8S, Minikube
 
+Yaml config for:
+
+* Namespace
+* Deployment
+* Service
+* Config-map
+* Secrets
+*
+
 ## HTTP(S) client, REST and GraphQL calls
 
 ## Load testing tools: Java Gatling tool
@@ -151,6 +165,8 @@ http://localhost:8080
 
 ## Message queue for testing (Artemis)
 
+## Message consumer example
+
 ## LDAP for testing
 
 * Embedded ApacheDS Server ?
@@ -159,11 +175,21 @@ http://localhost:8080
 
 ## CLI, separate main, Picocli
 
+* Sub command for some BE call
+
 ## Hikari DB pooling, Postgres restart test, pooling continue
 
 ## AOP example
 
 ## Lucene: Hibernate with Indexing
+
+## Maven wrapper
+
+## Apache commons libs
+
+## CI
+
+* Jenkinsfile
 
 ## Run security tests
 
