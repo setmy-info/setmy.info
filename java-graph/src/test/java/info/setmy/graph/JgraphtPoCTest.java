@@ -7,11 +7,13 @@ import org.jgrapht.alg.shortestpath.BellmanFordShortestPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DirectedWeightedMultigraph;
 import org.jgrapht.traverse.BreadthFirstIterator;
+import org.jgrapht.traverse.DepthFirstIterator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Iterator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -58,7 +60,14 @@ public class JgraphtPoCTest {
 
         assertThat(start).isEqualTo(new URI("http://www.jgrapht.org"));
 
-        // BFS algorithm
+        // DFS (depth-first) algorithm
+        Iterator<URI> iterator = new DepthFirstIterator<>(graph, start);
+        while (iterator.hasNext()) {
+            URI uri = iterator.next();
+            System.out.println("DFS: " + uri);
+        }
+
+        // BFS (breadth-first) algorithm
         BreadthFirstIterator<URI, DefaultWeightedEdgeWithInfo> bfsIterator = new BreadthFirstIterator<>(graph, google);
         while (bfsIterator.hasNext()) {
             URI vertex = bfsIterator.next();

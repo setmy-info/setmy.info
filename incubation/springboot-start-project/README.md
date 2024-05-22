@@ -87,6 +87,7 @@ http://localhost:8080
 * Levels: DAO/Repo (?), Service, Controller
 * UT and IT: **mvn clean install**
 * E2E tests after UT+IT: mvn install -Pe2e
+* Spring tests with REST mocking
 
 ## Exception Handlers, Error transform, @ControllerAdvice and @ExceptionHandler
 
@@ -176,6 +177,7 @@ Yaml config for:
 ## CLI, separate main, Picocli
 
 * Sub command for some BE call
+* No logging to console.
 
 ## Hikari DB pooling, Postgres restart test, pooling continue
 
@@ -200,10 +202,15 @@ Yaml config for:
 
 # TODO and requirements list
 
-1. Failing cucumber test does not make maven build fail
-2. Cucumber doesn't run separately in unit test and integration test phases. Some configurations execute cucumber tests
-   twice.
-3. Multiple Spring tests executed. Same time maven pre-integration step starts server.
+1. ~~Failing cucumber test does not make maven build fail~~
+2. ~~Cucumber doesn't run separately in unit test and integration test phases. Some configurations execute cucumber
+   tests
+   twice.~~
+3. When multiple Spring tests executed, then many servers started? Maven pre-integration step should start server.
+4. Logging need to be reviewed and probably reconfigured - for tests.
+5. Database connection dropping (until exceptions in logs) and restoring. Node should stay working after lost and
+   restored DB connection.
+6. Log location
 
 # Testing
 

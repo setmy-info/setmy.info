@@ -70,23 +70,27 @@ public class GraphStreamPoCTest {
         dijkstra.setSource(graph.getNode("A"));
         dijkstra.compute();
 
-        for (Node node : graph)
-            System.out.printf("%s->%s:%10.2f%n", dijkstra.getSource(), node,
-                dijkstra.getPathLength(node));
+        for (Node node : graph) {
+            System.out.printf("%s->%s:%10.2f%n", dijkstra.getSource(), node, dijkstra.getPathLength(node));
+        }
 
-        for (Node node : dijkstra.getPathNodes(graph.getNode("B")))
+        for (Node node : dijkstra.getPathNodes(graph.getNode("B"))) {
             node.setAttribute("ui.style", "fill-color: blue;");
+        }
 
-        for (Edge edge : dijkstra.getTreeEdges())
+        for (Edge edge : dijkstra.getTreeEdges()) {
             edge.setAttribute("ui.style", "fill-color: red;");
+        }
 
         System.out.println(dijkstra.getPath(graph.getNode("B")));
 
-        List<Node> list1 = new ArrayList<Node>();
-        for (Node node : dijkstra.getPathNodes(graph.getNode("B")))
+        List<Node> list1 = new ArrayList<>();
+        for (Node node : dijkstra.getPathNodes(graph.getNode("B"))) {
             list1.add(0, node);
+        }
 
         List<Node> list2 = dijkstra.getPath(graph.getNode("B")).getNodePath();
+        System.out.println(list2);
 
         dijkstra.clear();
 
@@ -95,12 +99,13 @@ public class GraphStreamPoCTest {
         dijkstra.setSource(graph.getNode("A"));
         dijkstra.compute();
 
-        for (Node node : graph)
-            System.out.printf("%s->%s:%10.2f%n", dijkstra.getSource(), node,
-                dijkstra.getPathLength(node));
+        for (Node node : graph) {
+            System.out.printf("%s->%s:%10.2f%n", dijkstra.getSource(), node, dijkstra.getPathLength(node));
+        }
 
         Iterator<Path> pathIterator = dijkstra.getAllPaths(graph.getNode("C")).iterator();
-        while (pathIterator.hasNext())
+        while (pathIterator.hasNext()) {
             System.out.println(pathIterator.next());
+        }
     }
 }
