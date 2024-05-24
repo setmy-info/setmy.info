@@ -39,5 +39,6 @@ public class ExampleModel implements Serializable {
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @Transient
+    @Builder.Default
     private LocalDateTime dateTime = LocalDateTime.now();
 }

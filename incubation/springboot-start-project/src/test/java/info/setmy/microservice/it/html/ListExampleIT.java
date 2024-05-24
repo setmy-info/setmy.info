@@ -1,18 +1,21 @@
 package info.setmy.microservice.it.html;
 
 import info.setmy.microservice.it.RestBase;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.not;
 
+@Slf4j
 public class ListExampleIT extends RestBase {
 
     private final static String RESOURCE_URL = "/listExample";
 
     @Test
     public void testFindAll() {
+        log.info("testFindAll");
         getRestRequest()
             .get(getHTMLUrl(RESOURCE_URL))
             .then()

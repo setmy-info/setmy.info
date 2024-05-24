@@ -4,8 +4,8 @@
 
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
-    <property name="LOG_PATH" value="./"/>
-    <property name="LOG_FILE" value="logback-test-spring.log"/>
+    <property name="LOG_PATH" value="./target"/>
+    <property name="LOG_FILE" value="logback-test.log"/>
     <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSSXXX} [%thread] src/test %-5level %logger{36} - %msg%n"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -44,5 +44,10 @@
             <logger name="io.restassured" level="DEBUG"/>
         </root>
     </springProfile>
+
+    <root level="debug">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
 
 </configuration>

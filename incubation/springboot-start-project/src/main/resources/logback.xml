@@ -5,8 +5,8 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
     <property name="LOG_PATH" value="./"/>
-    <property name="LOG_FILE" value="logback-test.log"/>
-    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSSXXX} [%thread] src/test %-5level %logger{36} - %msg%n"/>
+    <property name="LOG_FILE" value="logback.log"/>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSSXXX} [%thread] src/main %-5level %logger{36} - %msg%n"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -36,13 +36,46 @@
         <logger name="org.springframework.web" level="DEBUG"/>
     </springProfile>
 
-    <springProfile name="test">
-        <root level="DEBUG">
-            <appender-ref ref="CONSOLE"/>
+    <springProfile name="dev">
+        <root level="INFO">
+            <!-- appender-ref ref="CONSOLE"/ -->
             <appender-ref ref="FILE"/>
-            <logger name="info.setmy.microservice" level="DEBUG"/>
-            <logger name="io.restassured" level="DEBUG"/>
+        </root>
+        <logger name="info.setmy.microservice" level="DEBUG"/>
+        <logger name="org.springframework.web" level="DEBUG"/>
+    </springProfile>
+
+    <springProfile name="ci">
+        <root level="INFO">
+            <!-- appender-ref ref="CONSOLE"/ -->
+            <appender-ref ref="FILE"/>
         </root>
     </springProfile>
+
+    <springProfile name="test">
+        <root level="INFO">
+            <!-- appender-ref ref="CONSOLE"/ -->
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prelive">
+        <root level="INFO">
+            <!-- appender-ref ref="CONSOLE"/ -->
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="live">
+        <root level="INFO">
+            <!-- appender-ref ref="CONSOLE"/ -->
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+
+    <root level="debug">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
 
 </configuration>

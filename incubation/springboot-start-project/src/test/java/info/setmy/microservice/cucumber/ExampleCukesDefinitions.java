@@ -14,6 +14,7 @@ import io.cucumber.java.en.When;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,9 +31,8 @@ import static org.assertj.core.api.Fail.fail;
  * https://cucumber.io/docs/cucumber/api/
  * https://github.com/cucumber/cucumber-jvm/tree/master/java
  */
+@Slf4j
 public class ExampleCukesDefinitions {
-
-    private static final Logger log = LogManager.getLogger(ExampleCukesDefinitions.class);
 
     String firstName;
     String lastName;

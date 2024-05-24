@@ -1,6 +1,7 @@
 package info.setmy.microservice.it.graphql;
 
 import info.setmy.microservice.it.RestBase;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -8,11 +9,13 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.not;
 
+@Slf4j
 public class ExampleGraphQLIT extends RestBase {
 
     //https://devqa.io/rest-assured-api-requests-examples/
     @Test
     public void testFindAll() {
+        log.info("testFindAll");
         getRestRequest()
             .and()
             .body("{\"query\":\"{bookById(id: \\\"book-1\\\") {id name pageCount author {id firstName lastName}}}\",\"variables\":{},\"operationName\":null}")

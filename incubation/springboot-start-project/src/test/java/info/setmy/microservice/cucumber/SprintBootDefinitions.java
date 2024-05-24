@@ -6,8 +6,10 @@ import io.cucumber.java.Before;
 import io.cucumber.java.BeforeStep;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ConfigurableApplicationContext;
 
+@Slf4j
 public class SprintBootDefinitions {
 
     private static ConfigurableApplicationContext context;
