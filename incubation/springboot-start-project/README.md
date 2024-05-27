@@ -26,7 +26,7 @@ The following guides illustrate how to use some features concretely:
 #### Docker composer services
 
 ```shell
-docker-compose -f ./src/test/docker/docker-compose.yml up
+docker-compose -f ./src/test/docker/docker-compose.yaml up
 ```
 
 Build with docker
@@ -87,12 +87,12 @@ http://localhost:8080
 
 ## Tests
 
-* [UT, IT, E2E] x [JUnit 5, Vintage] x [none, Spring test]
+* {UT, IT, E2E} x {JUnit 5, Vintage} x {none, Spring test}
 * Pre, post IT, JUnit 5 + JUnit Vintage + Mockito + AssertJ + Cucumber (+ Spring Boot integration + unit and integration
   separation = 2x are executed) + PITest (mutation tests).)
 * Levels: DAO/Repo (?), Service, Controller
 * UT and IT: **mvn clean install**
-* E2E tests after UT+IT: mvn install -Pe2e
+* E2E tests after UT+IT: **mvn install -Pe2e**
 * Spring tests with REST mocking
 
 ## Exception Handlers, Error transform, @ControllerAdvice and @ExceptionHandler
@@ -160,7 +160,7 @@ Yaml config for:
 * Service
 * Config-map
 * Secrets
-*
+* Persistent volume claims
 
 ## HTTP(S) client, REST and GraphQL calls
 
