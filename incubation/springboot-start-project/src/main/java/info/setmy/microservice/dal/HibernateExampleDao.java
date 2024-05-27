@@ -15,7 +15,7 @@ public class HibernateExampleDao extends HibernateBaseDao implements IExampleDao
         return example;
     }
 
-    public List<Object> findAll() {
+    public List<ExampleModel> findAll() {
         return null;
     }
 }

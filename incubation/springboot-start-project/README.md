@@ -29,6 +29,12 @@ The following guides illustrate how to use some features concretely:
 docker-compose -f ./src/test/docker/docker-compose.yml up
 ```
 
+Build with docker
+
+```shell
+docker build --progress=plain -t springboot-start-project -f ./src/main/docker/Dockerfile.build .
+```
+
 ##### Infinispan
 
 http://localhost:11222
