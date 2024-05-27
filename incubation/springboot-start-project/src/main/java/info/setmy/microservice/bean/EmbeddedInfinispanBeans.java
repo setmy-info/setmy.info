@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import static org.infinispan.configuration.cache.CacheMode.LOCAL;
 import static org.infinispan.eviction.EvictionType.COUNT;
+import org.infinispan.spring.starter.embedded.InfinispanGlobalConfigurationCustomizer;
 
 @Configuration
 public class EmbeddedInfinispanBeans {
@@ -14,42 +15,48 @@ public class EmbeddedInfinispanBeans {
     @Bean
     public org.infinispan.configuration.cache.Configuration exampleCacheConfiguration() {
         return new ConfigurationBuilder()
-            .clustering()
-            .cacheMode(LOCAL)
-            .build();
+                .jmxStatistics().disable()
+                .clustering()
+                .cacheMode(LOCAL)
+                .build();
     }
 
     @Bean
     public org.infinispan.configuration.cache.Configuration smallCacheConfiguration(
-        org.infinispan.configuration.cache.Configuration exampleCacheConfiguration
+            org.infinispan.configuration.cache.Configuration exampleCacheConfiguration
     ) {
         return new ConfigurationBuilder()
-            .read(exampleCacheConfiguration)
-            .memory().size(1000L)
-            .memory().evictionType(COUNT)
-            .build();
+                .read(exampleCacheConfiguration)
+                .memory().size(1000L)
+                .memory().evictionType(COUNT)
+                .build();
     }
 
     @Bean
     public org.infinispan.configuration.cache.Configuration largeCacheConfiguration(
-        org.infinispan.configuration.cache.Configuration exampleCacheConfiguration
+            org.infinispan.configuration.cache.Configuration exampleCacheConfiguration
     ) {
         return new ConfigurationBuilder()
-            .read(exampleCacheConfiguration)
-            .memory().size(2000L)
-            .build();
+                .read(exampleCacheConfiguration)
+                .memory().size(2000L)
+                .build();
     }
 
     @Bean
     public InfinispanCacheConfigurer cacheConfigurer(
-        org.infinispan.configuration.cache.Configuration exampleCacheConfiguration,
-        org.infinispan.configuration.cache.Configuration smallCacheConfiguration,
-        org.infinispan.configuration.cache.Configuration largeCacheConfiguration
+            org.infinispan.configuration.cache.Configuration exampleCacheConfiguration,
+            org.infinispan.configuration.cache.Configuration smallCacheConfiguration,
+            org.infinispan.configuration.cache.Configuration largeCacheConfiguration
     ) {
         return manager -> {
             manager.defineConfiguration("exampleCache", exampleCacheConfiguration);
             manager.defineConfiguration("smallCache", smallCacheConfiguration);
             manager.defineConfiguration("largeCache", largeCacheConfiguration);
         };
+    }
+
+    @Bean
+    public InfinispanGlobalConfigurationCustomizer globalCustomizer() {
+        return builder -> builder.jmx().disable();
     }
 }
