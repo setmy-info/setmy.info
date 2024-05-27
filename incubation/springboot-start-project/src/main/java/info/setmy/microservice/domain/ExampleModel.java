@@ -21,6 +21,10 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @Table(name = "EXAMPLE")
 @NoArgsConstructor
 @AllArgsConstructor
+@org.hibernate.annotations.NamedQuery(
+        name = "findAll",
+        query = "SELECT e FROM ExampleModel e"
+)
 public class ExampleModel implements Serializable {
 
     private static final String SEQUENCE_GENERATOR_NAME = "exampleSequenceGenerator";
