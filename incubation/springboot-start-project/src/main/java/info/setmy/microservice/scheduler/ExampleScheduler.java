@@ -1,4 +1,4 @@
-package info.setmy.microservice.dal;
+package info.setmy.microservice.scheduler;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.scheduling.annotation.Scheduled;

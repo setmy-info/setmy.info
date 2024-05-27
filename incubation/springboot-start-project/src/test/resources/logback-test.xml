@@ -27,14 +27,14 @@
         </rollingPolicy>
     </appender>
 
-    <springProfile name="local">
+    <!--springProfile name="local">
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE"/>
         </root>
         <logger name="info.setmy.microservice" level="DEBUG"/>
         <logger name="org.springframework.web" level="DEBUG"/>
-    </springProfile>
+    </springProfile-->
 
     <springProfile name="test">
         <root level="DEBUG">
@@ -45,7 +45,7 @@
         </root>
     </springProfile>
 
-    <root level="debug">
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>

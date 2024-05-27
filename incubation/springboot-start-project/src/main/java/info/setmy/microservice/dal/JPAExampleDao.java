@@ -5,7 +5,7 @@ import jakarta.inject.Named;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Named("jpaExampleDao")
+@Named
 public class JPAExampleDao extends JPABaseDao implements IExampleDao {
 
     final Logger log = LogManager.getLogger(getClass());

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Log4j2
-@Named("jdbcExampleDao")
+@Named
 public class JDBCExampleDao extends JDBCBaseDao implements RowMapper<ExampleModel>, IExampleDao {
 
     //final String INSERT_SQL = "insert into example (text) values(?)"; // Pg autoincrement

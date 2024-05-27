@@ -1,15 +1,14 @@
 package info.setmy.microservice.service;
 
-import info.setmy.microservice.dal.ExampleDao;
 import info.setmy.microservice.dal.ExampleRepository;
+import info.setmy.microservice.dal.HibernateExampleDao;
 import info.setmy.microservice.dal.JDBCExampleDao;
 import info.setmy.microservice.dal.JPAExampleDao;
 import info.setmy.microservice.domain.ExampleModel;
 import info.setmy.microservice.exception.ExampleRollbackException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.infinispan.manager.EmbeddedCacheManager;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -20,20 +19,19 @@ import java.util.concurrent.ExecutionException;
 import static java.util.concurrent.CompletableFuture.allOf;
 import static java.util.concurrent.CompletableFuture.completedFuture;
 
+@Log4j2
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class ExampleService {
-
-    private final Logger log = LogManager.getLogger(getClass());
-
-    private final ExampleDao exampleDao;
 
     private final ExampleRepository exampleRepository;
 
     private final JDBCExampleDao jdbcExampleDao;
 
     private final JPAExampleDao jpaExampleDao;
+
+    private final HibernateExampleDao hibernateExampleDao;
 
     private final EmbeddedCacheManager cacheManager;
     //private final RemoteCacheManager cacheManager;
@@ -48,6 +46,13 @@ public class ExampleService {
         final ExampleModel model = exampleRepository.findAll().get(0);
         final ExampleModel newModel = new ExampleModel().setId(model.getId()).setDateTime(model.getDateTime()).setText(model.getText());
         return newModel;
+    }
+
+    @Transactional
+    public ExampleModel getHibernateExampleModel() {
+        log.info("getHibernateExampleModel");
+        final ExampleModel model = hibernateExampleDao.findAll().get(0);
+        return model;
     }
 
     private void insertData() {
