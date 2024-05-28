@@ -18,10 +18,10 @@ spec:
             containers:
                 -   name: microservice
                     image: springboot-start-project:latest
-                    # For example, not needed in Minikube
-                    # imagePullPolicy: Never
+                    # For example, comment in for Minikube
+                    imagePullPolicy: Never
                     ports:
-                        -   name: microservice-port
+                        -   name: micros-port
                             containerPort: 8080
                     env:
                         # For Spring boot
@@ -41,11 +41,10 @@ spec:
                                     name: microservice-secrets-map
                                     key: secret-variable
                                     optional: false
-            volumeMounts:
-                -   name: nfs-volume
-                    mountPath: /mnt/gintra
-        volumes:
-            -   name: nfs-volume
-                persistentVolumeClaim:
-                    claimName: microservice-nfs-persistent-volume-claim
-
+#            volumeMounts:
+#                -   name: nfs-volume
+#                    mountPath: /mnt/gintra
+#        volumes:
+#            -   name: nfs-volume
+#                persistentVolumeClaim:
+#                    claimName: microservice-nfs-persistent-volume-claim

@@ -3,11 +3,13 @@
 #src/main/java
 #src/main/resouorces
 #pom.xml
+#target
+#target/springboot-start-project-0.0.1-SNAPSHOT-sources.jar
+#target/springboot-start-project-0.0.1-SNAPSHOT.jar.original
 derby.log
 .idea
 archived
 README.md
-target
 target/classes
 target/cucumber
 target/failsafe-reports
@@ -21,5 +23,3 @@ target/maven-status
 target/site
 target/surefire-reports
 target/test-classes
-target/springboot-start-project-0.0.1-SNAPSHOT-sources.jar
-target/springboot-start-project-0.0.1-SNAPSHOT.jar.original

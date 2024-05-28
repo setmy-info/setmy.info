@@ -162,6 +162,42 @@ Yaml config for:
 * Secrets
 * Persistent volume claims
 
+```shell
+kubectl apply -f ./src/main/k8s/local/microservice-namespace.yaml
+kubectl apply -f ./src/main/k8s/local/microservice-config-map.yaml
+kubectl apply -f ./src/main/k8s/local/microservice-secrets-map.yaml
+kubectl apply -f ./src/main/k8s/local/microservice-nfs-persistent-volume.yaml
+kubectl apply -f ./src/main/k8s/local/microservice-nfs-persistent-volume-claim.yaml
+kubectl apply -f ./src/main/k8s/local/microservice-deployment.yaml
+kubectl apply -f ./src/main/k8s/local/microservice-service.yaml
+kubectl apply -f ./src/main/k8s/local/microservice-ingress.yaml
+```
+
+Check
+
+```
+kubectl get namespaces
+kubectl describe configmaps microservice-config-map -n microservice-local
+kubectl describe secret microservice-secrets-map    -n microservice-local
+docker context use default
+minikube start --driver=docker
+kubectl config set-context minikube
+minikube image rm setmyinfo/springboot-start-project:latest
+minikube image load setmyinfo/springboot-start-project:latest --overwrite
+minikube cache add setmyinfo/springboot-start-project:latest
+kubectl get pods -n microservice-local
+kubectl describe pod microservice-deployment-6f6c898cf8-mtffz -n microservice-local
+```
+
+Problem
+
+```
+minikube image load setmyinfo/springboot-start-project:latest --overwrite
+W0528 09:35:41.129739   24828 main.go:291] Unable to resolve the current Docker CLI context "default": context "default": context not found: open C:\Users\imre\.docker\contexts\meta\37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f\meta.json: The system cannot find the path specified.
+
+X Exiting due to GUEST_IMAGE_LOAD: Failed to load image: save to dir: caching images: caching image "C:\\Users\\imre\\.minikube\\cache\\images\\amd64\\setmyinfo\\springboot-start-project_latest": write: unable to calculate manifest: blob sha256:f120aa7f9c9a4cf13217ba17169252f6ec6b56af9f73ad71c0f2980d859aa449 not found
+```
+
 ## HTTP(S) client, REST and GraphQL calls
 
 ## Load testing tools: Java Gatling tool

@@ -11,7 +11,7 @@ LABEL org.label-schema.name="Docker HUB Rocky Spring boot micro service base" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.build-date=$BUILD_DATE
 
-COPY target/springboot-start-project-0.0.1-SNAPSHOT.jar /opt/has/lib/app.jar
+COPY ../../../target/springboot-start-project-0.0.1-SNAPSHOT.jar /opt/has/lib/app.jar
 RUN chown -R root:root                  /opt/has/lib/app.jar
 RUN ls -la /opt/has/lib/app.jar
 RUN java -version
