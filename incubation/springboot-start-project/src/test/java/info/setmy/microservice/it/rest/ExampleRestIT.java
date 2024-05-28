@@ -8,6 +8,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.contains;
 
 @Slf4j
 public class ExampleRestIT extends RestBase {
@@ -26,7 +27,7 @@ public class ExampleRestIT extends RestBase {
             .header("Connection", "keep-alive")
             //.header("Content-Encoding", "gzip") ???
             .header("Date", not(isEmptyOrNullString()))
-            .body("size()", is(1))
+            .body("size()", is(2))
             .body("exampleString", equalTo("Hello World from DB"));
     }
 
