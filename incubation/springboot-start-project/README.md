@@ -180,8 +180,10 @@ kubectl get namespaces
 kubectl describe configmaps microservice-config-map -n microservice-local
 kubectl describe secret microservice-secrets-map    -n microservice-local
 docker context use default
+minikube config set driver docker
 minikube start --driver=docker
-kubectl config set-context minikube
+kubectl config set-context minikube --namespace=microservice-local
+kubectl config view
 minikube image rm setmyinfo/springboot-start-project:latest
 minikube image load setmyinfo/springboot-start-project:latest --overwrite
 minikube cache add setmyinfo/springboot-start-project:latest
