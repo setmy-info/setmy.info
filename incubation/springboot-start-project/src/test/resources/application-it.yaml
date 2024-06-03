@@ -5,7 +5,7 @@ spring:
     main:
         banner-mode: "console"
     datasource:
-        url: jdbc:h2:file:./target/ci;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+        url: jdbc:h2:file:./target/it;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
     quartz:
         properties:
             org:
@@ -13,7 +13,7 @@ spring:
                     dataSource:
                         quartzDataSource:
                             driver: org.h2.Driver
-                            URL: jdbc:h2:file:./target/atest;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+                            URL: jdbc:h2:file:./target/it;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
                             user: sa
                             password:
 
