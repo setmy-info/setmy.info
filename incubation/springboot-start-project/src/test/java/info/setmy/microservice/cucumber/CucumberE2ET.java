@@ -38,5 +38,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "summary")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "usage")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "html:target/cucumber/examples/cucumber.html, json:target/cucumber/examples/cucumber.json, junit:target/cucumber/examples/cucumber.xml, message:target/cucumber/examples/results.ndjson")
-public class CucumberIT {
+public class CucumberE2ET {
 }
