@@ -1,7 +1,8 @@
-package info.setmy.microservice.cucumber;
+package info.setmy.microservice.e2e.cucumber;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
+import org.junit.platform.suite.api.SelectClasspathResource;
 import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 
@@ -31,9 +32,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectPackages("info.setmy.microservice.cucumber")
-//@SelectClasspathResource("info/setmy/microservice/cucumber")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "info.setmy.microservice.cucumber")
+@SelectPackages("info.setmy.microservice.e2e.cucumber")
+@SelectClasspathResource("info/setmy/microservice/e2e/cucumber")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "info.setmy.microservice.e2e.cucumber")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "summary")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "usage")

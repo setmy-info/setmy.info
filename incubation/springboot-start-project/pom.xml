@@ -596,6 +596,12 @@
             </properties>
         </profile>
         <profile>
+            <id>it</id>
+            <properties>
+                <spring-boot.run.profiles>it</spring-boot.run.profiles>
+            </properties>
+        </profile>
+        <profile>
             <id>ci</id>
             <properties>
                 <spring-boot.run.profiles>ci</spring-boot.run.profiles>
@@ -622,6 +628,9 @@
         <!-- On/Off switches -->
         <profile>
             <id>e2e</id>
+            <properties>
+                <spring-boot.run.profiles>e2e</spring-boot.run.profiles>
+            </properties>
             <build>
                 <plugins>
                     <plugin>

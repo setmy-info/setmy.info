@@ -1,4 +1,4 @@
-package info.setmy.microservice.cucumber;
+package info.setmy.microservice.e2e.cucumber;
 
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;

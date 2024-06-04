@@ -9,6 +9,6 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER
 
 @SpringBootTest(classes = Application.class)
 @DirtiesContext(classMode = AFTER_CLASS)
-@ActiveProfiles({"default", "it"})
+@ActiveProfiles({/*"default",*/ "it"})
 public class SpringBase {
 }
