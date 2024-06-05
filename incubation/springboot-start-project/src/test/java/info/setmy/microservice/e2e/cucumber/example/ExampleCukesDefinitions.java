@@ -191,7 +191,7 @@ public class ExampleCukesDefinitions {
 
     @Then("this test should fail")
     public void it_should_fail() {
-        if (expectToFail == E2E_TEST_CUCUMBER_FAILS) {
+        if (expectToFail || E2E_TEST_CUCUMBER_FAILS) {
             fail("Script is failing");
         }
     }
