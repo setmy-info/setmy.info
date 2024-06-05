@@ -2,7 +2,6 @@ package info.setmy.microservice.e2e.cucumber;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
-import org.junit.platform.suite.api.SelectClasspathResource;
 import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 

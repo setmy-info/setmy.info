@@ -1,9 +1,10 @@
 package info.setmy.microservice.service;
 
 import info.setmy.microservice.it.SpringBase;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ExampleServiceIT extends SpringBase {
 

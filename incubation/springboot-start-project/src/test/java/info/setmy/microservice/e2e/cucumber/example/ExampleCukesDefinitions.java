@@ -1,4 +1,4 @@
-package info.setmy.microservice.e2e.cucumber;
+package info.setmy.microservice.e2e.cucumber.example;
 
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
@@ -15,8 +15,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -24,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
+import static info.setmy.microservice.Switches.E2E_TEST_CUCUMBER_FAILS;
 import static org.assertj.core.api.Fail.fail;
 
 /**
@@ -192,7 +191,7 @@ public class ExampleCukesDefinitions {
 
     @Then("this test should fail")
     public void it_should_fail() {
-        if (expectToFail) {
+        if (expectToFail == E2E_TEST_CUCUMBER_FAILS) {
             fail("Script is failing");
         }
     }
