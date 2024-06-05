@@ -78,6 +78,9 @@ spring:
                             URL: jdbc:h2:file:./target/local;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
                             user: sa
                             password:
+#    jackson:
+#        date-format: yyyy-MM-dd'T'HH:mm:ss:SSS'Z'
+#        time-zone: UTC
 
 management:
     endpoints:

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static info.setmy.microservice.web.constant.ApiConstants.API_BASE;
 import static info.setmy.microservice.web.constant.ErrorConstants.KEY_FOR_ANOTHER_ERROR_KEY_VALUE;
 import static info.setmy.microservice.web.constant.ErrorConstants.KEY_FOR_SOME_ERROR_KEY_VALUE;
+import static org.springframework.http.MediaType.ALL_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 //curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -i http://localhost:8080/api/example
@@ -50,7 +51,7 @@ public class ExampleController {
 
     private final ExampleMapper exampleMapper;
 
-    @GetMapping
+    @GetMapping(consumes = ALL_VALUE)
     public ExampleDTO example() {
         log.info("Example GET called");
         return exampleMapper.toDto(exampleService.getExampleModel());
