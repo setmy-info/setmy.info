@@ -112,6 +112,8 @@ maven:
         artifactId: @project.artifactId@
 
 springBootStartProject:
+    startup:
+        timeZone: UTC
     example:
         foo: application.yaml
 
