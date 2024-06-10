@@ -64,7 +64,7 @@
         <maven.javadoc.plugin.version>3.6.0</maven.javadoc.plugin.version>
         <maven.gpg.plugin.version>3.1.0</maven.gpg.plugin.version>
         <maven.project.info.reports.plugin.version>3.4.5</maven.project.info.reports.plugin.version>
-        <maven.checkstyle.plugin.version>3.3.0</maven.checkstyle.plugin.version>
+        <maven.checkstyle.plugin.version>3.3.1</maven.checkstyle.plugin.version>
         <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
         <gmavenplus.plugin.version>3.0.0</gmavenplus.plugin.version>
         <mavn.maven.assembly.plugin>3.6.0</mavn.maven.assembly.plugin>
@@ -990,7 +990,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven.checkstyle.plugin.versoin}</version>
+                <version>${maven.checkstyle.plugin.version}</version>
                 <configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
