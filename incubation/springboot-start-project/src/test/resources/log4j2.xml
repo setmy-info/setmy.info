@@ -4,9 +4,9 @@
 
     <Properties>
         <Property name="LOCAL_LOG_PATTERN"
-                  value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] src/test %-5level %logger{36} %msg%n"/>
+                  value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] src/test %-5level %logger{36} - %msg%n"/>
         <Property name="UTC_LOG_PATTERN"
-                  value="%d{yyyy-MM-dd HH:mm:ss.SSS'Z', UTC} [%t] src/test %-5level %logger{36} %msg%n"/>
+                  value="%d{yyyy-MM-dd HH:mm:ss.SSS'Z', UTC} [%t] src/test %-5level %logger{36} - %msg%n"/>
         <Property name="LOG_PATTERN" value="${UTC_LOG_PATTERN}"/>
     </Properties>
 
