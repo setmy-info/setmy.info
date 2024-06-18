@@ -267,7 +267,7 @@ X Exiting due to GUEST_IMAGE_LOAD: Failed to load image: save to dir: caching im
 3. H2 console
 4. Actuators
 5. Swagger UI
-6. mvn clean && mvn test && mvn verify &&  mvn org.pitest:pitest-maven:mutationCoverage && mvn site:site
+6. mvn clean && mvn test && mvn verify && mvn install -pe2e && mvn org.pitest:pitest-maven:mutationCoverage && mvn site:site
 
 1. http://localhost:8080/
 2. http://localhost:8080/home
