@@ -131,6 +131,10 @@
                             <goal>compileTests</goal>
                             <goal>removeStubs</goal>
                             <goal>removeTestStubs</goal>
+                            <goal>groovydoc</goal>
+                            <goal>groovydocTests</goal>
+                            <!--goal>groovydoc-jar</goal>
+                            <goal>groovydocTests-jar</goal-->
                         </goals>
                     </execution>
                 </executions>
@@ -146,6 +150,12 @@
                     <dependency>
                         <groupId>org.apache.groovy</groupId>
                         <artifactId>groovy</artifactId>
+                        <version>${groovy.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.groovy</groupId>
+                        <artifactId>groovy-groovydoc</artifactId>
                         <version>${groovy.version}</version>
                         <scope>runtime</scope>
                     </dependency>
@@ -212,8 +222,6 @@
                         </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                </configuration>
             </plugin>
             <!--plugin>
                 <groupId>org.pitest</groupId>
