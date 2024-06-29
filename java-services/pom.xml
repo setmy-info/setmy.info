@@ -513,9 +513,9 @@
                 <role>Reviewer</role>
             </roles>
             <timezone>+2</timezone>
-            <!--properties>
-                <picUrl>http://tinyurl.com/xxxxxxxxx</picUrl>
-            </properties-->
+            <properties>
+                <picUrl>https://tinyurl.com/umq7jnf</picUrl>
+            </properties>
         </developer>
     </developers>
 
