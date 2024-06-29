@@ -16,7 +16,6 @@
     <groupId>info.setmy</groupId>
     <artifactId>maven-plugin-start-project</artifactId>
     <version>1.2.0-SNAPSHOT</version>
-
     <packaging>maven-plugin</packaging>
     <name>maven-plugin-start-project</name>
     <description>Maven plugin starter.</description>
@@ -52,7 +51,13 @@
             <version>3.13.1</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -68,21 +73,26 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <!--source>${java.version}</source>
-                    <target>${java.version}</target-->
+                    <!--source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target-->
                     <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.version}</version>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${failsafe.version}</version>
                 <executions>
@@ -162,17 +172,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.12.1</version>
+                <version>${maven.site.plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>${maven.release.plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.7.0</version>
+                <version>${nexus.staging.plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
@@ -183,7 +193,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>${maven.source.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -196,7 +206,7 @@
             <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${maven.javadoc.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -252,7 +262,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.1.0</version>
+                        <version>${maven.gpg.plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -273,7 +283,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>${maven.project.info.reports.plugin.version}</version>
             </plugin>
             <!--
             Problem with 3.0.5 plugin, that is crashing in middle of site building.
@@ -288,31 +298,30 @@
                     <includeFilterFile>${basedir}/src/test/resources/findbugs-include.xml</includeFilterFile>
                 </configuration>
             </plugin-->
-            <!--plugin>
+            <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.0.0</version>
-                <configuration>
+                <version>${spot.bugs.version}</version>
+                <!--configuration>
                     <excludeFilterFile>${basedir}/src/test/resources/spotbugs-exclude.xml</excludeFilterFile>
                     <includeFilterFile>${basedir}/src/test/resources/spotbugs-include.xml</includeFilterFile>
-                </configuration>
-            </plugin-->
+                </configuration-->
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.4.0</version>
                 <configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
-                    <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
-                    <!-- configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation -->
-                    <!-- configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation -->
+                    <!--configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation-->
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
-                <version>2.12.1</version>
+                <version>${maven.changes.plugin.version}</version>
             </plugin>
             <!-- can go broken -->
             <!--plugin>
@@ -328,7 +337,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>taglist-maven-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${taglist.maven.plugin.version}</version>
                 <configuration>
                     <tagListOptions>
                         <tagClasses>
@@ -387,7 +396,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>${maven.javadoc.plugin.version}</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -404,6 +413,12 @@
                     </reportSet>
                 </reportSets>
                 <configuration>
+                    <additionalparam>-Xdoclint:all -Xdoclint:-missing</additionalparam>
+                    <additionalOptions>-Xdoclint:all -Xdoclint:-missing</additionalOptions>
+                    <additionalJOptions>
+                        <additionalJOption>-Xdoclint:all</additionalJOption>
+                        <additionalJOption>-Xdoclint:-missing</additionalJOption>
+                    </additionalJOptions>
                     <additionalOptions>-html5</additionalOptions>
                 </configuration>
             </plugin>
@@ -493,8 +508,8 @@
         <url>https://github.com/setmy-info/setmy.info/issues</url>
     </issueManagement>
 
-    <ciManagement />
-    <contributors />
+    <ciManagement/>
+    <contributors/>
 
     <distributionManagement>
         <snapshotRepository>

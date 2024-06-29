@@ -38,6 +38,11 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -47,6 +52,7 @@
                 <artifactId>maven-plugin-start-project</artifactId>
                 <version>${project.version}</version>
                 <configuration>
+                    <!--goalPrefix>smi</goalPrefix-->
                     <exampleValue>EXAMPLE VALUE</exampleValue>
                 </configuration>
                 <executions>
@@ -68,6 +74,13 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
@@ -280,24 +293,24 @@
                     <includeFilterFile>${basedir}/src/test/resources/findbugs-include.xml</includeFilterFile>
                 </configuration>
             </plugin-->
-            <!--plugin>
+            <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.0.0</version>
-                <configuration>
+                <version>${spot.bugs.version}</version>
+                <!--configuration>
                     <excludeFilterFile>${basedir}/src/test/resources/spotbugs-exclude.xml</excludeFilterFile>
                     <includeFilterFile>${basedir}/src/test/resources/spotbugs-include.xml</includeFilterFile>
-                </configuration>
-            </plugin-->
+                </configuration-->
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
-                    <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
-                    <!-- configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation -->
-                    <!-- configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation -->
+                    <!--configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation-->
                 </configuration>
             </plugin>
             <plugin>
@@ -490,8 +503,8 @@
         <url>https://github.com/setmy-info/setmy.info/issues</url>
     </issueManagement>
     
-    <ciManagement />
-    <contributors />
+    <ciManagement/>
+    <contributors/>
 
     <distributionManagement>
         <snapshotRepository>
