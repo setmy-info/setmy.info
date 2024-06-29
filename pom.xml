@@ -95,7 +95,7 @@
         <swagger.annotations.version>1.6.3</swagger.annotations.version>
         <swagger.models.version>1.6.3</swagger.models.version>
         <springdoc.version>1.8.0</springdoc.version>
-        <jakarta.xml.bind.api.version>4.0.1</jakarta.xml.bind.api.version>
+        <jakarta.xml.bind.api.version>4.0.2</jakarta.xml.bind.api.version>
         <picocli.version>4.7.6</picocli.version>
         <find.bugs.version>3.0.5</find.bugs.version>
         <spot.bugs.version>4.8.5.0</spot.bugs.version>
