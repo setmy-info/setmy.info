@@ -45,8 +45,8 @@
         <mockito.version>5.11.0</mockito.version>
         <assertj.version>3.26.0</assertj.version>
         <jacoco.version>0.8.12</jacoco.version>
-        <surefire.version>3.2.5</surefire.version>
         <failsafe.version>3.2.5</failsafe.version>
+        <surefire.version>3.2.5</surefire.version>
         <!--log4j.verion>1.2.17</log4j.verion -->
         <log4j2.verion>2.23.1</log4j2.verion>
         <logback.verion>1.4.11</logback.verion>
@@ -59,6 +59,9 @@
         <jackson.version>2.17.1</jackson.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
         <dependency.check.version>9.2.0</dependency.check.version>
+        <maven.version>3.9.8</maven.version>
+        <maven.clean.plugin.version>3.3.2</maven.clean.plugin.version>
+        <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
         <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
         <maven.site.plugin.version>3.12.1</maven.site.plugin.version>
         <maven.release.plugin.version>3.0.1</maven.release.plugin.version>
@@ -68,8 +71,9 @@
         <maven.project.info.reports.plugin.version>3.4.5</maven.project.info.reports.plugin.version>
         <maven.checkstyle.plugin.version>3.4.0</maven.checkstyle.plugin.version>
         <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
+        <maven.assembly.plugin>3.7.1</maven.assembly.plugin>
+        <maven.plugin.annotations.version>3.13.1</maven.plugin.annotations.version>
         <gmavenplus.plugin.version>3.0.2</gmavenplus.plugin.version>
-        <mavn.maven.assembly.plugin>3.6.0</mavn.maven.assembly.plugin>
         <buildnumber.maven.plugin.version>3.2.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.7.0</nexus.staging.plugin.version>
         <spring.boot.verion>3.3.0</spring.boot.verion>

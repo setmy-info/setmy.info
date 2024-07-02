@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<rss version="2.0" xmlns="http://setmy.info/rss" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://setmy.info/rss ./rss.xsd">
+<rss version="2.0" xmlns="https://setmy.info/rss" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://setmy.info/rss ./rss.xsd">
     <channel>
         <title>Imre Tabur</title>
         <link>http://some.link.example.com</link>

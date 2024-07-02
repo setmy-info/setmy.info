@@ -10,160 +10,46 @@
         <groupId>info.setmy</groupId>
         <artifactId>multi-projects</artifactId>
         <version>1.2.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>info.setmy</groupId>
-    <artifactId>maven-plugin-start-project</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
-    <packaging>maven-plugin</packaging>
-    <name>maven-plugin-start-project</name>
-    <description>Maven plugin starter.</description>
+    <artifactId>java-lexer-parser</artifactId>
+    <packaging>jar</packaging>
+    <name>java-lexer-parser</name>
+    <description>Different programming languages parsing functionalities.</description>
     <url>https://setmy-info.github.io</url>
-
-    <!--properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>21</java.version>
-        <failsafe.version>3.2.5</failsafe.version>
-        <surefire.version>3.2.5</surefire.version>
-        <jacoco.version>0.8.12</jacoco.version>
-        <pitest.version>1.16.1</pitest.version>
-        <dependency.check.version>8.4.0</dependency.check.version>
-        <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
-    </properties-->
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-plugin-api</artifactId>
-            <version>${maven.version}</version>
-            <scope>provided</scope>
+            <groupId>info.setmy</groupId>
+            <artifactId>java-services</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-core</artifactId>
-            <version>${maven.version}</version>
-            <scope>provided</scope>
+            <groupId>com.github.javaparser</groupId>
+            <artifactId>javaparser-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.maven.plugin-tools</groupId>
-            <artifactId>maven-plugin-annotations</artifactId>
-            <version>${maven.plugin.annotations.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-contracts</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-xml</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-toml</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-yaml</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-contracts</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-contracts</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-sql</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-test</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-test-junit5</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-templates</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-cli-picocli</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-macro</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-datetime</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-dateutil</artifactId>
-        </dependency>
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.gmavenplus</groupId>
-                <artifactId>gmavenplus-plugin</artifactId>
-                <version>${gmavenplus.plugin.version}</version>
+                <groupId>info.setmy</groupId>
+                <artifactId>maven-plugin-start-project</artifactId>
+                <version>${project.version}</version>
+                <configuration>
+                    <exampleValue>EXAMPLE VALUE</exampleValue>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>addSources</goal>
-                            <goal>addTestSources</goal>
-                            <goal>generateStubs</goal>
-                            <goal>compile</goal>
-                            <goal>generateTestStubs</goal>
-                            <goal>compileTests</goal>
-                            <goal>removeStubs</goal>
-                            <goal>removeTestStubs</goal>
+                            <goal>generate-sources</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <scripts>
-                        <script><![CDATA[
-                            // your script here
-                        ]]></script>
-                    </scripts>
-                    <skipBytecodeCheck>true</skipBytecodeCheck>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.groovy</groupId>
-                        <artifactId>groovy</artifactId>
-                        <version>${groovy.version}</version>
-                        <scope>runtime</scope>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.13.1</version>
-                <configuration>
-                    <goalPrefix>smi</goalPrefix>
-                </configuration>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -176,13 +62,6 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
@@ -242,10 +121,10 @@
                 <version>${pitest.version}</version>
                 <configuration>
                     <targetClasses>
-                        <param>info.setmy.models*</param>
+                        <param>info.setmy.services*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>info.setmy.models*</param>
+                        <param>info.setmy.services*</param>
                     </targetTests>
                 </configuration>
             </plugin>
@@ -395,24 +274,25 @@
                     <includeFilterFile>${basedir}/src/test/resources/findbugs-include.xml</includeFilterFile>
                 </configuration>
             </plugin-->
-            <plugin>
+            <!--plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>${spot.bugs.version}</version>
-                <!--configuration>
+                <version>4.0.0</version>
+                <configuration>
                     <excludeFilterFile>${basedir}/src/test/resources/spotbugs-exclude.xml</excludeFilterFile>
                     <includeFilterFile>${basedir}/src/test/resources/spotbugs-include.xml</includeFilterFile>
-                </configuration-->
-            </plugin>
+                </configuration>
+            </plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven.checkstyle.plugin.versoin}</version>
                 <configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
-                    <!--configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
-                    <configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation>
-                    <configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation-->
+                    <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
+                    <!-- configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation -->
+                    <!-- configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation -->
                 </configuration>
             </plugin>
             <plugin>
@@ -510,12 +390,6 @@
                     </reportSet>
                 </reportSets>
                 <configuration>
-                    <additionalparam>-Xdoclint:all -Xdoclint:-missing</additionalparam>
-                    <additionalOptions>-Xdoclint:all -Xdoclint:-missing</additionalOptions>
-                    <additionalJOptions>
-                        <additionalJOption>-Xdoclint:all</additionalJOption>
-                        <additionalJOption>-Xdoclint:-missing</additionalJOption>
-                    </additionalJOptions>
                     <additionalOptions>-html5</additionalOptions>
                 </configuration>
             </plugin>
@@ -587,9 +461,9 @@
                 <role>Reviewer</role>
             </roles>
             <timezone>+2</timezone>
-            <properties>
-                <picUrl>https://tinyurl.com/umq7jnf</picUrl>
-            </properties>
+            <!--properties>
+                <picUrl>http://tinyurl.com/xxxxxxxxx</picUrl>
+            </properties-->
         </developer>
     </developers>
 
@@ -605,8 +479,8 @@
         <url>https://github.com/setmy-info/setmy.info/issues</url>
     </issueManagement>
 
-    <ciManagement/>
-    <contributors/>
+    <ciManagement />
+    <contributors />
 
     <distributionManagement>
         <snapshotRepository>
