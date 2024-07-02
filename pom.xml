@@ -147,6 +147,8 @@
         <module>springboot-start-project</module>
         <module>java-crawler</module>
         <module>incubation/maven-plugin-start-project</module>
+        <module>java-lexer-parser</module>
+		<module>java-tsd</module>
     </modules>
 
     <dependencies>

@@ -118,6 +118,26 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>info.setmy</groupId>
+                <artifactId>java-models</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>info.setmy</groupId>
+                <artifactId>java-services</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>info.setmy</groupId>
+                <artifactId>groovy-models</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>info.setmy</groupId>
+                <artifactId>groovy-services</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
@@ -522,6 +542,11 @@
                 <artifactId>tika-parsers</artifactId>
                 <version>${tika.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.javaparser</groupId>
+                <artifactId>javaparser-core</artifactId>
+                <version>3.26.1</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -669,6 +694,21 @@
                             <scope>runtime</scope>
                         </dependency>
                     </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.antlr</groupId>
+                    <artifactId>antlr4-maven-plugin</artifactId>
+                    <version>4.13.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>info.setmy</groupId>
+                    <artifactId>maven-plugin-start-project</artifactId>
+                    <version>${project.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>jaxb2-maven-plugin</artifactId>
+                    <version>3.2.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
