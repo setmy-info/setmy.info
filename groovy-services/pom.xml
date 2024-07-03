@@ -24,12 +24,10 @@
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>java-services</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>groovy-models</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
