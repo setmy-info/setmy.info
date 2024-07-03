@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<tsd_vorm xmlns="https://www.emta.ee/tsd_2023"
-          xmlns:tsd="https://www.emta.ee/tsd_2023"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="https://www.emta.ee/tsd_2023 ../../../../main/xsd/tsd_schema_01012023.xsd">
+<tsd_vorm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="../../../../main/xsd/tsd_schema_01012023.xsd">
 
     <c108_Aasta>2023</c108_Aasta>
     <c109_Kuu>2</c109_Kuu>
