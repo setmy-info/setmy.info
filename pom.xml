@@ -148,10 +148,14 @@
         <module>java-crawler</module>
         <module>incubation/maven-plugin-start-project</module>
         <module>java-lexer-parser</module>
-		<module>java-tsd</module>
     </modules>
 
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <!-- Vintage JUnit needs these two deps: junint 4 and vintage engine -->
         <dependency>
             <groupId>junit</groupId>

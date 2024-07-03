@@ -1,4 +1,4 @@
-package info.setmy.tsd.parser;
+package info.setmy.accouning.tsd.model;
 
 import info.setmy.tsd.models.TsdVorm;
 import jakarta.xml.bind.annotation.XmlRootElement;
