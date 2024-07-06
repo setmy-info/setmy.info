@@ -1,21 +1,20 @@
 package info.setmy.models.storage;
 
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.junit.jupiter.api.BeforeEach;
 
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
+@Slf4j
 public class StorageIT {
-
-    private static final Logger LOG = LoggerFactory.getLogger(StorageIT.class);
 
     private static final String STORAGE_FOLDER = "target";
 
@@ -23,8 +22,8 @@ public class StorageIT {
 
     @BeforeEach
     public void setUp() {
-        storage = new Storage(STORAGE_FOLDER);
-        storage.init();
+        storage = new Storage(STORAGE_FOLDER)
+            .init();
     }
 
     public void createFile() throws IOException {
@@ -81,11 +80,11 @@ public class StorageIT {
         new File("target/system").delete();
 
         final Optional<StorageFile> file = storage.createStorageFile(
-                new DirectoryStructurePattern().
-                        setSystem(systemName).
-                        setOwner(owner).
-                        setSubOwner(subOwner).
-                        setName(fileName)
+            new DirectoryStructurePattern().
+                setSystem(systemName).
+                setOwner(owner).
+                setSubOwner(subOwner).
+                setName(fileName)
         );
 
         assertThat(file.get().getParentName()).isEqualTo(parentName);

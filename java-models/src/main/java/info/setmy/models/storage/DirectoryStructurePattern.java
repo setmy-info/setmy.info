@@ -1,11 +1,6 @@
 package info.setmy.models.storage;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class for directory creation rules.
@@ -46,15 +41,6 @@ public class DirectoryStructurePattern implements StoragePattern {
     public DirectoryStructurePattern(final String owner, final String subOwner) {
         this.owner = owner;
         this.subOwner = subOwner;
-    }
-
-    @Override
-    public DirectoryStructurePattern setDefault() {
-        return setDate(newDate(), DirectoryStructureDepth.MINUTE);
-    }
-
-    Date newDate() {
-        return new Date();
     }
 
     public DirectoryStructurePattern setDate(final Date date, final DirectoryStructureDepth depth) {
