@@ -3,7 +3,7 @@ package info.setmy.models.storage;
 /**
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public interface StoragePattern {
+public interface StorageFileCreationPattern {
 
     String getName();
 }

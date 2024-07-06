@@ -4,7 +4,7 @@ import info.setmy.exceptions.InitializationException;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 
-import static info.setmy.models.storage.DirectoryStructurePattern.addString;
+import static info.setmy.models.storage.DirectoryStructureFileCreationPattern.addString;
 
 /**
  * Class for maven target folder class tests.
@@ -13,7 +13,7 @@ import static info.setmy.models.storage.DirectoryStructurePattern.addString;
  */
 @Builder(toBuilder = true)
 @RequiredArgsConstructor
-public class MavenTargetClassPattern<T> implements StoragePattern {
+public class MavenTargetClassFileCreationPattern<T> implements StorageFileCreationPattern {
 
     private final static String TARGET_FOLDER = "target";
 

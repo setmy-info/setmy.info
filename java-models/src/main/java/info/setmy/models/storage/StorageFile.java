@@ -1,5 +1,8 @@
 package info.setmy.models.storage;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import java.io.File;
 
 /**
@@ -11,6 +14,8 @@ import java.io.File;
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
+@Getter
+@RequiredArgsConstructor
 public class StorageFile {
 
     private final File parent;
@@ -20,27 +25,4 @@ public class StorageFile {
     private final String parentName;
 
     private final String childName;
-
-    public StorageFile(final File parent, final File child, final String parentName, final String childName) {
-        this.parent = parent;
-        this.child = child;
-        this.parentName = parentName;
-        this.childName = childName;
-    }
-
-    public String getParentName() {
-        return parentName;
-    }
-
-    public String getChildName() {
-        return childName;
-    }
-
-    public File getParent() {
-        return new File(parent.getPath());
-    }
-
-    public File getChild() {
-        return new File(child.getPath());
-    }
 }

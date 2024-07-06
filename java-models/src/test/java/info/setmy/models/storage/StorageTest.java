@@ -151,7 +151,9 @@ public class StorageTest {
 
     @Test
     public void creatingFileWithUperDirChangeShouldFail() {
-        final StoragePattern pattern = new DirectoryStructurePattern().setSystem("../");
+        final StorageFileCreationPattern pattern = DirectoryStructureFileCreationPattern.builder()
+            .system("../")
+            .build();
         ForbiddenException thrown = assertThrows(
             ForbiddenException.class,
             () -> storage.createStorageFile(pattern),
@@ -162,7 +164,7 @@ public class StorageTest {
 
     @Test
     public void creatingFileWithHomeDirShouldFail() {
-        final StoragePattern pattern = new DirectoryStructurePattern().setSystem("~");
+        final StorageFileCreationPattern pattern = DirectoryStructureFileCreationPattern.builder().system("~").build();
         ForbiddenException thrown = assertThrows(
             ForbiddenException.class,
             () -> storage.createStorageFile(pattern),
@@ -173,7 +175,7 @@ public class StorageTest {
 
     @Test
     public void creatingFileWithUperDirChangeShouldFail2() {
-        final StoragePattern pattern = new DirectoryStructurePattern().setOwner("../");
+        final StorageFileCreationPattern pattern = DirectoryStructureFileCreationPattern.builder().subOwner("../").build();
         ForbiddenException thrown = assertThrows(
             ForbiddenException.class,
             () -> storage.createStorageFile(pattern),
@@ -184,7 +186,7 @@ public class StorageTest {
 
     @Test
     public void creatingFileWithHomeDirShouldFail2() {
-        final StoragePattern pattern = new DirectoryStructurePattern().setOwner("~");
+        final StorageFileCreationPattern pattern = DirectoryStructureFileCreationPattern.builder().subOwner("~").build();
         ForbiddenException thrown = assertThrows(
             ForbiddenException.class,
             () -> storage.createStorageFile(pattern),
@@ -195,7 +197,7 @@ public class StorageTest {
 
     @Test
     public void creatingFileWithUperDirChangeShouldFail3() {
-        final StoragePattern pattern = new DirectoryStructurePattern().setSubOwner("../");
+        final StorageFileCreationPattern pattern = DirectoryStructureFileCreationPattern.builder().subOwner("../").build();
         ForbiddenException thrown = assertThrows(
             ForbiddenException.class,
             () -> storage.createStorageFile(pattern),
@@ -206,7 +208,7 @@ public class StorageTest {
 
     @Test
     public void creatingFileWithHomeDirShouldFail3() {
-        final StoragePattern pattern = new DirectoryStructurePattern().setSubOwner("~");
+        final StorageFileCreationPattern pattern = DirectoryStructureFileCreationPattern.builder().subOwner("~").build();
         ForbiddenException thrown = assertThrows(
             ForbiddenException.class,
             () -> storage.createStorageFile(pattern),
@@ -217,7 +219,7 @@ public class StorageTest {
 
     @Test
     public void creatingFileWithUperDirChangeShouldFail4() {
-        final StoragePattern pattern = new DirectoryStructurePattern().setName("../");
+        final StorageFileCreationPattern pattern = DirectoryStructureFileCreationPattern.builder().name("../").build();
         ForbiddenException thrown = assertThrows(
             ForbiddenException.class,
             () -> storage.createStorageFile(pattern),
@@ -228,7 +230,7 @@ public class StorageTest {
 
     @Test
     public void creatingFileWithHomeDirShouldFail4() {
-        final StoragePattern pattern = new DirectoryStructurePattern().setName("~");
+        final StorageFileCreationPattern pattern = DirectoryStructureFileCreationPattern.builder().name("~").build();
         ForbiddenException thrown = assertThrows(
             ForbiddenException.class,
             () -> storage.createStorageFile(pattern),

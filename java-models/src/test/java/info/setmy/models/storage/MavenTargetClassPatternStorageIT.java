@@ -28,7 +28,7 @@ public class MavenTargetClassPatternStorageIT {
     public void currentClassFolderStructure() {
         new File("./target/info/setmy/models/storage/MavenTargetClassPatternStorageIT/currentClassFolderStructure.txt").delete();
         new File("./target/info/setmy/models/storage/MavenTargetClassPatternStorageIT/").delete();
-        var pattern = MavenTargetClassPattern.builder()
+        var pattern = MavenTargetClassFileCreationPattern.builder()
             .name("currentClassFolderStructure.txt")
             .clazz(this.getClass())
             .build();

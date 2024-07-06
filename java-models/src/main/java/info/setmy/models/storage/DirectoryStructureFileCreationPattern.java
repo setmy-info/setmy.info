@@ -1,5 +1,8 @@
 package info.setmy.models.storage;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
 import java.util.*;
 
 /**
@@ -7,11 +10,13 @@ import java.util.*;
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-public class DirectoryStructurePattern implements StoragePattern {
+@Builder(toBuilder = true)
+@AllArgsConstructor
+public class DirectoryStructureFileCreationPattern implements StorageFileCreationPattern {
 
-    private String system;
-    private String owner;
-    private String subOwner;
+    private final String system;
+    private final String owner;
+    private final String subOwner;
     private Integer year;
     private Integer month;
     private Integer day;
@@ -35,15 +40,7 @@ public class DirectoryStructurePattern implements StoragePattern {
         SETTERS = Collections.unmodifiableList(temp);
     }
 
-    public DirectoryStructurePattern() {
-    }
-
-    public DirectoryStructurePattern(final String owner, final String subOwner) {
-        this.owner = owner;
-        this.subOwner = subOwner;
-    }
-
-    public DirectoryStructurePattern setDate(final Date date, final DirectoryStructureDepth depth) {
+    public DirectoryStructureFileCreationPattern setDate(final Date date, final DirectoryStructureDepth depth) {
         final Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
         for (DepthSetter setter : SETTERS) {
@@ -57,67 +54,52 @@ public class DirectoryStructurePattern implements StoragePattern {
         return this;
     }
 
-    public DirectoryStructurePattern setSystem(final String system) {
-        this.system = system;
-        return this;
-    }
-
-    public DirectoryStructurePattern setOwner(final String owner) {
-        this.owner = owner;
-        return this;
-    }
-
-    public DirectoryStructurePattern setSubOwner(final String subOwner) {
-        this.subOwner = subOwner;
-        return this;
-    }
-
-    public DirectoryStructurePattern setYear(final int year) {
+    public DirectoryStructureFileCreationPattern setYear(final int year) {
         this.year = year;
         return this;
     }
 
-    public DirectoryStructurePattern setMonth(final int month) {
+    public DirectoryStructureFileCreationPattern setMonth(final int month) {
         if (between(month, 1, 12)) {
             this.month = month;
         }
         return this;
     }
 
-    public DirectoryStructurePattern setDay(final int day) {
+    public DirectoryStructureFileCreationPattern setDay(final int day) {
         if (between(day, 1, 31)) {
             this.day = day;
         }
         return this;
     }
 
-    public DirectoryStructurePattern setHour(final int hour) {
+    public DirectoryStructureFileCreationPattern setHour(final int hour) {
         if (between(hour, 1, 24)) {
             this.hour = hour;
         }
         return this;
     }
 
-    public DirectoryStructurePattern setMinute(final int minute) {
+    public DirectoryStructureFileCreationPattern setMinute(final int minute) {
         if (between(minute, 0, 59)) {
             this.minute = minute;
         }
         return this;
     }
 
-    public DirectoryStructurePattern setSecond(final int second) {
+    public DirectoryStructureFileCreationPattern setSecond(final int second) {
         if (between(second, 0, 59)) {
             this.second = second;
         }
         return this;
     }
 
-    public DirectoryStructurePattern setMilliSecond(final int msecond) {
-        this.milliSecond = msecond;
+    public DirectoryStructureFileCreationPattern setMilliSecond(final int milliSecond) {
+        this.milliSecond = milliSecond;
         return this;
     }
 
-    public DirectoryStructurePattern setName(final String name) {
+    public DirectoryStructureFileCreationPattern setName(final String name) {
         this.name = name;
         return this;
     }
@@ -151,13 +133,13 @@ public class DirectoryStructurePattern implements StoragePattern {
         return name;
     }
 
-    static interface DepthSetter {
+    interface DepthSetter {
 
         boolean isDepth(final DirectoryStructureDepth depth);
 
-        public void setValue(final Calendar calendar, final DirectoryStructurePattern depth);
+        void setValue(final Calendar calendar, final DirectoryStructureFileCreationPattern depth);
 
-        public void setValue(final DirectoryStructurePattern depth, final StringBuilder stringBuilder);
+        void setValue(final DirectoryStructureFileCreationPattern depth, final StringBuilder stringBuilder);
     }
 
     static abstract class DepthBase {
@@ -180,12 +162,12 @@ public class DirectoryStructurePattern implements StoragePattern {
         }
 
         @Override
-        public void setValue(final Calendar calendar, final DirectoryStructurePattern pattern) {
+        public void setValue(final Calendar calendar, final DirectoryStructureFileCreationPattern pattern) {
             pattern.setYear(calendar.get(Calendar.YEAR));
         }
 
         @Override
-        public void setValue(DirectoryStructurePattern depth, StringBuilder stringBuilder) {
+        public void setValue(DirectoryStructureFileCreationPattern depth, StringBuilder stringBuilder) {
             addNumber(depth.year, stringBuilder);
         }
     }
@@ -198,12 +180,12 @@ public class DirectoryStructurePattern implements StoragePattern {
         }
 
         @Override
-        public void setValue(final Calendar calendar, final DirectoryStructurePattern pattern) {
+        public void setValue(final Calendar calendar, final DirectoryStructureFileCreationPattern pattern) {
             pattern.setMonth(calendar.get(Calendar.MONTH) + 1);
         }
 
         @Override
-        public void setValue(DirectoryStructurePattern depth, StringBuilder stringBuilder) {
+        public void setValue(DirectoryStructureFileCreationPattern depth, StringBuilder stringBuilder) {
             addNumber(depth.month, stringBuilder);
         }
     }
@@ -216,12 +198,12 @@ public class DirectoryStructurePattern implements StoragePattern {
         }
 
         @Override
-        public void setValue(final Calendar calendar, final DirectoryStructurePattern pattern) {
+        public void setValue(final Calendar calendar, final DirectoryStructureFileCreationPattern pattern) {
             pattern.setDay(calendar.get(Calendar.DAY_OF_MONTH));
         }
 
         @Override
-        public void setValue(DirectoryStructurePattern depth, StringBuilder stringBuilder) {
+        public void setValue(DirectoryStructureFileCreationPattern depth, StringBuilder stringBuilder) {
             addNumber(depth.day, stringBuilder);
         }
     }
@@ -234,12 +216,12 @@ public class DirectoryStructurePattern implements StoragePattern {
         }
 
         @Override
-        public void setValue(final Calendar calendar, final DirectoryStructurePattern pattern) {
+        public void setValue(final Calendar calendar, final DirectoryStructureFileCreationPattern pattern) {
             pattern.setHour(calendar.get(Calendar.HOUR));
         }
 
         @Override
-        public void setValue(DirectoryStructurePattern depth, StringBuilder stringBuilder) {
+        public void setValue(DirectoryStructureFileCreationPattern depth, StringBuilder stringBuilder) {
             addNumber(depth.hour, stringBuilder);
         }
     }
@@ -252,12 +234,12 @@ public class DirectoryStructurePattern implements StoragePattern {
         }
 
         @Override
-        public void setValue(final Calendar calendar, final DirectoryStructurePattern pattern) {
+        public void setValue(final Calendar calendar, final DirectoryStructureFileCreationPattern pattern) {
             pattern.setMinute(calendar.get(Calendar.MINUTE));
         }
 
         @Override
-        public void setValue(DirectoryStructurePattern depth, StringBuilder stringBuilder) {
+        public void setValue(DirectoryStructureFileCreationPattern depth, StringBuilder stringBuilder) {
             addNumber(depth.minute, stringBuilder);
         }
     }
@@ -270,12 +252,12 @@ public class DirectoryStructurePattern implements StoragePattern {
         }
 
         @Override
-        public void setValue(final Calendar calendar, final DirectoryStructurePattern pattern) {
+        public void setValue(final Calendar calendar, final DirectoryStructureFileCreationPattern pattern) {
             pattern.setSecond(calendar.get(Calendar.SECOND));
         }
 
         @Override
-        public void setValue(DirectoryStructurePattern depth, StringBuilder stringBuilder) {
+        public void setValue(DirectoryStructureFileCreationPattern depth, StringBuilder stringBuilder) {
             addNumber(depth.second, stringBuilder);
         }
     }
@@ -288,12 +270,12 @@ public class DirectoryStructurePattern implements StoragePattern {
         }
 
         @Override
-        public void setValue(final Calendar calendar, final DirectoryStructurePattern pattern) {
+        public void setValue(final Calendar calendar, final DirectoryStructureFileCreationPattern pattern) {
             pattern.setMilliSecond(calendar.get(Calendar.MILLISECOND));
         }
 
         @Override
-        public void setValue(DirectoryStructurePattern depth, StringBuilder stringBuilder) {
+        public void setValue(DirectoryStructureFileCreationPattern depth, StringBuilder stringBuilder) {
             addNumber(depth.milliSecond, stringBuilder);
         }
     }

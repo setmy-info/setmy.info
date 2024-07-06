@@ -39,7 +39,7 @@ public final class Storage {
         return this;
     }
 
-    public Optional<StorageFile> createStorageFile(final StoragePattern pattern) {
+    public Optional<StorageFile> createStorageFile(final StorageFileCreationPattern pattern) {
         final String directoryName = trim(pattern.toString());
         String fileName;
         if (pattern.getName() == null) {

@@ -27,7 +27,13 @@ public class StorageIT {
     }
 
     public void createFile() throws IOException {
-        final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setYear(2018).setMonth(4).setDay(23));
+        final Optional<StorageFile> file = storage.createStorageFile(
+            DirectoryStructureFileCreationPattern.builder()
+                .year(2018)
+                .month(4)
+                .day(23)
+                .build()
+        );
         assertThat(file.isPresent()).isEqualTo(true);
 
         final File newFile = file.get().getChild();//Is generated again
@@ -41,7 +47,9 @@ public class StorageIT {
     public void getExistingFileAndNonExistingFiles() throws IOException {
         final String directoryPath = "2018/4/23/";
 
-        final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setYear(2018).setMonth(4).setDay(23));
+        final Optional<StorageFile> file = storage.createStorageFile(
+            DirectoryStructureFileCreationPattern.builder().build().setYear(2018).setMonth(4).setDay(23)
+        );
 
         final Optional<StorageFile> createdFile = storage.getStorageFile(directoryPath + file.get().getChildName());
         assertThat(createdFile.isPresent()).isEqualTo(true);
@@ -59,7 +67,11 @@ public class StorageIT {
         new File(storageFileName).delete();
         new File(storageParentName).delete();
 
-        final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setOwner(owner).setName(fileName));
+        final Optional<StorageFile> file = storage.createStorageFile(DirectoryStructureFileCreationPattern.builder()
+            .owner(owner)
+            .name(fileName)
+            .build()
+        );
         assertThat(file.get().getChild().getPath()).isEqualTo(os(storageFileName));
     }
 
@@ -80,11 +92,12 @@ public class StorageIT {
         new File("target/system").delete();
 
         final Optional<StorageFile> file = storage.createStorageFile(
-            new DirectoryStructurePattern().
-                setSystem(systemName).
-                setOwner(owner).
-                setSubOwner(subOwner).
-                setName(fileName)
+            DirectoryStructureFileCreationPattern.builder()
+                .system(systemName)
+                .owner(owner)
+                .subOwner(subOwner)
+                .name(fileName)
+                .build()
         );
 
         assertThat(file.get().getParentName()).isEqualTo(parentName);
