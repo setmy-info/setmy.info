@@ -129,22 +129,21 @@ public class DirectoryStructurePattern implements StoragePattern {
     @Override
     public String toString() {
         final StringBuilder stringBuilder = new StringBuilder();
-        addTring(system, stringBuilder);
-        addTring(owner, stringBuilder);
-        addTring(subOwner, stringBuilder);
-        SETTERS.forEach((setter) -> {
-            setter.setValue(this, stringBuilder);
-        });
+        addString(system, stringBuilder);
+        addString(owner, stringBuilder);
+        addString(subOwner, stringBuilder);
+        SETTERS.forEach((setter) -> setter.setValue(this, stringBuilder));
         return stringBuilder.toString();
     }
 
-    void addTring(final String string, final StringBuilder stringBuilder) {
+    public static StringBuilder addString(final String string, final StringBuilder stringBuilder) {
         if (string != null) {
             if (stringBuilder.length() > 0) {
                 stringBuilder.append("/");
             }
             stringBuilder.append(string);
         }
+        return stringBuilder;
     }
 
     @Override
