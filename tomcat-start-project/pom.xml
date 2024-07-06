@@ -22,7 +22,7 @@
 
     <properties>
         <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
-        <maven.jetty.plugin.version>11.0.9</maven.jetty.plugin.version>
+        <maven.jetty.plugin.version>2.0.11</maven.jetty.plugin.version>
     </properties>
 
     <dependencies>
@@ -149,15 +149,27 @@
             <artifactId>spring-security-core</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>${servlet.api.version}</version>
-        </dependency>
+        </dependency-->
         <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>javax.servlet.jsp-api</artifactId>
             <version>${jsp.api.version}</version>
+            <scope>provided</scope>
+        </dependency-->
+        <dependency>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
         <!--dependency>
@@ -188,7 +200,6 @@
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>groovy-services</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>info.setmy</groupId>
@@ -271,10 +282,15 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
             <version>${javax.validation.api.version}</version>
+        </dependency-->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
         <dependency>
             <groupId>javax.inject</groupId>

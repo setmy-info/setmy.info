@@ -1,18 +1,16 @@
 package info.setmy.web.services;
 
-import info.setmy.web.services.HttpService;
 import info.setmy.exceptions.web.ForbiddenWebException;
 import static info.setmy.web.services.HttpService.DEFAULT_CSRF_COOKIE_NAME;
 import static info.setmy.web.services.HttpService.DEFAULT_JWT_COOKIE_NAME;
 import static info.setmy.web.services.HttpService.DELETABLE_COOKIE_MAX_AGE;
 import static info.setmy.web.services.HttpService.SESSION_COOKIE_MAX_AGE;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.Optional;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;

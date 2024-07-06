@@ -70,8 +70,8 @@
         <jsp.api.version>2.3.3</jsp.api.version>
         <!--jaxb.impl.version>2.1</jaxb.impl.version-->
         <maven.jetty.plugin.version>11.0.21</maven.jetty.plugin.version>
-        <spring.version>6.0.12</spring.version>
-        <spring.security.version>6.1.4</spring.security.version>
+        <spring.version>6.1.9</spring.version>
+        <spring.security.version>6.3.0</spring.security.version>
         <spring.data.jpa.version>3.1.4</spring.data.jpa.version>
         <hibernate.version>6.5.2.Final</hibernate.version>
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version>
@@ -146,7 +146,7 @@
         <!-- module>tomcat-start-project</module -->
         <module>springboot-start-project</module>
         <module>java-crawler</module>
-        <module>incubation/maven-plugin-start-project</module>
+        <module>maven-plugin-start-project</module>
         <module>java-lexer-parser</module>
     </modules>
 

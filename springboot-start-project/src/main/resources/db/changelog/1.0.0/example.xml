@@ -5,7 +5,16 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="1.0.0" author="Imre Tabur">
+    <changeSet id="1.0.0_pg_extension" author="Imre Tabur">
+        <preConditions onFail="MARK_RAN">
+            <dbms type="postgresql"/>
+        </preConditions>
+        <sql>CREATE
+        EXTENSION IF NOT EXISTS postgis;</sql>
+        <rollback>DROP EXTENSION IF EXISTS postgis;</rollback>
+    </changeSet>
+
+    <changeSet id="1.0.0_example" author="Imre Tabur">
 
         <createSequence sequenceName="EXAMPLE_ID_SEQ" incrementBy="1" startValue="2"/>
 
@@ -16,17 +25,20 @@
             <column name="text" type="varchar(512)">
                 <constraints nullable="false"/>
             </column>
+            <column name="geom" type="geometry">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
 
         <rollback>
             <dropTable tableName="EXAMPLE"/>
-            <dropSequence sequenceName="EXAMPLE_ID_SEQ" />
+            <dropSequence sequenceName="EXAMPLE_ID_SEQ"/>
         </rollback>
 
     </changeSet>
 
-    <changeSet id="1.0.1" author="Imre Tabur">
-        <loadData file="example.csv" tableName="EXAMPLE" relativeToChangelogFile="true"></loadData>
+    <changeSet id="1.0.0_example_data" author="Imre Tabur" context="load_example_data">
+        <loadData file="example.csv" tableName="EXAMPLE" relativeToChangelogFile="true" separator=";"></loadData>
     </changeSet>
 
 </databaseChangeLog>
