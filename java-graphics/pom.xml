@@ -14,10 +14,10 @@
     </parent>
 
     <groupId>info.setmy</groupId>
-    <artifactId>java-postscript</artifactId>
+    <artifactId>java-graphics</artifactId>
     <packaging>jar</packaging>
-    <name>java-postscript</name>
-    <description>PostScript creation library.</description>
+    <name>java-graphics</name>
+    <description>Graphics generation library.</description>
     <url>https://setmy-info.github.io</url>
 
     <dependencies>

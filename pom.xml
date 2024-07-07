@@ -143,12 +143,12 @@
         <module>java-stealer</module>
         <module>java-modular-ssn</module>
         <module>java-rest-client</module>
-        <!-- module>tomcat-start-project</module -->
-        <module>springboot-start-project</module>
         <module>java-crawler</module>
         <module>maven-plugin-start-project</module>
         <module>java-lexer-parser</module>
-        <module>java-postscript</module>
+        <module>java-graphics</module>
+        <!-- module>tomcat-start-project</module -->
+        <module>springboot-start-project</module>
     </modules>
 
     <dependencies>
