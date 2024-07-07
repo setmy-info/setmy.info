@@ -41,8 +41,12 @@ public final class Storage {
         return this;
     }
 
-    public Optional<StorageFile> createStorageFile(final StorageFileCreationPattern pattern) {
-        final String fullPathWithFile = trim(pattern.toString());
+    public Optional<StorageFile> createStorageFile(final Object pattern) {
+        return createStorageFile(pattern.toString());
+    }
+
+    public Optional<StorageFile> createStorageFile(final String path) {
+        final String fullPathWithFile = trim(path);
         final String[] fullPathPieces = toPieces(fullPathWithFile);
         if (fullPathPieces.length == 0) {
             return empty();
