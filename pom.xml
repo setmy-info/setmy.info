@@ -148,6 +148,7 @@
         <module>java-crawler</module>
         <module>maven-plugin-start-project</module>
         <module>java-lexer-parser</module>
+        <module>java-postscript</module>
     </modules>
 
     <dependencies>
