@@ -26,7 +26,8 @@ public class StorageIT {
             .init();
     }
 
-    public void createFile() throws IOException {
+    @Test
+    public void createFile() {
         final Optional<StorageFile> file = storage.createStorageFile(
             DirectoryStructureFileCreationPattern.builder()
                 .year(2018)

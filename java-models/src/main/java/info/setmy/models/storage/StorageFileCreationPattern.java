@@ -5,5 +5,4 @@ package info.setmy.models.storage;
  */
 public interface StorageFileCreationPattern {
 
-    String getName();
 }

@@ -14,6 +14,7 @@ import java.util.*;
 @AllArgsConstructor
 public class DirectoryStructureFileCreationPattern implements StorageFileCreationPattern {
 
+    private final String name;//^[0-9a-zA-Z_\-. ]{1,50}$
     private final String system;
     private final String owner;
     private final String subOwner;
@@ -24,7 +25,6 @@ public class DirectoryStructureFileCreationPattern implements StorageFileCreatio
     private Integer minute;
     private Integer second;
     private Integer milliSecond;
-    private String name;//^[0-9a-zA-Z_\-. ]{1,50}$
 
     private static final List<DepthSetter> SETTERS;
 
@@ -99,11 +99,6 @@ public class DirectoryStructureFileCreationPattern implements StorageFileCreatio
         return this;
     }
 
-    public DirectoryStructureFileCreationPattern setName(final String name) {
-        this.name = name;
-        return this;
-    }
-
     private boolean between(final int number, final int from, final int to) {
         return (number <= to && number >= from);
     }
@@ -115,6 +110,7 @@ public class DirectoryStructureFileCreationPattern implements StorageFileCreatio
         addString(owner, stringBuilder);
         addString(subOwner, stringBuilder);
         SETTERS.forEach((setter) -> setter.setValue(this, stringBuilder));
+        addString(nullAsUUID(name), stringBuilder);
         return stringBuilder.toString();
     }
 
@@ -128,9 +124,11 @@ public class DirectoryStructureFileCreationPattern implements StorageFileCreatio
         return stringBuilder;
     }
 
-    @Override
-    public String getName() {
-        return name;
+    public String nullAsUUID(final String txt) {
+        if (txt == null) {
+            return UUID.randomUUID().toString();
+        }
+        return txt;
     }
 
     interface DepthSetter {

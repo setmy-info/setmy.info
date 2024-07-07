@@ -20,11 +20,6 @@ public class MavenTargetClassFileCreationPattern<T> implements StorageFileCreati
     private final Class<? extends T> clazz;
     private final String name;
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
     private void validate() {
         if (clazz == null || name == null) {
             throw new InitializationException("class or name is null");
@@ -38,6 +33,7 @@ public class MavenTargetClassFileCreationPattern<T> implements StorageFileCreati
         final StringBuilder stringBuilder = new StringBuilder();
         addString(TARGET_FOLDER, stringBuilder);
         addString(fullClassNameWithSlashes, stringBuilder);
+        addString(name, stringBuilder);
         return stringBuilder.toString();
     }
 }

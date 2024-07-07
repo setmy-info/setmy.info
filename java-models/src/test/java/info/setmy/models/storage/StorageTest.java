@@ -225,7 +225,8 @@ public class StorageTest {
             () -> storage.createStorageFile(pattern),
             "Expected exception, but it didn't throw"
         );
-        assertThat(thrown.getMessage()).isEqualTo("File or directory '../' is not allowed");
+        assertThat(thrown.getMessage()).contains("File or directory '..");
+        assertThat(thrown.getMessage()).contains("' is not allowed");
     }
 
     @Test
