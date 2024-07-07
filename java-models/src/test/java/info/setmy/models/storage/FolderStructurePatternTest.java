@@ -1,26 +1,27 @@
 package info.setmy.models.storage;
 
-import info.setmy.models.storage.DirectoryStructurePattern.DirectoryStructureDepth;
+import info.setmy.models.storage.DirectoryStructureFileCreationPattern.DirectoryStructureDepth;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 public class FolderStructurePatternTest {
 
-    DirectoryStructurePattern folderStructurePattern;
+    DirectoryStructureFileCreationPattern folderStructurePattern;
 
     @BeforeEach
     public void setUp() {
         java.util.TimeZone.setDefault(TimeZone.getTimeZone("Europe/Tallinn"));
-        folderStructurePattern = new DirectoryStructurePattern();
+        folderStructurePattern = DirectoryStructureFileCreationPattern.builder().build();
     }
 
     @Test
@@ -78,21 +79,21 @@ public class FolderStructurePatternTest {
 
     @Test
     public void addFull() {
-        folderStructurePattern = new DirectoryStructurePattern("owner", "subOwner");
+        folderStructurePattern = DirectoryStructureFileCreationPattern.builder().owner("owner").subOwner("subOwner").build();
         folderStructurePattern.setDate(getDate(), DirectoryStructureDepth.MILLISECOND);
         assertThat(folderStructurePattern.toString()).isEqualTo("owner/subOwner/2017/12/31/8/18/10/252");
     }
 
     @Test
     public void addFull2() {
-        folderStructurePattern = new DirectoryStructurePattern(null, "subOwner");
+        folderStructurePattern = DirectoryStructureFileCreationPattern.builder().owner(null).subOwner("subOwner").build();
         folderStructurePattern.setDate(getDate(), DirectoryStructureDepth.MILLISECOND);
         assertThat(folderStructurePattern.toString()).isEqualTo("subOwner/2017/12/31/8/18/10/252");
     }
 
     @Test
     public void addFull3() {
-        folderStructurePattern = new DirectoryStructurePattern("owner", null);
+        folderStructurePattern = DirectoryStructureFileCreationPattern.builder().owner("owner").subOwner(null).build();
         folderStructurePattern.setDate(getDate(), DirectoryStructureDepth.MILLISECOND);
         assertThat(folderStructurePattern.toString()).isEqualTo("owner/2017/12/31/8/18/10/252");
     }

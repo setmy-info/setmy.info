@@ -17,7 +17,7 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RSS {
 
-    public static final String RSS_NAMESPACE = "http://setmy.info/rss";
+    public static final String RSS_NAMESPACE = "https://setmy.info/rss";
     public static final String DEFAULT_RSS_VERSION = "2.0";
 
     @XmlAttribute(name = "version")

@@ -24,32 +24,10 @@
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>java-services</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>groovy-models</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
@@ -131,6 +109,10 @@
                             <goal>compileTests</goal>
                             <goal>removeStubs</goal>
                             <goal>removeTestStubs</goal>
+                            <goal>groovydoc</goal>
+                            <goal>groovydocTests</goal>
+                            <!--goal>groovydoc-jar</goal>
+                            <goal>groovydocTests-jar</goal-->
                         </goals>
                     </execution>
                 </executions>
@@ -146,6 +128,12 @@
                     <dependency>
                         <groupId>org.apache.groovy</groupId>
                         <artifactId>groovy</artifactId>
+                        <version>${groovy.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.groovy</groupId>
+                        <artifactId>groovy-groovydoc</artifactId>
                         <version>${groovy.version}</version>
                         <scope>runtime</scope>
                     </dependency>
@@ -212,8 +200,6 @@
                         </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                </configuration>
             </plugin>
             <!--plugin>
                 <groupId>org.pitest</groupId>
@@ -547,9 +533,9 @@
                 <role>Reviewer</role>
             </roles>
             <timezone>+2</timezone>
-            <!--properties>
-                <picUrl>http://tinyurl.com/xxxxxxxxx</picUrl>
-            </properties-->
+            <properties>
+                <picUrl>https://tinyurl.com/umq7jnf</picUrl>
+            </properties>
         </developer>
     </developers>
 

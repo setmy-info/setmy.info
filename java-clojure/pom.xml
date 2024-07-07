@@ -34,6 +34,7 @@
                 <artifactId>maven-plugin-start-project</artifactId>
                 <version>${project.version}</version>
                 <configuration>
+                    <!--goalPrefix>smi</goalPrefix-->
                     <exampleValue>EXAMPLE VALUE</exampleValue>
                 </configuration>
                 <executions>
@@ -55,6 +56,13 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
@@ -221,30 +229,6 @@
                 </executions>
             </plugin-->
         </plugins>
-
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>${maven.checkstyle.plugin.versoin}</version>
-                    <configuration>
-                        <violationSeverity>warning</violationSeverity>
-                        <consoleOutput>true</consoleOutput>
-                        <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
-                        <!-- configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation -->
-                        <!-- configLocation>${basedir}/src/test/resources/google-checks.xml</configLocation -->
-                    </configuration>                   
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.puppycrawl.tools</groupId>
-                            <artifactId>checkstyle</artifactId>
-                            <version>10.3</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-            </plugins>
-        </pluginManagement>
     </build>
 
     <profiles>
@@ -294,7 +278,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.7.0.0</version>
+                <version>${spot.bugs.version}</version>
                 <!--configuration>
                     <excludeFilterFile>${basedir}/src/test/resources/spotbugs-exclude.xml</excludeFilterFile>
                     <includeFilterFile>${basedir}/src/test/resources/spotbugs-include.xml</includeFilterFile>
@@ -303,6 +287,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>              
+                <configuration>
+                    <violationSeverity>warning</violationSeverity>
+                    <consoleOutput>true</consoleOutput>
+                    <!--configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation-->
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -476,9 +467,9 @@
                 <role>Reviewer</role>
             </roles>
             <timezone>+2</timezone>
-            <!--properties>
-                <picUrl>http://tinyurl.com/xxxxxxxxx</picUrl>
-            </properties-->
+            <properties>
+                <picUrl>https://tinyurl.com/umq7jnf</picUrl>
+            </properties>
         </developer>
     </developers>
 
@@ -494,8 +485,8 @@
         <url>https://github.com/setmy-info/setmy.info/issues</url>
     </issueManagement>
 
-    <ciManagement />
-    <contributors />
+    <ciManagement/>
+    <contributors/>
 
     <distributionManagement>
         <snapshotRepository>
