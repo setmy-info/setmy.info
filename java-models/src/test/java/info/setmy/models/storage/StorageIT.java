@@ -1,21 +1,20 @@
 package info.setmy.models.storage;
 
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.junit.jupiter.api.BeforeEach;
 
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
+@Slf4j
 public class StorageIT {
-
-    private static final Logger LOG = LoggerFactory.getLogger(StorageIT.class);
 
     private static final String STORAGE_FOLDER = "target";
 
@@ -23,12 +22,19 @@ public class StorageIT {
 
     @BeforeEach
     public void setUp() {
-        storage = new Storage(STORAGE_FOLDER);
-        storage.init();
+        storage = new Storage(STORAGE_FOLDER)
+            .init();
     }
 
-    public void createFile() throws IOException {
-        final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setYear(2018).setMonth(4).setDay(23));
+    @Test
+    public void createFile() {
+        final Optional<StorageFile> file = storage.createStorageFile(
+            DirectoryStructureFileCreationPattern.builder()
+                .year(2018)
+                .month(4)
+                .day(23)
+                .build()
+        );
         assertThat(file.isPresent()).isEqualTo(true);
 
         final File newFile = file.get().getChild();//Is generated again
@@ -42,7 +48,9 @@ public class StorageIT {
     public void getExistingFileAndNonExistingFiles() throws IOException {
         final String directoryPath = "2018/4/23/";
 
-        final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setYear(2018).setMonth(4).setDay(23));
+        final Optional<StorageFile> file = storage.createStorageFile(
+            DirectoryStructureFileCreationPattern.builder().build().setYear(2018).setMonth(4).setDay(23)
+        );
 
         final Optional<StorageFile> createdFile = storage.getStorageFile(directoryPath + file.get().getChildName());
         assertThat(createdFile.isPresent()).isEqualTo(true);
@@ -60,7 +68,11 @@ public class StorageIT {
         new File(storageFileName).delete();
         new File(storageParentName).delete();
 
-        final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setOwner(owner).setName(fileName));
+        final Optional<StorageFile> file = storage.createStorageFile(DirectoryStructureFileCreationPattern.builder()
+            .owner(owner)
+            .name(fileName)
+            .build()
+        );
         assertThat(file.get().getChild().getPath()).isEqualTo(os(storageFileName));
     }
 
@@ -81,11 +93,12 @@ public class StorageIT {
         new File("target/system").delete();
 
         final Optional<StorageFile> file = storage.createStorageFile(
-                new DirectoryStructurePattern().
-                        setSystem(systemName).
-                        setOwner(owner).
-                        setSubOwner(subOwner).
-                        setName(fileName)
+            DirectoryStructureFileCreationPattern.builder()
+                .system(systemName)
+                .owner(owner)
+                .subOwner(subOwner)
+                .name(fileName)
+                .build()
         );
 
         assertThat(file.get().getParentName()).isEqualTo(parentName);

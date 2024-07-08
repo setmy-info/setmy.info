@@ -61,7 +61,7 @@
                 <artifactId>maven-plugin-start-project</artifactId>
                 <version>${project.version}</version>
                 <configuration>
-                    <goalPrefix>smi</goalPrefix>
+                    <!-- goalPrefix>smi</goalPrefix -->
                     <exampleValue>EXAMPLE VALUE</exampleValue>
                 </configuration>
                 <executions>

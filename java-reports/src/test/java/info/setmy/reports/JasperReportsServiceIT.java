@@ -1,6 +1,6 @@
 package info.setmy.reports;
 
-import info.setmy.models.storage.DirectoryStructurePattern;
+import info.setmy.models.storage.DirectoryStructureFileCreationPattern;
 import info.setmy.models.storage.Storage;
 import info.setmy.models.storage.StorageFile;
 import java.io.File;
@@ -34,7 +34,10 @@ public class JasperReportsServiceIT {
 
     @BeforeEach
     public void setUp() {
-        final DirectoryStructurePattern pattern = new DirectoryStructurePattern().setOwner("target").setSubOwner("reports");
+        final DirectoryStructureFileCreationPattern pattern = DirectoryStructureFileCreationPattern.builder()
+            .owner("target")
+            .subOwner("reports")
+            .build();
         storage = new Storage(pattern.toString());
         jasperReportsService = new JasperReportsService(location);
         jasperReportsService.setReportNames(Arrays.asList(reportName));
@@ -51,7 +54,10 @@ public class JasperReportsServiceIT {
     @Test
     @EnabledOnOs({OS.LINUX, OS.WINDOWS, OS.MAC})
     public void testExport() {
-        final Optional<StorageFile> file = storage.createStorageFile(new DirectoryStructurePattern().setDefault());
+        final Optional<StorageFile> file = storage.createStorageFile(
+            DirectoryStructureFileCreationPattern.builder()
+            .build()
+        );
         final File child = file.get().getChild();
         assertThat(child).isNotNull();
         jasperReportsService.export(model, child);
