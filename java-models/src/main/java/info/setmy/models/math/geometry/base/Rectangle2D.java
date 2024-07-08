@@ -4,16 +4,14 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import lombok.experimental.Delegate;
 
 @Getter
 @Setter
 @Accessors(chain = false)
 @RequiredArgsConstructor
-public class Rectangle2D<N extends Number> {
+public class Rectangle2D<G extends Point2DBase<N>, B extends Boundaries2DBase<N>, N extends Number> {
 
-    private Point2DBase<N> position;
+    private G position;
 
-    @Delegate
-    private Boundaries2DBase<N> boundaries;
+    private B boundaries;
 }

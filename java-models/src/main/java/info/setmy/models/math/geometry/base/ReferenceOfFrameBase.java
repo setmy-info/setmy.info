@@ -12,9 +12,9 @@ import java.util.List;
 @Setter
 @Accessors(chain = false)
 @RequiredArgsConstructor
-public class ReferenceOfFrameBase<T extends Point2DBase<N>, N extends Number> {
+public class ReferenceOfFrameBase<G extends Point2DBase<N>, N extends Number> {
 
-    private final T position;
+    private final G position;
 
     private ReferenceOfFrameBase parentReference;
 
