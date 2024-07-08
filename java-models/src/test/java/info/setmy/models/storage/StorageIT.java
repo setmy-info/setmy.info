@@ -40,12 +40,12 @@ public class StorageIT {
         final File newFile = file.get().getChild();//Is generated again
         assertThat(newFile.exists()).isEqualTo(true);
         assertThat(newFile.isFile()).isEqualTo(true);
-        assertThat(newFile.getAbsolutePath().contains("2018/4/23/")).isEqualTo(true);
+        assertThat(newFile.getAbsolutePath().replace("\\", "/").contains("2018/4/23/")).isEqualTo(true);
         assertThat(storage.getStorageDirectory("2018/4/24/").isPresent()).isEqualTo(false);
     }
 
     @Test
-    public void getExistingFileAndNonExistingFiles() throws IOException {
+    public void getExistingFileAndNonExistingFiles() {
         final String directoryPath = "2018/4/23/";
 
         final Optional<StorageFile> file = storage.createStorageFile(
