@@ -7,11 +7,8 @@ import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(chain = false)
+@Accessors(chain = true)
 @RequiredArgsConstructor
-public class Rectangle2D<G extends Point2DBase<N>, B extends Boundaries2DBase<N>, N extends Number> {
+public class RectangularCuboid<G extends Point3DBase<N>, B extends Boundaries3DBase<N>, N extends Number> extends Rectangle<G, B, N> {
 
-    private G position;
-
-    private B boundaries;
 }

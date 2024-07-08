@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(chain = false)
+@Accessors(chain = true)
 public class Point2DBase<N extends Number> {
     private N x;
     private N y;
