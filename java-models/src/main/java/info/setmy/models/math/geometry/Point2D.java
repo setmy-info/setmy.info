@@ -15,4 +15,8 @@ public class Point2D {
 
     private double x;
     private double y;
+
+    public double getLength() {
+        return Math.sqrt(x * x + y * y);
+    }
 }

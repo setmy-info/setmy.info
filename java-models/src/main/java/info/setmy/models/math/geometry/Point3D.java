@@ -15,4 +15,8 @@ public class Point3D extends Point2D {
         super(x, y);
         this.z = z;
     }
+
+    public double getLength() {
+        return Math.sqrt(getX() * getX() + getY() * getY() + getZ() * getZ());
+    }
 }
