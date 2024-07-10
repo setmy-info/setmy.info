@@ -50,6 +50,10 @@ public class ReferenceOfFrame2D {
             y += current.getPosition().getY();
             current = current.getParent();
         }
-        return new Point2D(x, y);
+        return Point2D.builder()
+            .x(x)
+            .y(y)
+            .dateTime(coordinate.getDateTime())
+            .build();
     }
 }

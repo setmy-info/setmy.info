@@ -12,9 +12,9 @@ import static java.util.Collections.synchronizedList;
 @Getter
 @Builder(toBuilder = true)
 @RequiredArgsConstructor
-public class MapObject2D {
+public class MapObject3D {
 
     private final GeometryProperties geometryProperties;
-    private final PointVector2D pointVector;
-    private final List<PointVector2D> trajectory = synchronizedList(new ArrayList<>());
+    private final PointVector3D pointVector;
+    private final List<PointVector3D> trajectory = synchronizedList(new ArrayList<>());
 }

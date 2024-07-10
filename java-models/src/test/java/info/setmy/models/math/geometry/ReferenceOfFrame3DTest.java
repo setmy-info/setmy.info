@@ -14,24 +14,46 @@ public class ReferenceOfFrame3DTest {
     Point3D position2;
     Point3D position3;
 
-    final Point3D shift = new Point3D(1.0D, 1.0D, 1.0D);
-    final Point3D coordinate = new Point3D(1.0D, 1.0D, 1.0D);
+    final Point3D shift = Point3D.builder()
+        .x(1.0D)
+        .y(1.0D)
+        .z(1.0D)
+        .build();
+    final Point3D coordinate = Point3D.builder()
+        .x(1.0D)
+        .y(1.0D)
+        .z(1.0D)
+        .build();
 
     @BeforeEach
     public void before() {
-        position1 = new Point3D(0.0D, 0.0D, 0.0D);
+        position1 = Point3D.builder()
+            .x(0.0D)
+            .y(0.0D)
+            .z(0.0D)
+            .build();
         reference1 = ReferenceOfFrame3D.builder()
             .position(position1)
             .geometryProperties(GeometryProperties.builder().name("Sub 1 Geometry").build())
             .build();
 
-        position2 = new Point3D(1.0D, 1.0D, 1.0D);
+        position2 = Point3D.builder()
+            .x(1.0D)
+            .y(1.0D)
+            .z(1.0D)
+            .build();
+
+
         reference2 = ReferenceOfFrame3D.builder()
             .position(position2)
             .geometryProperties(GeometryProperties.builder().name("Sub 2 Geometry").build())
             .build();
 
-        position3 = new Point3D(2.0D, 2.0D, 2.0D);
+        position3 = Point3D.builder()
+            .x(2.0D)
+            .y(2.0D)
+            .z(2.0D)
+            .build();
         reference3 = ReferenceOfFrame3D.builder()
             .position(position3)
             .geometryProperties(GeometryProperties.builder().name("Sub 3 Geometry").build())

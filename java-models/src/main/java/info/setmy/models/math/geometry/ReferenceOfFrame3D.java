@@ -53,6 +53,11 @@ public class ReferenceOfFrame3D {
             z += current.getPosition().getZ();
             current = current.getParent();
         }
-        return new Point3D(x, y, z);
+        return Point3D.builder()
+            .x(x)
+            .y(y)
+            .z(z)
+            .dateTime(coordinate.getDateTime())
+            .build();
     }
 }

@@ -1,24 +1,22 @@
 package info.setmy.models.math.geometry;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @SuperBuilder(toBuilder = true)
-public class Point3D extends Point2D {
+@Accessors(chain = true)
+@AllArgsConstructor
+public class Vector3D {
 
+    private double x;
+    private double y;
     private double z;
 
-    public Point3D(final double x, final double y, final double z, final LocalDateTime dateTime) {
-        super(x, y, dateTime);
-        this.z = z;
-    }
-
-    @Override
     public double getLength() {
         return Math.sqrt(getX() * getX() + getY() * getY() + getZ() * getZ());
     }
