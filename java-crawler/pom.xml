@@ -35,6 +35,10 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -481,8 +485,8 @@
         <url>https://github.com/setmy-info/setmy.info/issues</url>
     </issueManagement>
 
-    <ciManagement />
-    <contributors />
+    <ciManagement/>
+    <contributors/>
 
     <distributionManagement>
         <snapshotRepository>
