@@ -23,7 +23,7 @@ public class DocumentTest {
         document.add(new MoveTo(72, 500));
         document.add(new Show("Hello world!"));
         document.add(new Rectangle(144, 144, 144, 144));
-        document.add(new Circle(400, 400, 150, 150, 360));
+        document.add(new Circle(4, 5, 3, 0, 360));
         document.add(new ShowPage());
         var psContent = document.toString();
         assertThat(psContent).isEqualTo(
