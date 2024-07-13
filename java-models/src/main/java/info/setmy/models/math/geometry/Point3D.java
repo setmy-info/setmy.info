@@ -18,6 +18,11 @@ public class Point3D extends Point2D {
         this.z = z;
     }
 
+    public Point3D(final Point3D coordinates) {
+        super(coordinates);
+        this.z = coordinates.getZ();
+    }
+
     @Override
     public double getLength() {
         return Math.sqrt(getX() * getX() + getY() * getY() + getZ() * getZ());

@@ -18,13 +18,10 @@ public class PointVector3D {
         Point3D coord;
         Vector3D vector;
         synchronized (lock) {
-            coord = coordinates.toBuilder().build();
-            vector = headingVector.toBuilder().build();
+            coord = new Point3D(coordinates);
+            vector = new Vector3D(headingVector);
         }
-        return PointVector3D.builder()
-            .coordinates(coord)
-            .headingVector(vector)
-            .build();
+        return new PointVector3D(coord, vector);
     }
 
     private void setPointVector(final Point3D coordinates, final Vector3D headingVector) {

@@ -17,6 +17,12 @@ public class Vector3D {
     private double y;
     private double z;
 
+    public Vector3D(final Vector3D vector) {
+        this.x = vector.getX();
+        this.y = vector.getY();
+        this.z = vector.getZ();
+    }
+
     public double getLength() {
         return Math.sqrt(getX() * getX() + getY() * getY() + getZ() * getZ());
     }

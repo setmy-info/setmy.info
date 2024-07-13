@@ -29,7 +29,7 @@ public class ReferenceOfFrame3D {
     @Builder.Default
     private List<ReferenceOfFrame3D> subReferenceOfFrame = new ArrayList<>();
 
-    public boolean add(ReferenceOfFrame3D referenceOfFrame3D) {
+    public boolean add(final ReferenceOfFrame3D referenceOfFrame3D) {
         referenceOfFrame3D.setParent(this);
         return subReferenceOfFrame.add(referenceOfFrame3D);
     }
@@ -40,6 +40,11 @@ public class ReferenceOfFrame3D {
             position.setY(position.getY() + shift.getY());
             position.setZ(position.getZ() + shift.getZ());
         }
+    }
+
+    public MapObject3D calculate(final MapObject3D mapObject3D) {
+        // TODO
+        return null;
     }
 
     public Point3D calculate(final Point3D coordinate) {
@@ -53,11 +58,6 @@ public class ReferenceOfFrame3D {
             z += current.getPosition().getZ();
             current = current.getParent();
         }
-        return Point3D.builder()
-            .x(x)
-            .y(y)
-            .z(z)
-            .dateTime(coordinate.getDateTime())
-            .build();
+        return new Point3D(x, y, z, coordinate.getDateTime());
     }
 }

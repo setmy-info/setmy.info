@@ -18,8 +18,8 @@ public class PointVector2D {
         Point2D coord;
         Vector2D vector;
         synchronized (lock) {
-            coord = coordinates.toBuilder().build();
-            vector = headingVector.toBuilder().build();
+            coord = new Point2D(coordinates);
+            vector = new Vector2D(headingVector);
         }
         return PointVector2D.builder()
             .coordinates(coord)

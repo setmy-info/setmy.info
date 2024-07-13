@@ -29,7 +29,7 @@ public class ReferenceOfFrame2D {
     @Builder.Default
     private List<ReferenceOfFrame2D> subReferenceOfFrame = new ArrayList<>();
 
-    public boolean add(ReferenceOfFrame2D referenceOfFrame2D) {
+    public boolean add(final ReferenceOfFrame2D referenceOfFrame2D) {
         referenceOfFrame2D.setParent(this);
         return subReferenceOfFrame.add(referenceOfFrame2D);
     }
@@ -41,6 +41,11 @@ public class ReferenceOfFrame2D {
         }
     }
 
+    public MapObject2D calculate(final MapObject2D mapObject2D) {
+        // TODO
+        return null;
+    }
+
     public Point2D calculate(final Point2D coordinate) {
         double x = coordinate.getX();
         double y = coordinate.getY();
@@ -50,10 +55,6 @@ public class ReferenceOfFrame2D {
             y += current.getPosition().getY();
             current = current.getParent();
         }
-        return Point2D.builder()
-            .x(x)
-            .y(y)
-            .dateTime(coordinate.getDateTime())
-            .build();
+        return new Point2D(x, y, coordinate.getDateTime());
     }
 }
