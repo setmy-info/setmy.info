@@ -38,6 +38,7 @@ public class Header extends CommandCollection {
         asOptional(languageLevel).ifPresent(comment -> add(comment));
         asOptional(pages).ifPresent(comment -> add(comment));
         asOptional(page).ifPresent(comment -> add(comment));
+        add(new Comment("%EndComments"));
         return this;
     }
 

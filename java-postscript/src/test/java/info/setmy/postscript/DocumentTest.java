@@ -24,6 +24,7 @@ public class DocumentTest {
                 "%%Title: Example PS from Java\n" +
                 "%%CreationDate: 2024-07-14\n" +
                 "%%DocumentData: Clean7Bit\n" +
+                "%%EndComments\n" +
                 "/Courier\n" +
                 "20 selectfont\n" +
                 "72.0 500.0 moveto\n" +
