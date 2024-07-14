@@ -69,7 +69,7 @@
         <jaxb.api.version>2.3.1</jaxb.api.version>
         <jsp.api.version>2.3.3</jsp.api.version>
         <!--jaxb.impl.version>2.1</jaxb.impl.version-->
-        <maven.jetty.plugin.version>11.0.21</maven.jetty.plugin.version>
+        <maven.jetty.plugin.version>11.0.22</maven.jetty.plugin.version>
         <spring.version>6.1.9</spring.version>
         <spring.security.version>6.3.0</spring.security.version>
         <spring.data.jpa.version>3.1.4</spring.data.jpa.version>
@@ -107,7 +107,7 @@
         <tensorflow.core.version>0.5.0</tensorflow.core.version>
         <tensorflow.ndarray.version>1.0.0</tensorflow.ndarray.version>
         <tensorflow.framework.version>0.5.0</tensorflow.framework.version>
-        <jsoup.version>1.17.2</jsoup.version>
+        <jsoup.version>1.18.1</jsoup.version>
         <selenium.version>4.21.0</selenium.version>
         <feign.version>13.2.1</feign.version>
         <jasperreports.version>6.21.3</jasperreports.version>

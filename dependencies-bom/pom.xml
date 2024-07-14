@@ -60,7 +60,7 @@
         <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
         <maven.assembly.plugin>3.7.1</maven.assembly.plugin>
         <maven.plugin.annotations.version>3.13.1</maven.plugin.annotations.version>
-        <gmavenplus.plugin.version>3.0.2</gmavenplus.plugin.version>       
+        <gmavenplus.plugin.version>3.0.2</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.2.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.7.0</nexus.staging.plugin.version>
         <spring.boot.verion>3.1.4</spring.boot.verion>
@@ -69,7 +69,7 @@
         <jaxb.api.version>2.3.1</jaxb.api.version>
         <jsp.api.version>2.3.3</jsp.api.version>
         <!--jaxb.impl.version>2.1</jaxb.impl.version-->
-        <maven.jetty.plugin.version>11.0.21</maven.jetty.plugin.version>
+        <maven.jetty.plugin.version>11.0.22</maven.jetty.plugin.version>
         <spring.version>6.1.9</spring.version>
         <spring.security.version>6.1.4</spring.security.version>
         <spring.data.jpa.version>6.3.0</spring.data.jpa.version>
@@ -107,7 +107,7 @@
         <tensorflow.core.version>0.5.0</tensorflow.core.version>
         <tensorflow.ndarray.version>1.0.0</tensorflow.ndarray.version>
         <tensorflow.framework.version>0.5.0</tensorflow.framework.version>
-        <jsoup.version>1.17.2</jsoup.version>
+        <jsoup.version>1.18.1</jsoup.version>
         <selenium.version>4.21.0</selenium.version>
         <feign.version>13.2.1</feign.version>
         <jasperreports.version>6.21.3</jasperreports.version>
@@ -211,7 +211,7 @@
                 <groupId>org.infinispan</groupId>
                 <artifactId>infinispan-spring-boot-starter</artifactId>
                 <version>${infinispan.starter.version}</version>
-            </dependency>           
+            </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
