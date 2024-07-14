@@ -1,4 +1,4 @@
-package info.setmy.postscript;
+package info.setmy.postscript.base;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import static java.util.Arrays.stream;
 @SuperBuilder(toBuilder = true)
 @Accessors(chain = true)
 @RequiredArgsConstructor
-public abstract class Command {
+public abstract class CommandBase implements Command {
 
     public abstract String getCommandName();
 

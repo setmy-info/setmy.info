@@ -1,5 +1,6 @@
 package info.setmy.postscript;
 
+import info.setmy.postscript.base.CommandBase;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
@@ -9,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(toBuilder = true)
 @Accessors(chain = true)
 @RequiredArgsConstructor
-public class SetRGBColor extends Command {
+public class SetRGBColor extends CommandBase {
 
     private final static String COMMAND_NAME = "setrgbcolor";
 

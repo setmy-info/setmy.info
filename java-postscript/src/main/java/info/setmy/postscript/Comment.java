@@ -10,17 +10,19 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(toBuilder = true)
 @Accessors(chain = true)
 @RequiredArgsConstructor
-public class Stroke extends CommandBase {
+public class Comment extends CommandBase {
 
-    private final static String COMMAND_NAME = "stroke";
+    private final String text;
 
     @Override
     public String toString() {
-        return newStringBuilderWithCommand().toString();
+        final StringBuilder stringBuilder = new StringBuilder();
+        appendCommandName(stringBuilder.append("%"));
+        return stringBuilder.toString();
     }
 
     @Override
     public String getCommandName() {
-        return COMMAND_NAME;
+        return text;
     }
 }

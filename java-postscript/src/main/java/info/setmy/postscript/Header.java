@@ -1,32 +1,29 @@
 package info.setmy.postscript;
 
-import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
-
-import java.time.LocalDateTime;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Builder(toBuilder = true)
+@SuperBuilder(toBuilder = true)
 @Accessors(chain = true)
-@RequiredArgsConstructor
-public class Header {
+public class Header extends Comment {
 
-    private final static String HEADER = "%!PS-Adobe-3.0 EPSF-3.0";
+    private final static String TEXT = "!PS-Adobe-3.0 EPSF-3.0";
 
-    private final String creator;//%%Creator: usually program that generated the postscript
-    private final String title;//%%Title: ame or usually file name
-    private final LocalDateTime creationDate;//%%CreationDate: date when the file was created
-    private final LocalDateTime documentData;//%%DocumentData: Clean7Bit
-    //%%Origin: [eg: 0 0]
-    //%%BoundingBox: 0 0 width height
-    //%%LanguageLevel: 2
-    //%%Pages: 1
-    //%%Page: 1 1
+    private final Comment creator;//%%Creator: usually program that generated the postscript
+    private final Comment title;//%%Title: ame or usually file name
+    private final Comment creationDate;//%%CreationDate: date when the file was created
+    private final Comment documentData;//%%DocumentData: Clean7Bit
+    private final Comment origin;//%%Origin: [eg: 0 0]
+    // A4
+    private final Comment boundingBox;//%%BoundingBox: 0 0 595 842
+    private final Comment languageLevel;//%%LanguageLevel: 2
+    private final Comment pages;//%%Pages: 1
+    private final Comment page;//%%Page: 1 1
 
     @Override
-    public String toString() {
-        return HEADER;
+    public String getCommandName() {
+        return TEXT;
     }
 }
