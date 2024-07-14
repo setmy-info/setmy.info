@@ -146,6 +146,8 @@
         <module>java-crawler</module>
         <module>maven-plugin-start-project</module>
         <module>java-lexer-parser</module>
+        <module>java-protocol</module>
+        <module>java-graph</module>
         <module>java-graphics</module>
         <!-- module>tomcat-start-project</module -->
         <module>springboot-start-project</module>
