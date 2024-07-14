@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +53,14 @@ public class Document {
 
     public void write(final File file) {
         try (FileWriter writer = new FileWriter(file)) {
+            write(writer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void write(final Writer writer) {
+        try {
             writer.write(toString());
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -2,8 +2,8 @@ package info.setmy.postscript.complex;
 
 import info.setmy.postscript.Arc;
 import info.setmy.postscript.ClosePath;
-import info.setmy.postscript.base.CommandCollection;
 import info.setmy.postscript.Stroke;
+import info.setmy.postscript.base.CommandCollection;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;

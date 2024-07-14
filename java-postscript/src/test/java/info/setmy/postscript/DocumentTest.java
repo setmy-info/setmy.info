@@ -20,6 +20,10 @@ public class DocumentTest {
         var psContent = document.toString();
         assertThat(psContent).isEqualTo(
             "%!PS-Adobe-3.0 EPSF-3.0\n" +
+                "%%Creator: setmy.info PS creator\n" +
+                "%%Title: Example PS from Java\n" +
+                "%%CreationDate: 2024-07-14\n" +
+                "%%DocumentData: Clean7Bit\n" +
                 "/Courier\n" +
                 "20 selectfont\n" +
                 "72.0 500.0 moveto\n" +
@@ -35,7 +39,8 @@ public class DocumentTest {
                 "closepath\n" +
                 "stroke\n" +
                 "% This is a comment\n" +
-                "showpage\n"
+                "showpage\n" +
+                "%%EOF\n"
         );
     }
 }

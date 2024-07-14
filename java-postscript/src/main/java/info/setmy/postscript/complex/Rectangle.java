@@ -1,6 +1,9 @@
 package info.setmy.postscript.complex;
 
-import info.setmy.postscript.*;
+import info.setmy.postscript.LineTo;
+import info.setmy.postscript.MoveTo;
+import info.setmy.postscript.NewPath;
+import info.setmy.postscript.Stroke;
 import info.setmy.postscript.base.CommandCollection;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
