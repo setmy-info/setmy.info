@@ -1,9 +1,6 @@
 package info.setmy.postscript;
 
-import info.setmy.postscript.complex.Circle;
-import info.setmy.postscript.complex.Document;
-import info.setmy.postscript.complex.Header;
-import info.setmy.postscript.complex.Rectangle;
+import info.setmy.postscript.complex.*;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -25,6 +22,12 @@ public class PSData {
         document.add(new Rectangle(144, 144, 144, 144));
         document.add(new Circle(297.5D, 421, 100, 0, 360));
         document.add(new Comment(" This is a comment"));
+        document.add(new Line(10, 10, 10, 410));
+        document.add(new Line(10, 10, 410, 10));
+        document.add(new MoveTo(415, 10));
+        document.add(new Show("x"));
+        document.add(new MoveTo(10, 415));
+        document.add(new Show("y"));
         document.add(new ShowPage());
         document.add(new Comment("%EOF"));
         return document;

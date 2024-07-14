@@ -40,6 +40,18 @@ public class DocumentTest {
                 "closepath\n" +
                 "stroke\n" +
                 "% This is a comment\n" +
+                "newpath\n" +
+                "10.0 10.0 moveto\n" +
+                "10.0 410.0 lineto\n" +
+                "stroke\n" +
+                "newpath\n" +
+                "10.0 10.0 moveto\n" +
+                "410.0 10.0 lineto\n" +
+                "stroke\n" +
+                "415.0 10.0 moveto\n" +
+                "(x) show\n" +
+                "10.0 415.0 moveto\n" +
+                "(y) show\n" +
                 "showpage\n" +
                 "%%EOF\n"
         );
