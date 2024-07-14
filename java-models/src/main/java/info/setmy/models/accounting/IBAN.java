@@ -38,7 +38,7 @@ public class IBAN {
     }
 
     public final void parse(final String ibanString) {
-        validation.validateMaxLenght(ibanString, 34);//Cant be more that that
+        validation.validateMaxLenght(ibanString, 34);//Cant be more than that
         final String countryCodePart = ibanString.substring(0, 2);
         final String checkDigitsPart = ibanString.substring(2, 4);
         final String bbanPart = ibanString.substring(4, ibanString.length());

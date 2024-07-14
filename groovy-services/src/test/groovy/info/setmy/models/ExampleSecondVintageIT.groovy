@@ -7,13 +7,13 @@ import org.junit.Test
  *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
-class ExampleVintageIT {
-    
-    Example example
-    
+class ExampleSecondVintageIT {
+
+    ExampleSecond example
+
     @Before
     void before() {
-        example = new Example()
+        example = new ExampleSecond()
         example.firstName = "Imre"
     }
 
