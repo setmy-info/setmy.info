@@ -436,7 +436,7 @@
                     </reportSet>
                 </reportSets>
                 <configuration>
-                    <additionalparam>-Xdoclint:all -Xdoclint:-missing</additionalparam>
+                    <!-- additionalparam>-Xdoclint:all -Xdoclint:-missing</additionalparam -->
                     <additionalOptions>-Xdoclint:all -Xdoclint:-missing</additionalOptions>
                     <additionalJOptions>
                         <additionalJOption>-Xdoclint:all</additionalJOption>

@@ -16,7 +16,4 @@ public class RectangularCuboid {
 
     @NonNull
     private Point3D position;
-
-    @NonNull
-    private Boundaries3D boundaries;
 }
