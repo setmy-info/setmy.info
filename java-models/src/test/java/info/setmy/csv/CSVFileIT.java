@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -18,6 +20,7 @@ public class CSVFileIT {
 
     @Test
     public void test() {
+        final List<ParsedRecord> records = new ArrayList<>();
         final CSVConfig csvConfig = CSVConfig.builder()
             .charsetName("Windows-1252")
             .delimiter('t')
@@ -35,10 +38,11 @@ public class CSVFileIT {
             .paringFunction(parsingFunction)
             .build()
             .init()) {
-            Optional<ParsedRecord> result = csvFile.get();
-            while (result.isPresent()) {
-                log.info("Result: {}", result);
-                result = csvFile.get();
+            Optional<ParsedRecord> row = csvFile.get();
+            row.ifPresent(parsedRecord -> records.add(parsedRecord));
+            while (row.isPresent()) {
+                log.info("Result: {}", row);
+                row = csvFile.get();
             }
         }
     }
