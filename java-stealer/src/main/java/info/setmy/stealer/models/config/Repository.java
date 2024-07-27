@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @RequiredArgsConstructor
 public class Repository {
 

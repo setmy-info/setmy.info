@@ -26,14 +26,14 @@ public class StealerTest {
     }
 
     @Test
-    public void getClonesDir() throws IOException {
+    public void getClonesDir() {
         final File directory = stealer.getClonesDir();
         assertThat(directory.getAbsolutePath()).endsWith(byOS("/java-stealer/./.stealer/clones"));
     }
 
     @Test
     @DisplayName("working directory is left null")
-    public void getClonesDir_empty() throws IOException {
+    public void getClonesDir_empty() {
         stealer = Stealer.builder()
                 .build();
 
@@ -44,7 +44,7 @@ public class StealerTest {
 
     @Test
     @DisplayName("working directory is set to something")
-    public void getClonesDir_something() throws IOException {
+    public void getClonesDir_something() {
         stealer = Stealer.builder()
                 .workingDirectory("/some/dir")
                 .build();
