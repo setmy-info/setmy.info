@@ -1,28 +1,30 @@
 package info.setmy.stealer.models;
 
-import java.io.File;
-import java.io.IOException;
-import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
-import static org.assertj.core.api.Assertions.assertThat;
+import info.setmy.stealer.models.services.RepositoryServiceProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
+import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 public class StealerTest {
 
     private Stealer stealer;
 
+    private RepositoryServiceProvider repositoryServiceProvider;
+
     private final String WORKING_DIR = "./";
 
     @BeforeEach
     public void before() {
-        stealer = Stealer.builder()
-                .workingDirectory(WORKING_DIR)
-                .build();
+        repositoryServiceProvider = new RepositoryServiceProvider();
+        stealer = new Stealer(null, WORKING_DIR, repositoryServiceProvider);
     }
 
     @Test
@@ -34,8 +36,7 @@ public class StealerTest {
     @Test
     @DisplayName("working directory is left null")
     public void getClonesDir_empty() {
-        stealer = Stealer.builder()
-                .build();
+        stealer = new Stealer(null, null, null);
 
         final File directory = stealer.getClonesDir();
 
@@ -45,13 +46,11 @@ public class StealerTest {
     @Test
     @DisplayName("working directory is set to something")
     public void getClonesDir_something() {
-        stealer = Stealer.builder()
-                .workingDirectory("/some/dir")
-                .build();
+        stealer = new Stealer(null, "/some/dir", null);
 
         final File directory = stealer.getClonesDir();
 
-        if(IS_OS_WINDOWS) {
+        if (IS_OS_WINDOWS) {
             assertThat(directory.getAbsolutePath()).isEqualTo("C:\\some\\dir\\.stealer\\clones");
         } else {
             assertThat(directory.getAbsolutePath()).isEqualTo("/some/dir/.stealer/clones");
@@ -59,6 +58,6 @@ public class StealerTest {
     }
 
     private String byOS(final String inputString) {
-        return IS_OS_WINDOWS ? inputString.replace("/", "\\"): inputString;
+        return IS_OS_WINDOWS ? inputString.replace("/", "\\") : inputString;
     }
 }
