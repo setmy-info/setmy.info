@@ -5,11 +5,11 @@ import info.setmy.stealer.models.config.Repository;
 import info.setmy.stealer.models.steps.SVCCloneStep;
 import info.setmy.vcs.Vcs;
 import info.setmy.vcs.VcsFactory;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,17 +18,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AccessLevel;
 
 /**
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 @Getter
 @Builder
+@Slf4j
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Stealer {
-
-    private final Logger LOG = LoggerFactory.getLogger(getClass());
 
     public static final String STEALER_DIR = ".stealer";
 
