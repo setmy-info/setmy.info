@@ -1,9 +1,9 @@
 package info.setmy.stealer;
 
 import info.setmy.stealer.models.Stealer;
-import info.setmy.stealer.models.config.RepositoryConfig;
 import info.setmy.stealer.models.services.RepositoryServiceProvider;
-import info.setmy.vcs.RepoType;
+import info.setmy.vcs.models.CloningConfig;
+import info.setmy.vcs.models.RepoType;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,12 +14,15 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import static info.setmy.stealer.models.Stealer.CLONES_DIR;
 import static info.setmy.stealer.models.Stealer.STEALER_DIR;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,7 +37,9 @@ public class RepositoryCloningDefinitions {
 
     private final String TEST_DATA_STEALER_DIR = TEST_DATA_DIR + "/" + STEALER_DIR;
 
-    private final List<RepositoryConfig> repositories = new ArrayList<>();
+    private final String TEST_DATA_CLONES_DIR = TEST_DATA_DIR + "/" + CLONES_DIR;
+
+    private final List<CloningConfig> repositories = new ArrayList<>();
 
     private File testDataDir;
 
@@ -73,11 +78,12 @@ public class RepositoryCloningDefinitions {
     }
 
     @Given("{repoType} repository {string} with short name {string}")
-    public void repository(final RepoType repoType, final String url, final String name) {
-        repositories.add(RepositoryConfig.builder()
+    public void repository(final RepoType repoType, final String url, final String name) throws MalformedURLException {
+        repositories.add(CloningConfig.builder()
             .repoType(repoType)
-            .url(url)
-            .moduleName(name)
+            .url(new URL(url))
+            .cloningDirectory(new File(TEST_DATA_CLONES_DIR))
+            .directoryName(name)
             .build()
         );
     }

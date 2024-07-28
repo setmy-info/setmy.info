@@ -1,44 +1,27 @@
 package info.setmy.vcs;
 
-import info.setmy.models.storage.DefaultStorageValidator;
 import info.setmy.vcs.exceptions.VcsException;
+import info.setmy.vcs.models.CloningConfig;
+import info.setmy.vcs.models.RepoType;
 
-/**
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
- */
-public final class VcsFactory {
+public class VcsFactory {
 
-    public static final Vcs instanceOf(final RepoType repoType, final String url, final String cloneWorkingDirectory) {
-        switch (repoType) {
-            case GIT -> {
-                return new Git(url, DefaultStorageValidator.instance().validateAgainstDirChanges(cloneWorkingDirectory));
-            }
-            case HG -> {
-                return new Hg(url, DefaultStorageValidator.instance().validateAgainstDirChanges(cloneWorkingDirectory));
-            }
-            default ->
-                throw new VcsException("Not supported repo type " + repoType);
-        }
+    private final static VcsFactory INSTANCE = new VcsFactory();
+
+    public static VcsFactory getInstance() {
+        return INSTANCE;
     }
 
-    public static final Vcs instanceOf(final RepoType repoType, final String url, final String cloneWorkingDirectory, final String moduleName) {
+    public Vcs newVcs(final CloningConfig cloningConfig) {
+        final RepoType repoType = cloningConfig.getRepoType();
         switch (repoType) {
             case GIT -> {
-                return new Git(
-                    url,
-                    DefaultStorageValidator.instance().validateAgainstDirChanges(cloneWorkingDirectory),
-                    DefaultStorageValidator.instance().validateAgainstDirChanges(moduleName)
-                );
+                return new GitVcs(cloningConfig);
             }
             case HG -> {
-                return new Hg(
-                    url,
-                    DefaultStorageValidator.instance().validateAgainstDirChanges(cloneWorkingDirectory),
-                    DefaultStorageValidator.instance().validateAgainstDirChanges(moduleName)
-                );
+                return new HgVcs(cloningConfig);
             }
-            default ->
-                throw new VcsException("Not supported repo type " + repoType);
+            default -> throw new VcsException("Not supported repo type " + repoType);
         }
     }
 }

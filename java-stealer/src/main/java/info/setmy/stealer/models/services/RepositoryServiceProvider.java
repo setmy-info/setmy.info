@@ -1,23 +1,20 @@
 package info.setmy.stealer.models.services;
 
-import info.setmy.stealer.models.config.RepositoryConfig;
 import info.setmy.vcs.Vcs;
 import info.setmy.vcs.VcsFactory;
+import info.setmy.vcs.models.CloningConfig;
 
 public class RepositoryServiceProvider {
 
-    public RepositoryService getRepositoryService(final RepositoryConfig repositoryConfig) {
-        validate(repositoryConfig);
-        final Vcs vcs = VcsFactory.instanceOf(
-            repositoryConfig.getRepoType(),
-            repositoryConfig.getUrl(),
-            repositoryConfig.getCloneDirectory(),
-            repositoryConfig.getModuleName()
-        );
-        return new RepositoryService(repositoryConfig, vcs);
+    private final VcsFactory vcsFactory = VcsFactory.getInstance();
+
+    public RepositoryService getRepositoryService(final CloningConfig cloningConfig) {
+        validate(cloningConfig);
+        final Vcs vcs = vcsFactory.newVcs(cloningConfig);
+        return new RepositoryService(cloningConfig, vcs);
     }
 
-    private void validate(final RepositoryConfig repositoryConfig) {
+    private void validate(final CloningConfig cloningConfig) {
         // TODO : throw new StealerValidationException(); in case of non ready config etc
     }
 }
