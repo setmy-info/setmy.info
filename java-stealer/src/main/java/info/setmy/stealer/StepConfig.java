@@ -1,4 +1,4 @@
-package info.setmy.stealer.models;
+package info.setmy.stealer;
 
 import lombok.Builder;
 import lombok.Getter;

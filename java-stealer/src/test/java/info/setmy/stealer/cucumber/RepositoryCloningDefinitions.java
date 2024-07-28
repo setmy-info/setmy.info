@@ -1,6 +1,6 @@
-package info.setmy.stealer;
+package info.setmy.stealer.cucumber;
 
-import info.setmy.stealer.models.Stealer;
+import info.setmy.stealer.Stealer;
 import info.setmy.vcs.models.RepoType;
 import info.setmy.vcs.models.RepositoryConfig;
 import io.cucumber.java.Before;
@@ -20,8 +20,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static info.setmy.stealer.models.Stealer.CLONES_DIR;
-import static info.setmy.stealer.models.Stealer.STEALER_DIR;
+import static info.setmy.stealer.Stealer.CLONES_DIR;
+import static info.setmy.stealer.Stealer.STEALER_DIR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

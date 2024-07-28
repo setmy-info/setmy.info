@@ -1,7 +1,9 @@
-package info.setmy.stealer.models;
+package info.setmy.stealer;
 
 import info.setmy.stealer.exceptions.StealerException;
-import info.setmy.stealer.models.steps.SVCCloneStep;
+import info.setmy.stealer.models.config.StealerCommand;
+import info.setmy.stealer.models.config.StealerRepoConfig;
+import info.setmy.stealer.steps.SVCCloneStep;
 import info.setmy.vcs.Vcs;
 import info.setmy.vcs.VcsFactory;
 import info.setmy.vcs.models.RepositoryConfig;
@@ -30,7 +32,7 @@ public class Stealer {
 
     public static final String CLONES_DIR = STEALER_DIR + "/clones";
 
-    private final List<RepositoryConfig> repositoryConfigs;
+    private final List<RepositoryConfig> repositoryConfigs;// = new ArrayList<>();
 
     private final String workingDirectory;
 
@@ -38,9 +40,42 @@ public class Stealer {
 
     private final VcsFactory vcsFactory = VcsFactory.getInstance();
 
+    public void steal(final StealerCommand stealerCommand) {
+        // TODO : build and populate repositories and steps
+        initRepos(stealerCommand);
+    }
+
+    private void initRepos(final StealerCommand stealerCommand) {
+        final List<StealerRepoConfig> stealerRepoConfigs = stealerCommand.getStealerRepoConfigs();
+        stealerRepoConfigs.forEach(stealerRepoConfig -> initRepo(stealerCommand, stealerRepoConfig));
+    }
+
+    private void initRepo(final StealerCommand stealerCommand, final StealerRepoConfig stealerRepoConfig) {
+        final RepositoryConfig repositoryConfig = RepositoryConfig.builder()
+            .repoType(stealerRepoConfig.getRepoType())
+            .url(stealerRepoConfig.getUrl())
+            .cloningDirectory(new File(stealerCommand.getWorkingDirectory()))
+            .directoryName(stealerRepoConfig.getDirectoryName())
+            .build();
+        final Vcs vcs = vcsFactory.newVcs(repositoryConfig);
+        final Repository repository = Repository.builder()
+            .repositoryConfig(repositoryConfig)
+            .vcs(vcs)
+            .build();
+        repository.addStep(new SVCCloneStep());
+        stealerRepoConfig.getStealerStepConfigs().forEach(stealerStepConfig -> {
+            // TODO : add additional steps lik this  repository.addStep(new SVCCloneStep());
+        });
+    }
+
+    @Deprecated // command should be passed
+    public void steal() {
+        repositories.forEach(repository -> repository.execute());
+    }
+
     public void init() {
         initDirectories();
-        initRepositoryScripts();
+        initRepositoryConfigs();
     }
 
     private void initDirectories() {
@@ -60,7 +95,7 @@ public class Stealer {
         }
     }
 
-    private void initRepositoryScripts() {
+    private void initRepositoryConfigs() {
         repositoryConfigs.forEach(repositoryConfig -> {
             try {
                 final Repository repository = new Repository(repositoryConfig, repoTypeToVcs(repositoryConfig));
@@ -75,10 +110,6 @@ public class Stealer {
         repository.addStep(new SVCCloneStep());
         // TODO : add more steps
         return repository;
-    }
-
-    public void steal() {
-        repositories.forEach(repository -> repository.execute());
     }
 
     private Vcs repoTypeToVcs(final RepositoryConfig repositoryConfig) throws MalformedURLException {

@@ -1,6 +1,6 @@
-package info.setmy.stealer.models;
+package info.setmy.stealer;
 
-import info.setmy.stealer.models.steps.Step;
+import info.setmy.stealer.steps.Step;
 import info.setmy.vcs.Vcs;
 import info.setmy.vcs.models.RepositoryConfig;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.List;
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 public class Repository {
 

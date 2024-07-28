@@ -1,4 +1,4 @@
-package info.setmy.stealer.models;
+package info.setmy.stealer;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
