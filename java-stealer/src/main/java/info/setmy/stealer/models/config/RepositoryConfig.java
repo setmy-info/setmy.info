@@ -11,11 +11,15 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @Builder(toBuilder = true)
 @RequiredArgsConstructor
-public class Repository {
+public class RepositoryConfig {
 
-    private final String name;
+    private final String moduleName;
 
     private final String url;
 
     private final RepoType repoType;
+
+    private final String cloneDirectory;
+
+    private final String workingDirectory;
 }

@@ -1,12 +1,11 @@
 package info.setmy.stealer.models;
 
 import info.setmy.stealer.exceptions.StealerException;
-import info.setmy.stealer.models.config.Repository;
+import info.setmy.stealer.models.config.RepositoryConfig;
+import info.setmy.stealer.models.services.RepositoryServiceProvider;
 import info.setmy.stealer.models.steps.SVCCloneStep;
 import info.setmy.vcs.Vcs;
 import info.setmy.vcs.VcsFactory;
-import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,18 +22,19 @@ import java.util.List;
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 @Getter
-@Builder
 @Slf4j
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class Stealer {
 
     public static final String STEALER_DIR = ".stealer";
 
     public static final String CLONES_DIR = STEALER_DIR + "/clones";
 
-    private final List<Repository> repositories;
+    private final List<RepositoryConfig> repositories;
 
     private final String workingDirectory;
+
+    private final RepositoryServiceProvider repositoryServiceProvider;
 
     private final List<RepositoryScript> repositoryScripts = new ArrayList<>();
 
@@ -79,8 +79,8 @@ public class Stealer {
         });
     }
 
-    private Vcs repoTypeToVcs(final Repository repository) {
-        return VcsFactory.instanceOf(repository.getRepoType(), repository.getUrl(), getClonesDirString());
+    private Vcs repoTypeToVcs(final RepositoryConfig repositoryConfig) {
+        return VcsFactory.instanceOf(repositoryConfig.getRepoType(), repositoryConfig.getUrl(), getClonesDirString());
     }
 
     public File getClonesDir() {

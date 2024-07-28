@@ -1,6 +1,6 @@
 package info.setmy.stealer.models;
 
-import info.setmy.stealer.models.config.Repository;
+import info.setmy.stealer.models.config.RepositoryConfig;
 import info.setmy.stealer.models.steps.Step;
 import info.setmy.vcs.Vcs;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class RepositoryScript {
 
-    private final Repository repository;
+    private final RepositoryConfig repositoryConfig;
 
     private final Vcs vcs;
 
