@@ -1,8 +1,9 @@
 package info.setmy.stealer;
 
-import info.setmy.vcs.RepoType;
 import info.setmy.stealer.models.Stealer;
-import info.setmy.stealer.models.config.Repository;
+import info.setmy.stealer.models.config.RepositoryConfig;
+import info.setmy.stealer.models.services.RepositoryServiceProvider;
+import info.setmy.vcs.RepoType;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -33,7 +34,7 @@ public class RepositoryCloningDefinitions {
 
     private final String TEST_DATA_STEALER_DIR = TEST_DATA_DIR + "/" + STEALER_DIR;
 
-    private final List<Repository> repositories = new ArrayList<>();
+    private final List<RepositoryConfig> repositories = new ArrayList<>();
 
     private File testDataDir;
 
@@ -45,8 +46,11 @@ public class RepositoryCloningDefinitions {
 
     private Stealer stealer;
 
+    private RepositoryServiceProvider repositoryServiceProvider;
+
     @Before
     public void before() throws IOException {
+        repositoryServiceProvider = new RepositoryServiceProvider();
         repositories.clear();
         LOG.info("Before scenario creating test data folder: {}", TEST_DATA_DIR);
 
@@ -65,19 +69,16 @@ public class RepositoryCloningDefinitions {
         Files.createDirectories(testDataStealerPath);
         LOG.info("Before scenario created test data folder: {}", testDataDirString);
         LOG.info("Before scenario created test data stealer folder: {}", testDataStealerDirString);
-        stealer = Stealer.builder()
-                .repositories(repositories)
-                .workingDirectory(testDataDirString)
-                .build();
+        stealer = new Stealer(repositories, testDataDirString, repositoryServiceProvider);
     }
 
     @Given("{repoType} repository {string} with short name {string}")
     public void repository(final RepoType repoType, final String url, final String name) {
-        repositories.add(Repository.builder()
-                .repoType(repoType)
-                .url(url)
-                .name(name)
-                .build()
+        repositories.add(RepositoryConfig.builder()
+            .repoType(repoType)
+            .url(url)
+            .moduleName(name)
+            .build()
         );
     }
 
