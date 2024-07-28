@@ -7,9 +7,8 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,9 +27,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
+@Slf4j
 public class RepositoryCloningDefinitions {
-
-    private static final Logger LOG = LoggerFactory.getLogger(RepositoryCloningDefinitions.class);
 
     private final String TEST_DATA_DIR = "test-data";
 
@@ -53,7 +51,7 @@ public class RepositoryCloningDefinitions {
     @Before
     public void before() throws IOException {
         repositories.clear();
-        LOG.info("Before scenario creating test data folder: {}", TEST_DATA_DIR);
+        log.info("Before scenario creating test data folder: {}", TEST_DATA_DIR);
 
         final Path testDataPath = Paths.get(TEST_DATA_DIR);
         testDataDir = testDataPath.toFile();
@@ -68,8 +66,8 @@ public class RepositoryCloningDefinitions {
 
         Files.createDirectories(testDataPath);
         Files.createDirectories(testDataStealerPath);
-        LOG.info("Before scenario created test data folder: {}", testDataDirString);
-        LOG.info("Before scenario created test data stealer folder: {}", testDataStealerDirString);
+        log.info("Before scenario created test data folder: {}", testDataDirString);
+        log.info("Before scenario created test data stealer folder: {}", testDataStealerDirString);
         stealer = new Stealer(repositories, testDataDirString);
     }
 
@@ -97,7 +95,7 @@ public class RepositoryCloningDefinitions {
     @Then("{string} folder should exist")
     public void folderShouldExist(final String folderName) {
         final String testableDir = stealer.getClonesDirString();
-        LOG.info("Checking directory: {}", testableDir);
+        log.info("Checking directory: {}", testableDir);
         assertThat(new File(testableDir).isDirectory()).isTrue();
         assertThat(new File(testableDir + "/" + folderName).isDirectory()).isTrue();
     }

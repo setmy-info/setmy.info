@@ -1,20 +1,17 @@
 package info.setmy.stealer.models.steps;
 
-import info.setmy.stealer.models.RepositoryScript;
+import info.setmy.stealer.models.Repository;
+import info.setmy.stealer.models.StepConfig;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 @Getter
 @Setter
+@Accessors(chain = true)
 public abstract class BaseStep implements Step {
 
-    protected RepositoryScript repositoryScript;
+    protected Repository repository;
 
-    protected String stepData;
-
-    @Override
-    public Step setRepositoryScript(final RepositoryScript repositoryScript) {
-        this.repositoryScript = repositoryScript;
-        return this;
-    }
+    protected StepConfig stepConfig;
 }

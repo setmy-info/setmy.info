@@ -34,7 +34,7 @@ public class Stealer {
 
     private final String workingDirectory;
 
-    private final List<RepositoryScript> repositoryScripts = new ArrayList<>();
+    private final List<Repository> repositories = new ArrayList<>();
 
     private final VcsFactory vcsFactory = VcsFactory.getInstance();
 
@@ -61,27 +61,24 @@ public class Stealer {
     }
 
     private void initRepositoryScripts() {
-        repositoryConfigs.forEach(repository -> {
+        repositoryConfigs.forEach(repositoryConfig -> {
             try {
-                final RepositoryScript repositoryScript;
-                repositoryScript = new RepositoryScript(repository, repoTypeToVcs(repository));
-                repositoryScript.addStep(new SVCCloneStep());// TODO move to ordinary configured steps?
-                addConfiguredSteps(repositoryScript);
-                repositoryScripts.add(repositoryScript);
+                final Repository repository = new Repository(repositoryConfig, repoTypeToVcs(repositoryConfig));
+                repositories.add(addConfiguredSteps(repository));
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
         });
     }
 
-    private void addConfiguredSteps(final RepositoryScript repositoryScript) {
-        // TODO
+    private Repository addConfiguredSteps(final Repository repository) {
+        repository.addStep(new SVCCloneStep());
+        // TODO : add more steps
+        return repository;
     }
 
     public void steal() {
-        repositoryScripts.forEach(repositoryScript -> {
-            repositoryScript.execute();
-        });
+        repositories.forEach(repository -> repository.execute());
     }
 
     private Vcs repoTypeToVcs(final RepositoryConfig repositoryConfig) throws MalformedURLException {

@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
-public class RepositoryScript {
+public class Repository {
 
     private final RepositoryConfig repositoryConfig;
 
@@ -25,7 +25,7 @@ public class RepositoryScript {
     private final List<Step> steps = new ArrayList<>();
 
     public void addStep(final Step step) {
-        steps.add(step.setRepositoryScript(this));
+        steps.add(step.setRepository(this));
     }
 
     public void execute() {
