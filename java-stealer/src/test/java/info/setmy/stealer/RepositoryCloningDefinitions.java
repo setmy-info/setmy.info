@@ -1,9 +1,8 @@
 package info.setmy.stealer;
 
 import info.setmy.stealer.models.Stealer;
-import info.setmy.stealer.models.services.RepositoryServiceProvider;
-import info.setmy.vcs.models.CloningConfig;
 import info.setmy.vcs.models.RepoType;
+import info.setmy.vcs.models.RepositoryConfig;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -39,7 +38,7 @@ public class RepositoryCloningDefinitions {
 
     private final String TEST_DATA_CLONES_DIR = TEST_DATA_DIR + "/" + CLONES_DIR;
 
-    private final List<CloningConfig> repositories = new ArrayList<>();
+    private final List<RepositoryConfig> repositories = new ArrayList<>();
 
     private File testDataDir;
 
@@ -51,11 +50,8 @@ public class RepositoryCloningDefinitions {
 
     private Stealer stealer;
 
-    private RepositoryServiceProvider repositoryServiceProvider;
-
     @Before
     public void before() throws IOException {
-        repositoryServiceProvider = new RepositoryServiceProvider();
         repositories.clear();
         LOG.info("Before scenario creating test data folder: {}", TEST_DATA_DIR);
 
@@ -74,12 +70,12 @@ public class RepositoryCloningDefinitions {
         Files.createDirectories(testDataStealerPath);
         LOG.info("Before scenario created test data folder: {}", testDataDirString);
         LOG.info("Before scenario created test data stealer folder: {}", testDataStealerDirString);
-        stealer = new Stealer(repositories, testDataDirString, repositoryServiceProvider);
+        stealer = new Stealer(repositories, testDataDirString);
     }
 
     @Given("{repoType} repository {string} with short name {string}")
     public void repository(final RepoType repoType, final String url, final String name) throws MalformedURLException {
-        repositories.add(CloningConfig.builder()
+        repositories.add(RepositoryConfig.builder()
             .repoType(repoType)
             .url(new URL(url))
             .cloningDirectory(new File(TEST_DATA_CLONES_DIR))

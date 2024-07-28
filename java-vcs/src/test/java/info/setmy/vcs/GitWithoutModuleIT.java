@@ -1,6 +1,6 @@
 package info.setmy.vcs;
 
-import info.setmy.vcs.models.CloningConfig;
+import info.setmy.vcs.models.RepositoryConfig;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,14 +34,14 @@ public class GitWithoutModuleIT {
         vcsFactory = VcsFactory.getInstance();
 
         vcsA = vcsFactory.newVcs(
-            CloningConfig.builder()
+            RepositoryConfig.builder()
                 .repoType(GIT)
                 .url(new URL(URL_A))
                 .cloningDirectory(new File(DIR))
                 .build()
         );
         vcsB = vcsFactory.newVcs(
-            CloningConfig.builder()
+            RepositoryConfig.builder()
                 .repoType(GIT)
                 .url(new URL(URL_B))
                 .cloningDirectory(new File(DIR))

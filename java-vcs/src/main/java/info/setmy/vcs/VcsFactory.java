@@ -1,8 +1,8 @@
 package info.setmy.vcs;
 
 import info.setmy.vcs.exceptions.VcsException;
-import info.setmy.vcs.models.CloningConfig;
 import info.setmy.vcs.models.RepoType;
+import info.setmy.vcs.models.RepositoryConfig;
 
 public class VcsFactory {
 
@@ -12,14 +12,14 @@ public class VcsFactory {
         return INSTANCE;
     }
 
-    public Vcs newVcs(final CloningConfig cloningConfig) {
-        final RepoType repoType = cloningConfig.getRepoType();
+    public Vcs newVcs(final RepositoryConfig repositoryConfig) {
+        final RepoType repoType = repositoryConfig.getRepoType();
         switch (repoType) {
             case GIT -> {
-                return new GitVcs(cloningConfig);
+                return new GitVcs(repositoryConfig);
             }
             case HG -> {
-                return new HgVcs(cloningConfig);
+                return new HgVcs(repositoryConfig);
             }
             default -> throw new VcsException("Not supported repo type " + repoType);
         }

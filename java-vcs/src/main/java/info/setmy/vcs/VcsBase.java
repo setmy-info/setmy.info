@@ -2,8 +2,8 @@ package info.setmy.vcs;
 
 import info.setmy.exec.Executor;
 import info.setmy.vcs.exceptions.VcsValidationException;
-import info.setmy.vcs.models.CloningConfig;
 import info.setmy.vcs.models.CommandData;
+import info.setmy.vcs.models.RepositoryConfig;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -11,34 +11,34 @@ public abstract class VcsBase implements Vcs {
 
     public abstract CommandData getCommandData();
 
-    public abstract CloningConfig getCloningConfig();
+    public abstract RepositoryConfig getRepositoryConfig();
 
     @Override
     public void doClone() {
-        final Executor executor = newExecutor().setWorkingDirectory(fixDirectoryName(getCloningConfig()).getCloningDirectory());
+        final Executor executor = newExecutor().setWorkingDirectory(fixDirectoryName(getRepositoryConfig()).getCloningDirectory());
         final String[] params = buildCloneCommand();
         executor.exec(params);
         executor.waitFor();
         validateCheckoutResult(executor.getExitValue());
     }
 
-    private CloningConfig fixDirectoryName(final CloningConfig cloningConfig) {
-        if (isBlank(cloningConfig.getDirectoryName())) {
-            final String path = cloningConfig.getUrl().getPath();
+    private RepositoryConfig fixDirectoryName(final RepositoryConfig repositoryConfig) {
+        if (isBlank(repositoryConfig.getDirectoryName())) {
+            final String path = repositoryConfig.getUrl().getPath();
             final String[] parts = path.split("/");
             final String lastPart = parts[parts.length - 1];
             final String[] name = lastPart.split("\\.");
             final String newDirectoryName = name[0];
-            return cloningConfig.toBuilder()
+            return repositoryConfig.toBuilder()
                 .directoryName(newDirectoryName)
                 .build();
         }
-        return cloningConfig;
+        return repositoryConfig;
     }
 
     @Override
     public void doCheckout(final String branchName) {
-        final Executor executor = newExecutor().setWorkingDirectory(fixDirectoryName(getCloningConfig()).getClonedDirectory());
+        final Executor executor = newExecutor().setWorkingDirectory(fixDirectoryName(getRepositoryConfig()).getClonedDirectory());
         final String[] params = getCommandData().buildCheckoutCommand(branchName);
         executor.exec(params);
         executor.waitFor();
@@ -47,7 +47,7 @@ public abstract class VcsBase implements Vcs {
 
     @Override
     public void doFetch() {
-        final Executor executor = newExecutor().setWorkingDirectory(fixDirectoryName(getCloningConfig()).getClonedDirectory());
+        final Executor executor = newExecutor().setWorkingDirectory(fixDirectoryName(getRepositoryConfig()).getClonedDirectory());
         final String[] params = getCommandData().buildFetchCommand();
         executor.exec(params);
         executor.waitFor();
@@ -56,7 +56,7 @@ public abstract class VcsBase implements Vcs {
 
     @Override
     public void doPull() {
-        final Executor executor = newExecutor().setWorkingDirectory(fixDirectoryName(getCloningConfig()).getClonedDirectory());
+        final Executor executor = newExecutor().setWorkingDirectory(fixDirectoryName(getRepositoryConfig()).getClonedDirectory());
         final String[] params = getCommandData().buildPullCommand();
         executor.exec(params);
         executor.waitFor();
@@ -65,7 +65,7 @@ public abstract class VcsBase implements Vcs {
 
     @Override
     public void doPush() {
-        final Executor executor = newExecutor().setWorkingDirectory(fixDirectoryName(getCloningConfig()).getClonedDirectory());
+        final Executor executor = newExecutor().setWorkingDirectory(fixDirectoryName(getRepositoryConfig()).getClonedDirectory());
         final String[] params = getCommandData().buildPushCommand();
         executor.exec(params);
         executor.waitFor();
@@ -80,7 +80,7 @@ public abstract class VcsBase implements Vcs {
     }
 
     protected String[] buildCloneCommand() {
-        final CloningConfig conf = fixDirectoryName(getCloningConfig());
+        final RepositoryConfig conf = fixDirectoryName(getRepositoryConfig());
         final String[] params = {
             getCommandData().getCommand(),
             getCommandData().getCloneSubCommand(),

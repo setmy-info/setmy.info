@@ -1,11 +1,10 @@
 package info.setmy.stealer.models;
 
 import info.setmy.stealer.exceptions.StealerException;
-import info.setmy.stealer.models.services.RepositoryServiceProvider;
 import info.setmy.stealer.models.steps.SVCCloneStep;
 import info.setmy.vcs.Vcs;
 import info.setmy.vcs.VcsFactory;
-import info.setmy.vcs.models.CloningConfig;
+import info.setmy.vcs.models.RepositoryConfig;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,11 +30,9 @@ public class Stealer {
 
     public static final String CLONES_DIR = STEALER_DIR + "/clones";
 
-    private final List<CloningConfig> repositories;
+    private final List<RepositoryConfig> repositoryConfigs;
 
     private final String workingDirectory;
-
-    private final RepositoryServiceProvider repositoryServiceProvider;
 
     private final List<RepositoryScript> repositoryScripts = new ArrayList<>();
 
@@ -64,7 +61,7 @@ public class Stealer {
     }
 
     private void initRepositoryScripts() {
-        repositories.forEach(repository -> {
+        repositoryConfigs.forEach(repository -> {
             try {
                 final RepositoryScript repositoryScript;
                 repositoryScript = new RepositoryScript(repository, repoTypeToVcs(repository));
@@ -87,8 +84,8 @@ public class Stealer {
         });
     }
 
-    private Vcs repoTypeToVcs(final CloningConfig repositoryCloningConfig) throws MalformedURLException {
-        return vcsFactory.newVcs(repositoryCloningConfig);
+    private Vcs repoTypeToVcs(final RepositoryConfig repositoryConfig) throws MalformedURLException {
+        return vcsFactory.newVcs(repositoryConfig);
     }
 
     public File getClonesDir() {

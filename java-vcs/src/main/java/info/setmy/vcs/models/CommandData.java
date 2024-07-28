@@ -35,7 +35,7 @@ public class CommandData {
     public String[] buildPushCommand() {
         final String[] params = {
             command,
-            pullCommand
+            pushCommand
         };
         return params;
     }

@@ -2,7 +2,7 @@ package info.setmy.stealer.models;
 
 import info.setmy.stealer.models.steps.Step;
 import info.setmy.vcs.Vcs;
-import info.setmy.vcs.models.CloningConfig;
+import info.setmy.vcs.models.RepositoryConfig;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class RepositoryScript {
 
-    private final CloningConfig cloningConfig;
+    private final RepositoryConfig repositoryConfig;
 
     private final Vcs vcs;
 

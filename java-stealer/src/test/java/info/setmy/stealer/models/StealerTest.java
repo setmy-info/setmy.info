@@ -1,6 +1,5 @@
 package info.setmy.stealer.models;
 
-import info.setmy.stealer.models.services.RepositoryServiceProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,14 +16,11 @@ public class StealerTest {
 
     private Stealer stealer;
 
-    private RepositoryServiceProvider repositoryServiceProvider;
-
     private final String WORKING_DIR = "./";
 
     @BeforeEach
     public void before() {
-        repositoryServiceProvider = new RepositoryServiceProvider();
-        stealer = new Stealer(null, WORKING_DIR, repositoryServiceProvider);
+        stealer = new Stealer(null, WORKING_DIR);
     }
 
     @Test
@@ -36,7 +32,7 @@ public class StealerTest {
     @Test
     @DisplayName("working directory is left null")
     public void getClonesDir_empty() {
-        stealer = new Stealer(null, null, null);
+        stealer = new Stealer(null, null);
 
         final File directory = stealer.getClonesDir();
 
@@ -46,7 +42,7 @@ public class StealerTest {
     @Test
     @DisplayName("working directory is set to something")
     public void getClonesDir_something() {
-        stealer = new Stealer(null, "/some/dir", null);
+        stealer = new Stealer(null, "/some/dir");
 
         final File directory = stealer.getClonesDir();
 

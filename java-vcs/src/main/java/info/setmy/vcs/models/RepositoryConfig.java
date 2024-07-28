@@ -10,7 +10,7 @@ import java.net.URL;
 @Getter
 @Builder(toBuilder = true)
 @RequiredArgsConstructor
-public class CloningConfig {
+public class RepositoryConfig {
 
     private final RepoType repoType;
     private final URL url;

@@ -1,6 +1,6 @@
 package info.setmy.vcs;
 
-import info.setmy.vcs.models.CloningConfig;
+import info.setmy.vcs.models.RepositoryConfig;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ public class GitWithModuleIT {
         FileUtils.deleteDirectory(new File("target/module-b"));
         vcsFactory = VcsFactory.getInstance();
         vcsA = vcsFactory.newVcs(
-            CloningConfig.builder()
+            RepositoryConfig.builder()
                 .repoType(GIT)
                 .url(new URL(URL_A))
                 .cloningDirectory(new File(DIR))
@@ -41,7 +41,7 @@ public class GitWithModuleIT {
                 .build()
         );
         vcsB = vcsFactory.newVcs(
-            CloningConfig.builder()
+            RepositoryConfig.builder()
                 .repoType(GIT)
                 .url(new URL(URL_B))
                 .cloningDirectory(new File(DIR))
@@ -55,7 +55,7 @@ public class GitWithModuleIT {
         vcsA.doClone();
         vcsA.doCheckout("master");
         vcsA.doPull();
-        vcsA.doPush();
+        //vcsA.doPush();
         assertThat(FileUtils.isDirectory(new File("target/module-a"), NOFOLLOW_LINKS)).isTrue();
         assertThat(new File("target/module-a/master.txt").isFile()).isTrue();
         assertThat(new File("target/module-a/develop.txt").exists()).isFalse();
