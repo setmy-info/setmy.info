@@ -3,7 +3,11 @@ package info.setmy.stealer;
 import info.setmy.stealer.exceptions.StealerException;
 import info.setmy.stealer.models.config.StealerCommand;
 import info.setmy.stealer.models.config.StealerRepoConfig;
+import info.setmy.stealer.models.config.StealerStepConfig;
+import info.setmy.stealer.steps.DumbStep;
+import info.setmy.stealer.steps.InitStep;
 import info.setmy.stealer.steps.SVCCloneStep;
+import info.setmy.stealer.steps.Step;
 import info.setmy.vcs.Vcs;
 import info.setmy.vcs.VcsFactory;
 import info.setmy.vcs.models.RepositoryConfig;
@@ -43,6 +47,7 @@ public class Stealer {
     public void steal(final StealerCommand stealerCommand) {
         // TODO : build and populate repositories and steps
         initRepos(stealerCommand);
+        repositories.forEach(repo -> repo.execute());
     }
 
     private void initRepos(final StealerCommand stealerCommand) {
@@ -54,7 +59,7 @@ public class Stealer {
         final RepositoryConfig repositoryConfig = RepositoryConfig.builder()
             .repoType(stealerRepoConfig.getRepoType())
             .url(stealerRepoConfig.getUrl())
-            .cloningDirectory(new File(stealerCommand.getWorkingDirectory()))
+            .cloningDirectory(new File(stealerCommand.getWorkingDirectory(), CLONES_DIR))
             .directoryName(stealerRepoConfig.getDirectoryName())
             .build();
         final Vcs vcs = vcsFactory.newVcs(repositoryConfig);
@@ -63,9 +68,16 @@ public class Stealer {
             .vcs(vcs)
             .build();
         repository.addStep(new SVCCloneStep());
-        stealerRepoConfig.getStealerStepConfigs().forEach(stealerStepConfig -> {
-            // TODO : add additional steps lik this  repository.addStep(new SVCCloneStep());
-        });
+        repository.addStep(new InitStep());
+        stealerRepoConfig.getStealerStepConfigs().forEach(stealerStepConfig -> repository.addStep(newStep(stealerStepConfig)));
+        repositories.add(repository);
+    }
+
+    private Step newStep(final StealerStepConfig stealerStepConfig) {
+        final StepConfig stepConfig = StepConfig.builder()
+            // TODO : needed mapping
+            .build();
+        return new DumbStep().setStepConfig(stepConfig);
     }
 
     @Deprecated // command should be passed

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -16,6 +17,6 @@ public class StealerRepoConfig {
     private final RepoType repoType;
     private final URL url;
     private final String directoryName;
-    private final List<StealerStepConfig> stealerStepConfigs;
+    private final List<StealerStepConfig> stealerStepConfigs = new ArrayList<>();
 
 }

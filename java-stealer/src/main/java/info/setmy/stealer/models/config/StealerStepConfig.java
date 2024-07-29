@@ -1,9 +1,11 @@
 package info.setmy.stealer.models.config;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@Setter
+@Builder(toBuilder = true)
+@RequiredArgsConstructor
 public class StealerStepConfig {
 }

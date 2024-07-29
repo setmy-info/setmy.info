@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -13,5 +14,5 @@ public class StealerCommand {
 
     private final String workingDirectory;
 
-    private final List<StealerRepoConfig> stealerRepoConfigs;
+    private final List<StealerRepoConfig> stealerRepoConfigs = new ArrayList<>();
 }

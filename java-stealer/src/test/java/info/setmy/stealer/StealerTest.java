@@ -5,7 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 
+import static info.setmy.stealer.FolderToolsUtils.byOS;
 import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,7 +22,7 @@ public class StealerTest {
 
     @BeforeEach
     public void before() {
-        stealer = new Stealer(null, WORKING_DIR);
+        stealer = new Stealer(new ArrayList<>(), WORKING_DIR);
     }
 
     @Test
@@ -32,7 +34,7 @@ public class StealerTest {
     @Test
     @DisplayName("working directory is left null")
     public void getClonesDir_empty() {
-        stealer = new Stealer(null, null);
+        stealer = new Stealer(new ArrayList<>(), null);
 
         final File directory = stealer.getClonesDir();
 
@@ -42,7 +44,7 @@ public class StealerTest {
     @Test
     @DisplayName("working directory is set to something")
     public void getClonesDir_something() {
-        stealer = new Stealer(null, "/some/dir");
+        stealer = new Stealer(new ArrayList<>(), "/some/dir");
 
         final File directory = stealer.getClonesDir();
 
@@ -51,9 +53,5 @@ public class StealerTest {
         } else {
             assertThat(directory.getAbsolutePath()).isEqualTo("/some/dir/.stealer/clones");
         }
-    }
-
-    private String byOS(final String inputString) {
-        return IS_OS_WINDOWS ? inputString.replace("/", "\\") : inputString;
     }
 }
