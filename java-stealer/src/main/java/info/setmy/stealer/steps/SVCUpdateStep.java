@@ -1,4 +1,4 @@
-package info.setmy.stealer.models.steps;
+package info.setmy.stealer.steps;
 
 public class SVCUpdateStep extends BaseStep implements Step {
 

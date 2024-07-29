@@ -3,7 +3,6 @@ package info.setmy.vcs.exceptions;
 import info.setmy.exceptions.UncheckedException;
 
 /**
- *
  * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
  */
 public class VcsException extends UncheckedException {
@@ -25,7 +24,7 @@ public class VcsException extends UncheckedException {
     }
 
     protected VcsException(final String string, final Throwable throwable,
-            final boolean bln, final boolean bln1
+                           final boolean bln, final boolean bln1
     ) {
         super(string, throwable, bln, bln1);
     }
