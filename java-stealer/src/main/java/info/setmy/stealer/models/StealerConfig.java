@@ -16,4 +16,11 @@ public class StealerConfig {
     private final File workingDirectory;
 
     private final List<StepConfig> stepConfigs = new ArrayList<>();
+
+    public static class StealerConfigBuilder {
+        public StealerConfigBuilder workingDirectoryString(final String fileName) {
+            this.workingDirectory = new File(fileName);
+            return this;
+        }
+    }
 }
