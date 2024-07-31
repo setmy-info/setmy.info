@@ -36,11 +36,12 @@ public class StealerServiceIT {
     @BeforeEach
     public void setUp() throws IOException {
         stealerService = new StealerService();
-        FileUtils.deleteDirectory(new File(TEST_DATA_DIR));
+        FileUtils.deleteDirectory(new File(CLONE_DIR));
+        FileUtils.deleteDirectory(new File(COPY_DIR));
     }
 
     @Test
-    public void testStealerService() throws MalformedURLException {
+    public void testStealerService() {
         final List<String> aCleanup = new ArrayList<>();
         aCleanup.add("a");
         aCleanup.add("b/b.txt");

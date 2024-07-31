@@ -2,7 +2,6 @@ package info.setmy.stealer.services;
 
 import info.setmy.stealer.exceptions.StealerException;
 import info.setmy.stealer.models.StealerConfig;
-import info.setmy.stealer.models.StepConfig;
 import info.setmy.vcs.Vcs;
 import info.setmy.vcs.VcsFactory;
 import info.setmy.vcs.models.RepositoryConfig;
@@ -11,11 +10,8 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static java.util.List.copyOf;
 import static org.apache.commons.io.FileUtils.copyDirectory;
 
 @Getter
@@ -26,6 +22,8 @@ public class StealerService {
     public static final String COPY_DIR = "copy";
 
     private final VcsFactory vcsFactory = VcsFactory.getInstance();
+
+    private final StepConfigMapper stepConfigMapper = StepConfigMapper.getInstance();
 
     public void steal(final StealerConfig stealerConfig) {
         doSteal(init(stealerConfig));
@@ -40,32 +38,12 @@ public class StealerService {
                 .stealerDirectory(stealerDirectory)
                 .cloneDirectory(new File(stealerDirectory, CLONE_DIR))
                 .copyDirectory(new File(stealerDirectory, COPY_DIR))
-                .stepsConfig(copyConfig(stealerConfig.getStepConfigs()))
+                .stepsConfig(stepConfigMapper.toStepInnerConfigList(stealerConfig.getStepConfigs()))
                 .build()
         );
         return stealerInnerConfig;
     }
 
-    private List<StepInnerConfig> copyConfig(final List<StepConfig> stepConfigs) {
-        return stepConfigs.stream()
-            .map(stepConfig -> StepInnerConfig.builder()
-                .repoType(stepConfig.getRepoType())
-                .url(stepConfig.getUrl())
-                .directoryName(stepConfig.getDirectoryName())
-                .branchName(stepConfig.getBranchName())
-                .subDirectories(replaceEmpty(stepConfig.getSubDirectories()))
-                .cleanup(replaceEmpty(stepConfig.getCleanup()))
-                .build()
-            )
-            .collect(Collectors.toUnmodifiableList());
-    }
-
-    private List<String> replaceEmpty(final List<String> subDirectories) {
-        if (subDirectories == null) {
-            return new ArrayList<>();
-        }
-        return copyOf(subDirectories);
-    }
 
     private StealerInnerConfig createDirectories(final StealerInnerConfig stealerInnerConfig) {
         stealerInnerConfig.getStealerDirectory().mkdirs();
