@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class ${className} {
 <#assign attributeNames = classData.attributeNames>
 
-<#list attributeNames as attributeName>
+<#list classData.attributeNames as attributeName>
     private String ${attributeName};
 </#list>
 }
