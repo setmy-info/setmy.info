@@ -111,7 +111,7 @@
         <jsoup.version>1.18.1</jsoup.version>
         <selenium.version>4.21.0</selenium.version>
         <feign.version>13.3</feign.version>
-        <jasperreports.version>7.0.0</jasperreports.version>
+        <jasperreports.version>6.21.3</jasperreports.version>
         <itextpdf.version>5.5.13.4</itextpdf.version>
         <tika.version>2.9.2</tika.version>
     </properties>
