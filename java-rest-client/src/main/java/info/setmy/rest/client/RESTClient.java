@@ -21,7 +21,7 @@ import static org.glassfish.jersey.logging.LoggingFeature.DEFAULT_LOGGER_NAME;
 import static org.glassfish.jersey.logging.LoggingFeature.Verbosity.PAYLOAD_ANY;
 
 /**
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @RequiredArgsConstructor
 public class RESTClient {

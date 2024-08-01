@@ -15,7 +15,7 @@ import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class HgWithModuleIT {
 

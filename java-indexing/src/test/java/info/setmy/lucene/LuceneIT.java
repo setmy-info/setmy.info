@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
  * Read: http://www.lucenetutorial.com/lucene-in-5-minutes.html Query:
  * http://lucene.apache.org/core/4_1_0/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class LuceneIT {
 

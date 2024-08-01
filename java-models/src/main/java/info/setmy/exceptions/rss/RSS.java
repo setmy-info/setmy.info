@@ -10,7 +10,7 @@ import jakarta.xml.bind.annotation.XmlType;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @XmlType(name = "", propOrder = {"channel"})
 @XmlRootElement(name = "rss", namespace = RSS_NAMESPACE)

@@ -8,7 +8,7 @@ import static info.setmy.models.accounting.Validation.validation;
  *
  * https://www.bankswiftcode.org
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class BICCode {
 

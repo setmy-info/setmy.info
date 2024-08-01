@@ -133,6 +133,7 @@
         <module>java-hr</module>
         <module>java-indexing</module>
         <module>java-reports</module>
+        <module>java-templates</module>
         <module>java-scripting</module>
         <module>java-storage</module>
         <module>java-web-doc-format</module>

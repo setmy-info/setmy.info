@@ -36,7 +36,7 @@ import java.util.UUID;
  * TODO :
  * https://connect2id.com/products/nimbus-jose-jwt/examples/jws-with-rsa-signature
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class JWTToken {
 

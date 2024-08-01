@@ -19,7 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 /**
  * https://www.mathsisfun.com/data/correlation.html
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @DisplayName("JUnit 5 collection examples")
 @ExtendWith(RandomParametersExtension.class)

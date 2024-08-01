@@ -14,7 +14,7 @@ import static java.util.Optional.empty;
 import static org.apache.commons.lang3.StringUtils.trim;
 
 /**
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public final class Storage {
 

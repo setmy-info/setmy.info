@@ -8,7 +8,7 @@ import org.junit.runners.Suite;
  *
  * mvn -Dtest=Release test
  *
- * @author Imre Tabur <imre.tabur@eesti.ee>
+ * @author Imre Tabur <imre.tabur@mail.ee>
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({AllTests.class})

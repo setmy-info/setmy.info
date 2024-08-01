@@ -3,7 +3,7 @@ package info.setmy.models.storage;
 import info.setmy.exceptions.ForbiddenException;
 
 /**
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public final class DefaultStorageValidator implements StorageValidator {
 

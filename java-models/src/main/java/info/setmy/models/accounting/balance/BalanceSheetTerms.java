@@ -3,7 +3,7 @@ package info.setmy.models.accounting.balance;
 /**
  * Class for holding tranlsation keys.
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public final class BalanceSheetTerms {
 

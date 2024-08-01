@@ -12,7 +12,7 @@ import java.io.File;
  * <p>
  * If file, then parent file object and parent file name is null.
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @Getter
 @RequiredArgsConstructor

@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 
 /**
  *
- * @author Imre Tabur <imre.tabur@eesti.ee>
+ * @author Imre Tabur <imre.tabur@mail.ee>
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({UnitTests.class})

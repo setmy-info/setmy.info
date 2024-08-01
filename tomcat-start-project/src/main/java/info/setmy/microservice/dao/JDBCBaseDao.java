@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  *
  * https://docs.spring.io/spring/docs/current/spring-framework-reference/html/jdbc.html
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class JDBCBaseDao {
 

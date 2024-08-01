@@ -6,7 +6,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
  *
  * Model for creating and verificating (parsing) extended (non-RFC part) JWT tokens with claims.
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class ExtendedJWTToken extends JWTToken {
 

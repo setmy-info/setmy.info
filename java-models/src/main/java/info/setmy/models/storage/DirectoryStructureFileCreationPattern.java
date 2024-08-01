@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Class for directory creation rules.
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @Builder(toBuilder = true)
 @AllArgsConstructor

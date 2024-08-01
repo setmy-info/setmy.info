@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory
 /**
  * Exception to roll back transactions.
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @TestMethodOrder(OrderAnnotation)
 class ExampleSecondTest {
