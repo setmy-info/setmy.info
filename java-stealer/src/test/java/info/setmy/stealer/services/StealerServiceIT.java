@@ -80,7 +80,7 @@ public class StealerServiceIT {
         final String b_root = content(toFile(B_COPY_DIR, "root.txt"));
     }
 
-    public String content(final File file) {
+    public static String content(final File file) {
         try {
             return FileUtils.readFileToString(file, UTF_8);
         } catch (IOException e) {
@@ -88,7 +88,7 @@ public class StealerServiceIT {
         }
     }
 
-    public File toFile(final String dir, final String subItem) {
+    public static File toFile(final String dir, final String subItem) {
         return new File(new File(dir), subItem);
     }
 

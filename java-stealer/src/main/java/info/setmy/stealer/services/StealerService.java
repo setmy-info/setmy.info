@@ -21,6 +21,12 @@ public class StealerService {
     public static final String CLONE_DIR = "clone";
     public static final String COPY_DIR = "copy";
 
+    private final static StealerService INSTANCE = new StealerService();
+
+    public static StealerService getInstance() {
+        return INSTANCE;
+    }
+
     private final VcsFactory vcsFactory = VcsFactory.getInstance();
 
     private final StepConfigMapper stepConfigMapper = StepConfigMapper.getInstance();

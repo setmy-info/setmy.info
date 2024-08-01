@@ -6,20 +6,32 @@ import info.setmy.stealer.models.StepConfig;
 import lombok.NoArgsConstructor;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+import static info.setmy.vcs.models.RepoType.valueOf;
 import static java.lang.System.getProperty;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 @NoArgsConstructor
 public class StealerConfigService {
 
     private final String STEALER_DIR = ".stealer";
     private final String STEALER_CONFIG_FILE = "config.yaml";
+
+    private final static StealerConfigService INSTANCE = new StealerConfigService();
+
+    public static StealerConfigService getInstance() {
+        return INSTANCE;
+    }
 
     public StealerConfig getConfig() {
         final File currentDir = new File(getProperty("user.dir"));
@@ -65,19 +77,30 @@ public class StealerConfigService {
     private void confToStepConfigs(final List steps, final List<StepConfig> stepConfigs) {
         steps.stream()
             .map(step -> stepToStepConfig(step))
-            .filter(maped -> maped != null)
+            .filter(mapped -> mapped != null)
             .forEach(stepx -> stepConfigs.add((StepConfig) stepx));
     }
 
     private StepConfig stepToStepConfig(final Object step) {
         if (step instanceof Map) {
             final Map<String, String> stepMap = (Map<String, String>) step;
-            StepConfig.builder()
-                .url(toUrl(stepMap.get("url")))
+            final StepConfig conf = StepConfig.builder()
+                .url(toUrl(asNotNul(stepMap.get("url"))))
+                .repoType(valueOf(asNotNul(stepMap.get("repoType")).trim().toUpperCase()))
+                .directoryName(asNotNul(stepMap.get("directoryName")).trim())
+                .branchName(asNotNul(stepMap.get("branchName")).trim())
                 .build();
             // TODO
+            return conf;
         }
         return null;
+    }
+
+    private String asNotNul(final String repoType) {
+        if (isBlank(repoType)) {
+            return "";
+        }
+        return repoType;
     }
 
     public static URL toUrl(final String urlString) {
