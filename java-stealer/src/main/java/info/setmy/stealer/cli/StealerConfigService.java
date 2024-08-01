@@ -11,15 +11,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import static info.setmy.vcs.models.RepoType.valueOf;
 import static java.lang.System.getProperty;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 
 @NoArgsConstructor
 public class StealerConfigService {
@@ -28,6 +23,8 @@ public class StealerConfigService {
     private final String STEALER_CONFIG_FILE = "config.yaml";
 
     private final static StealerConfigService INSTANCE = new StealerConfigService();
+
+    private final StealerConfigMapper stealerConfigMapper = StealerConfigMapper.getInstance();
 
     public static StealerConfigService getInstance() {
         return INSTANCE;
@@ -43,7 +40,7 @@ public class StealerConfigService {
 
     private StealerConfig getConfig(final File stealerConfigFile) {
         final StealerConfig result = StealerConfig.builder()
-            .workingDirectory(stealerConfigFile.getParentFile())
+            .workingDirectory(stealerConfigFile.getParentFile().getParentFile())
             .build();
         final List<StepConfig> stepConfigs = result.getStepConfigs();
         parseYamlToConfig(stealerConfigFile, stepConfigs);
@@ -76,39 +73,8 @@ public class StealerConfigService {
 
     private void confToStepConfigs(final List steps, final List<StepConfig> stepConfigs) {
         steps.stream()
-            .map(step -> stepToStepConfig(step))
-            .filter(mapped -> mapped != null)
-            .forEach(stepx -> stepConfigs.add((StepConfig) stepx));
-    }
-
-    private StepConfig stepToStepConfig(final Object step) {
-        if (step instanceof Map) {
-            final Map<String, String> stepMap = (Map<String, String>) step;
-            final StepConfig conf = StepConfig.builder()
-                .url(toUrl(asNotNul(stepMap.get("url"))))
-                .repoType(valueOf(asNotNul(stepMap.get("repoType")).trim().toUpperCase()))
-                .directoryName(asNotNul(stepMap.get("directoryName")).trim())
-                .branchName(asNotNul(stepMap.get("branchName")).trim())
-                .build();
-            // TODO
-            return conf;
-        }
-        return null;
-    }
-
-    private String asNotNul(final String repoType) {
-        if (isBlank(repoType)) {
-            return "";
-        }
-        return repoType;
-    }
-
-    public static URL toUrl(final String urlString) {
-        final URI uri = URI.create(urlString);
-        try {
-            return uri.toURL();
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+            .map(step -> stealerConfigMapper.stepToStepConfig(step))
+            .filter(step -> step != null)
+            .forEach(step -> stepConfigs.add((StepConfig) step));
     }
 }

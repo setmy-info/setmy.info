@@ -8,9 +8,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
 
+import static info.setmy.stealer.services.StealerServiceIT.content;
+import static info.setmy.stealer.services.StealerServiceIT.toFile;
 import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
+import static org.apache.commons.io.FileUtils.deleteDirectory;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StealerCallableIT {
 
@@ -33,7 +38,9 @@ public class StealerCallableIT {
     private StealerCallable stealerCallable;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
+        deleteDirectory(new File(CLONE_DIR));
+        deleteDirectory(new File(COPY_DIR));
         originalDir = new File(getProperty("user.dir"));
         testDir = new File(STEALER_TEST_WORKING_DIR);
         setProperty("user.dir", testDir.getAbsolutePath());
@@ -54,7 +61,6 @@ public class StealerCallableIT {
     public void call() throws Exception {
         Integer result = stealerCallable.call();
 
-        /*
         assertThat(toFile(A_CLONE_DIR, "master.txt")).exists().isFile();
         assertThat(toFile(B_CLONE_DIR, "develop.txt")).exists().isFile();
         assertThat(toFile(A_COPY_DIR, "master.txt")).exists().isFile();
@@ -64,6 +70,5 @@ public class StealerCallableIT {
         assertThat(toFile(B_COPY_DIR, "root.txt")).exists().isFile();
         final String a_master = content(toFile(A_CLONE_DIR, "master.txt"));
         final String b_root = content(toFile(B_COPY_DIR, "root.txt"));
-         */
     }
 }

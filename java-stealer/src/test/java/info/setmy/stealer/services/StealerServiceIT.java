@@ -16,6 +16,7 @@ import java.util.List;
 
 import static info.setmy.vcs.models.RepoType.GIT;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.apache.commons.io.FileUtils.deleteDirectory;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StealerServiceIT {
@@ -36,8 +37,8 @@ public class StealerServiceIT {
     @BeforeEach
     public void setUp() throws IOException {
         stealerService = new StealerService();
-        FileUtils.deleteDirectory(new File(CLONE_DIR));
-        FileUtils.deleteDirectory(new File(COPY_DIR));
+        deleteDirectory(new File(CLONE_DIR));
+        deleteDirectory(new File(COPY_DIR));
     }
 
     @Test

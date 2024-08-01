@@ -29,8 +29,8 @@
         <junit.version>4.13.2</junit.version>
         <junit5.version>5.10.2</junit5.version>
         <junit.platform.version>1.10.2</junit.platform.version>
-        <mockito.version>5.11.0</mockito.version>
-        <assertj.version>3.26.0</assertj.version>
+        <mockito.version>5.12.0</mockito.version>
+        <assertj.version>3.26.3</assertj.version>
         <jacoco.version>0.8.12</jacoco.version>
         <failsafe.version>3.2.5</failsafe.version>
         <surefire.version>3.2.5</surefire.version>
@@ -38,14 +38,14 @@
         <log4j2.verion>2.23.1</log4j2.verion>
         <logback.verion>1.5.6</logback.verion>
         <slf4j.version>2.0.13</slf4j.version>
-        <lucene.version>9.11.0</lucene.version>
-        <groovy.version>4.0.21</groovy.version>
-        <cucumber.version>7.18.0</cucumber.version>
+        <lucene.version>9.11.1</lucene.version>
+        <groovy.version>4.0.22</groovy.version>
+        <cucumber.version>7.18.1</cucumber.version>
         <pitest.version>1.16.1</pitest.version>
         <jersey.version>3.1.7</jersey.version>
-        <jackson.version>2.17.1</jackson.version>
+        <jackson.version>2.17.2</jackson.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
-        <dependency.check.version>9.2.0</dependency.check.version>
+        <dependency.check.version>10.0.3</dependency.check.version>
         <maven.version>3.9.8</maven.version>
         <maven.clean.plugin.version>3.3.2</maven.clean.plugin.version>
         <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
@@ -60,6 +60,7 @@
         <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
         <maven.assembly.plugin>3.7.1</maven.assembly.plugin>
         <maven.plugin.annotations.version>3.13.1</maven.plugin.annotations.version>
+        <maven.versions.maven.plugin>2.17.1</maven.versions.maven.plugin>
         <gmavenplus.plugin.version>3.0.2</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.2.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.7.0</nexus.staging.plugin.version>
@@ -72,23 +73,23 @@
         <maven.jetty.plugin.version>11.0.22</maven.jetty.plugin.version>
         <spring.version>6.1.9</spring.version>
         <spring.security.version>6.3.0</spring.security.version>
-        <spring.data.jpa.version>3.1.4</spring.data.jpa.version>
+        <spring.data.jpa.version>6.3.0</spring.data.jpa.version>
         <hibernate.version>6.5.2.Final</hibernate.version>
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version>
         <hibernate.ehcache.version>5.6.15.Final</hibernate.ehcache.version>
         <ehcache.version>3.10.8</ehcache.version>
         <commons.dbcp.version>2.12.0</commons.dbcp.version>
         <commons.io.version>2.16.1</commons.io.version>
-        <commons.codec.version>1.17.0</commons.codec.version>
-        <commons.lang3.version>3.14.0</commons.lang3.version>
+        <commons.codec.version>1.17.1</commons.codec.version>
+        <commons.lang3.version>3.15.0</commons.lang3.version>
         <snakeyaml.version>2.2</snakeyaml.version>
         <javax.validation.api.version>2.0.1.Final</javax.validation.api.version>
         <javax.inject.version>1</javax.inject.version>
         <javax.cache.api.version>1.1.1</javax.cache.api.version>
         <java.jwt.version>4.4.0</java.jwt.version><!--java.jwt.version>4.0.0</java.jwt.version-->
         <rest.assured.version>5.4.0</rest.assured.version>
-        <liquibase.version>4.28.0</liquibase.version>
-        <infinispan.version>15.0.5.Final</infinispan.version>
+        <liquibase.version>4.29.1</liquibase.version>
+        <infinispan.version>15.0.6.Final</infinispan.version>
         <infinispan.starter.version>2.3.6.Final</infinispan.starter.version>
         <quartz.verion>2.3.2</quartz.verion>
         <lombok.version>1.18.32</lombok.version>
@@ -109,8 +110,8 @@
         <tensorflow.framework.version>0.5.0</tensorflow.framework.version>
         <jsoup.version>1.18.1</jsoup.version>
         <selenium.version>4.21.0</selenium.version>
-        <feign.version>13.2.1</feign.version>
-        <jasperreports.version>6.21.3</jasperreports.version>
+        <feign.version>13.3</feign.version>
+        <jasperreports.version>7.0.0</jasperreports.version>
         <itextpdf.version>5.5.13.4</itextpdf.version>
         <tika.version>2.9.2</tika.version>
     </properties>
@@ -287,6 +288,20 @@
 
     <reporting>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${maven.versions.maven.plugin}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>dependency-updates-report</report>
+                            <report>plugin-updates-report</report>
+                            <report>property-updates-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
