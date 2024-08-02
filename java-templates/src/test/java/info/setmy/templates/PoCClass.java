@@ -12,5 +12,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PoCClass {
 
+    private final String className;
     private final List<String> attributeNames = new ArrayList<>();
 }

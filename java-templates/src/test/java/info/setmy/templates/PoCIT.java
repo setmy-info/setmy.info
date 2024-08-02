@@ -41,20 +41,21 @@ public class PoCIT {
         cfg.setSQLDateAndTimeTimeZone(TimeZone.getDefault());
 
         final PoCClass classData = PoCClass.builder()
+            .className("ExampleClass")
             .build();
         classData.getAttributeNames().add("firstName");
         classData.getAttributeNames().add("lastName");
-        final Map<String, Object> root = new HashMap<>();
-        root.put("className", "ExampleClass");
-        root.put("classData", classData);
+        //final Map<String, Object> root = new HashMap<>();
+        //root.put("className", classData.getClassName());
+        //root.put("classData", classData);
 
         final Template template = cfg.getTemplate("ExampleClass.java.ftl");
 
         final Writer out = new OutputStreamWriter(System.out);
-        template.process(root, out);
+        template.process(classData, out);
 
         try (FileWriter fileWriter = new FileWriter(outfile)) {
-            template.process(root, fileWriter);
+            template.process(classData, fileWriter);
         }
     }
 }
