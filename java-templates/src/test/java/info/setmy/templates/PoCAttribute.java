@@ -9,9 +9,7 @@ import java.util.List;
 
 @Getter
 @SuperBuilder(toBuilder = true)
-public class PoCClass extends BaseModel {
+public class PoCAttribute extends BaseModel {
 
-    private final String className;
-    private final List<String> attributeNames = new ArrayList<>();
-    private final List<PoCAttribute> attributes = new ArrayList<>();
+    private final String name;
 }

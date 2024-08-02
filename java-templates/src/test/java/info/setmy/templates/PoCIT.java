@@ -3,16 +3,15 @@ package info.setmy.templates;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import info.setmy.templates.models.TemplateConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TimeZone;
-
-import static freemarker.template.Configuration.VERSION_2_3_33;
-import static freemarker.template.TemplateExceptionHandler.RETHROW_HANDLER;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 public class PoCIT {
 
@@ -29,25 +28,23 @@ public class PoCIT {
 
     @Test
     public void poc() throws IOException, TemplateException {
-        final Configuration configuration = new Configuration(VERSION_2_3_33);
-        configuration.setDirectoryForTemplateLoading(new File("src/test/resources/templates/"));
-        configuration.setClassForTemplateLoading(this.getClass(), "/");
-        configuration.setDefaultEncoding("UTF-8");
-        configuration.setTemplateExceptionHandler(RETHROW_HANDLER);
-        configuration.setLogTemplateExceptions(false);
-        configuration.setWrapUncheckedExceptions(true);
-        configuration.setFallbackOnNullLoopVariable(false);
-        configuration.setSQLDateAndTimeTimeZone(TimeZone.getDefault());
-
+        final TemplateConfig templateConfig = new TemplateConfig("src/test/resources/templates/");
         final PoCClass classData = PoCClass.builder()
+            .templateConfig(templateConfig)
             .className("ExampleClass")
             .templateName(TEMPLATE_DIR + IN_FILE_NAME)
             .build();
         classData.getAttributeNames().add("firstName");
         classData.getAttributeNames().add("lastName");
+        classData.getAttributes().add(
+            PoCAttribute.builder()
+                .templateConfig(templateConfig)
+                .name("firstName")
+                .templateName("attribute.ftl")
+                .build()
+        );
 
-        final Template template = configuration.getTemplate(classData.getTemplateName());
-        //final Template template = configuration.getTemplate(IN_FILE_NAME);
+        final Template template = templateConfig.getTemplate(classData.getTemplateName());
 
         final Writer out = new OutputStreamWriter(System.out);
         template.process(classData, out);

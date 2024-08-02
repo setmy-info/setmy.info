@@ -9,5 +9,6 @@ import lombok.experimental.SuperBuilder;
 @RequiredArgsConstructor
 public abstract class BaseModel {
 
+    private final TemplateConfig templateConfig;
     private final String templateName;
 }
