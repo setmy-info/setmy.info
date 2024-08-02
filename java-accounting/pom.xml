@@ -23,8 +23,7 @@
     <dependencies>
         <dependency>
             <groupId>info.setmy</groupId>
-            <artifactId>java-services</artifactId>
-            <version>${project.version}</version>
+            <artifactId>groovy-services</artifactId>
         </dependency>
     </dependencies>
     <build>
@@ -55,6 +54,22 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--target>2.3</target-->
+                    <packageName>info.setmy.tsd.models</packageName>
                 </configuration>
             </plugin>
             <plugin>
@@ -444,7 +459,7 @@
     <developers>
         <developer>
             <id>imreit</id>
-            <email>imre.tabur@eesti.ee</email>
+            <email>imre.tabur@mail.ee</email>
             <name>Imre Tabur</name>
             <organization>Hear And See Systems LLC</organization>
             <roles>

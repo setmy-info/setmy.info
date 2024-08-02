@@ -31,6 +31,16 @@
             <artifactId>java-exec</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>6.8.0.202311291450-r</version>
+        </dependency>
+        <dependency>
+            <groupId>org.javahg</groupId>
+            <artifactId>javahg</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -450,7 +460,7 @@
     <developers>
         <developer>
             <id>imreit</id>
-            <email>imre.tabur@eesti.ee</email>
+            <email>imre.tabur@mail.ee</email>
             <name>Imre Tabur</name>
             <organization>Hear And See Systems LLC</organization>
             <roles>

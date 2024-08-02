@@ -4,7 +4,7 @@ import java.util.Optional;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class VariableValue extends VariableObject<String, String> {
 

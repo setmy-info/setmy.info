@@ -1,0 +1,22 @@
+server:
+    port: 8777
+
+spring:
+    main:
+        banner-mode: "console"
+    datasource:
+        url: jdbc:h2:file:./target/it;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    quartz:
+        properties:
+            org:
+                quartz:
+                    dataSource:
+                        quartzDataSource:
+                            driver: org.h2.Driver
+                            URL: jdbc:h2:file:./target/it;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+                            user: sa
+                            password:
+
+springBootStartProject:
+    example:
+        foo: Integration test application-it.yaml

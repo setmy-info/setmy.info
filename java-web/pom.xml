@@ -26,10 +26,16 @@
             <artifactId>java-services</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
+        <!-- dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>${servlet.api.version}</version>
+            <scope>provided</scope>
+        </dependency-->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.1.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -449,7 +455,7 @@
     <developers>
         <developer>
             <id>imreit</id>
-            <email>imre.tabur@eesti.ee</email>
+            <email>imre.tabur@mail.ee</email>
             <name>Imre Tabur</name>
             <organization>Hear And See Systems LLC</organization>
             <roles>

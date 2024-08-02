@@ -1,0 +1,9 @@
+diff a/incubation/activemq-artemis-maven-plugin/src/main/resources/broker.xml b/incubation/activemq-artemis-maven-plugin/src/main/resources/broker.xml	(rejected hunks)
+@@ -8,6 +8,7 @@
+ 
+         <acceptors>
+             <acceptor name="in-vm">vm://0</acceptor>
++            <acceptor name="tcp">tcp://127.0.0.1:61616</acceptor>
+         </acceptors>
+     </core>
+ </configuration>

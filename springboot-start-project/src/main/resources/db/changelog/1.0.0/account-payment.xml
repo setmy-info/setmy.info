@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1.0.0_account" author="Imre Tabur">
+        <createTable tableName="account">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="balance" type="NUMERIC(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="account"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="1.0.0_payment" author="Imre Tabur">
+        <createTable tableName="payment">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="sender_account_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="receiver_account_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="timestamp" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="payment"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="1.0.0_fks" author="Imre Tabur">
+        <addForeignKeyConstraint baseTableName="payment"
+                                 baseColumnNames="sender_account_id"
+                                 constraintName="fk_sender_account"
+                                 referencedTableName="account"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="payment"
+                                 baseColumnNames="receiver_account_id"
+                                 constraintName="fk_receiver_account"
+                                 referencedTableName="account"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="payment"
+                                      constraintName="fk_sender_account"/>
+            <dropForeignKeyConstraint baseTableName="payment"
+                                      constraintName="fk_receiver_account"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="1.0.0_load_data" author="Imre Tabur">
+        <loadData
+            file="account-payment.csv"
+            separator=";"
+            tableName="account"
+            relativeToChangelogFile="true">
+            <column name="name" type="string"/>
+            <column name="balance" type="numeric"/>
+        </loadData>
+        <rollback>
+            <delete tableName="account"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

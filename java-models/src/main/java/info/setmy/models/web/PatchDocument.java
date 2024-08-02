@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @param <T> type of key
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class PatchDocument<T extends Object> extends ArrayList<Patch> {
 

@@ -3,7 +3,7 @@ package info.setmy.exceptions;
 /**
  * Exception to roll back transactions.
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class ParsingException extends UncheckedException {
 

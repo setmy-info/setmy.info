@@ -11,6 +11,8 @@ import org.apache.tika.config.TikaConfig;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.io.TikaInputStream;
 import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.sax.BodyContentHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
@@ -41,7 +43,7 @@ public class TikaIT {
         final TikaConfig tika = new TikaConfig();
         for (File file : storage.listStorageFiles(".")) {
             Metadata metadata = new Metadata();
-            metadata.set(Metadata.RESOURCE_NAME_KEY, file.toString());
+            metadata.set(Metadata.TIKA_MIME_FILE, file.toString());
             String mimetype = tika.getDetector().detect(TikaInputStream.get(storage.getStorageFileStream(file.getName()).get()), metadata).toString();
             log.debug("File {} is {}", file, mimetype);
         }
@@ -52,9 +54,19 @@ public class TikaIT {
     }
 
     private String parseToStringExample(final String fileName) throws IOException, SAXException, TikaException {
+        /*
         Tika tika = new Tika();
         try (InputStream stream = storage.getStorageFileStream(fileName).get()) {
             return tika.parseToString(stream);
+        }
+        */
+        // BUG : TODO : broken
+        AutoDetectParser parser = new AutoDetectParser();
+        BodyContentHandler handler = new BodyContentHandler();
+        Metadata metadata = new Metadata();
+        try (InputStream stream = storage.getStorageFileStream(fileName).get()) {
+            parser.parse(stream, handler, metadata);
+            return handler.toString();
         }
     }
 }

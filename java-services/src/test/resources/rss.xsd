@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- 
-    Copyright Imre Tabur <imre.tabur@eesti.ee>
+    Copyright Imre Tabur <imre.tabur@mail.ee>
 -->
 
 <xs:schema
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://setmy.info/rss"
-    xmlns:rss="http://setmy.info/rss"
+    targetNamespace="https://setmy.info/rss"
+    xmlns:rss="https://setmy.info/rss"
     elementFormDefault="qualified">
 
     <xs:attribute name="version"        type="xs:string"    />

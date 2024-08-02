@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2021 Imre Tabur <imre.tabur@eesti.ee>
+# Copyright 2021 Imre Tabur <imre.tabur@mail.ee>
 
 USR_LOCAL_DIR=/usr/local
 INFINISPAN_USR_LOCAL_DIR=${USR_LOCAL_DIR}/infinispan-server

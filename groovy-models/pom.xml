@@ -22,17 +22,16 @@
 
     <dependencies>
         <dependency>
+            <groupId>info.setmy</groupId>
+            <artifactId>java-models</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-contracts</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>info.setmy</groupId>
-            <artifactId>java-models</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -50,33 +49,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-runner</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -87,6 +61,7 @@
                 <artifactId>maven-plugin-start-project</artifactId>
                 <version>${project.version}</version>
                 <configuration>
+                    <!-- goalPrefix>smi</goalPrefix -->
                     <exampleValue>EXAMPLE VALUE</exampleValue>
                 </configuration>
                 <executions>
@@ -112,6 +87,10 @@
                             <goal>compileTests</goal>
                             <goal>removeStubs</goal>
                             <goal>removeTestStubs</goal>
+                            <goal>groovydoc</goal>
+                            <goal>groovydocTests</goal>
+                            <!--goal>groovydoc-jar</goal>
+                            <goal>groovydocTests-jar</goal-->
                         </goals>
                     </execution>
                 </executions>
@@ -121,11 +100,18 @@
                             // your script here
                         ]]></script>
                     </scripts>
+                    <skipBytecodeCheck>true</skipBytecodeCheck>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.groovy</groupId>
                         <artifactId>groovy</artifactId>
+                        <version>${groovy.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.groovy</groupId>
+                        <artifactId>groovy-groovydoc</artifactId>
                         <version>${groovy.version}</version>
                         <scope>runtime</scope>
                     </dependency>
@@ -136,8 +122,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <!--source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target-->
                     <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showWarnings>true</showWarnings>
@@ -316,7 +302,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.0.1</version>
+                        <version>${maven.gpg.plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -516,7 +502,7 @@
     <developers>
         <developer>
             <id>imreit</id>
-            <email>imre.tabur@eesti.ee</email>
+            <email>imre.tabur@mail.ee</email>
             <name>Imre Tabur</name>
             <organization>Hear And See Systems LLC</organization>
             <roles>
@@ -525,9 +511,9 @@
                 <role>Reviewer</role>
             </roles>
             <timezone>+2</timezone>
-            <!--properties>
-                <picUrl>http://tinyurl.com/xxxxxxxxx</picUrl>
-            </properties-->
+            <properties>
+                <picUrl>https://tinyurl.com/umq7jnf</picUrl>
+            </properties>
         </developer>
     </developers>
 

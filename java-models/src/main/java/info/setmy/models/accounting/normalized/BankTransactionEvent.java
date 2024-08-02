@@ -6,7 +6,7 @@ import info.setmy.models.accounting.Money;
 /**
  * Babnk transaction event.
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class BankTransactionEvent extends Event {
 

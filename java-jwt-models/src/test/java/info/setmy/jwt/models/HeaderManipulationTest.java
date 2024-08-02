@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  *
  * https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class HeaderManipulationTest extends Data {
 

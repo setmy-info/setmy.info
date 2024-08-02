@@ -1,0 +1,6 @@
+diff a/incubation/activemq-artemis-maven-plugin/.gitignore b/incubation/activemq-artemis-maven-plugin/.gitignore	(rejected hunks)
+@@ -1,3 +1,4 @@
++data/
+ target/
+ !.mvn/wrapper/maven-wrapper.jar
+ !**/src/main/**/target/

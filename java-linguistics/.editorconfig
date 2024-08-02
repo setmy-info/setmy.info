@@ -11,3 +11,6 @@ trim_trailing_whitespace = true
 [*.java]
 indent_style = space
 indent_size = 4
+
+[*.feature]
+indent_style = tab

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public abstract class Entity implements Serializable {
 

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.condition.OS.WINDOWS;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class ExecutorIT {
 

@@ -3,7 +3,7 @@ package info.setmy.exceptions;
 /**
  * Root exception.
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class UncheckedException extends RuntimeException {
 

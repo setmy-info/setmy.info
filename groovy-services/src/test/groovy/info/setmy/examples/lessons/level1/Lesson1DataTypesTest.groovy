@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @TestMethodOrder(OrderAnnotation)
 class Lesson1DataTypesTest {
@@ -46,12 +46,12 @@ class Lesson1DataTypesTest {
     void helloWorld() {
         println "Hello World!"
     }
-    
+
     @Test
     void map() {
         def map = [:]
         def firstname = "Homer"
-        def colors = [red: '#FF0000', green: '#00FF00', blue: '#0000FF']   
+        def colors = [red: '#FF0000', green: '#00FF00', blue: '#0000FF']
         map."an identifier with a space and double quotes" = "ALLOWED"
         map.'with-dash-signs-and-single-quotes' = "ALLOWED"
         map."Simpson-${firstname}" = "Homer Simpson"
@@ -59,11 +59,11 @@ class Lesson1DataTypesTest {
         assert map."an identifier with a space and double quotes" == "ALLOWED"
         assert map.'with-dash-signs-and-single-quotes' == "ALLOWED"
         assert map.'Simpson-Homer' == "Homer Simpson"
-        assert colors['red'] == '#FF0000'    
-        assert colors.green  == '#00FF00'    
+        assert colors['red'] == '#FF0000'
+        assert colors.green  == '#00FF00'
 
-        colors['pink'] = '#FF00FF'           
-        colors.yellow  = '#FFFF00'           
+        colors['pink'] = '#FF00FF'
+        colors.yellow  = '#FFFF00'
 
         assert colors.pink == '#FF00FF'
         assert colors['yellow'] == '#FFFF00'

@@ -7,7 +7,7 @@ import static info.setmy.models.accounting.Validation.validation;
  *
  * https://www.iban.com/glossary
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class IBAN {
 
@@ -38,7 +38,7 @@ public class IBAN {
     }
 
     public final void parse(final String ibanString) {
-        validation.validateMaxLenght(ibanString, 34);//Cant be more that that
+        validation.validateMaxLenght(ibanString, 34);//Cant be more than that
         final String countryCodePart = ibanString.substring(0, 2);
         final String checkDigitsPart = ibanString.substring(2, 4);
         final String bbanPart = ibanString.substring(4, ibanString.length());

@@ -1,2 +1,7 @@
-dataSource:
-    url: jdbc:h2:file:${DB_LOCATION}/springboot-start-project
+spring:
+    liquibase:
+        contexts: load_example_data
+
+springBootStartProject:
+    example:
+        foo: application-dev.yaml

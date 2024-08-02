@@ -6,12 +6,12 @@ import static org.junit.Assert.*
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 class ExampleVintageTest {
-    
+
     Example example
-    
+
     @Before
     void before() {
         example = new Example()

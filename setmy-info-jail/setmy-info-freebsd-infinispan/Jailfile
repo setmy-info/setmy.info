@@ -1,6 +1,6 @@
 FROM setmy-info-freebsd-java:13.0-RELEASE
 
-MAINTAINER Imre Tabur "imre.tabur@eesti.ee"
+MAINTAINER Imre Tabur "imre.tabur@mail.ee"
 
 # http://label-schema.org/rc1/
 LABEL org.label-schema.name="FreeBSD file strucure for FreeBSD Infinispan jail" \
