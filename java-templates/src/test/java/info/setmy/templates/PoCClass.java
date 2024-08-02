@@ -1,16 +1,15 @@
 package info.setmy.templates;
 
-import lombok.Builder;
+import info.setmy.templates.models.BaseModel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Builder(toBuilder = true)
-@RequiredArgsConstructor
-public class PoCClass {
+@SuperBuilder(toBuilder = true)
+public class PoCClass extends BaseModel {
 
     private final String className;
     private final List<String> attributeNames = new ArrayList<>();
