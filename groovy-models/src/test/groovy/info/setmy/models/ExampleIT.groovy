@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 class ExampleIT {
-    
+
     Example example
-    
+
     @BeforeEach
     void before() {
         example = new Example()

@@ -1,0 +1,97 @@
+server:
+    port: 8080
+#    servlet:
+#        context-path: /rest
+    compression:
+        enabled: true
+        mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+
+spring:
+    main:
+        banner-mode: "off"
+    application:
+        name: springboot-start-project
+        console:
+            enabled: false
+    security:
+        user:
+            name: ${SPRING_USER_NAME:}
+            password: ${SPRING_USER_PASSWORD:}
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.H2Dialect
+                #dialect: org.hibernate.dialect.PostgreSQLDialect
+                #dialect: org.hibernate.dialect.HSQLDialect
+                #dialect: org.hibernate.dialect.DerbyTenSevenDialect
+                #dialect: org.hibernate.dialect.Oracle10gDialect
+                id.new_generator_mappings: false
+                format_sql: true
+    liquibase:
+        change-log: classpath:db/changelog/db.changelog-master.xml
+    datasource:
+        driver-class-name: org.h2.Driver
+        #driver-class-name: org.postgresql.Driver
+        #driver-class-name: org.hsqldb.jdbc.JDBCDriver
+        #driver-class-name: org.apache.derby.jdbc.ClientDriver
+        #driver-class-name:
+        url: jdbc:h2:file:./target/live
+        #url: jdbc:hsqldb:hsql://localhost:8877
+        username: sa
+        password:
+        hikari:
+            maximum-pool-size: 10
+            minimum-idle: 5
+            connection-timeout: 30000
+            idle-timeout: 600000
+            max-lifetime: 1800000
+
+liquibaseDataSource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./target/live
+    username: sa
+    password:
+
+liquibase:
+    change-log: classpath:liquibase/master.xml
+
+scheduler:
+    timeInMillis: 60000
+    transactionTimeInMillis: 60000
+
+system:
+    example:
+        foo: Foo text
+        bar: Bar text
+    cache:
+        cacheName: apiCache
+        cacheTimeoutMillis: 15000
+    features:
+        foo: false
+    rest:
+        datesUTC: true
+    httpSecurity:
+        csrf: false
+        frameOptions: false
+
+infinispan:
+    embedded:
+        enabled: true
+    remote:
+        enabled: false
+
+maven:
+    project:
+        groupId: @project.groupId@
+        artifactId: @project.artifactId@
+
+apiDocumentation:
+    title: springboot-start-project API
+    description: Sample API.
+    docsUrl: https://setmy-info.github.io/
+
+springdoc:
+    packagesToScan: info.setmy.microservice.controllers, info.setmy.microservice.*
+    pathsToMatch: /api, /api/*
+    swagger-ui:
+        path: /swagger-ui.html

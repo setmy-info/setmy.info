@@ -11,7 +11,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @XmlType(name = "", propOrder = {"title", "link", "description", "pubDate", "guid"})
 @XmlRootElement(name = "item", namespace = RSS_NAMESPACE)

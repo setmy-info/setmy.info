@@ -4,7 +4,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class LimitedQueue<T extends Object> extends ArrayBlockingQueue<T> {
 

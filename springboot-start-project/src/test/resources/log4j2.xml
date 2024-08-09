@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="INFO">
+
+    <Properties>
+        <Property name="LOCAL_LOG_PATTERN"
+                  value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] src/test %-5level %logger{36} - %msg%n"/>
+        <Property name="UTC_LOG_PATTERN"
+                  value="%d{yyyy-MM-dd HH:mm:ss.SSS'Z', UTC} [%t] src/test %-5level %logger{36} - %msg%n"/>
+        <Property name="LOG_PATTERN" value="${UTC_LOG_PATTERN}"/>
+    </Properties>
+
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+        <File name="FILE" fileName="./target/log4j2-test.log" append="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.apache.log4j.xml" level="info"/>
+        <Root level="INFO">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="FILE"/>
+        </Root>
+    </Loggers>
+</Configuration>

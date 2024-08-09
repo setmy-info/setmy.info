@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: microservice-deployment
+    namespace: local
+    labels:
+        app: microservice-deployment
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: microservice-deployment
+    template:
+        metadata:
+            labels:
+                app: microservice-deployment
+        spec:
+            containers:
+                -   name: microservice
+                    image: springboot-start-project:latest
+                    # For example, comment in for Minikube
+                    imagePullPolicy: Never
+                    ports:
+                        -   name: micros-port
+                            containerPort: 8080
+                    env:
+                        # For Spring boot
+                        -   name: PROFILES_LIST
+                            value: "local,api-docs"
+                        ## From config-map
+                        -   name: VARIABLE
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: microservice-config-map
+                                    key: variable
+                                    optional: false
+                        ## From secrets
+                        -   name: SECRET_VARIABLE
+                            valueFrom:
+                                secretKeyRef:
+                                    name: microservice-secrets-map
+                                    key: secret-variable
+                                    optional: false
+#            volumeMounts:
+#                -   name: nfs-volume
+#                    mountPath: /mnt/gintra
+#        volumes:
+#            -   name: nfs-volume
+#                persistentVolumeClaim:
+#                    claimName: microservice-nfs-persistent-volume-claim

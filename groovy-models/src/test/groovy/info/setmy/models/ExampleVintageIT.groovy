@@ -5,12 +5,12 @@ import org.junit.Test
 
 /**
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 class ExampleVintageIT {
-    
+
     Example example
-    
+
     @Before
     void before() {
         example = new Example()

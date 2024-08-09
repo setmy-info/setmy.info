@@ -25,7 +25,7 @@ import org.apache.logging.log4j.Logger;
  * https://cucumber.io/docs/cucumber/api/
  * https://github.com/cucumber/cucumber-jvm/tree/master/java
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 public class ExampleCukesDefinitions {
 

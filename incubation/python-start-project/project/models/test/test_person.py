@@ -1,7 +1,7 @@
 '''
 Created on 20. mai 2019
 
-@author: Imre Tabur <imre.tabur@eesti.ee>
+@author: Imre Tabur <imre.tabur@mail.ee>
 '''
 import unittest
 

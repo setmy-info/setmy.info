@@ -1,0 +1,14 @@
+version: '0.0.1'
+services:
+    db:
+    image: postgis/postgis
+    restart: always
+    environment:
+        POSTGRES_PASSWORD: 'g6p8'
+    volumes:
+        - pg-data:/var/lib/postgresql/data
+    ports:
+        - '5432:5432'
+volumes:
+    pg-data:
+

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * REST call: http://localhost:8777/tomcat-start-project-1.2.0-SNAPSHOT/api/example .
  *
- * @author <a href="mailto:imre.tabur@eesti.ee">Imre Tabur</a>
+ * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
 @Named("exampleController")
 @RestController

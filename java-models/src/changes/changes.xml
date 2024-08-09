@@ -5,11 +5,11 @@
           xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
     <properties>
         <title>Java models library</title>
-        <author email="imre.tabur@eesti.ee">Imre Tabur</author>
+        <author email="imre.tabur@mail.ee">Imre Tabur</author>
     </properties>
     <body>
         <release version="1.0.0" date="2018-04-05" description="First release">
-            <action dev="imreit" type="add" due-to="Imre Tabur" due-to-email="imre.tabur@eesti.ee">Initial release.</action>
+            <action dev="imreit" type="add" due-to="Imre Tabur" due-to-email="imre.tabur@mail.ee">Initial release.</action>
         </release>
     </body>
 </document>
