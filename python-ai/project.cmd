@@ -1,2 +1,0 @@
-set PROJECT_PYTHON_VERSION=3.9
-set PROJECT_REQUIREMENTS=requirements-all-win.txt
