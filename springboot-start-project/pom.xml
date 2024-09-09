@@ -9,7 +9,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.0</version>
+        <version>3.3.3</version>
         <relativePath/>
     </parent>
     <!--parent>
@@ -21,7 +21,7 @@
 
     <groupId>info.setmy</groupId>
     <artifactId>springboot-start-project</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>springboot-start-project-incubation</name>
     <description>Containerized microservice starter (seed) project</description>
@@ -76,7 +76,7 @@
         <gmavenplus.plugin.version>3.0.2</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.2.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.7.0</nexus.staging.plugin.version>
-        <spring.boot.verion>3.3.0</spring.boot.verion>
+        <spring.boot.verion>3.3.3</spring.boot.verion>
         <taglist.maven.plugin.version>3.0.0</taglist.maven.plugin.version>
         <servlet.api.version>4.0.1</servlet.api.version>
         <jaxb.api.version>2.3.1</jaxb.api.version>
@@ -890,6 +890,43 @@
             </testResource>
         </testResources>
     </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-bom</artifactId>
+                <version>${infinispan.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring.boot.verion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-spring-boot3-starter</artifactId>
+                <version>${infinispan.starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.verion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-bom</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency-->
+        </dependencies>
+    </dependencyManagement>
 
     <profiles>
         <profile>
