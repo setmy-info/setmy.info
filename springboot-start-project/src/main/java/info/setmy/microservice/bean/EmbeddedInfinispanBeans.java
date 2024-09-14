@@ -12,6 +12,7 @@ import org.infinispan.spring.starter.embedded.InfinispanGlobalConfigurationCusto
 @Configuration
 public class EmbeddedInfinispanBeans {
 
+    /*
     @Bean
     public org.infinispan.configuration.cache.Configuration exampleCacheConfiguration() {
         return new ConfigurationBuilder()
@@ -59,4 +60,5 @@ public class EmbeddedInfinispanBeans {
     public InfinispanGlobalConfigurationCustomizer globalCustomizer() {
         return builder -> builder.jmx().disable();
     }
+    */
 }

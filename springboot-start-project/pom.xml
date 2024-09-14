@@ -40,82 +40,87 @@
         <spring.boot.main.class>info.setmy.microservice.Application</spring.boot.main.class>
 
         <junit.version>4.13.2</junit.version>
-        <junit5.version>5.10.2</junit5.version>
-        <junit.platform.version>1.10.2</junit.platform.version>
-        <mockito.version>5.11.0</mockito.version>
-        <assertj.version>3.26.0</assertj.version>
+        <junit5.version>5.11.0</junit5.version>
+        <junit.platform.version>1.11.0</junit.platform.version>
+        <mockito.version>5.13.0</mockito.version>
+        <assertj.version>3.26.3</assertj.version>
         <jacoco.version>0.8.12</jacoco.version>
-        <failsafe.version>3.2.5</failsafe.version>
-        <surefire.version>3.2.5</surefire.version>
+        <failsafe.version>3.5.0</failsafe.version>
+        <surefire.version>3.5.0</surefire.version>
         <!--log4j.verion>1.2.17</log4j.verion -->
         <log4j2.verion>2.23.1</log4j2.verion>
-        <logback.verion>1.4.11</logback.verion>
-        <slf4j.version>2.0.9</slf4j.version>
-        <lucene.version>9.7.0</lucene.version>
-        <groovy.version>4.0.21</groovy.version>
-        <cucumber.version>7.18.0</cucumber.version>
+        <logback.verion>1.5.7</logback.verion>
+        <slf4j.version>2.0.16</slf4j.version>
+        <lucene.version>9.11.1</lucene.version>
+        <groovy.version>4.0.22</groovy.version>
+        <cucumber.version>7.18.1</cucumber.version>
         <pitest.version>1.16.1</pitest.version>
-        <jersey.version>3.1.3</jersey.version>
-        <jackson.version>2.17.1</jackson.version>
+        <jersey.version>3.1.8</jersey.version>
+        <jackson.version>2.17.2</jackson.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
-        <dependency.check.version>9.2.0</dependency.check.version>
+        <dependency.check.version>10.0.3</dependency.check.version>
         <maven.version>3.9.8</maven.version>
-        <maven.clean.plugin.version>3.3.2</maven.clean.plugin.version>
+        <maven.clean.plugin.version>3.4.0</maven.clean.plugin.version>
         <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
         <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
-        <maven.site.plugin.version>3.12.1</maven.site.plugin.version>
-        <maven.release.plugin.version>3.0.1</maven.release.plugin.version>
+        <maven.site.plugin.version>3.20.0</maven.site.plugin.version>
+        <maven.release.plugin.version>3.1.1</maven.release.plugin.version>
         <maven.source.plugin.version>3.3.1</maven.source.plugin.version>
-        <maven.javadoc.plugin.version>3.7.0</maven.javadoc.plugin.version>
-        <maven.gpg.plugin.version>3.1.0</maven.gpg.plugin.version>
-        <maven.project.info.reports.plugin.version>3.4.5</maven.project.info.reports.plugin.version>
-        <maven.checkstyle.plugin.version>3.4.0</maven.checkstyle.plugin.version>
+        <maven.javadoc.plugin.version>3.10.0</maven.javadoc.plugin.version>
+        <maven.gpg.plugin.version>3.2.5</maven.gpg.plugin.version>
+        <maven.project.info.reports.plugin.version>3.7.0</maven.project.info.reports.plugin.version>
+        <maven.checkstyle.plugin.version>3.5.0</maven.checkstyle.plugin.version>
         <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
         <maven.assembly.plugin>3.7.1</maven.assembly.plugin>
         <maven.plugin.annotations.version>3.13.1</maven.plugin.annotations.version>
+        <maven.versions.maven.plugin>2.17.1</maven.versions.maven.plugin>
         <gmavenplus.plugin.version>3.0.2</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.2.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.7.0</nexus.staging.plugin.version>
         <spring.boot.verion>3.3.3</spring.boot.verion>
-        <taglist.maven.plugin.version>3.0.0</taglist.maven.plugin.version>
+        <taglist.maven.plugin.version>3.1.0</taglist.maven.plugin.version>
         <servlet.api.version>4.0.1</servlet.api.version>
         <jaxb.api.version>2.3.1</jaxb.api.version>
-        <hibernate.version>6.3.0.Final</hibernate.version>
+        <hibernate.version>6.5.2.Final</hibernate.version>
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version>
         <hibernate.ehcache.version>5.6.15.Final</hibernate.ehcache.version>
         <ehcache.version>3.10.8</ehcache.version>
-        <commons.dbcp.version>1.4</commons.dbcp.version>
-        <commons.io.version>2.13.0</commons.io.version>
-        <commons.codec.version>1.16.0</commons.codec.version>
-        <commons.lang3.version>3.13.0</commons.lang3.version>
+        <commons.dbcp.version>2.12.0</commons.dbcp.version>
+        <commons.io.version>2.16.1</commons.io.version>
+        <commons.codec.version>1.17.1</commons.codec.version>
+        <commons.lang3.version>3.16.0</commons.lang3.version>
         <snakeyaml.version>2.2</snakeyaml.version>
         <javax.validation.api.version>2.0.1.Final</javax.validation.api.version>
         <javax.inject.version>1</javax.inject.version>
         <javax.cache.api.version>1.1.1</javax.cache.api.version>
         <java.jwt.version>4.4.0</java.jwt.version><!--java.jwt.version>4.0.0</java.jwt.version-->
         <rest.assured.version>5.4.0</rest.assured.version>
-        <liquibase.version>4.23.2</liquibase.version>
-        <infinispan.version>14.0.17.Final</infinispan.version>
-        <infinispan.starter.version>2.3.6.Final</infinispan.starter.version>
+        <liquibase.version>4.29.1</liquibase.version>
+        <infinispan.version>15.0.8.Final</infinispan.version>
         <quartz.verion>2.3.2</quartz.verion>
-        <lombok.version>1.18.32</lombok.version>
+        <lombok.version>1.18.34</lombok.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <swagger.version>3.1.0</swagger.version>
         <swagger.annotations.version>1.6.3</swagger.annotations.version>
         <swagger.models.version>1.6.3</swagger.models.version>
-        <springdoc.version>1.7.0</springdoc.version>
-        <jakarta.xml.bind.api.version>4.0.1</jakarta.xml.bind.api.version>
+        <springdoc.version>1.8.0</springdoc.version>
+        <jakarta.xml.bind.api.version>4.0.2</jakarta.xml.bind.api.version>
         <jakarta.validation.api.version>3.1.0</jakarta.validation.api.version>
         <jakarta.inject.api.version>2.0.1</jakarta.inject.api.version>
-        <picocli.version>4.7.5</picocli.version>
+        <picocli.version>4.7.6</picocli.version>
         <find.bugs.version>3.0.5</find.bugs.version>
-        <spot.bugs.version>4.7.3.5</spot.bugs.version>
-        <clojure.version>1.11.3</clojure.version>
+        <spot.bugs.version>4.8.6.2</spot.bugs.version>
+        <clojure.version>1.11.4</clojure.version>
         <tensorflow.core.version>0.5.0</tensorflow.core.version>
-        <tensorflow.ndarray.version>0.4.0</tensorflow.ndarray.version>
+        <tensorflow.ndarray.version>1.0.0</tensorflow.ndarray.version>
         <tensorflow.framework.version>0.5.0</tensorflow.framework.version>
-        <jsoup.version>1.16.1</jsoup.version>
-        <selenium.version>4.17.0</selenium.version>
+        <jsoup.version>1.18.1</jsoup.version>
+        <selenium.version>4.23.1</selenium.version>
+        <feign.version>13.3</feign.version>
+        <jasperreports.version>7.0.0</jasperreports.version>
+        <itextpdf.version>5.5.13.4</itextpdf.version>
+        <tika.version>2.9.2</tika.version>
+        <kotlin.version>2.0.20</kotlin.version>
     </properties>
 
     <dependencies>
@@ -310,7 +315,7 @@
             <version>${jakarta.inject.api.version}</version>
         </dependency>
 
-        <dependency>
+        <!--dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit5.version}</version>
@@ -339,7 +344,15 @@
             <artifactId>junit-platform-engine</artifactId>
             <version>${junit.platform.version}</version>
             <scope>test</scope>
+        </dependency-->
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit5.version}</version>
+            <scope>test</scope>
         </dependency>
+
         <!--dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite-api</artifactId>
@@ -467,16 +480,8 @@
 
         <dependency>
             <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-commons-jakarta</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.infinispan</groupId>
             <artifactId>infinispan-component-annotations</artifactId>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-core-jakarta</artifactId>
         </dependency>
         <dependency>
             <groupId>org.infinispan</groupId>
@@ -490,7 +495,10 @@
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
         </dependency-->
-
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+        </dependency>
         <!--dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
@@ -623,6 +631,24 @@
                         </exclude>
                     </excludes>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>start-spring-boot</id>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                        </configuration>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>stop-spring-boot</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
@@ -688,7 +714,7 @@
             <plugin>
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>
-                <version>4.9.4</version>
+                <version>4.9.6</version>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -753,7 +779,22 @@
                     <targetTests>
                         <param>info.setmy.microservice*</param>
                     </targetTests>
+                    <excludedTestClasses>
+                        <param>**.*IT</param>
+                    </excludedTestClasses>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>1.2.1</version>
+                    </dependency>
+                    <!--dependency>
+                        <groupId>com.arcmutate</groupId>
+                        <artifactId>arcmutate-spring</artifactId>
+                        <version>1.0.0</version>
+                    </dependency-->
+                </dependencies>
             </plugin>
             <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -1154,7 +1195,7 @@
                     </reportSet>
                 </reportSets>
                 <configuration>
-                    <additionalparam>-Xdoclint:all -Xdoclint:-missing</additionalparam>
+                    <!-- additionalparam>-Xdoclint:all -Xdoclint:-missing</additionalparam -->
                     <additionalOptions>-Xdoclint:all -Xdoclint:-missing</additionalOptions>
                     <additionalJOptions>
                         <additionalJOption>-Xdoclint:all</additionalJOption>
