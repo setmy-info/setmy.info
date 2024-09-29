@@ -19,5 +19,4 @@ spring:
 
 springBootStartProject:
     example:
-        foo: Integration test application-it.yaml
-        #another: it profile
+        foo: test application.yaml

@@ -22,4 +22,4 @@ RUN chmod +x ./mvnw
 RUN ls -la
 RUN java --version
 RUN ./mvnw --version
-RUN ./mvnw clean install
+RUN ./mvnw clean package && ./mvnw install -Pe2e && ./mvnw org.pitest:pitest-maven:mutationCoverage && ./mvnw site:site

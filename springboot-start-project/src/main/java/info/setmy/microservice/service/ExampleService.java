@@ -33,7 +33,7 @@ public class ExampleService {
 
     private final HibernateExampleDao hibernateExampleDao;
 
-    private final EmbeddedCacheManager cacheManager;
+    //private final EmbeddedCacheManager cacheManager;
     //private final RemoteCacheManager cacheManager;
 
     @Transactional
@@ -41,8 +41,8 @@ public class ExampleService {
         log.info("getExampleModel");
         //insertData();
         //final ExampleModel model = exampleDao.getExampleModel();
-        cacheManager.getCache("exampleCache").put("exampleKey", "Hello World from Cache!");
-        log.info("Cache: {}", cacheManager.getCache("exampleCache").get("exampleKey"));
+        //cacheManager.getCache("exampleCache").put("exampleKey", "Hello World from Cache!");
+        //log.info("Cache: {}", cacheManager.getCache("exampleCache").get("exampleKey"));
         final ExampleModel model = exampleRepository.findAll().get(0);
         final ExampleModel newModel = new ExampleModel().setId(model.getId()).setDateTime(model.getDateTime()).setText(model.getText());
         return newModel;

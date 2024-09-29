@@ -1,17 +1,49 @@
 package info.setmy.microservice.bean;
-
+/*
+import org.infinispan.configuration.cache.CacheMode;
 import org.infinispan.configuration.cache.ConfigurationBuilder;
+import org.infinispan.configuration.global.GlobalConfiguration;
+import org.infinispan.configuration.global.GlobalConfigurationBuilder;
+import org.infinispan.jboss.marshalling.core.JBossUserMarshaller;
 import org.infinispan.spring.starter.embedded.InfinispanCacheConfigurer;
+*/
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+/*
 import static org.infinispan.configuration.cache.CacheMode.LOCAL;
 import static org.infinispan.eviction.EvictionType.COUNT;
 import org.infinispan.spring.starter.embedded.InfinispanGlobalConfigurationCustomizer;
-
+*/
 @Configuration
 public class EmbeddedInfinispanBeans {
+    /*
+    @Bean
+    public InfinispanCacheConfigurer cacheConfigurer() {
+        return manager -> {
+            final org.infinispan.configuration.cache.Configuration ispnConfig = new ConfigurationBuilder()
+                .clustering()
+                .cacheMode(CacheMode.LOCAL)
+                .build();
 
+            manager.defineConfiguration("exampleCache", ispnConfig);
+        };
+    }
+
+    @Bean
+    public GlobalConfiguration globalConfiguration() {
+        return GlobalConfigurationBuilder
+            .defaultClusteredBuilder()
+            .transport()
+            .defaultTransport()
+            .clusterName("cluster")
+            .jmx().disable()
+            //.enabled(true)
+            .domain("microserviceDomainName")
+            .serialization()
+            .marshaller(new JBossUserMarshaller())
+            .build();
+    }
+    */
     /*
     @Bean
     public org.infinispan.configuration.cache.Configuration exampleCacheConfiguration() {

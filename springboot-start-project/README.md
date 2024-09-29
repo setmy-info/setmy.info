@@ -32,7 +32,7 @@ docker-compose -f ./src/test/docker/docker-compose.yaml up
 Build with docker
 
 ```shell
-docker build --progress=plain -t springboot-start-project -f ./src/main/docker/Dockerfile.build .
+docker build --progress=plain -t springboot-start-project -f ./src/main/docker/Dockerfile .
 ```
 
 ##### Infinispan
@@ -277,8 +277,8 @@ X Exiting due to GUEST_IMAGE_LOAD: Failed to load image: save to dir: caching im
 5. http://localhost:8080/example.html
 6. http://localhost:8080/graphiql?path=/graphql
 7. http://localhost:8080/v3/api-docs
-8. curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -i http://localhost:8080/api/example
-9. http://localhost:8080/swagger-ui/index.html
+8. http://localhost:8080/swagger-ui/index.html
+9. curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -i http://localhost:8080/api/example
 10. http://localhost:8080/graphql
 11. curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -i http://localhost:8080/graphql
     -d '{"query": "{ bookById(id: \"book-1\") { id name pageCount author { id firstName lastName } } }"}'

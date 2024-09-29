@@ -15,6 +15,7 @@ public class ExamplePropertiesIT extends SpringBase {
 
     @Test
     void exampleProperties() {
-        assertThat(exampleProperties.getFoo()).isEqualTo("Integration test application-it.yaml");
+        assertThat(exampleProperties.getFoo()).isEqualTo("test application.yaml");
+        //assertThat(exampleProperties.getAnother()).isEqualTo("Integration test application-it.yaml");
     }
 }

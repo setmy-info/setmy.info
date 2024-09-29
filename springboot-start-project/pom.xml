@@ -12,6 +12,7 @@
         <version>3.3.3</version>
         <relativePath/>
     </parent>
+
     <!--parent>
         <groupId>info.setmy</groupId>
         <artifactId>multi-projects</artifactId>
@@ -23,6 +24,7 @@
     <artifactId>springboot-start-project</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+
     <name>springboot-start-project-incubation</name>
     <description>Containerized microservice starter (seed) project</description>
     <url>https://setmy-info.github.io</url>
@@ -38,6 +40,7 @@
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
         <spring.boot.main.class>info.setmy.microservice.Application</spring.boot.main.class>
+	<!-- spring.boot.main.class>info.setmy.microservice.CLApplication</spring.boot.main.class -->
 
         <junit.version>4.13.2</junit.version>
         <junit5.version>5.11.0</junit5.version>
@@ -59,7 +62,7 @@
         <jackson.version>2.17.2</jackson.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
         <dependency.check.version>10.0.3</dependency.check.version>
-        <maven.version>3.9.8</maven.version>
+        <maven.version>3.9.9</maven.version>
         <maven.clean.plugin.version>3.4.0</maven.clean.plugin.version>
         <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
         <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
@@ -94,12 +97,12 @@
         <javax.inject.version>1</javax.inject.version>
         <javax.cache.api.version>1.1.1</javax.cache.api.version>
         <java.jwt.version>4.4.0</java.jwt.version><!--java.jwt.version>4.0.0</java.jwt.version-->
-        <rest.assured.version>5.4.0</rest.assured.version>
+        <rest.assured.version>5.5.0</rest.assured.version>
         <liquibase.version>4.29.1</liquibase.version>
         <infinispan.version>15.0.8.Final</infinispan.version>
         <quartz.verion>2.3.2</quartz.verion>
         <lombok.version>1.18.34</lombok.version>
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <mapstruct.version>1.6.0</mapstruct.version>
         <swagger.version>3.1.0</swagger.version>
         <swagger.annotations.version>1.6.3</swagger.annotations.version>
         <swagger.models.version>1.6.3</swagger.models.version>
@@ -179,8 +182,46 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!--dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency-->
+        <!--dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <!--dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+        </dependency-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>info.picocli</groupId>
+            <artifactId>picocli-spring-boot-starter</artifactId>
+            <version>${picocli.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -224,7 +265,6 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.2.224</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -269,16 +309,31 @@
             <version>${slf4j.version}</version>
         </dependency-->
         <!--dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency-->
-        <!--dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.verion}</version>
         </dependency>
+	    <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j2.verion}</version>
+        </dependency-->
+        <!--dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>${logback.verion}</version>
@@ -302,6 +357,11 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
@@ -455,14 +515,38 @@
         </dependency>
 
         <dependency>
+            <groupId>org.wiremock</groupId>
+            <artifactId>wiremock-standalone</artifactId>
+            <version>3.0.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!--dependency>
+            <groupId>io.gatling</groupId>
+            <artifactId>gatling-core</artifactId>
+            <version>3.12.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.gatling</groupId>
+            <artifactId>gatling-http</artifactId>
+            <version>3.12.0</version>
+            <scope>test</scope>
+        </dependency-->
+        <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <version>3.12.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.5.0</version>
+            <version>2.6.0</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
-            <version>2.5.0</version>
+            <version>2.6.0</version>
         </dependency>
 
         <dependency>
@@ -480,6 +564,10 @@
 
         <dependency>
             <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.infinispan</groupId>
             <artifactId>infinispan-component-annotations</artifactId>
             <scope>compile</scope>
         </dependency>
@@ -487,10 +575,10 @@
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-hibernate-cache-v62</artifactId>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-spring-boot3-starter-embedded</artifactId>
-        </dependency>
+        </dependency-->
         <!--dependency>
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
@@ -498,6 +586,7 @@
         <dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
+            <version>1.1.1</version>
         </dependency>
         <!--dependency>
             <groupId>javax.cache</groupId>
@@ -555,7 +644,7 @@
             <artifactId>camel-core</artifactId>
             <version>4.6.0</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.locationtech.jts</groupId>
             <artifactId>jts-core</artifactId>
@@ -615,6 +704,7 @@
                     <attach>true</attach>
                     <addOutputDirectoryToResources>true</addOutputDirectoryToResources>
                     <timestampFormat>${maven.build.timestamp.format}</timestampFormat>
+                    <!-- scmBranchPropertyName>scmBranch</scmBranchPropertyName -->
                 </configuration>
             </plugin>
             <plugin>
@@ -631,7 +721,7 @@
                         </exclude>
                     </excludes>
                 </configuration>
-                <executions>
+                <!-- executions>
                     <execution>
                         <id>start-spring-boot</id>
                         <phase>pre-integration-test</phase>
@@ -648,7 +738,7 @@
                             <goal>stop</goal>
                         </goals>
                     </execution>
-                </executions>
+                </executions -->
             </plugin>
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
@@ -721,6 +811,7 @@
                 <version>${surefire.version}</version>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${failsafe.version}</version>
                 <executions>
@@ -951,7 +1042,7 @@
             <dependency>
                 <groupId>org.infinispan</groupId>
                 <artifactId>infinispan-spring-boot3-starter</artifactId>
-                <version>${infinispan.starter.version}</version>
+                <version>${infinispan.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -1007,12 +1098,13 @@
                 <spring-boot.run.profiles>dev</spring-boot.run.profiles>
             </properties>
         </profile>
-        <profile>
+        <!-- decide is it needed -->
+        <!--profile>
             <id>it</id>
             <properties>
                 <spring-boot.run.profiles>it</spring-boot.run.profiles>
             </properties>
-        </profile>
+        </profile-->
         <profile>
             <id>ci</id>
             <properties>
@@ -1055,6 +1147,18 @@
                             </includes>
                         </configuration>
                     </plugin>
+                    <!-- plugin>
+                        <groupId>io.gatling</groupId>
+                        <artifactId>gatling-maven-plugin</artifactId>
+                        <version>4.9.6</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin-->
                 </plugins>
             </build>
         </profile>
@@ -1092,6 +1196,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven.checkstyle.plugin.version}</version>
                 <configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>

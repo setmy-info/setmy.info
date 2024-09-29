@@ -4,9 +4,13 @@
 #src/main/resouorces
 #pom.xml
 #target
-#target/springboot-start-project-0.0.1-SNAPSHOT-sources.jar
-#target/springboot-start-project-0.0.1-SNAPSHOT.jar.original
+target/local.mv.db
+target/local.trace.db
+target/logback-test.log
+target/springboot-start-project-0.0.1-SNAPSHOT-sources.jar
+target/springboot-start-project-0.0.1-SNAPSHOT.jar.original
 derby.log
+logback.log
 .idea
 archived
 README.md

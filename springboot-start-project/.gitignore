@@ -34,3 +34,10 @@ build/
 
 derby.log
 /data/
+
+### Mac ###
+.DS_Store
+
+### Logs ###
+*.log
+

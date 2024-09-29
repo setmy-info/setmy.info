@@ -1,14 +1,45 @@
-version: '0.0.1'
 services:
-    db:
-    image: postgis/postgis
-    restart: always
-    environment:
-        POSTGRES_PASSWORD: 'g6p8'
-    volumes:
-        - pg-data:/var/lib/postgresql/data
-    ports:
-        - '5432:5432'
+    microservice-postgres:
+        image: postgres:16.4
+        container_name: microservice-postgres
+        restart: always
+        environment:
+            POSTGRES_USER: microservice
+            POSTGRES_PASSWORD: g6p8
+            POSTGRES_DB: microservice-db
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        ports:
+            - '5432:5432'
+
+    microservice-infinispan:
+        image: quay.io/infinispan/server
+        container_name: microservice-infinispan
+        restart: always
+        environment:
+            USER: microservice
+            PASS: g6p8
+        ports:
+            - "11222:11222"
+
+    springboot-start-project:
+        image: setmy-info/springboot-start-project:latest
+        container_name: springboot-start-project
+        entrypoint: [ "java-execute" ]
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:postgresql://microservice-postgres:5432/microservice-db
+            SPRING_DATASOURCE_USERNAME: microservice
+            SPRING_DATASOURCE_PASSWORD: g6p8
+            APPLICATION_PROFILES: local,compose
+            INFINISPAN_SERVER_LIST: microservice-infinispan:11222
+            INFINISPAN_AUTH_USERNAME: microservice
+            INFINISPAN_AUTH_PASSWORD: g6p8
+        depends_on:
+            - microservice-postgres
+            - microservice-infinispan
+        ports:
+            - "8080:8080"
+
 volumes:
-    pg-data:
+    postgres-data:
 
