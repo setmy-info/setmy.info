@@ -18,5 +18,12 @@ spring:
                             password:
 
 springBootStartProject:
+    startup:
+        timeZone: UTC
     example:
         foo: test application.yaml
+
+#maven:
+#    project:
+#        groupId: @project.groupId@
+#        artifactId: @project.artifactId@
