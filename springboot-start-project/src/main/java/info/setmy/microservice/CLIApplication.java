@@ -7,8 +7,6 @@ import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 
 //@SpringBootApplication
-//@EnableScheduling
-//@ComponentScan(basePackages = {"info.setmy.microservice", "info.setmy.microservice.dal"})
 @RequiredArgsConstructor
 public class CLIApplication implements CommandLineRunner, ExitCodeGenerator {
 

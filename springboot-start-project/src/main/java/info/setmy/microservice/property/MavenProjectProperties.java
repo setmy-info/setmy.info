@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @ToString
 @Configuration
-@ConfigurationProperties(prefix = "maven.project"/*, ignoreInvalidFields = true*/)
+@ConfigurationProperties(prefix = "maven.project")
 public class MavenProjectProperties {
 
     private String groupId;

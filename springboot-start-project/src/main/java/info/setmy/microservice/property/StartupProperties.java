@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 @Setter
 @Configuration
-@ConfigurationProperties(prefix = "spring-boot-start-project.startup"/*, ignoreUnknownFields = false*/)
+@ConfigurationProperties(prefix = "spring-boot-start-project.startup")
 public class StartupProperties {
 
     private String timeZone;

@@ -16,14 +16,10 @@ spring:
                             URL: jdbc:h2:file:./target/it;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
                             user: sa
                             password:
+    cache:
 
 springBootStartProject:
     startup:
         timeZone: UTC
     example:
         foo: test application.yaml
-
-#maven:
-#    project:
-#        groupId: @project.groupId@
-#        artifactId: @project.artifactId@

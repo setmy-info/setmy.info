@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 @Setter
 @Configuration
-@ConfigurationProperties(value = "spring-boot-start-project.example"/*, ignoreInvalidFields = true*/)
+@ConfigurationProperties(value = "spring-boot-start-project.example")
 public class ExampleProperties {
 
     private String foo;

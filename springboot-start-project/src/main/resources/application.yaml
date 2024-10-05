@@ -102,13 +102,19 @@ springdoc:
         version: openapi_3_1
     enable-groovy: true
 
-infinispan:
-    remote:
-        server-list: 127.0.0.1
-        marshaller: org.infinispan.commons.marshall.ProtoStreamMarshaller
-        java-serial-allowlist: info.setmy.microservice.*
-        auth-username: admin
-        auth-password: password
+#infinispan:
+    #remote:
+        #enabled: true
+        #server-list: 127.0.0.1
+        # application/x-protostream
+        #marshaller: org.infinispan.commons.marshall.ProtoStreamMarshaller
+        # application/x-jboss-marshalling
+        #marshaller: org.infinispan.jboss.marshalling.commons.GenericJBossMarshaller
+        # x-java-serialized-object
+        #marhaller: org.infinispan.commons.marshall.JavaSerializationMarshaller
+        #java-serial-allowlist: info.setmy.microservice.domain.*
+        #auth-username: admin
+        #auth-password: password
 
 maven:
     project:
