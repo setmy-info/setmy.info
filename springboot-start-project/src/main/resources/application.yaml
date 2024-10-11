@@ -37,6 +37,13 @@ spring:
     liquibase:
         # With profiles in dev only
         contexts: load_example_data
+        url: jdbc:h2:file:./target/local;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+        driver-class-name: org.h2.Driver
+        #driver-class-name: org.postgresql.Driver
+        #driver-class-name: org.hsqldb.jdbc.JDBCDriver
+        #driver-class-name: org.apache.derby.jdbc.ClientDriver
+        user: sa
+        password:
     jpa:
         properties:
             hibernate:
@@ -102,19 +109,19 @@ springdoc:
         version: openapi_3_1
     enable-groovy: true
 
-#infinispan:
-    #remote:
-        #enabled: true
-        #server-list: 127.0.0.1
-        # application/x-protostream
-        #marshaller: org.infinispan.commons.marshall.ProtoStreamMarshaller
-        # application/x-jboss-marshalling
-        #marshaller: org.infinispan.jboss.marshalling.commons.GenericJBossMarshaller
-        # x-java-serialized-object
-        #marhaller: org.infinispan.commons.marshall.JavaSerializationMarshaller
-        #java-serial-allowlist: info.setmy.microservice.domain.*
-        #auth-username: admin
-        #auth-password: password
+      #infinispan:
+      #remote:
+      #enabled: true
+      #server-list: 127.0.0.1
+      # application/x-protostream
+      #marshaller: org.infinispan.commons.marshall.ProtoStreamMarshaller
+      # application/x-jboss-marshalling
+      #marshaller: org.infinispan.jboss.marshalling.commons.GenericJBossMarshaller
+      # x-java-serialized-object
+      #marhaller: org.infinispan.commons.marshall.JavaSerializationMarshaller
+      #java-serial-allowlist: info.setmy.microservice.domain.*
+    #auth-username: admin
+    #auth-password: password
 
 maven:
     project:
