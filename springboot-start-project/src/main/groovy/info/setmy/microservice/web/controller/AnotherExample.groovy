@@ -48,7 +48,8 @@ class AnotherExample {
 
     @GetMapping(consumes = ALL_VALUE)
     ExampleDTO example() {
-        log.info("Example GET called");
+        log.info("Another example GET called");
+        /*
         def clojureExec = ClojureExec.builder()
             .ns(DEFAULT_NAME_SPACE)
             .scriptName(DEFAULT_MAIN_CLJ_SCRIPT)
@@ -56,6 +57,7 @@ class AnotherExample {
             .args([])
             .build()
         clojureService.exec(clojureExec)
+        */
         return exampleMapper.toDto(exampleService.getExampleModel());
     }
 }
