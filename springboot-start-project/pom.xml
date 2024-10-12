@@ -40,7 +40,7 @@
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
         <spring.boot.main.class>info.setmy.microservice.Application</spring.boot.main.class>
-	<!-- spring.boot.main.class>info.setmy.microservice.CLApplication</spring.boot.main.class -->
+        <!-- spring.boot.main.class>info.setmy.microservice.CLApplication</spring.boot.main.class -->
 
         <junit.version>4.13.2</junit.version>
         <junit5.version>5.11.0</junit5.version>
@@ -113,7 +113,7 @@
         <picocli.version>4.7.6</picocli.version>
         <find.bugs.version>3.0.5</find.bugs.version>
         <spot.bugs.version>4.8.6.2</spot.bugs.version>
-        <clojure.version>1.11.4</clojure.version>
+        <clojure.version>1.12.0</clojure.version>
         <tensorflow.core.version>0.5.0</tensorflow.core.version>
         <tensorflow.ndarray.version>1.0.0</tensorflow.ndarray.version>
         <tensorflow.framework.version>0.5.0</tensorflow.framework.version>
@@ -687,6 +687,29 @@
                 <configuration>
                 </configuration>
             </plugin-->
+            <plugin>
+                <groupId>com.theoryinpractise</groupId>
+                <artifactId>clojure-maven-plugin</artifactId>
+                <version>1.8.3</version>
+                <executions>
+                    <execution>
+                        <id>clojure-compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <extensions>true</extensions>
+                <!--configuration>
+                    <sourceDirectories>
+                        <sourceDirectory>src/main/clojure</sourceDirectory>
+                    </sourceDirectories>
+                    <testSourceDirectories>
+                        <testSourceDirectory>src/test/clojure</testSourceDirectory>
+                    </testSourceDirectories>
+                </configuration -->
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
