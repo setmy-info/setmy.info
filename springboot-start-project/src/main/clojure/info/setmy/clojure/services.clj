@@ -1,4 +1,4 @@
-(ns info.setmy.services)
+(ns info.setmy.clojure.services)
 
 ;;https://clojure.org/guides/learn/functions#_closures
 

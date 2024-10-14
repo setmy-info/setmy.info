@@ -1,8 +1,7 @@
 package info.setmy.microservice.web.controller
 
-
 import info.setmy.microservice.clojure.service.ClojureExec
-import info.setmy.microservice.service.ClojureService
+import info.setmy.microservice.clojure.service.ClojureService
 import info.setmy.microservice.mapper.ExampleMapper
 import info.setmy.microservice.service.ExampleService
 import info.setmy.microservice.web.dto.ExampleDTO
@@ -27,8 +26,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 @Validated
 class AnotherExample {
 
-    private static final String DEFAULT_MAIN_CLJ_SCRIPT = "info/setmy/core.clj"
-    private static final String DEFAULT_NAME_SPACE = "info.setmy.core"
+    private static final String DEFAULT_MAIN_CLJ_SCRIPT = "info/setmy/clojure/core.clj"
+    private static final String DEFAULT_NAME_SPACE = "info.setmy.clojure.core"
     private static final String DEFAULT_MAIN_NAME = "-main"
 
     private final static Logger log = LogManager.getLogger(AnotherExample)
@@ -41,10 +40,12 @@ class AnotherExample {
 
     AnotherExample(
         ExampleService exampleService,
-        ExampleMapper exampleMapper
+        ExampleMapper exampleMapper,
+        ClojureService clojureService
     ) {
         this.exampleService = exampleService
         this.exampleMapper = exampleMapper
+        this.clojureService = clojureService
     }
 
     @GetMapping(consumes = ALL_VALUE)
@@ -58,7 +59,7 @@ class AnotherExample {
                 DEFAULT_MAIN_NAME,
                 args
             )
-            //clojureService.exec(clojureExec)
+            clojureService.exec(clojureExec)
         } catch (Exception e) {
             log.error("e: ", e)
         }

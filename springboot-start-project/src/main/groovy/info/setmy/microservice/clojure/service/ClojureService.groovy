@@ -1,8 +1,7 @@
-package info.setmy.microservice.service
+package info.setmy.microservice.clojure.service
 
 import clojure.lang.RT
 import groovy.util.logging.Slf4j
-import info.setmy.microservice.clojure.service.ClojureExec
 import org.springframework.stereotype.Service
 
 @Slf4j

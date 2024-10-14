@@ -1,11 +1,11 @@
-(ns info.setmy.core
+(ns info.setmy.clojure.core
     (:require [clojure.string :as str])
     ;(:require [info.setmy.services.greet :as greet])
     ;(:require [info.setmy.services.barService :as barService])
     ; (:require [info.setmy.services.getBar :as getBar])
     (:gen-class)
     ; TODO : remove "use", prefer require
-    (:use info.setmy.services))
+    (:use info.setmy.clojure.services))
 
 (def aString "String")
 (def aLong 14)
@@ -148,7 +148,7 @@
     (println "Minime: " (ishe "Me"))
     (println "Returned: " (return-true))
 
-    ; Generates a class: public final class info.setmy.core.Person implements IRecord, IHashEq, IObj, ILookup, IKeywordLookup, IPersistentMap, Map, Serializable
+    ; Generates a class: public final class info.setmy.clojure.core.Person implements IRecord, IHashEq, IObj, ILookup, IKeywordLookup, IPersistentMap, Map, Serializable
     (defrecord Person [firstName lastName])
     (def person1 (->Person "Imre" "Tabur"))
     (println (:firstName person1))
