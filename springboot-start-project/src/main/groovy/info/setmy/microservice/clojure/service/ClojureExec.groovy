@@ -1,15 +1,11 @@
 package info.setmy.microservice.clojure.service
 
-import groovy.transform.Immutable
-import groovy.transform.ToString
-import groovy.transform.builder.Builder
+import groovy.transform.TupleConstructor
 
-@Builder
-@ToString
-@Immutable
+@TupleConstructor
 class ClojureExec {
     String ns
     String scriptName
     String mainFunctionName
-    String [] args
+    String[] args
 }

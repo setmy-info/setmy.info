@@ -1,7 +1,8 @@
 package info.setmy.microservice.web.controller
 
+
 import info.setmy.microservice.clojure.service.ClojureExec
-import info.setmy.microservice.clojure.service.ClojureService
+import info.setmy.microservice.service.ClojureService
 import info.setmy.microservice.mapper.ExampleMapper
 import info.setmy.microservice.service.ExampleService
 import info.setmy.microservice.web.dto.ExampleDTO
@@ -49,16 +50,18 @@ class AnotherExample {
     @GetMapping(consumes = ALL_VALUE)
     ExampleDTO example() {
         log.info("Another example GET called");
-
-        /*
-        def clojureExec = ClojureExec.builder()
-            .ns(DEFAULT_NAME_SPACE)
-            .scriptName(DEFAULT_MAIN_CLJ_SCRIPT)
-            .mainFunctionName(DEFAULT_MAIN_NAME)
-            .args([])
-            .build()
-        */
-        //clojureService.exec(clojureExec)
+        String[] args = []
+        try {
+            ClojureExec clojureExec = new ClojureExec(
+                DEFAULT_NAME_SPACE,
+                DEFAULT_MAIN_CLJ_SCRIPT,
+                DEFAULT_MAIN_NAME,
+                args
+            )
+            //clojureService.exec(clojureExec)
+        } catch (Exception e) {
+            log.error("e: ", e)
+        }
 
         return exampleMapper.toDto(exampleService.getExampleModel());
     }
