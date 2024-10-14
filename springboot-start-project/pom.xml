@@ -640,6 +640,17 @@
             <version>1.1.0</version>
         </dependency>
         <dependency>
+            <groupId>prismatic</groupId>
+            <artifactId>schema</artifactId>
+            <version>1.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>info.setmy</groupId>
+            <artifactId>clj-commons</artifactId>
+            <version>0.3.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
             <version>4.6.0</version>
@@ -1431,6 +1442,13 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>repo.clojars.org</id>
+            <url>https://repo.clojars.org/</url>
+        </repository>
+    </repositories>
 
     <licenses>
         <license>
