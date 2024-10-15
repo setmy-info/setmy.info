@@ -2,7 +2,9 @@
 
 ;;https://clojure.org/guides/learn/functions#_closures
 
-(defn greet  [name] (str "Hello, " name))
+(defn greet [name]
+    "greet documentation"
+    (str "Hello, " name))
 
 (def barService info.setmy.clojure.BarService/barService)
 
