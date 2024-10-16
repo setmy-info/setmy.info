@@ -2,12 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
     name: microservice-service
-    namespace: local
+    namespace: microservice-local
 spec:
     selector:
         app.kubernetes.io/name: microservice
     ports:
         -   protocol: TCP
+            # Port where Ingress forwards to
             port: 80
-            targetPort: micros-port
-
+            # Deployment or POD port
+            targetPort: 8080

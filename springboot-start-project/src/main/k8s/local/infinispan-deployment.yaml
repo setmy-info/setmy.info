@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: infinispan-deployment
+    namespace: microservice-local
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: infinispan-deployment
+    template:
+        metadata:
+            labels:
+                app: infinispan-deployment
+        spec:
+            containers:
+                -   name: infinispan
+                    image: quay.io/infinispan/server
+                    ports:
+                        -   name: is-port
+                            containerPort: 11222
+                    env:
+                        -   name: USER
+                            valueFrom:
+                                secretKeyRef:
+                                    name: infinispan-secrets-map
+                                    key: user
+                                    optional: false
+                        -   name: PASS
+                            valueFrom:
+                                secretKeyRef:
+                                    name: infinispan-secrets-map
+                                    key: pass
+                                    optional: false
+                    volumeMounts:
+                        -   name: infinispan-storage
+                            mountPath: /data
+
+            volumes:
+                -   name: infinispan-storage
+                    persistentVolumeClaim:
+                        claimName: infinispan-persistent-volume-claim

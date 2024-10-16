@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: postgres-deployment
+    namespace: microservice-local
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: postgres-deployment
+    template:
+        metadata:
+            labels:
+                app: postgres-deployment
+        spec:
+            containers:
+                -   name: postgres
+                    image: postgres:16.4
+                    ports:
+                        -   name: pg-port
+                            containerPort: 5432
+                    env:
+                        ## From config-map
+                        -   name: POSTGRES_DB
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: postgres-config-map
+                                    key: postgres-db
+                                    optional: false
+                        ## From secrets
+                        -   name: POSTGRES_USER
+                            valueFrom:
+                                secretKeyRef:
+                                    name: postgres-secrets-map
+                                    key: postgres-user
+                                    optional: false
+                        -   name: POSTGRES_PASSWORD
+                            valueFrom:
+                                secretKeyRef:
+                                    name: postgres-secrets-map
+                                    key: postgres-password
+                                    optional: false
+                    volumeMounts:
+                        -   mountPath: /var/lib/postgresql/data
+                            name: postgres-storage
+            volumes:
+                -   name: postgres-storage
+                    persistentVolumeClaim:
+                        claimName: postgres-persistent-volume-claim
