@@ -7,9 +7,9 @@
     <property name="LOG_PATH" value="./"/>
     <property name="LOG_FILE" value="logback.log"/>
     <property name="LOCAL_LOG_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] src/main %-5level %logger{36} - %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] ${POD_NAMESPACE:-unknown} ${POD_NAME:-unknown} src/main %-5level %logger{36} - %msg%n"/>
     <property name="UTC_LOG_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS'Z', UTC} [%thread] src/main %-5level %logger{36} - %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS'Z', UTC} [%thread] ${POD_NAMESPACE:-unknown} ${POD_NAME:-unknown} src/main %-5level %logger{36} - %msg%n"/>
     <property name="LOG_PATTERN" value="${UTC_LOG_PATTERN}"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">

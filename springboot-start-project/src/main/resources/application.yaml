@@ -133,6 +133,10 @@ springBootStartProject:
         timeZone: UTC
     example:
         foo: application.yaml
+    kubernetes:
+        nodeNameSpace: ${POD_NAMESPACE}
+        nodeName: ${NODE_NAME}
+        podName: ${POD_NAME}
 
 #liquibaseDataSource:
 #    driver-class-name: org.h2.Driver
