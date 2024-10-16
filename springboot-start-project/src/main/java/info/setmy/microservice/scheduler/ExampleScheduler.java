@@ -10,6 +10,6 @@ public class ExampleScheduler {
 
     @Scheduled(fixedDelay = 30000)
     public void scheduledTaskForFirstDB() {
-        log.info("Scheduled");
+        log.info("Scheduled as non-synchronized on multinode environment");
     }
 }
