@@ -540,6 +540,13 @@
         </repository>
     </distributionManagement>
 
+    <repositories>
+        <repository>
+            <id>repo.clojars.org</id>
+            <url>https://repo.clojars.org/</url>
+        </repository>
+    </repositories>
+
     <licenses>
         <license>
             <name>The MIT License (MIT)</name>

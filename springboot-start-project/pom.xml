@@ -707,12 +707,6 @@
                 <artifactId>clojure-maven-plugin</artifactId>
                 <version>1.8.3</version>
                 <executions>
-                    <!--execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>test</goal>
-                        </goals>
-                    </execution-->
                     <execution>
                         <id>compile</id>
                         <phase>compile</phase>
