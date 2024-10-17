@@ -9,4 +9,4 @@
     "Unit Test documentation"
   (testing "Greet test"
     (is (= 5 (add 3 2)))
-    (is (= "He" (greet "Hello, Me")))))
+    (is (= "Hello, Me" (greet "Me")))))
