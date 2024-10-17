@@ -1,0 +1,67 @@
+;;; not tested!
+(defproject info.setmy/java-clojure "1.2.0-SNAPSHOT"
+  :description "Java Clojure project."
+  :url "https://github.com/setmy-info/setmy.info/java-clojure"
+  :license {:name "MIT License"
+            :url  "https://mit-license.org/"}
+  :dependencies
+  [["org.clojure/clojure" "1.11.1"]
+   ["org.clojure/tools.cli" "1.0.219"]
+   ["org.clojure/data.json" "2.4.0"]]
+  :plugins {:aliases {"doc" ["do" "codox"]}}
+  :aliases {"doc" ["do" "codox"]}
+  :codox {:metadata {:doc/format :markdown}}
+  :aot :all
+  :jvm-opts ["-Dclojure.compiler.direct-linking=true"]
+  :profiles
+  {:uberjar
+   {:resource-paths ["src/test/resources"]
+    :deploy-repositories [["clojars" {:url "https://clojars.org/repo"
+                                     :sign-releases false}]]}
+   :local {}
+   :dev {}
+   :ci {}
+   :test {:resource-paths ["src/test/resources"]}
+   :prelive {}
+   :live {}}
+  :main info.setmy.clojure
+  :target-path "target/%s"
+  :source-paths ["src/main/clojure"]
+  :test-paths ["src/test/clojure"]
+  :resource-paths ["src/main/resources" "./target/classes"])
+
+;; Not tested, but this looks correct
+{
+  :paths ["src/main/clojure" "src/main/resources" "src/main/java"]
+  :deps {
+    org.clojure/clojure {:mvn/version "1.11.1"}
+    org.clojure/tools.cli {:mvn/version "1.0.219"}
+    org.clojure/data.json {:mvn/version "2.4.0"}
+  }
+  :aliases {
+    :run {
+      :main-opts ["-m" "info.setmy.clojure"]
+    }
+    :doc {
+      :extra-deps {lein-codox {:mvn/version "0.10.8"}}
+      :exec-fn codox.main/generate-docs
+    }
+    :uberjar {
+      :exec-fn hf.depstar.uberjar/build-uberjar
+      :exec-args {:aot true
+                  :jar "target/uberjar/app.jar"
+                  :main-class "info.setmy.clojure"}
+      :jvm-opts ["-Dclojure.compiler.direct-linking=true"]
+    }
+    :test {
+      :extra-paths ["src/test/clojure" "src/test/resources"]
+    }
+  }
+  :build {
+    :target "target/%s"
+    :aot true
+  }
+  :mvn/repos {
+    "clojars" {:url "https://repo.clojars.org/"}
+  }
+}
