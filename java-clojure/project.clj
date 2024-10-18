@@ -1,16 +1,33 @@
-(defproject java-clojure "0.0.0-SNAPSHOT"
-    :description "Incubation Clojure project"
-    :url "http://example.com/FIXME"
+(defproject info.setmy/java-clojure "1.2.0-SNAPSHOT"
+    :description "Java Clojure project."
+    :url "https://github.com/setmy-info/setmy.info/java-clojure"
     :license
-    {:name "MIT"
+    {:name "MIT License"
      :url  "https://mit-license.org/"}
-    :dependencies [[org.clojure/clojure "1.11.1"]]
-    :main ^:skip-aot info.setmy.core
+    :dependencies [[org.clojure/clojure "1.11.1"]
+                   [org.clojure/tools.cli "1.0.219"]
+                   [org.clojure/data.json "2.4.0"]]
+    :plugins [[lein-codox "0.10.8"]]
+    :main ^:skip-aot info.setmy.clojure
     :target-path "target/%s"
-    :source-paths ["src" "src/main/clojure"]
-    :test-paths ["test" "src/test/clojure"]
+    :source-paths ["src/main/clojure"]
+    :test-paths ["src/test/clojure"]
     :java-source-paths ["src/main/java"] ; Java source is stored separately.
-    :resource-paths ["src/main/resources"] ; Non-code files included in classpath/jar.
+    :resource-paths ["src/main/resources" "./target/classes"] ; Non-code files included in classpath/jar.
     :profiles
+    ; with-profile :abc
     {:uberjar {:aot      :all
-               :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
+               :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}
+     :local   {}
+     :dev     {}
+     :ci      {}
+     :test    {:resource-paths ["src/test/resources"]}
+     :prelive {}
+     :live    {}}
+    :deploy-repositories
+    [["clojars"
+      {:url           "https://clojars.org/repo"
+       :sign-releases false}]]
+    :aliases {"doc" ["do" "codox"]}
+    :codox
+    {:metadata {:doc/format :markdown}})

@@ -32,7 +32,8 @@ docker-compose -f ./src/test/docker/docker-compose.yaml up
 Build with docker
 
 ```shell
-docker build --progress=plain -t springboot-start-project -f ./src/main/docker/Dockerfile .
+BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+docker build --progress=plain --build-arg BUILD_DATE=$BUILD_DATE -t springboot-start-project -f ./src/main/docker/Dockerfile .
 ```
 
 ##### Infinispan
@@ -148,7 +149,8 @@ http://localhost:8080
 
 ## Docker (files), docker compose
 
-* docker build -t setmyinfo/springboot-start-project:latest -f ./src/main/docker/Dockerfile .
+* BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+* docker build --build-arg BUILD_DATE=$BUILD_DATE -t setmyinfo/springboot-start-project:latest -f ./src/main/docker/Dockerfile .
 * docker run -p 8080:8080 setmyinfo/springboot-start-project:latest
 
 ## K8S, Minikube
@@ -267,7 +269,7 @@ X Exiting due to GUEST_IMAGE_LOAD: Failed to load image: save to dir: caching im
 3. H2 console
 4. Actuators
 5. Swagger UI
-6. mvn clean && mvn test && mvn verify && mvn install -pe2e && mvn org.pitest:pitest-maven:mutationCoverage && mvn site:site
+6. mvn clean && mvn test && mvn verify && mvn install -Pe2e && mvn org.pitest:pitest-maven:mutationCoverage && mvn site:site
 
 1. http://localhost:8080/
 2. http://localhost:8080/home

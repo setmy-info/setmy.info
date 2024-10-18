@@ -80,3 +80,10 @@ spec:
                                     name: microservice-secrets-map
                                     key: infinispan-auth-password
                                     optional: false
+                    volumeMounts:
+                        -   name: nfs-volume
+                            mountPath: /mnt/gintra
+            volumes:
+                -   name: nfs-volume
+                    persistentVolumeClaim:
+                        claimName: xyz-nfs-persistent-volume-claim
