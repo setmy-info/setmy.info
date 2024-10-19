@@ -7,8 +7,7 @@ metadata:
     # <pod-name>.<service-name>.<namespace>.svc.cluster.local
     # postgresql-1.postgres-service.microservice-local.svc.cluster.local
 data:
-    spring-datasource-url: "jdbc:postgresql://postgres-service.microservice-local.svc.cluster.local:5432/microservice-db"
-    redis-host: "redis-service.microservice-local.svc.cluster.local"
-    redis-port: "6379"
+    #spring-datasource-url: "jdbc:postgresql://postgres-service.microservice-local.svc.cluster.local:5432/microservice-db"
+    spring-datasource-url: "jdbc:h2:file:./target/local;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL"
     infinispan-server-list: "infinispan-service.microservice-local.svc.cluster.local"
 immutable: true

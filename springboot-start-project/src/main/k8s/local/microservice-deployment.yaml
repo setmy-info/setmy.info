@@ -6,7 +6,8 @@ metadata:
     labels:
         app: microservice-deployment
 spec:
-    replicas: 3
+    #replicas: 3
+    replicas: 2
     selector:
         matchLabels:
             app: microservice-deployment
@@ -17,11 +18,13 @@ spec:
         spec:
             containers:
                 -   name: microservice
-                    #image: docker.io/sfey/springboot-start-project:latest
-                    image: sfey/springboot-start-project:latest
+                    #image: docker.io/setmy.info/springboot-start-project:latest
+                    #image: library/springboot-start-project:latest
+                    image: springboot-start-project:latest
                     # For example pulling is not needed in Minikube
-                    command: [ "java-execute" ]
-                    #args: ["echo 'Hello World'; exec myapp --start"]
+                    #command: [ "java-execute" ]
+                    command: [ "java" ]
+                    args: [ "-jar", "/opt/setmy.info/lib/microservice.jar", "--spring.profiles.active=local" ]
                     imagePullPolicy: Never
                     ports:
                         -   name: ms-port
@@ -29,7 +32,7 @@ spec:
                     env:
                         # For Spring boot
                         -   name: APPLICATION_PROFILES
-                            value: "local,compose"
+                            value: "local"
                         ## From config-map
                         -   name: SPRING_DATASOURCE_URL
                             valueFrom:
@@ -80,10 +83,10 @@ spec:
                                     name: microservice-secrets-map
                                     key: infinispan-auth-password
                                     optional: false
-                    volumeMounts:
-                        -   name: nfs-volume
-                            mountPath: /mnt/gintra
-            volumes:
-                -   name: nfs-volume
-                    persistentVolumeClaim:
-                        claimName: xyz-nfs-persistent-volume-claim
+#                    volumeMounts:
+#                        -   name: nfs-volume
+#                            mountPath: /mnt/gintra
+#            volumes:
+#                -   name: nfs-volume
+#                    persistentVolumeClaim:
+#                        claimName: xyz-nfs-persistent-volume-claim

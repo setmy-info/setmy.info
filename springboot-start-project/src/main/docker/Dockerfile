@@ -15,7 +15,7 @@ LABEL org.opencontainers.image.title="Docker HUB Rocky Spring boot micro service
       org.opencontainers.image.ref.name="" \
       org.opencontainers.image.base.name=""
 
-COPY ../../../target/springboot-start-project-0.0.1-SNAPSHOT.jar /opt/setmy.info/lib/microservice.jar
+COPY ../../../target/springboot-start-project-1.0.0-SNAPSHOT.jar /opt/setmy.info/lib/microservice.jar
 RUN chown -R root:root /opt/setmy.info/lib/microservice.jar && \
     ls -la /opt/setmy.info/lib/microservice.jar && \
     java -version && \

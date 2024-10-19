@@ -5,7 +5,8 @@ metadata:
     namespace: microservice-local
 spec:
     selector:
-        app.kubernetes.io/name: microservice
+        #app.kubernetes.io/name: microservice
+        app: microservice-deployment
     ports:
         -   protocol: TCP
             # Port where Ingress forwards to
