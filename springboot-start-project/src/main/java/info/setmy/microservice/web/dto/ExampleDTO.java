@@ -23,5 +23,8 @@ public class ExampleDTO {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"/*, timezone = "UTC"*/)
     private LocalDateTime dateTime;
 
-    //private String geom;
+    /**
+     * Need to finish that for REST API for SPA.
+     * */
+    private String geom;
 }

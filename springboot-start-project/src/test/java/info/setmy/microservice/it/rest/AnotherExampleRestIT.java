@@ -26,7 +26,8 @@ public class AnotherExampleRestIT extends RestBase {
             .header("Connection", "keep-alive")
             //.header("Content-Encoding", "gzip") ???
             .header("Date", not(isEmptyOrNullString()))
-            .body("size()", is(2))
-            .body("exampleString", equalTo("Hello World from DB"));
+            .body("size()", is(3))
+            .body("exampleString", equalTo("Hello World from DB"))
+            .body("geom", equalTo("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))"));
     }
 }
