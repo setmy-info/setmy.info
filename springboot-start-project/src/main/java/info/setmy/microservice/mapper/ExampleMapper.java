@@ -14,11 +14,14 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 @Mapper(componentModel = SPRING)
 public interface ExampleMapper {
 
+
     @Mapping(source = "text", target = "exampleString")
+    //@Mapping(source = "geom", target = "geom") // TODO : WKA - JSON serializer and deserializer
     @Mapping(target = "geom", qualifiedByName = "convertGeometryToString")
     ExampleDTO toDto(ExampleModel exampleModel);
 
     @Mapping(source = "exampleString", target = "text")
+    //@Mapping(source = "geom", target = "geom") // TODO : WKA - JSON serializer and deserializer
     @Mapping(target = "geom", qualifiedByName = "convertStringToGeometry")
     ExampleModel toEntity(ExampleDTO exampleDTO);
 

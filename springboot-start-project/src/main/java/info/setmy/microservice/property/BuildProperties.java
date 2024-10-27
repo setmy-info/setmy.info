@@ -11,18 +11,18 @@ import org.springframework.context.annotation.PropertySource;
 @Setter
 @Configuration
 @ToString
-@PropertySource("classpath:build.properties")
+@PropertySource(value = "classpath:build.properties", ignoreResourceNotFound = true)
 public class BuildProperties {
 
-    @Value("${name}")
+    @Value("${name}:spring-boot-project")
     private String name;
 
-    @Value("${version}")
+    @Value("${version:0.0.0-SNAPSHOT}")
     private String version;
 
-    @Value("${timestamp}")
+    @Value("${timestamp:01.01.1970 00:00}")
     private String timestamp;
 
-    @Value("${revision}")
+    @Value("${revision:0}")
     private String revision;
 }
