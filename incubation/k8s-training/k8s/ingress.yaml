@@ -9,7 +9,8 @@ spec:
             http:
                 paths:
                     -   path: /
-                        pathType: Exact
+                        #pathType: Exact
+                        pathType: Prefix
                         backend:
                             service:
                                 name: training-service

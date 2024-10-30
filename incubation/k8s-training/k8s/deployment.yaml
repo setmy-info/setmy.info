@@ -27,7 +27,7 @@ spec:
                         #-   name: tr-port
                         #    containerPort: 8111
                     env:
-                        ## From config-map
+                        ## From ConfigMap
                         -   name: K8S_CONFIG
                             valueFrom:
                                 configMapKeyRef:
@@ -46,7 +46,7 @@ spec:
                             valueFrom:
                                 fieldRef:
                                     fieldPath: spec.nodeName
-                        ## From secrets
+                        ## From Secret
                         -   name: K8S_SECRET
                             valueFrom:
                                 secretKeyRef:

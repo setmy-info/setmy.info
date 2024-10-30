@@ -5,7 +5,7 @@ metadata:
     namespace: training
 spec:
     selector:
-        app: training-service
+        app: training-deployment
     ports:
         -   protocol: TCP
             port: 80
