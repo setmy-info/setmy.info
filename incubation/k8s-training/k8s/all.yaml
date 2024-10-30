@@ -1,0 +1,126 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: training
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: training-config-map
+    namespace: training
+data:
+    k8s-config: "k8s-abcd"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+    name: training-secrets-map
+    namespace: training
+data:
+    k8s-secret: azhzLWFiY2QxMjM0
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name: training-persistent-volume
+    namespace: training
+spec:
+    capacity:
+        storage: 10Gi
+    accessModes:
+        - ReadWriteMany
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: standard
+    hostPath:
+        path: C:\\pub\\setmy.info\\lib\\data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: training-persistent-volume-claim
+    namespace: training
+spec:
+    accessModes:
+        - ReadWriteMany
+    resources:
+        requests:
+            storage: 1Gi
+    storageClassName: standard
+    volumeName: training-persistent-volume
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: training-deployment
+    namespace: training
+    labels:
+        app: training-deployment
+spec:
+    #replicas: 3
+    replicas: 2
+    #replicas: 1
+    selector:
+        matchLabels:
+            app: training-deployment
+    template:
+        metadata:
+            labels:
+                app: training-deployment
+        spec:
+            containers:
+                -   name: training-deployment
+                    image: labseeker/k8s-training:latest
+                    # Minikube
+                    #imagePullPolicy: Never
+                    ports:
+                        -   containerPort: 8111
+                        #-   name: tr-port
+                        #    containerPort: 8111
+                    env:
+                        ## From ConfigMap
+                        -   name: K8S_CONFIG
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: training-config-map
+                                    key: k8s-config
+                                    optional: false
+                        -   name: K8S_POD_NAMESPACE
+                            valueFrom:
+                                fieldRef:
+                                    fieldPath: metadata.namespace
+                        -   name: K8S_POD_NAME
+                            valueFrom:
+                                fieldRef:
+                                    fieldPath: metadata.name
+                        -   name: K8S_NODE_NAME
+                            valueFrom:
+                                fieldRef:
+                                    fieldPath: spec.nodeName
+                        ## From Secret
+                        -   name: K8S_SECRET
+                            valueFrom:
+                                secretKeyRef:
+                                    name: training-secrets-map
+                                    key: k8s-secret
+                                    optional: false
+#                    volumeMounts:
+#                        -   name: data-volume
+#                            mountPath: /mnt/data
+#            volumes:
+#                -   name: data-volume
+#                    persistentVolumeClaim:
+#                        claimName: training-persistent-volume-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: training-service
+    namespace: training
+spec:
+    selector:
+        app: training-deployment
+    ports:
+        -   protocol: TCP
+            port: 80
+            targetPort: 8111
+---
