@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: training-deployment
+    namespace: training
+    labels:
+        app: training-deployment
+spec:
+    #replicas: 3
+    replicas: 2
+    #replicas: 1
+    selector:
+        matchLabels:
+            app: training-deployment
+    template:
+        metadata:
+            labels:
+                app: training-deployment
+        spec:
+            containers:
+                -   name: training-deployment
+                    image: labseeker/k8s-training:latest
+                    # Minikube
+                    #imagePullPolicy: Never
+                    ports:
+                        -   containerPort: 8111
+                        #-   name: tr-port
+                        #    containerPort: 8111
+                    env:
+                        ## From config-map
+                        -   name: K8S_CONFIG
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: training-config-map
+                                    key: k8s-config
+                                    optional: false
+                        -   name: K8S_POD_NAMESPACE
+                            valueFrom:
+                                fieldRef:
+                                    fieldPath: metadata.namespace
+                        -   name: K8S_POD_NAME
+                            valueFrom:
+                                fieldRef:
+                                    fieldPath: metadata.name
+                        -   name: K8S_NODE_NAME
+                            valueFrom:
+                                fieldRef:
+                                    fieldPath: spec.nodeName
+                        ## From secrets
+                        -   name: K8S_SECRET
+                            valueFrom:
+                                secretKeyRef:
+                                    name: training-secrets-map
+                                    key: k8s-secret
+                                    optional: false
+#                    volumeMounts:
+#                        -   name: data-volume
+#                            mountPath: /mnt/data
+#            volumes:
+#                -   name: data-volume
+#                    persistentVolumeClaim:
+#                        claimName: training-persistent-volume-claim
