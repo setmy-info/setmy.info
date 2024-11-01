@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+    generateName: echo-workflow-
+    namespace: training
+spec:
+    entrypoint: echo-sequence
+    templates:
+        -   name: echo-sequence
+            steps:
+                -   -   name: step-1
+                        template: echo-template
+                        arguments:
+                            parameters:
+                                -   name: message
+                                    value: "Hello from Step 1"
+
+                    -   name: step-2
+                        template: echo-template
+                        arguments:
+                            parameters:
+                                -   name: message
+                                    value: "Hello from Step 2"
+
+                -   -   name: step-3
+                        template: echo-template
+                        arguments:
+                            parameters:
+                                -   name: message
+                                    value: "Hello from Step 3"
+
+                    -   name: step-4
+                        template: echo-template
+                        arguments:
+                            parameters:
+                                -   name: message
+                                    value: "Hello from Step 4"
+
+        -   name: echo-template
+            inputs:
+                parameters:
+                    -   name: message
+            container:
+                image: alpine:latest
+                command: [ "/bin/sh", "-c" ]
+                args: [ "sleep 2 && echo {{inputs.parameters.message}}" ]

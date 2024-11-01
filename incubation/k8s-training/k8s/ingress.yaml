@@ -3,10 +3,11 @@ kind: Ingress
 metadata:
     name: training-ingress
     namespace: training
+    annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
     rules:
-        -   host: example.net
-            http:
+        -   http:
                 paths:
                     -   path: /
                         #pathType: Exact
