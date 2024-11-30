@@ -1,9 +1,14 @@
 package info.setmy.ipfs;
 
 import io.ipfs.api.IPFS;
+import io.ipfs.api.MerkleNode;
+import io.ipfs.api.NamedStreamable;
 import io.ipfs.multihash.Multihash;
 
+import java.io.File;
 import java.io.IOException;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class IPFSService {
 
@@ -24,11 +29,27 @@ public class IPFSService {
         }
     }
 
-    public byte[] getContent(String string) {
-        Multihash filePointer = Multihash.fromBase58(string);
+    public String asString(String hash) {
+        return new String(getContent(hash), UTF_8);
+    }
+
+    public byte[] getContent(String hash) {
+        Multihash filePointer = Multihash.fromBase58(hash);
         try {
             byte[] fileContents = ipfs.cat(filePointer);
             return fileContents;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String addFile(String filePath) {
+        NamedStreamable.FileWrapper file = new NamedStreamable.FileWrapper(new File(filePath));
+        try {
+            MerkleNode addResult = ipfs.add(file).get(0);
+            System.out.println(addResult);
+            System.out.println("HASH: " + addResult.hash);
+            return addResult.hash.toString();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

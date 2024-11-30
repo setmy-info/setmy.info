@@ -1,0 +1,2 @@
+Set my info (setmy.info).
+Java test file - java.ipfs.txt.
