@@ -122,5 +122,5 @@
 	path = submodules/setmy-info-less
 	url = git@github.com:setmy-info/setmy-info-less.git
 [submodule "submodules/apache-low-io"]
-	path = submodules/apache-low-io
+	path = submodules/java-low-io
 	url = git@github.com:setmy-info/apache-low-io.git
