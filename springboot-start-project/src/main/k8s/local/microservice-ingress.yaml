@@ -12,10 +12,12 @@ spec:
         -   host: microservice-local
             http:
                 paths:
+                    #-   path: /testpath
                     -   path: /microservice-local
                         pathType: Prefix
                         backend:
                             service:
+                                #name: test
                                 name: microservice-service
                                 port:
                                     number: 80

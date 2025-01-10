@@ -118,3 +118,9 @@
 [submodule "submodules/firefox-scripts-extension"]
 	path = submodules/firefox-scripts-extension
 	url = git@github.com:setmy-info/firefox-scripts-extension.git
+[submodule "submodules/setmy-info-less"]
+	path = submodules/setmy-info-less
+	url = git@github.com:setmy-info/setmy-info-less.git
+[submodule "submodules/java-low-io"]
+	path = submodules/java-low-io
+	url = git@github.com:setmy-info/java-low-io.git

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: training-ingress
+    namespace: training
+    annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+    rules:
+        -   http:
+                paths:
+                    -   path: /
+                        #pathType: Exact
+                        pathType: Prefix
+                        backend:
+                            service:
+                                name: training-service
+                                port:
+                                    number: 80

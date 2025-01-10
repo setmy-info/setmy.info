@@ -4,10 +4,7 @@ import info.setmy.microservice.it.RestBase;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isEmptyOrNullString;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 @Slf4j
 public class ExampleRestIT extends RestBase {
@@ -26,8 +23,9 @@ public class ExampleRestIT extends RestBase {
             .header("Connection", "keep-alive")
             //.header("Content-Encoding", "gzip") ???
             .header("Date", not(isEmptyOrNullString()))
-            .body("size()", is(2))
-            .body("exampleString", equalTo("Hello World from DB"));
+            .body("size()", is(3))
+            .body("exampleString", equalTo("Hello World from DB"))
+            .body("geom", equalTo("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))"));
     }
 
     @Test

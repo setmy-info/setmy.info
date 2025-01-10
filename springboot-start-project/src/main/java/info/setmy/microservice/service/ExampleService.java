@@ -47,7 +47,7 @@ public class ExampleService {
         //cacheManager.getCache("exampleCache").put("exampleKey", "Hello World from Cache!");
         //log.info("Cache: {}", cacheManager.getCache("exampleCache").get("exampleKey"));
         final ExampleModel model = exampleRepository.findAll().get(0);
-        final ExampleModel newModel = new ExampleModel().setId(model.getId()).setDateTime(model.getDateTime()).setText(model.getText());
+        final ExampleModel newModel = new ExampleModel().setId(model.getId()).setDateTime(model.getDateTime()).setText(model.getText()).setGeom(model.getGeom());
         return newModel;
     }
 

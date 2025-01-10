@@ -32,7 +32,8 @@ docker-compose -f ./src/test/docker/docker-compose.yaml up
 Build with docker
 
 ```shell
-docker build --progress=plain -t springboot-start-project -f ./src/main/docker/Dockerfile .
+BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+docker build --progress=plain --build-arg BUILD_DATE=$BUILD_DATE -t springboot-start-project -f ./src/main/docker/Dockerfile .
 ```
 
 ##### Infinispan
@@ -148,7 +149,8 @@ http://localhost:8080
 
 ## Docker (files), docker compose
 
-* docker build -t setmyinfo/springboot-start-project:latest -f ./src/main/docker/Dockerfile .
+* BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+* docker build --build-arg BUILD_DATE=$BUILD_DATE -t setmyinfo/springboot-start-project:latest -f ./src/main/docker/Dockerfile .
 * docker run -p 8080:8080 setmyinfo/springboot-start-project:latest
 
 ## K8S, Minikube
@@ -163,11 +165,17 @@ Yaml config for:
 * Persistent volume claims
 
 ```shell
+minikube start
+minikube addons enable ingress
+minikube image load springboot-start-project:latest --overwrite
+minikube image ls --format table
+minikube ip
 kubectl apply -f ./src/main/k8s/local/microservice-namespace.yaml
-kubectl apply -f ./src/main/k8s/local/microservice-config-map.yaml
-kubectl apply -f ./src/main/k8s/local/microservice-secrets-map.yaml
+kubectl config set-context minikube --namespace=microservice-local
 kubectl apply -f ./src/main/k8s/local/microservice-nfs-persistent-volume.yaml
 kubectl apply -f ./src/main/k8s/local/microservice-nfs-persistent-volume-claim.yaml
+kubectl apply -f ./src/main/k8s/local/microservice-config-map.yaml
+kubectl apply -f ./src/main/k8s/local/microservice-secrets-map.yaml
 kubectl apply -f ./src/main/k8s/local/microservice-deployment.yaml
 kubectl apply -f ./src/main/k8s/local/microservice-service.yaml
 kubectl apply -f ./src/main/k8s/local/microservice-ingress.yaml
@@ -189,6 +197,9 @@ minikube image load setmyinfo/springboot-start-project:latest --overwrite
 minikube cache add setmyinfo/springboot-start-project:latest
 kubectl get pods -n microservice-local
 kubectl describe pod microservice-deployment-6f6c898cf8-mtffz -n microservice-local
+kubectl logs -l app=microservice-deployment --all-containers=true --follow
+kubectl logs ingress-nginx-controller-68cd94d4bd-kxd4n -n ingress-nginx -f
+kubectl get endpoints microservice-service -n microservice-local
 ```
 
 Problem
@@ -198,6 +209,17 @@ minikube image load setmyinfo/springboot-start-project:latest --overwrite
 W0528 09:35:41.129739   24828 main.go:291] Unable to resolve the current Docker CLI context "default": context "default": context not found: open C:\Users\imre\.docker\contexts\meta\37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f\meta.json: The system cannot find the path specified.
 
 X Exiting due to GUEST_IMAGE_LOAD: Failed to load image: save to dir: caching images: caching image "C:\\Users\\imre\\.minikube\\cache\\images\\amd64\\setmyinfo\\springboot-start-project_latest": write: unable to calculate manifest: blob sha256:f120aa7f9c9a4cf13217ba17169252f6ec6b56af9f73ad71c0f2980d859aa449 not found
+```
+
+Delete
+
+```
+kubectl delete ingress microservice-ingress
+kubectl delete service microservice-service
+kubectl delete deployment microservice-deployment
+kubectl delete secrets microservice-secrets-map
+kubectl delete configmap microservice-config-map
+kubectl delete namespace microservice-namespace
 ```
 
 ## HTTP(S) client, REST and GraphQL calls
@@ -267,7 +289,7 @@ X Exiting due to GUEST_IMAGE_LOAD: Failed to load image: save to dir: caching im
 3. H2 console
 4. Actuators
 5. Swagger UI
-6. mvn clean && mvn test && mvn verify && mvn install -pe2e && mvn org.pitest:pitest-maven:mutationCoverage && mvn site:site
+6. mvn clean && mvn test && mvn verify && mvn install -Pe2e && mvn org.pitest:pitest-maven:mutationCoverage && mvn site:site
 
 1. http://localhost:8080/
 2. http://localhost:8080/home

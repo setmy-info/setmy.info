@@ -1,0 +1,66 @@
+<style>
+</style>
+
+<main class="main">
+  <div class="content">
+    <div class="left-side">
+      <h1>Header</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt laoreet mattis. Nullam at orci auctor,
+        blandit metus non, porttitor justo. Proin vitae nisl purus. Mauris in bibendum urna. Donec lacinia nisi vitae
+        magna maximus ullamcorper. Morbi scelerisque libero vitae fermentum consequat. Vivamus vestibulum vitae diam
+        eget interdum. Phasellus pellentesque enim ut quam blandit, a fermentum ex faucibus.</p>
+      <p>Nunc scelerisque pellentesque nulla eget accumsan. Etiam sem tellus, interdum eget tincidunt ut, ultrices eu
+        massa. Mauris mollis nisi sed posuere molestie. Aliquam laoreet et est non ullamcorper. Nunc varius justo eu
+        massa commodo, nec molestie enim lacinia. Nunc volutpat lorem id ipsum sodales, vel feugiat urna iaculis.
+        Curabitur mauris est, aliquet ac dolor eu, sodales varius leo. Nulla facilisi. Nunc nec ullamcorper augue. Cras
+        id arcu tempus, hendrerit ante at, elementum purus.</p>
+      <p>Quisque erat lorem, lacinia et viverra at, cursus nec ligula. Aliquam ut purus sed magna dictum finibus.
+        Curabitur lacinia nisi ac libero ornare gravida. Vivamus tincidunt neque ut laoreet bibendum. Cras auctor leo
+        lacus, id posuere felis vulputate bibendum. Sed pulvinar, ipsum quis accumsan vestibulum, libero felis gravida
+        dolor, et sodales ex felis eget arcu. Fusce interdum ante lectus, in vulputate augue lobortis a. Ut volutpat est
+        vel odio finibus lacinia. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p>Ut id nibh feugiat, venenatis neque venenatis, malesuada eros. Nullam ultricies dolor ac condimentum
+        vestibulum. Nulla elementum molestie justo, a pellentesque orci sollicitudin ac. Curabitur ultricies orci at
+        turpis vestibulum, vitae convallis risus consequat. Pellentesque suscipit et quam sed laoreet. Donec finibus
+        egestas consequat. Mauris dictum semper vehicula. Quisque fermentum leo nunc, ut rutrum ante pharetra et.
+        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+      <p>Nullam a lacinia quam. Nunc tempus tincidunt arcu. Vivamus lacinia arcu id magna lobortis laoreet. Integer non
+        venenatis lacus. Duis et accumsan metus. Curabitur elementum orci sed erat venenatis auctor. Nullam interdum
+        bibendum velit, sed malesuada ex congue a. Praesent id libero vel elit ornare viverra. </p>
+    </div>
+    <div class="divider" role="separator" aria-label="Divider"></div>
+    <div class="right-side">
+      <div class="pill-group">
+        @for (item of [
+          {title: 'Explore the Docs', link: 'https://angular.dev'},
+          {title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials'},
+          {title: 'CLI Docs', link: 'https://angular.dev/tools/cli'},
+          {title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service'},
+          {title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools'},
+        ]; track item.title) {
+          <a
+            class="pill"
+            [href]="item.link"
+            target="_blank"
+            rel="noopener"
+          >
+            <span>{{ item.title }}</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="14"
+              viewBox="0 -960 960 960"
+              width="14"
+              fill="currentColor"
+            >
+              <path
+                d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"
+              />
+            </svg>
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+</main>
+
+<router-outlet/>
