@@ -11,14 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class ExampleRepositoryIT extends SpringBase {
+class ExampleRepositoryIT extends SpringBase {
 
     @Autowired
     private ExampleRepository exampleRepository;
 
     @Test
     @Transactional
-    public void testFindById() throws Exception {
+    void testFindById() throws Exception {
         ExampleModel exampleModel = exampleRepository.findById(1L).orElse(null);
         assertThat(exampleModel).isNotNull();
         assertThat(exampleModel.getGeom()).isEqualTo(new WKTReader().read("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))"));

@@ -8,12 +8,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ExampleWorldEntityTest {
+class ExampleWorldEntityTest {
 
     ExampleWorldEntityService exampleWorldEntityService = new ExampleWorldEntityService();
 
     @Test
-    public void myExampleWorldEntityInitialState() {
+    void myExampleWorldEntityInitialState() {
         ExampleWorldEntity exampleWorldEntity = ExampleWorldEntity.builder().build();
         assertThat(exampleWorldEntity.getFoo()).isNull();
         assertThat(exampleWorldEntity.getBar()).isNull();
@@ -24,7 +24,7 @@ public class ExampleWorldEntityTest {
     }
 
     @Test
-    public void test() {
+    void test() {
         ExampleWorldEntity result = exampleWorldEntityService.allDoingMethod();
         assertThat(result).isNotNull();
         assertThat(result.getFoo()).isEqualTo("Foo!");
@@ -35,7 +35,7 @@ public class ExampleWorldEntityTest {
     }
 
     @Test
-    public void foo_isPureFunction() {
+    void foo_isPureFunction() {
         List<ExampleCountry> countries = new ArrayList<>();
         ExampleCountry country = ExampleCountry.builder().name("Utopia").build();
         countries.add(country);

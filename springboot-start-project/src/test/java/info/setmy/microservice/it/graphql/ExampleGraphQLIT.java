@@ -4,17 +4,14 @@ import info.setmy.microservice.it.RestBase;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isEmptyOrNullString;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 @Slf4j
-public class ExampleGraphQLIT extends RestBase {
+class ExampleGraphQLIT extends RestBase {
 
     //https://devqa.io/rest-assured-api-requests-examples/
     @Test
-    public void testFindAll() {
+    void testFindAll() {
         log.info("testFindAll");
         getRestRequest()
             .and()

@@ -4,13 +4,10 @@ import info.setmy.microservice.it.RestBase;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isEmptyOrNullString;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 @Slf4j
-public class AnotherExampleRestIT extends RestBase {
+class AnotherExampleRestIT extends RestBase {
 
     private final static String RESOURCE_URL = "/anotherExample";
 
