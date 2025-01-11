@@ -7,12 +7,14 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @ToString
+@Accessors(chain = true)
 public class ExampleDTO {
 
     @NotBlank(message = "Example string is mandatory")

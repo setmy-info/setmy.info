@@ -27,7 +27,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @Getter
 @Setter
 @Entity
-@Builder
+@Builder(toBuilder = true)
 @Accessors(chain = true)
 @Table(name = "EXAMPLE")
 @NoArgsConstructor
