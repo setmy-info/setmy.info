@@ -7,10 +7,10 @@ import static info.setmy.microservice.Switches.UNIT_TEST_FAILS;
 import static org.assertj.core.api.Assertions.fail;
 
 @Slf4j
-public class ExampleTest {
+class ExampleTest {
 
     @Test
-    public void test() {
+    void test() {
         log.info("Logging UNIT_TEST_FAILS {}", UNIT_TEST_FAILS);
         if (UNIT_TEST_FAILS) {
             fail("Unit test fail");

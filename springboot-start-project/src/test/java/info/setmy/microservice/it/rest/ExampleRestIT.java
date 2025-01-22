@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.Matchers.*;
 
 @Slf4j
-public class ExampleRestIT extends RestBase {
+class ExampleRestIT extends RestBase {
 
     private final static String RESOURCE_URL = "/example";
 

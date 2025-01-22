@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Slf4j
-public class ExamplePropertiesIT extends SpringBase {
+class ExamplePropertiesIT extends SpringBase {
 
     @Autowired
     private ExampleProperties exampleProperties;

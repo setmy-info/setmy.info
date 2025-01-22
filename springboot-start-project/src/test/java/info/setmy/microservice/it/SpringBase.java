@@ -1,9 +1,10 @@
 package info.setmy.microservice.it;
 
-import info.setmy.microservice.Application;
+import jakarta.transaction.Transactional;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = Application.class)
+@Transactional
+@SpringBootTest//(classes = Application.class)
 //@ActiveProfiles({"default"/*, "it"*/})
-public class SpringBase {
+public abstract class SpringBase {
 }

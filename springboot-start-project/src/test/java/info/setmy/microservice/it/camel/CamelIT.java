@@ -5,12 +5,12 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.junit.jupiter.api.Test;
 
-public class CamelIT {
+class CamelIT {
 
     CamelContext context = new DefaultCamelContext();
 
     @Test
-    public void test() throws Exception {
+    void test() throws Exception {
 
         context.addRoutes(new RouteBuilder() {
             @Override

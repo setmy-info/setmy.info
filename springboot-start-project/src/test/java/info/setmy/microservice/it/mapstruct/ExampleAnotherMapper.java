@@ -1,9 +1,7 @@
 package info.setmy.microservice.it.mapstruct;
 
-import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 

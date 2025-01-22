@@ -7,5 +7,5 @@ import org.springframework.test.context.ActiveProfiles;
 //@ActiveProfiles({"default"/*, "test"*/})
 @ActiveProfiles({"default"/*, "it"*/})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class WebSpringBase {
+public abstract class WebSpringBase {
 }

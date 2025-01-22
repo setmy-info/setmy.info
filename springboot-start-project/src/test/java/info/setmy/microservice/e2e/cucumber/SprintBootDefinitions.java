@@ -1,10 +1,6 @@
 package info.setmy.microservice.e2e.cucumber;
 
-import io.cucumber.java.After;
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.Before;
-import io.cucumber.java.BeforeStep;
-import io.cucumber.java.Scenario;
+import io.cucumber.java.*;
 import io.cucumber.java.en.Given;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ConfigurableApplicationContext;

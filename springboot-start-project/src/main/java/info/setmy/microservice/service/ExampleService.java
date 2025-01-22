@@ -6,6 +6,7 @@ import info.setmy.microservice.dal.JDBCExampleDao;
 import info.setmy.microservice.dal.JPAExampleDao;
 import info.setmy.microservice.domain.ExampleModel;
 import info.setmy.microservice.exception.ExampleRollbackException;
+import info.setmy.microservice.validation.EntityValidator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -35,6 +36,7 @@ public class ExampleService {
 
     private final HibernateExampleDao hibernateExampleDao;
 
+    private final EntityValidator entityValidator;
     //private final EmbeddedCacheManager cacheManager;
     //private final RemoteCacheManager cacheManager;
 
@@ -125,5 +127,10 @@ public class ExampleService {
         if (doRollback) {
             throw new ExampleRollbackException("Should not save");
         }
+    }
+
+    public ExampleModel save(ExampleModel model) {
+        entityValidator.validate(model);
+        return exampleRepository.save(model);
     }
 }
