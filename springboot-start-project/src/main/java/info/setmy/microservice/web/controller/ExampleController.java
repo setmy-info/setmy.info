@@ -5,6 +5,7 @@ import info.setmy.microservice.mapper.ExampleMapper;
 import info.setmy.microservice.service.ExampleService;
 import info.setmy.microservice.web.dto.ExampleDTO;
 import info.setmy.microservice.web.exception.ServiceUnavailableException;
+import info.setmy.microservice.web.validation.ExampleDTOValidator;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -13,7 +14,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,6 +54,13 @@ public class ExampleController {
 
     private final ExampleMapper exampleMapper;
 
+    private final ExampleDTOValidator validator;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setValidator(validator);
+    }
+
     @GetMapping(consumes = ALL_VALUE)
     public ExampleDTO example() {
         log.info("Example GET called");
@@ -59,7 +69,7 @@ public class ExampleController {
 
     @Operation(summary = "Summary line about method", description = "Description about method functionality")
     @PostMapping
-    public ExampleDTO example(@Valid @RequestBody final ExampleDTO exampleDTO) {
+    public ExampleDTO example(@Valid @RequestBody final ExampleDTO exampleDTO) {// Can use, but not necessary right now: @Validated/
         log.info("Example POST called with {}", exampleDTO);
         return exampleMapper.toDto(
             exampleMapper.toEntity(exampleDTO)
