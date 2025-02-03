@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 import static info.setmy.arch.unit.PackageGroups.JAVA_PACKAGES;
+import static info.setmy.arch.unit.PackageGroups.mergePackages;
 
 class ArchUnitTest {
 
@@ -32,22 +33,16 @@ class ArchUnitTest {
 
     @Test
     void packageB_should_only_depend_on_packageA_and_java() {
-        String[] allowedPackages = PackageGroups.mergePackages(
-            new String[]{
-                "info.setmy.arch.unit.example.a..",
-                "info.setmy.arch.unit.example.c.."
-            },
-            JAVA_PACKAGES
-        );
-
         rule = classes()
             .that().resideInAPackage("info.setmy.arch.unit.example.b..")
             .should().onlyDependOnClassesThat()
-            .resideInAnyPackage(
-                "info.setmy.arch.unit.example.a..",
-                "info.setmy.arch.unit.example.c..",
-                "java..",
-                "javax.."
+            .resideInAnyPackage(mergePackages(
+                    new String[]{
+                        "info.setmy.arch.unit.example.a..",
+                        "info.setmy.arch.unit.example.c.."
+                    },
+                    JAVA_PACKAGES
+                )
             );
 
         rule.check(importedClasses);
