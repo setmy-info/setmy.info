@@ -1,9 +1,5 @@
 package info.setmy.arch.unit;
 
-import com.tngtech.archunit.core.domain.JavaClasses;
-import com.tngtech.archunit.core.importer.ClassFileImporter;
-import com.tngtech.archunit.lang.ArchRule;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,16 +7,9 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 import static info.setmy.arch.unit.PackageGroups.JAVA_PACKAGES;
 import static info.setmy.arch.unit.PackageGroups.mergePackages;
+import static info.setmy.arch.unit.PackageGroups.toArray;
 
-class ArchUnitTest {
-
-    JavaClasses importedClasses;
-    ArchRule rule;
-
-    @BeforeEach
-    void setUp() {
-        importedClasses = new ClassFileImporter().importPackages("info.setmy.arch.unit.example");
-    }
+class ArchUnitTest extends ArchUnitBase {
 
     @Test
     @DisplayName("Package A should only depend on Java")
@@ -31,23 +20,66 @@ class ArchUnitTest {
             .resideOutsideOfPackages(JAVA_PACKAGES);
 
         rule.check(importedClasses);
+
+        // Same as "Elegant objects" way:
+        PackageGroup mergedPackages = new MergedPackages(
+            new JavaPackages()
+        );
+        String[] packages = mergedPackages.packages().toArray(new String[0]);
+        rule = noClasses()
+            .that().resideInAPackage("info.setmy.arch.unit.example.a..")
+            .should().dependOnClassesThat()
+            .resideOutsideOfPackages(packages);
+
+        rule.check(importedClasses);
+
+        /*
+        // Same as shortened dependency check
+        var packageName = "info.setmy.arch.unit.example.a";
+        var packageDependencies = new PackageDependencies(
+            packageName,
+            mergePackages(
+                toArray(packageName),
+                JAVA_PACKAGES
+            )
+        );
+        prepareDefaultRule(packageDependencies);
+
+        rule.check(importedClasses);
+        */
     }
 
     @Test
     @DisplayName("Package B should only depend on Package A and C and Java")
     void packageB() {
         rule = classes()
-            .that().resideInAPackage("info.setmy.arch.unit.example.b..")
+            .that().resideInAPackage(appendSuffix("info.setmy.arch.unit.example.b"))
             .should().onlyDependOnClassesThat()
             .resideInAnyPackage(
                 mergePackages(
                     new String[]{
-                        "info.setmy.arch.unit.example.a..",
-                        "info.setmy.arch.unit.example.c.."
+                        appendSuffix("info.setmy.arch.unit.example.a"),
+                        appendSuffix("info.setmy.arch.unit.example.c")
                     },
                     JAVA_PACKAGES
                 )
             );
+
+        rule.check(importedClasses);
+
+        // Same as "Elegant objects" way:
+        PackageGroup mergedPackages = new MergedPackages(
+            new GenericPackageGroup(
+                appendSuffix("info.setmy.arch.unit.example.a"),
+                appendSuffix("info.setmy.arch.unit.example.c")
+            ),
+            new JavaPackages()
+        );
+        String[] packages = mergedPackages.packages().toArray(new String[0]);
+        rule = classes()
+            .that().resideInAPackage(appendSuffix("info.setmy.arch.unit.example.b"))
+            .should().onlyDependOnClassesThat()
+            .resideInAnyPackage(packages);
 
         rule.check(importedClasses);
     }
@@ -60,11 +92,26 @@ class ArchUnitTest {
             .should().onlyDependOnClassesThat()
             .resideInAnyPackage(
                 mergePackages(
-                    new String[]{
-                        "info.setmy.arch.unit.example.a.."
-                    },
+                    toArray(
+                        appendSuffix("info.setmy.arch.unit.example.a")
+                    ),
                     JAVA_PACKAGES
                 )
+            );
+
+        rule.check(importedClasses);
+
+        // Same as "Elegant objects" way:
+        rule = classes()
+            .that().resideInAPackage(appendSuffix("info.setmy.arch.unit.example.b"))
+            .should().onlyDependOnClassesThat()
+            .resideInAnyPackage(
+                new MergedPackages(
+                    new SinglePackageGroup(
+                        appendSuffix("info.setmy.arch.unit.example.a")
+                    ),
+                    new JavaPackages()
+                ).packages().toArray(new String[0])
             );
 
         rule.check(importedClasses);
