@@ -6,6 +6,7 @@ import com.tngtech.archunit.lang.ArchRule;
 import org.junit.jupiter.api.BeforeEach;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
+import static info.setmy.arch.unit.PackageGroups.MICROSERVICE_PACKAGES;
 
 public abstract class ArchUnitBase {
 
@@ -18,12 +19,9 @@ public abstract class ArchUnitBase {
     @BeforeEach
     void setUp() {
         currentClassName = getClassPackageNameForAnalysis();
-        importedClasses = new ClassFileImporter().importPackages("info.setmy.arch.unit.example");
-        /*
         importedClasses = new ClassFileImporter()
-            .withImportOption(DO_NOT_INCLUDE_TESTS)
+            //.withImportOption(DO_NOT_INCLUDE_TESTS)
             .importPackages(MICROSERVICE_PACKAGES);
-         */
     }
 
     protected String getClassPackageNameForAnalysis() {

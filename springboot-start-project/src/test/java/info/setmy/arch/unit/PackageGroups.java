@@ -9,7 +9,7 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PRIVATE)
 public final class PackageGroups {
 
-    public static final String[] MICROSERVICE_PACKAGES = {"info.setmy.."};
+    public static final String[] MICROSERVICE_PACKAGES = {"info.setmy"};
 
     public static final String[] JAVA_PACKAGES = {"java..", "javax.."};
     public static final String[] LOMBOK_PACKAGES = {"lombok.."};
