@@ -36,7 +36,7 @@ public abstract class ArchUnitBase {
 
     protected ArchRule toDefaultRule(final PackageDependencies packageDependencies) {
         ArchRule archRule = noClasses()
-            .that().resideInAPackage(packageDependencies.packageName() + "..")
+            .that().resideInAPackage(appendSuffix(packageDependencies.packageName()))
             .should().dependOnClassesThat()
             .resideOutsideOfPackages(appendSuffix(packageDependencies.allowedOnlyDependencies()));
         return archRule;

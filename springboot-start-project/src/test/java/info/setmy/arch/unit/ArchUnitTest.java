@@ -15,9 +15,9 @@ class ArchUnitTest extends ArchUnitBase {
     @DisplayName("Package A should only depend on Java")
     void packageA() {
         rule = noClasses()
-            .that().resideInAPackage("info.setmy.arch.unit.example.a..")
+            .that().resideInAPackage(appendSuffix("info.setmy.arch.unit.example.a"))
             .should().dependOnClassesThat()
-            .resideOutsideOfPackages(JAVA_PACKAGES);
+            .resideOutsideOfPackages(appendSuffix(JAVA_PACKAGES));
 
         rule.check(importedClasses);
 
@@ -27,13 +27,12 @@ class ArchUnitTest extends ArchUnitBase {
         );
         String[] packages = mergedPackages.packages().toArray(new String[0]);
         rule = noClasses()
-            .that().resideInAPackage("info.setmy.arch.unit.example.a..")
+            .that().resideInAPackage(appendSuffix("info.setmy.arch.unit.example.a"))
             .should().dependOnClassesThat()
             .resideOutsideOfPackages(packages);
 
         rule.check(importedClasses);
 
-        /*
         // Same as shortened dependency check
         var packageName = "info.setmy.arch.unit.example.a";
         var packageDependencies = new PackageDependencies(
@@ -46,7 +45,6 @@ class ArchUnitTest extends ArchUnitBase {
         prepareDefaultRule(packageDependencies);
 
         rule.check(importedClasses);
-        */
     }
 
     @Test
@@ -61,7 +59,7 @@ class ArchUnitTest extends ArchUnitBase {
                         appendSuffix("info.setmy.arch.unit.example.a"),
                         appendSuffix("info.setmy.arch.unit.example.c")
                     },
-                    JAVA_PACKAGES
+                    appendSuffix(JAVA_PACKAGES)
                 )
             );
 
@@ -88,14 +86,14 @@ class ArchUnitTest extends ArchUnitBase {
     @DisplayName("Package C should only depend on Package A and Java")
     void packageC_should_only_depend_on_packageA_and_java() {
         rule = classes()
-            .that().resideInAPackage("info.setmy.arch.unit.example.c..")
+            .that().resideInAPackage(appendSuffix("info.setmy.arch.unit.example.c"))
             .should().onlyDependOnClassesThat()
             .resideInAnyPackage(
                 mergePackages(
                     toArray(
                         appendSuffix("info.setmy.arch.unit.example.a")
                     ),
-                    JAVA_PACKAGES
+                    appendSuffix(JAVA_PACKAGES)
                 )
             );
 
