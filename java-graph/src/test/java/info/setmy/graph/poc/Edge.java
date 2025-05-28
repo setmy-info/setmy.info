@@ -10,7 +10,7 @@ import org.jgrapht.graph.DefaultEdge;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PocEdge extends DefaultEdge {
+public class Edge extends DefaultEdge {
 
     private WeightValue weightValue;
 

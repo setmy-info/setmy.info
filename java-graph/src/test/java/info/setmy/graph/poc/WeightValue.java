@@ -1,15 +1,20 @@
 package info.setmy.graph.poc;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
-public class WeightValue {
+public class WeightValue extends NamedBase {
 
     private double weight;
+
+    public WeightValue(String name) {
+        super(name);
+    }
+
+    public WeightValue(String name, double weight) {
+        super(name);
+        this.weight = weight;
+    }
 }
