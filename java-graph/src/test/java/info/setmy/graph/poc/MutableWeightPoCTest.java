@@ -22,18 +22,18 @@ class MutableWeightPoCTest {
         graph.addVertex(nodeB);
         graph.addVertex(nodeC);
 
-        WeightCalculatorImpl calculatorAB = new WeightCalculatorImpl(0.9);
-        WeightCalculatorImpl calculatorBC = new WeightCalculatorImpl(0.8);
-        WeightCalculatorImpl calculatorAC = new WeightCalculatorImpl(0.5);
+        WeightValue weightValueAB = new WeightValue(0.9);
+        WeightValue weightValueBC = new WeightValue(0.8);
+        WeightValue weightValueAC = new WeightValue(0.5);
 
         PocEdge servAB = graph.addEdge(nodeA, nodeB);
-        servAB.setWeightCalculator(calculatorAB);
+        servAB.setWeightValue(weightValueAB);
 
         PocEdge servBC = graph.addEdge(nodeB, nodeC);
-        servBC.setWeightCalculator(calculatorBC);
+        servBC.setWeightValue(weightValueBC);
 
         PocEdge servAC = graph.addEdge(nodeA, nodeC);
-        servAC.setWeightCalculator(calculatorAC);
+        servAC.setWeightValue(weightValueAC);
 
         System.out.println("Graph start state: \n" + graph.edgeSet().toString().replace(", ", ",\n "));
 
@@ -43,7 +43,9 @@ class MutableWeightPoCTest {
         System.out.println("---------------------------------------------");
 
         System.out.println("🚀☇ EXTERNAL SATE CHANGE: Direct path A->C probability decreases significantly!");
-        calculatorAC.setProbability(0.05);
+        weightValueAB.setWeight(0.05);
+        weightValueBC.setWeight(0.1);
+        weightValueAC.setWeight(0.2);
 
         System.out.println("\nGraph new state: \n" + graph.edgeSet().toString().replace(", ", ",\n "));
         System.out.println("\nShortest path A->C after change: " + dijkstra.getPath(nodeA, nodeC));

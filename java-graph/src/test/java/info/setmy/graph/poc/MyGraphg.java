@@ -10,6 +10,6 @@ public class MyGraphg extends DefaultDirectedGraph<String, PocEdge> {
 
     @Override
     public double getEdgeWeight(PocEdge serv) {
-        return serv.getWeightCalculator().calcWight();
+        return serv.getWeightValue().getWeight();
     }
 }

@@ -12,10 +12,10 @@ import org.jgrapht.graph.DefaultEdge;
 @AllArgsConstructor
 public class PocEdge extends DefaultEdge {
 
-    private WeightCalculator weightCalculator;
+    private WeightValue weightValue;
 
     @Override
     public String toString() {
-        return getSource().toString() + " -> " + getTarget().toString() + " : " + weightCalculator.toString();
+        return getSource().toString() + " -> " + getTarget().toString() + " : " + weightValue.getWeight();
     }
 }
