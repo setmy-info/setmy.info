@@ -35,7 +35,7 @@
         <encoding.level>UTF-8</encoding.level>
         <!--maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target-->
-        <java.version>21</java.version>
+        <java.version>24</java.version>
         <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
         <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
         <dependency.locations.enabled>false</dependency.locations.enabled>
