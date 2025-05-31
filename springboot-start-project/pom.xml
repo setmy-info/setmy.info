@@ -9,7 +9,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.4</version>
+        <version>3.5.0</version>
         <relativePath/>
     </parent>
 
@@ -43,11 +43,12 @@
         <!-- spring.boot.main.class>info.setmy.microservice.CLApplication</spring.boot.main.class -->
 
         <junit.version>4.13.2</junit.version>
-        <junit5.version>5.11.0</junit5.version>
+        <junit5.version>5.11.3</junit5.version>
         <junit.platform.version>1.11.0</junit.platform.version>
-        <mockito.version>5.13.0</mockito.version>
+        <mockito.version>5.18.0</mockito.version>
         <assertj.version>3.26.3</assertj.version>
-        <jacoco.version>0.8.12</jacoco.version>
+        <archunit.version>1.4.1</archunit.version>
+        <jacoco.version>0.8.13</jacoco.version>
         <failsafe.version>3.5.0</failsafe.version>
         <surefire.version>3.5.0</surefire.version>
         <!--log4j.verion>1.2.17</log4j.verion -->
@@ -55,7 +56,7 @@
         <logback.verion>1.5.7</logback.verion>
         <slf4j.version>2.0.16</slf4j.version>
         <lucene.version>9.11.1</lucene.version>
-        <groovy.version>4.0.23</groovy.version>
+        <groovy.version>4.0.27</groovy.version>
         <cucumber.version>7.18.1</cucumber.version>
         <pitest.version>1.16.1</pitest.version>
         <jersey.version>3.1.8</jersey.version>
@@ -65,7 +66,7 @@
         <maven.version>3.9.9</maven.version>
         <maven.clean.plugin.version>3.4.0</maven.clean.plugin.version>
         <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
-        <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
+        <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
         <maven.site.plugin.version>3.20.0</maven.site.plugin.version>
         <maven.release.plugin.version>3.1.1</maven.release.plugin.version>
         <maven.source.plugin.version>3.3.1</maven.source.plugin.version>
@@ -77,10 +78,10 @@
         <maven.assembly.plugin>3.7.1</maven.assembly.plugin>
         <maven.plugin.annotations.version>3.13.1</maven.plugin.annotations.version>
         <maven.versions.maven.plugin>2.17.1</maven.versions.maven.plugin>
-        <gmavenplus.plugin.version>4.0.1</gmavenplus.plugin.version>
+        <gmavenplus.plugin.version>4.2.0</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.2.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.7.0</nexus.staging.plugin.version>
-        <spring.boot.verion>3.3.4</spring.boot.verion>
+        <spring.boot.verion>3.5.0</spring.boot.verion>
         <taglist.maven.plugin.version>3.1.0</taglist.maven.plugin.version>
         <servlet.api.version>4.0.1</servlet.api.version>
         <jaxb.api.version>2.3.1</jaxb.api.version>
@@ -101,7 +102,7 @@
         <liquibase.version>4.29.1</liquibase.version>
         <infinispan.version>15.0.8.Final</infinispan.version>
         <quartz.verion>2.3.2</quartz.verion>
-        <lombok.version>1.18.34</lombok.version>
+        <lombok.version>1.18.38</lombok.version>
         <mapstruct.version>1.6.0</mapstruct.version>
         <swagger.version>3.1.0</swagger.version>
         <swagger.annotations.version>1.6.3</swagger.annotations.version>
@@ -307,7 +308,7 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.verion}</version>
         </dependency>
-	    <dependency>
+            <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
             <version>${slf4j.version}</version>
@@ -420,7 +421,7 @@
             <scope>test</scope>
         </dependency>
         <!-- Vintage JUnit needs these two deps: junint 4 and vintage engine -->
-        <dependency>
+        <!-- dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
@@ -431,7 +432,7 @@
             <artifactId>junit-vintage-engine</artifactId>
             <version>${junit5.version}</version>
             <scope>test</scope>
-        </dependency>
+        </dependency -->
 
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -533,13 +534,18 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
+        <!-- dependency>
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit</artifactId>
-            <version>1.3.0</version>
+            <version>${archunit.version}</version>
+            <scope>test</scope>
+        </dependency -->
+        <dependency>
+            <groupId>com.tngtech.archunit</groupId>
+            <artifactId>archunit-junit5</artifactId>
+            <version>1.4.1</version>
             <scope>test</scope>
         </dependency>
-
 
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -867,8 +873,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <!--source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target-->
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                     <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <!--outputEncoding>${project.build.sourceEncoding}</outputEncoding -->
