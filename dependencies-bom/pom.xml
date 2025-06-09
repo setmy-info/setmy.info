@@ -109,7 +109,7 @@
         <tensorflow.ndarray.version>1.0.0</tensorflow.ndarray.version>
         <tensorflow.framework.version>0.5.0</tensorflow.framework.version>
         <jsoup.version>1.18.1</jsoup.version>
-        <selenium.version>4.23.1</selenium.version>
+        <selenium.version>4.33.0</selenium.version>
         <feign.version>13.3</feign.version>
         <jasperreports.version>7.0.0</jasperreports.version>
         <itextpdf.version>5.5.13.4</itextpdf.version>
