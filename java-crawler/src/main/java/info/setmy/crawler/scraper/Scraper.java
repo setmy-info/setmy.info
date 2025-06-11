@@ -3,7 +3,6 @@ package info.setmy.crawler.scraper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -11,9 +10,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.io.File;
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static java.time.Duration.ofSeconds;
-import static javax.swing.UIManager.put;
 
 public class Scraper {
 
@@ -81,13 +80,12 @@ public class Scraper {
         desiredCapabilities.setBrowserName("firefox");
         */
         desiredCapabilities.setCapability("se:headers", new HashMap<String, String>() {{
-            put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0");
+            put("User-Agent", randomUserAgent(USER_AGENTS));
         }});
         return desiredCapabilities;
     }
 
-
-    public static File findFirefoxProfileByName(String profileNamePart) {
+    public File findFirefoxProfileByName(String profileNamePart) {
         String os = System.getProperty("os.name").toLowerCase();
         String baseDir;
         if (os.contains("win")) {
@@ -105,5 +103,23 @@ public class Scraper {
             }
         }
         throw new RuntimeException("Profile not found: " + profileNamePart);
+    }
+
+    String[] USER_AGENTS = {
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0",
+        "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Edge/18.18363",
+        "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0",
+        "Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36",
+        "Mozilla/5.0 (X11; Debian; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chromium/81.0.4044.138 Chrome/81.0.4044.138 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko",
+        "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0"
+    };
+
+    public String randomUserAgent(String[] userAgents) {
+        int randomIndex = ThreadLocalRandom.current().nextInt(userAgents.length);
+        return userAgents[randomIndex];
     }
 }

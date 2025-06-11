@@ -30,7 +30,7 @@ public final class FirefoxProfileFile {
         if (os.contains("win")) {
             baseDir = System.getenv("APPDATA") + "\\Mozilla\\Firefox\\Profiles";
         } else {
-            baseDir = System.getProperty("user.home") + "/.mozilla/firefox/profiles";
+            baseDir = System.getProperty("user.home") + "/.mozilla/firefox";
         }
         return baseDir;
     }

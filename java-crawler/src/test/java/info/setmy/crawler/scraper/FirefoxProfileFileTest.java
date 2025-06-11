@@ -13,9 +13,9 @@ class FirefoxProfileFileTest {
     @Test
     void test() {
         final String profileName = "selenium-test";
-        firefoxProfileFile = new FirefoxProfileFile("selenium-test");
+        firefoxProfileFile = new FirefoxProfileFile(profileName);
         final File profileFile = firefoxProfileFile.getProfileFile();
         assertThat(profileFile).isNotNull();
-        assertThat(profileFile.getName()).endsWith("selenium-test");
+        assertThat(profileFile.getName()).endsWith(profileName);
     }
 }
