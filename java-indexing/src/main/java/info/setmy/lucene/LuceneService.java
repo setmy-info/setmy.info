@@ -22,12 +22,13 @@ import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.MMapDirectory;
 import org.apache.lucene.util.Version;
-import static org.apache.lucene.util.Version.LUCENE_9_0_0;
+import static org.apache.lucene.util.Version.LUCENE_10_2_2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +40,7 @@ public class LuceneService {
 
     static final Logger LOG = LoggerFactory.getLogger(LuceneService.class);
 
-    private final Version version = LUCENE_9_0_0;
+    private final Version version = LUCENE_10_2_2;
 
     private final String locationDirectory;
 
@@ -106,13 +107,15 @@ public class LuceneService {
             final Query query = new QueryParser(fieldName, analyzer).parse(queryString);
             reader = getReader();
             final IndexSearcher indexSearcher = new IndexSearcher(reader);
-            final TopScoreDocCollector collector = TopScoreDocCollector.create(paging.getResultsOnPage(), 1000000);
+            /*final TopScoreDocCollector collector = TopScoreDocCollector.create(paging.getResultsOnPage(), 1000000);
             indexSearcher.search(query, collector);
-            final ScoreDoc[] hits = collector.topDocs().scoreDocs;
+            final ScoreDoc[] hits = collector.topDocs().scoreDocs;*/            
+            TopDocs topDocs = indexSearcher.search(query, paging.getResultsOnPage());
+            ScoreDoc[] hits = topDocs.scoreDocs;
             paging.setResults(hits.length);
             for (ScoreDoc hit : hits) {
                 int docId = hit.doc;
-                Document document = indexSearcher.doc(docId);
+                Document document = indexSearcher.storedFields().document(docId);//Document document = indexSearcher.doc(docId);
                 info.setmy.lucene.Document resultDocument = toDocument(document, clazz);
                 result.add((T) resultDocument);
             }

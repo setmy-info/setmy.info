@@ -13,6 +13,7 @@ import java.util.List;
 class CheckIT {
 
     @Test
+    @Disabled
     void test() throws MalformedURLException {
         FirefoxOptions options = new FirefoxOptions();
         options.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");

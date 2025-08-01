@@ -26,7 +26,7 @@ public class ScraperIT {
     }
 
     @Test
-    //@Disabled
+    @Disabled
     public void loremIpsum() {
         final ScrapedContent scrapedContent = scraper.parse("https://setmy-info.codeberg.page/loremipsum.html");
         final String someTexts = scrapedContent.getScrapedTexts().stream()

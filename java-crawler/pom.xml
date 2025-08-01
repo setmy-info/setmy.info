@@ -73,6 +73,18 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
@@ -180,7 +192,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>${maven.source.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -193,7 +205,7 @@
             <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${maven.javadoc.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -249,7 +261,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>${maven.gpg.plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -270,7 +282,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${maven.project.info.reports.plugin.version}</version>
             </plugin>
             <!--
             Problem with 3.0.5 plugin, that is crashing in middle of site building.
@@ -285,31 +297,30 @@
                     <includeFilterFile>${basedir}/src/test/resources/findbugs-include.xml</includeFilterFile>
                 </configuration>
             </plugin-->
-            <!--plugin>
+            <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.0.0</version>
-                <configuration>
+                <version>${spot.bugs.version}</version>
+                <!--configuration>
                     <excludeFilterFile>${basedir}/src/test/resources/spotbugs-exclude.xml</excludeFilterFile>
                     <includeFilterFile>${basedir}/src/test/resources/spotbugs-include.xml</includeFilterFile>
-                </configuration>
-            </plugin-->
+                </configuration-->
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
                 <configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
-                    <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
-                    <!-- configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation -->
-                    <!-- configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation -->
+                    <!--configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation-->
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
-                <version>2.12.1</version>
+                <version>${maven.changes.plugin.version}</version>
             </plugin>
             <!-- can go broken -->
             <!--plugin>
@@ -325,7 +336,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>taglist-maven-plugin</artifactId>
-                <version>2.4</version>
+                <version>${taglist.maven.plugin.version}</version>
                 <configuration>
                     <tagListOptions>
                         <tagClasses>
@@ -384,7 +395,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${maven.javadoc.plugin.version}</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -401,6 +412,12 @@
                     </reportSet>
                 </reportSets>
                 <configuration>
+                    <!-- additionalparam>-Xdoclint:all -Xdoclint:-missing</additionalparam -->
+                    <additionalOptions>-Xdoclint:all -Xdoclint:-missing</additionalOptions>
+                    <additionalJOptions>
+                        <additionalJOption>-Xdoclint:all</additionalJOption>
+                        <additionalJOption>-Xdoclint:-missing</additionalJOption>
+                    </additionalJOptions>
                     <additionalOptions>-html5</additionalOptions>
                 </configuration>
             </plugin>
