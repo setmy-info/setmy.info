@@ -78,14 +78,6 @@
         </dependency>
         <dependency>
             <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-contracts</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-contracts</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-sql</artifactId>
         </dependency>
         <dependency>
@@ -160,7 +152,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.15.1</version>
+                <!--version>3.15.1</version-->
                 <configuration>
                     <goalPrefix>smi</goalPrefix>
                 </configuration>
