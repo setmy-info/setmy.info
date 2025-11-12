@@ -1,5 +1,7 @@
 package info.setmy.stealer.services;
 
+import static info.setmy.stealer.cli.models.StealerCallableIT.CLONE_DIR;
+import static info.setmy.stealer.cli.models.StealerCallableIT.COPY_DIR;
 import info.setmy.stealer.models.StealerConfig;
 import info.setmy.stealer.models.StepConfig;
 import org.apache.commons.io.FileUtils;
@@ -15,9 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static info.setmy.vcs.models.RepoType.GIT;
+import static java.lang.System.setProperty;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.io.FileUtils.deleteDirectory;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.AfterEach;
 
 public class StealerServiceIT {
 
@@ -37,6 +41,12 @@ public class StealerServiceIT {
     @BeforeEach
     public void setUp() throws IOException {
         stealerService = new StealerService();
+        deleteDirectory(new File(CLONE_DIR));
+        deleteDirectory(new File(COPY_DIR));
+    }
+
+    @AfterEach
+    void tearDown() throws IOException {
         deleteDirectory(new File(CLONE_DIR));
         deleteDirectory(new File(COPY_DIR));
     }
@@ -102,4 +112,3 @@ public class StealerServiceIT {
         }
     }
 }
-

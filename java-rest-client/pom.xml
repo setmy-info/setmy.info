@@ -261,32 +261,30 @@
                 </executions>
             </plugin-->
             <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
+                <groupId>org.eclipse.jetty.ee11</groupId>
+                <artifactId>jetty-ee11-maven-plugin</artifactId>
                 <version>${maven.jetty.plugin.version}</version>
                 <configuration>
                     <supportedPackagings>jar</supportedPackagings>
-                    <webAppSourceDirectory>src/test/webapp</webAppSourceDirectory>
-                    <!--scanIntervalSeconds>0</scanIntervalSeconds -->
                     <webApp>
                         <contextPath>/</contextPath>
+                        <descriptor>${project.basedir}/src/test/webapp/WEB-INF/web.xml</descriptor>
+                        <resourceBases>
+                            <resourceBase>${project.basedir}/src/test/webapp</resourceBase>
+                        </resourceBases>
                     </webApp>
-                    <!-- useTestClasspath>true</useTestClasspath -->
-                    <contextXml>${project.basedir}/src/test/webapp/WEB-INF/jetty-context.xml</contextXml>
-                    <jvmArgs>-Dorg.eclipse.jetty.webapp.LEVEL=DEBUG</jvmArgs>
+                    <jvmArgs>-Dorg.eclipse.jetty.LEVEL=DEBUG</jvmArgs>
                     <jettyProperties>
-                        <jettyProperty>jetty.server.dumpAfterStart=true</jettyProperty>
+                        <jettyProperty>jetty.server.dumpAfterStart:true</jettyProperty>
+                        <jettyProperty>org.eclipse.jetty.LEVEL:DEBUG</jettyProperty>
                     </jettyProperties>
+                    <contextXml>${project.basedir}/src/test/webapp/WEB-INF/jetty-context.xml</contextXml>
                     <stopPort>8005</stopPort>
                     <stopKey>STOP</stopKey>
                     <httpConnector>
                         <port>8777</port>
                     </httpConnector>
-                    <!--modules>
-                        <module>apache-jsp</module>
-                        <module>apache-jstl</module>
-                        <module>jmx</module>
-                    </modules-->
+                    <scan>0</scan>
                 </configuration>
                 <executions>
                     <execution>
@@ -295,11 +293,6 @@
                         <goals>
                             <goal>start</goal>
                         </goals>
-                        <configuration>
-                            <!--daemon>true</daemon-->
-                            <stopPort>8005</stopPort>
-                            <stopKey>STOP</stopKey>
-                        </configuration>
                     </execution>
                     <execution>
                         <id>stop-jetty</id>

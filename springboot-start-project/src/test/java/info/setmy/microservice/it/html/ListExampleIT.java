@@ -5,8 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.*;
+import org.junit.jupiter.api.Disabled;
 
 @Slf4j
+@Disabled // https://github.com/rest-assured/rest-assured/issues/1846#event-3793091868
 class ListExampleIT extends RestBase {
 
     private final static String RESOURCE_URL = "/listExample";
