@@ -23,6 +23,7 @@ public class ExecutorIT {
     private final String NORMAL_TIMEOUT_PROGRAM = "./src/test/" + FOLDER + "/timeout" + SUFFIX;
     private final String ERROR_PROGRAM = "./src/test/" + FOLDER + "/error" + SUFFIX;
     private final String WITHOUT_EXEC_BIT_PROGRAM = "./src/test/" + FOLDER + "/withoutexec" + SUFFIX;
+    private final String JAVA_VERSION = System.getProperty("java.version");
 
     @BeforeEach
     public void before() {
@@ -55,7 +56,13 @@ public class ExecutorIT {
         });
         assertThat(thownException).isExactlyInstanceOf(ExecutionError.class);
         assertThat(thownException.getMessage()).isEqualTo("Coldn't execute command");
-        assertThat(thownException.getCause().getMessage()).isEqualTo("Cannot run program \"nonExisting\" (in directory \".\"): error=2, No such file or directory");
+        String expected;
+        if (JAVA_VERSION.startsWith("21")) {
+            expected = "Cannot run program \"nonExisting\" (in directory \".\"): error=2, No such file or directory";
+        } else {
+            expected = "Cannot run program \"nonExisting\" (in directory \".\"): Exec failed, error: 2 (No such file or directory)";
+        }
+        assertThat(thownException.getCause().getMessage()).isEqualTo(expected);
     }
 
     @Test
@@ -67,6 +74,13 @@ public class ExecutorIT {
         assertThat(thownException).isExactlyInstanceOf(ExecutionError.class);
         assertThat(thownException.getMessage()).isEqualTo("Coldn't execute command");
         assertThat(thownException.getCause().getMessage()).isEqualTo("Cannot run program \"./src/test/sh/withoutexec.sh\" (in directory \".\"): error=13, Permission denied");
+        String expected;
+        if (JAVA_VERSION.startsWith("21")) {
+            expected = "Cannot run program \"./src/test/sh/withoutexec.sh\" (in directory \".\"): error=13, Permission denied";
+        } else {
+            expected = "Cannot run program \"./src/test/sh/withoutexec.sh\" (in directory \".\"): Exec failed, error: 13 (Permission denied)";
+        }
+        assertThat(thownException.getCause().getMessage()).isEqualTo(expected);
     }
 
     @Test
