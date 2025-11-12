@@ -60,7 +60,7 @@ public class ExecutorIT {
         if (JAVA_VERSION.startsWith("21")) {
             expected = "Cannot run program \"nonExisting\" (in directory \".\"): error=2, No such file or directory";
         } else {
-            expected = "Cannot run program \"nonExisting\" (in directory \".\"): Exec failed, error: 2 (No such file or directory)";
+            expected = "Cannot run program \"nonExisting\" (in directory \".\"): Exec failed, error: 2 (No such file or directory) ";
         }
         assertThat(thownException.getCause().getMessage()).isEqualTo(expected);
     }
@@ -78,7 +78,7 @@ public class ExecutorIT {
         if (JAVA_VERSION.startsWith("21")) {
             expected = "Cannot run program \"./src/test/sh/withoutexec.sh\" (in directory \".\"): error=13, Permission denied";
         } else {
-            expected = "Cannot run program \"./src/test/sh/withoutexec.sh\" (in directory \".\"): Exec failed, error: 13 (Permission denied)";
+            expected = "Cannot run program \"./src/test/sh/withoutexec.sh\" (in directory \".\"): Exec failed, error: 13 (Permission denied) ";
         }
         assertThat(thownException.getCause().getMessage()).isEqualTo(expected);
     }
