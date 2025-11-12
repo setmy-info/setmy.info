@@ -50,7 +50,7 @@
         <maven.version>3.9.11</maven.version>
         <maven.clean.plugin.version>3.5.0</maven.clean.plugin.version>
         <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
-        <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
+        <maven.compiler.plugin.version>3.14.1</maven.compiler.plugin.version>
         <maven.site.plugin.version>3.20.0</maven.site.plugin.version>
         <maven.release.plugin.version>3.1.1</maven.release.plugin.version>
         <maven.source.plugin.version>3.3.1</maven.source.plugin.version>
@@ -147,7 +147,7 @@
         <module>java-modular-ssn</module>
         <module>java-rest-client</module>
         <module>java-crawler</module>
-        <!--module>maven-plugin-start-project</module-->
+        <module>maven-plugin-start-project</module>
         <module>java-lexer-parser</module>
         <module>java-protocol</module>
         <module>java-graph</module>
