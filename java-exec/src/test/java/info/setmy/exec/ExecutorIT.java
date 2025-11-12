@@ -73,7 +73,6 @@ public class ExecutorIT {
         });
         assertThat(thownException).isExactlyInstanceOf(ExecutionError.class);
         assertThat(thownException.getMessage()).isEqualTo("Coldn't execute command");
-        assertThat(thownException.getCause().getMessage()).isEqualTo("Cannot run program \"./src/test/sh/withoutexec.sh\" (in directory \".\"): error=13, Permission denied");
         String expected;
         if (JAVA_VERSION.startsWith("21")) {
             expected = "Cannot run program \"./src/test/sh/withoutexec.sh\" (in directory \".\"): error=13, Permission denied";
