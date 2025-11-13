@@ -5,14 +5,14 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
 class FirefoxProfileFileTest {
 
     FirefoxProfileFile firefoxProfileFile;
 
     @Test
-    @Disabled
+    @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = "true")
     void test() {
         final String profileName = "selenium-test";
         firefoxProfileFile = new FirefoxProfileFile(profileName);
