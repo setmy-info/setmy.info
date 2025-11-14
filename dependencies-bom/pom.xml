@@ -471,6 +471,29 @@
             </dependency>
             <dependency>
                 <groupId>org.tensorflow</groupId>
+                <artifactId>tensorflow-core-api</artifactId>
+                <version>${tensorflow.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tensorflow</groupId>
+                <artifactId>tensorflow-core-native</artifactId>
+                <version>${tensorflow.core.version}</version>
+                <classifier>linux-x86_64</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.tensorflow</groupId>
+                <artifactId>tensorflow-core-native</artifactId>
+                <version>${tensorflow.core.version}</version>
+                <classifier>macosx-arm64</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.tensorflow</groupId>
+                <artifactId>tensorflow-core-native</artifactId>
+                <version>${tensorflow.core.version}</version>
+                <classifier>windows-x86_64</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.tensorflow</groupId>
                 <artifactId>tensorflow-core-platform</artifactId>
                 <version>${tensorflow.core.version}</version>
             </dependency>

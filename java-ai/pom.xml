@@ -24,7 +24,6 @@
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>java-services</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.tensorflow</groupId>
