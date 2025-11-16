@@ -1,5 +1,6 @@
 package info.setmy.crawler.scraper;
 
+import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 
 import static info.setmy.crawler.scraper.UserAgentService.userAgentService;
 
+@Log4j2
 class CheckIT {
 
     @Test
@@ -72,5 +74,11 @@ class CheckIT {
         RemoteWebDriver driver = new RemoteWebDriver(URI.create("http://localhost:4444").toURL(), desiredCapabilities);
 
         driver.close();
+    }
+
+    @Test
+    void loggingTest() {
+        log.debug("Debug!");
+        log.info("Info!");
     }
 }
