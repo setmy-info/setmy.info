@@ -5,6 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.Logs;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
@@ -12,6 +16,7 @@ import java.time.Duration;
 import java.util.HashMap;
 
 import static info.setmy.crawler.scraper.UserAgentService.userAgentService;
+import static java.lang.IO.println;
 import static java.time.Duration.ofSeconds;
 
 public class Scraper {
@@ -61,28 +66,22 @@ public class Scraper {
     }
 
     private Capabilities newDesiredCapabilities() {
-        //new FirefoxProfileFile("selenium-test").getProfileFile();
-        final File profileDir = new FirefoxProfileFile("selenium-test").getProfileFile();//findFirefoxProfileByName("selenium-test");
+        final File profileDir = new FirefoxProfileFile("selenium-test").getProfileFile();
         final FirefoxProfile profile = new FirefoxProfile(profileDir);
         /*
         final Proxy proxy = new Proxy()
             .setHttpProxy("localhost:8888")
             .setSslProxy("localhost:8888");
         */
+        var agent = userAgentService.randomUserAgent();
+        profile.setPreference("general.useragent.override", agent);
+
         final FirefoxOptions desiredCapabilities = new FirefoxOptions();
         desiredCapabilities.setProfile(profile);
+
         //desiredCapabilities.setProxy(proxy);
         //desiredCapabilities.setAcceptInsecureCerts(true);
 
-        //desiredCapabilities.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
-        //RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444"), options);
-        /*
-        final DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setBrowserName("firefox");
-        */
-        desiredCapabilities.setCapability("se:headers", new HashMap<String, String>() {{
-            put("User-Agent", userAgentService.randomUserAgent());
-        }});
         return desiredCapabilities;
     }
 }

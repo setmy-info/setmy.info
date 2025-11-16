@@ -11,6 +11,12 @@ class FirefoxProfileFileTest {
 
     FirefoxProfileFile firefoxProfileFile;
 
+    /**
+     * firefox --createprofile "selenium-test"
+     * export PATH=/opt/firefox:${PATH}
+     * set PATH="C:\Program Files\Mozilla Firefox";%PATH%
+     * firefox -P
+     * */
     @Test
     @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = "true")
     void test() {

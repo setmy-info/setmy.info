@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,6 +21,14 @@ public class ScraperIT {
         scraperConfig.addScript("setmy-info.codeberg.page", getFileName("smiControls.js"));
         scraperConfig.addScript("setmy-info.codeberg.page", getFileName("ScraperIT.js"));
         scraperConfig.addScript("setmy-info.codeberg.page", getFileName("smiTextSearchService.js"));
+
+        scraperConfig.addScript("maven.apache.org", getFileName("smiControls.js"));
+        scraperConfig.addScript("maven.apache.org", getFileName("ScraperIT.js"));
+        scraperConfig.addScript("maven.apache.org", getFileName("smiTextSearchService.js"));
+
+        scraperConfig.addScript("localhost", getFileName("smiControls.js"));
+        scraperConfig.addScript("localhost", getFileName("ScraperIT.js"));
+        scraperConfig.addScript("localhost", getFileName("smiTextSearchService.js"));
         scraper = new Scraper(scraperConfig);
     }
 
@@ -53,6 +60,36 @@ public class ScraperIT {
         assertThat(scrapedContent.getScrapedTexts().get(14).getText()).isEqualTo(".");
         assertThat(someTexts).containsSubsequence("\"Ei ole ka kedagi, kes armastab ja otsib ja tahab valu iseennast, lihtsalt");
         assertThat(scrapedContent.getUrl()).isEqualTo("https://setmy-info.codeberg.page/loremipsum.html");
+    }
+
+    @Test
+    @Disabled
+    public void maven() {
+        final ScrapedContent scrapedContent = scraper.parse("https://maven.apache.org/download.cgi");
+        final String someTexts = scrapedContent.getScrapedTexts().stream()
+            .map(ScrapedText::toString)
+            .filter(s -> !s.isBlank())
+            .collect(Collectors.joining("\n"));
+    }
+
+    @Test
+    @Disabled
+    public void local() {
+        final ScrapedContent scrapedContent = scraper.parse("http://localhost:7171/");
+        final String someTexts = scrapedContent.getScrapedTexts().stream()
+            .map(ScrapedText::toString)
+            .filter(s -> !s.isBlank())
+            .collect(Collectors.joining("\n"));
+    }
+
+    @Test
+    @Disabled
+    public void local_pdf() {
+        final ScrapedContent scrapedContent = scraper.parse("http://localhost:7171/pdf");
+        final String someTexts = scrapedContent.getScrapedTexts().stream()
+            .map(ScrapedText::toString)
+            .filter(s -> !s.isBlank())
+            .collect(Collectors.joining("\n"));
     }
 
     private String getFileName(final String name) {

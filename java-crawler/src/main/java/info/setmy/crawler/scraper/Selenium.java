@@ -3,6 +3,10 @@ package info.setmy.crawler.scraper;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.bidi.BiDi;
+import org.openqa.selenium.bidi.HasBiDi;
+import org.openqa.selenium.bidi.module.Network;
+import org.openqa.selenium.bidi.network.Header;
 
 import java.io.File;
 import java.io.IOException;
