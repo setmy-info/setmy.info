@@ -1,6 +1,7 @@
 package info.setmy.crawler.scraper;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +44,7 @@ public class ScraperConfig {
     public List<String> findScripts(final String urlString) {
         final List<String> result = new ArrayList<>();
         try {
-            final URL url = new URL(urlString);
+            final URL url = URI.create(urlString).toURL();
             final String host = url.getHost();
             for (Map.Entry<String, List<String>> entry : scripts.entrySet()) {
                 final String hostEnding = entry.getKey();
