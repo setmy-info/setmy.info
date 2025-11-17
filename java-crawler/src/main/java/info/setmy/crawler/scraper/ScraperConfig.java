@@ -1,5 +1,7 @@
 package info.setmy.crawler.scraper;
 
+import lombok.Getter;
+
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -15,17 +17,27 @@ import static java.util.Collections.unmodifiableList;
 import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
 
+@Getter
 public class ScraperConfig {
 
     private final Optional<String> hostName;
 
     private final Optional<Integer> port;
 
+    private final boolean headless;
+
     private final Map<String, List<String>> scripts = new HashMap<>();
 
     public ScraperConfig(final String hostName, final int port) {
         this.hostName = of(hostName);
         this.port = of(port);
+        this.headless = true;
+    }
+
+    public ScraperConfig(final String hostName, final int port, boolean headless) {
+        this.hostName = of(hostName);
+        this.port = of(port);
+        this.headless = headless;
     }
 
     public URL getUrl() {

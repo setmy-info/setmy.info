@@ -2,6 +2,7 @@ package info.setmy.crawler.scraper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -25,27 +26,30 @@ import static java.time.Duration.ofSeconds;
  * ❌ 6. Sec-CH-UA spoofing IMPORTANT.
  * ❌ 7. Accept header spoofing.
  * ❌ 8. Intelligent pauses + scroll + mouse movements
- * */
+ *
+ */
+@Getter
 public class Scraper {
 
     private final ScraperConfig scraperConfig;
+
+    public static Scraper newScraper(final ScraperConfig scraperConfig) {
+        return new Scraper(scraperConfig);
+    }
 
     public Scraper(final ScraperConfig scraperConfig) {
         this.scraperConfig = scraperConfig;
     }
 
     public ScrapedContent parse(final String urlString) {
-        final ScrapedContent scrapedContent = new ScrapedContent(urlString);
+        final Selenium selenium = newInitializedSelenium();
 
-        final Selenium selenium = newSelenium();
-        Dimension dimension = randomWindowSize();
+        Dimension dimension = selenium.getWebDriver().manage().window().getSize();
+        final ScrapedContent scrapedContent = new ScrapedContent(urlString);
         scrapedContent.getMetaData().setHeight(dimension.height);
         scrapedContent.getMetaData().setWidth(dimension.width);
-        selenium.getWebDriver().manage().window().setSize(dimension);
-        selenium.get(scrapedContent.getUrl());
 
-        final Duration duration = ofSeconds(10);
-        selenium.getWebDriver().manage().timeouts().implicitlyWait(duration);
+        selenium.get(scrapedContent.getUrl());
 
         selenium.executeScripts(scraperConfig.findScripts(scrapedContent.getUrl()));
 
@@ -67,13 +71,34 @@ public class Scraper {
         }
     }
 
-    private Selenium newSelenium() {
+    public Selenium newInitializedSelenium() {
+        final Selenium selenium = timeouts(
+            randomSize(
+                newSelenium()
+            )
+        );
+        return selenium;
+    }
+
+    public Selenium newSelenium() {
         return new Selenium(
             new RemoteWebDriver(
                 scraperConfig.getUrl(),
                 newDesiredCapabilities()
             )
         );
+    }
+
+    public Selenium randomSize(Selenium selenium) {
+        Dimension dimension = randomWindowSize();
+        selenium.getWebDriver().manage().window().setSize(dimension);
+        return selenium;
+    }
+
+    public Selenium timeouts(Selenium selenium) {
+        final Duration duration = ofSeconds(10);
+        selenium.getWebDriver().manage().timeouts().implicitlyWait(duration);
+        return selenium;
     }
 
     private Capabilities newDesiredCapabilities() {
@@ -88,6 +113,9 @@ public class Scraper {
         profile.setPreference("general.useragent.override", agent);
 
         final FirefoxOptions desiredCapabilities = new FirefoxOptions();
+        if (scraperConfig.isHeadless()) {
+            desiredCapabilities.addArguments("-headless");
+        }
         desiredCapabilities.setProfile(profile);
 
         //desiredCapabilities.setProxy(proxy);

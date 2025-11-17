@@ -4,8 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.util.stream.Collectors;
 
+import static info.setmy.crawler.scraper.Tools.newTools;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.data.Offset.offset;
 
@@ -13,11 +15,12 @@ import static org.assertj.core.data.Offset.offset;
 public class ScraperIT {
 
     Scraper scraper;
+    Tools tools;
     ScraperConfig scraperConfig;
 
     @BeforeEach
     public void before() {
-        scraperConfig = new ScraperConfig("localhost", 4444);
+        scraperConfig = new ScraperConfig("localhost", 4444, false);
         scraperConfig.addScript("setmy-info.codeberg.page", getFileName("smiControls.js"));
         scraperConfig.addScript("setmy-info.codeberg.page", getFileName("ScraperIT.js"));
         scraperConfig.addScript("setmy-info.codeberg.page", getFileName("smiTextSearchService.js"));
@@ -29,7 +32,8 @@ public class ScraperIT {
         scraperConfig.addScript("localhost", getFileName("smiControls.js"));
         scraperConfig.addScript("localhost", getFileName("ScraperIT.js"));
         scraperConfig.addScript("localhost", getFileName("smiTextSearchService.js"));
-        scraper = new Scraper(scraperConfig);
+        tools = newTools(scraperConfig);
+        scraper = tools.scraper();
     }
 
     @Test
@@ -90,6 +94,12 @@ public class ScraperIT {
             .map(ScrapedText::toString)
             .filter(s -> !s.isBlank())
             .collect(Collectors.joining("\n"));
+    }
+
+    @Test
+    @Disabled
+    public void tools_url_to_file() {
+        tools.parse("http://localhost:7171/pdf", new File("./target/local.pdf.json"));
     }
 
     private String getFileName(final String name) {

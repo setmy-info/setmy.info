@@ -45,7 +45,8 @@ const smiTextSearchService = {
                 marginRight: smiRemovePxAndParseInt(parentNodeComputedStyle.getPropertyValue("margin-right")),
                 marginBottom: smiRemovePxAndParseInt(parentNodeComputedStyle.getPropertyValue("margin-bottom")),
 
-                location: that.getLocation(parentNode)
+                location: that.getLocation(parentNode),
+                isVisible: that.isVisible(parentNode)
             };
             result.push(textElementProperties);
         });
@@ -86,7 +87,18 @@ const smiTextSearchService = {
             path.push({index: childIndex, tag: childTag});
             element = element.parentNode;
         }
-        return path.reverse().map(item => `${item.index}:${item.tag}`).join(';');
+        return path.reverse().map(item => `${item.tag}[${item.index}]`).join('.');
+    },
+
+    isVisible: function (element) {
+        if (!element) return false;
+        const style = window.getComputedStyle(element);
+        if (style.display === "none") return false;
+        if (style.visibility === "hidden") return false;
+        if (parseFloat(style.opacity) === 0) return false;
+        const rect = element.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) return false;
+        return true;
     }
 };
 
