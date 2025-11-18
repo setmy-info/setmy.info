@@ -100,7 +100,7 @@
         <java.jwt.version>4.5.0</java.jwt.version><!--java.jwt.version>4.0.0</java.jwt.version-->
         <rest.assured.version>5.5.6</rest.assured.version>
         <liquibase.version>4.33.0</liquibase.version>
-        <infinispan.version>15.2.5.Final</infinispan.version>
+        <infinispan.version>16.0.1</infinispan.version>
         <quartz.verion>2.3.2</quartz.verion>
         <lombok.version>1.18.38</lombok.version>
         <mapstruct.version>1.6.0</mapstruct.version>
@@ -557,8 +557,12 @@
         </dependency>
         <dependency>
             <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-hibernate-cache-v62</artifactId>
+            <artifactId>infinispan-hibernate-cache-commons</artifactId>
         </dependency>
+        <!--dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-hibernate-cache-v62</artifactId>
+        </dependency-->
         <dependency>
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-spring-boot3-starter-embedded</artifactId>
@@ -1104,6 +1108,11 @@
                 <version>${infinispan.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-hibernate-cache-commons</artifactId>
+                <version>${infinispan.version}</version>
             </dependency>
             <!-- dependency>
                 <groupId>org.springframework.boot</groupId>

@@ -4,7 +4,7 @@ import org.infinispan.configuration.cache.CacheMode;
 import org.infinispan.configuration.cache.ConfigurationBuilder;
 import org.infinispan.configuration.global.GlobalConfiguration;
 import org.infinispan.configuration.global.GlobalConfigurationBuilder;
-import org.infinispan.jboss.marshalling.core.JBossUserMarshaller;
+import org.infinispan.marshall.protostream.impl.GlobalMarshaller;
 import org.infinispan.spring.starter.embedded.InfinispanCacheConfigurer;
 import org.infinispan.spring.starter.embedded.InfinispanGlobalConfigurationCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -41,7 +41,7 @@ public class EmbeddedInfinispanBeans {
             .enabled(true)
             .domain("microserviceDomainName")
             .serialization()
-            .marshaller(new JBossUserMarshaller())
+            .marshaller(new GlobalMarshaller())
             .build();
     }
 
