@@ -30,7 +30,7 @@ public class EmbeddedInfinispanBeans {
         };
     }
 
-    @Bean
+    /*@Bean
     public GlobalConfiguration globalConfiguration() {
         return GlobalConfigurationBuilder
             .defaultClusteredBuilder()
@@ -43,7 +43,7 @@ public class EmbeddedInfinispanBeans {
             .serialization()
             .marshaller(new GlobalMarshaller())
             .build();
-    }
+    }*/
 
     // Tests execution: Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'defaultCacheManager' defined in class path resource [org/infinispan/spring/starter/embedded/InfinispanEmbeddedAutoConfiguration.class]: Failed to instantiate [org.infinispan.manager.DefaultCacheManager]: Factory method 'defaultCacheManager' threw exception with message: ISPN000034: The 'org.infinispan' JMX domain is already in use.
     @Bean
