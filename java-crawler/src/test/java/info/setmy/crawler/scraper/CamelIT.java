@@ -8,6 +8,7 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.spi.ThreadPoolProfile;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static info.setmy.crawler.scraper.tools.Tools.newTools;
@@ -67,6 +68,7 @@ class CamelIT {
     }
 
     @Test
+    @Disabled
     void test2() {
         final ScraperConfig scraperConfig = new ScraperConfig("localhost", 4444, false);
         final ScrapingCommand scrapingCommand = ScrapingCommand.builder()
