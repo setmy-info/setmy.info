@@ -1,5 +1,6 @@
 package info.setmy.crawler.scraper;
 
+import info.setmy.crawler.scraper.tools.Tools;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.stream.Collectors;
 
-import static info.setmy.crawler.scraper.Tools.newTools;
+import static info.setmy.crawler.scraper.tools.Tools.newTools;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.data.Offset.offset;
 

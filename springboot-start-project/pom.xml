@@ -125,6 +125,7 @@
         <itextpdf.version>5.5.13.4</itextpdf.version>
         <tika.version>3.2.1</tika.version>
         <kotlin.version>2.0.20</kotlin.version>
+        <camel.version>4.6.0</camel.version>
     </properties>
 
     <dependencies>
@@ -656,7 +657,7 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
-            <version>4.6.0</version>
+            <version>${camel.version}</version>
         </dependency>
 
         <dependency>
