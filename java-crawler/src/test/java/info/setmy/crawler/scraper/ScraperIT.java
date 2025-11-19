@@ -1,40 +1,51 @@
 package info.setmy.crawler.scraper;
 
-import info.setmy.crawler.scraper.tools.Tools;
+import info.setmy.crawler.browser.models.Browser;
+import info.setmy.crawler.selenium.Selenium;
+import info.setmy.crawler.selenium.SeleniumConfig;
+import info.setmy.crawler.selenium.SeleniumExtended;
+import info.setmy.crawler.selenium.SeleniumExtendedConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.util.stream.Collectors;
 
-import static info.setmy.crawler.scraper.tools.Tools.newTools;
+import static java.util.Arrays.asList;
+import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.data.Offset.offset;
 
 
 public class ScraperIT {
 
-    Scraper scraper;
-    Tools tools;
+    Browser browser;
+    SeleniumConfig seleniumConfig;
+    Selenium selenium;
+    SeleniumExtendedConfig seleniumExtendedConfig;
+    SeleniumExtended seleniumExtended;
     ScraperConfig scraperConfig;
+    Scraper scraper;
+    //String path = "src/test/resources/ScraperIT/";
+    String path = "";
 
     @BeforeEach
     public void before() {
-        scraperConfig = new ScraperConfig("localhost", 4444, false);
-        scraperConfig.addScript("setmy-info.codeberg.page", getFileName("smiControls.js"));
-        scraperConfig.addScript("setmy-info.codeberg.page", getFileName("ScraperIT.js"));
-        scraperConfig.addScript("setmy-info.codeberg.page", getFileName("smiTextSearchService.js"));
-
-        scraperConfig.addScript("maven.apache.org", getFileName("smiControls.js"));
-        scraperConfig.addScript("maven.apache.org", getFileName("ScraperIT.js"));
-        scraperConfig.addScript("maven.apache.org", getFileName("smiTextSearchService.js"));
-
-        scraperConfig.addScript("localhost", getFileName("smiControls.js"));
-        scraperConfig.addScript("localhost", getFileName("ScraperIT.js"));
-        scraperConfig.addScript("localhost", getFileName("smiTextSearchService.js"));
-        tools = newTools(scraperConfig);
-        scraper = tools.scraper();
+        browser = Browser.newBrowser();
+        seleniumConfig = SeleniumConfig.builder()
+            .hostName(of("localhost"))
+            .port(of(4444))
+            .headless(false)
+            .browser(of(browser))
+            .build();
+        selenium = new Selenium(seleniumConfig);
+        seleniumExtendedConfig = SeleniumExtendedConfig.builder()
+            .scriptNames(asList(path + "smiControls.js", path + "ScraperIT.js", path + "smiTextSearchService.js"))
+            .build();
+        seleniumExtended = new SeleniumExtended(selenium, seleniumExtendedConfig);
+        scraperConfig = new ScraperConfig();
+        scraper = new Scraper(scraperConfig, seleniumExtended);
+        scraper.init();
     }
 
     @Test
@@ -50,7 +61,7 @@ public class ScraperIT {
         assertThat(scrapedContent.getScrapedTexts().get(12).getText()).isEqualTo("This page was made manually");
         assertThat(scrapedContent.getScrapedTexts().get(12).getPaddingTop()).isCloseTo(48, offset(5));
         assertThat(scrapedContent.getScrapedTexts().get(12).getMarginTop()).isCloseTo(64, offset(5));
-        assertThat(scrapedContent.getScrapedTexts().get(12).getLocation()).isEqualTo("0:html;1:body;1:main;9:footer;0:span");
+        assertThat(scrapedContent.getScrapedTexts().get(12).getLocation()).isEqualTo("html[0].body[1].main[1].footer[9].span[0]");
         assertThat(scrapedContent.getScrapedTexts().get(12).getLocationArray()).hasSize(5);
         assertThat(scrapedContent.getScrapedTexts().get(12).getLocationArray()[0].getIndex()).isEqualTo(0L);
         assertThat(scrapedContent.getScrapedTexts().get(12).getLocationArray()[0].getName()).isEqualTo("html");
@@ -97,11 +108,13 @@ public class ScraperIT {
             .collect(Collectors.joining("\n"));
     }
 
+    /*
     @Test
     @Disabled
     public void tools_url_to_file() {
         tools.parse("http://localhost:7171/pdf", new File("./target/local.pdf.json"));
     }
+    */
 
     private String getFileName(final String name) {
         return "./src/test/resources/" + getClass().getSimpleName() + "/" + name;

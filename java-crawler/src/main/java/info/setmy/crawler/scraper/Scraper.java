@@ -2,18 +2,17 @@ package info.setmy.crawler.scraper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import info.setmy.crawler.browser.models.Browser;
+import info.setmy.crawler.selenium.Selenium;
+import info.setmy.crawler.selenium.SeleniumExtended;
 import lombok.Getter;
-import org.openqa.selenium.Capabilities;
+import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.io.File;
 import java.time.Duration;
-import java.util.Random;
 
-import static info.setmy.crawler.scraper.UserAgentService.userAgentService;
+import static info.setmy.crawler.browser.models.Browser.newBrowser;
 import static java.time.Duration.ofSeconds;
 
 /**
@@ -29,36 +28,32 @@ import static java.time.Duration.ofSeconds;
  *
  */
 @Getter
-public class Scraper {
+@RequiredArgsConstructor
+public final class Scraper {
 
     private final ScraperConfig scraperConfig;
+    private final SeleniumExtended seleniumExtended;
 
-    public static Scraper newScraper(final ScraperConfig scraperConfig) {
-        return new Scraper(scraperConfig);
-    }
-
-    public Scraper(final ScraperConfig scraperConfig) {
-        this.scraperConfig = scraperConfig;
+    public void init() {
+        seleniumExtended.init();
     }
 
     public ScrapedContent parse(final String urlString) {
-        final Selenium selenium = newInitializedSelenium();
-
-        Dimension dimension = selenium.getWebDriver().manage().window().getSize();
         final ScrapedContent scrapedContent = new ScrapedContent(urlString);
+        final Dimension dimension = seleniumExtended.getSelenium().getWebDriver().manage().window().getSize();
         scrapedContent.getMetaData().setHeight(dimension.height);
         scrapedContent.getMetaData().setWidth(dimension.width);
 
-        selenium.get(scrapedContent.getUrl());
+        seleniumExtended.getSelenium().get(scrapedContent.getUrl());
 
-        selenium.executeScripts(scraperConfig.findScripts(scrapedContent.getUrl()));
+        seleniumExtended.executeScripts();
 
-        selenium.findElementByIdValue("smiTextArea")
+        seleniumExtended.getSelenium().getElementValueById("smiTextArea")
             .ifPresent(smiTextAreaText -> scrapedContent.setScrapedTexts(
                 parseScrapedTexts(smiTextAreaText)
             ));
 
-        selenium.quit();
+        seleniumExtended.getSelenium().quit();
         return scrapedContent;
     }
 
@@ -69,65 +64,5 @@ public class Scraper {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public Selenium newInitializedSelenium() {
-        final Selenium selenium = timeouts(
-            randomSize(
-                newSelenium()
-            )
-        );
-        return selenium;
-    }
-
-    public Selenium newSelenium() {
-        return new Selenium(
-            new RemoteWebDriver(
-                scraperConfig.getUrl(),
-                newDesiredCapabilities()
-            )
-        );
-    }
-
-    public Selenium randomSize(Selenium selenium) {
-        Dimension dimension = randomWindowSize();
-        selenium.getWebDriver().manage().window().setSize(dimension);
-        return selenium;
-    }
-
-    public Selenium timeouts(Selenium selenium) {
-        final Duration duration = ofSeconds(10);
-        selenium.getWebDriver().manage().timeouts().implicitlyWait(duration);
-        return selenium;
-    }
-
-    private Capabilities newDesiredCapabilities() {
-        final File profileDir = new FirefoxProfileFile("selenium-test").getProfileFile();
-        final FirefoxProfile profile = new FirefoxProfile(profileDir);
-        /*
-        final Proxy proxy = new Proxy()
-            .setHttpProxy("localhost:8888")
-            .setSslProxy("localhost:8888");
-        */
-        var agent = userAgentService.randomUserAgent();
-        profile.setPreference("general.useragent.override", agent);
-
-        final FirefoxOptions desiredCapabilities = new FirefoxOptions();
-        if (scraperConfig.isHeadless()) {
-            desiredCapabilities.addArguments("-headless");
-        }
-        desiredCapabilities.setProfile(profile);
-
-        //desiredCapabilities.setProxy(proxy);
-        //desiredCapabilities.setAcceptInsecureCerts(true);
-
-        return desiredCapabilities;
-    }
-
-    public Dimension randomWindowSize() {
-        Random r = new Random();
-        int width = 1000 + r.nextInt(600);  // 1000–1600
-        int height = 700 + r.nextInt(400);   // 700–1100
-        return new Dimension(width, height);
     }
 }

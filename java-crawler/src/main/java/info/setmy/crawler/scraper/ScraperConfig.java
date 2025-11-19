@@ -2,24 +2,10 @@ package info.setmy.crawler.scraper;
 
 import lombok.Getter;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import static info.setmy.crawler.scraper.Constants.DEFAULT_HUB_HOST_NAME;
-import static info.setmy.crawler.scraper.Constants.DEFAULT_HUB_PORT;
-import static java.util.Collections.unmodifiableList;
-import static java.util.Optional.of;
-import static java.util.Optional.ofNullable;
-
 @Getter
-public class ScraperConfig {
+public final class ScraperConfig {
 
+    /*
     private final Optional<String> hostName;
 
     private final Optional<Integer> port;
@@ -27,6 +13,7 @@ public class ScraperConfig {
     private final boolean headless;
 
     private final Map<String, List<String>> scripts = new HashMap<>();
+
 
     public ScraperConfig(final String hostName, final int port) {
         this.hostName = of(hostName);
@@ -40,18 +27,6 @@ public class ScraperConfig {
         this.headless = headless;
     }
 
-    public URL getUrl() {
-        try {
-            final String urlString = getUrlString();
-            return new URL(urlString);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public String getUrlString() {
-        return "http://" + hostName.orElse(DEFAULT_HUB_HOST_NAME) + ":" + port.orElse(DEFAULT_HUB_PORT) + "/wd/hub";
-    }
 
     public List<String> findScripts(final String urlString) {
         final List<String> result = new ArrayList<>();
@@ -88,4 +63,6 @@ public class ScraperConfig {
     public Optional<List<String>> get(final String hostEnding) {
         return ofNullable(scripts.get(hostEnding));
     }
+
+     */
 }

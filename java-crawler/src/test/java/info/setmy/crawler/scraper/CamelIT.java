@@ -1,17 +1,12 @@
 package info.setmy.crawler.scraper;
 
-import info.setmy.crawler.scraper.tools.ScrapingCommand;
-import info.setmy.crawler.scraper.tools.Tools;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.spi.ThreadPoolProfile;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import static info.setmy.crawler.scraper.tools.Tools.newTools;
 
 class CamelIT {
 
@@ -65,21 +60,6 @@ class CamelIT {
         //context.createProducerTemplate().sendBody("direct:start", "Begin");
         Thread.sleep(2000);
         context.stop();
-    }
-
-    @Test
-    @Disabled
-    void test2() {
-        final ScraperConfig scraperConfig = new ScraperConfig("localhost", 4444, false);
-        final ScrapingCommand scrapingCommand = ScrapingCommand.builder()
-            .source("")
-            .destination("")
-            .maxPoolSize(5)
-            .poolSize(5)
-            .scraperConfig(scraperConfig)
-            .build();
-        Tools tools = newTools(scrapingCommand);
-        tools.execute();
     }
 
     public static class ExampleService {

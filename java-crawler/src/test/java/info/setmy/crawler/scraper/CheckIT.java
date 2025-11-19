@@ -13,7 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.util.HashMap;
 
-import static info.setmy.crawler.scraper.UserAgentService.userAgentService;
+import static info.setmy.crawler.browser.models.Browser.newBrowser;
 
 @Log4j2
 class CheckIT {
@@ -38,7 +38,7 @@ class CheckIT {
         options.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
         RemoteWebDriver driver = new RemoteWebDriver(URI.create("http://localhost:4444").toURL(), options);
         options.setCapability("se:headers", new HashMap<String, String>() {{
-            put("User-Agent", userAgentService.randomUserAgent());
+            put("User-Agent", newBrowser().getUserAgent());
         }});
 
 
@@ -81,4 +81,22 @@ class CheckIT {
         log.debug("Debug!");
         log.info("Info!");
     }
+
+
+    /*
+    @Test
+    @Disabled
+    void test2() {
+        final ScraperConfig scraperConfig = new ScraperConfig("localhost", 4444, false);
+        final ScrapingCommand scrapingCommand = ScrapingCommand.builder()
+            .source("")
+            .destination("")
+            .maxPoolSize(5)
+            .poolSize(5)
+            .scraperConfig(scraperConfig)
+            .build();
+        Tools tools = newTools(scrapingCommand);
+        tools.execute();
+    }
+    */
 }
