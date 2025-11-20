@@ -2,11 +2,11 @@ const smiTextArea = document.createElement('textarea');
 
 function smiRemovePxAndParseInt(value) {
     return parseInt(smiRemovePx(value));
-};
+}
 
 function smiRemovePx(value) {
     return value.replace(/px/g, "");
-};
+}
 
 const smiTextSearchService = {
 

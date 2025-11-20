@@ -1,5 +1,6 @@
 package info.setmy.crawler.scraper;
 
+import info.setmy.crawler.scraper.models.FirefoxProfileFile;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -38,7 +39,7 @@ class CheckIT {
         options.setBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
         RemoteWebDriver driver = new RemoteWebDriver(URI.create("http://localhost:4444").toURL(), options);
         options.setCapability("se:headers", new HashMap<String, String>() {{
-            put("User-Agent", newBrowser().getUserAgent());
+            put("User-Agent", newBrowser().userAgent());
         }});
 
         driver.close();
@@ -56,7 +57,7 @@ class CheckIT {
     void test2() throws MalformedURLException {
         final DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("browserName", "firefox");
-        //desiredCapabilities.setCapability("binary", "C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+        desiredCapabilities.setCapability("binary", "C:\\Program Files\\Mozilla Firefox\\firefox.exe");//moz:firefoxOptions.binary
         desiredCapabilities.setCapability("platformName", "Windows 11");
 
         //desiredCapabilities.setBrowserName("firefox");

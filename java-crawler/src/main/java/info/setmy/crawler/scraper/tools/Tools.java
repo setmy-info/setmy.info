@@ -2,13 +2,10 @@ package info.setmy.crawler.scraper.tools;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import info.setmy.crawler.scraper.ScrapedContent;
 import info.setmy.crawler.scraper.Scraper;
-import info.setmy.crawler.camel.Named;
+import info.setmy.crawler.scraper.models.ScrapedContent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.spi.ThreadPoolProfile;
 
 import java.io.File;
 import java.io.IOException;

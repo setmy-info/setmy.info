@@ -1,6 +1,6 @@
 package info.setmy.crawler.scraper.tools;
 
-import info.setmy.crawler.scraper.ScraperConfig;
+import info.setmy.crawler.scraper.models.ScraperConfig;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

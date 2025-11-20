@@ -560,10 +560,6 @@
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-hibernate-cache-commons</artifactId>
         </dependency>
-        <!--dependency>
-            <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-hibernate-cache-v62</artifactId>
-        </dependency-->
         <dependency>
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-spring-boot3-starter-embedded</artifactId>

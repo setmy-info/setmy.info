@@ -1,4 +1,3 @@
-
 const SMI_DEFAULT_FUNCTION = function (index, control) {
     console.log("Control: ", index, control);
 };

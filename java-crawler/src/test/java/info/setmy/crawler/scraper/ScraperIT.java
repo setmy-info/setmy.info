@@ -4,7 +4,9 @@ import info.setmy.crawler.browser.models.Browser;
 import info.setmy.crawler.camel.Camel;
 import info.setmy.crawler.camel.CamelConfig;
 import info.setmy.crawler.camel.CamelThreadsConfig;
-import info.setmy.crawler.camel.ScraperRouteBuilder;
+import info.setmy.crawler.scraper.models.ScrapedContent;
+import info.setmy.crawler.scraper.models.ScrapedText;
+import info.setmy.crawler.scraper.models.ScraperConfig;
 import info.setmy.crawler.selenium.Selenium;
 import info.setmy.crawler.selenium.SeleniumConfig;
 import info.setmy.crawler.selenium.SeleniumExtended;
@@ -58,7 +60,7 @@ public class ScraperIT {
             .build();
         camelConfig = CamelConfig.builder()
             .build();
-        camel = new  Camel(camelConfig);
+        camel = new Camel(camelConfig);
         //camel.add(new ScraperRouteBuilder(s));
 
         scraperConfig = new ScraperConfig();

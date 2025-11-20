@@ -1,4 +1,4 @@
-package info.setmy.crawler.scraper;
+package info.setmy.crawler.scraper.models;
 
 public class Location {
 

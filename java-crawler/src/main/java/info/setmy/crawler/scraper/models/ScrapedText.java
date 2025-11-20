@@ -1,4 +1,4 @@
-package info.setmy.crawler.scraper;
+package info.setmy.crawler.scraper.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -90,7 +90,7 @@ public class ScrapedText {
 
     public void setLocationArray(final String locationString) {
         if (isNotBlank(locationString)) {
-            final String[] parts = locationString.split(";");
+            final String[] parts = locationString.split("\\.");
             setLocationArray(parse(parts));
         }
     }
@@ -120,9 +120,11 @@ public class ScrapedText {
     }
 
     private Location parse(final String part) {
-        final String[] split = part.split(":");
+        final String[] split = part.split("\\[");
         if (split.length >= 2) {
-            return new Location(parseInt(split[0]), split[1]);
+            var name = split[0];
+            var index = split[1].replace("]", "");
+            return new Location(parseInt(index), name);
         }
         return new Location(-1, "");
     }

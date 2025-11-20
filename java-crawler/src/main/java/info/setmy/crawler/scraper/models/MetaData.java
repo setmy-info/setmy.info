@@ -1,4 +1,4 @@
-package info.setmy.crawler.scraper;
+package info.setmy.crawler.scraper.models;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -15,13 +15,11 @@ app.use((req, res, next) => {
     console.log("Method:", req.method);
     console.log("URL:", req.originalUrl);
     console.log("Headers:", req.headers);
-
     if (req.body && Object.keys(req.body).length > 0) {
         console.log("Body:", req.body);
     } else {
         console.log("Body: (empty or non parsable)");
     }
-
     next();
 });
 

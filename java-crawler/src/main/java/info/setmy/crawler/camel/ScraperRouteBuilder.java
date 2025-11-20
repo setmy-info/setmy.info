@@ -12,12 +12,13 @@ public class ScraperRouteBuilder extends RouteBuilder {
 
     //"scrapingELT"
     private final String routeId;
+    private final String executorPoolId;
 
     @Override
     public void configure() throws Exception {
         from("direct:start")
             .routeId(routeId)
-            .threads().executorService("scraperPool")
+            .threads().executorService(executorPoolId)
             .log("Entering step 1")
             .process(exchange -> {
                 String body = exchange.getIn().getBody(String.class);

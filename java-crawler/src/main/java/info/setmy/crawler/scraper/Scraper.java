@@ -2,18 +2,13 @@ package info.setmy.crawler.scraper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import info.setmy.crawler.browser.models.Browser;
-import info.setmy.crawler.selenium.Selenium;
+import info.setmy.crawler.scraper.models.ScrapedContent;
+import info.setmy.crawler.scraper.models.ScrapedText;
+import info.setmy.crawler.scraper.models.ScraperConfig;
 import info.setmy.crawler.selenium.SeleniumExtended;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.remote.RemoteWebDriver;
-
-import java.time.Duration;
-
-import static info.setmy.crawler.browser.models.Browser.newBrowser;
-import static java.time.Duration.ofSeconds;
 
 /**
  * TODO: to make unique window
@@ -60,7 +55,8 @@ public final class Scraper {
     private ScrapedText[] parseScrapedTexts(final String jsonString) {
         try {
             final ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.readValue(jsonString, ScrapedText[].class);
+            ScrapedText[] result = objectMapper.readValue(jsonString, ScrapedText[].class);
+            return result;
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
