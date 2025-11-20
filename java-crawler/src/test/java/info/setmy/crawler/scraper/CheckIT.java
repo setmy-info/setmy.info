@@ -41,7 +41,6 @@ class CheckIT {
             put("User-Agent", newBrowser().getUserAgent());
         }});
 
-
         driver.close();
     }
 
@@ -81,7 +80,6 @@ class CheckIT {
         log.debug("Debug!");
         log.info("Info!");
     }
-
 
     /*
     @Test

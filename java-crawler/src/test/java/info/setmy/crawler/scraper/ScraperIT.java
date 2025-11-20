@@ -1,6 +1,10 @@
 package info.setmy.crawler.scraper;
 
 import info.setmy.crawler.browser.models.Browser;
+import info.setmy.crawler.camel.Camel;
+import info.setmy.crawler.camel.CamelConfig;
+import info.setmy.crawler.camel.CamelThreadsConfig;
+import info.setmy.crawler.camel.ScraperRouteBuilder;
 import info.setmy.crawler.selenium.Selenium;
 import info.setmy.crawler.selenium.SeleniumConfig;
 import info.setmy.crawler.selenium.SeleniumExtended;
@@ -28,6 +32,9 @@ public class ScraperIT {
     Scraper scraper;
     //String path = "src/test/resources/ScraperIT/";
     String path = "";
+    CamelThreadsConfig threadsConfig;
+    CamelConfig camelConfig;
+    Camel camel;
 
     @BeforeEach
     public void before() {
@@ -43,6 +50,17 @@ public class ScraperIT {
             .scriptNames(asList(path + "smiControls.js", path + "ScraperIT.js", path + "smiTextSearchService.js"))
             .build();
         seleniumExtended = new SeleniumExtended(selenium, seleniumExtendedConfig);
+
+        threadsConfig = CamelThreadsConfig.builder()
+            .poolSize(5)
+            .maxPoolSize(5)
+            .maxQueueSize(0)
+            .build();
+        camelConfig = CamelConfig.builder()
+            .build();
+        camel = new  Camel(camelConfig);
+        //camel.add(new ScraperRouteBuilder(s));
+
         scraperConfig = new ScraperConfig();
         scraper = new Scraper(scraperConfig, seleniumExtended);
         scraper.init();

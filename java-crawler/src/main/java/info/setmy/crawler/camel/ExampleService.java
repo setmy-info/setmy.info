@@ -1,4 +1,4 @@
-package info.setmy.crawler.scraper.tools.camel.beans;
+package info.setmy.crawler.camel;
 
 import org.apache.camel.Exchange;
 

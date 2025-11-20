@@ -1,13 +1,22 @@
-package info.setmy.crawler.scraper.tools.camel.beans;
+package info.setmy.crawler.camel;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.apache.camel.builder.RouteBuilder;
 
+@Getter
+@Log4j2
+@RequiredArgsConstructor
 public class ScraperRouteBuilder extends RouteBuilder {
+
+    //"scrapingELT"
+    private final String routeId;
 
     @Override
     public void configure() throws Exception {
         from("direct:start")
-            .routeId("scrapingELT")
+            .routeId(routeId)
             .threads().executorService("scraperPool")
             .log("Entering step 1")
             .process(exchange -> {

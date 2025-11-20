@@ -4,15 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import info.setmy.crawler.scraper.ScrapedContent;
 import info.setmy.crawler.scraper.Scraper;
-import info.setmy.crawler.scraper.ScraperConfig;
-import info.setmy.crawler.scraper.tools.camel.beans.ExampleService;
-import info.setmy.crawler.scraper.tools.camel.beans.Named;
-import info.setmy.crawler.scraper.tools.camel.beans.ScraperRouteBuilder;
-import info.setmy.crawler.selenium.SeleniumExtended;
+import info.setmy.crawler.camel.Named;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.spi.ThreadPoolProfile;
 
 import java.io.File;
@@ -41,18 +36,6 @@ public record Tools(
     }
     */
 
-    private void bind(Named named) {
-        context.getRegistry().bind(named.getName(), named);
-    }
-
-    private void add(RouteBuilder routeBuilder) {
-        try {
-            context.addRoutes(routeBuilder);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public void execute() {
         context.start();
         ProducerTemplate template = context.createProducerTemplate();
@@ -65,15 +48,6 @@ public record Tools(
             throw new RuntimeException(e);
         }
         context.stop();
-    }
-
-    private static ThreadPoolProfile toThreadPoolProfile(ScrapingCommand scrapingCommand) {
-        ThreadPoolProfile threadPoolProfile = new ThreadPoolProfile();
-        threadPoolProfile.setId(SCRAPER_POOL);
-        threadPoolProfile.setPoolSize(scrapingCommand.getPoolSize());
-        threadPoolProfile.setMaxPoolSize(scrapingCommand.getMaxPoolSize());
-        threadPoolProfile.setMaxQueueSize(scrapingCommand.getMaxQueueSize());
-        return threadPoolProfile;
     }
 
     public void parse(final String url, final File file) {
