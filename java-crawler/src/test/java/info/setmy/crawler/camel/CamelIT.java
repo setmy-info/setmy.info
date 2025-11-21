@@ -1,6 +1,5 @@
 package info.setmy.crawler.camel;
 
-import org.apache.camel.builder.RouteBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,11 +7,11 @@ class CamelIT {
 
     CamelConfig camelConfig;
     Camel camel;
-    Named exampleService;
+    ExampleService exampleService;
     String executorPoolId;
     CamelThreadsConfig camelThreadsConfig;
     String routeId;
-    RouteBuilder routeBuilder;
+    ScraperRouteBuilder routeBuilder;
 
     @BeforeEach
     void setUp() {
@@ -29,6 +28,7 @@ class CamelIT {
             .build();
         routeId = "testRoute";
         routeBuilder = new ScraperRouteBuilder(routeId, executorPoolId);
+        routeBuilder.addCamelBean(exampleService);
     }
 
     @Test

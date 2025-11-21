@@ -1,5 +1,6 @@
 package info.setmy.crawler.camel;
 
-public interface Named {
+public interface CamelNamed {
+
     String getName();
 }

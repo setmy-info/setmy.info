@@ -18,7 +18,7 @@ public class Camel {
 
     private final CamelContext context = new DefaultCamelContext();
 
-    public void bind(final Named named) {
+    public void bind(final CamelNamed named) {
         context.getRegistry().bind(named.getName(), named);
     }
 
