@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.ThreadsDefinition;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,7 @@ import java.util.List;
 public class ScraperRouteBuilder extends RouteBuilder {
 
     //"scrapingELT"
-    private final String routeId;
-    private final String executorPoolId;
+    private final ScraperRouteBuilderConfig scraperRouteBuilderConfig;
 
     private final List<CamelBean> camelBeanList = new ArrayList<>();
 
@@ -26,9 +26,34 @@ public class ScraperRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() {
+        final File input = scraperRouteBuilderConfig.workingDirectory().getInput();
+        final File processing = scraperRouteBuilderConfig.workingDirectory().getProcessing();
+        final File processed = scraperRouteBuilderConfig.workingDirectory().getProcessed();
+
+        final String inputDirectoryPath = "file://"
+            + input.getAbsolutePath()
+            + "?include=.*\\.csv"
+            + "&move=" + processing.getAbsolutePath()
+            + "/${file:name}"
+            + "&delay=5000";
+
+        from(inputDirectoryPath)
+            .routeId("fileIntake")
+            .log("Picked up: ${header.CamelFileName} → moved to processing/")
+            .split()
+            .tokenize("[\r\n]+")
+            .streaming()
+            .filter(simple("${body.trim().length} > 0"))
+            .filter(simple("${body} not regex '^\\s*\"?name\"?;'"))
+            .to("direct:start")
+            .end()
+            .log("All lines processed for: ${header.CamelFileName}")
+            // TODO: here move to processed
+            .log("Moved to processed: ${header.CamelFileName}");
+
         ThreadsDefinition threadsDefinition = from("direct:start")
-            .routeId(routeId)
-            .threads().executorService(executorPoolId)
+            .routeId(scraperRouteBuilderConfig.routeId())
+            .threads().executorService(scraperRouteBuilderConfig.executorPoolId())
             .log("Entering step 1")
             .process(exchange -> {
                 String body = exchange.getIn().getBody(String.class);

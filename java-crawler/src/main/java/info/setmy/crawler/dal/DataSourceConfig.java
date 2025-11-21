@@ -1,9 +1,12 @@
 package info.setmy.crawler.dal;
 
 import lombok.Builder;
-import lombok.Getter;
 
-@Getter
 @Builder(toBuilder = true)
-public class DataSourceConfig {
+public record DataSourceConfig(
+    String jdbcUrl,
+    String userName,
+    String password,
+    int maximumPoolSize
+) {
 }

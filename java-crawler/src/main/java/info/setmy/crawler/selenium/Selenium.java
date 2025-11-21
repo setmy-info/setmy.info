@@ -86,6 +86,10 @@ public final class Selenium {
 
         if (browser.isNot(FIREFOX)) {
             log.info("Not firefox. Rewriting some headers.");
+            /*
+            "user_pref('browser.cache.disk.enable', false);\n" +
+            "user_pref('browser.cache.memory.enable', false);\n",
+             */
             final BrowserPreferences browserPreferences = browser.browserPreferences();
             profile.setPreference("network.http.accept.default", browserPreferences.acceptHeader());
             profile.setPreference("intl.accept_languages", browserPreferences.acceptLanguage());

@@ -116,6 +116,7 @@
         <tika.version>3.2.1</tika.version>
         <kotlin.version>2.0.20</kotlin.version>
         <camel.version>4.6.0</camel.version>
+        <hikari.version>7.0.2</hikari.version>
     </properties>
 
     <dependencyManagement>
@@ -451,6 +452,11 @@
                 <version>${hibernate.validator.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.hibernate.search</groupId>
+                <artifactId>hibernate-search-backend-lucene</artifactId>
+                <version>8.1.2.Final</version>
+            </dependency>
+            <dependency>
                 <groupId>org.ehcache</groupId>
                 <artifactId>ehcache</artifactId>
                 <version>${ehcache.version}</version>
@@ -602,6 +608,21 @@
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-core</artifactId>
                 <version>${camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>${hikari.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>2.4.240</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq</artifactId>
+                <version>3.20.9</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
