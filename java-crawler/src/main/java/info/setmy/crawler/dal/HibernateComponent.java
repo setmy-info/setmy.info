@@ -17,9 +17,9 @@ public class HibernateComponent {
     private final DataSource dataSource;
     private EntityManagerFactory entityManagerFactory;
 
-    public void init() {
-        hibernateProperties.put("hibernate.hikari.dataSource", dataSource);
+    public HibernateComponent init() {
         entityManagerFactory = Persistence.createEntityManagerFactory("appPU", hibernateProperties);
+        return this;
     }
 
     public EntityManager createEntityManager() {

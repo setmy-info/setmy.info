@@ -16,13 +16,7 @@ public final class HomeDirectory extends Directory {
     }
 
     public HomeDirectory init() {
-        js = new File(directory, JS);
-        if (js.exists() && !js.isDirectory()) {
-            throw new RuntimeException("Input directory exists and is not a directory");
-        }
-        if (!js.exists()) {
-            js.mkdirs();
-        }
+        js = validate(newFile(JS));
         return this;
     }
 }

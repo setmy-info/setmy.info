@@ -6,7 +6,6 @@ import org.openqa.selenium.Dimension;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static info.setmy.crawler.browser.models.BrowserType.FIREFOX;
 import static info.setmy.crawler.browser.models.BrowserType.randomBrowserType;
 
 // TODO : Browser with other parameters to send to backend as headers

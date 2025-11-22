@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="003-1" author="crawler">
+
+        <createSequence sequenceName="RECORD_ENTITY_ID_SEQ" incrementBy="1" startValue="2"/>
+
+        <createTable tableName="record_entity">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(512)"/>
+            <column name="url" type="VARCHAR(500)"/>
+            <column name="content" type="JSON"/>
+        </createTable>
+        <createIndex tableName="record_entity" indexName="idx_record_entity_name">
+            <column name="name"/>
+        </createIndex>
+        <createIndex tableName="record_entity" indexName="idx_record_entity_url">
+            <column name="url"/>
+        </createIndex>
+
+        <rollback>
+            <dropTable tableName="record_entity"/>
+            <dropSequence sequenceName="RECORD_ENTITY_ID_SEQ"/>
+        </rollback>
+
+    </changeSet>
+
+</databaseChangeLog>
