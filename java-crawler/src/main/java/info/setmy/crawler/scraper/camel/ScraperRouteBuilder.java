@@ -1,4 +1,4 @@
-package info.setmy.crawler.camel;
+package info.setmy.crawler.scraper.camel;
 
 import info.setmy.crawler.entities.CSVRecord;
 import info.setmy.crawler.entities.RecordEntity;
@@ -30,15 +30,25 @@ public class ScraperRouteBuilder extends RouteBuilder {
         final String errorPath = errorFile.getAbsolutePath();
         final String processedPath = processedFile.getAbsolutePath();
 
+        onException(Exception.class)
+            .handled(true)
+            .log("Error with ${header.CamelFileName} processing: ${exception.message}")
+            .to("file://" + errorPath + "?fileName=${header.CamelFileName}");
+
         //final String camelUri = "file://" + inputPath + "?include=.*\\.csv&noop=true&initialDelay=1000&delay=30000";
         /*final String camelUri = "file://" + inputPath +
             "?include=.*\\.csv&move=" + processedPath +
             "/${file:name}&moveFailed=" + inputPath +
             "/error/${file:name}&initialDelay=1000&delay=30000";*/
-        final String camelUri = "file://" + inputPath +
+        /*final String camelUri = "file://" + inputPath +
             "?include=.*\\.csv&move=" + processedPath +
             "/${file:name}&moveFailed=" + errorPath + // Does not go to the error folder when SCV parsed has an exception
-            "/${file:name}&initialDelay=1000&delay=30000";
+            "/${file:name}&initialDelay=1000&delay=30000";*/
+        final String camelUri = "file://" + inputPath +
+            "?include=.*\\.csv" +
+            "&move=" + processedPath + "/${file:name}" +
+            "&moveFailed=" + errorPath + "/${file:name}" +
+            "&initialDelay=1000&delay=30000";
 
         from(camelUri)
             .routeId("scraperCSVFileLogger")

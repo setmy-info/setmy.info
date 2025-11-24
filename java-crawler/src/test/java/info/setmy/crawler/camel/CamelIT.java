@@ -1,10 +1,15 @@
 package info.setmy.crawler.camel;
 
 import info.setmy.crawler.camel.services.CSVService;
+import info.setmy.crawler.camel.services.ExampleService;
 import info.setmy.crawler.dal.DataSourceConfig;
 import info.setmy.crawler.dal.DataSourceFactory;
 import info.setmy.crawler.dal.HibernateComponent;
 import info.setmy.crawler.dal.LiquibaseComponent;
+import info.setmy.crawler.scraper.camel.ScraperRouteBuilder;
+import info.setmy.crawler.scraper.camel.ScraperRouteBuilderConfig;
+import info.setmy.crawler.scraper.models.HomeDirectory;
+import info.setmy.crawler.scraper.models.WorkingDirectory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +41,6 @@ class CamelIT {
     File baseDir;
     HomeDirectory homeDirectory;
     WorkingDirectory workingDirectory;
-
 
     @BeforeEach
     void setUp() {

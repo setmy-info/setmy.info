@@ -1,5 +1,6 @@
-package info.setmy.crawler.camel;
+package info.setmy.crawler.camel.services;
 
+import info.setmy.crawler.camel.CamelBean;
 import org.apache.camel.Exchange;
 
 public class ExampleService implements CamelBean {

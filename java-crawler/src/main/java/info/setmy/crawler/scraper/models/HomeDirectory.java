@@ -1,4 +1,4 @@
-package info.setmy.crawler.camel;
+package info.setmy.crawler.scraper.models;
 
 import lombok.experimental.SuperBuilder;
 
