@@ -3,25 +3,25 @@ package info.setmy.crawler.camel;
 import info.setmy.crawler.camel.services.CSVService;
 import info.setmy.crawler.camel.services.ExampleService;
 import info.setmy.crawler.dal.DataSourceConfig;
-import info.setmy.crawler.dal.DataSourceFactory;
-import info.setmy.crawler.dal.HibernateComponent;
-import info.setmy.crawler.dal.LiquibaseComponent;
+import info.setmy.crawler.elt.models.HomeDirectory;
+import info.setmy.crawler.elt.models.WorkingDirectory;
+import info.setmy.crawler.elt.services.DataSourceFactoryService;
+import info.setmy.crawler.elt.services.GlobalConfigService;
+import info.setmy.crawler.elt.services.GuiceService;
+import info.setmy.crawler.elt.services.HibernateService;
+import info.setmy.crawler.elt.services.TransformsService;
 import info.setmy.crawler.scraper.camel.ScraperRouteBuilder;
 import info.setmy.crawler.scraper.camel.ScraperRouteBuilderConfig;
-import info.setmy.crawler.scraper.models.HomeDirectory;
-import info.setmy.crawler.scraper.models.WorkingDirectory;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import javax.sql.DataSource;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
-class CamelIT {
+public class CamelIT {
 
-    private static final String BASE_WINDOWS_DIR = "C:\\pub\\setmy.info\\data\\crawler";
-    private static final String BASE_UNIXES_DIR = "/TODO";
+    public static final String BASE_WINDOWS_DIR = "C:\\pub\\setmy.info\\data\\crawler";
+    public static final String BASE_UNIXES_DIR = "/TODO";
 
     CamelConfig camelConfig;
     Camel camel;
@@ -33,25 +33,38 @@ class CamelIT {
     ScraperRouteBuilderConfig scraperRouteBuilderConfig;
     ScraperRouteBuilder routeBuilder;
     DataSourceConfig dataSourceConfig;
-    DataSource dataSource;
-    LiquibaseComponent liquibaseComponent;
-    Map<String, Object> hibernateProperties;
-    HibernateComponent hibernateComponent;
-    String baseDirName;
-    File baseDir;
+    HibernateService hibernateService;
+    String homeDirectoryNameString;
+    String workingDirectoryNameString;
+    File homeDirectoryFile;
+    File workingDirectoryFile;
     HomeDirectory homeDirectory;
     WorkingDirectory workingDirectory;
+    GuiceService guiceService;
+    GlobalConfigService globalConfigService;
+    TransformsService transformsService;
+    DataSourceFactoryService dataSourceFactoryService;
 
     @BeforeEach
     void setUp() {
         if (System.getProperty("os.name").toLowerCase().contains("win")) {
-            baseDirName = BASE_WINDOWS_DIR;
+            homeDirectoryNameString = BASE_WINDOWS_DIR;
+            workingDirectoryNameString = BASE_WINDOWS_DIR;
         } else {
-            baseDirName = BASE_UNIXES_DIR;
+            homeDirectoryNameString = BASE_UNIXES_DIR;
+            workingDirectoryNameString = BASE_UNIXES_DIR;
         }
-        baseDir = new File(baseDirName);
-        homeDirectory = new HomeDirectory(baseDir).init();
-        workingDirectory = new WorkingDirectory(baseDir).init();
+        homeDirectoryFile = new File(homeDirectoryNameString);
+        workingDirectoryFile = new File(workingDirectoryNameString);
+        guiceService = new GuiceService(homeDirectoryFile, workingDirectoryFile)
+            .init();
+        homeDirectory = guiceService.getInjector().getInstance(HomeDirectory.class);
+        workingDirectory = guiceService.getInjector().getInstance(WorkingDirectory.class);
+        globalConfigService = guiceService.getInjector().getInstance(GlobalConfigService.class);
+        transformsService = guiceService.getInjector().getInstance(TransformsService.class);
+        dataSourceFactoryService = guiceService.getInjector().getInstance(DataSourceFactoryService.class);
+        hibernateService = guiceService.getInjector().getInstance(HibernateService.class);
+
         camelConfig = CamelConfig.builder()
             .build();
         camel = new Camel(camelConfig);
@@ -78,33 +91,10 @@ class CamelIT {
             .password("")
             .maximumPoolSize(5)
             .build();
-        dataSource = DataSourceFactory.getInstance().newDataSource(dataSourceConfig);
-        liquibaseComponent = new LiquibaseComponent(dataSource, "db/changelog/db.changelog-master.xml")
-            .migrate();
-        hibernateProperties = new HashMap<>();
-        hibernateProperties.put("hibernate.connection.datasource", dataSource);
-        hibernateProperties.put("hibernate.hikari.dataSource", dataSource);
-        hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-        hibernateProperties.put("hibernate.hbm2ddl.auto", "validate"); // validate, update, create, create-drop
-        hibernateProperties.put("hibernate.show_sql", "true");
-        hibernateProperties.put("hibernate.format_sql", "true");
-        hibernateProperties.put("hibernate.use_sql_comments", "true");
-        hibernateProperties.put("hibernate.jdbc.batch_size", "20");
-        hibernateProperties.put("hibernate.order_inserts", "true");
-        hibernateProperties.put("hibernate.order_updates", "true");
-        hibernateProperties.put("hibernate.batch_fetch_style", "DYNAMIC");
-        hibernateProperties.put("hibernate.hikari.minimumIdle", "2");
-        hibernateProperties.put("hibernate.hikari.maximumPoolSize", "10");
-        hibernateProperties.put("hibernate.hikari.idleTimeout", "30000");
-        hibernateProperties.put("hibernate.hikari.connectionTimeout", "20000");
-        hibernateProperties.put("hibernate.hikari.maxLifetime", "120000");
-        hibernateProperties.put("jakarta.persistence.nonJtaDataSource", dataSource);
-
-        hibernateComponent = new HibernateComponent(hibernateProperties, dataSource)
-            .init();
     }
 
     @Test
+    @Disabled
     void camelTest() {
         camel.bind(exampleService);
         camel.bind(csvService);

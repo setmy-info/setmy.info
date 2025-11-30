@@ -40,11 +40,6 @@
             <artifactId>jsoup</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.lightbody.bmp</groupId>
-            <artifactId>browsermob-core</artifactId>
-            <version>2.1.5</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
             <version>${camel.version}</version>
@@ -69,6 +64,15 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>7.0.0</version>
         </dependency>
     </dependencies>
     <build>

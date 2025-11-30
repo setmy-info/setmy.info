@@ -1,4 +1,13 @@
-FF
+# Firefox notes
+
+firefox --createprofile "selenium-test"
+export PATH=/opt/firefox:${PATH}
+set PATH="C:\Program Files\Mozilla Firefox";%PATH%
+firefox -P
+
+# Headers
+
+## FF
 
 ```
 -- REQUEST HEADERS ---
@@ -15,7 +24,7 @@ Sec-Fetch-Site: cross-site
 Priority: u=6
 ```
 
-Chrome:
+## Chrome:
 
 ```
 --- REQUEST HEADERS ---
@@ -35,7 +44,7 @@ Accept-Language: en-US,en;q=0.9
 Cookie: Idea-b5a71766=f5a92a26-173a-44e8-a2aa-35aa45246b47
 ```
 
-Edge:
+## Edge:
 
 ```
 --- REQUEST HEADERS ---

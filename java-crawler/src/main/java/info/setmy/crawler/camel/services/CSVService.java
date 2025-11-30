@@ -39,7 +39,8 @@ public class CSVService implements CamelBean {
 
     private info.setmy.crawler.entities.CSVRecord map(final CSVRecord record) {
         try {
-            if (true) {
+            //TODO: Remove. For testing.
+            if (false) {
                 throw new RuntimeException("asdgzsdg");
             }
             return info.setmy.crawler.entities.CSVRecord.builder()

@@ -1,13 +1,12 @@
-package info.setmy.crawler.scraper.models;
+package info.setmy.crawler.elt.models;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import java.io.File;
 
 @Getter
-@SuperBuilder(toBuilder = true)
+//@SuperBuilder(toBuilder = true)
 @RequiredArgsConstructor
 public abstract class Directory {
 

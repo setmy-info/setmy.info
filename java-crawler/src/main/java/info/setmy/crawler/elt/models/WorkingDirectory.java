@@ -1,12 +1,11 @@
-package info.setmy.crawler.scraper.models;
+package info.setmy.crawler.elt.models;
 
 import lombok.Getter;
-import lombok.experimental.SuperBuilder;
 
 import java.io.File;
 
 @Getter
-@SuperBuilder(toBuilder = true)
+//@SuperBuilder(toBuilder = true)
 public final class WorkingDirectory extends Directory {
 
     private static final String INPUT = "input";

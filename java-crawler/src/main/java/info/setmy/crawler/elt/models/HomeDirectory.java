@@ -1,10 +1,8 @@
-package info.setmy.crawler.scraper.models;
-
-import lombok.experimental.SuperBuilder;
+package info.setmy.crawler.elt.models;
 
 import java.io.File;
 
-@SuperBuilder(toBuilder = true)
+//@SuperBuilder(toBuilder = true)
 public final class HomeDirectory extends Directory {
 
     private static final String JS = "js";

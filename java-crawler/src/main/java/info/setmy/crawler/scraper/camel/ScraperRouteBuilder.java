@@ -30,12 +30,8 @@ public class ScraperRouteBuilder extends RouteBuilder {
         final String errorPath = errorFile.getAbsolutePath();
         final String processedPath = processedFile.getAbsolutePath();
 
-        onException(Exception.class)
-            .handled(true)
-            .log("Error with ${header.CamelFileName} processing: ${exception.message}")
-            .to("file://" + errorPath + "?fileName=${header.CamelFileName}");
 
-        //final String camelUri = "file://" + inputPath + "?include=.*\\.csv&noop=true&initialDelay=1000&delay=30000";
+        final String camelUri = "file://" + inputPath + "?include=.*\\.csv&noop=true&initialDelay=1000&delay=30000";
         /*final String camelUri = "file://" + inputPath +
             "?include=.*\\.csv&move=" + processedPath +
             "/${file:name}&moveFailed=" + inputPath +
@@ -44,11 +40,12 @@ public class ScraperRouteBuilder extends RouteBuilder {
             "?include=.*\\.csv&move=" + processedPath +
             "/${file:name}&moveFailed=" + errorPath + // Does not go to the error folder when SCV parsed has an exception
             "/${file:name}&initialDelay=1000&delay=30000";*/
-        final String camelUri = "file://" + inputPath +
+        /*final String camelUri = "file://" + inputPath +
             "?include=.*\\.csv" +
             "&move=" + processedPath + "/${file:name}" +
             "&moveFailed=" + errorPath + "/${file:name}" +
             "&initialDelay=1000&delay=30000";
+        */
 
         from(camelUri)
             .routeId("scraperCSVFileLogger")
@@ -85,7 +82,6 @@ public class ScraperRouteBuilder extends RouteBuilder {
             .stopOnException()
             .filter(simple("${body} != null && ${body.trim().length()} > 0"))
             .filter(simple("${body} not regex '^\\s*\"?name\"?\\s*;\\s*\"?url\"?\\s*$'"))// Header out
-            .to("direct:cleanScraperCSVFileRow")
             .to("seda:parallelProcessingScraperCSVFileRows")
             .end()// Split end, back on file level
             .log("========= splitScraperCSVFile: ${header.CamelFileName} END =============");
@@ -105,6 +101,7 @@ public class ScraperRouteBuilder extends RouteBuilder {
             .routeId("parallelProcessingScraperCSVFileRows")
             .log("========= parallelProcessingScraperCSVFileRows START =============")
             .threads().executorService(scraperRouteBuilderConfig.executorPoolId())
+            .to("direct:cleanScraperCSVFileRow")
             .bean("csvService", "doRun")
             .log("Entering step 1")
             .process(exchange -> {

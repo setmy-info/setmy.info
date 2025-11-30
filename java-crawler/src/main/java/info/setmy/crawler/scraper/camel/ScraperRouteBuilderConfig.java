@@ -1,7 +1,7 @@
 package info.setmy.crawler.scraper.camel;
 
-import info.setmy.crawler.scraper.models.HomeDirectory;
-import info.setmy.crawler.scraper.models.WorkingDirectory;
+import info.setmy.crawler.elt.models.HomeDirectory;
+import info.setmy.crawler.elt.models.WorkingDirectory;
 import lombok.Builder;
 
 @Builder(toBuilder = true)

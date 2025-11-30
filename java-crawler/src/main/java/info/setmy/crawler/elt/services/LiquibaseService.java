@@ -1,5 +1,7 @@
-package info.setmy.crawler.dal;
+package info.setmy.crawler.elt.services;
 
+import info.setmy.crawler.elt.models.DataConnectionTraversal;
+import jakarta.inject.Inject;
 import liquibase.Liquibase;
 import liquibase.database.Database;
 import liquibase.database.DatabaseFactory;
@@ -9,23 +11,19 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 
 @Log4j2
 @Getter
-@RequiredArgsConstructor
-public class LiquibaseComponent {
+@RequiredArgsConstructor(onConstructor_ = @Inject)
+public class LiquibaseService {
 
-    private final DataSource dataSource;
-    private final String changeLogFile;
-
-    public LiquibaseComponent migrate() {
-        try (Connection connection = dataSource.getConnection()) {
+    public DataConnectionTraversal migrate(final DataConnectionTraversal dataConnectionTraversal) {
+        try (Connection connection = dataConnectionTraversal.dataSource().getConnection()) {
             final Database database = DatabaseFactory.getInstance()
                 .findCorrectDatabaseImplementation(new JdbcConnection(connection));
             final Liquibase liquibase = new Liquibase(
-                changeLogFile,
+                dataConnectionTraversal.changeLogFile(),
                 new ClassLoaderResourceAccessor(),
                 database
             );
@@ -36,6 +34,6 @@ public class LiquibaseComponent {
             log.error("Liquibase migration failed", e);
             throw new RuntimeException("Database migration failed", e);
         }
-        return this;
+        return dataConnectionTraversal;
     }
 }
