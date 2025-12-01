@@ -3,6 +3,8 @@ package info.setmy.crawler.elt.services;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.name.Names;
+import info.setmy.crawler.elt.models.GuiceCreation;
 import info.setmy.crawler.elt.models.HomeDirectory;
 import info.setmy.crawler.elt.models.WorkingDirectory;
 import lombok.Getter;
@@ -11,9 +13,10 @@ import lombok.RequiredArgsConstructor;
 import java.io.File;
 
 import static com.google.inject.Scopes.SINGLETON;
+import static lombok.AccessLevel.PRIVATE;
 
 @Getter
-@RequiredArgsConstructor
+@RequiredArgsConstructor(access = PRIVATE)
 public final class GuiceService extends AbstractModule {
 
     private final File workingDirectoryPath;
@@ -23,6 +26,13 @@ public final class GuiceService extends AbstractModule {
     private HomeDirectory homeDirectory;
 
     private Injector injector;
+
+    public static GuiceService newGuiceService(final GuiceCreation creation) {
+        return new GuiceService(
+            creation.workingDirectory(),
+            creation.homeDirectory()
+        );
+    }
 
     public GuiceService init() {
         initWorkingDirectory();
@@ -37,7 +47,11 @@ public final class GuiceService extends AbstractModule {
         bind(HomeDirectory.class).toInstance(homeDirectory);
 
         bind(GlobalConfigService.class).in(SINGLETON);
-        bind(TransformsService.class).in(SINGLETON);
+        //bind(ScvDbService.class).in(SINGLETON);
+        bind(ScvDbService.class)
+            .annotatedWith(Names.named("scvDb"))
+            .to(ScvDbService.class)
+            .in(SINGLETON);
         bind(DataSourceFactoryService.class).in(SINGLETON);
         bind(HibernateService.class).in(SINGLETON);
         bind(JOOQService.class).in(SINGLETON);

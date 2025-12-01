@@ -1,6 +1,6 @@
 package info.setmy.crawler;
 
-import info.setmy.crawler.picocli.SubCommand;
+import info.setmy.crawler.picocli.ScvDb;
 import lombok.extern.log4j.Log4j2;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -9,7 +9,7 @@ import picocli.CommandLine.Option;
 @Log4j2
 @Command(name = "someMainCommand",
     description = "Main command",
-    subcommands = {SubCommand.class})
+    subcommands = {ScvDb.class})
 public class Application implements Runnable {
 
     @Option(names = {"--help", "-h"}, usageHelp = true, description = "Show help")

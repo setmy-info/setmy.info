@@ -1,22 +1,23 @@
 package info.setmy.crawler.elt.services;
 
+import info.setmy.crawler.elt.models.GuiceCreation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static info.setmy.crawler.camel .CamelIT.BASE_UNIXES_DIR;
+import static info.setmy.crawler.camel.CamelIT.BASE_UNIXES_DIR;
 import static info.setmy.crawler.camel.CamelIT.BASE_WINDOWS_DIR;
 
-class TransformsServiceIT {
+class ScvDbServiceIT {
 
     String homeDirectoryNameString;
     String workingDirectoryNameString;
     File homeDirectoryFile;
     File workingDirectoryFile;
     GuiceService guiceService;
-    TransformsService transformsService;
+    ScvDbService scvDbService;
 
     @BeforeEach
     void setUp() {
@@ -29,14 +30,19 @@ class TransformsServiceIT {
         }
         homeDirectoryFile = new File(homeDirectoryNameString);
         workingDirectoryFile = new File(workingDirectoryNameString);
-        guiceService = new GuiceService(homeDirectoryFile, workingDirectoryFile)
+        guiceService = GuiceService.newGuiceService(
+                GuiceCreation.builder()
+                    .homeDirectory(homeDirectoryFile)
+                    .workingDirectory(workingDirectoryFile)
+                    .build()
+            )
             .init();
-        transformsService = guiceService.getInjector().getInstance(TransformsService.class);
+        scvDbService = guiceService.getInjector().getInstance(ScvDbService.class);
     }
 
     @Test
     @Disabled
-    void csvToDb() {
-        transformsService.csvToDb();
+    void run() {
+        scvDbService.run();
     }
 }

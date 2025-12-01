@@ -3,13 +3,14 @@ package info.setmy.crawler.camel;
 import info.setmy.crawler.camel.services.CSVService;
 import info.setmy.crawler.camel.services.ExampleService;
 import info.setmy.crawler.dal.DataSourceConfig;
+import info.setmy.crawler.elt.models.GuiceCreation;
 import info.setmy.crawler.elt.models.HomeDirectory;
 import info.setmy.crawler.elt.models.WorkingDirectory;
 import info.setmy.crawler.elt.services.DataSourceFactoryService;
 import info.setmy.crawler.elt.services.GlobalConfigService;
 import info.setmy.crawler.elt.services.GuiceService;
 import info.setmy.crawler.elt.services.HibernateService;
-import info.setmy.crawler.elt.services.TransformsService;
+import info.setmy.crawler.elt.services.ScvDbService;
 import info.setmy.crawler.scraper.camel.ScraperRouteBuilder;
 import info.setmy.crawler.scraper.camel.ScraperRouteBuilderConfig;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +43,7 @@ public class CamelIT {
     WorkingDirectory workingDirectory;
     GuiceService guiceService;
     GlobalConfigService globalConfigService;
-    TransformsService transformsService;
+    ScvDbService scvDbService;
     DataSourceFactoryService dataSourceFactoryService;
 
     @BeforeEach
@@ -56,12 +57,17 @@ public class CamelIT {
         }
         homeDirectoryFile = new File(homeDirectoryNameString);
         workingDirectoryFile = new File(workingDirectoryNameString);
-        guiceService = new GuiceService(homeDirectoryFile, workingDirectoryFile)
+        guiceService = GuiceService.newGuiceService(
+                GuiceCreation.builder()
+                    .homeDirectory(homeDirectoryFile)
+                    .workingDirectory(workingDirectoryFile)
+                    .build()
+            )
             .init();
         homeDirectory = guiceService.getInjector().getInstance(HomeDirectory.class);
         workingDirectory = guiceService.getInjector().getInstance(WorkingDirectory.class);
         globalConfigService = guiceService.getInjector().getInstance(GlobalConfigService.class);
-        transformsService = guiceService.getInjector().getInstance(TransformsService.class);
+        scvDbService = guiceService.getInjector().getInstance(ScvDbService.class);
         dataSourceFactoryService = guiceService.getInjector().getInstance(DataSourceFactoryService.class);
         hibernateService = guiceService.getInjector().getInstance(HibernateService.class);
 

@@ -9,13 +9,13 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +24,7 @@ import static java.util.Objects.requireNonNull;
 
 @Log4j2
 @RequiredArgsConstructor(onConstructor_ = @Inject)
-public class TransformsService {
+public class ScvDbService implements Runnable{
 
     private static final CSVFormat CSV_FORMAT = CSVFormat.DEFAULT.builder()
         .setDelimiter(';')
@@ -43,14 +43,14 @@ public class TransformsService {
     private final HibernateService hibernateService;
     private final JOOQService jooqService;
 
-    public void csvToDb() {
+    public void run() {
         final DataConnectionTraversal dataConnectionTraversal = DataConnectionTraversal.builder()
             .timestamp(now())
             .userName("sa")
             .password("")
             .csvFiles(getCSVFiles())
-            .persistenceUnitName("appPU")
-            .changeLogFile("db/changelog/db.changelog-master.xml")
+            .persistenceUnitName("csvPersistenceUnit")
+            .changeLogFile("db/changelog/csv/db.changelog-master.xml")
             .build();
 
         final DataConnectionTraversal dbInitialized =
@@ -79,21 +79,22 @@ public class TransformsService {
             .toList();
     }
 
-    private void rowsToDb(final DataConnectionTraversal dbInitialized) {
-        try (Reader reader = Files.newBufferedReader(dbInitialized.csvFile().toPath(), StandardCharsets.UTF_8);
+    private void rowsToDb(final DataConnectionTraversal csvFileTraversal) {
+        try (Reader reader = Files.newBufferedReader(csvFileTraversal.csvFile().toPath(), StandardCharsets.UTF_8);
              final CSVParser parser = CSVParser.parse(reader, CSV_FORMAT)) {
             for (CSVRecord record : parser) {
-                final DataConnectionTraversal withDbRecord = dbInitialized.toBuilder()
+                final DataConnectionTraversal withDbRecord = csvFileTraversal.toBuilder()
                     .recordEntity(RecordEntity.builder()
-                        .url(record.get("url"))
                         .name(record.get("name"))
+                        .url(record.get("url"))
                         .build()
                     )
                     .build();
                 save(withDbRecord);
             }
+            moveFileToProcessed(csvFileTraversal);
         } catch (IOException ex) {
-            log.error("IO error with CSV file {}", dbInitialized.csvFile(), ex);
+            log.error("IO error with CSV file {}", csvFileTraversal.csvFile(), ex);
         }
     }
 
@@ -110,6 +111,24 @@ public class TransformsService {
             entityManager.getTransaction().rollback();
             log.error("Failed to save record", e);
             throw e;
+        }
+    }
+
+    private void moveFileToProcessed(final DataConnectionTraversal dataConnectionTraversal) {
+        final File csvFile = dataConnectionTraversal.csvFile();
+        final File processedDirectory = globalConfigService.getWorkingDirectory().getProcessed();
+        final File processedFile = new File(processedDirectory, csvFile.getName());
+        moveFile(csvFile, processedFile);
+    }
+
+    private void moveFile(final File from, final File to) {
+        try {
+            FileUtils.moveFile(
+                from,
+                to
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
