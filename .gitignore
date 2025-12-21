@@ -91,7 +91,6 @@ freebsd-ports/setmy-info-scripts/distinfo
 
 ### NodeJS ###
 */node_modules/
-**/dist/**
 
 # Logs
 node-start-project/*.log
