@@ -1,18 +1,22 @@
 package info.setmy;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.armedbear.lisp.Bignum;
 import org.armedbear.lisp.Cons;
 import org.armedbear.lisp.DoubleFloat;
 import org.armedbear.lisp.Fixnum;
 import org.armedbear.lisp.Function;
+import org.armedbear.lisp.HashTable;
 import org.armedbear.lisp.Lisp;
 import org.armedbear.lisp.LispCharacter;
 import org.armedbear.lisp.LispInteger;
 import org.armedbear.lisp.LispObject;
 import org.armedbear.lisp.Ratio;
 import org.armedbear.lisp.SimpleString;
+import org.armedbear.lisp.SimpleVector;
 import org.armedbear.lisp.SingleFloat;
+import org.armedbear.lisp.Symbol;
 import org.armedbear.lisp.scripting.AbclScriptEngineFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -22,7 +26,9 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -74,49 +80,6 @@ class LispIT {
             System.out.println("Result = " + func2Result);
             assertThat((Number) func2Result.intValue()).isEqualTo(9);
         }
-    }
-
-    private LispObject javaToLisp(Object o) {
-        return switch (o) {
-            case null -> Lisp.NIL;
-            case Boolean bool -> bool ? Lisp.T : Lisp.NIL;
-            case Byte b -> Fixnum.getInstance(b.intValue());
-            case Character c -> LispCharacter.getInstance(c);
-            case Short s -> Fixnum.getInstance(s.intValue());
-            case Integer i -> Fixnum.getInstance(i);
-            case Long l -> LispInteger.getInstance(l);
-            case BigInteger bi -> Bignum.getInstance(bi);
-            case Float f -> new SingleFloat(f);
-            case Double d -> new DoubleFloat(d);
-            case String s -> new SimpleString(s);
-            case Pair<?, ?> p -> {
-                Object a = p.getLeft();
-                Object b = p.getRight();
-                if (a instanceof BigInteger A && b instanceof BigInteger B) {
-                    yield new Ratio(A, B);
-                }
-                throw new IllegalArgumentException("Pair must be <BigInteger,BigInteger>");
-            }
-            default -> throw new IllegalArgumentException("Unsupported type: " + o);
-        };
-    }
-
-    private Object lispToJava(LispObject o) {
-        if (o == Lisp.NIL) return null;
-        if (o == Lisp.T) return true;
-        if (o instanceof Fixnum f) return f.value;
-        if (o instanceof Bignum bi) return bi.value;
-        if (o instanceof LispCharacter c) return c.getValue();
-        if (o instanceof LispInteger li) return li.intValue();
-        if (o instanceof SingleFloat sf) return sf.getValue();
-        if (o instanceof DoubleFloat df) return df.getValue();
-        if (o instanceof SimpleString s) return s.getStringValue();
-        if (o instanceof Ratio r) {
-            BigInteger num = r.numerator();
-            BigInteger den = r.denominator();
-            return Pair.of(num, den);
-        }
-        return o;
     }
 
     @Test
@@ -196,12 +159,97 @@ class LispIT {
 
         for (LispObject cell = list; cell instanceof Cons cons; cell = cons.cdr()) {
             Cons pair = (Cons) cons.car();
-            String key = pair.car().getStringValue();
+            Symbol symbol = (Symbol) pair.car();
+            String key = symbol.getStringValue();
             Object value = lispToJava(pair.cdr());
             map.put(key, value);
         }
 
-        assertThat(map.get(":FIXNUM")).isInstanceOf(Integer.class)
-            .isEqualTo(42);
+        assertThat(map.get("FIXNUM")).isInstanceOf(Integer.class).isEqualTo(42);
+        assertThat(map.get("SMALL-NEGATIVE")).isEqualTo(-7);
+        assertThat(map.get("BIGNUM")).isInstanceOf(BigInteger.class).isEqualTo(new BigInteger("9999999999999999999999999999"));
+        assertThat(map.get("RATIO")).isInstanceOf(Pair.class);
+        ImmutablePair<?, ?> r1 = (ImmutablePair<?, ?>) map.get("RATIO");
+        assertThat(r1.getLeft()).isEqualTo(BigInteger.valueOf(3));
+        assertThat(r1.getRight()).isEqualTo(BigInteger.valueOf(4));
+
+        ImmutablePair<?, ?> r2 = (ImmutablePair<?, ?>) map.get("BIG-RATIO");
+        assertThat(r2.getLeft()).isEqualTo(new BigInteger("9999999999999999999"));
+        assertThat(r2.getRight()).isEqualTo(BigInteger.valueOf(5));
+
+        assertThat(map.get("FLOAT")).isInstanceOf(Float.class).isEqualTo(1.5f);
+        assertThat(map.get("DOUBLE")).isInstanceOf(Double.class).isEqualTo(3.1415926535897930);
+        assertThat(map.get("STRING")).isEqualTo("hello");
+        assertThat(map.get("CHAR")).isInstanceOf(Character.class).isEqualTo('A');
+        assertThat(map.get("NIL")).isNull();
+        assertThat(map.get("T")).isInstanceOf(Boolean.class).isEqualTo(true);
+
+        Cons list1 = (Cons) map.get("LIST");
+        List<Object> resultList = consToJavaList(list1);
+        assertThat(resultList).containsExactly(1, 2, 3);
+
+        Cons plist = (Cons) map.get("PLIST");
+        List<Object> resultPlist = consToJavaList(plist);
+
+        Cons assoList = (Cons) map.get("ASSO-LIST");
+        List<Object> resultAssoList = consToJavaList(assoList);
+
+        SimpleVector vector = (SimpleVector) map.get("VECTOR");
+        HashTable hash = (HashTable) map.get("HASH");
+    }
+
+    private List<Object> consToJavaList(LispObject obj) {
+        final List<Object> result = new ArrayList<>();
+        while (obj instanceof Cons cons) {
+            result.add(lispToJava(cons.car()));
+            obj = cons.cdr();
+        }
+        if (obj != Lisp.NIL) {
+            throw new IllegalArgumentException("Improper list, cdr not NIL");
+        }
+        return result;
+    }
+
+    private LispObject javaToLisp(Object o) {
+        return switch (o) {
+            case null -> Lisp.NIL;
+            case Boolean bool -> bool ? Lisp.T : Lisp.NIL;
+            case Byte b -> Fixnum.getInstance(b.intValue());
+            case Character c -> LispCharacter.getInstance(c);
+            case Short s -> Fixnum.getInstance(s.intValue());
+            case Integer i -> Fixnum.getInstance(i);
+            case Long l -> LispInteger.getInstance(l);
+            case BigInteger bi -> Bignum.getInstance(bi);
+            case Float f -> new SingleFloat(f);
+            case Double d -> new DoubleFloat(d);
+            case String s -> new SimpleString(s);
+            case Pair<?, ?> p -> {
+                Object a = p.getLeft();
+                Object b = p.getRight();
+                if (a instanceof BigInteger A && b instanceof BigInteger B) {
+                    yield new Ratio(A, B);
+                }
+                throw new IllegalArgumentException("Pair must be <BigInteger,BigInteger>");
+            }
+            default -> throw new IllegalArgumentException("Unsupported type: " + o);
+        };
+    }
+
+    private Object lispToJava(LispObject o) {
+        if (o == Lisp.NIL) return null;
+        if (o == Lisp.T) return true;
+        if (o instanceof Fixnum f) return f.value;
+        if (o instanceof Bignum bi) return bi.value;
+        if (o instanceof LispCharacter c) return c.getValue();
+        if (o instanceof LispInteger li) return li.intValue();
+        if (o instanceof SingleFloat sf) return sf.getValue();
+        if (o instanceof DoubleFloat df) return df.getValue();
+        if (o instanceof SimpleString s) return s.getStringValue();
+        if (o instanceof Ratio r) {
+            BigInteger num = r.numerator();
+            BigInteger den = r.denominator();
+            return Pair.of(num, den);
+        }
+        return o;
     }
 }
