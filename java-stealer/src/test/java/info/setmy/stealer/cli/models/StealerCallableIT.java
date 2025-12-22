@@ -53,10 +53,8 @@ public class StealerCallableIT {
     }
 
     @AfterEach
-    void tearDown() throws IOException {
+    void tearDown() {
         setProperty("user.dir", originalDir.getAbsolutePath());
-        deleteDirectory(new File(CLONE_DIR));
-        deleteDirectory(new File(COPY_DIR));
     }
 
     @Test

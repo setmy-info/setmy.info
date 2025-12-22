@@ -12,7 +12,6 @@ import java.net.URL;
 import static info.setmy.vcs.models.RepoType.GIT;
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.AfterEach;
 
 /**
  * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
@@ -49,12 +48,6 @@ public class GitWithModuleIT {
                 .directoryName("module-b")
                 .build()
         );
-    }
-
-    @AfterEach
-    public void after() throws IOException {
-        FileUtils.deleteDirectory(new File("target/module-a"));
-        FileUtils.deleteDirectory(new File("target/module-b"));
     }
 
     @Test
