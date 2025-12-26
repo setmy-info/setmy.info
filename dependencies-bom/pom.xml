@@ -40,7 +40,7 @@
         <logback.verion>1.5.18</logback.verion>
         <slf4j.version>2.0.16</slf4j.version>
         <lucene.version>10.2.2</lucene.version>
-        <groovy.version>5.0.2</groovy.version>
+        <groovy.version>5.0.3</groovy.version>
         <cucumber.version>7.27.0</cucumber.version>
         <pitest.version>1.16.1</pitest.version>
         <jersey.version>3.1.10</jersey.version>
@@ -50,7 +50,7 @@
         <maven.version>3.9.11</maven.version>
         <maven.clean.plugin.version>3.5.0</maven.clean.plugin.version>
         <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
-        <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
+        <maven.compiler.plugin.version>3.14.1</maven.compiler.plugin.version>
         <maven.site.plugin.version>3.20.0</maven.site.plugin.version>
         <maven.release.plugin.version>3.1.1</maven.release.plugin.version>
         <maven.source.plugin.version>3.3.1</maven.source.plugin.version>
@@ -90,7 +90,7 @@
         <java.jwt.version>4.5.0</java.jwt.version><!--java.jwt.version>4.0.0</java.jwt.version-->
         <rest.assured.version>5.5.6</rest.assured.version>
         <liquibase.version>4.33.0</liquibase.version>
-        <infinispan.version>15.2.5.Final</infinispan.version>
+        <infinispan.version>16.0.1</infinispan.version>
         <quartz.verion>2.3.2</quartz.verion>
         <lombok.version>1.18.38</lombok.version>
         <mapstruct.version>1.6.0</mapstruct.version>
@@ -104,7 +104,7 @@
         <picocli.version>4.7.7</picocli.version>
         <find.bugs.version>3.0.5</find.bugs.version>
         <spot.bugs.version>4.8.6.2</spot.bugs.version>
-        <clojure.version>1.12.3</clojure.version>
+        <clojure.version>1.12.4</clojure.version>
         <tensorflow.core.version>1.1.0</tensorflow.core.version>
         <tensorflow.ndarray.version>1.0.0</tensorflow.ndarray.version>
         <tensorflow.framework.version>1.1.0</tensorflow.framework.version>

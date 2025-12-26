@@ -56,7 +56,7 @@
         <logback.verion>1.5.18</logback.verion>
         <slf4j.version>2.0.16</slf4j.version>
         <lucene.version>10.2.2</lucene.version>
-        <groovy.version>5.0.2</groovy.version>
+        <groovy.version>5.0.3</groovy.version>
         <cucumber.version>7.27.0</cucumber.version>
         <pitest.version>1.16.1</pitest.version>
         <jersey.version>3.1.10</jersey.version>
@@ -66,7 +66,7 @@
         <maven.version>3.9.11</maven.version>
         <maven.clean.plugin.version>3.5.0</maven.clean.plugin.version>
         <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
-        <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
+        <maven.compiler.plugin.version>3.14.1</maven.compiler.plugin.version>
         <maven.site.plugin.version>3.20.0</maven.site.plugin.version>
         <maven.release.plugin.version>3.1.1</maven.release.plugin.version>
         <maven.source.plugin.version>3.3.1</maven.source.plugin.version>
@@ -81,12 +81,12 @@
         <gmavenplus.plugin.version>4.2.1</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.2.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.7.0</nexus.staging.plugin.version>
-        <spring.boot.verion>3.5.0</spring.boot.verion>
+        <spring.boot.verion>3.5.7</spring.boot.verion>
         <taglist.maven.plugin.version>3.1.0</taglist.maven.plugin.version>
         <servlet.api.version>4.0.1</servlet.api.version>
         <jaxb.api.version>2.3.1</jaxb.api.version>
-        <hibernate.version>6.5.2.Final</hibernate.version>
-        <hibernate.validator.version>8.0.1.Final</hibernate.validator.version>
+        <hibernate.version>7.0.8.Final</hibernate.version>
+        <hibernate.validator.version>9.0.1.Final</hibernate.validator.version>
         <hibernate.ehcache.version>5.6.15.Final</hibernate.ehcache.version>
         <ehcache.version>3.10.8</ehcache.version>
         <commons.dbcp.version>2.13.0</commons.dbcp.version>
@@ -114,7 +114,7 @@
         <picocli.version>4.7.7</picocli.version>
         <find.bugs.version>3.0.5</find.bugs.version>
         <spot.bugs.version>4.8.6.2</spot.bugs.version>
-        <clojure.version>1.12.3</clojure.version>
+        <clojure.version>1.12.4</clojure.version>
         <tensorflow.core.version>1.1.0</tensorflow.core.version>
         <tensorflow.ndarray.version>1.0.0</tensorflow.ndarray.version>
         <tensorflow.framework.version>1.1.0</tensorflow.framework.version>
