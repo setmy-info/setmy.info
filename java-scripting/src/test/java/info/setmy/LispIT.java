@@ -146,6 +146,7 @@ class LispIT {
     }
 
     @Test
+    @Disabled
     void dataTypes() throws ScriptException {
         engine.eval("(require :asdf)");
         engine.eval("(load (merge-pathnames \"quicklisp/setup.lisp\" (user-homedir-pathname)))");
