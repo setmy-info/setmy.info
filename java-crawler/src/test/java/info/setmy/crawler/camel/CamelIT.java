@@ -10,7 +10,7 @@ import info.setmy.crawler.elt.services.DataSourceFactoryService;
 import info.setmy.crawler.elt.services.GlobalConfigService;
 import info.setmy.crawler.elt.services.GuiceService;
 import info.setmy.crawler.elt.services.HibernateService;
-import info.setmy.crawler.elt.services.ScvDbService;
+import info.setmy.crawler.elt.services.CsvDbService;
 import info.setmy.crawler.scraper.camel.ScraperRouteBuilder;
 import info.setmy.crawler.scraper.camel.ScraperRouteBuilderConfig;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +22,7 @@ import java.io.File;
 public class CamelIT {
 
     public static final String BASE_WINDOWS_DIR = "C:\\pub\\setmy.info\\data\\crawler";
-    public static final String BASE_UNIXES_DIR = "/TODO";
+    public static final String BASE_UNIXES_DIR = "/var/opt/setmy.info/crawler";
 
     CamelConfig camelConfig;
     Camel camel;
@@ -43,7 +43,7 @@ public class CamelIT {
     WorkingDirectory workingDirectory;
     GuiceService guiceService;
     GlobalConfigService globalConfigService;
-    ScvDbService scvDbService;
+    CsvDbService scvDbService;
     DataSourceFactoryService dataSourceFactoryService;
 
     @BeforeEach
@@ -67,7 +67,7 @@ public class CamelIT {
         homeDirectory = guiceService.getInjector().getInstance(HomeDirectory.class);
         workingDirectory = guiceService.getInjector().getInstance(WorkingDirectory.class);
         globalConfigService = guiceService.getInjector().getInstance(GlobalConfigService.class);
-        scvDbService = guiceService.getInjector().getInstance(ScvDbService.class);
+        scvDbService = guiceService.getInjector().getInstance(CsvDbService.class);
         dataSourceFactoryService = guiceService.getInjector().getInstance(DataSourceFactoryService.class);
         hibernateService = guiceService.getInjector().getInstance(HibernateService.class);
 

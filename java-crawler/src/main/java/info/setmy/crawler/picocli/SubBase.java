@@ -2,7 +2,7 @@ package info.setmy.crawler.picocli;
 
 import info.setmy.crawler.elt.models.GuiceCreation;
 import info.setmy.crawler.elt.services.GuiceService;
-import info.setmy.crawler.elt.services.ScvDbService;
+import info.setmy.crawler.elt.services.CsvDbService;
 import lombok.Getter;
 import lombok.Setter;
 import picocli.CommandLine;
@@ -38,6 +38,6 @@ public abstract class SubBase {
                     .build()
             )
             .init();
-        scvDb = guiceService.getInjector().getInstance(get(ScvDbService.class, named(name)));
+        scvDb = guiceService.getInjector().getInstance(get(CsvDbService.class, named(name)));
     }
 }

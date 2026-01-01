@@ -17,7 +17,7 @@ class ScvDbServiceIT {
     File homeDirectoryFile;
     File workingDirectoryFile;
     GuiceService guiceService;
-    ScvDbService scvDbService;
+    CsvDbService scvDbService;
 
     @BeforeEach
     void setUp() {
@@ -37,7 +37,7 @@ class ScvDbServiceIT {
                     .build()
             )
             .init();
-        scvDbService = guiceService.getInjector().getInstance(ScvDbService.class);
+        scvDbService = guiceService.getInjector().getInstance(CsvDbService.class);
     }
 
     @Test

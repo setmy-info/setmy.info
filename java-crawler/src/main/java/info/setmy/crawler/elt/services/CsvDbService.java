@@ -24,7 +24,7 @@ import static java.util.Objects.requireNonNull;
 
 @Log4j2
 @RequiredArgsConstructor(onConstructor_ = @Inject)
-public class ScvDbService implements Runnable{
+public class CsvDbService implements Runnable{
 
     private static final CSVFormat CSV_FORMAT = CSVFormat.DEFAULT.builder()
         .setDelimiter(';')

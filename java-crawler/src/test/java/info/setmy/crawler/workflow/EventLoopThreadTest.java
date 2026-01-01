@@ -1,7 +1,5 @@
 package info.setmy.crawler.workflow;
 
-import info.setmy.crawler.workflow.EventLoopThread;
-import info.setmy.crawler.workflow.ExecutableService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 
