@@ -9,7 +9,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.7</version>
+        <version>3.5.9</version>
         <relativePath/>
     </parent>
 
@@ -44,21 +44,21 @@
 
         <junit.version>4.13.2</junit.version>
         <junit5.version>5.13.4</junit5.version>
-        <junit.platform.version>1.13.4</junit.platform.version>
-        <mockito.version>5.18.0</mockito.version>
+        <junit.platform.version>1.14.2</junit.platform.version>
+        <mockito.version>5.21.0</mockito.version>
         <assertj.version>3.27.3</assertj.version>
         <archunit.version>1.4.1</archunit.version>
-        <jacoco.version>0.8.13</jacoco.version>
-        <failsafe.version>3.5.0</failsafe.version>
-        <surefire.version>3.5.0</surefire.version>
+        <jacoco.version>0.8.14</jacoco.version>
+        <failsafe.version>3.5.4</failsafe.version>
+        <surefire.version>3.5.4</surefire.version>
         <!--log4j.verion>1.2.17</log4j.verion -->
         <log4j2.verion>2.25.1</log4j2.verion>
-        <logback.verion>1.5.18</logback.verion>
+        <logback.verion>1.5.24</logback.verion>
         <slf4j.version>2.0.16</slf4j.version>
-        <lucene.version>10.2.2</lucene.version>
+        <lucene.version>10.3.2</lucene.version>
         <groovy.version>5.0.3</groovy.version>
-        <cucumber.version>7.27.0</cucumber.version>
-        <pitest.version>1.16.1</pitest.version>
+        <cucumber.version>7.33.0</cucumber.version>
+        <pitest.version>1.22.0</pitest.version>
         <jersey.version>3.1.10</jersey.version>
         <jackson.version>2.19.2</jackson.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
@@ -68,64 +68,64 @@
         <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
         <maven.compiler.plugin.version>3.14.1</maven.compiler.plugin.version>
         <maven.site.plugin.version>3.20.0</maven.site.plugin.version>
-        <maven.release.plugin.version>3.1.1</maven.release.plugin.version>
+        <maven.release.plugin.version>3.3.1</maven.release.plugin.version>
         <maven.source.plugin.version>3.3.1</maven.source.plugin.version>
-        <maven.javadoc.plugin.version>3.10.0</maven.javadoc.plugin.version>
-        <maven.gpg.plugin.version>3.2.5</maven.gpg.plugin.version>
-        <maven.project.info.reports.plugin.version>3.7.0</maven.project.info.reports.plugin.version>
-        <maven.checkstyle.plugin.version>3.5.0</maven.checkstyle.plugin.version>
+        <maven.javadoc.plugin.version>3.12.0</maven.javadoc.plugin.version>
+        <maven.gpg.plugin.version>3.2.8</maven.gpg.plugin.version>
+        <maven.project.info.reports.plugin.version>3.9.0</maven.project.info.reports.plugin.version>
+        <maven.checkstyle.plugin.version>3.6.0</maven.checkstyle.plugin.version>
         <maven.changes.plugin.version>2.12.1</maven.changes.plugin.version>
-        <maven.assembly.plugin>3.7.1</maven.assembly.plugin>
+        <maven.assembly.plugin>3.8.0</maven.assembly.plugin>
         <maven.plugin.annotations.version>3.13.1</maven.plugin.annotations.version>
-        <maven.versions.maven.plugin>2.17.1</maven.versions.maven.plugin>
+        <maven.versions.maven.plugin>2.20.1</maven.versions.maven.plugin>
         <gmavenplus.plugin.version>4.2.1</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.2.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.7.0</nexus.staging.plugin.version>
-        <spring.boot.verion>3.5.7</spring.boot.verion>
-        <taglist.maven.plugin.version>3.1.0</taglist.maven.plugin.version>
+        <spring.boot.verion>3.5.9</spring.boot.verion>
+        <taglist.maven.plugin.version>3.2.2</taglist.maven.plugin.version>
         <servlet.api.version>4.0.1</servlet.api.version>
         <jaxb.api.version>2.3.1</jaxb.api.version>
-        <hibernate.version>7.0.8.Final</hibernate.version>
-        <hibernate.validator.version>9.0.1.Final</hibernate.validator.version>
+        <hibernate.version>7.2.0.Final</hibernate.version>
+        <hibernate.validator.version>9.1.0.Final</hibernate.validator.version>
         <hibernate.ehcache.version>5.6.15.Final</hibernate.ehcache.version>
-        <ehcache.version>3.10.8</ehcache.version>
-        <commons.dbcp.version>2.13.0</commons.dbcp.version>
-        <commons.io.version>2.20.0</commons.io.version>
-        <commons.codec.version>1.19.0</commons.codec.version>
-        <commons.lang3.version>3.18.0</commons.lang3.version>
-        <snakeyaml.version>2.4</snakeyaml.version>
+        <ehcache.version>3.11.1</ehcache.version>
+        <commons.dbcp.version>2.14.0</commons.dbcp.version>
+        <commons.io.version>2.21.0</commons.io.version>
+        <commons.codec.version>1.20.0</commons.codec.version>
+        <commons.lang3.version>3.20.0</commons.lang3.version>
+        <snakeyaml.version>2.5</snakeyaml.version>
         <javax.validation.api.version>2.0.1.Final</javax.validation.api.version>
         <javax.inject.version>1</javax.inject.version>
         <javax.cache.api.version>1.1.1</javax.cache.api.version>
         <java.jwt.version>4.5.0</java.jwt.version><!--java.jwt.version>4.0.0</java.jwt.version-->
         <rest.assured.version>5.5.6</rest.assured.version>
-        <liquibase.version>4.33.0</liquibase.version>
+        <liquibase.version>5.0.1</liquibase.version>
         <infinispan.version>16.0.1</infinispan.version>
         <quartz.verion>2.3.2</quartz.verion>
-        <lombok.version>1.18.38</lombok.version>
+        <lombok.version>1.18.42</lombok.version>
         <mapstruct.version>1.6.0</mapstruct.version>
         <swagger.version>3.1.0</swagger.version>
         <swagger.annotations.version>1.6.3</swagger.annotations.version>
         <swagger.models.version>1.6.3</swagger.models.version>
         <springdoc.version>1.8.0</springdoc.version>
-        <jakarta.xml.bind.api.version>4.0.2</jakarta.xml.bind.api.version>
+        <jakarta.xml.bind.api.version>4.0.4</jakarta.xml.bind.api.version>
         <jakarta.validation.api.version>3.1.0</jakarta.validation.api.version>
         <jakarta.inject.api.version>2.0.1</jakarta.inject.api.version>
         <picocli.version>4.7.7</picocli.version>
         <find.bugs.version>3.0.5</find.bugs.version>
-        <spot.bugs.version>4.8.6.2</spot.bugs.version>
+        <spot.bugs.version>4.9.8.2</spot.bugs.version>
         <clojure.version>1.12.4</clojure.version>
         <tensorflow.core.version>1.1.0</tensorflow.core.version>
         <tensorflow.ndarray.version>1.0.0</tensorflow.ndarray.version>
         <tensorflow.framework.version>1.1.0</tensorflow.framework.version>
-        <jsoup.version>1.21.1</jsoup.version>
-        <selenium.version>4.34.0</selenium.version>
+        <jsoup.version>1.22.1</jsoup.version>
+        <selenium.version>4.39.0</selenium.version>
         <feign.version>13.6</feign.version>
         <jasperreports.version>7.0.3</jasperreports.version>
         <itextpdf.version>5.5.13.4</itextpdf.version>
-        <tika.version>3.2.1</tika.version>
+        <tika.version>3.2.3</tika.version>
         <kotlin.version>2.0.20</kotlin.version>
-        <camel.version>4.6.0</camel.version>
+        <camel.version>4.17.0</camel.version>
         <hikari.version>7.0.2</hikari.version>
     </properties>
 
