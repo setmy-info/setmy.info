@@ -1,5 +1,6 @@
 package info.setmy.stealer.cli;
 
+import info.setmy.stealer.models.Change;
 import info.setmy.stealer.models.StepConfig;
 import lombok.NoArgsConstructor;
 
@@ -34,6 +35,8 @@ public class StealerConfigMapper {
                 .branchName(asNotNul((String) stepMap.get("branchName")).trim())
                 .subDirectories(stepStringList((List<String>) stepMap.get("subDirectories")))
                 .cleanup(stepStringList((List<String>) stepMap.get("cleanup")))
+                .patches(stepStringList((List<String>) stepMap.get("patches")))
+                .changes(toChangeList((List) stepMap.get("changes")))
                 .build();
             return conf;
         }
@@ -45,6 +48,31 @@ public class StealerConfigMapper {
             return unmodifiableList(new ArrayList<>());
         }
         return stringList.stream().collect(toUnmodifiableList());
+    }
+
+    private List<Change> toChangeList(final List changes) {
+        if (changes == null || changes.isEmpty()) {
+            return unmodifiableList(new ArrayList<>());
+        }
+        final List<Change> result = new ArrayList<>();
+        for (final Object c : changes) {
+            final Change change = toChange(c);
+            if (change != null) {
+                result.add(change);
+            }
+        }
+        return unmodifiableList(result);
+    }
+
+    private Change toChange(final Object changeObj) {
+        if (changeObj instanceof Map) {
+            final Map<String, Object> changeMap = (Map<String, Object>) changeObj;
+            return Change.builder()
+                .pattern(asNotNul((String) changeMap.get("pattern")))
+                .replacement(asNotNul((String) changeMap.get("replacement")))
+                .build();
+        }
+        return null;
     }
 
     private String asNotNul(final String repoType) {

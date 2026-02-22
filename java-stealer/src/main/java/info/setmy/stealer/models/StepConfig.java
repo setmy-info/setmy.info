@@ -18,4 +18,6 @@ public class StepConfig {
     private final String branchName;
     private final List<String> subDirectories;
     private final List<String> cleanup;
+    private final List<String> patches;
+    private final List<Change> changes;
 }

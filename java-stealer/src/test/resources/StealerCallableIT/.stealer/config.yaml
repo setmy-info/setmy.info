@@ -1,13 +1,13 @@
 steps:
-  - repoType: GIT
-    url: https://github.com/setmy-info/stealer-test-a.git
+  - url: https://github.com/setmy-info/stealer-test-a.git
+    repoType: GIT
     directoryName: stealer-test-a
     branchName: master
     cleanup:
       - a
       - b/b.txt
-  - repoType: GIT
-    url: https://github.com/setmy-info/stealer-test-b.git
+  - url: https://github.com/setmy-info/stealer-test-b.git
+    repoType: GIT
     directoryName: stealer-test-b
     branchName: develop
     subDirectories:

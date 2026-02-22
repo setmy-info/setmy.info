@@ -3,9 +3,9 @@ package info.setmy.stealer.models;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Singular;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -15,7 +15,8 @@ public class StealerConfig {
 
     private final File workingDirectory;
 
-    private final List<StepConfig> stepConfigs = new ArrayList<>();
+    @Singular
+    private final List<StepConfig> stepConfigs;
 
     public static class StealerConfigBuilder {
         public StealerConfigBuilder workingDirectoryString(final String fileName) {

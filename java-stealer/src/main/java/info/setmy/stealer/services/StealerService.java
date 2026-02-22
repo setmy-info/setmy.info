@@ -1,6 +1,8 @@
 package info.setmy.stealer.services;
 
+import info.setmy.exec.Executor;
 import info.setmy.stealer.exceptions.StealerException;
+import info.setmy.stealer.models.Change;
 import info.setmy.stealer.models.StealerConfig;
 import info.setmy.vcs.Vcs;
 import info.setmy.vcs.VcsFactory;
@@ -10,16 +12,19 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.io.FileUtils.copyDirectory;
 
 @Getter
 public class StealerService {
 
     public static final String STEALER_DIR = ".stealer";
-    public static final String CLONE_DIR = "clone";
+    public static final String CLONE_DIR = "clones";
     public static final String COPY_DIR = "copy";
+    public static final String FINAL_DIR = "final";
 
     private final static StealerService INSTANCE = new StealerService();
 
@@ -44,6 +49,7 @@ public class StealerService {
                 .stealerDirectory(stealerDirectory)
                 .cloneDirectory(new File(stealerDirectory, CLONE_DIR))
                 .copyDirectory(new File(stealerDirectory, COPY_DIR))
+                .finalDirectory(new File(stealerDirectory, FINAL_DIR))
                 .stepsConfig(stepConfigMapper.toStepInnerConfigList(stealerConfig.getStepConfigs()))
                 .build()
         );
@@ -55,6 +61,7 @@ public class StealerService {
         stealerInnerConfig.getStealerDirectory().mkdirs();
         stealerInnerConfig.getCloneDirectory().mkdirs();
         stealerInnerConfig.getCopyDirectory().mkdirs();
+        stealerInnerConfig.getFinalDirectory().mkdirs();
         return stealerInnerConfig;
     }
 
@@ -65,6 +72,7 @@ public class StealerService {
         doPatch(stealerConfig);
         doChange(stealerConfig);
         doFinalization(stealerConfig);
+        doDeployToWorkingDirectory(stealerConfig);
     }
 
     private void doCloneAndCheckout(final StealerInnerConfig stealerInnerConfig) {
@@ -80,9 +88,6 @@ public class StealerService {
                 .cloningDirectory(cloneDir)
                 .directoryName(stepInnerConfig.getDirectoryName())
                 .build());
-        stepInnerConfig.toBuilder()
-            .vcs(vcs)
-            .build();
         vcs.doClone();
         stepInnerConfig.getOptionalBranchName().ifPresent(newBranchName -> vcs.doCheckout(newBranchName));
     }
@@ -109,7 +114,7 @@ public class StealerService {
         final File fromDir = new File(cloneDir, subDirectoryName);
         copyDir.mkdirs();
         try {
-            copyDirectory(fromDir, copyDir);
+            copyDirectory(fromDir, copyDir, file -> !file.getName().equals(".git"));
         } catch (IOException e) {
             throw new StealerException(e);
         }
@@ -142,6 +147,18 @@ public class StealerService {
     }
 
     private void doStepPatch(final StealerInnerConfig stealerInnerConfig, final StepInnerConfig stepInnerConfig) {
+        stepInnerConfig.getPatches().forEach(patchFile -> doStepPatch(stealerInnerConfig, stepInnerConfig, patchFile));
+    }
+
+    private void doStepPatch(final StealerInnerConfig stealerInnerConfig, final StepInnerConfig stepInnerConfig, final String patchFile) {
+        final File patchFilePath = new File(patchFile);
+        final File copyDir = new File(stealerInnerConfig.getCopyDirectory(), stepInnerConfig.getDirectoryName());
+        final Executor executor = new Executor()
+            .setTimeout(0)
+            .setBlocking(false)
+            .setWorkingDirectory(copyDir);
+        executor.exec("patch", "-p0", "-i", patchFilePath.getAbsolutePath());
+        executor.waitFor();
     }
 
     private void doChange(final StealerInnerConfig stealerInnerConfig) {
@@ -149,6 +166,25 @@ public class StealerService {
     }
 
     private void doStepChange(final StealerInnerConfig stealerInnerConfig, final StepInnerConfig stepInnerConfig) {
+        stepInnerConfig.getChanges().forEach(change -> doStepChange(stealerInnerConfig, stepInnerConfig, change));
+    }
+
+    private void doStepChange(final StealerInnerConfig stealerInnerConfig, final StepInnerConfig stepInnerConfig, final Change change) {
+        final File copyDir = new File(stealerInnerConfig.getCopyDirectory(), stepInnerConfig.getDirectoryName());
+        final Collection<File> files = FileUtils.listFiles(copyDir, null, true);
+        files.forEach(file -> applyChangeToFile(file, change));
+    }
+
+    private void applyChangeToFile(final File file, final Change change) {
+        try {
+            final String content = FileUtils.readFileToString(file, UTF_8);
+            final String modified = content.replaceAll(change.getPattern(), change.getReplacement());
+            if (!content.equals(modified)) {
+                FileUtils.writeStringToFile(file, modified, UTF_8);
+            }
+        } catch (IOException e) {
+            throw new StealerException(e);
+        }
     }
 
     private void doFinalization(final StealerInnerConfig stealerInnerConfig) {
@@ -156,5 +192,22 @@ public class StealerService {
     }
 
     private void doStepFinalization(final StealerInnerConfig stealerInnerConfig, final StepInnerConfig stepInnerConfig) {
+        final File copyDir = new File(stealerInnerConfig.getCopyDirectory(), stepInnerConfig.getDirectoryName());
+        final File finalDirectory = stealerInnerConfig.getFinalDirectory();
+        try {
+            copyDirectory(copyDir, finalDirectory);
+        } catch (IOException e) {
+            throw new StealerException(e);
+        }
+    }
+
+    private void doDeployToWorkingDirectory(final StealerInnerConfig stealerInnerConfig) {
+        final File finalDirectory = stealerInnerConfig.getFinalDirectory();
+        final File workingDirectory = stealerInnerConfig.getWorkingDirectory();
+        try {
+            copyDirectory(finalDirectory, workingDirectory);
+        } catch (IOException e) {
+            throw new StealerException(e);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package info.setmy.stealer.services;
 
+import info.setmy.stealer.models.Change;
 import info.setmy.stealer.models.StepConfig;
 
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class StepConfigMapper {
             .branchName(stepConfig.getBranchName())
             .subDirectories(replaceEmpty(stepConfig.getSubDirectories()))
             .cleanup(replaceEmpty(stepConfig.getCleanup()))
+            .patches(replaceEmpty(stepConfig.getPatches()))
+            .changes(replaceEmptyChanges(stepConfig.getChanges()))
             .build();
     }
 
@@ -38,5 +41,12 @@ public class StepConfigMapper {
             return new ArrayList<>();
         }
         return copyOf(subDirectories);
+    }
+
+    private List<Change> replaceEmptyChanges(final List<Change> changes) {
+        if (changes == null) {
+            return new ArrayList<>();
+        }
+        return copyOf(changes);
     }
 }
