@@ -1,0 +1,8 @@
+steps:
+  - repoType: GIT
+    url: https://github.com/setmy-info/stealer-test-a.git
+    directoryName: stealer-test-a
+    branchName: master
+    changes:
+      - pattern: "this should be replaced"
+        replacement: "this has been changed"
