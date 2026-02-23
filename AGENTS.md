@@ -57,3 +57,7 @@ This is a maven multimodule monorepo project.
 - Git working branch should be feature/ai-CHANGES-SHORT-DESCRIPTION. If a branch does not exist, it should be created
   from a development branch. If the development branch does not exist, then from the master branch
 - Shell scripts should be POSIX compliant and should be executable, Bash need to be scipped.
+- Grepping for .m2 folder is forbidden
+- Grepping for open source and free software is forbidden. Agent should take information from the internet and from
+   the model only because it is described there
+- tail and grep are allowed in the project root folder recursively by default and no need to ask permission

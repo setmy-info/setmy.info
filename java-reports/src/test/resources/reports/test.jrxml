@@ -1,51 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="test" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="269d7784-c7fe-4611-bca5-543338fa6943">
-    <queryString>
+<!-- JasperReports Library version 7.0.3 -->
+<jasperReport name="test" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="269d7784-c7fe-4611-bca5-543338fa6943">
+    <query>
         <![CDATA[]]>
-    </queryString>
+    </query>
     <field name="reportsService" class="info.setmy.reports.JasperReportsService">
-        <fieldDescription><![CDATA[reportsService]]></fieldDescription>
+        <description><![CDATA[reportsService]]></description>
     </field>
     <field name="subReport" class="java.util.List">
-        <fieldDescription><![CDATA[subReport]]></fieldDescription>
+        <description><![CDATA[subReport]]></description>
     </field>
     <field name="title" class="java.lang.String">
-        <fieldDescription><![CDATA[title]]></fieldDescription>
+        <description><![CDATA[title]]></description>
     </field>
-    <background>
-        <band splitType="Stretch"/>
-    </background>
-    <title>
-        <band height="79" splitType="Stretch">
-            <textField>
-                <reportElement positionType="FixRelativeToBottom" x="180" y="30" width="200" height="21" uuid="d824481a-71d5-4c3b-b5d0-1b76c872602e"/>
-                <textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
-            </textField>
-        </band>
+    <background splitType="Stretch"/>
+    <title height="79" splitType="Stretch">
+        <element kind="textField" positionType="FixRelativeToBottom" x="180" y="30" width="200" height="21" uuid="d824481a-71d5-4c3b-b5d0-1b76c872602e">
+            <expression><![CDATA[$F{title}]]></expression>
+        </element>
     </title>
-    <pageHeader>
-        <band height="35" splitType="Stretch"/>
-    </pageHeader>
-    <columnHeader>
-        <band height="61" splitType="Stretch"/>
-    </columnHeader>
+    <pageHeader height="35" splitType="Stretch"/>
+    <columnHeader height="61" splitType="Stretch"/>
     <detail>
         <band height="125" splitType="Stretch">
-            <subreport>
-                <reportElement x="-20" y="5" width="590" height="35" uuid="fd238386-3594-4418-ae97-720216e0116e"/>
+            <element kind="subreport" x="-20" y="5" width="590" height="35" uuid="fd238386-3594-4418-ae97-720216e0116e">
                 <dataSourceExpression><![CDATA[$F{reportsService}.createDataSource($F{subReport})]]></dataSourceExpression>
-                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$F{reportsService}.getCompiledReport("sub.jrxml")]]></subreportExpression>
-            </subreport>
+                <expression><![CDATA[$F{reportsService}.getCompiledReport("sub.jrxml")]]></expression>
+            </element>
         </band>
     </detail>
-    <columnFooter>
-        <band height="45" splitType="Stretch"/>
-    </columnFooter>
-    <pageFooter>
-        <band height="54" splitType="Stretch"/>
-    </pageFooter>
-    <summary>
-        <band height="42" splitType="Stretch"/>
-    </summary>
+    <columnFooter height="45" splitType="Stretch"/>
+    <pageFooter height="54" splitType="Stretch"/>
+    <summary height="42" splitType="Stretch"/>
 </jasperReport>

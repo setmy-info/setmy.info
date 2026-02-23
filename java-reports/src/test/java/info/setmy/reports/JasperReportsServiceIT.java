@@ -4,11 +4,13 @@ import info.setmy.models.storage.DirectoryStructureFileCreationPattern;
 import info.setmy.models.storage.Storage;
 import info.setmy.models.storage.StorageFile;
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Optional;
+import org.apache.tika.Tika;
+import org.apache.tika.exception.TikaException;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -17,7 +19,6 @@ import org.junit.jupiter.api.condition.OS;
  *
  * @author <a href="mailto:imre.tabur@mail.ee">Imre Tabur</a>
  */
-@Disabled // TODO : update reports files version, remake these. reload.
 public class JasperReportsServiceIT {
 
     JasperReportsService jasperReportsService;
@@ -55,7 +56,7 @@ public class JasperReportsServiceIT {
 
     @Test
     @EnabledOnOs({OS.LINUX, OS.WINDOWS, OS.MAC})
-    public void testExport() {
+    public void testExport() throws TikaException, IOException {
         final Optional<StorageFile> file = storage.createStorageFile(
             DirectoryStructureFileCreationPattern.builder()
             .build()
@@ -63,5 +64,9 @@ public class JasperReportsServiceIT {
         final File child = file.get().getChild();
         assertThat(child).isNotNull();
         jasperReportsService.export(model, child);
+        final String content = new Tika().parseToString(child);
+        assertThat(content)
+            .contains(model.getTitle())
+            .contains(subReportModel.getSubData());
     }
 }

@@ -95,3 +95,75 @@ After finalization, content from `copy/<repo>/` is merged into the working direc
 ### Clones Directory Naming
 - Renamed `StealerService.CLONE_DIR` from `"clone"` to `"clones"` (plural) to match backlog specification.
 - All IT test constants (`CLONE_DIR`, `A_CLONE_DIR`, `B_CLONE_DIR`) updated from `/clone/` to `/clones/`.
+
+---
+
+# JasperReports 7.x Migration Report
+
+## Summary
+
+Upgraded JasperReports XML report definitions (JRXML files) in the `java-reports` module from the pre-7.x format to the JasperReports 7.x Jackson-based XML format. The `JasperReportsServiceIT` integration test now passes.
+
+## Versions
+
+- JasperReports: `7.0.3` (already set in `dependencies-bom` at `<jasperreports.version>`)
+- Dependencies already in BOM and `java-reports/pom.xml`: `jasperreports`, `jasperreports-fonts`, `jasperreports-pdf`, `itextpdf`
+
+## JRXML Format Changes (pre-7.x → 7.x)
+
+JasperReports 7.x replaced the Digester-based XML parser with a Jackson-based XML deserializer. This required the following JRXML format changes:
+
+### 1. Band elements wrapped in `<element kind="...">` containers
+
+**Before (pre-7.x):**
+```xml
+<title height="79" splitType="Stretch">
+    <textField>
+        <reportElement x="180" y="30" width="200" height="21" uuid="..."/>
+        <textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+    </textField>
+</title>
+```
+
+**After (7.x):**
+```xml
+<title height="79" splitType="Stretch">
+    <element kind="textField" x="180" y="30" width="200" height="21" uuid="...">
+        <expression><![CDATA[$F{title}]]></expression>
+    </element>
+</title>
+```
+
+### 2. `<reportElement>` removed — position/size attributes moved to `<element>`
+
+The `<reportElement>` wrapper element is no longer used. Attributes like `x`, `y`, `width`, `height`, `uuid`, `positionType`, `stretchType` are now directly on the `<element>` tag.
+
+### 3. Polymorphic type discriminator `kind` attribute required
+
+Each element in a band list requires a `kind` attribute telling Jackson which concrete type to instantiate. Known `kind` values: `textField`, `staticText`, `image`, `subreport`, `rectangle`, `ellipse`, `line`, `frame`, `crosstab`, `chart`, `break`, `componentElement`, `genericElement`.
+
+### 4. Element expression properties renamed to `<expression>`
+
+| Pre-7.x element name     | 7.x element name |
+|--------------------------|------------------|
+| `<textFieldExpression>`  | `<expression>`   |
+| `<subreportExpression>`  | `<expression>`   |
+
+`<dataSourceExpression>` for subreports remains unchanged.
+
+## Files Changed
+
+- `java-reports/src/test/resources/reports/test.jrxml` — main report with title text field and detail subreport
+- `java-reports/src/test/resources/reports/sub.jrxml` — subreport with a text field
+- `java-reports/src/test/java/info/setmy/reports/JasperReportsServiceIT.java` — extended `testExport()` with Tika-based PDF content verification
+
+## Tika Content Verification
+
+After PDF export, Apache Tika parses the generated PDF and asserts the report contains the expected model data:
+
+```java
+final String content = new Tika().parseToString(child);
+assertThat(content)
+    .contains(model.getTitle())         // "Jasper reports example"
+    .contains(subReportModel.getSubData()); // "Sub report data!"
+```
