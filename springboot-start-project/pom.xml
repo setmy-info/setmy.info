@@ -943,10 +943,11 @@
                         <param>info.setmy.microservice*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>info.setmy.microservice*</param>
+                        <param>info.setmy.microservice.*Test</param>
                     </targetTests>
                     <excludedTestClasses>
                         <param>**.*IT</param>
+                        <param>**.*E2ET</param>
                     </excludedTestClasses>
                 </configuration>
                 <dependencies>
