@@ -16,6 +16,7 @@ class StealerInnerConfig {
     private final File stealerDirectory;
     private final File cloneDirectory;
     private final File copyDirectory;
+    private final File finalDirectory;
 
     private final List<StepInnerConfig> stepsConfig;
 }

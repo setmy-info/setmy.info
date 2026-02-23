@@ -1,5 +1,6 @@
 package info.setmy.stealer.services;
 
+import info.setmy.stealer.models.Change;
 import info.setmy.vcs.Vcs;
 import info.setmy.vcs.models.RepoType;
 import lombok.Builder;
@@ -28,6 +29,8 @@ class StepInnerConfig {
     private final Vcs vcs;
     private final List<String> subDirectories;
     private final List<String> cleanup;
+    private final List<String> patches;
+    private final List<Change> changes;
 
     public boolean haveBranchName() {
         return getOptionalBranchName().isPresent();
@@ -43,5 +46,21 @@ class StepInnerConfig {
 
     public List<String> getSubDirectories() {
         return haveSubDirectories() ? unmodifiableList(subDirectories) : unmodifiableList(new ArrayList<>());
+    }
+
+    public boolean havePatches() {
+        return patches != null && !patches.isEmpty();
+    }
+
+    public List<String> getPatches() {
+        return havePatches() ? unmodifiableList(patches) : unmodifiableList(new ArrayList<>());
+    }
+
+    public boolean haveChanges() {
+        return changes != null && !changes.isEmpty();
+    }
+
+    public List<Change> getChanges() {
+        return haveChanges() ? unmodifiableList(changes) : unmodifiableList(new ArrayList<>());
     }
 }

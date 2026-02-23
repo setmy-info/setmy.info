@@ -206,13 +206,13 @@
                     <additionalOptions>-html5</additionalOptions>
                 </configuration>
             </plugin-->
-            <!--plugin>
+            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>${maven.assembly.plugin}</version>
                 <configuration>
                     <tarLongFileMode>gnu</tarLongFileMode>
                     <descriptors>
-                        <descriptor>src/main/assembly/src.xml</descriptor>
+                        <descriptor>src/main/assembly/cli.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>
@@ -224,7 +224,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin-->
+            </plugin>
             <!--plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>

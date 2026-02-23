@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,12 +40,12 @@ public class StealerConfigService {
     }
 
     private StealerConfig getConfig(final File stealerConfigFile) {
-        final StealerConfig result = StealerConfig.builder()
-            .workingDirectory(stealerConfigFile.getParentFile().getParentFile())
-            .build();
-        final List<StepConfig> stepConfigs = result.getStepConfigs();
+        final List<StepConfig> stepConfigs = new ArrayList<>();
         parseYamlToConfig(stealerConfigFile, stepConfigs);
-        return result;
+        return StealerConfig.builder()
+            .workingDirectory(stealerConfigFile.getParentFile().getParentFile())
+            .stepConfigs(stepConfigs)
+            .build();
     }
 
     private void parseYamlToConfig(final File stealerConfigFile, final List<StepConfig> stepConfigs) {

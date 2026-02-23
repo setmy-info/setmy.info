@@ -1,0 +1,7 @@
+--- test.txt
++++ test.txt
+@@ -1,3 +1,3 @@
+ <a>./stealer-test-a/test.txt</a>
+ a: "abc"
+-this should be replaced
++this has been replaced

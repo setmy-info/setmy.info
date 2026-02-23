@@ -8,7 +8,7 @@ import static java.lang.System.exit;
 
 public class Application {
 
-    public static void main(final String... args) {
+    static void main(final String... args) {
         exit(
             new CommandLine(
                 new StealerCallable(
