@@ -1,4 +1,4 @@
 #!/bin/sh
 set -e
-SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
-exec java -cp "${SCRIPT_DIR}/../lib/*" info.setmy.stealer.cli.Application "$@"
+SMI_LIB_DIR=`smi-lib-location`
+exec java -cp "${SMI_LIB_DIR}/java-stealer-*.jar" info.setmy.stealer.cli.Application "$@"
