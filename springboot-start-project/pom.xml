@@ -22,6 +22,7 @@
 
     <modules>
         <module>springboot-start-app</module>
+        <module>spring-boot-example-starter</module>
     </modules>
 
 </project>
