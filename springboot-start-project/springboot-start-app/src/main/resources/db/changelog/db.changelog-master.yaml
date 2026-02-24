@@ -1,0 +1,7 @@
+databaseChangeLog:
+    -   include:
+            file: properties.xml
+            relativeToChangelogFile: true
+    -   include:
+            file: 1.0.0/index.xml
+            relativeToChangelogFile: true

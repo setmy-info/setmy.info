@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1.0.0_person_agreement" author="Imre Tabur">
+
+        <createSequence sequenceName="PERSON_AGREEMENT_ID_SEQ" incrementBy="1" startValue="1"/>
+
+        <createTable tableName="person_agreement">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(25)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_person_agreement__name"/>
+            </column>
+            <column name="terms_agreement" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data" type="${jsonbType}">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="person_agreement"/>
+            <dropSequence sequenceName="PERSON_AGREEMENT_ID_SEQ"/>
+        </rollback>
+
+    </changeSet>
+
+</databaseChangeLog>
