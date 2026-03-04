@@ -23,6 +23,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import org.locationtech.jts.geom.Geometry;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -65,6 +67,7 @@ public class ExampleModel implements Serializable {
     private LocalDateTime dateTime = LocalDateTime.now();
 
     @Column(name = "geom")
+    @JdbcTypeCode(SqlTypes.GEOMETRY)
     private Geometry geom;
 
     @PostPersist

@@ -9,7 +9,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.9</version>
+        <version>4.0.3</version>
         <relativePath/>
     </parent>
 
@@ -81,7 +81,7 @@
         <gmavenplus.plugin.version>4.2.1</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.2.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.7.0</nexus.staging.plugin.version>
-        <spring.boot.verion>3.5.9</spring.boot.verion>
+        <spring.boot.verion>4.0.3</spring.boot.verion>
         <taglist.maven.plugin.version>3.2.2</taglist.maven.plugin.version>
         <servlet.api.version>4.0.1</servlet.api.version>
         <jaxb.api.version>2.3.1</jaxb.api.version>
@@ -100,7 +100,7 @@
         <java.jwt.version>4.5.0</java.jwt.version><!--java.jwt.version>4.0.0</java.jwt.version-->
         <rest.assured.version>5.5.6</rest.assured.version>
         <liquibase.version>5.0.1</liquibase.version>
-        <infinispan.version>16.0.1</infinispan.version>
+        <infinispan.version>16.1.0</infinispan.version>
         <quartz.verion>2.3.2</quartz.verion>
         <lombok.version>1.18.42</lombok.version>
         <mapstruct.version>1.6.0</mapstruct.version>
@@ -195,8 +195,12 @@
             <!-- version>${spring.boot.verion}</version -->
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
         </dependency>
         <!--dependency>
             <groupId>org.springframework.boot</groupId>
@@ -239,24 +243,24 @@
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.5.2.Final</version>
+            <version>${hibernate.version}</version>
             <!-- scope>runtime</scope -->
         </dependency>
         <dependency>
             <groupId>org.hibernate.orm</groupId>
-            <artifactId>hibernate-jpamodelgen</artifactId>
-            <version>6.5.2.Final</version>
+            <artifactId>hibernate-processor</artifactId>
+            <version>${hibernate.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>8.0.1.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-spatial</artifactId>
-            <version>6.5.2.Final</version>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validator.version}</version>
         </dependency>
 
         <dependency>
@@ -568,11 +572,12 @@
         </dependency>
         <dependency>
             <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-spring-boot3-starter-embedded</artifactId>
+            <artifactId>infinispan-spring-boot4-starter-embedded</artifactId>
+            <version>${infinispan.version}</version>
         </dependency>
         <!--dependency>
             <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-spring-boot3-starter-remote</artifactId>
+            <artifactId>infinispan-spring-boot4-starter-remote</artifactId>
         </dependency-->
         <dependency>
             <groupId>javax.cache</groupId>
@@ -1127,7 +1132,7 @@
             </dependency>
             <dependency>
                 <groupId>org.infinispan</groupId>
-                <artifactId>infinispan-spring-boot3-starter</artifactId>
+                <artifactId>infinispan-spring-boot4-starter</artifactId>
                 <version>${infinispan.version}</version>
             </dependency>
             <dependency>
