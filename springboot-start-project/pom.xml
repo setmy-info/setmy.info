@@ -23,6 +23,34 @@
     <modules>
         <module>springboot-start-app</module>
         <module>spring-boot-example-starter</module>
+        <module>spring-boot-accounting-starter</module>
+        <module>spring-boot-ai-starter</module>
+        <module>spring-boot-clojure-starter</module>
+        <module>spring-boot-communication-starter</module>
+        <module>spring-boot-crawler-starter</module>
+        <module>spring-boot-db-starter</module>
+        <module>spring-boot-document-db-starter</module>
+        <module>spring-boot-exec-starter</module>
+        <module>spring-boot-graph-starter</module>
+        <module>spring-boot-graph-db-starter</module>
+        <module>spring-boot-graphics-starter</module>
+        <module>spring-boot-hr-starter</module>
+        <module>spring-boot-indexing-starter</module>
+        <module>spring-boot-jwt-models-starter</module>
+        <module>spring-boot-lexer-parser-starter</module>
+        <module>spring-boot-linguistics-starter</module>
+        <module>spring-boot-modular-ssn-starter</module>
+        <module>spring-boot-protocol-starter</module>
+        <module>spring-boot-reports-starter</module>
+        <module>spring-boot-rest-client-starter</module>
+        <module>spring-boot-scripting-starter</module>
+        <module>spring-boot-stealer-starter</module>
+        <module>spring-boot-storage-starter</module>
+        <module>spring-boot-templates-starter</module>
+        <module>spring-boot-vcs-starter</module>
+        <module>spring-boot-web-starter</module>
+        <module>spring-boot-web-doc-format-starter</module>
+        <module>spring-boot-wf-starter</module>
     </modules>
 
 </project>
