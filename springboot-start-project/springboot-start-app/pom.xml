@@ -470,8 +470,8 @@
             <version>${rest.assured.version}</version>
             <exclusions>
                 <exclusion>
-                    <artifactId>org.apache.groovy</artifactId>
-                    <groupId>groovy</groupId>
+                    <groupId>org.apache.groovy</groupId>
+                    <artifactId>groovy</artifactId>
                 </exclusion>
             </exclusions>
             <scope>test</scope>
