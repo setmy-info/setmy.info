@@ -118,7 +118,7 @@ python-ai/traffic/
 /incubation/springboot-start-project/nbproject/
 
 # AI agents
-
-**/TASKLIST.lisp
-**/TASKLIST.sexp
-**/TASKLIST.md
+**/TASKLIST*.md
+**/TASKLIST*.lisp
+**/TASKLIST*.sexp
+**/.output.txt

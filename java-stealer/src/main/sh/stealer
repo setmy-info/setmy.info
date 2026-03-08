@@ -1,4 +1,9 @@
 #!/bin/sh
+# Copyright (C) 2024 Imre Tabur <imre.tabur@mail.ee>
 set -e
-SMI_LIB_DIR=`smi-lib-location`
-exec java -cp "${SMI_LIB_DIR}/java-stealer-*.jar" info.setmy.stealer.cli.Application "$@"
+OPT_DIR=/opt
+STEALER_OPT_DIR=${OPT_DIR}/stealer
+STEALER_BIN_OPT_DIR=${STEALER_OPT_DIR}/bin
+STEALER_LIB_OPT_DIR=${STEALER_OPT_DIR}/lib
+
+exec java -cp "${STEALER_LIB_OPT_DIR}/*" info.setmy.stealer.cli.Application "$@"
