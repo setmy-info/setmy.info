@@ -20,8 +20,8 @@
     <description>Spring Boot Master POM</description>
     <url>https://setmy-info.github.io</url>
 
-    <!-- Properties duplicated here from springboot-start-app for starter modules inheritance.
-         All spring-boot-*-starter modules inherit these from this parent POM. -->
+    <!-- Single source of truth for all Spring Boot module properties.
+         springboot-start-app and all spring-boot-*-starter modules inherit from this POM. -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -116,6 +116,18 @@
         <camel.version>4.18.0</camel.version>
         <hikari.version>7.0.2</hikari.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.verion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <modules>
         <module>springboot-start-app</module>
