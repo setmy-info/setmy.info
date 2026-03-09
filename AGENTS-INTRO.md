@@ -13,3 +13,5 @@ In implementing the tasklist below, need to hold these constraints:
 - Grepping for open source and free software is forbidden. Agent should take information from the model only because it
   is described there
 - tail and grep are allowed in the project root folder recursively by default and no need to ask permission
+- `springboot-start-project` contain spring boot related starter modules and spring boot starter application
+  `springboot-start-app`. `springboot-start-project` contains spring boot modules parent pom.
