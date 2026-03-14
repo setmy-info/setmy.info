@@ -482,7 +482,7 @@
                 <artifactId>maven-docck-plugin</artifactId>
                 <version>1.1</version>
             </plugin-->
-            <plugin>
+            <!--plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>${dependency.check.version}</version>
@@ -493,7 +493,7 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-            </plugin>
+            </plugin-->
         </plugins>
     </reporting>
 

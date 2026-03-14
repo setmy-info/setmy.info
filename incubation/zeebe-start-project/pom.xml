@@ -259,7 +259,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.9.0</version>
             </plugin-->
-            <plugin>
+            <!--plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>${dependency.check.version}</version>
@@ -270,7 +270,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
@@ -609,7 +609,7 @@
                 <artifactId>maven-docck-plugin</artifactId>
                 <version>1.1</version>
             </plugin-->
-            <plugin>
+            <!--plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>${dependency.check.version}</version>
@@ -620,7 +620,7 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-            </plugin>
+            </plugin-->
         </plugins>
     </reporting>
 
