@@ -8,6 +8,27 @@
         <author email="imre.tabur@mail.ee">Imre Tabur</author>
     </properties>
     <body>
+        <release version="1.2.0" date="2026-03-08" description="Installation directory refactored to /opt/stealer; Windows migration">
+            <action dev="imreit" type="update" due-to="Imre Tabur" due-to-email="imre.tabur@mail.ee">
+                Refactored Unix shell script (src/main/sh/stealer) to use a self-relative path approach: SCRIPT_DIR is
+                derived from dirname of the executed script, STEALER_HOME is its parent. The classpath now includes all
+                JARs in the lib/ directory (lib/*) instead of only java-stealer-*.jar, which previously left all
+                transitive dependency JARs unused at runtime.
+            </action>
+            <action dev="imreit" type="update" due-to="Imre Tabur" due-to-email="imre.tabur@mail.ee">
+                Changed FHS installation package name from setmy.info to stealer. Installation path is now /opt/stealer
+                with bin/ and lib/ subdirectories (FHS 3.0 compliant). Previously, all dependency JARs were placed in
+                the shared /opt/setmy.info/lib directory, causing potential classpath conflicts with other applications
+                sharing that directory. The dedicated /opt/stealer/lib/ directory isolates stealer JARs.
+            </action>
+            <action dev="imreit" type="add" due-to="Imre Tabur" due-to-email="imre.tabur@mail.ee">
+                Windows migration: src/main/cmd/stealer.cmd uses %~dp0 to determine the script directory and constructs
+                the classpath as %SCRIPT_DIR%..\lib\* to include all dependency JARs from the lib/ directory relative
+                to the installation root. This supports installation at C:\pub\stealer\ with bin\ and lib\
+                subdirectories. The Maven assembly (src/main/assembly/cli.xml) bundles stealer.cmd into the bin/
+                directory of the distribution archive alongside the Unix shell script.
+            </action>
+        </release>
         <release version="1.0.0" date="2021-07-27" description="First release">
             <action dev="imreit" type="add" due-to="Imre Tabur" due-to-email="imre.tabur@mail.ee">Initial release.</action>
         </release>

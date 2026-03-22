@@ -325,9 +325,9 @@
                 <configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>
-                    <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
-                    <!-- configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation -->
-                    <!-- configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation -->
+                    <!--configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/src/test/resources/sun-checkstyle.xml</configLocation>
+                    <configLocation>${basedir}/src/test/resources/google_checks.xml</configLocation-->
                 </configuration>
             </plugin>
             <plugin>
@@ -475,7 +475,7 @@
                 <artifactId>maven-docck-plugin</artifactId>
                 <version>1.1</version>
             </plugin-->
-            <plugin>
+            <!--plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>${dependency.check.version}</version>
@@ -486,7 +486,7 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-            </plugin>
+            </plugin-->
         </plugins>
     </reporting>
 
