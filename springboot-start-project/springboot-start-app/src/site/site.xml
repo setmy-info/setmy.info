@@ -14,7 +14,7 @@
         <links>
             <item name="APT Format" href="http://maven.apache.org/doxia/references/apt-format.html"/>
         </links>
-        <menu name="ÂµS - ÂµService">
+        <menu name="µS - µService">
             <item name="Index" href="index.html"/>
             <item name="Template" href="template.html" collapse="true">
                 <item name="Template" href="template.html"/>

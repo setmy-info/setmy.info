@@ -695,6 +695,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.verion}</version>
+                <!-- AI added. Is this needed? -->
                 <executions>
                     <execution>
                         <goals>
@@ -779,6 +780,7 @@
                     <release>${java.version}</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <!--outputEncoding>${project.build.sourceEncoding}</outputEncoding -->
+                    <!-- AI added. Is this needed? -->
                     <parameters>true</parameters>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
