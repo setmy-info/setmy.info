@@ -124,6 +124,7 @@
         <module>dependencies-bom</module>
         <module>java-models</module>
         <module>java-services</module>
+        <module>java-crypto</module>
         <module>groovy-models</module>
         <module>groovy-services</module>
         <module>java-clojure</module>
