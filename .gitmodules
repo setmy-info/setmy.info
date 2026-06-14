@@ -133,3 +133,6 @@
 [submodule "submodules/setmy-info-docker"]
 	path = submodules/setmy-info-docker
 	url = git@github.com:setmy-info/setmy-info-docker.git
+[submodule "submodules/elixir-module-loader"]
+	path = submodules/elixir-module-loader
+	url = git@github.com:setmy-info/elixir-module-loader.git
