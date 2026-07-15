@@ -136,3 +136,15 @@
 [submodule "submodules/elixir-module-loader"]
 	path = submodules/elixir-module-loader
 	url = git@github.com:setmy-info/elixir-module-loader.git
+[submodule "submodules/setmy.info-python"]
+	path = submodules/setmy.info-python
+	url = https://github.com/setmy-info/setmy.info-python.git
+[submodule "submodules/setmy.info-js"]
+	path = submodules/setmy.info-js
+	url = https://github.com/setmy-info/setmy.info-js.git
+[submodule "submodules/setmy.info-cpp"]
+	path = submodules/setmy.info-cpp
+	url = https://github.com/setmy-info/setmy.info-cpp.git
+[submodule "submodules/setmy.info-elixir"]
+	path = submodules/setmy.info-elixir
+	url = https://github.com/setmy-info/setmy.info-elixir.git
