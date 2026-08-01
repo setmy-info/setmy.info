@@ -38,7 +38,7 @@
         <junit.platform.version>1.14.2</junit.platform.version>
         <mockito.version>5.22.0</mockito.version>
         <assertj.version>3.27.3</assertj.version>
-        <archunit.version>1.4.1</archunit.version>
+        <archunit.version>1.4.2</archunit.version>
         <jacoco.version>0.8.14</jacoco.version>
         <failsafe.version>3.5.5</failsafe.version>
         <surefire.version>3.5.5</surefire.version>
@@ -72,7 +72,7 @@
         <gmavenplus.plugin.version>4.3.1</gmavenplus.plugin.version>
         <buildnumber.maven.plugin.version>3.3.0</buildnumber.maven.plugin.version>
         <nexus.staging.plugin.version>1.7.0</nexus.staging.plugin.version>
-        <spring.boot.verion>4.0.3</spring.boot.verion>
+        <spring.boot.verion>4.1.0</spring.boot.verion>
         <taglist.maven.plugin.version>3.2.2</taglist.maven.plugin.version>
         <servlet.api.version>4.0.1</servlet.api.version>
         <jaxb.api.version>2.3.1</jaxb.api.version>
