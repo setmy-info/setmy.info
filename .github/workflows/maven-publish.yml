@@ -16,11 +16,11 @@ jobs:
       packages: write
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 25
+    - name: Set up JDK 26
       # https://github.com/actions/setup-java
       uses: actions/setup-java@v4
       with:
-        java-version: '25'
+        java-version: '26'
         architecture: 'x64'
         distribution: 'zulu'
         # server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
