@@ -215,6 +215,11 @@
                 <version>${assertj.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.tngtech.archunit</groupId>
+                <artifactId>archunit-junit5</artifactId>
+                <version>${archunit.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.infinispan</groupId>
                 <artifactId>infinispan-bom</artifactId>
                 <version>${infinispan.version}</version>
