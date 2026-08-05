@@ -196,7 +196,7 @@ public class JUnit5CollectedExamplesTest {
 
     @Order(10)
     @Test
-    @EnabledForJreRange(max = JAVA_12)
+    @EnabledForJreRange(min = JAVA_8, max = JAVA_12)
     void onJRERange() {
         log.info("Up to {} JRE not allowed", JAVA_12);
         fail("Not allowed JRE!");

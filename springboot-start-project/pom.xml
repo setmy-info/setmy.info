@@ -35,7 +35,7 @@
 
         <junit.version>4.13.2</junit.version>
         <junit5.version>6.1.2</junit5.version>
-        <junit.platform.version>1.14.4</junit.platform.version>
+        <junit.platform.version>6.1.2</junit.platform.version>
         <mockito.version>5.23.0</mockito.version>
         <assertj.version>3.27.7</assertj.version>
         <archunit.version>1.4.2</archunit.version>
@@ -51,8 +51,9 @@
         <cucumber.version>7.34.6</cucumber.version>
         <pitest.version>1.25.8</pitest.version>
         <jersey.version>4.0.2</jersey.version>
-        <jackson.version>2.22.1</jackson.version>
+        <jackson.version>2.22</jackson.version>
         <jackson.annotaions.version>2.22</jackson.annotaions.version>
+        <jackson.databind.version>2.22.1</jackson.databind.version>
         <dockerfile.maven.version>1.4.13</dockerfile.maven.version>
         <dependency.check.version>12.2.2</dependency.check.version>
         <maven.version>3.9.16</maven.version>
@@ -106,7 +107,7 @@
         <picocli.version>4.7.7</picocli.version>
         <find.bugs.version>3.0.5</find.bugs.version>
         <spot.bugs.version>4.10.3.0</spot.bugs.version>
-        <clojure.version>1.25.5</clojure.version>
+        <clojure.version>1.12.5</clojure.version>
         <tensorflow.core.version>1.2.0</tensorflow.core.version>
         <tensorflow.ndarray.version>1.0.0</tensorflow.ndarray.version>
         <tensorflow.framework.version>1.2.0</tensorflow.framework.version>
