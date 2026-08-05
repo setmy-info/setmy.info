@@ -122,3 +122,6 @@ python-ai/traffic/
 **/TASKLIST*.lisp
 **/TASKLIST*.sexp
 **/.output.txt
+
+**/claude.session.sh
+
