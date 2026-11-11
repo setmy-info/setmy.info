@@ -83,7 +83,7 @@ diff <(grep -E '<[a-z0-9.]+(version|verion|plugin)>' dependencies-bom/pom.xml) \
 
 ### 7. Upgrade the JDK in CI
 
-`.github/workflows/maven-publish.yml` – set `java-version` of `actions/setup-java` to the newest JDK
+`.github/workflows/pipeline.yml` – set `JAVA_VERSION` to the newest JDK
 (check releases of `actions/checkout` and `actions/setup-java` too). Jenkins uses whatever is in `/opt/jdk`.
 `java.version` in the poms is the compile target and can stay lower than the CI/build JDK.
 

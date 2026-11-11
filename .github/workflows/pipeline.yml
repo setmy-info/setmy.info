@@ -1,0 +1,251 @@
+# GitHub Actions port of the Jenkinsfile, made from submodules/jenkinsfile-starter
+# (.github/workflows/pipeline.yml, jenkinsfile-starter 1.3.0) in its "without draft" flow:
+# there is no draft branch, the flow is release -> master and master is the release.
+# Release and Release reports run on master, DRAFT_TO_LIVE and the live draft stage are not used,
+# master publishes the release and deploys it to the live publish stage.
+#
+# Jenkinsfile -> GitHub Actions
+#   pollSCM                                  on: push, every branch. No pull request builds, no tag builds.
+#   disableConcurrentBuilds(abortPrevious)   concurrency per branch, cancel-in-progress.
+#   agent any                                runs-on. Deploying to own machines needs a self-hosted runner.
+#   environment { }                          env below. A job-level if cannot read env, so the Pre-build job
+#                                            hands the switches on as outputs, and the jobs read those.
+#   when { }                                 job if. A skipped job shows as skipped, like a skipped stage.
+#   post { }                                 the Post job, which always runs last.
+#   one workspace for all stages             every job checks out on its own; pass build output on with
+#                                            actions/upload-artifact and actions/download-artifact.
+
+name: Pipeline
+
+on:
+  push:
+    branches:
+      - '**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  JAVA_VERSION: '27'
+  JAVA_DISTRIBUTION: 'zulu'
+  MAVEN_ARGS: '-B -ntp'
+
+  SMI_PROFILES: 'ci'
+
+  MASTER_TO_LIVE: 'DEPLOY'
+
+  RELEASE_TO_PRELIVE: 'DEPLOY'
+  HOTFIX_TO_PRELIVE: 'DEPLOY'
+
+  DEVELOPMENT_TO_TEST_DRAFT: 'DEPLOY'
+  RELEASE_TO_TEST_DRAFT: 'DEPLOY'
+  HOTFIX_TO_TEST_DRAFT: 'DEPLOY'
+
+  #DEVELOPMENT_TO_TEST_PUBLISH: 'DEPLOY'
+  #RELEASE_TO_TEST_PUBLISH: 'DEPLOY'
+  #HOTFIX_TO_TEST_PUBLISH: 'DEPLOY'
+
+  DEVELOPMENT_TO_DEV: 'DEPLOY'
+
+jobs:
+
+  # Inspection
+
+  pre-build:
+    name: 'Inspection: Pre-build'
+    runs-on: ubuntu-latest
+    outputs:
+      MASTER_TO_LIVE: ${{ env.MASTER_TO_LIVE }}
+      RELEASE_TO_PRELIVE: ${{ env.RELEASE_TO_PRELIVE }}
+      HOTFIX_TO_PRELIVE: ${{ env.HOTFIX_TO_PRELIVE }}
+      DEVELOPMENT_TO_TEST_DRAFT: ${{ env.DEVELOPMENT_TO_TEST_DRAFT }}
+      RELEASE_TO_TEST_DRAFT: ${{ env.RELEASE_TO_TEST_DRAFT }}
+      HOTFIX_TO_TEST_DRAFT: ${{ env.HOTFIX_TO_TEST_DRAFT }}
+      DEVELOPMENT_TO_TEST_PUBLISH: ${{ env.DEVELOPMENT_TO_TEST_PUBLISH }}
+      RELEASE_TO_TEST_PUBLISH: ${{ env.RELEASE_TO_TEST_PUBLISH }}
+      HOTFIX_TO_TEST_PUBLISH: ${{ env.HOTFIX_TO_TEST_PUBLISH }}
+      DEVELOPMENT_TO_DEV: ${{ env.DEVELOPMENT_TO_DEV }}
+    steps:
+      - uses: actions/checkout@v7
+      - run: 'echo "Runner: ${RUNNER_NAME}, operating system: ${RUNNER_OS}"'
+      - name: Precondition check
+        run: |
+          test -f pom.xml || { echo 'pom.xml missing'; exit 1; }
+          test -x mvnw || { echo 'mvnw missing or not executable'; exit 1; }
+          test -x build-sites.sh || { echo 'build-sites.sh missing or not executable'; exit 1; }
+
+  build-tools:
+    name: 'Inspection: Build tools'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          architecture: 'x64'
+      - run: ./mvnw --version
+      - run: java --version
+      - run: which java
+
+  # Preparation
+
+  install:
+    name: 'Preparation: Install'
+    needs: [pre-build, build-tools]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'No tools installations and build setup'
+
+  # Build
+
+  build:
+    name: 'Build'
+    needs: [install]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          architecture: 'x64'
+          cache: 'maven'
+      - name: Build, unit and integration tests
+        run: ./mvnw clean install -P"${SMI_PROFILES}"
+      - name: Mutation tests and sites
+        run: ./build-sites.sh
+
+  # Publish
+
+  release:
+    name: 'Publish: Release'
+    needs: [build]
+    if: github.ref_name == 'master'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Put here software release steps'
+
+  snapshot:
+    name: 'Publish: Snapshot'
+    needs: [build]
+    if: startsWith(github.ref_name, 'devel')
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Put here software snapshot publishing steps'
+
+  release-reports:
+    name: 'Publish: Release reports'
+    needs: [build]
+    if: github.ref_name == 'master'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Put here reports publishing steps'
+
+  snapshot-reports:
+    name: 'Publish: Snapshot reports'
+    needs: [build]
+    if: startsWith(github.ref_name, 'devel')
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Put here reports publishing steps'
+
+  # Deploy - !cancelled() && !failure(): run after the Publish jobs even when they were skipped
+
+  dev:
+    name: 'Deploy: dev'
+    needs: [pre-build, build, release, snapshot, release-reports, snapshot-reports]
+    if: >-
+      !cancelled() && !failure() &&
+      needs.pre-build.outputs.DEVELOPMENT_TO_DEV == 'DEPLOY' && startsWith(github.ref_name, 'devel')
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Put here software development installations steps'
+
+  test-draft:
+    name: 'Deploy: test: draft'
+    needs: [pre-build, build, release, snapshot, release-reports, snapshot-reports]
+    if: >-
+      !cancelled() && !failure() && (
+        (needs.pre-build.outputs.DEVELOPMENT_TO_TEST_DRAFT == 'DEPLOY' && startsWith(github.ref_name, 'devel')) ||
+        (needs.pre-build.outputs.RELEASE_TO_TEST_DRAFT == 'DEPLOY' && startsWith(github.ref_name, 'release')) ||
+        (needs.pre-build.outputs.HOTFIX_TO_TEST_DRAFT == 'DEPLOY' && startsWith(github.ref_name, 'hotfix'))
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Put here software test draft stage installations steps'
+
+  test-publish:
+    name: 'Deploy: test: publish'
+    needs: [pre-build, build, release, snapshot, release-reports, snapshot-reports]
+    if: >-
+      !cancelled() && !failure() && (
+        (needs.pre-build.outputs.DEVELOPMENT_TO_TEST_PUBLISH == 'DEPLOY' && startsWith(github.ref_name, 'devel')) ||
+        (needs.pre-build.outputs.RELEASE_TO_TEST_PUBLISH == 'DEPLOY' && startsWith(github.ref_name, 'release')) ||
+        (needs.pre-build.outputs.HOTFIX_TO_TEST_PUBLISH == 'DEPLOY' && startsWith(github.ref_name, 'hotfix'))
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Put here software test publish stage installations steps'
+
+  prelive:
+    name: 'Deploy: prelive'
+    needs: [pre-build, build, release, snapshot, release-reports, snapshot-reports]
+    if: >-
+      !cancelled() && !failure() && (
+        (needs.pre-build.outputs.RELEASE_TO_PRELIVE == 'DEPLOY' && startsWith(github.ref_name, 'release')) ||
+        (needs.pre-build.outputs.HOTFIX_TO_PRELIVE == 'DEPLOY' && startsWith(github.ref_name, 'hotfix'))
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Put here software prelive installations steps'
+
+  live-publish:
+    name: 'Deploy: live: publish'
+    needs: [pre-build, build, release, snapshot, release-reports, snapshot-reports]
+    if: >-
+      !cancelled() && !failure() &&
+      needs.pre-build.outputs.MASTER_TO_LIVE == 'DEPLOY' && github.ref_name == 'master'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Put here software live publish stage installations steps'
+
+  # Tag
+
+  tag:
+    name: 'Tag'
+    needs: [pre-build, dev, test-draft, test-publish, prelive, live-publish]
+    if: >-
+      !cancelled() && !failure() &&
+      needs.pre-build.outputs.MASTER_TO_LIVE == 'DEPLOY' && github.ref_name == 'master'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - run: echo 'Put here tagging'
+
+  # Post - GitHub e-mails the failure to the user who pushed (Jenkins: emailext to developers)
+
+  post:
+    name: 'Post'
+    needs: [pre-build, build-tools, install, build, release, snapshot, release-reports, snapshot-reports,
+            dev, test-draft, test-publish, prelive, live-publish, tag]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Always"
+
+      - if: ${{ !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
+        run: 'echo "Workflow ${GITHUB_WORKFLOW}, run ${GITHUB_RUN_NUMBER}, branch ${GITHUB_REF_NAME} SUCCESSFUL post step"'
+
+      - if: ${{ contains(needs.*.result, 'failure') }}
+        run: 'echo "Workflow ${GITHUB_WORKFLOW}, run ${GITHUB_RUN_NUMBER}, branch ${GITHUB_REF_NAME} FAILED post step"'
