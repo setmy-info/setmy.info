@@ -16,21 +16,23 @@ services:
         volumes:
             - infinispan_data:/user-config
 
+    # http://localhost:8180/iam - same path layout as behind Nginx (https://example.com/iam), see keycloak.md.
+    # Configure realm, clients and roles: src/main/keycloak/keycloak-setup.sh
     keycloak:
         container_name: keycloak
-        image: quay.io/keycloak/keycloak:24.0.2
+        image: quay.io/keycloak/keycloak:26.7.1
         command: start-dev
         restart: always
         ports:
-            - "8181:8080"
+            - "8180:8080"
         environment:
-            - KEYCLOAK_ADMIN=admin
-            - KEYCLOAK_ADMIN_PASSWORD=password
-        #volumes:
-        #    - keycloak_data:/xxxxxxxxxxxxxxxxxxxxxxx
+            - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+            - KC_BOOTSTRAP_ADMIN_PASSWORD=password
+            - KC_HTTP_RELATIVE_PATH=/iam
+        volumes:
+            - keycloak_data:/opt/keycloak/data
 
-# TODO : Set up Keycloak and Infinispan to use volumes to save data for next startup.
-# TODO : "inject" script or config file (how exactly possible) to configure realms, groups etc in Keycloak.
+# TODO : Set up Infinispan to use volumes to save data for next startup.
 volumes:
     infinispan_data:
     keycloak_data:
