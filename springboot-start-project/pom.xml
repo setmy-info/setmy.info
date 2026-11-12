@@ -134,6 +134,58 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- Every module is ready for tests: *Test.java unit tests (surefire), *IT.java integration tests (failsafe) -->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Newer JDKs do not run annotation processors found on the class path, they must be listed here.
+                 A module that needs more processors (for example mapstruct-processor) lists all of them again. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <parameters>true</parameters>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-configuration-processor</artifactId>
+                            <version>${spring.boot.verion}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${failsafe.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
     <modules>
         <module>springboot-start-app</module>
         <module>spring-boot-example-starter</module>
@@ -151,6 +203,7 @@
         <module>spring-boot-hr-starter</module>
         <module>spring-boot-indexing-starter</module>
         <module>spring-boot-jwt-models-starter</module>
+        <module>spring-boot-keycloak-starter</module>
         <module>spring-boot-lexer-parser-starter</module>
         <module>spring-boot-linguistics-starter</module>
         <module>spring-boot-modular-ssn-starter</module>
