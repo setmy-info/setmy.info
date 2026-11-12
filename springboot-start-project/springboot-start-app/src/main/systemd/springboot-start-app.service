@@ -1,0 +1,19 @@
+[Unit]
+Description=springboot-start-app Spring Boot service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=microservice
+Group=microservice
+# Environment specific values (profile, Keycloak, database): one file per server
+EnvironmentFile=/opt/setmy.info/etc/springboot-start-app.env
+WorkingDirectory=/var/opt/setmy.info/microservice
+ExecStart=/usr/bin/java $JAVA_OPTS -jar /opt/setmy.info/lib/microservice.jar
+# JVM exit code after SIGTERM
+SuccessExitStatus=143
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
