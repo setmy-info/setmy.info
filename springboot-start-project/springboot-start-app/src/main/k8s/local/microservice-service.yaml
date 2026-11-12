@@ -12,5 +12,5 @@ spec:
             # Port where Ingress forwards to
             port: 80
             # Deployment or POD port in container port
-            #targetPort: 8081
+            #targetPort: 8082
             targetPort: ms-port

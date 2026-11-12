@@ -42,7 +42,7 @@ http://localhost:11222
 
 ##### Keycloak
 
-http://localhost:8080
+http://localhost:8180/iam (admin/password). Setup and Spring Boot integration: [keycloak.md](src/site/markdown/keycloak.md).
 
 # Requirements and QA
 
@@ -151,7 +151,7 @@ http://localhost:8080
 
 * BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 * docker build --build-arg BUILD_DATE=$BUILD_DATE -t setmyinfo/springboot-start-project:latest -f ./src/main/docker/Dockerfile .
-* docker run -p 8080:8080 setmyinfo/springboot-start-project:latest
+* docker run -p 8082:8082 setmyinfo/springboot-start-project:latest
 
 ## K8S, Minikube
 
@@ -291,20 +291,21 @@ kubectl delete namespace microservice-namespace
 5. Swagger UI
 6. mvn clean && mvn test && mvn verify && mvn install -Pe2e && mvn org.pitest:pitest-maven:mutationCoverage && mvn site:site
 
-1. http://localhost:8080/
-2. http://localhost:8080/home
-3. http://localhost:8080/login
-3. http://localhost:8080/h2-console
-4. http://localhost:8080/listExample
-5. http://localhost:8080/example.html
-6. http://localhost:8080/graphiql?path=/graphql
-7. http://localhost:8080/v3/api-docs
-8. http://localhost:8080/swagger-ui/index.html
-9. curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -i http://localhost:8080/api/example
-10. http://localhost:8080/graphql
-11. curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -i http://localhost:8080/graphql
+1. http://localhost:8082/
+2. http://localhost:8082/home
+3. http://localhost:8082/login
+3. http://localhost:8082/h2-console
+4. http://localhost:8082/listExample
+5. http://localhost:8082/example.html
+5. http://localhost:8082/calculator.html (Vue SPA with Keycloak login, see [keycloak.md](src/site/markdown/keycloak.md))
+6. http://localhost:8082/graphiql?path=/graphql
+7. http://localhost:8082/v3/api-docs
+8. http://localhost:8082/swagger-ui/index.html
+9. curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -i http://localhost:8082/api/example
+10. http://localhost:8082/graphql
+11. curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -i http://localhost:8082/graphql
     -d '{"query": "{ bookById(id: \"book-1\") { id name pageCount author { id firstName lastName } } }"}'
-12. http://localhost:8080/v3/api-docs.yaml
-13. http://localhost:8080/actuator
-13. http://localhost:8080/actuator/info
-14. http://localhost:8080/actuator/health
+12. http://localhost:8082/v3/api-docs.yaml
+13. http://localhost:8082/actuator
+13. http://localhost:8082/actuator/info
+14. http://localhost:8082/actuator/health

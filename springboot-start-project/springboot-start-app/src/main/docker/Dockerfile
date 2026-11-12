@@ -30,7 +30,7 @@ ENV MICROSERVICE_JAR_FILE_PATH=/opt/setmy.info/lib/microservice.jar
 
 WORKDIR /var/opt/setmy.info/microservice
 
-EXPOSE 8081/tcp
+EXPOSE 8082/tcp
 EXPOSE 8443/tcp
 
 USER microservice

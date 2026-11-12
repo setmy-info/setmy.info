@@ -4,6 +4,8 @@ import info.setmy.microservice.web.exception.MicroWebServiceException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -26,6 +28,15 @@ public class ExceptionHandlerComponent extends ResponseEntityExceptionHandler {
         final Map<String, Object> errorAttributes = customErrorAttributesComponent.getErrorAttributes(request);
         errorAttributes.put(KEY, ex.getKey());
         return new ResponseEntity<>(errorAttributes, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * Without this, handleAllExceptions would turn method security denials (@PreAuthorize etc.) into 500.
+     * Rethrown, they reach Spring Security, which answers 401 (no or invalid token) or 403 (no permission).
+     */
+    @ExceptionHandler({AccessDeniedException.class, AuthenticationException.class})
+    public void rethrowSecurityException(final RuntimeException ex) {
+        throw ex;
     }
 
     @ExceptionHandler(Exception.class)

@@ -28,7 +28,7 @@ spec:
                     imagePullPolicy: Never
                     ports:
                         -   name: ms-port
-                            containerPort: 8081
+                            containerPort: 8082
                     env:
                         # For Spring boot
                         -   name: APPLICATION_PROFILES

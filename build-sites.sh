@@ -60,6 +60,7 @@ MODULES=(
     springboot-start-project/spring-boot-hr-starter
     springboot-start-project/spring-boot-indexing-starter
     springboot-start-project/spring-boot-jwt-models-starter
+    springboot-start-project/spring-boot-keycloak-starter
     springboot-start-project/spring-boot-lexer-parser-starter
     springboot-start-project/spring-boot-linguistics-starter
     springboot-start-project/spring-boot-modular-ssn-starter

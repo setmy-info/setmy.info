@@ -87,7 +87,7 @@ When several environments share one realm, they share users and roles. Two ways 
 2. **One SPA client per environment** (stricter): `springboot-start-app-spa-dev`, `...-test`, and set
    `SMI_IAM_SPA_CLIENT_ID` per environment.
 
-`http://localhost:8081/*` redirect URIs are fine in a non-live realm for developers, never in live.
+`http://localhost:8082/*` redirect URIs are fine in a non-live realm for developers, never in live.
 
 ## 4. Keycloak behind a reverse proxy on a path (/iam)
 
@@ -164,7 +164,7 @@ Now every client that has the `calculator` scope gets tokens with `scope: "... c
 3. *Login settings*:
     * *Root URL*: empty (several environments) or the app URL.
     * *Valid redirect URIs*: every app base URL with `/*`, for example
-      `http://localhost:8081/*`, `https://dev.example.com/*`, `https://test.example.com/*`.
+      `http://localhost:8082/*`, `https://dev.example.com/*`, `https://test.example.com/*`.
     * *Valid post logout redirect URIs*: `+` (same as redirect URIs).
     * *Web origins*: `+` (same origins as redirect URIs, needed for CORS of the token endpoint).
 4. *Save*. Client → *Advanced* tab → *Advanced settings* → *Proof Key for Code Exchange Code Challenge Method*:
@@ -205,7 +205,7 @@ TOKEN=$(curl -s -X POST "$KEYCLOAK_URL/realms/$REALM/protocol/openid-connect/tok
     -d client_secret="$CLIENT_SECRET" | jq -r .access_token)
 # Look into the token payload
 echo "$TOKEN" | cut -d. -f2 | tr '_-' '/+' | base64 -d 2>/dev/null | jq .
-curl -i -H "Authorization: Bearer $TOKEN" "http://localhost:8081/api/calculator/whoami"
+curl -i -H "Authorization: Bearer $TOKEN" "http://localhost:8082/api/calculator/whoami"
 ```
 
 The payload should contain (shortened):
@@ -243,7 +243,7 @@ overwritten).
 | `KEYCLOAK_API_ROLES`          | `calculator-user,calculator-admin`| API client roles |
 | `KEYCLOAK_API_SCOPE`          | `calculator`                      | API client scope |
 | `KEYCLOAK_SPA_CLIENT_ID`      | `springboot-start-app-spa`        | SPA client |
-| `KEYCLOAK_SPA_URLS`           | `http://localhost:8081`           | comma separated SPA base URLs of all environments |
+| `KEYCLOAK_SPA_URLS`           | `http://localhost:8082`           | comma separated SPA base URLs of all environments |
 | `KEYCLOAK_M2M_CLIENT_ID`      | `springboot-start-app-m2m`        | machine client |
 | `KEYCLOAK_M2M_ROLES`          | `calculator-user`                 | roles of the machine client |
 | `KEYCLOAK_TEST_USERS`         | `false`                           | `true`: users `calculator-user`, `calculator-admin` |
@@ -253,7 +253,7 @@ Shared non-live Keycloak:
 
 ```shell
 KEYCLOAK_URL=https://example.com/iam KEYCLOAK_REALM=example \
-KEYCLOAK_SPA_URLS=http://localhost:8081,https://dev.example.com,https://test.example.com,https://prelive.example.com \
+KEYCLOAK_SPA_URLS=http://localhost:8082,https://dev.example.com,https://test.example.com,https://prelive.example.com \
 KEYCLOAK_ADMIN_PASSWORD=... ./src/main/keycloak/keycloak-setup.sh
 ```
 
@@ -441,10 +441,10 @@ When an endpoint must be user only or machine only, check it explicitly, for exa
 export SMI_IAM_URL=https://example.com/iam
 export SMI_IAM_REALM=example
 ./mvnw spring-boot:run          # local profile
-# open http://localhost:8081/calculator.html
+# open http://localhost:8082/calculator.html
 ```
 
-`http://localhost:8081/*` must be in the SPA client redirect URIs (chapter 5.4).
+`http://localhost:8082/*` must be in the SPA client redirect URIs (chapter 5.4).
 
 ### systemd
 
@@ -462,7 +462,7 @@ sudo systemctl enable --now springboot-start-app
 ### Docker
 
 ```shell
-docker run -p 8081:8081 -e SMI_IAM_URL=https://example.com/iam -e SMI_IAM_REALM=example \
+docker run -p 8082:8082 -e SMI_IAM_URL=https://example.com/iam -e SMI_IAM_REALM=example \
     setmyinfo/springboot-start-project:latest
 ```
 

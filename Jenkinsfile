@@ -99,6 +99,7 @@ pipeline {
                 sh 'cd springboot-start-project/spring-boot-hr-starter; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ../..'
                 sh 'cd springboot-start-project/spring-boot-indexing-starter; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ../..'
                 sh 'cd springboot-start-project/spring-boot-jwt-models-starter; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ../..'
+                sh 'cd springboot-start-project/spring-boot-keycloak-starter; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ../..'
                 sh 'cd springboot-start-project/spring-boot-lexer-parser-starter; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ../..'
                 sh 'cd springboot-start-project/spring-boot-linguistics-starter; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ../..'
                 sh 'cd springboot-start-project/spring-boot-modular-ssn-starter; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ../..'

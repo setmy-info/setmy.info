@@ -7,9 +7,9 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
-/* http://localhost:8080/graphiql?path=/graphql
+/* http://localhost:8082/graphiql?path=/graphql
 
-POST (Content-Type: ation/json; Accept: application/json) : http://localhost:8080/graphql
+POST (Content-Type: ation/json; Accept: application/json) : http://localhost:8082/graphql
 BODY: {"query":"query bookDetails {\n  bookById(id: \"book-1\") {\n    id\n    name\n    pageCount\n    author {\n      id\n      firstName\n      lastName\n    }\n  }\n}","operationName":"bookDetails"}
 
 Actual Query: {bookById(id: "book-1") {id name pageCount author {id firstName lastName}}}

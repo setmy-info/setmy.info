@@ -28,7 +28,7 @@ import static info.setmy.microservice.web.constant.ErrorConstants.KEY_FOR_SOME_E
 import static org.springframework.http.MediaType.ALL_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-//curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -i http://localhost:8080/api/example
+//curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -i http://localhost:8082/api/example
 @OpenAPIDefinition(
     info = @Info(
         title = "Example API",
@@ -76,7 +76,7 @@ public class ExampleController {
         );
     }
 
-    //curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -d '{"exampleString": "Example string that should not go into DB"}' -i http://localhost:8080/api/example/rollback
+    //curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -d '{"exampleString": "Example string that should not go into DB"}' -i http://localhost:8082/api/example/rollback
     @PostMapping(value = "rollback")
     public ExampleDTO rollback(@RequestBody final ExampleDTO exampleDTO) {
         log.info("Example POST called with {} to be rolled back", exampleDTO);
@@ -90,7 +90,7 @@ public class ExampleController {
         );
     }
 
-    //curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -d '{"exampleString": "Example string that should go into DB"}' -i http://localhost:8080/api/example/norollback
+    //curl -X GET -H "Content-Type: application/json" -H "Accept: application/json" -d '{"exampleString": "Example string that should go into DB"}' -i http://localhost:8082/api/example/norollback
     @PostMapping(value = "norollback")
     public ExampleDTO noRollback(@RequestBody final ExampleDTO exampleDTO) {
         log.info("Example POST called with {} to be not rolled back", exampleDTO);

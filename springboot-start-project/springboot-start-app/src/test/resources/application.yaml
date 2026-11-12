@@ -1,3 +1,13 @@
+# Keycloak (IAM) defaults for tests, environment variables with the same name override them
+SMI_IAM_URL: http://localhost:8180/iam
+SMI_IAM_REALM: example
+SMI_IAM_ISSUER_URL: ${SMI_IAM_URL}/realms/${SMI_IAM_REALM}
+SMI_IAM_JWK_SET_URL: ${SMI_IAM_ISSUER_URL}/protocol/openid-connect/certs
+SMI_IAM_API_CLIENT_ID: springboot-start-app-api
+SMI_IAM_AUDIENCE: ${SMI_IAM_API_CLIENT_ID}
+SMI_IAM_SPA_CLIENT_ID: springboot-start-app-spa
+SMI_IAM_PRINCIPAL_CLAIM: preferred_username
+
 server:
     port: 8777
 
@@ -26,9 +36,36 @@ spring:
         username: sa
         password:
     cache:
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    issuer-uri: ${SMI_IAM_ISSUER_URL}
+                    jwk-set-uri: ${SMI_IAM_JWK_SET_URL}
+                    audiences: ${SMI_IAM_AUDIENCE}
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health, info
+    endpoint:
+        info:
+            enabled: true
 
 springBootStartProject:
     startup:
         timeZone: UTC
     example:
         foo: test application.yaml
+    security:
+        # Tests use mocked tokens (spring-security-test jwt()), Keycloak is not called
+        keycloak:
+            url: ${SMI_IAM_URL}
+            realm: ${SMI_IAM_REALM}
+            issuerUrl: ${SMI_IAM_ISSUER_URL}
+            jwkSetUrl: ${SMI_IAM_JWK_SET_URL}
+            apiClientId: ${SMI_IAM_API_CLIENT_ID}
+            audience: ${SMI_IAM_AUDIENCE}
+            spaClientId: ${SMI_IAM_SPA_CLIENT_ID}
+            principalClaim: ${SMI_IAM_PRINCIPAL_CLAIM}
