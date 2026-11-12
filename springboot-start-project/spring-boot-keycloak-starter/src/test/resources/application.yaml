@@ -1,0 +1,18 @@
+# Same structure as in the application. Base SMI_IAM_* values (URL, realm, client IDs, principal claim) are not
+# given here: every integration test sets them itself (@TestPropertySource), like environment variables in real life.
+# Only the derived defaults are here, a test may override them too.
+SMI_IAM_ISSUER_URL: ${SMI_IAM_URL}/realms/${SMI_IAM_REALM}
+SMI_IAM_JWK_SET_URL: ${SMI_IAM_ISSUER_URL}/protocol/openid-connect/certs
+SMI_IAM_AUDIENCE: ${SMI_IAM_API_CLIENT_ID}
+
+springBootStartProject:
+    security:
+        keycloak:
+            url: ${SMI_IAM_URL}
+            realm: ${SMI_IAM_REALM}
+            issuerUrl: ${SMI_IAM_ISSUER_URL}
+            jwkSetUrl: ${SMI_IAM_JWK_SET_URL}
+            apiClientId: ${SMI_IAM_API_CLIENT_ID}
+            audience: ${SMI_IAM_AUDIENCE}
+            spaClientId: ${SMI_IAM_SPA_CLIENT_ID}
+            principalClaim: ${SMI_IAM_PRINCIPAL_CLAIM}
