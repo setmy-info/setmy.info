@@ -34,6 +34,11 @@ services:
             INFINISPAN_SERVER_LIST: microservice-infinispan:11222
             INFINISPAN_AUTH_USERNAME: microservice
             INFINISPAN_AUTH_PASSWORD: g6p8
+            # Keycloak, see keycloak.md
+            SMI_IAM_URL: https://example.com/iam
+            SMI_IAM_REALM: example
+            SMI_IAM_API_CLIENT_ID: springboot-start-app-api
+            SMI_IAM_SPA_CLIENT_ID: springboot-start-app-spa
         depends_on:
             - microservice-postgres
             - microservice-infinispan

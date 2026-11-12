@@ -10,4 +10,9 @@ data:
     #spring-datasource-url: "jdbc:postgresql://postgres-service.microservice-local.svc.cluster.local:5432/microservice-db"
     spring-datasource-url: "jdbc:h2:file:./target/local;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL"
     infinispan-server-list: "infinispan-service.microservice-local.svc.cluster.local"
+    # Keycloak, see keycloak.md. Base URL without /realms/...
+    keycloak-url: "https://example.com/iam"
+    keycloak-realm: "example"
+    keycloak-api-client-id: "springboot-start-app-api"
+    keycloak-spa-client-id: "springboot-start-app-spa"
 immutable: true

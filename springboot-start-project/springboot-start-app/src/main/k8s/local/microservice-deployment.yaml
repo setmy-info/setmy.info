@@ -58,6 +58,30 @@ spec:
                                     name: microservice-config-map
                                     key: infinispan-server-list
                                     optional: false
+                        -   name: SMI_IAM_URL
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: microservice-config-map
+                                    key: keycloak-url
+                                    optional: false
+                        -   name: SMI_IAM_REALM
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: microservice-config-map
+                                    key: keycloak-realm
+                                    optional: false
+                        -   name: SMI_IAM_API_CLIENT_ID
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: microservice-config-map
+                                    key: keycloak-api-client-id
+                                    optional: false
+                        -   name: SMI_IAM_SPA_CLIENT_ID
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: microservice-config-map
+                                    key: keycloak-spa-client-id
+                                    optional: false
                         ## From secrets
                         -   name: SPRING_DATASOURCE_USERNAME
                             valueFrom:
