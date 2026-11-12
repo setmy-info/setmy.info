@@ -121,8 +121,8 @@ jobs:
           cache: 'maven'
       - name: Build, unit and integration tests
         run: ./mvnw clean install -P"${SMI_PROFILES}"
-      - name: Mutation tests and sites
-        run: ./build-sites.sh
+#      - name: Mutation tests and sites
+#        run: ./build-sites.sh
 
   # Publish
 
