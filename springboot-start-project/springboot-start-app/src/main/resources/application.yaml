@@ -1,5 +1,5 @@
 server:
-    port: 8080
+    port: 8081
     servlet:
         context-path: /
     compression:
@@ -33,7 +33,7 @@ spring:
             max-lifetime: 1800000
     h2:
         console:
-            enabled: true
+            enabled: false
     liquibase:
         # With profiles in dev only
         contexts: load_example_data
@@ -89,6 +89,16 @@ spring:
                             user: sa
                             password:
     cache:
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    # Token "iss" claim must be exactly this
+                    issuer-uri: http://localhost:8180/iam/realms/example
+                    # Signing keys, fetched lazily on first request, so startup does not need Keycloak
+                    jwk-set-uri: http://localhost:8180/iam/realms/example/protocol/openid-connect/certs
+                    # Token "aud" claim must contain this
+                    audiences: springboot-start-app-api
 #    jackson:
 #        date-format: yyyy-MM-dd'T'HH:mm:ss:SSS'Z'
 #        time-zone: UTC
@@ -133,6 +143,16 @@ springBootStartProject:
         timeZone: UTC
     example:
         foo: application.yaml
+    security:
+        keycloak:
+            url: http://localhost:8180/iam
+            realm: example
+            issuerUrl: http://localhost:8180/iam/realms/example
+            jwkSetUrl: http://localhost:8180/iam/realms/example/protocol/openid-connect/certs
+            apiClientId: springboot-start-app-api
+            audience: springboot-start-app-api
+            spaClientId: springboot-start-app-spa
+            principalClaim: preferred_username
     kubernetes:
         nodeNameSpace: ${POD_NAMESPACE}
         nodeName: ${NODE_NAME}

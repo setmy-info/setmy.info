@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator: Vue.js 3 SPA with Keycloak login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<!--
+    Vue.js 3 SPA served by Spring Boot (src/main/resources/static), calls the protected calculator REST API.
+    Login: Keycloak authorization code flow with PKCE (keycloak-js), see keycloak.md.
+    Keycloak URL, realm and client ID come from GET api/public/auth-config (server environment variables).
+    Routes with meta.requiresAuth send the user to the Keycloak login first, then back to the same route.
+-->
+<div id="app">
+    <p v-if="authenticated">Logged in as <b>{{ username }}</b>
+        <button @click="logout">Logout</button>
+    </p>
+    <p v-else>
+        <button @click="login">Login</button>
+    </p>
+    <ul>
+        <li>
+            <router-link to="/">Home page</router-link>
+        </li>
+        <li v-for="operation in operations" :key="operation.name">
+            <router-link :to="'/' + operation.name">{{ operation.title }}</router-link>
+            ({{ operation.protection }})
+        </li>
+        <li>
+            <router-link to="/whoami">Who am I</router-link>
+        </li>
+    </ul>
+    <router-view></router-view>
+</div>
+
+<script src="https://unpkg.com/vue@3.5.42/dist/vue.global.prod.js"></script>
+<script src="https://unpkg.com/vue-router@4.6.4/dist/vue-router.global.prod.js"></script>
+
+<template id="home-page-template">
+    <div>
+        <h2>Calculator</h2>
+        <p>Every operation is protected in another way. Pages need login, the API answers 401 without token
+            and 403 without the needed role or scope.</p>
+        <p v-if="roles.length">Your roles for the API: {{ roles.join(', ') }}</p>
+    </div>
+</template>
+
+<template id="calculation-page-template">
+    <div>
+        <h2>{{ operation.title }}</h2>
+        <p>Protection: {{ operation.protection }}</p>
+        <input type="number" v-model.number="a"> {{ operation.symbol }} <input type="number" v-model.number="b">
+        <button @click="calculate">=</button>
+        <p v-if="result !== null">Result: {{ result }}</p>
+        <p v-if="error" style="color: red">{{ error }}</p>
+    </div>
+</template>
+
+<template id="whoami-page-template">
+    <div>
+        <h2>Who am I (as the API sees the token)</h2>
+        <pre v-if="me">{{ me }}</pre>
+        <p v-if="error" style="color: red">{{ error }}</p>
+    </div>
+</template>
+
+<script type="module">
+    import Keycloak from 'https://unpkg.com/keycloak-js@26.2.4/lib/keycloak.js';
+
+    const AFTER_LOGIN_ROUTE_KEY = 'calculator.afterLoginRoute';
+
+    const operations = [
+        {name: 'add', title: 'Add', symbol: '+', protection: 'any valid token'},
+        {name: 'subtract', title: 'Subtract', symbol: '-', protection: 'scope calculator'},
+        {name: 'multiply', title: 'Multiply', symbol: '*', protection: 'role calculator-user, @PreAuthorize'},
+        {name: 'divide', title: 'Divide', symbol: '/', protection: 'role calculator-user, @RolesAllowed'},
+        {name: 'modulo', title: 'Modulo', symbol: '%', protection: 'role calculator-admin, @Secured'},
+        {name: 'power', title: 'Power', symbol: '^', protection: 'admin, or user with exponent <= 10'}
+    ];
+
+    const authService = {
+        keycloak: null,
+        apiClientId: 'springboot-start-app-api',
+        async init() {
+            const response = await fetch('api/public/auth-config', {headers: {Accept: 'application/json'}});
+            const config = await response.json();
+            this.keycloak = new Keycloak({url: config.url, realm: config.realm, clientId: config.clientId});
+            // responseMode query: the login answer comes as ?code=..., so it does not clash with the # router
+            await this.keycloak.init({pkceMethod: 'S256', responseMode: 'query', checkLoginIframe: false});
+        },
+        login(route) {
+            sessionStorage.setItem(AFTER_LOGIN_ROUTE_KEY, route || '/');
+            this.keycloak.login({redirectUri: this.pageUrl()});
+        },
+        logout() {
+            this.keycloak.logout({redirectUri: this.pageUrl()});
+        },
+        takeAfterLoginRoute() {
+            const route = sessionStorage.getItem(AFTER_LOGIN_ROUTE_KEY);
+            sessionStorage.removeItem(AFTER_LOGIN_ROUTE_KEY);
+            return route;
+        },
+        pageUrl() {
+            return window.location.origin + window.location.pathname;
+        },
+        username() {
+            return this.keycloak.tokenParsed?.preferred_username;
+        },
+        roles() {
+            return this.keycloak.tokenParsed?.resource_access?.[this.apiClientId]?.roles || [];
+        },
+        async token() {
+            // Refreshes the access token when it expires within 30 seconds
+            await this.keycloak.updateToken(30);
+            return this.keycloak.token;
+        }
+    };
+
+    const apiService = {
+        async get(path, params) {
+            const query = params ? '?' + new URLSearchParams(params) : '';
+            const response = await fetch('api/calculator/' + path + query, {
+                headers: {Accept: 'application/json', Authorization: 'Bearer ' + await authService.token()}
+            });
+            if (!response.ok) {
+                throw new Error(this.errorMessage(response.status));
+            }
+            return response.json();
+        },
+        errorMessage(status) {
+            switch (status) {
+                case 400:
+                    return '400 Bad request: invalid input';
+                case 401:
+                    return '401 Unauthorized: no valid token, login again';
+                case 403:
+                    return '403 Forbidden: your token does not have the needed role or scope';
+                default:
+                    return status + ' error';
+            }
+        }
+    };
+
+    const homePage = {
+        template: '#home-page-template',
+        data() {
+            return {
+                roles: authService.roles()
+            };
+        }
+    };
+
+    const calculationPage = {
+        props: ['operation'],
+        template: '#calculation-page-template',
+        data() {
+            return {
+                a: 6,
+                b: 3,
+                result: null,
+                error: null
+            };
+        },
+        watch: {
+            operation() {
+                this.result = null;
+                this.error = null;
+            }
+        },
+        methods: {
+            async calculate() {
+                this.result = null;
+                this.error = null;
+                try {
+                    const calculation = await apiService.get(this.operation.name, {a: this.a, b: this.b});
+                    this.result = calculation.result;
+                } catch (error) {
+                    this.error = error.message;
+                }
+            }
+        }
+    };
+
+    const whoAmIPage = {
+        template: '#whoami-page-template',
+        data() {
+            return {
+                me: null,
+                error: null
+            };
+        },
+        async created() {
+            try {
+                this.me = await apiService.get('whoami');
+            } catch (error) {
+                this.error = error.message;
+            }
+        }
+    };
+
+    const router = VueRouter.createRouter({
+        history: VueRouter.createWebHashHistory(),
+        routes: [
+            {path: '/', component: homePage},
+            ...operations.map(operation => ({
+                path: '/' + operation.name,
+                component: calculationPage,
+                props: {operation},
+                meta: {requiresAuth: true}
+            })),
+            {path: '/whoami', component: whoAmIPage, meta: {requiresAuth: true}}
+        ]
+    });
+
+    // Not logged in: go to the Keycloak login, after login come back to the same route
+    router.beforeEach((to) => {
+        if (to.meta.requiresAuth && !authService.keycloak.authenticated) {
+            authService.login(to.fullPath);
+            return false;
+        }
+    });
+
+    const app = Vue.createApp({
+        data() {
+            return {
+                operations,
+                authenticated: authService.keycloak.authenticated,
+                username: authService.username()
+            };
+        },
+        methods: {
+            login() {
+                authService.login(this.$route.fullPath);
+            },
+            logout() {
+                authService.logout();
+            }
+        }
+    });
+
+    await authService.init();
+    const afterLoginRoute = authService.takeAfterLoginRoute();
+    app.use(router);
+    app.mount('#app');
+    if (authService.keycloak.authenticated && afterLoginRoute) {
+        router.replace(afterLoginRoute);
+    }
+</script>
+</body>
+</html>
