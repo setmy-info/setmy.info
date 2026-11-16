@@ -188,6 +188,8 @@
 
     <modules>
         <module>springboot-start-app</module>
+        <module>spring-boot-cli-application-starter</module>
+        <module>spring-boot-web-application-starter</module>
         <module>spring-boot-example-starter</module>
         <module>spring-boot-accounting-starter</module>
         <module>spring-boot-ai-starter</module>
