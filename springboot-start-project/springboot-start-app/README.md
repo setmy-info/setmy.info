@@ -153,6 +153,16 @@ http://localhost:8180/iam (admin/password). Setup and Spring Boot integration: [
 * docker build --build-arg BUILD_DATE=$BUILD_DATE -t setmyinfo/springboot-start-project:latest -f ./src/main/docker/Dockerfile .
 * docker run -p 8082:8082 setmyinfo/springboot-start-project:latest
 
+## RPM (LIVE and TEST machines)
+
+```shell
+make help
+make rpms                                   # after mvn install
+SMI_DEPLOY_TEST_HOSTS='test.example.com' make deploy-test
+```
+
+See [rpm.md](src/site/markdown/rpm.md).
+
 ## K8S, Minikube
 
 Yaml config for:
