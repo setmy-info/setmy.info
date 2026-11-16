@@ -24,11 +24,20 @@
 
     <properties>
         <spring.boot.main.class>info.setmy.microservice.Application</spring.boot.main.class>
-        <!-- spring.boot.main.class>info.setmy.microservice.CLApplication</spring.boot.main.class -->
-
     </properties>
 
     <dependencies>
+        <!-- Exactly one application starter: it holds the main class and selects the form of the application. -->
+        <dependency>
+            <groupId>info.setmy</groupId>
+            <artifactId>spring-boot-web-application-starter</artifactId>
+            <version>1.2.0-SNAPSHOT</version>
+        </dependency>
+        <!--dependency>
+            <groupId>info.setmy</groupId>
+            <artifactId>spring-boot-cli-application-starter</artifactId>
+            <version>1.2.0-SNAPSHOT</version>
+        </dependency-->
         <dependency>
             <groupId>info.setmy</groupId>
             <artifactId>spring-boot-example-starter</artifactId>
@@ -168,8 +177,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-liquibase</artifactId>
         </dependency>
 
         <dependency>
@@ -1093,22 +1102,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>org.infinispan</groupId>
-                <artifactId>infinispan-hibernate-cache-commons</artifactId>
-                <version>${infinispan.version}</version>
-            </dependency>
             <!-- dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
                 <version>${spring.boot.verion}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.infinispan</groupId>
-                <artifactId>infinispan-spring-boot4-starter</artifactId>
-                <version>${infinispan.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
