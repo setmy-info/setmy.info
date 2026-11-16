@@ -5,7 +5,7 @@ pipeline {
     agent any
 
     environment {
-        PATH = "/opt/jdk/bin:/opt/has/bin:/opt/maven/bin:/usr/local/bin:$PATH"
+        PATH = "/opt/jdk/bin:/opt/setmy.info/bin:/opt/has/bin:/opt/maven/bin:/usr/local/bin:$PATH"
         JAVA_HOME = "/opt/jdk/"
 
         MASTER_TO_LIVE = 'DEPLOY'
@@ -18,6 +18,11 @@ pipeline {
 
         DEVELOPMENT_TO_DEV = 'DEPLOY'
         RELEASE_TO_DEV = 'DEPLOY'
+
+        // No servers in this repository: SMI_DEPLOY_TEST_HOSTS and SMI_DEPLOY_LIVE_HOSTS ("[user@]host[:port]",
+        // several separated by spaces) come from the Jenkins job / node configuration and reach make and
+        // smi-deploy as environment variables. SMI_DEPLOY_USER, SMI_DEPLOY_PORT, ... the same way, when needed.
+        SPRINGBOOT_APP_DIR = 'springboot-start-project/springboot-start-app'
     }
 
     stages {
@@ -46,6 +51,9 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn clean install -Pci'
+
+                // RPMs of the Spring Boot app (LIVE and TEST), from the jar the install above built
+                sh 'make -C "${SPRINGBOOT_APP_DIR}" clean rpms'
 
                 // Sites
                 sh 'cd dependencies-bom; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
@@ -174,7 +182,9 @@ pipeline {
                         }
                     }
                     steps {
-                        echo 'Put here software development installations steps'
+                        // Upload and hand-over to the deployment service of the TEST machines, which installs it.
+                        // journalctl -u setmy-info-deploy.service on the machine says how it went.
+                        sh 'make -C "${SPRINGBOOT_APP_DIR}" deploy-test'
                     }
                 }
                 stage('prelive') {
@@ -194,7 +204,8 @@ pipeline {
                         }
                     }
                     steps {
-                        echo 'Put here software production installations steps'
+                        // LIVE BE machines: the same jar, Spring profile live
+                        sh 'make -C "${SPRINGBOOT_APP_DIR}" deploy-live'
                     }
                 }
             }
