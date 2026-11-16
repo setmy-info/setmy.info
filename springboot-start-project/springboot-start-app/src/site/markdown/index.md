@@ -22,4 +22,6 @@ What is xxxx?
 
 [Keycloak](keycloak.html): login, JWT roles and environment variables
 
+[RPM](rpm.html): packaging and deployment to TEST and LIVE
+
 [xxxx](http://yyyyy)

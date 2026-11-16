@@ -446,17 +446,16 @@ export SMI_IAM_REALM=example
 
 `http://localhost:8082/*` must be in the SPA client redirect URIs (chapter 5.4).
 
-### systemd
+### systemd (RPM)
 
-[`src/main/systemd/springboot-start-app.service`](../../../src/main/systemd/springboot-start-app.service) reads
-`/opt/setmy.info/etc/springboot-start-app.env`, example in
-[`src/main/systemd/springboot-start-app.env`](../../../src/main/systemd/springboot-start-app.env):
+The RPMs install [`src/main/systemd/springboot-start-app.service`](../../../src/main/systemd/springboot-start-app.service),
+see [rpm.md](rpm.md). The variables go into `/opt/setmy.info/etc/springboot-start-app/` (`springboot-start-app.env`, `machine.env`,
+`local.env`), which is not in the RPM but in the machine's own configuration package; example in
+[`src/main/systemd/springboot-start-app.env`](../../../src/main/systemd/springboot-start-app.env).
 
 ```shell
-sudo cp src/main/systemd/springboot-start-app.service /etc/systemd/system/
-sudo cp src/main/systemd/springboot-start-app.env /opt/setmy.info/etc/   # edit the values
-sudo systemctl daemon-reload
-sudo systemctl enable --now springboot-start-app
+sudo systemctl restart springboot-start-app   # after the .env file changed
+journalctl -u springboot-start-app -n 50
 ```
 
 ### Docker

@@ -42,7 +42,7 @@ spring:
         #driver-class-name: org.postgresql.Driver
         #driver-class-name: org.hsqldb.jdbc.JDBCDriver
         #driver-class-name: org.apache.derby.jdbc.ClientDriver
-        username: sa
+        user: sa
         password:
     jpa:
         properties:
@@ -157,9 +157,3 @@ springBootStartProject:
         nodeNameSpace: ${POD_NAMESPACE}
         nodeName: ${NODE_NAME}
         podName: ${POD_NAME}
-
-#liquibaseDataSource:
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:file:./target/default
-#    username: sa
-#    password:

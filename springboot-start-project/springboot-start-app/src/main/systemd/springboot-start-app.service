@@ -1,5 +1,6 @@
 [Unit]
 Description=springboot-start-app Spring Boot service
+Documentation=https://setmy.info
 After=network-online.target
 Wants=network-online.target
 
@@ -7,13 +8,57 @@ Wants=network-online.target
 Type=simple
 User=microservice
 Group=microservice
-# Environment specific values (profile, Keycloak, database): one file per server
-EnvironmentFile=/opt/setmy.info/etc/springboot-start-app.env
+# Working directory and log directory are the same folder, created by the package as microservice:microservice
 WorkingDirectory=/var/opt/setmy.info/microservice
-ExecStart=/usr/bin/java $JAVA_OPTS -jar /opt/setmy.info/lib/microservice.jar
+
+# The JDK is installed by hand as /opt/jdk (a symlink to the JDK in use), smi-spring-boot calls "java" by name.
+# systemd reads no profile file, so the PATH of the setmy-info-scripts commands is set here too.
+Environment=JAVA_HOME=/opt/jdk
+Environment=PATH=/opt/jdk/bin:/opt/setmy.info/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+
+# Read by smi-spring-boot (setmy-info-scripts)
+Environment=MICROSERVICE_JAR_FILE_PATH=/opt/setmy.info/lib/springboot-start-app.jar
+Environment=MICROSERVICE_LOG_DIR_PATH=/var/opt/setmy.info/microservice
+Environment=MICROSERVICE_LOG_FILE_NAME=springboot-start-app.log
+Environment=MICROSERVICE_OPTIONAL_CONFIG_FILE_PATH=/opt/setmy.info/etc/springboot-start-app/springboot-start-app.yaml
+# The Spring profile of the machine. Exactly one of the two lines is switched on by the %post scriptlet of the
+# package that is installed: smi-springboot-start-app (LIVE) or smi-springboot-start-app-test (TEST).
+# NB! LIVE ONLY: Environment=MICROSERVICE_PROFILES=live
+# NB! TEST ONLY: Environment=MICROSERVICE_PROFILES=test
+
+# Machine configuration (SMI_IAM_*, database, JDK_JAVA_OPTIONS for JVM flags, ...) comes from the separate
+# configuration repository and package, never from this one: every machine, this environment, and local.env made
+# by hand on the machine (secrets, in no package). All optional ("-"), the file read last has the last word, and
+# a value in them wins over the Environment= lines above.
+EnvironmentFile=-/opt/setmy.info/etc/springboot-start-app/springboot-start-app.env
+EnvironmentFile=-/opt/setmy.info/etc/springboot-start-app/machine.env
+EnvironmentFile=-/opt/setmy.info/etc/springboot-start-app/local.env
+
+ExecStart=/opt/setmy.info/bin/smi-spring-boot
 # JVM exit code after SIGTERM
 SuccessExitStatus=143
 Restart=on-failure
+RestartSec=5
+TimeoutStopSec=60
+LimitNOFILE=65536
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=full
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+ProtectClock=true
+ProtectHostname=true
+RestrictSUIDSGID=true
+RestrictRealtime=true
+RestrictNamespaces=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+LockPersonality=true
+CapabilityBoundingSet=
 
 [Install]
 WantedBy=multi-user.target

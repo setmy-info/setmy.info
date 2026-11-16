@@ -17,6 +17,7 @@
         <menu name="µS - µService">
             <item name="Index" href="index.html"/>
             <item name="Keycloak" href="keycloak.html"/>
+            <item name="RPM" href="rpm.html"/>
             <item name="Template" href="template.html" collapse="true">
                 <item name="Template" href="template.html"/>
             </item>
