@@ -231,42 +231,113 @@ admin CLI `kcadm.sh` (in the Keycloak distribution `bin` directory and in the Ke
 objects are created, existing clients are updated to the script settings (manual changes to those settings are
 overwritten).
 
+The argument is the environment, it sets the defaults: `./src/main/keycloak/keycloak-setup.sh <environment>`.
+
+| Environment                         | Defaults |
+|-------------------------------------|----------|
+| `compose`                           | the Keycloak of `src/main/docker/docker-compose.yaml`: `kcadm.sh` inside the container `microservice-keycloak` at `http://localhost:8080/iam`, `admin` / `password`, SPA `http://localhost:8082`, test users with password `password` |
+| `local`                             | a Keycloak on the developer machine `http://localhost:8180/iam`, `kcadm.sh` of `PATH`, SPA `http://localhost:8082`, test users |
+| `dev`, `ci`, `test`, `prelive`, `live` | a shared Keycloak: `KEYCLOAK_URL`, `KEYCLOAK_ADMIN_PASSWORD` and `KEYCLOAK_SPA_URLS` required, no test users unless asked, never in `live` |
+
+Every variable overrides the default of the environment:
+
 | Variable                      | Default                           | Meaning |
 |-------------------------------|-----------------------------------|---------|
-| `KCADM`                       | `kcadm.sh`                        | admin CLI command |
-| `KEYCLOAK_URL`                | `http://localhost:8180/iam`       | Keycloak base URL |
+| `KCADM`                       | `kcadm.sh` (`compose`: `docker exec -i microservice-keycloak /opt/keycloak/bin/kcadm.sh`) | admin CLI command |
+| `KEYCLOAK_URL`                | by environment                    | Keycloak base URL, as `kcadm.sh` reaches it |
 | `KEYCLOAK_ADMIN_REALM`        | `master`                          | realm of the administrator |
 | `KEYCLOAK_ADMIN_USER`         | `admin`                           | administrator |
-| `KEYCLOAK_ADMIN_PASSWORD`     | (required)                        | administrator password |
+| `KEYCLOAK_ADMIN_PASSWORD`     | (required, `compose`: `password`) | administrator password |
 | `KEYCLOAK_REALM`              | `example`                         | application realm |
 | `KEYCLOAK_API_CLIENT_ID`      | `springboot-start-app-api`        | API client |
 | `KEYCLOAK_API_ROLES`          | `calculator-user,calculator-admin`| API client roles |
 | `KEYCLOAK_API_SCOPE`          | `calculator`                      | API client scope |
 | `KEYCLOAK_SPA_CLIENT_ID`      | `springboot-start-app-spa`        | SPA client |
-| `KEYCLOAK_SPA_URLS`           | `http://localhost:8082`           | comma separated SPA base URLs of all environments |
+| `KEYCLOAK_SPA_URLS`           | by environment                    | comma separated SPA base URLs of all environments |
 | `KEYCLOAK_M2M_CLIENT_ID`      | `springboot-start-app-m2m`        | machine client |
 | `KEYCLOAK_M2M_ROLES`          | `calculator-user`                 | roles of the machine client |
-| `KEYCLOAK_TEST_USERS`         | `false`                           | `true`: users `calculator-user`, `calculator-admin` |
-| `KEYCLOAK_TEST_USER_PASSWORD` | (required with test users)        | test users password |
+| `KEYCLOAK_TEST_USERS`         | `true` in `compose` and `local`, else `false` | `true`: users `calculator-user`, `calculator-admin` |
+| `KEYCLOAK_TEST_USER_PASSWORD` | (required with test users, `compose`: `password`) | test users password |
 
 Shared non-live Keycloak:
 
 ```shell
 KEYCLOAK_URL=https://example.com/iam KEYCLOAK_REALM=example \
 KEYCLOAK_SPA_URLS=http://localhost:8082,https://dev.example.com,https://test.example.com,https://prelive.example.com \
-KEYCLOAK_ADMIN_PASSWORD=... ./src/main/keycloak/keycloak-setup.sh
+KEYCLOAK_ADMIN_PASSWORD=... ./src/main/keycloak/keycloak-setup.sh dev
 ```
 
-Local docker compose Keycloak (`src/test/docker/docker-compose.yaml`, `http://localhost:8180/iam`, admin/password):
+### 6.1 Local Keycloak in docker compose, for developers
+
+[`src/main/docker/docker-compose.yaml`](../../../src/main/docker/docker-compose.yaml) runs Keycloak
+`http://localhost:8180/iam` (administrator `admin` / `password`) next to the application, with Postgres as its
+database: `keycloak_local`, user `localkeycloakliquibase` (the owner, Keycloak migrates its own tables), created by
+[`keycloak-init.sql`](../../../src/main/docker/keycloak-init.sql) on an empty volume. The file is generated with
+`smi-postgresql-create-db-sql keycloak local`, the full command is in its first line.
+
+Everything made in Keycloak (realms, clients, roles, users) is stored in that database, in the volume
+`postgres-data`: it stays when the containers stop, restart or are removed with `down`. Only `down -v` removes it.
+
+Commands in the `springboot-start-app` directory:
 
 ```shell
-docker compose -f ./src/test/docker/docker-compose.yaml up -d keycloak
-KCADM="docker exec -i keycloak /opt/keycloak/bin/kcadm.sh" KEYCLOAK_URL=http://localhost:8080/iam \
-KEYCLOAK_ADMIN_PASSWORD=password KEYCLOAK_TEST_USERS=true KEYCLOAK_TEST_USER_PASSWORD=... \
-./src/main/keycloak/keycloak-setup.sh
+C="docker compose -f src/main/docker/docker-compose.yaml"
 ```
 
-(`KEYCLOAK_URL` is the URL inside the container there.)
+**First time, empty database, no export yet** (once per team, then the export below does it for everybody):
+
+1. Start: `$C up -d microservice-postgres microservice-keycloak`, wait until `$C logs microservice-keycloak`
+   says `Running the server in development mode`.
+2. Optional: log in at `http://localhost:8180/iam/admin` with `admin` / `password` to look around. Nothing has to be
+   made by hand, the script of the next step makes chapter 5.
+3. Realm `example`, the API, SPA and machine clients, roles and the test users `calculator-user` and
+   `calculator-admin`:
+
+   ```shell
+   ./src/main/keycloak/keycloak-setup.sh compose
+   ```
+4. Check: `$C up -d`, open `http://localhost:8082/calculator.html` and log in as `calculator-user` / `password`
+   (chapter 5.7 shows the token).
+5. Anything else the developers need (more users, roles, groups): admin console, realm `example`, chapter 5.
+
+**Export, so the next developer gets it all from an empty database.** The export runs with the server stopped, on the
+same database, and writes `example-realm.json` with the users into
+[`src/main/docker/keycloak`](../../../src/main/docker/keycloak), where the import reads it:
+
+```shell
+$C stop microservice-keycloak
+$C run --rm --no-deps -v "$PWD/src/main/docker/keycloak:/opt/keycloak/data/export" microservice-keycloak \
+    export --dir /opt/keycloak/data/export --realm example --users realm_file
+$C start microservice-keycloak
+```
+
+Keycloak runs as user 1000 in the container: when the directory is not writable for it, `chmod o+w
+src/main/docker/keycloak` before and `chmod o-w` after. Commit `example-realm.json`. It holds the client secret of
+the machine client and the password hashes of the test users: development data only, never a live realm.
+
+**Every other time, or from scratch:**
+
+```shell
+$C down -v          # only to start from an empty database
+$C up -d
+```
+
+On an empty database Keycloak imports every `*.json` of `src/main/docker/keycloak` at the start
+(`start-dev --import-realm`), so realm, clients and users are there without the script. A realm that is already in
+the database is never overwritten by the import; to take a newer export, `down -v` first.
+
+Inside the compose network the application fetches the signing keys from `microservice-keycloak:8080`, while the
+tokens carry the issuer of the browser, `http://localhost:8180/iam/realms/example` (`KC_HOSTNAME`), the value of
+`application.yaml`.
+
+[`src/test/docker/docker-compose.yaml`](../../../src/test/docker/docker-compose.yaml) has a Keycloak of its own with
+an H2 database, also on port 8180: only one of the two runs at a time.
+
+```sh
+C="docker compose -f src/main/docker/docker-compose.yaml"
+$C up -d microservice-postgres microservice-keycloak
+./src/main/keycloak/keycloak-setup.sh compose
+```
 
 ## 7. Spring Boot side
 
@@ -462,7 +533,7 @@ journalctl -u springboot-start-app -n 50
 
 ```shell
 docker run -p 8082:8082 -e SMI_IAM_URL=https://example.com/iam -e SMI_IAM_REALM=example \
-    setmyinfo/springboot-start-project:latest
+    setmyinfo/springboot-start-app:latest
 ```
 
 Same variables in [`src/main/docker/docker-compose.yaml`](../../../src/main/docker/docker-compose.yaml).
@@ -486,7 +557,9 @@ the pods. M2M client secrets of calling services belong to a Secret, not to a Co
 3. Router guard: a route with `meta.requiresAuth` and no login stores the route and calls `keycloak.login()`.
    After login the SPA goes back to the stored route.
 4. Before every API call `keycloak.updateToken(30)` refreshes the token, then
-   `Authorization: Bearer <token>` is sent.
+   `Authorization: Bearer <token>` is sent. While the user is idle, `onTokenExpired` refreshes the token too, and again
+   when a hidden tab is shown. A refresh that fails (SSO session ended: idle or max time, logout elsewhere) shows the
+   page as logged out. Background refreshes keep the SSO session alive, so it ends at "SSO Session Max".
 5. Tokens stay in memory only (not in localStorage). Reloading the page logs in again silently through the
    Keycloak SSO session.
 

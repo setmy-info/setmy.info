@@ -18,20 +18,22 @@ spec:
         spec:
             containers:
                 -   name: microservice
-                    #image: docker.io/setmy.info/springboot-start-project:latest
-                    #image: library/springboot-start-project:latest
-                    image: springboot-start-project:latest
-                    # For example pulling is not needed in Minikube
-                    #command: [ "java-execute" ]
-                    command: [ "java" ]
-                    args: [ "-jar", "/opt/setmy.info/lib/microservice.jar", "--spring.profiles.active=local" ]
+                    #image: docker.io/setmyinfo/springboot-start-app:latest
+                    #image: library/springboot-start-app:latest
+                    image: setmyinfo/springboot-start-app:latest
+                    # The same start as the image CMD: the jar, log location and optional config file come from the
+                    # MICROSERVICE_* of the Dockerfile, the profiles from MICROSERVICE_PROFILES below. Application
+                    # arguments go to args, for example args: [ "--server.port=8082" ]
+                    # The image is imported into K3s (k3s ctr images import), not pulled
+                    command: [ "smi-spring-boot" ]
+                    #args: [ "-jar", "/opt/setmy.info/lib/microservice.jar", "--spring.profiles.active=local" ]
                     imagePullPolicy: Never
                     ports:
                         -   name: ms-port
                             containerPort: 8082
                     env:
-                        # For Spring boot
-                        -   name: APPLICATION_PROFILES
+                        # smi-spring-boot: spring.profiles.active, instead of the live of the image
+                        -   name: MICROSERVICE_PROFILES
                             value: "local"
                         ## From config-map
                         -   name: SPRING_DATASOURCE_URL

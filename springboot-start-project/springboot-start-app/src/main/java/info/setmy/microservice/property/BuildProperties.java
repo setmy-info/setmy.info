@@ -3,26 +3,27 @@ package info.setmy.microservice.property;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+/**
+ * Build information, from application.yaml: Maven fills it in when the resources are filtered, the revision comes
+ * from build.properties of buildnumber-maven-plugin. The values here are the defaults when nothing is set.
+ */
 @Getter
 @Setter
-@Configuration
 @ToString
+@Configuration
+@ConfigurationProperties(prefix = "spring-boot-start-project.build")
 @PropertySource(value = "classpath:build.properties", ignoreResourceNotFound = true)
 public class BuildProperties {
 
-    @Value("${name}:spring-boot-project")
-    private String name;
+    private String name = "spring-boot-project";
 
-    @Value("${version:0.0.0-SNAPSHOT}")
-    private String version;
+    private String version = "0.0.0-SNAPSHOT";
 
-    @Value("${timestamp:01.01.1970 00:00}")
-    private String timestamp;
+    private String timestamp = "01.01.1970 00:00";
 
-    @Value("${revision:0}")
-    private String revision;
+    private String revision = "0";
 }

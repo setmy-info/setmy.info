@@ -1,0 +1,36 @@
+spring:
+    # Names of smi-postgresql-create-db-sql springboot_start_app local
+    datasource:
+        url: jdbc:postgresql://microservice-postgres:5432/springboot_start_app_local
+        driverClassName: org.postgresql.Driver
+        username: localspringboot_start_app
+        password: g6p8
+    liquibase:
+        url: jdbc:postgresql://microservice-postgres:5432/springboot_start_app_local
+        driver-class-name: org.postgresql.Driver
+        user: localspringboot_start_appliquibase
+        password: g6p8
+    # Postgres here: the H2 console of the local profile is off
+    h2:
+        console:
+            enabled: false
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+    quartz:
+        properties:
+            org:
+                quartz:
+                    jobStore:
+                        driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+                    dataSource:
+                        quartzDataSource:
+                            driver: org.postgresql.Driver
+                            URL: jdbc:postgresql://microservice-postgres:5432/springboot_start_app_local
+                            user: localspringboot_start_app
+                            password: g6p8
+
+springBootStartProject:
+    example:
+        foo: application-compose.yaml

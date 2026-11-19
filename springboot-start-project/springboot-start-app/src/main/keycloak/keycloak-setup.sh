@@ -7,17 +7,58 @@
 #
 # POSIX shell script (sh, dash, ksh, bash), uses only POSIX shell features and tools (awk, grep) besides kcadm.sh.
 #
-# Uses the Keycloak admin CLI kcadm.sh (in the Keycloak distribution bin directory and in the Keycloak image):
-#   KEYCLOAK_ADMIN_PASSWORD=password ./src/main/keycloak/keycloak-setup.sh
-#   KCADM="docker exec -i keycloak /opt/keycloak/bin/kcadm.sh" KEYCLOAK_URL=http://localhost:8080/iam \
-#       KEYCLOAK_ADMIN_PASSWORD=password ./src/main/keycloak/keycloak-setup.sh
+# Uses the Keycloak admin CLI kcadm.sh (in the Keycloak distribution bin directory and in the Keycloak image).
+#
+# Usage: keycloak-setup.sh <local|compose|dev|ci|test|prelive|live>
+#   The argument is the environment, it sets the defaults below; every environment variable still overrides them.
+#   compose  the Keycloak of src/main/docker/docker-compose.yaml: kcadm.sh inside the container
+#            microservice-keycloak, admin/password and the test users with password "password"
+#   local    a Keycloak on the developer machine at http://localhost:8180/iam, kcadm.sh of PATH, test users
+#   dev ci test prelive live
+#            a shared Keycloak: KEYCLOAK_URL, KEYCLOAK_ADMIN_PASSWORD and KEYCLOAK_SPA_URLS are required, no test
+#            users unless KEYCLOAK_TEST_USERS=true, never in live
+#
+#   ./src/main/keycloak/keycloak-setup.sh compose
+#   KEYCLOAK_ADMIN_PASSWORD=... ./src/main/keycloak/keycloak-setup.sh local
+#   KEYCLOAK_URL=https://dev.example.com/iam KEYCLOAK_ADMIN_PASSWORD=... \
+#       KEYCLOAK_SPA_URLS=https://dev.example.com ./src/main/keycloak/keycloak-setup.sh dev
 
 set -eu
 # No file name expansion: KCADM and comma lists are split on purpose, values like "/*" must stay as they are
 set -f
 
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <local|compose|dev|ci|test|prelive|live>" >&2
+    exit 1
+fi
+ENVIRONMENT="$1"
+
+case "${ENVIRONMENT}" in
+    compose)
+        # kcadm.sh runs inside the container, where Keycloak listens on 8080 (8180 is the port of the host)
+        : "${KCADM:=docker exec -i microservice-keycloak /opt/keycloak/bin/kcadm.sh}"
+        : "${KEYCLOAK_URL:=http://localhost:8080/iam}"
+        : "${KEYCLOAK_ADMIN_PASSWORD:=password}"
+        : "${KEYCLOAK_SPA_URLS:=http://localhost:8082}"
+        : "${KEYCLOAK_TEST_USERS:=true}"
+        : "${KEYCLOAK_TEST_USER_PASSWORD:=password}"
+        ;;
+    local)
+        : "${KEYCLOAK_URL:=http://localhost:8180/iam}"
+        : "${KEYCLOAK_SPA_URLS:=http://localhost:8082}"
+        : "${KEYCLOAK_TEST_USERS:=true}"
+        ;;
+    dev|ci|test|prelive|live)
+        : "${KEYCLOAK_URL:?KEYCLOAK_URL is not set}"
+        : "${KEYCLOAK_SPA_URLS:?KEYCLOAK_SPA_URLS is not set}"
+        ;;
+    *)
+        echo "ERROR: Environment must be one of: local, compose, dev, ci, test, prelive, live." >&2
+        exit 1
+        ;;
+esac
+
 KCADM="${KCADM:-kcadm.sh}"
-KEYCLOAK_URL="${KEYCLOAK_URL:-http://localhost:8180/iam}"
 KEYCLOAK_ADMIN_REALM="${KEYCLOAK_ADMIN_REALM:-master}"
 KEYCLOAK_ADMIN_USER="${KEYCLOAK_ADMIN_USER:-admin}"
 KEYCLOAK_ADMIN_PASSWORD="${KEYCLOAK_ADMIN_PASSWORD:?KEYCLOAK_ADMIN_PASSWORD is not set}"
@@ -29,22 +70,29 @@ KEYCLOAK_API_SCOPE="${KEYCLOAK_API_SCOPE:-calculator}"
 KEYCLOAK_SPA_CLIENT_ID="${KEYCLOAK_SPA_CLIENT_ID:-springboot-start-app-spa}"
 # Comma separated base URLs of every environment where the SPA runs, for example
 # http://localhost:8082,https://dev.example.com,https://test.example.com,https://prelive.example.com
-KEYCLOAK_SPA_URLS="${KEYCLOAK_SPA_URLS:-http://localhost:8082}"
 KEYCLOAK_M2M_CLIENT_ID="${KEYCLOAK_M2M_CLIENT_ID:-springboot-start-app-m2m}"
 KEYCLOAK_M2M_ROLES="${KEYCLOAK_M2M_ROLES:-calculator-user}"
-# Test users calculator-user and calculator-admin, never in live
+# Test users calculator-user and calculator-admin
 KEYCLOAK_TEST_USERS="${KEYCLOAK_TEST_USERS:-false}"
+
+if [ "${ENVIRONMENT}" = "live" ] && [ "${KEYCLOAK_TEST_USERS}" = "true" ]; then
+    echo "ERROR: No test users in live." >&2
+    exit 1
+fi
 
 REALM="${KEYCLOAK_REALM}"
 
 # Functions with ( ) bodies run in a subshell: their variables and IFS changes stay local (POSIX has no "local").
 
-kc() {
-    # KCADM unquoted on purpose: it may be a command with arguments ("docker exec -i keycloak .../kcadm.sh").
-    # stdin from /dev/null: kcadm.sh (update without -s, docker exec -i) must never wait for input.
+kc() (
+    # KCADM unquoted on purpose: it may be a command with arguments ("docker exec -i microservice-keycloak
+    # .../kcadm.sh"). Split on blanks with the default IFS, also when the caller loops over a comma list (IFS=',').
+    # stdin from /dev/null: kcadm.sh (update -n without -s, docker exec -i) must never wait for input.
+    IFS=' 	
+'
     # shellcheck disable=SC2086
     ${KCADM} "$@" </dev/null
-}
+)
 
 log() {
     printf 'keycloak-setup: %s\n' "$*"
@@ -125,7 +173,7 @@ ensure_test_user() (
     add_api_roles "${username}" "$2"
 )
 
-log "login to ${KEYCLOAK_URL} realm ${KEYCLOAK_ADMIN_REALM} as ${KEYCLOAK_ADMIN_USER}"
+log "${ENVIRONMENT}: login to ${KEYCLOAK_URL} realm ${KEYCLOAK_ADMIN_REALM} as ${KEYCLOAK_ADMIN_USER}"
 kc config credentials --server "${KEYCLOAK_URL}" --realm "${KEYCLOAK_ADMIN_REALM}" \
     --user "${KEYCLOAK_ADMIN_USER}" --password "${KEYCLOAK_ADMIN_PASSWORD}"
 
@@ -173,7 +221,8 @@ ensure_client "${KEYCLOAK_SPA_CLIENT_ID}" \
     -s 'attributes."pkce.code.challenge.method"=S256' \
     -s 'attributes."post.logout.redirect.uris"=+'
 SPA_UUID="$(client_uuid "${KEYCLOAK_SPA_CLIENT_ID}")"
-kc update "clients/${SPA_UUID}/default-client-scopes/${SCOPE_UUID}" -r "${REALM}"
+# -n: a link endpoint has PUT and DELETE only, without -n kcadm.sh would GET it first to merge and fail
+kc update "clients/${SPA_UUID}/default-client-scopes/${SCOPE_UUID}" -r "${REALM}" -n
 
 # 5. Machine to machine client: confidential, client credentials grant through the service account
 ensure_client "${KEYCLOAK_M2M_CLIENT_ID}" \
@@ -181,7 +230,7 @@ ensure_client "${KEYCLOAK_M2M_CLIENT_ID}" \
     -s publicClient=false -s clientAuthenticatorType=client-secret -s serviceAccountsEnabled=true \
     -s standardFlowEnabled=false -s implicitFlowEnabled=false -s directAccessGrantsEnabled=false
 M2M_UUID="$(client_uuid "${KEYCLOAK_M2M_CLIENT_ID}")"
-kc update "clients/${M2M_UUID}/default-client-scopes/${SCOPE_UUID}" -r "${REALM}"
+kc update "clients/${M2M_UUID}/default-client-scopes/${SCOPE_UUID}" -r "${REALM}" -n
 add_api_roles "service-account-${KEYCLOAK_M2M_CLIENT_ID}" "${KEYCLOAK_M2M_ROLES}"
 
 # 6. Test users

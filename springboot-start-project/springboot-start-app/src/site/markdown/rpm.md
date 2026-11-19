@@ -34,6 +34,11 @@ repository and its packages, `smi-springboot-start-app-config` (LIVE) and `smi-s
 * `machine.env`: this environment
 * `local.env`: made by hand on the machine, in no package, for secrets
 * `springboot-start-app.yaml`: extra Spring configuration, loaded with `spring.config.additional-location`
+* `logback.xml`: made by hand when needed, a logging configuration instead of the one in the jar, with
+  `MICROSERVICE_LOG_CONFIG_FILE_PATH=/opt/setmy.info/etc/springboot-start-app/logback.xml` in `local.env`
+
+The log file is `/var/opt/setmy.info/microservice/springboot-start-app.log`, rolled over daily or at 10 MB into
+`springboot-start-app.log.<date>.<n>.gz` beside it.
 
 Example variables in [`src/main/systemd/springboot-start-app.env`](../../../src/main/systemd/springboot-start-app.env).
 The application package starts the service when `machine.env` is already there, otherwise the configuration

@@ -63,6 +63,7 @@ spring:
     quartz:
         job-store-type: jdbc
         jdbc:
+            # Created through the owner datasource of spring.liquibase.* (bean/DatasourceBeans)
             initialize-schema: always
         properties:
             org:
@@ -139,6 +140,12 @@ maven:
         artifactId: @project.artifactId@
 
 springBootStartProject:
+    # Filled in by Maven resource filtering, the revision from build.properties of buildnumber-maven-plugin
+    build:
+        name: @project.artifactId@
+        version: @project.version@
+        timestamp: @buildTimestamp@
+        revision: ${revision:0}
     startup:
         timeZone: UTC
     example:

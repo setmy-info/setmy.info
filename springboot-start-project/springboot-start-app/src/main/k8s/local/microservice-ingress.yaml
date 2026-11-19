@@ -3,21 +3,17 @@ kind: Ingress
 metadata:
     name: microservice-ingress
     namespace: microservice-local
-    annotations:
-        nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-    #ingressClassName: nginx-example
-    ingressClassName: nginx
+    # Traefik, the ingress controller K3s installs
+    ingressClassName: traefik
     rules:
         -   host: microservice-local
             http:
                 paths:
-                    #-   path: /testpath
-                    -   path: /microservice-local
+                    -   path: /
                         pathType: Prefix
                         backend:
                             service:
-                                #name: test
                                 name: microservice-service
                                 port:
                                     number: 80

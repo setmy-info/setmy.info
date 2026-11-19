@@ -4,5 +4,5 @@ metadata:
     name: postgres-config-map
     namespace: microservice-local
 data:
-    postgres-db: "microservice-db"
+    postgres-db: "springboot_start_app_local"
 immutable: true

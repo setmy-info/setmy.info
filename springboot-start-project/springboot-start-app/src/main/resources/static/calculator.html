@@ -88,6 +88,27 @@
             this.keycloak = new Keycloak({url: config.url, realm: config.realm, clientId: config.clientId});
             // responseMode query: the login answer comes as ?code=..., so it does not clash with the # router
             await this.keycloak.init({pkceMethod: 'S256', responseMode: 'query', checkLoginIframe: false});
+            // Token updater while the user is idle: keycloak-js calls onTokenExpired when the access token expires,
+            // also when no API call needs it, so the page stays logged in until the Keycloak SSO session ends
+            this.keycloak.onTokenExpired = () => this.refresh();
+            // Timers of a hidden browser tab are slowed down: check the token again when the tab is shown
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'visible' && this.keycloak.authenticated) {
+                    this.refresh();
+                }
+            });
+        },
+        async refresh() {
+            try {
+                await this.keycloak.updateToken(30);
+            } catch (error) {
+                // Refresh token expired or SSO session ended (idle or max time, logout elsewhere): logged out here too
+                this.keycloak.clearToken();
+            }
+            this.onChange();
+        },
+        // Set by the Vue app: shows the login state after a refresh
+        onChange() {
         },
         login(route) {
             sessionStorage.setItem(AFTER_LOGIN_ROUTE_KEY, route || '/');
@@ -227,6 +248,12 @@
                 operations,
                 authenticated: authService.keycloak.authenticated,
                 username: authService.username()
+            };
+        },
+        mounted() {
+            authService.onChange = () => {
+                this.authenticated = authService.keycloak.authenticated;
+                this.username = authService.username();
             };
         },
         methods: {
