@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: infinispan-ingress
+    namespace: microservice-local
+spec:
+    # Traefik, the ingress controller K3s installs. Console: http://infinispan.localhost/console
+    ingressClassName: traefik
+    rules:
+        -   host: infinispan.localhost
+            http:
+                paths:
+                    -   path: /
+                        pathType: Prefix
+                        backend:
+                            service:
+                                name: infinispan-service
+                                port:
+                                    number: 11222

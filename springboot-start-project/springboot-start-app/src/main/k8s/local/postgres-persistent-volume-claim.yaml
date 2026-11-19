@@ -4,10 +4,9 @@ metadata:
     name: postgres-persistent-volume-claim
     namespace: microservice-local
 spec:
+    # K3s default storage class local-path: a directory on the node
     accessModes:
         - ReadWriteOnce
     resources:
         requests:
             storage: 1Gi
-#    storageClassName: ""
-#    volumeName: postgres-persistent-volume

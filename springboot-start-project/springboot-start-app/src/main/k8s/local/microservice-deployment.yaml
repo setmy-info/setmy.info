@@ -6,7 +6,7 @@ metadata:
     labels:
         app: microservice-deployment
 spec:
-    #replicas: 3
+    # Two pods on the same database: Liquibase lock and clustered Quartz
     replicas: 2
     selector:
         matchLabels:
@@ -16,32 +16,38 @@ spec:
             labels:
                 app: microservice-deployment
         spec:
+            # depends_on service_healthy of docker-compose.yaml
+            initContainers:
+                -   name: wait-for-postgres
+                    image: postgis/postgis:18-3.6
+                    command: [ "sh", "-c", "until pg_isready -h postgres-service -p 5432; do sleep 2; done" ]
             containers:
                 -   name: microservice
-                    #image: docker.io/setmyinfo/springboot-start-app:latest
-                    #image: library/springboot-start-app:latest
+                    # The image is imported into K3s (k3s ctr images import), not pulled
                     image: setmyinfo/springboot-start-app:latest
+                    imagePullPolicy: Never
                     # The same start as the image CMD: the jar, log location and optional config file come from the
                     # MICROSERVICE_* of the Dockerfile, the profiles from MICROSERVICE_PROFILES below. Application
                     # arguments go to args, for example args: [ "--server.port=8082" ]
-                    # The image is imported into K3s (k3s ctr images import), not pulled
                     command: [ "smi-spring-boot" ]
-                    #args: [ "-jar", "/opt/setmy.info/lib/microservice.jar", "--spring.profiles.active=local" ]
-                    imagePullPolicy: Never
                     ports:
                         -   name: ms-port
                             containerPort: 8082
                     env:
-                        # smi-spring-boot: spring.profiles.active, instead of the live of the image
-                        -   name: MICROSERVICE_PROFILES
-                            value: "local"
                         ## From config-map
-                        -   name: SPRING_DATASOURCE_URL
+                        -   name: MICROSERVICE_PROFILES
                             valueFrom:
                                 configMapKeyRef:
                                     name: microservice-config-map
-                                    key: spring-datasource-url
+                                    key: microservice-profiles
                                     optional: false
+                        -   name: INFINISPAN_SERVER_LIST
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: microservice-config-map
+                                    key: infinispan-server-list
+                                    optional: false
+                        ## From the pod
                         -   name: POD_NAMESPACE
                             valueFrom:
                                 fieldRef:
@@ -54,36 +60,6 @@ spec:
                             valueFrom:
                                 fieldRef:
                                     fieldPath: spec.nodeName
-                        -   name: INFINISPAN_SERVER_LIST
-                            valueFrom:
-                                configMapKeyRef:
-                                    name: microservice-config-map
-                                    key: infinispan-server-list
-                                    optional: false
-                        -   name: SMI_IAM_URL
-                            valueFrom:
-                                configMapKeyRef:
-                                    name: microservice-config-map
-                                    key: keycloak-url
-                                    optional: false
-                        -   name: SMI_IAM_REALM
-                            valueFrom:
-                                configMapKeyRef:
-                                    name: microservice-config-map
-                                    key: keycloak-realm
-                                    optional: false
-                        -   name: SMI_IAM_API_CLIENT_ID
-                            valueFrom:
-                                configMapKeyRef:
-                                    name: microservice-config-map
-                                    key: keycloak-api-client-id
-                                    optional: false
-                        -   name: SMI_IAM_SPA_CLIENT_ID
-                            valueFrom:
-                                configMapKeyRef:
-                                    name: microservice-config-map
-                                    key: keycloak-spa-client-id
-                                    optional: false
                         ## From secrets
                         -   name: SPRING_DATASOURCE_USERNAME
                             valueFrom:
@@ -97,6 +73,18 @@ spec:
                                     name: microservice-secrets-map
                                     key: spring-datasource-password
                                     optional: false
+                        -   name: SPRING_LIQUIBASE_USER
+                            valueFrom:
+                                secretKeyRef:
+                                    name: microservice-secrets-map
+                                    key: spring-liquibase-user
+                                    optional: false
+                        -   name: SPRING_LIQUIBASE_PASSWORD
+                            valueFrom:
+                                secretKeyRef:
+                                    name: microservice-secrets-map
+                                    key: spring-liquibase-password
+                                    optional: false
                         -   name: INFINISPAN_AUTH_USERNAME
                             valueFrom:
                                 secretKeyRef:
@@ -109,10 +97,28 @@ spec:
                                     name: microservice-secrets-map
                                     key: infinispan-auth-password
                                     optional: false
+                    # Public /actuator/health (SecurityConfiguration), the database included
+                    startupProbe:
+                        httpGet:
+                            path: /actuator/health
+                            port: ms-port
+                        periodSeconds: 5
+                        failureThreshold: 36
+                    readinessProbe:
+                        httpGet:
+                            path: /actuator/health
+                            port: ms-port
+                        periodSeconds: 10
+                    livenessProbe:
+                        httpGet:
+                            path: /actuator/health
+                            port: ms-port
+                        periodSeconds: 20
+                        failureThreshold: 3
 #                    volumeMounts:
 #                        -   name: nfs-volume
 #                            mountPath: /mnt/gintra
 #            volumes:
 #                -   name: nfs-volume
 #                    persistentVolumeClaim:
-#                        claimName: xyz-nfs-persistent-volume-claim
+#                        claimName: microservice-nfs-persistent-volume-claim

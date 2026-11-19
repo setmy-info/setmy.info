@@ -487,30 +487,12 @@
         </dependency>
         <dependency>
             <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-hibernate-cache-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.infinispan</groupId>
             <artifactId>infinispan-spring-boot4-starter-embedded</artifactId>
             <version>${infinispan.version}</version>
         </dependency>
         <!--dependency>
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-spring-boot4-starter-remote</artifactId>
-        </dependency-->
-        <dependency>
-            <groupId>javax.cache</groupId>
-            <artifactId>cache-api</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <!--dependency>
-            <groupId>javax.cache</groupId>
-            <artifactId>cache-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>3.10.8</version>
         </dependency-->
 
         <dependency>

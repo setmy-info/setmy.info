@@ -236,6 +236,7 @@ The argument is the environment, it sets the defaults: `./src/main/keycloak/keyc
 | Environment                         | Defaults |
 |-------------------------------------|----------|
 | `compose`                           | the Keycloak of `src/main/docker/docker-compose.yaml`: `kcadm.sh` inside the container `microservice-keycloak` at `http://localhost:8080/iam`, `admin` / `password`, SPA `http://localhost:8082`, test users with password `password` |
+| `k8s`                               | the Keycloak of `src/main/k8s/local` (K3s, namespace `microservice-local`): `kcadm.sh` inside the pod of `keycloak-deployment` at `http://localhost:8080/iam`, `admin` / `password`, SPA `http://microservice.localhost`, test users with password `password` |
 | `local`                             | a Keycloak on the developer machine `http://localhost:8180/iam`, `kcadm.sh` of `PATH`, SPA `http://localhost:8082`, test users |
 | `dev`, `ci`, `test`, `prelive`, `live` | a shared Keycloak: `KEYCLOAK_URL`, `KEYCLOAK_ADMIN_PASSWORD` and `KEYCLOAK_SPA_URLS` required, no test users unless asked, never in `live` |
 
@@ -540,11 +541,15 @@ Same variables in [`src/main/docker/docker-compose.yaml`](../../../src/main/dock
 
 ### Kubernetes
 
-Values in the ConfigMap ([`microservice-config-map.yaml`](../../../src/main/k8s/local/microservice-config-map.yaml),
-keys `keycloak-url`, `keycloak-realm`, `keycloak-api-client-id`, `keycloak-spa-client-id`), mapped to the
-variables in [`microservice-deployment.yaml`](../../../src/main/k8s/local/microservice-deployment.yaml) with
-`configMapKeyRef`. The ConfigMap is `immutable: true`: delete and create it again to change values, then restart
-the pods. M2M client secrets of calling services belong to a Secret, not to a ConfigMap.
+Local K3s ([`src/main/k8s/local`](../../../src/main/k8s/local), namespace `microservice-local`, see README.md):
+Keycloak runs as `keycloak-deployment` on the database `keycloak_local` of the Postgres pod and imports
+`src/main/docker/keycloak/*.json` (ConfigMap `keycloak-realm-config-map`) on an empty database, the same as docker
+compose. The browser reaches it as `http://keycloak.localhost/iam` (`keycloak-ingress`), so tokens carry that issuer; the
+application pods fetch the signing keys from `http://keycloak-service:8080/iam`. These values are in the profile
+`k8s` ([`application-k8s.yml`](../../../src/main/resources/application-k8s.yml)), the deployment runs the profiles
+`local,k8s`. The SPA is `http://microservice.localhost`, its redirect URI is in the realm JSON. Setup without the import:
+`./src/main/keycloak/keycloak-setup.sh k8s`. M2M client secrets of calling services belong to a Secret, not to a
+ConfigMap.
 
 ## 10. SPA (Vue) side
 

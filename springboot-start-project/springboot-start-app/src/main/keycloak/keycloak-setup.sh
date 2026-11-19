@@ -9,10 +9,12 @@
 #
 # Uses the Keycloak admin CLI kcadm.sh (in the Keycloak distribution bin directory and in the Keycloak image).
 #
-# Usage: keycloak-setup.sh <local|compose|dev|ci|test|prelive|live>
+# Usage: keycloak-setup.sh <local|compose|k8s|dev|ci|test|prelive|live>
 #   The argument is the environment, it sets the defaults below; every environment variable still overrides them.
 #   compose  the Keycloak of src/main/docker/docker-compose.yaml: kcadm.sh inside the container
 #            microservice-keycloak, admin/password and the test users with password "password"
+#   k8s      the Keycloak of src/main/k8s/local (K3s, namespace microservice-local): kcadm.sh inside the pod of
+#            keycloak-deployment, admin/password, SPA http://microservice.localhost and the test users
 #   local    a Keycloak on the developer machine at http://localhost:8180/iam, kcadm.sh of PATH, test users
 #   dev ci test prelive live
 #            a shared Keycloak: KEYCLOAK_URL, KEYCLOAK_ADMIN_PASSWORD and KEYCLOAK_SPA_URLS are required, no test
@@ -28,7 +30,7 @@ set -eu
 set -f
 
 if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <local|compose|dev|ci|test|prelive|live>" >&2
+    echo "Usage: $0 <local|compose|k8s|dev|ci|test|prelive|live>" >&2
     exit 1
 fi
 ENVIRONMENT="$1"
@@ -43,6 +45,15 @@ case "${ENVIRONMENT}" in
         : "${KEYCLOAK_TEST_USERS:=true}"
         : "${KEYCLOAK_TEST_USER_PASSWORD:=password}"
         ;;
+    k8s)
+        # kcadm.sh runs inside the pod, where Keycloak listens on 8080
+        : "${KCADM:=kubectl exec -i -n microservice-local deployment/keycloak-deployment -- /opt/keycloak/bin/kcadm.sh}"
+        : "${KEYCLOAK_URL:=http://localhost:8080/iam}"
+        : "${KEYCLOAK_ADMIN_PASSWORD:=password}"
+        : "${KEYCLOAK_SPA_URLS:=http://microservice.localhost}"
+        : "${KEYCLOAK_TEST_USERS:=true}"
+        : "${KEYCLOAK_TEST_USER_PASSWORD:=password}"
+        ;;
     local)
         : "${KEYCLOAK_URL:=http://localhost:8180/iam}"
         : "${KEYCLOAK_SPA_URLS:=http://localhost:8082}"
@@ -53,7 +64,7 @@ case "${ENVIRONMENT}" in
         : "${KEYCLOAK_SPA_URLS:?KEYCLOAK_SPA_URLS is not set}"
         ;;
     *)
-        echo "ERROR: Environment must be one of: local, compose, dev, ci, test, prelive, live." >&2
+        echo "ERROR: Environment must be one of: local, compose, k8s, dev, ci, test, prelive, live." >&2
         exit 1
         ;;
 esac

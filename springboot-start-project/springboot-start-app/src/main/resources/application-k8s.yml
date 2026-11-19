@@ -1,0 +1,49 @@
+# Local K3s, namespace microservice-local (src/main/k8s/local), profiles local,k8s: the same as application-compose.yml
+# with the service names of Kubernetes. Users and passwords come from microservice-secrets-map as
+# SPRING_DATASOURCE_USERNAME/PASSWORD and SPRING_LIQUIBASE_USER/PASSWORD.
+spring:
+    # Names of smi-postgresql-create-db-sql springboot_start_app local
+    datasource:
+        url: jdbc:postgresql://postgres-service:5432/springboot_start_app_local
+        driverClassName: org.postgresql.Driver
+    liquibase:
+        url: jdbc:postgresql://postgres-service:5432/springboot_start_app_local
+        driver-class-name: org.postgresql.Driver
+    # Postgres here: the H2 console of the local profile is off
+    h2:
+        console:
+            enabled: false
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+    quartz:
+        properties:
+            org:
+                quartz:
+                    jobStore:
+                        driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+                    dataSource:
+                        quartzDataSource:
+                            driver: org.postgresql.Driver
+                            URL: jdbc:postgresql://postgres-service:5432/springboot_start_app_local
+                            user: ${SPRING_DATASOURCE_USERNAME}
+                            password: ${SPRING_DATASOURCE_PASSWORD}
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    # Browser URL of keycloak-ingress (KC_HOSTNAME of keycloak-config-map)
+                    issuer-uri: http://keycloak.localhost/iam/realms/example
+                    # Signing keys inside the cluster
+                    jwk-set-uri: http://keycloak-service:8080/iam/realms/example/protocol/openid-connect/certs
+
+springBootStartProject:
+    example:
+        foo: application-k8s.yaml
+    security:
+        keycloak:
+            # Handed over to the SPA: the browser goes to keycloak.localhost
+            url: http://keycloak.localhost/iam
+            issuerUrl: http://keycloak.localhost/iam/realms/example
+            jwkSetUrl: http://keycloak-service:8080/iam/realms/example/protocol/openid-connect/certs

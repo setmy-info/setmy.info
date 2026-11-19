@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-    name: postgres-config-map
-    namespace: microservice-local
-data:
-    postgres-db: "springboot_start_app_local"
-immutable: true

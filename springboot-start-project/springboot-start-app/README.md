@@ -189,46 +189,122 @@ See [rpm.md](src/site/markdown/rpm.md).
 
 ## K8S, K3s
 
-Yaml config in `src/main/k8s/local` for:
+Local developer cluster, single machine K3s: `src/main/k8s/local`, namespace `microservice-local`. The same
+components and values as `src/main/docker/docker-compose.yaml`:
 
-* Namespace
-* Deployment
-* Service
-* Ingress (Traefik, the ingress controller of K3s)
-* Config-map
-* Secrets
-* Persistent volume claims
+| Component  | Files                                                         | Browser                              |
+|------------|---------------------------------------------------------------|--------------------------------------|
+| Postgres   | `postgres-*`, PostgreSQL 18 with PostGIS 3.6, init SQL of `src/main/docker/*.sql` | -                |
+| Infinispan | `infinispan-*`, server and console only (the application has embedded Infinispan) | http://infinispan.localhost/console, microservice / g6p8 |
+| Keycloak   | `keycloak-*`, database `keycloak_local`, realm import of `src/main/docker/keycloak/*.json` | http://keycloak.localhost/iam, admin / password |
+| App        | `microservice-*`, profiles `local,k8s` (`application-k8s.yml`)    | http://microservice.localhost/calculator.html |
 
-K3s runs the images of its own containerd, not the ones of Docker: the image is built with Docker and imported into
-K3s (the deployment has `imagePullPolicy: Never`). kubectl of K3s reads `/etc/rancher/k3s/k3s.yaml`, the context
-is `default`.
+Postgres creates the databases and users from the init SQL once, on an empty volume, the same as docker compose.
+Keycloak imports the realm once, on an empty database. Ingress is Traefik, the ingress controller of K3s. K3s runs the
+images of its own containerd, not the ones of Docker: the application image is built with Docker and imported into
+K3s (`imagePullPolicy: Never`). kubectl of K3s reads `/etc/rancher/k3s/k3s.yaml`, the context is `default`.
+
+Once
 
 ```shell
-# kubectl as the user, once (or sudo k3s kubectl ...)
+# kubectl as the user, with its own config (or sudo k3s kubectl ...). Without KUBECONFIG the kubectl of K3s uses
+# /etc/rancher/k3s/k3s.yaml of root: "open /etc/rancher/k3s/k3s.yaml.lock: permission denied"
 mkdir -p ~/.kube && sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config && sudo chown "$(id -u):$(id -g)" ~/.kube/config
+chmod 600 ~/.kube/config
+echo 'export KUBECONFIG=~/.kube/config' >> ~/.bashrc && export KUBECONFIG=~/.kube/config
+# *.localhost: the browser resolves it to 127.0.0.1 itself and takes http://*.localhost as a secure context, which
+# keycloak-js needs (Web Crypto API). Other host names would need HTTPS. curl and the rest of the machine:
+echo "127.0.0.1 microservice.localhost keycloak.localhost infinispan.localhost" | sudo tee -a /etc/hosts
 
-# Image into K3s, after every new build
-mvn clean install && smi-docker-build
-docker save setmyinfo/springboot-start-app:latest | sudo k3s ctr images import -
-sudo k3s crictl images | grep springboot-start-app
+#Or
+mkdir -p ~/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown "$(id -u):$(id -g)" ~/.kube/config
+chmod 600 ~/.kube/config
+export KUBECONFIG=~/.kube/config
 
-kubectl apply -f ./src/main/k8s/local/microservice-namespace.yaml
+kubectl config get-contexts        # should list "default" marked with *
 kubectl config set-context --current --namespace=microservice-local
-# NFS volume, optional: the mount of the deployment is commented out, the node needs nfs-utils
-kubectl apply -f ./src/main/k8s/local/microservice-nfs-persistent-volume.yaml
-kubectl apply -f ./src/main/k8s/local/microservice-nfs-persistent-volume-claim.yaml
-kubectl apply -f ./src/main/k8s/local/microservice-config-map.yaml
-kubectl apply -f ./src/main/k8s/local/microservice-secrets-map.yaml
-kubectl apply -f ./src/main/k8s/local/microservice-deployment.yaml
-kubectl apply -f ./src/main/k8s/local/microservice-service.yaml
-kubectl apply -f ./src/main/k8s/local/microservice-ingress.yaml
+kubectl get nodes
 ```
 
-The Ingress answers for the host `microservice-local` on the ports 80 and 443 of the node:
+Image into K3s, after every new build
 
 ```shell
-echo "127.0.0.1 microservice-local" | sudo tee -a /etc/hosts
-curl http://microservice-local/actuator/health
+mvn clean install && smi-docker-build
+docker save setmyinfo/springboot-start-app:latest | sudo /usr/local/bin/k3s ctr images import -
+sudo /usr/local/bin/k3s crictl images | grep springboot-start-app
+```
+
+Apply, in this order
+
+```shell
+K8S=./src/main/k8s/local
+# 1. Namespace
+kubectl apply -f ${K8S}/microservice-namespace.yaml
+kubectl config set-context --current --namespace=microservice-local
+# 2. Postgres. The init SQL comes from the files of docker compose (create or update the ConfigMap)
+kubectl create configmap postgres-init-config-map \
+    --from-file=./src/main/docker/keycloak-init.sql \
+    --from-file=./src/main/docker/postgres-init.sql \
+    --from-file=./src/main/docker/postgres-postgis.sql \
+    --dry-run=client -o yaml | kubectl apply -f -
+kubectl apply -f ${K8S}/postgres-secrets-map.yaml
+kubectl apply -f ${K8S}/postgres-persistent-volume-claim.yaml
+kubectl apply -f ${K8S}/postgres-deployment.yaml
+kubectl apply -f ${K8S}/postgres-service.yaml
+kubectl rollout status deployment postgres-deployment
+# 3. Infinispan
+kubectl apply -f ${K8S}/infinispan-secrets-map.yaml
+kubectl apply -f ${K8S}/infinispan-persistent-volume-claim.yaml
+kubectl apply -f ${K8S}/infinispan-deployment.yaml
+kubectl apply -f ${K8S}/infinispan-service.yaml
+kubectl apply -f ${K8S}/infinispan-ingress.yaml
+# 4. Keycloak. The realm JSON comes from the files of docker compose (create or update the ConfigMap)
+kubectl create configmap keycloak-realm-config-map \
+    --from-file=./src/main/docker/keycloak/example-realm.json \
+    --dry-run=client -o yaml | kubectl apply -f -
+kubectl apply -f ${K8S}/keycloak-config-map.yaml
+kubectl apply -f ${K8S}/keycloak-secrets-map.yaml
+kubectl apply -f ${K8S}/keycloak-deployment.yaml
+kubectl apply -f ${K8S}/keycloak-service.yaml
+kubectl apply -f ${K8S}/keycloak-ingress.yaml
+kubectl rollout status deployment keycloak-deployment --timeout=5m
+# 5. App
+kubectl apply -f ${K8S}/microservice-config-map.yaml
+kubectl apply -f ${K8S}/microservice-secrets-map.yaml
+kubectl apply -f ${K8S}/microservice-deployment.yaml
+kubectl apply -f ${K8S}/microservice-service.yaml
+kubectl apply -f ${K8S}/microservice-ingress.yaml
+kubectl rollout status deployment microservice-deployment --timeout=5m
+# NFS volume, optional: the mount of the deployment is commented out, the node needs nfs-utils
+#kubectl apply -f ${K8S}/microservice-nfs-persistent-volume.yaml
+#kubectl apply -f ${K8S}/microservice-nfs-persistent-volume-claim.yaml
+```
+
+```shell
+curl http://microservice.localhost/actuator/health
+curl http://keycloak.localhost/iam/realms/example/.well-known/openid-configuration
+```
+
+Login in http://microservice.localhost/calculator.html with the test users of the realm JSON (`calculator-user`,
+`calculator-admin`, see [keycloak.md](src/site/markdown/keycloak.md)). Without the realm import:
+`./src/main/keycloak/keycloak-setup.sh k8s`.
+
+Changed ConfigMap or Secret: apply it again and restart the deployment, the environment variables are read at the
+start of the pod only.
+
+```shell
+kubectl apply -f ./src/main/k8s/local/microservice-config-map.yaml
+kubectl rollout restart deployment microservice-deployment
+```
+
+Changed init SQL or realm JSON: they are used on an empty database only. Delete the Postgres volume (everything of
+Postgres and Keycloak is lost) and apply again.
+
+```shell
+kubectl delete deployment keycloak-deployment microservice-deployment postgres-deployment
+kubectl delete pvc postgres-persistent-volume-claim
 ```
 
 New image, same tag: import it again and restart the pods.
@@ -245,26 +321,28 @@ Check
 kubectl config view
 kubectl get namespaces
 kubectl get all
+kubectl get pvc
 kubectl describe configmaps microservice-config-map
 kubectl describe secret microservice-secrets-map
 kubectl get pods
 kubectl describe pod -l app=microservice-deployment
 kubectl logs -l app=microservice-deployment --all-containers=true --follow
-kubectl get endpoints microservice-service
+kubectl logs -l app=postgres-deployment
+kubectl logs -l app=keycloak-deployment --follow
+kubectl logs -l app=infinispan-deployment
+kubectl exec -it deployment/postgres-deployment -- psql -U postgres -d springboot_start_app_local
+kubectl get endpoints
 kubectl get ingress
 kubectl logs -n kube-system -l app.kubernetes.io/name=traefik -f
 kubectl port-forward service/microservice-service 8082:80
+kubectl port-forward service/postgres-service 5433:5432
 ```
 
-Delete
+Delete: the namespace with everything in it, the volumes included
 
 ```shell
-kubectl delete -f ./src/main/k8s/local/microservice-ingress.yaml
-kubectl delete -f ./src/main/k8s/local/microservice-service.yaml
-kubectl delete -f ./src/main/k8s/local/microservice-deployment.yaml
-kubectl delete -f ./src/main/k8s/local/microservice-secrets-map.yaml
-kubectl delete -f ./src/main/k8s/local/microservice-config-map.yaml
 kubectl delete namespace microservice-local
+#kubectl delete -f ./src/main/k8s/local/microservice-nfs-persistent-volume.yaml
 sudo k3s ctr images rm docker.io/setmyinfo/springboot-start-app:latest
 ```
 

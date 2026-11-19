@@ -5,6 +5,9 @@ metadata:
     namespace: microservice-local
 spec:
     replicas: 1
+    # One pod on the volume at a time: the old pod stops before the new one starts
+    strategy:
+        type: Recreate
     selector:
         matchLabels:
             app: postgres-deployment
@@ -15,18 +18,12 @@ spec:
         spec:
             containers:
                 -   name: postgres
-                    image: postgres:16.4
+                    # PostgreSQL 18 with PostGIS 3.6, the same as docker-compose.yaml
+                    image: postgis/postgis:18-3.6
                     ports:
                         -   name: pg-port
                             containerPort: 5432
                     env:
-                        ## From config-map
-                        -   name: POSTGRES_DB
-                            valueFrom:
-                                configMapKeyRef:
-                                    name: postgres-config-map
-                                    key: postgres-db
-                                    optional: false
                         ## From secrets
                         -   name: POSTGRES_USER
                             valueFrom:
@@ -40,10 +37,25 @@ spec:
                                     name: postgres-secrets-map
                                     key: postgres-password
                                     optional: false
+                    readinessProbe:
+                        exec:
+                            command: [ "pg_isready", "-U", "postgres", "-d", "springboot_start_app_local" ]
+                        periodSeconds: 5
+                        timeoutSeconds: 5
                     volumeMounts:
-                        -   mountPath: /var/lib/postgresql/data
-                            name: postgres-storage
+                        # PostgreSQL 18 image: PGDATA is /var/lib/postgresql/18/docker
+                        -   name: postgres-storage
+                            mountPath: /var/lib/postgresql
+                        # Run once on an empty volume, in alphabetical order: keycloak-init.sql, postgres-init.sql,
+                        # postgres-postgis.sql
+                        -   name: postgres-init
+                            mountPath: /docker-entrypoint-initdb.d
+                            readOnly: true
             volumes:
                 -   name: postgres-storage
                     persistentVolumeClaim:
                         claimName: postgres-persistent-volume-claim
+                # kubectl create configmap postgres-init-config-map --from-file=src/main/docker/..., see README.md
+                -   name: postgres-init
+                    configMap:
+                        name: postgres-init-config-map

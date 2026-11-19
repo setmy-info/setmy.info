@@ -7,12 +7,8 @@ metadata:
     # <pod-name>.<service-name>.<namespace>.svc.cluster.local
     # postgresql-1.postgres-service.microservice-local.svc.cluster.local
 data:
-    #spring-datasource-url: "jdbc:postgresql://postgres-service.microservice-local.svc.cluster.local:5432/springboot_start_app_local"
-    spring-datasource-url: "jdbc:h2:file:./target/local;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL"
-    infinispan-server-list: "infinispan-service.microservice-local.svc.cluster.local"
-    # Keycloak, see keycloak.md. Base URL without /realms/...
-    keycloak-url: "https://example.com/iam"
-    keycloak-realm: "example"
-    keycloak-api-client-id: "springboot-start-app-api"
-    keycloak-spa-client-id: "springboot-start-app-spa"
-immutable: true
+    # smi-spring-boot: spring.profiles.active. local and k8s (application-k8s.yml: Postgres, Keycloak of this namespace),
+    # the same way as local,compose of docker-compose.yaml
+    microservice-profiles: "local,k8s"
+    # Not used yet: the application has embedded Infinispan
+    infinispan-server-list: "infinispan-service.microservice-local.svc.cluster.local:11222"

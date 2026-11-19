@@ -6,8 +6,9 @@ metadata:
 spec:
     # Traefik, the ingress controller K3s installs
     ingressClassName: traefik
+    # *.localhost: a secure context for the browser without HTTPS, keycloak-js needs the Web Crypto API
     rules:
-        -   host: microservice-local
+        -   host: microservice.localhost
             http:
                 paths:
                     -   path: /

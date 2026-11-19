@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: keycloak-deployment
+    namespace: microservice-local
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: keycloak-deployment
+    template:
+        metadata:
+            labels:
+                app: keycloak-deployment
+        spec:
+            # depends_on service_healthy of docker-compose.yaml
+            initContainers:
+                -   name: wait-for-postgres
+                    image: postgis/postgis:18-3.6
+                    command: [ "sh", "-c", "until pg_isready -h postgres-service -p 5432; do sleep 2; done" ]
+            containers:
+                -   name: keycloak
+                    image: quay.io/keycloak/keycloak:26.8.2
+                    # Realms, clients and users are stored in the database keycloak_local. On an empty database every
+                    # realm JSON of keycloak-realm-config-map (src/main/docker/keycloak) is imported at the start, an
+                    # existing realm is left as it is
+                    args: [ "start-dev", "--import-realm" ]
+                    ports:
+                        -   name: kc-port
+                            containerPort: 8080
+                        -   name: kc-management
+                            containerPort: 9000
+                    env:
+                        -   name: KC_HTTP_RELATIVE_PATH
+                            value: "/iam"
+                        -   name: KC_HOSTNAME_BACKCHANNEL_DYNAMIC
+                            value: "true"
+                        # Traefik in front of it
+                        -   name: KC_PROXY_HEADERS
+                            value: "xforwarded"
+                        -   name: KC_HEALTH_ENABLED
+                            value: "true"
+                        # Health of the management port 9000 at /health, without /iam
+                        -   name: KC_HTTP_MANAGEMENT_RELATIVE_PATH
+                            value: "/"
+                        -   name: KC_DB
+                            value: "postgres"
+                        ## From config-map
+                        -   name: KC_HOSTNAME
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: keycloak-config-map
+                                    key: kc-hostname
+                                    optional: false
+                        -   name: KC_DB_URL
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: keycloak-config-map
+                                    key: kc-db-url
+                                    optional: false
+                        ## From secrets
+                        -   name: KC_BOOTSTRAP_ADMIN_USERNAME
+                            valueFrom:
+                                secretKeyRef:
+                                    name: keycloak-secrets-map
+                                    key: kc-bootstrap-admin-username
+                                    optional: false
+                        -   name: KC_BOOTSTRAP_ADMIN_PASSWORD
+                            valueFrom:
+                                secretKeyRef:
+                                    name: keycloak-secrets-map
+                                    key: kc-bootstrap-admin-password
+                                    optional: false
+                        -   name: KC_DB_USERNAME
+                            valueFrom:
+                                secretKeyRef:
+                                    name: keycloak-secrets-map
+                                    key: kc-db-username
+                                    optional: false
+                        -   name: KC_DB_PASSWORD
+                            valueFrom:
+                                secretKeyRef:
+                                    name: keycloak-secrets-map
+                                    key: kc-db-password
+                                    optional: false
+                    readinessProbe:
+                        httpGet:
+                            path: /health/ready
+                            port: kc-management
+                        initialDelaySeconds: 20
+                        periodSeconds: 10
+                    livenessProbe:
+                        httpGet:
+                            path: /health/live
+                            port: kc-management
+                        initialDelaySeconds: 60
+                        periodSeconds: 20
+                    volumeMounts:
+                        -   name: keycloak-realm
+                            mountPath: /opt/keycloak/data/import
+                            readOnly: true
+            volumes:
+                # kubectl create configmap keycloak-realm-config-map --from-file=src/main/docker/keycloak/..., see README.md
+                -   name: keycloak-realm
+                    configMap:
+                        name: keycloak-realm-config-map

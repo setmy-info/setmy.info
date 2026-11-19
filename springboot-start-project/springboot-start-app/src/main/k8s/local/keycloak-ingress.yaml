@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: keycloak-ingress
+    namespace: microservice-local
+spec:
+    # Traefik, the ingress controller K3s installs. Admin console: http://keycloak.localhost/iam
+    ingressClassName: traefik
+    rules:
+        -   host: keycloak.localhost
+            http:
+                paths:
+                    -   path: /iam
+                        pathType: Prefix
+                        backend:
+                            service:
+                                name: keycloak-service
+                                port:
+                                    number: 8080

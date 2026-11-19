@@ -5,6 +5,8 @@ metadata:
     namespace: microservice-local
 spec:
     replicas: 1
+    strategy:
+        type: Recreate
     selector:
         matchLabels:
             app: infinispan-deployment
@@ -15,11 +17,14 @@ spec:
         spec:
             containers:
                 -   name: infinispan
+                    # The same as docker-compose.yaml. The application does not connect yet (embedded Infinispan),
+                    # the server is here for its console: http://infinispan.localhost/console
                     image: quay.io/infinispan/server
                     ports:
                         -   name: is-port
                             containerPort: 11222
                     env:
+                        ## From secrets
                         -   name: USER
                             valueFrom:
                                 secretKeyRef:
@@ -32,10 +37,14 @@ spec:
                                     name: infinispan-secrets-map
                                     key: pass
                                     optional: false
+                    readinessProbe:
+                        tcpSocket:
+                            port: is-port
+                        periodSeconds: 5
                     volumeMounts:
+                        # Caches and other configuration made in the console stay over restarts
                         -   name: infinispan-storage
-                            mountPath: /data
-
+                            mountPath: /opt/infinispan/server/data
             volumes:
                 -   name: infinispan-storage
                     persistentVolumeClaim:
