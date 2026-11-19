@@ -1,6 +1,6 @@
 package info.setmy.microservice.dao;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import org.hibernate.SessionFactory;
 
 /**

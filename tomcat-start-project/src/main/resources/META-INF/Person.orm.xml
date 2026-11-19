@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
-                 version="2.0">
+                 xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence/orm https://jakarta.ee/xml/ns/persistence/orm/orm_3_2.xsd"
+                 version="3.2">
 
     <!--
     https://docs.jboss.org/hibernate/stable/annotations/reference/en/html/xml-overriding.html
@@ -22,28 +22,26 @@
 
     <package>info.setmy.microservice.example.model</package>
 
-    <!-- @MappedSuperclass -->
-    <mapped-superclass class="info.setmy.models.Entity">
+    <!-- @SequenceGenerator(name = "personSequenceGenerator", sequenceName = "PERSON_ID_SEQ", allocationSize = 1):
+         on the top level, so the id of the mapped superclass can use it -->
+    <sequence-generator name="personSequenceGenerator" sequence-name="PERSON_ID_SEQ" allocation-size="1" initial-value="1"/>
+
+    <!-- @MappedSuperclass: the id is declared once, here, on the private field of info.setmy.models.Entity -->
+    <mapped-superclass class="info.setmy.models.Entity" access="FIELD">
         <attributes>
             <id name="id">
                 <column name="ID" unique="true" nullable="false"/>
+                <!-- @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personSequenceGenerator") -->
+                <generated-value strategy="SEQUENCE" generator="personSequenceGenerator"/>
             </id>
         </attributes>
     </mapped-superclass>
 
-    <entity class="info.setmy.microservice.example.model.Person" name="Person">
+    <entity class="info.setmy.microservice.example.model.Person" name="Person" access="FIELD">
         <table name="PERSON"/>
         <!-- @Inheritance(strategy=InheritanceType.SINGLE_TABLE) : SINGLE_TABLE, TABLE_PER_CLASS, JOINED;-->
         <!-- inheritance strategy="SINGLE_TABLE"/ -->
-        <id-class class="info.setmy.models.Entity"/>
         <attributes>
-            <id name="id">
-                <column name="ID" unique="true" nullable="false"/>
-                <!-- @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personSequenceGenerator" -->
-                <generated-value strategy="SEQUENCE" generator="personSequenceGenerator"/>
-                <!-- @SequenceGenerator(name = "personSequenceGenerator" sequenceName = "PERSON_ID_SEQ", allocationSize = 1) -->
-                <sequence-generator name="personSequenceGenerator" sequence-name="PERSON_ID_SEQ" allocation-size="1" initial-value="1"/>
-            </id>
             <basic name="firstName">
                 <column name="FIRST_NAME" length="512"/>
             </basic>
@@ -52,5 +50,5 @@
             </basic>
         </attributes>
     </entity>
-   
+
 </entity-mappings>

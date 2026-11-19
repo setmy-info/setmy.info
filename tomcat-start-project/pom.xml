@@ -22,7 +22,6 @@
 
     <properties>
         <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
-        <maven.jetty.plugin.version>2.0.11</maven.jetty.plugin.version>
     </properties>
 
     <dependencies>
@@ -31,12 +30,6 @@
             <artifactId>rest-assured</artifactId>
             <version>${rest.assured.version}</version>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>org.apache.groovy</artifactId>
-                    <groupId>groovy</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -72,112 +65,75 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
         </dependency>
+        <!-- Spring, Spring Security and Spring Data versions: dependencies-bom (spring-framework-bom, ...) -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>${spring.data.jpa.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.aspectj</groupId>
-                    <artifactId>aspectjrt</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>${spring.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>${spring.security.version}</version>
         </dependency>
-        <!--dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${servlet.api.version}</version>
-        </dependency-->
+        <!-- Given by the server: Tomcat 11, Jetty 12 ee11 (Jakarta EE 11) -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>6.1.0</version>
             <scope>provided</scope>
         </dependency>
-        <!--dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
-            <version>${jsp.api.version}</version>
-            <scope>provided</scope>
-        </dependency-->
         <dependency>
             <groupId>jakarta.servlet.jsp</groupId>
             <artifactId>jakarta.servlet.jsp-api</artifactId>
-            <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
-        <!--dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-            <scope>runtime</scope>
-        </dependency-->
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
@@ -203,7 +159,7 @@
         </dependency>
         <dependency>
             <groupId>info.setmy</groupId>
-            <artifactId>jwt-models</artifactId>
+            <artifactId>java-jwt-models</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -211,106 +167,50 @@
             <artifactId>hibernate-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-ehcache</artifactId>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-jcache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <classifier>jakarta</classifier>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>${commons.dbcp.version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.28.0-GA</version>
-        </dependency>
-        <!-- Jersey / Jakarta related REST -->
-        <!--dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>${jersey.version}</version>
-        </dependency-->
-        <!--dependency>
-            <groupId>jakarta.ws.rs</groupId>
-            <artifactId>jakarta.ws.rs-api</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>5.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.annotation</groupId>
-            <artifactId>jakarta.annotation-api</artifactId>
-            <version>2.0.0</version>
-        </dependency-->
-        <!--dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-jetty-servlet</artifactId>
-            <version>3.0.2</version>
-        </dependency-->
-        <!--dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet</artifactId>
-            <version>${jersey.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
-            <version>${jersey.version}</version>
-        </dependency-->
-        <!--dependency>
-            <groupId>org.glassfish.jersey.ext</groupId>
-            <artifactId>jersey-spring5</artifactId>
-            <version>2.34</version>
-        </dependency-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!--dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>${javax.validation.api.version}</version>
-        </dependency-->
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <version>3.1.0</version>
         </dependency>
         <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>${javax.inject.version}</version>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
         </dependency>
         <dependency>
             <groupId>jakarta.transaction</groupId>
             <artifactId>jakarta.transaction-api</artifactId>
-            <version>2.0.1</version>
         </dependency>
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
-            <version>3.1.0</version>
         </dependency>
         <dependency>
             <groupId>jakarta.annotation</groupId>
             <artifactId>jakarta.annotation-api</artifactId>
-            <version>2.1.0</version>
         </dependency>
     </dependencies>
 
@@ -355,6 +255,7 @@
                             // your script here
                         ]]></script>
                     </scripts>
+                    <skipBytecodeCheck>true</skipBytecodeCheck>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -543,33 +444,26 @@
                 </executions>
             </plugin-->
             <plugin>
-                <!-- https://www.eclipse.org/jetty/documentation/jetty-10/programming-guide/index.html#jetty-maven-plugin -->
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
+                <!-- Jetty 12 ee11 (Servlet 6.1, the level of Tomcat 11): mvn jetty:run, and around the *IT tests
+                     https://jetty.org/docs/jetty/12.1/programming-guide/maven-jetty/jetty-maven-plugin.html -->
+                <groupId>org.eclipse.jetty.ee11</groupId>
+                <artifactId>jetty-ee11-maven-plugin</artifactId>
                 <version>${maven.jetty.plugin.version}</version>
                 <configuration>
                     <supportedPackagings>war</supportedPackagings>
-                    <!--webAppSourceDirectory>src/main/webapp</webAppSourceDirectory-->
-                    <!--scanIntervalSeconds>0</scanIntervalSeconds-->
                     <webApp>
                         <contextPath>/${project.name}-${project.version}</contextPath>
                     </webApp>
-                    <!--useTestClasspath>true</useTestClasspath-->
                     <contextXml>${project.basedir}/src/main/webapp/WEB-INF/jetty-context.xml</contextXml>
-                    <jvmArgs>-Dorg.eclipse.jetty.webapp.LEVEL=DEBUG</jvmArgs>
                     <jettyProperties>
-                        <jettyProperty>jetty.server.dumpAfterStart=true</jettyProperty>
+                        <jettyProperty>jetty.server.dumpAfterStart:false</jettyProperty>
                     </jettyProperties>
                     <stopPort>8005</stopPort>
                     <stopKey>STOP</stopKey>
                     <httpConnector>
                         <port>8777</port>
                     </httpConnector>
-                    <!--modules>
-                        <module>apache-jsp</module>
-                        <module>apache-jstl</module>
-                        <module>jmx</module>
-                    </modules-->
+                    <scan>0</scan>
                 </configuration>
                 <executions>
                     <execution>
@@ -578,11 +472,6 @@
                         <goals>
                             <goal>start</goal>
                         </goals>
-                        <configuration>
-                            <!--daemon>true</daemon-->
-                            <stopPort>8005</stopPort>
-                            <stopKey>STOP</stopKey>
-                        </configuration>
                     </execution>
                     <execution>
                         <id>stop-jetty</id>
@@ -596,7 +485,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.3</version>
+                <version>3.4.0</version>
                 <!--configuration>
                     <warName>${project.artifactId}</warName>
                 </configuration-->
@@ -625,10 +514,10 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.4</version>
+                <version>${buildnumber.maven.plugin.version}</version>
                 <executions>
                     <execution>
-                        <phase>generate-ressources</phase>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>create-metadata</goal>
                         </goals>
@@ -760,7 +649,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven.checkstyle.plugin.versoin}</version>
+                <version>${maven.checkstyle.plugin.version}</version>
                 <configuration>
                     <violationSeverity>warning</violationSeverity>
                     <consoleOutput>true</consoleOutput>

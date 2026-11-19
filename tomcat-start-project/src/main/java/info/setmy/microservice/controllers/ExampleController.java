@@ -2,7 +2,7 @@ package info.setmy.microservice.controllers;
 
 import info.setmy.microservice.models.ExampleModel;
 import info.setmy.microservice.services.ExampleService;
-import javax.inject.Named;
+import jakarta.inject.Named;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;

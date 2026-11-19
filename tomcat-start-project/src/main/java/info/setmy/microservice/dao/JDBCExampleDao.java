@@ -3,7 +3,7 @@ package info.setmy.microservice.dao;
 import info.setmy.microservice.models.ExampleModel;
 import java.util.List;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;

@@ -72,13 +72,12 @@
         <jaxb.api.version>2.3.1</jaxb.api.version>
         <jsp.api.version>2.3.3</jsp.api.version>
         <!--jaxb.impl.version>2.1</jaxb.impl.version-->
-        <maven.jetty.plugin.version>12.1.6</maven.jetty.plugin.version>
-        <spring.version>6.2.16</spring.version>
-        <spring.security.version>6.5.8</spring.security.version>
-        <spring.data.jpa.version>6.3.0</spring.data.jpa.version>
+        <maven.jetty.plugin.version>12.1.14</maven.jetty.plugin.version>
+        <spring.version>7.0.10</spring.version>
+        <spring.security.version>7.1.2</spring.security.version>
+        <spring.data.version>2026.0.2</spring.data.version>
         <hibernate.version>7.4.15.Final</hibernate.version>
         <hibernate.validator.version>9.1.6.Final</hibernate.validator.version>
-        <hibernate.ehcache.version>6.0.0.Alpha7</hibernate.ehcache.version>
         <ehcache.version>3.12.0</ehcache.version>
         <commons.dbcp.version>2.14.0</commons.dbcp.version>
         <commons.io.version>2.22.0</commons.io.version>
@@ -89,7 +88,7 @@
         <javax.inject.version>1</javax.inject.version>
         <javax.cache.api.version>1.1.1</javax.cache.api.version>
         <java.jwt.version>4.6.2</java.jwt.version><!--java.jwt.version>4.0.0</java.jwt.version-->
-        <rest.assured.version>5.5.7</rest.assured.version>
+        <rest.assured.version>6.3.0</rest.assured.version>
         <liquibase.version>5.0.4</liquibase.version>
         <infinispan.version>16.3.1</infinispan.version>
         <quartz.verion>2.5.2</quartz.verion>
@@ -457,15 +456,70 @@
                 <artifactId>lucene-analyzers-common</artifactId>
                 <version>${lucene.version}</version>
             </dependency-->
+            <!-- Spring without Spring Boot (for example the war of tomcat-start-project): the versions of the
+                 Spring Boot release of spring.boot.verion, so both kinds of modules use the same Spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-bom</artifactId>
+                <version>${spring.security.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-bom</artifactId>
+                <version>${spring.data.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Jakarta EE 11 APIs: Servlet 6.1 (Tomcat 11, Jetty 12 ee11), JSP 4.0, JPA 3.2 -->
+            <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>6.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.servlet.jsp</groupId>
+                <artifactId>jakarta.servlet.jsp-api</artifactId>
+                <version>4.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.persistence</groupId>
+                <artifactId>jakarta.persistence-api</artifactId>
+                <version>3.2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.transaction</groupId>
+                <artifactId>jakarta.transaction-api</artifactId>
+                <version>2.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.validation</groupId>
+                <artifactId>jakarta.validation-api</artifactId>
+                <version>${jakarta.validation.api.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-ehcache</artifactId>
-                <version>${hibernate.ehcache.version}</version>
+                <!-- Second level cache through JCache (JSR-107), with Ehcache 3 as the provider -->
+                <groupId>org.hibernate.orm</groupId>
+                <artifactId>hibernate-jcache</artifactId>
+                <version>${hibernate.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
@@ -481,6 +535,21 @@
                 <groupId>org.ehcache</groupId>
                 <artifactId>ehcache</artifactId>
                 <version>${ehcache.version}</version>
+            </dependency>
+            <dependency>
+                <!-- Jakarta XML Binding (jakarta.xml.bind) instead of javax.xml.bind -->
+                <groupId>org.ehcache</groupId>
+                <artifactId>ehcache</artifactId>
+                <version>${ehcache.version}</version>
+                <classifier>jakarta</classifier>
+                <exclusions>
+                    <!-- The pom is shared with the javax jar and asks the old javax JAXB runtime: the jakarta jar
+                         uses the Jakarta one (com.sun.xml.bind:jaxb-impl 4) -->
+                    <exclusion>
+                        <groupId>org.glassfish.jaxb</groupId>
+                        <artifactId>jaxb-runtime</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.liquibase</groupId>
@@ -786,8 +855,9 @@
                     <version>2.7.1</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.eclipse.jetty</groupId>
-                    <artifactId>jetty-maven-plugin</artifactId>
+                    <!-- Jetty 12, Jakarta EE 11 (Servlet 6.1): the same API level as Tomcat 11 -->
+                    <groupId>org.eclipse.jetty.ee11</groupId>
+                    <artifactId>jetty-ee11-maven-plugin</artifactId>
                     <version>${maven.jetty.plugin.version}</version>
                 </plugin>
                 <plugin>

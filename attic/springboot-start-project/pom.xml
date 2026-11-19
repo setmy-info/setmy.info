@@ -81,7 +81,7 @@
         <jaxb.api.version>2.3.1</jaxb.api.version>
         <hibernate.version>6.5.2.Final</hibernate.version>
         <hibernate.validator.version>8.0.1.Final</hibernate.validator.version>
-        <hibernate.ehcache.version>5.6.15.Final</hibernate.ehcache.version>
+        <!--hibernate.ehcache.version>5.6.15.Final</hibernate.ehcache.version-->
         <ehcache.version>3.10.8</ehcache.version>
         <commons.dbcp.version>2.12.0</commons.dbcp.version>
         <commons.io.version>2.16.1</commons.io.version>

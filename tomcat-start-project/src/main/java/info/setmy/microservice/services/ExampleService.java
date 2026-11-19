@@ -7,8 +7,8 @@ import info.setmy.microservice.dao.JPAExampleDao;
 import info.setmy.microservice.dao.PersonRepository;
 import info.setmy.microservice.models.ExampleModel;
 import info.setmy.microservice.properties.ExampleProperties;
-import javax.inject.Named;
-import javax.transaction.Transactional;
+import jakarta.inject.Named;
+import jakarta.transaction.Transactional;
 
 /**
  *
