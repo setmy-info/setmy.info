@@ -260,6 +260,7 @@ kubectl apply -f ${K8S}/infinispan-persistent-volume-claim.yaml
 kubectl apply -f ${K8S}/infinispan-deployment.yaml
 kubectl apply -f ${K8S}/infinispan-service.yaml
 kubectl apply -f ${K8S}/infinispan-ingress.yaml
+kubectl rollout status deployment infinispan-deployment
 # 4. Keycloak. The realm JSON comes from the files of docker compose (create or update the ConfigMap)
 kubectl create configmap keycloak-realm-config-map \
     --from-file=./src/main/docker/keycloak/example-realm.json \
@@ -290,6 +291,45 @@ curl http://keycloak.localhost/iam/realms/example/.well-known/openid-configurati
 Login in http://microservice.localhost/calculator.html with the test users of the realm JSON (`calculator-user`,
 `calculator-admin`, see [keycloak.md](src/site/markdown/keycloak.md)). Without the realm import:
 `./src/main/keycloak/keycloak-setup.sh k8s`.
+
+Postgres in Kubernetes. Users and passwords of `src/main/docker/*.sql` (smi-postgresql-create-db-sql), all `g6p8`:
+
+| User                                 | Database                     | Use                                  |
+|--------------------------------------|------------------------------|--------------------------------------|
+| `postgres`                           | all                          | superuser of the image               |
+| `localspringboot_start_app`          | `springboot_start_app_local` | application user (datasource, Quartz) |
+| `localspringboot_start_appliquibase` | `springboot_start_app_local` | owner (Liquibase, tables)            |
+| `localkeycloakliquibase`             | `keycloak_local`             | owner of the Keycloak tables         |
+
+psql inside the pod, no client on the machine needed:
+
+```shell
+kubectl exec -it deployment/postgres-deployment -- psql -U postgres -d springboot_start_app_local
+kubectl exec -it deployment/postgres-deployment -- psql -U localspringboot_start_app -h localhost -d springboot_start_app_local
+# One command, for example the tables of the application
+kubectl exec deployment/postgres-deployment -- psql -U postgres -d springboot_start_app_local -c '\dt'
+# SQL file of the machine
+kubectl exec -i deployment/postgres-deployment -- psql -U postgres -d springboot_start_app_local < file.sql
+```
+
+From the machine (psql, IntelliJ, DBeaver, ...): forward a local port to the service while the command runs. Port
+5433, the same as docker compose, so a running compose Postgres must be stopped first, or take another port.
+
+```shell
+kubectl port-forward service/postgres-service 5433:5432
+# In another terminal
+psql -h localhost -p 5433 -U localspringboot_start_app -d springboot_start_app_local
+```
+
+JDBC URL of the tools: `jdbc:postgresql://localhost:5433/springboot_start_app_local`. Inside the cluster (other
+pods): `postgres-service:5432`, from another namespace `postgres-service.microservice-local.svc.cluster.local:5432`.
+
+Backup and restore
+
+```shell
+kubectl exec deployment/postgres-deployment -- pg_dump -U postgres -d springboot_start_app_local > springboot_start_app_local.sql
+kubectl exec -i deployment/postgres-deployment -- psql -U postgres -d springboot_start_app_local < springboot_start_app_local.sql
+```
 
 Changed ConfigMap or Secret: apply it again and restart the deployment, the environment variables are read at the
 start of the pod only.
