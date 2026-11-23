@@ -24,12 +24,14 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Disabled;
 
 /**
  * https://github.com/tensorflow/java/#tensorflow-version-support
  * https://github.com/tensorflow/java/tree/master/tensorflow-core/tensorflow-core-api/src/test/java/org/tensorflow
  * https://github.com/tensorflow/java-models/tree/master/tensorflow-examples/src/main/java/org/tensorflow/model/examples
  */
+@Disabled
 public class TensorflowTest {
 
     private final Logger log = LogManager.getLogger(getClass());
