@@ -8,6 +8,10 @@ pipeline {
         PATH = "/opt/jdk/bin:/opt/setmy.info/bin:/opt/has/bin:/opt/maven/bin:/usr/local/bin:$PATH"
         JAVA_HOME = "/opt/jdk/"
 
+        // The same as GitHub Actions sets: tests that need a developer machine (for example a Firefox profile of
+        // java-crawler) are off with @DisabledIfEnvironmentVariable(named = "CI", matches = "true")
+        CI = 'true'
+
         MASTER_TO_LIVE = 'DEPLOY'
 
         MASTER_TO_PRELIVE = 'DEPLOY'

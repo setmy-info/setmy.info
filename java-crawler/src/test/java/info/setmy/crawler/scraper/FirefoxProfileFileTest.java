@@ -20,7 +20,8 @@ class FirefoxProfileFileTest {
      *
      */
     @Test
-    @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = "true")
+    // CI=true: GitHub Actions sets it, the Jenkinsfile too. No Firefox profile on a CI machine.
+    @DisabledIfEnvironmentVariable(named = "CI", matches = "true")
     void test() {
         final String profileName = "selenium-test";
         firefoxProfileFile = new FirefoxProfileFile(profileName);
