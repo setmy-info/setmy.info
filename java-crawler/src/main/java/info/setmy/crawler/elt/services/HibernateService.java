@@ -13,25 +13,25 @@ import java.util.Map;
 @RequiredArgsConstructor(onConstructor_ = @Inject)
 public class HibernateService {
 
+    /**
+     * Inserts per JDBC batch. Flush and clear the EntityManager after so many inserts.
+     */
+    public static final int JDBC_BATCH_SIZE = 20;
+
     public DataConnectionTraversal fillHibernateProperties(final DataConnectionTraversal dataConnectionTraversal) {
         final Map<String, Object> hibernateProperties = new HashMap<>();
-        hibernateProperties.put("hibernate.connection.datasource", dataConnectionTraversal.dataSource());
-        hibernateProperties.put("hibernate.hikari.dataSource", dataConnectionTraversal.dataSource());
-        hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        // The Hikari pool of DataSourceFactoryService. Hibernate does not create a pool of its own, therefore no
+        // hibernate.hikari.* properties: the pool is configured in DataSourceFactoryService.
+        hibernateProperties.put("jakarta.persistence.nonJtaDataSource", dataConnectionTraversal.dataSource());
+        // No hibernate.dialect: Hibernate detects H2 from the connection (HHH90000025 otherwise)
+        // Liquibase creates the schema, Hibernate only checks that the entities match it
         hibernateProperties.put("hibernate.hbm2ddl.auto", "validate"); // validate, update, create, create-drop
         hibernateProperties.put("hibernate.show_sql", "true");
         hibernateProperties.put("hibernate.format_sql", "true");
         hibernateProperties.put("hibernate.use_sql_comments", "true");
-        hibernateProperties.put("hibernate.jdbc.batch_size", "20");
+        hibernateProperties.put("hibernate.jdbc.batch_size", String.valueOf(JDBC_BATCH_SIZE));
         hibernateProperties.put("hibernate.order_inserts", "true");
         hibernateProperties.put("hibernate.order_updates", "true");
-        hibernateProperties.put("hibernate.batch_fetch_style", "DYNAMIC");
-        hibernateProperties.put("hibernate.hikari.minimumIdle", "2");
-        hibernateProperties.put("hibernate.hikari.maximumPoolSize", "10");
-        hibernateProperties.put("hibernate.hikari.idleTimeout", "30000");
-        hibernateProperties.put("hibernate.hikari.connectionTimeout", "20000");
-        hibernateProperties.put("hibernate.hikari.maxLifetime", "120000");
-        hibernateProperties.put("jakarta.persistence.nonJtaDataSource", dataConnectionTraversal.dataSource());
         return dataConnectionTraversal.toBuilder()
             .hibernateProperties(hibernateProperties)
             .build();
@@ -48,9 +48,18 @@ public class HibernateService {
             .build();
     }
 
+    /**
+     * A new EntityManager: the caller closes it.
+     */
     public DataConnectionTraversal fillEntityManager(final DataConnectionTraversal dataConnectionTraversal) {
         return dataConnectionTraversal.toBuilder()
             .entityManager(dataConnectionTraversal.entityManagerFactory().createEntityManager())
             .build();
+    }
+
+    public void close(final DataConnectionTraversal dataConnectionTraversal) {
+        if (dataConnectionTraversal.entityManagerFactory() != null) {
+            dataConnectionTraversal.entityManagerFactory().close();
+        }
     }
 }

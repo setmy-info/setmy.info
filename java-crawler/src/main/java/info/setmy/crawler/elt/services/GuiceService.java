@@ -49,10 +49,11 @@ public final class GuiceService extends AbstractModule {
         bind(GlobalConfigService.class).in(SINGLETON);
         //bind(ScvDbService.class).in(SINGLETON);
         bind(CsvDbService.class)
-            .annotatedWith(Names.named("scvDb"))
+            .annotatedWith(Names.named("csvDb"))
             .to(CsvDbService.class)
             .in(SINGLETON);
         bind(DataSourceFactoryService.class).in(SINGLETON);
+        bind(LiquibaseService.class).in(SINGLETON);
         bind(HibernateService.class).in(SINGLETON);
         bind(JOOQService.class).in(SINGLETON);
     }

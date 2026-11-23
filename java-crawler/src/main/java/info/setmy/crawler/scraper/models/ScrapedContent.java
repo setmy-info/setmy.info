@@ -20,7 +20,7 @@ public class ScrapedContent {
             .filter(scrapedText1 -> scrapedText1.haveTextOrUrl())
             .toList();
         scrapedTexts = list.stream()
-            .limit(list.size() - 10) // 10 control buttons with texts
+            .limit(Math.max(0, list.size() - 10)) // 10 control buttons with texts, a negative limit throws
             .collect(Collectors.toUnmodifiableList());
         calcMetaDataStatistics();
     }

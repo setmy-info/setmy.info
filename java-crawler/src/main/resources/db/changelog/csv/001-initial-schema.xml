@@ -10,7 +10,8 @@
         <createSequence sequenceName="RECORD_ENTITY_ID_SEQ" incrementBy="1" startValue="2"/>
 
         <createTable tableName="record_entity">
-            <column name="id" type="BIGINT" autoIncrement="true">
+            <!-- The id comes from RECORD_ENTITY_ID_SEQ (RecordEntity @SequenceGenerator), not from an identity column -->
+            <column name="id" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(512)"/>
