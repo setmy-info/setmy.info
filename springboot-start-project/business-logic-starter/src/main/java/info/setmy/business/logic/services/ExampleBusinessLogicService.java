@@ -1,5 +1,6 @@
 package info.setmy.business.logic.services;
 
+import info.setmy.locator.ServiceLocator;
 import lombok.NoArgsConstructor;
 
 import static lombok.AccessLevel.PRIVATE;
@@ -21,5 +22,9 @@ public final class ExampleBusinessLogicService {
 
     public String foo() {
         return "Hello from foo";
+    }
+
+    public String bar(final String name) {
+        return ServiceLocator.getInstance().get(ExampleGreetingService.class).greet(name);
     }
 }

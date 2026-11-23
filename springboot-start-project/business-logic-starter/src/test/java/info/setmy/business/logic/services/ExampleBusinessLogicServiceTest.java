@@ -4,9 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Plain Java unit test, no Spring: the library works on its own.
- */
 class ExampleBusinessLogicServiceTest {
 
     @Test

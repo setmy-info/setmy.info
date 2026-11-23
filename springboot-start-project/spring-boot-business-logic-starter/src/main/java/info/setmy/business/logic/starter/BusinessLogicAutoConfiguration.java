@@ -5,10 +5,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 
-/**
- * Spring layer of business-logic-starter: the plain Java singletons of the library become Spring beans. Spring does
- * not create new instances, it registers the ones the library created.
- */
 @AutoConfiguration
 public class BusinessLogicAutoConfiguration {
 

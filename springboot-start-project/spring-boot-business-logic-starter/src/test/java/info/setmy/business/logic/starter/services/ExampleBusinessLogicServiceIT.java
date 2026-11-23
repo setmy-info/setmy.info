@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * The plain Java singleton of business-logic-starter, used as a Spring bean.
- */
 class ExampleBusinessLogicServiceIT extends SpringBase {
 
     @Autowired
