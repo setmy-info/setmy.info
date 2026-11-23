@@ -150,6 +150,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <parameters>true</parameters>
                     <annotationProcessorPaths>
@@ -191,6 +192,9 @@
         <module>spring-boot-cli-application-starter</module>
         <module>spring-boot-web-application-starter</module>
         <module>spring-boot-example-starter</module>
+        <!-- Bottom up: plain Java library, then its Spring Boot starter -->
+        <module>business-logic-starter</module>
+        <module>spring-boot-business-logic-starter</module>
         <module>spring-boot-accounting-starter</module>
         <module>spring-boot-ai-starter</module>
         <module>spring-boot-clojure-starter</module>
