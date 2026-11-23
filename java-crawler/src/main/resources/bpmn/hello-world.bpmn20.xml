@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Bare minimum: start, one service task, end -->
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:flowable="http://flowable.org/bpmn"
+             targetNamespace="https://setmy.info/crawler/bpmn">
+
+    <process id="helloWorld" name="Hello world" isExecutable="true">
+        <startEvent id="start"/>
+        <sequenceFlow id="startToHello" sourceRef="start" targetRef="hello"/>
+        <serviceTask id="hello" name="Say hello"
+                     flowable:class="info.setmy.crawler.bpmn.delegates.HelloWorldDelegate"/>
+        <sequenceFlow id="helloToEnd" sourceRef="hello" targetRef="end"/>
+        <endEvent id="end"/>
+    </process>
+
+</definitions>

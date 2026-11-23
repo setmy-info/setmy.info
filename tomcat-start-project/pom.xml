@@ -451,9 +451,12 @@
                 <version>${maven.jetty.plugin.version}</version>
                 <configuration>
                     <supportedPackagings>war</supportedPackagings>
+                    <!--webAppSourceDirectory>src/main/webapp</webAppSourceDirectory-->
+                    <!--scanIntervalSeconds>0</scanIntervalSeconds-->
                     <webApp>
                         <contextPath>/${project.name}-${project.version}</contextPath>
                     </webApp>
+                    <!--useTestClasspath>true</useTestClasspath-->
                     <contextXml>${project.basedir}/src/main/webapp/WEB-INF/jetty-context.xml</contextXml>
                     <jettyProperties>
                         <jettyProperty>jetty.server.dumpAfterStart:false</jettyProperty>

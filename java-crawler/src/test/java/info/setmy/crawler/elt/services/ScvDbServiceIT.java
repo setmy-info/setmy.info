@@ -32,11 +32,11 @@ class ScvDbServiceIT {
         workingDirectoryFile = new File(workingDirectoryNameString);
         guiceService = GuiceService.newGuiceService(
                 GuiceCreation.builder()
-                    .homeDirectory(homeDirectoryFile)
-                    .workingDirectory(workingDirectoryFile)
-                    .build()
-            )
-            .init();
+                        .homeDirectory(homeDirectoryFile)
+                        .workingDirectory(workingDirectoryFile)
+                        .build()
+        )
+                .init();
         scvDbService = guiceService.getInjector().getInstance(CsvDbService.class);
     }
 

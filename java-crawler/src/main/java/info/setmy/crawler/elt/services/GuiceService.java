@@ -4,6 +4,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.name.Names;
+import info.setmy.crawler.bpmn.services.FlowableService;
 import info.setmy.crawler.elt.models.GuiceCreation;
 import info.setmy.crawler.elt.models.HomeDirectory;
 import info.setmy.crawler.elt.models.WorkingDirectory;
@@ -56,6 +57,7 @@ public final class GuiceService extends AbstractModule {
         bind(LiquibaseService.class).in(SINGLETON);
         bind(HibernateService.class).in(SINGLETON);
         bind(JOOQService.class).in(SINGLETON);
+        bind(FlowableService.class).in(SINGLETON);
     }
 
     private void initWorkingDirectory() {
