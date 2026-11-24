@@ -475,3 +475,4 @@ sudo k3s ctr images rm docker.io/setmyinfo/springboot-start-app:latest
 13. http://localhost:8082/actuator
 13. http://localhost:8082/actuator/info
 14. http://localhost:8082/actuator/health
+15. http://localhost:8082/api/anotherExample
