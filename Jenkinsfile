@@ -1,8 +1,32 @@
+def runCommand(String command) {
+    if (isUnix()) {
+        sh command
+    } else {
+        bat command
+    }
+}
+
 pipeline {
 
-    // jenkinsfile-starter version  1.0.0
+    // jenkinsfile-starter version  1.3.0, without draft: master releases and deploys to the live publish stage
 
     agent any
+
+    triggers {
+        pollSCM('H/5 * * * *')
+    }
+
+    options {
+        buildDiscarder(
+            logRotator(
+                numToKeepStr: '20',
+                artifactNumToKeepStr: '10'
+            )
+        )
+
+        quietPeriod(15)
+        disableConcurrentBuilds(abortPrevious: true)
+    }
 
     environment {
         PATH = "/opt/jdk/bin:/opt/setmy.info/bin:/opt/has/bin:/opt/maven/bin:/usr/local/bin:$PATH"
@@ -12,16 +36,24 @@ pipeline {
         // java-crawler) are off with @DisabledIfEnvironmentVariable(named = "CI", matches = "true")
         CI = 'true'
 
+        SMI_PROFILES = 'ci'
+
+        SMI_MAIL_TO = 'has@gintra'
+
         MASTER_TO_LIVE = 'DEPLOY'
 
-        MASTER_TO_PRELIVE = 'DEPLOY'
         RELEASE_TO_PRELIVE = 'DEPLOY'
+        HOTFIX_TO_PRELIVE = 'DEPLOY'
 
-        DEVELOPMENT_TO_TESTING = 'DEPLOY'
-        RELEASE_TO_TESTING = 'DEPLOY'
+        DEVELOPMENT_TO_TEST_DRAFT = 'DEPLOY'
+        RELEASE_TO_TEST_DRAFT = 'DEPLOY'
+        HOTFIX_TO_TEST_DRAFT = 'DEPLOY'
+
+        //DEVELOPMENT_TO_TEST_PUBLISH = 'DEPLOY'
+        //RELEASE_TO_TEST_PUBLISH = 'DEPLOY'
+        //HOTFIX_TO_TEST_PUBLISH = 'DEPLOY'
 
         DEVELOPMENT_TO_DEV = 'DEPLOY'
-        RELEASE_TO_DEV = 'DEPLOY'
 
         // No servers in this repository: SMI_DEPLOY_TEST_HOSTS and SMI_DEPLOY_LIVE_HOSTS ("[user@]host[:port]",
         // several separated by spaces) come from the Jenkins job / node configuration and reach make and
@@ -32,13 +64,31 @@ pipeline {
     stages {
         stage('Inspection') {
             parallel {
+                stage('Pre-build') {
+                    steps {
+                        echo "Jenkins node: ${env.NODE_NAME}"
+                        echo "Operating system: ${isUnix() ? 'Unix/Linux' : 'Windows'}"
+
+                        script {
+                            if (!fileExists('README.md')) {
+                                error('README.md missing')
+                            }
+                            if (!fileExists("${env.SPRINGBOOT_APP_DIR}/src/main/sh/etc/systemd/system/springboot-start-app.service")) {
+                                error("${env.SPRINGBOOT_APP_DIR}/src/main/sh/etc/systemd/system/springboot-start-app.service missing")
+                            }
+                        }
+                    }
+                }
                 stage('Build tools') {
                     steps {
-                        sh 'mvn --version'
-                        sh 'java --version'
-                        sh 'which java'
+                        runCommand 'mvn --version'
+                        runCommand 'java --version'
+                        runCommand 'which java'
+                        runCommand 'make --version'
+                        runCommand 'rpmbuild --version'
+                        runCommand 'rpm --eval "%{_topdir}"'
                     }
-                }                
+                }
             }
         }
 
@@ -54,10 +104,11 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean install -Pci'
+                echo 'Cleaning, compilation, unit and integration tests are in the install below'
+                runCommand 'mvn clean install -Pci'
 
-                // RPMs of the Spring Boot app (LIVE and TEST), from the jar the install above built
-                sh 'make -C "${SPRINGBOOT_APP_DIR}" clean rpms'
+                echo 'No mutation tests'
+                echo 'mvn org.pitest:pitest-maven:mutationCoverage'
 
                 // Sites
                 echo 'cd dependencies-bom; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ..'
@@ -126,6 +177,18 @@ pipeline {
                 echo 'cd springboot-start-project/spring-boot-web-starter; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ../..'
                 echo 'cd springboot-start-project/spring-boot-web-doc-format-starter; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ../..'
                 echo 'cd springboot-start-project/spring-boot-wf-starter; mvn org.pitest:pitest-maven:mutationCoverage site:site; cd ../..'
+
+                echo 'No e2e tests'
+                echo 'mvn verify -Pe2e -Pci'
+
+                echo 'No system tests'
+                echo 'No acceptance tests'
+
+                // RPMs of the Spring Boot app (LIVE and TEST), from the jar the install above built
+                runCommand 'make -C "${SPRINGBOOT_APP_DIR}" clean rpms'
+                runCommand 'for spec in "${SPRINGBOOT_APP_DIR}"/rpm/*.spec; do rpmspec -q "$spec" >/dev/null; done'
+
+                echo 'No local publishing'
             }
         }
 
@@ -136,15 +199,15 @@ pipeline {
                         branch 'master'
                     }
                     steps {
-                        echo 'Put here software release steps'
+                        echo 'No release repository: the RPMs are uploaded by the Deploy stage'
                     }
                 }
                 stage('Snapshot') {
                     when {
-                        expression { env.BRANCH_NAME.startsWith('devel') }
+                        branch pattern: 'devel.*', comparator: 'REGEXP'
                     }
                     steps {
-                        echo 'Put here software snapshot publishing steps'
+                        echo 'No snapshot repository: the RPMs are uploaded by the Deploy stage'
                     }
                 }
                 stage('Release reports') {
@@ -157,7 +220,7 @@ pipeline {
                 }
                 stage('Snapshot reports') {
                     when {
-                        expression { env.BRANCH_NAME.startsWith('devel') }
+                        branch pattern: 'devel.*', comparator: 'REGEXP'
                     }
                     steps {
                         echo 'Put here reports publishing steps'
@@ -169,81 +232,151 @@ pipeline {
             parallel {
                 stage('dev') {
                     when {
-                        expression {
-                            (env.DEVELOPMENT_TO_DEV == 'DEPLOY' && env.BRANCH_NAME.startsWith('devel')) ||
-                            (env.RELEASE_TO_DEV == 'DEPLOY' && env.BRANCH_NAME.startsWith('release'))
-                        }
+                        environment name: 'DEVELOPMENT_TO_DEV', value: 'DEPLOY'
+                        branch pattern: 'devel.*', comparator: 'REGEXP'
                     }
                     steps {
-                        echo 'Put here software development installations steps'
+                        echo 'No DEV machine'
                     }
                 }
-                stage('testing') {
+                stage('test: draft') {
                     when {
-                        expression {
-                            (env.DEVELOPMENT_TO_TESTING == 'DEPLOY' && env.BRANCH_NAME.startsWith('devel')) ||
-                            (env.RELEASE_TO_TESTING == 'DEPLOY' && env.BRANCH_NAME.startsWith('release'))
+                        anyOf {
+                            allOf {
+                                environment name: 'DEVELOPMENT_TO_TEST_DRAFT', value: 'DEPLOY'
+                                branch pattern: 'devel.*', comparator: 'REGEXP'
+                            }
+                            allOf {
+                                environment name: 'RELEASE_TO_TEST_DRAFT', value: 'DEPLOY'
+                                branch pattern: 'release.*', comparator: 'REGEXP'
+                            }
+                            allOf {
+                                environment name: 'HOTFIX_TO_TEST_DRAFT', value: 'DEPLOY'
+                                branch pattern: 'hotfix.*', comparator: 'REGEXP'
+                            }
                         }
                     }
                     steps {
                         // Upload and hand-over to the deployment service of the TEST machines, which installs it.
                         // journalctl -u setmy-info-deploy.service on the machine says how it went.
-                        sh 'make -C "${SPRINGBOOT_APP_DIR}" deploy-test'
+                        script {
+                            if (env.SMI_DEPLOY_TEST_HOSTS || env.SMI_SPRINGBOOT_TEST_HOSTS) {
+                                runCommand 'make -C "${SPRINGBOOT_APP_DIR}" deploy-test'
+                            } else {
+                                echo 'No SMI_SPRINGBOOT_TEST_HOSTS / SMI_DEPLOY_TEST_HOSTS in the job: nothing to deploy to'
+                            }
+                        }
+                    }
+                }
+                stage('test: publish') {
+                    when {
+                        anyOf {
+                            allOf {
+                                environment name: 'DEVELOPMENT_TO_TEST_PUBLISH', value: 'DEPLOY'
+                                branch pattern: 'devel.*', comparator: 'REGEXP'
+                            }
+                            allOf {
+                                environment name: 'RELEASE_TO_TEST_PUBLISH', value: 'DEPLOY'
+                                branch pattern: 'release.*', comparator: 'REGEXP'
+                            }
+                            allOf {
+                                environment name: 'HOTFIX_TO_TEST_PUBLISH', value: 'DEPLOY'
+                                branch pattern: 'hotfix.*', comparator: 'REGEXP'
+                            }
+                        }
+                    }
+                    steps {
+                        echo 'No test publish stage: the service has no draft'
                     }
                 }
                 stage('prelive') {
                     when {
-                        expression {
-                            env.RELEASE_TO_PRELIVE == 'DEPLOY' && env.BRANCH_NAME.startsWith('release')
+                        anyOf {
+                            allOf {
+                                environment name: 'RELEASE_TO_PRELIVE', value: 'DEPLOY'
+                                branch pattern: 'release.*', comparator: 'REGEXP'
+                            }
+                            allOf {
+                                environment name: 'HOTFIX_TO_PRELIVE', value: 'DEPLOY'
+                                branch pattern: 'hotfix.*', comparator: 'REGEXP'
+                            }
                         }
                     }
                     steps {
-                        echo 'Put here software prelive installations steps'
+                        echo 'No PRELIVE machine'
                     }
                 }
-                stage('live') {
+                stage('live: draft') {
                     when {
-                        expression {
-                            env.MASTER_TO_LIVE == 'DEPLOY' && env.BRANCH_NAME == 'master'
-                        }
+                        environment name: 'DRAFT_TO_LIVE', value: 'DEPLOY'
+                        branch 'draft'
+                    }
+                    steps {
+                        echo 'No draft branch: master deploys to the live publish stage'
+                    }
+                }
+                stage('live: publish') {
+                    when {
+                        environment name: 'MASTER_TO_LIVE', value: 'DEPLOY'
+                        branch 'master'
                     }
                     steps {
                         // LIVE BE machines: the same jar, Spring profile live
-                        sh 'make -C "${SPRINGBOOT_APP_DIR}" deploy-live'
+                        script {
+                            if (env.SMI_DEPLOY_LIVE_HOSTS || env.SMI_SPRINGBOOT_LIVE_HOSTS) {
+                                runCommand 'make -C "${SPRINGBOOT_APP_DIR}" deploy-live'
+                            } else {
+                                echo 'No SMI_SPRINGBOOT_LIVE_HOSTS / SMI_DEPLOY_LIVE_HOSTS in the job: nothing to deploy to'
+                            }
+                        }
                     }
                 }
             }
         }
         stage('Tag') {
             when {
+                environment name: 'MASTER_TO_LIVE', value: 'DEPLOY'
                 branch 'master'
-                expression { env.MASTER_TO_LIVE == 'DEPLOY' }
             }
             steps {
                 echo 'Put here taging'
-            }        
+                echo 'smi-new-tag 1.2.3'
+            }
         }
     }
 
     post {
         always {
             // junit '**/target/*-reports/*.xml'
-            sh 'echo "Allways"'
+            runCommand 'ls -l "$(rpm --eval "%{_topdir}")/RPMS/noarch" || true'
         }
 
         success {
             emailext (
+                to: "${SMI_MAIL_TO}",
                 subject: "Jenkins job: $JOB_NAME, build: $BUILD_NUMBER type: SUCCESSFUL",
                 body: "Job: $JOB_NAME, build: $BUILD_NUMBER, url: ${env.BUILD_URL}, git: ${env.GIT_URL}, branch: ${env.GIT_BRANCH} SUCCESSFUL post step",
                 recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
         }
 
+        unstable {
+            emailext (
+                to: "${SMI_MAIL_TO}",
+                subject: "Jenkins job: $JOB_NAME, build: $BUILD_NUMBER type: UNSTABLE",
+                body: "Job: $JOB_NAME, build: $BUILD_NUMBER, url: ${env.BUILD_URL}, git: ${env.GIT_URL}, branch: ${env.GIT_BRANCH} UNSTABLE post step",
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+            )
+        }
+
         failure {
             emailext (
+                to: "${SMI_MAIL_TO}",
                 subject: "Jenkins job: $JOB_NAME, build: $BUILD_NUMBER type: FAILED",
                 body: "Job: $JOB_NAME, build: $BUILD_NUMBER, url: ${env.BUILD_URL}, git: ${env.GIT_URL}, branch: ${env.GIT_BRANCH}  FAILED post step",
-                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+                attachLog: true,
+                compressLog: true
             )
         }
     }

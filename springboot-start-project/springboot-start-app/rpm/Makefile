@@ -29,7 +29,7 @@ TARBALL  := $(TOPDIR)/SOURCES/$(SRCNAME)-$(VERSION).tar.gz
 
 # The executable jar: spring-boot-maven-plugin repackages with the classifier "exec"
 JAR      := $(REPO)/target/$(APP)-$(MAVEN_VERSION)-exec.jar
-UNIT     := $(REPO)/src/main/systemd/$(APP).service
+UNIT     := $(REPO)/src/main/sh/etc/systemd/system/$(APP).service
 
 SPECS    := $(sort $(wildcard *.spec))
 NAMES    := $(basename $(SPECS))
@@ -43,8 +43,8 @@ SKIP_TEST := smi-$(APP)
 RPMS_LIVE := $(filter-out $(foreach n,$(SKIP_LIVE),$(TOPDIR)/RPMS/noarch/$(n)-$(VERSION)-$(RELEASE).noarch.rpm),$(RPMS))
 RPMS_TEST := $(filter-out $(foreach n,$(SKIP_TEST),$(TOPDIR)/RPMS/noarch/$(n)-$(VERSION)-$(RELEASE).noarch.rpm),$(RPMS))
 
-SMI_DEPLOY_TEST_HOSTS ?=
-SMI_DEPLOY_LIVE_HOSTS ?=
+SMI_DEPLOY_TEST_HOSTS ?= $(SMI_SPRINGBOOT_TEST_HOSTS)
+SMI_DEPLOY_LIVE_HOSTS ?= $(SMI_SPRINGBOOT_LIVE_HOSTS)
 
 .PHONY: all rpms srpms tarball lint install upload upload-test upload-live \
         move move-test move-live deploy-test deploy-live clean distclean help

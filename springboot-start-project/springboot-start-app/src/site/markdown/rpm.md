@@ -40,7 +40,7 @@ repository and its packages, `smi-springboot-start-app-config` (LIVE) and `smi-s
 The log file is `/var/opt/setmy.info/microservice/springboot-start-app.log`, rolled over daily or at 10 MB into
 `springboot-start-app.log.<date>.<n>.gz` beside it.
 
-Example variables in [`src/main/systemd/springboot-start-app.env`](../../../src/main/systemd/springboot-start-app.env).
+Example variables in [`src/main/sh/etc/springboot-start-app/springboot-start-app.env`](../../../src/main/sh/etc/springboot-start-app/springboot-start-app.env).
 The application package starts the service when `machine.env` is already there, otherwise the configuration
 package starts it when it is installed.
 
@@ -86,6 +86,7 @@ configuration, `[user@]host[:port]`, several separated by spaces:
 |-------------------------|-----------------------------|
 | `SMI_DEPLOY_TEST_HOSTS` | TEST machines               |
 | `SMI_DEPLOY_LIVE_HOSTS` | LIVE BE machines            |
+| `SMI_SPRINGBOOT_TEST_HOSTS`, `SMI_SPRINGBOOT_LIVE_HOSTS` | used when the two above are not set; the same names as the configuration repository, so one pair of job variables deploys the application and its configuration |
 | `SMI_DEPLOY_USER`, `SMI_DEPLOY_PORT`, `SMI_DEPLOY_REMOTE_DIR`, `SMI_DEPLOY_INCOMING_DIR` | read by `smi-deploy`, defaults `deploy`, `22`, `/home/<user>/deploy`, `/var/opt/setmy.info/incoming` |
 
 ```shell
@@ -101,5 +102,22 @@ incoming directory). On the server `setmy-info-deploy.path` starts `smi-incoming
 journalctl -u setmy-info-deploy.service -n 50
 ```
 
-The root `Jenkinsfile` builds the RPMs after `mvn clean install` and deploys: `devel*`/`release*` branches to TEST,
+The root `Jenkinsfile` builds the RPMs after `mvn clean install` and deploys: `devel*`, `release*` and `hotfix*` branches to TEST,
 `master` to LIVE.
+
+Without a host variable in the job, the deploy stages only say so and the build stays green.
+
+## Version
+
+`src/main/sh/build/update-versions.sh` of the repository root bumps the version of every module at once, in the
+repository root:
+
+```shell
+src/main/sh/build/update-versions.sh 1.3.0-SNAPSHOT
+src/main/sh/build/update-versions.sh 1.3.0 'what changed, one line'
+```
+
+It runs `mvn versions:set` over all modules, fixes the `info.setmy` versions Maven left behind, and updates the
+version in `tomcat-start-project` (Makefile, Dockerfile, Jailfile), `java-clojure` (project.clj, deps.edn), the
+fallback `Version` of the specs here and this page. With the second argument the specs also get a `%changelog`
+entry. Files still carrying the old version are listed at the end.

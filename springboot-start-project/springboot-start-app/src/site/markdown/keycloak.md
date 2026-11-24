@@ -520,10 +520,10 @@ export SMI_IAM_REALM=example
 
 ### systemd (RPM)
 
-The RPMs install [`src/main/systemd/springboot-start-app.service`](../../../src/main/systemd/springboot-start-app.service),
+The RPMs install [`src/main/sh/etc/systemd/system/springboot-start-app.service`](../../../src/main/sh/etc/systemd/system/springboot-start-app.service),
 see [rpm.md](rpm.md). The variables go into `/opt/setmy.info/etc/springboot-start-app/` (`springboot-start-app.env`, `machine.env`,
 `local.env`), which is not in the RPM but in the machine's own configuration package; example in
-[`src/main/systemd/springboot-start-app.env`](../../../src/main/systemd/springboot-start-app.env).
+[`src/main/sh/etc/springboot-start-app/springboot-start-app.env`](../../../src/main/sh/etc/springboot-start-app/springboot-start-app.env).
 
 ```shell
 sudo systemctl restart springboot-start-app   # after the .env file changed
