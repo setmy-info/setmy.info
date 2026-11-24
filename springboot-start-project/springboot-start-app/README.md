@@ -158,7 +158,9 @@ http://localhost:8180/iam (admin/password). Setup and Spring Boot integration: [
 
 * After `mvn install`, in the project root: `smi-docker-build` builds
   `setmyinfo/springboot-start-app` with the version of `pom.xml` and `latest`, `smi-docker-push` pushes them.
-* docker run -p 8082:8082 setmyinfo/springboot-start-app:latest
+* docker run -p 8082:8082 -e MICROSERVICE_PROFILES=local setmyinfo/springboot-start-app:latest (the image default
+  profile is live, which needs SPRING_DATASOURCE_URL, SPRING_DATASOURCE_USERNAME, SPRING_DATASOURCE_PASSWORD,
+  SPRING_LIQUIBASE_USER and SPRING_LIQUIBASE_PASSWORD of a Postgres database, the same as the test profile)
 * The app with Postgres, Infinispan and Keycloak (on Postgres, realm import, see
   [keycloak.md](src/site/markdown/keycloak.md) chapter 6.1), profiles `local,compose` (`application-compose.yml` points the datasource,
   Liquibase and Quartz to Postgres). In the `springboot-start-app` directory, after the image is built:

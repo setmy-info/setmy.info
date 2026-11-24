@@ -1,3 +1,31 @@
+spring:
+    datasource:
+        url: ${SPRING_DATASOURCE_URL}
+        driverClassName: org.postgresql.Driver
+        username: ${SPRING_DATASOURCE_USERNAME}
+        password: ${SPRING_DATASOURCE_PASSWORD}
+    liquibase:
+        url: ${SPRING_LIQUIBASE_URL:${SPRING_DATASOURCE_URL}}
+        driver-class-name: org.postgresql.Driver
+        user: ${SPRING_LIQUIBASE_USER}
+        password: ${SPRING_LIQUIBASE_PASSWORD}
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+    quartz:
+        properties:
+            org:
+                quartz:
+                    jobStore:
+                        driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+                    dataSource:
+                        quartzDataSource:
+                            driver: org.postgresql.Driver
+                            URL: ${SPRING_DATASOURCE_URL}
+                            user: ${SPRING_DATASOURCE_USERNAME}
+                            password: ${SPRING_DATASOURCE_PASSWORD}
+
 springBootStartProject:
     example:
         foo: application-test.yaml
