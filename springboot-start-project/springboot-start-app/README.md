@@ -476,3 +476,24 @@ sudo k3s ctr images rm docker.io/setmyinfo/springboot-start-app:latest
 13. http://localhost:8082/actuator/info
 14. http://localhost:8082/actuator/health
 15. http://localhost:8082/api/anotherExample
+
+https://setmy.info.gintra/
+https://setmy.info.gintra/apps/old/
+https://setmy.info.gintra/apps/smi/
+https://setmy.info.gintra/apps/smi/home
+https://setmy.info.gintra/apps/smi/login
+https://setmy.info.gintra/apps/smi/listExample
+https://setmy.info.gintra/apps/smi/example.html
+https://setmy.info.gintra/apps/smi/hello
+
+https://setmy.info.gintra/apps/smi/calculator.html
+https://setmy.info.gintra/apps/smi/graphiql?path=/apps/smi/graphql
+https://setmy.info.gintra/apps/smi/v3/api-docs
+https://setmy.info.gintra/apps/smi/swagger-ui/index.html
+
+https://setmy.info.gintra/apps/smi/actuator
+https://setmy.info.gintra/apps/smi/actuator/info
+https://setmy.info.gintra/apps/smi/actuator/health
+https://setmy.info.gintra/apps/smi/api/example
+https://setmy.info.gintra/apps/smi/api/anotherExample
+https://setmy.info.gintra/apps/smi/v3/api-docs.yaml

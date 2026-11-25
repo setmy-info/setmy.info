@@ -35,6 +35,8 @@ EnvironmentFile=-/opt/setmy.info/etc/springboot-start-app/machine.env
 EnvironmentFile=-/opt/setmy.info/etc/springboot-start-app/local.env
 
 ExecStart=/opt/setmy.info/bin/smi-spring-boot
+ExecStartPost=/bin/bash -c 'until (exec 3<>/dev/tcp/127.0.0.1/$${SERVER_PORT:-8082}) 2>/dev/null; do sleep 2; done'
+TimeoutStartSec=300
 # JVM exit code after SIGTERM
 SuccessExitStatus=143
 Restart=on-failure

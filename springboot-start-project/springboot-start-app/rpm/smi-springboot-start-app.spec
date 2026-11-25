@@ -105,7 +105,7 @@ else
 fi
 
 %preun
-if [ $1 -eq 0 ]; then
+if [ $1 -eq 0 ] && ! rpm -q --quiet smi-springboot-start-app-test; then
     systemctl disable --now %{app} >/dev/null 2>&1 || :
 fi
 
