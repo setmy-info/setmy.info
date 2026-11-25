@@ -58,9 +58,7 @@ The unit carries one commented line per environment:
 The `%post` scriptlet of the installed package removes the prefix of its own environment, the same way as
 smi-nftables-config does with `# NB! BE ONLY: `. One unit file in git, one active profile on the machine.
 
-`%post` also enables the service, and `%posttrans` restarts it once per transaction, also when the configuration package
-comes in the same one (a second restart would kill Liquibase during its migration and leave its lock behind), so every
-deployed version is restarted:
+`%post` also enables the service and restarts it, so every deployed version is restarted:
 
 ```shell
 sudo systemctl start springboot-start-app

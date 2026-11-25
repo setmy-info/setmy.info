@@ -5,7 +5,6 @@
 %global workdir %{smi_var}/microservice
 %global confdir %{smi_home}/etc/%{app}
 %global unitdir %{smi_home}/etc/systemd/system
-%global restart_marker /run/%{app}.rpm-restart
 %global profile_marker TEST
 
 Name:           smi-springboot-start-app-test
@@ -56,9 +55,7 @@ The unit carries one commented line per environment, "# NB! LIVE ONLY: " and
 environment, which switches its Spring profile on.
 
 The %pre scriptlet creates the system user microservice when setmy-info-scripts
-has not, %post creates the working directory and enables the service, and
-%posttrans restarts it once per transaction, also when the configuration
-package comes in the same one,
+has not, %post creates the working directory, enables the service and restarts
 it when it runs, so a deployment of a new version is a restart. It is started
 when the configuration package is already installed; otherwise the
 configuration package starts it when it arrives.
@@ -101,19 +98,10 @@ fi
 restorecon -RF %{workdir} %{smi_home}/lib/%{app}.jar %{unitdir}/%{app}.service >/dev/null 2>&1 || :
 systemctl daemon-reload >/dev/null 2>&1 || :
 systemctl enable %{app} >/dev/null 2>&1 || :
-touch %{restart_marker} || :
-
-%posttrans
-if [ -e %{restart_marker} ]; then
-    rm -f %{restart_marker}
-    if [ -e %{_sysconfdir}/systemd/system/%{app}.service ]; then
-        systemctl daemon-reload >/dev/null 2>&1 || :
-        if [ -e %{confdir}/machine.env ]; then
-            systemctl restart %{app} || :
-        else
-            systemctl try-restart %{app} || :
-        fi
-    fi
+if [ -e %{confdir}/machine.env ]; then
+    systemctl restart %{app} || :
+else
+    systemctl try-restart %{app} || :
 fi
 
 %preun
