@@ -94,11 +94,11 @@ spring:
             resourceserver:
                 jwt:
                     # Token "iss" claim must be exactly this
-                    issuer-uri: http://localhost:8180/iam/realms/example
+                    issuer-uri: ${SMI_IAM_ISSUER_URL:${SMI_IAM_URL:http://localhost:8180/iam}/realms/${SMI_IAM_REALM:example}}
                     # Signing keys, fetched lazily on first request, so startup does not need Keycloak
-                    jwk-set-uri: http://localhost:8180/iam/realms/example/protocol/openid-connect/certs
+                    jwk-set-uri: ${SMI_IAM_JWK_SET_URL:${SMI_IAM_URL:http://localhost:8180/iam}/realms/${SMI_IAM_REALM:example}/protocol/openid-connect/certs}
                     # Token "aud" claim must contain this
-                    audiences: springboot-start-app-api
+                    audiences: ${SMI_IAM_AUDIENCE:${SMI_IAM_API_CLIENT_ID:springboot-start-app-api}}
 #    jackson:
 #        date-format: yyyy-MM-dd'T'HH:mm:ss:SSS'Z'
 #        time-zone: UTC
@@ -151,14 +151,14 @@ springBootStartProject:
         foo: application.yaml
     security:
         keycloak:
-            url: http://localhost:8180/iam
-            realm: example
-            issuerUrl: http://localhost:8180/iam/realms/example
-            jwkSetUrl: http://localhost:8180/iam/realms/example/protocol/openid-connect/certs
-            apiClientId: springboot-start-app-api
-            audience: springboot-start-app-api
-            spaClientId: springboot-start-app-spa
-            principalClaim: preferred_username
+            url: ${SMI_IAM_URL:http://localhost:8180/iam}
+            realm: ${SMI_IAM_REALM:example}
+            issuerUrl: ${SMI_IAM_ISSUER_URL:${SMI_IAM_URL:http://localhost:8180/iam}/realms/${SMI_IAM_REALM:example}}
+            jwkSetUrl: ${SMI_IAM_JWK_SET_URL:${SMI_IAM_URL:http://localhost:8180/iam}/realms/${SMI_IAM_REALM:example}/protocol/openid-connect/certs}
+            apiClientId: ${SMI_IAM_API_CLIENT_ID:springboot-start-app-api}
+            audience: ${SMI_IAM_AUDIENCE:${SMI_IAM_API_CLIENT_ID:springboot-start-app-api}}
+            spaClientId: ${SMI_IAM_SPA_CLIENT_ID:springboot-start-app-spa}
+            principalClaim: ${SMI_IAM_PRINCIPAL_CLAIM:preferred_username}
     kubernetes:
         nodeNameSpace: ${POD_NAMESPACE}
         nodeName: ${NODE_NAME}
