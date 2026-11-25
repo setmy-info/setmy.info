@@ -114,7 +114,7 @@ systemctl daemon-reload >/dev/null 2>&1 || :
 
 %files
 %attr(0644,root,root) %{smi_home}/lib/%{app}.jar
-%config %attr(0644,root,root) %{unitdir}/%{app}.service
+%verify(not md5 size mtime) %attr(0644,root,root) %{unitdir}/%{app}.service
 %{_sysconfdir}/systemd/system/%{app}.service
 
 %changelog

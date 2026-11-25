@@ -31,7 +31,16 @@ spring:
                             URL: ${SPRING_DATASOURCE_URL}
                             user: ${SPRING_DATASOURCE_USERNAME}
                             password: ${SPRING_DATASOURCE_PASSWORD}
+    graphql:
+        graphiql:
+            enabled: false
 
 springBootStartProject:
     example:
         foo: application-live.yaml
+
+springdoc:
+    api-docs:
+        enabled: false
+    swagger-ui:
+        enabled: false

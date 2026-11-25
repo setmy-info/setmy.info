@@ -1,3 +1,14 @@
+spring:
+    graphql:
+        graphiql:
+            enabled: false
+
 springBootStartProject:
     example:
         foo: application-ci.yaml
+
+springdoc:
+    api-docs:
+        enabled: false
+    swagger-ui:
+        enabled: false
