@@ -126,3 +126,9 @@ python-ai/traffic/
 
 **/claude.session.sh
 
+
+### mise ###
+mise.local.toml
+.mise.local.toml
+mise.*.local.toml
+.mise.*.local.toml
