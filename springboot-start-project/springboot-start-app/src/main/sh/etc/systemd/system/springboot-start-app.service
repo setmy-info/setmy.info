@@ -27,11 +27,12 @@ Environment=MICROSERVICE_OPTIONAL_CONFIG_FILE_PATH=/opt/setmy.info/etc/springboo
 # NB! TEST ONLY: Environment=MICROSERVICE_PROFILES=test
 
 # Machine configuration (SMI_IAM_*, database, JDK_JAVA_OPTIONS for JVM flags, ...) comes from the separate
-# configuration repository and package, never from this one: every machine, this environment, and local.env made
-# by hand on the machine (secrets, in no package). All optional ("-"), the file read last has the last word, and
-# a value in them wins over the Environment= lines above.
+# configuration repository and package, never from this one: every machine, this environment, this host (host-
+# and the short host name, %l), and local.env made by hand on the machine (secrets, in no package). All optional
+# ("-"), the file read last has the last word, and a value in them wins over the Environment= lines above.
 EnvironmentFile=-/opt/setmy.info/etc/springboot-start-app/springboot-start-app.env
 EnvironmentFile=-/opt/setmy.info/etc/springboot-start-app/machine.env
+EnvironmentFile=-/opt/setmy.info/etc/springboot-start-app/host-%l.env
 EnvironmentFile=-/opt/setmy.info/etc/springboot-start-app/local.env
 
 ExecStart=/opt/setmy.info/bin/smi-spring-boot
