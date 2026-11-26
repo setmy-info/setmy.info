@@ -17,12 +17,12 @@
     <packaging>jar</packaging>
 
     <name>spring-boot-business-logic-starter</name>
-    <description>Spring Boot Starter of business-logic-starter: its plain Java singletons as Spring beans</description>
+    <description>Spring Boot Starter of business-logic: its plain Java singletons as Spring beans</description>
 
     <dependencies>
         <dependency>
             <groupId>info.setmy</groupId>
-            <artifactId>business-logic-starter</artifactId>
+            <artifactId>business-logic</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

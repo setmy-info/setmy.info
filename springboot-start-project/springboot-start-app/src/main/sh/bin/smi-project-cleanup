@@ -65,6 +65,10 @@ remove_submodules() {
     rm -rf submodules
 }
 
+remove_incubation() {
+    rm -rf incubation
+}
+
 remove_site_tasklist() {
     rm -rf src/site/markdown/tasklist
 }
@@ -106,11 +110,15 @@ use_bom_version_property() {
         { print }'
 }
 
-remove_submodules_from_gitmodules() {
+remove_removed_folders_from_gitmodules() {
     edit_file .gitmodules awk '
         function flush() { if (!drop) printf "%s", buf; buf = ""; drop = 0 }
         /^\[submodule / { flush() }
-        /^[ \t]*path[ \t]*=[ \t]*submodules\// { drop = 1 }
+        /^[ \t]*path[ \t]*=/ {
+            path = $0
+            sub(/^[ \t]*path[ \t]*=[ \t]*/, "", path)
+            if (system("test -e \"" path "\"") != 0) drop = 1
+        }
         { buf = buf $0 "\n" }
         END { flush() }'
 }
@@ -183,13 +191,14 @@ cleanup() {
     step remove_python_ai
     step remove_setmy_info_jail
     step remove_submodules
+    step remove_incubation
     step remove_site_tasklist
     step remove_spring_boot_starters
     step remove_root_modules_without_folder
     step remove_springboot_modules_without_folder
     step add_bom_version_property
     step use_bom_version_property
-    step remove_submodules_from_gitmodules
+    step remove_removed_folders_from_gitmodules
     step remove_empty_gitmodules
     step remove_removed_modules_from_jenkinsfile
 }
