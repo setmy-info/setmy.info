@@ -158,6 +158,8 @@
         <module>java-graph</module>
         <module>java-graphics</module>
         <module>tomcat-start-project</module>
+        <module>business-commons</module>
+        <module>business-logic</module>
         <module>springboot-start-project</module>
     </modules>
 

@@ -101,16 +101,23 @@ renameAppModule() {
 }
 
 renameAppArtifact() {
-    projectReplaceInFile "${SB}/${NAME}/pom.xml" "<artifactId>${TEMPLATE_APP}</artifactId>" "<artifactId>${NAME}</artifactId>"
-    projectReplaceInFile "${SB}/${NAME}/pom.xml" "<name>${TEMPLATE_APP}</name>" "<name>${NAME}</name>"
+    projectRenameMavenArtifact "${TEMPLATE_APP}" "${NAME}" "${SB}/${NAME}/pom.xml"
+}
+
+renameBusinessArtifacts() {
+    for module in business-commons business-logic spring-boot-business-logic-starter; do
+        projectRenameMavenArtifact "${module}" "${NAME}-${module}" pom.xml */pom.xml "${SB}"/*/pom.xml
+    done
 }
 
 renameRootArtifact() {
     projectReplaceInFile pom.xml ">multi-projects<" ">${NAME}-parent<"
 }
 
-renameRootParentOfSpringBoot() {
-    projectReplaceInFile "${SB}/pom.xml" "<artifactId>multi-projects</artifactId>" "<artifactId>${NAME}-parent</artifactId>"
+renameRootParentOfModules() {
+    for module_pom in "${SB}/pom.xml" business-*/pom.xml; do
+        projectReplaceInFile "${module_pom}" "<artifactId>multi-projects</artifactId>" "<artifactId>${NAME}-parent</artifactId>"
+    done
 }
 
 renameSpringBootArtifact() {
@@ -161,8 +168,9 @@ doRename() {
     projectStep renameAppFolder
     projectStep renameAppModule
     projectStep renameAppArtifact
+    projectStep renameBusinessArtifacts
     projectStep renameRootArtifact
-    projectStep renameRootParentOfSpringBoot
+    projectStep renameRootParentOfModules
     projectStep renameSpringBootArtifact
     projectStep renameSpringBootParentOfModules
     projectStep renameAppJarInRpmMakefile
