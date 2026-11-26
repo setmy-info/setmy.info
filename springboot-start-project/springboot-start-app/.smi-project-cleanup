@@ -5,6 +5,7 @@ APP="${NAME}-${TEMPLATE_APP}"
 NEW_VERSION=0.1.0-SNAPSHOT
 GROUP_ID="${SMI_PROJECT_GROUP_ID:-}"
 DOCKER_NAMESPACE=example
+SCM_URL="git@git.example.com:${NAME}.git"
 
 removeAttic() {
     projectRemove attic
@@ -89,9 +90,18 @@ removeGitSubmodulesWithoutFolder() {
 removeMavenPublishing() {
     for pom in pom.xml "${SB}/${TEMPLATE_APP}/pom.xml"; do
         projectRemoveXmlElement "${pom}" distributionManagement
-        projectRemoveXmlElement "${pom}" scm
         projectRemoveXmlElement "${pom}" issueManagement
         projectRemoveXmlElement "${pom}" plugin nexus-staging-maven-plugin
+    done
+}
+
+replaceTemplateScm() {
+    for pom in pom.xml "${SB}/${TEMPLATE_APP}/pom.xml"; do
+        projectEditFile "${pom}" awk -v url="scm:git:${SCM_URL}" '
+            /^    <scm>/ { inside = 1; print; print "        <connection>" url "</connection>"; print "        <developerConnection>" url "</developerConnection>"; next }
+            inside && /<\/scm>/ { inside = 0 }
+            inside { next }
+            { print }'
     done
 }
 
@@ -350,6 +360,7 @@ doCleanup() {
     projectStep useBomVersionProperty
     projectStep removeGitSubmodulesWithoutFolder
     projectStep removeMavenPublishing
+    projectStep replaceTemplateScm
     projectStep removeOpenSourceLicense
     projectStep removeRemovedModulesFromJenkinsfile
     projectStep removeTemplateBuildScripts
