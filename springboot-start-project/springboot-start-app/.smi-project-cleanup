@@ -1,0 +1,171 @@
+SB=springboot-start-project
+TEMPLATE_APP=springboot-start-app
+NAME="$(projectName)"
+
+removeAttic() {
+    projectRemove attic
+}
+
+removeJavaModules() {
+    projectRemove java-*
+}
+
+removeGroovyModules() {
+    projectRemove groovy-*
+}
+
+removeDependenciesBom() {
+    projectRemove dependencies-bom
+}
+
+removeMavenPluginStartProject() {
+    projectRemove maven-plugin-start-project
+}
+
+removeTomcatStartProject() {
+    projectRemove tomcat-start-project
+}
+
+removePythonAi() {
+    projectRemove python-ai
+}
+
+removeSetmyInfoJail() {
+    projectRemove setmy-info-jail
+}
+
+removeSubmodules() {
+    projectRemove submodules
+}
+
+removeIncubation() {
+    projectRemove incubation
+}
+
+removeSiteTasklist() {
+    projectRemove src/site/markdown/tasklist
+}
+
+removeSpringBootStarters() {
+    projectRemoveExcept spring-boot-business-logic-starter "${SB}"/spring-boot-*-starter
+}
+
+removeRootModulesWithoutFolder() {
+    projectRemoveMavenModulesWithoutFolder .
+}
+
+removeSpringBootModulesWithoutFolder() {
+    projectRemoveMavenModulesWithoutFolder "${SB}"
+}
+
+addBomVersionProperty() {
+    grep -q '<setmy.info.version>' pom.xml && return 0
+    projectEditFile pom.xml awk \
+        -v version="$(sed -n 's|^    <version>\(.*\)</version>.*|\1|p' pom.xml | head -1)" '
+        { print }
+        !done && /<properties>/ {
+            indent = $0
+            sub(/<properties>.*/, "", indent)
+            print indent "    <setmy.info.version>" version "</setmy.info.version>"
+            done = 1
+        }'
+}
+
+useBomVersionProperty() {
+    projectEditFile pom.xml awk '
+        /<artifactId>dependencies-bom<\/artifactId>/ { bom = 1 }
+        bom && /<version>/ { sub(/\$\{project\.version\}/, "${setmy.info.version}"); bom = 0 }
+        { print }'
+}
+
+removeGitSubmodulesWithoutFolder() {
+    projectRemoveGitSubmodulesWithoutFolder
+}
+
+removeRemovedModulesFromJenkinsfile() {
+    projectDeleteLinesInFile Jenkinsfile \
+        "echo .cd java-" \
+        "echo .cd groovy-" \
+        "echo .cd dependencies-bom" \
+        "echo .cd maven-plugin-start-project" \
+        "echo .cd tomcat-start-project"
+    projectEditFile Jenkinsfile sed -e "/spring-boot-business-logic-starter/!{/echo .cd ${SB}\/spring-boot-/d;}"
+}
+
+renameAppFolder() {
+    projectRename "${SB}/${TEMPLATE_APP}" "${SB}/${NAME}"
+}
+
+renameAppModule() {
+    projectReplaceInFile "${SB}/pom.xml" "<module>${TEMPLATE_APP}</module>" "<module>${NAME}</module>"
+}
+
+renameAppArtifact() {
+    projectReplaceInFile "${SB}/${NAME}/pom.xml" "<artifactId>${TEMPLATE_APP}</artifactId>" "<artifactId>${NAME}</artifactId>"
+    projectReplaceInFile "${SB}/${NAME}/pom.xml" "<name>${TEMPLATE_APP}</name>" "<name>${NAME}</name>"
+}
+
+renameRootArtifact() {
+    projectReplaceInFile pom.xml ">multi-projects<" ">${NAME}-parent<"
+}
+
+renameRootParentOfSpringBoot() {
+    projectReplaceInFile "${SB}/pom.xml" "<artifactId>multi-projects</artifactId>" "<artifactId>${NAME}-parent</artifactId>"
+}
+
+renameSpringBootArtifact() {
+    projectReplaceInFile "${SB}/pom.xml" ">${SB}<" ">${NAME}-springboot<"
+}
+
+renameSpringBootParentOfModules() {
+    for module_pom in "${SB}"/*/pom.xml; do
+        projectReplaceInFile "${module_pom}" "<artifactId>${SB}</artifactId>" "<artifactId>${NAME}-springboot</artifactId>"
+    done
+}
+
+renameAppJarInRpmMakefile() {
+    projectEditFile "${SB}/${NAME}/rpm/Makefile" sed \
+        -e "s|^\(JAR *:= *[$](REPO)/target/\)[$](APP)-|\1${NAME}-|"
+}
+
+renameAppFolderInJenkinsfile() {
+    projectReplaceInFile Jenkinsfile "${SB}/${TEMPLATE_APP}" "${SB}/${NAME}"
+}
+
+renameAppFolderInRootInclude() {
+    projectReplaceInFile .smi-project-cleanup "${SB}/${TEMPLATE_APP}/" "${SB}/${NAME}/"
+}
+
+doCleanup() {
+    projectStep removeAttic
+    projectStep removeJavaModules
+    projectStep removeGroovyModules
+    projectStep removeDependenciesBom
+    projectStep removeMavenPluginStartProject
+    projectStep removeTomcatStartProject
+    projectStep removePythonAi
+    projectStep removeSetmyInfoJail
+    projectStep removeSubmodules
+    projectStep removeIncubation
+    projectStep removeSiteTasklist
+    projectStep removeSpringBootStarters
+    projectStep removeRootModulesWithoutFolder
+    projectStep removeSpringBootModulesWithoutFolder
+    projectStep addBomVersionProperty
+    projectStep useBomVersionProperty
+    projectStep removeGitSubmodulesWithoutFolder
+    projectStep removeRemovedModulesFromJenkinsfile
+}
+
+doRename() {
+    projectStep renameAppFolder
+    projectStep renameAppModule
+    projectStep renameAppArtifact
+    projectStep renameRootArtifact
+    projectStep renameRootParentOfSpringBoot
+    projectStep renameSpringBootArtifact
+    projectStep renameSpringBootParentOfModules
+    projectStep renameAppJarInRpmMakefile
+    projectStep renameAppFolderInJenkinsfile
+    projectStep renameAppFolderInRootInclude
+}
