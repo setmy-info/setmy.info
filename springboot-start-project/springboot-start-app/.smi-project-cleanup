@@ -83,6 +83,26 @@ removeGitSubmodulesWithoutFolder() {
     projectRemoveGitSubmodulesWithoutFolder
 }
 
+removeMavenPublishing() {
+    for pom in pom.xml "${SB}/${TEMPLATE_APP}/pom.xml"; do
+        projectRemoveXmlElement "${pom}" distributionManagement
+        projectRemoveXmlElement "${pom}" scm
+        projectRemoveXmlElement "${pom}" issueManagement
+        projectRemoveXmlElement "${pom}" plugin nexus-staging-maven-plugin
+    done
+}
+
+removeOpenSourceLicense() {
+    for pom in pom.xml "${SB}/${TEMPLATE_APP}/pom.xml"; do
+        projectRemoveXmlElement "${pom}" licenses
+    done
+    grep -q "Permission is hereby granted, free of charge" LICENSE 2>/dev/null || return 0
+    projectWriteFile LICENSE "Copyright (c) $(date +%Y). All rights reserved.
+
+${NAME} is proprietary and confidential software. No part of it may be copied, modified, distributed or
+used without the prior written permission of its owner."
+}
+
 removeRemovedModulesFromJenkinsfile() {
     projectDeleteLinesInFile Jenkinsfile \
         "echo .cd java-" \
@@ -131,9 +151,28 @@ renameSpringBootParentOfModules() {
     done
 }
 
-renameAppJarInRpmMakefile() {
-    projectEditFile "${SB}/${APP}/rpm/Makefile" sed \
-        -e "s|^\(JAR *:= *[$](REPO)/target/\)[$](APP)-|\1${APP}-|"
+renameRpmSpecs() {
+    projectRename "${SB}/${APP}/rpm/smi-${TEMPLATE_APP}.spec" "${SB}/${APP}/rpm/smi-${APP}.spec"
+    projectRename "${SB}/${APP}/rpm/smi-${TEMPLATE_APP}-test.spec" "${SB}/${APP}/rpm/smi-${APP}-test.spec"
+}
+
+renameSystemdUnit() {
+    projectRename "${SB}/${APP}/src/main/sh/etc/systemd/system/${TEMPLATE_APP}.service" \
+        "${SB}/${APP}/src/main/sh/etc/systemd/system/${APP}.service"
+}
+
+renameAppEtcFolder() {
+    projectRename "${SB}/${APP}/src/main/sh/etc/${TEMPLATE_APP}" "${SB}/${APP}/src/main/sh/etc/${APP}"
+    projectRename "${SB}/${APP}/src/main/sh/etc/${APP}/${TEMPLATE_APP}.env" "${SB}/${APP}/src/main/sh/etc/${APP}/${APP}.env"
+}
+
+renameAppInPackaging() {
+    for file in "${SB}/${APP}"/rpm/*.spec "${SB}/${APP}/rpm/Makefile" \
+        "${SB}/${APP}/src/main/sh/etc/systemd/system/${APP}.service" \
+        "${SB}/${APP}/src/main/sh/etc/${APP}/${APP}.env" Jenkinsfile; do
+        projectReplaceInFile "${file}" "smi-${TEMPLATE_APP}" "smi-${APP}"
+        projectReplaceWordInFile "${file}" "${TEMPLATE_APP}" "${APP}"
+    done
 }
 
 renameAppFolderInJenkinsfile() {
@@ -162,6 +201,8 @@ doCleanup() {
     projectStep addBomVersionProperty
     projectStep useBomVersionProperty
     projectStep removeGitSubmodulesWithoutFolder
+    projectStep removeMavenPublishing
+    projectStep removeOpenSourceLicense
     projectStep removeRemovedModulesFromJenkinsfile
 }
 
@@ -174,7 +215,10 @@ doRename() {
     projectStep renameRootParentOfModules
     projectStep renameSpringBootArtifact
     projectStep renameSpringBootParentOfModules
-    projectStep renameAppJarInRpmMakefile
+    projectStep renameRpmSpecs
+    projectStep renameSystemdUnit
+    projectStep renameAppEtcFolder
+    projectStep renameAppInPackaging
     projectStep renameAppFolderInJenkinsfile
     projectStep renameAppFolderInRootInclude
 }
