@@ -2,6 +2,9 @@ SB=springboot-start-project
 TEMPLATE_APP=springboot-start-app
 NAME="$(projectName)"
 APP="${NAME}-${TEMPLATE_APP}"
+NEW_VERSION=0.1.0-SNAPSHOT
+GROUP_ID="${SMI_PROJECT_GROUP_ID:-}"
+DOCKER_NAMESPACE=example
 
 removeAttic() {
     projectRemove attic
@@ -103,6 +106,90 @@ ${NAME} is proprietary and confidential software. No part of it may be copied, m
 used without the prior written permission of its owner."
 }
 
+removeTemplateBuildScripts() {
+    projectRemove build-sites.sh build-sites.cmd src/main/sh/build/update-versions.sh
+    projectRemoveEmptyFolders src/main/sh/build src/main/sh src/main
+}
+
+removeAiProfiles() {
+    projectRemove ai.profiles
+}
+
+replaceTemplateReadme() {
+    grep -q "^# setmy.info" README.md 2>/dev/null || return 0
+    projectWriteFile README.md "# ${NAME}
+
+${NAME} project.
+
+## Build
+
+\`\`\`shell
+./mvnw clean install
+\`\`\`"
+}
+
+replaceTemplateAgentsIntro() {
+    grep -q "^# setmy.info" AGENTS-INTRO.md 2>/dev/null || return 0
+    projectWriteFile AGENTS-INTRO.md "# ${NAME}
+
+This is a maven multimodule project.
+
+- \`business-commons\`: common parts of the business logic, plain Java, depends on no other module
+- \`business-logic\`: the business logic, plain Java, depends on \`business-commons\`
+- \`${SB}\`: the Spring Boot parent pom, with \`spring-boot-business-logic-starter\` and the application
+  \`${APP}\`
+- Line ending should be taken and derived from \`.editorconfig\`"
+}
+
+removeVersionsBackups() {
+    find . -name "*.versionsBackup" -not -path "./.git/*" -exec rm -f {} +
+}
+
+removeTemplateDevelopers() {
+    for pom in pom.xml "${SB}/${TEMPLATE_APP}/pom.xml"; do
+        projectRemoveXmlElement "${pom}" developers
+    done
+}
+
+removeTemplateUrls() {
+    for pom in pom.xml "${SB}/pom.xml" "${SB}/${TEMPLATE_APP}/pom.xml"; do
+        projectDeleteLinesInFile "${pom}" "^    <url>https://setmy-info.github.io</url>$"
+    done
+}
+
+resetChangesHistory() {
+    changes="${SB}/${TEMPLATE_APP}/src/changes/changes.xml"
+    grep -q "<title>Spring Boot Start Project</title>" "${changes}" 2>/dev/null || return 0
+    projectWriteFile "${changes}" "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+
+<document xmlns=\"http://maven.apache.org/changes/1.0.0\"
+          xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
+          xsi:schemaLocation=\"http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd\">
+    <properties>
+        <title>${NAME}</title>
+    </properties>
+    <body>
+        <release version=\"${NEW_VERSION%-SNAPSHOT}\" date=\"$(date +%Y-%m-%d)\" description=\"First release\">
+            <action type=\"add\">Project made from the template.</action>
+        </release>
+    </body>
+</document>"
+}
+
+removeTemplateSitePages() {
+    projectRemove "${SB}/${TEMPLATE_APP}/src/site/markdown/keycloak.md" \
+        "${SB}/${TEMPLATE_APP}/src/site/markdown/rpm.md" src/site/markdown/build.md
+    projectDeleteLinesInFile "${SB}/${TEMPLATE_APP}/src/site/site.xml" '<item name="Keycloak"' '<item name="RPM"'
+    projectDeleteLinesInFile src/site/site.xml '<item name="Build"'
+    for site in src/site/site.xml "${SB}/${TEMPLATE_APP}/src/site/site.xml"; do
+        projectDeleteLinesInFile "${site}" '^        <href>https://'
+    done
+}
+
+removeGitignoreEntriesWithoutFolder() {
+    projectRemoveGitignoreEntriesWithoutFolder .gitignore
+}
+
 removeRemovedModulesFromJenkinsfile() {
     projectDeleteLinesInFile Jenkinsfile \
         "echo .cd java-" \
@@ -175,12 +262,73 @@ renameAppInPackaging() {
     done
 }
 
+renameProjectVersion() {
+    template_version="$(sed -n 's|.*<setmy.info.version>\(.*\)</setmy.info.version>.*|\1|p' pom.xml | head -1)"
+    for pom in pom.xml business-*/pom.xml "${SB}/pom.xml" "${SB}"/*/pom.xml; do
+        projectEditFile "${pom}" awk -v from="<version>${template_version}</version>" -v to="${NEW_VERSION}" -v prefix="<artifactId>${NAME}-" '
+            /<(!--)?(dependency|plugin)>/ { block = 1; internal = 0 }
+            block && index($0, prefix) { internal = 1 }
+            (i = index($0, from)) > 0 {
+                version = block ? (internal ? "${project.version}" : "${setmy.info.version}") : to
+                $0 = substr($0, 1, i - 1) "<version>" version "</version>" substr($0, i + length(from))
+            }
+            { print }
+            /<\/(dependency|plugin)>/ { block = 0 }'
+    done
+}
+
+renameGroupId() {
+    [ -n "${GROUP_ID}" ] || return 0
+    for pom in pom.xml business-*/pom.xml "${SB}/pom.xml" "${SB}"/*/pom.xml; do
+        projectEditFile "${pom}" awk -v to="${GROUP_ID}" -v prefix="<artifactId>${NAME}-" '
+            function flush() { if (index(buf, prefix)) gsub(/<groupId>info\.setmy<\/groupId>/, "<groupId>" to "</groupId>", buf); printf "%s", buf; buf = ""; block = 0 }
+            /^    <groupId>info\.setmy<\/groupId>$/ { print "    <groupId>" to "</groupId>"; next }
+            /<(parent|dependency)>/ { block = 1 }
+            block { buf = buf $0 "\n"; if ($0 ~ /<\/(parent|dependency)>/) flush(); next }
+            { print }
+            END { if (block) printf "%s", buf }'
+    done
+}
+
+renameDescriptions() {
+    projectReplaceInFile pom.xml "<description>Java and Groovy projects</description>" "<description>${NAME} parent</description>"
+    projectReplaceInFile "${SB}/${APP}/pom.xml" "<description>Containerized microservice starter (seed) project</description>" "<description>${NAME} Spring Boot application</description>"
+    for pom in business-*/pom.xml "${SB}"/spring-boot-business-logic-starter/pom.xml; do
+        for module in business-commons business-logic spring-boot-business-logic-starter; do
+            projectReplaceWordInFile "${pom}" "${module}" "${NAME}-${module}"
+        done
+    done
+}
+
+renameDockerImage() {
+    projectReplaceInFile "${SB}/${APP}/pom.xml" "<repository>setmyinfo/" "<repository>${DOCKER_NAMESPACE}/"
+    for file in "${SB}/${APP}/src/main/docker/docker-compose.yaml" "${SB}/${APP}"/src/main/k8s/*/*.yaml; do
+        projectReplaceWordInFile "${file}" "${TEMPLATE_APP}" "${APP}"
+        projectReplaceInFile "${file}" "setmyinfo/${APP}:" "${DOCKER_NAMESPACE}/${APP}:"
+    done
+    projectReplaceInFile "${SB}/${APP}/src/main/docker/build/Dockerfile" "-t ${SB} " "-t ${APP} "
+}
+
+renameDockerLabels() {
+    dockerfile="${SB}/${APP}/src/main/docker/Dockerfile"
+    projectReplaceInFile "${dockerfile}" 'title="Docker HUB Rocky Java Spring Boot microservice"' "title=\"${APP}\""
+    projectReplaceInFile "${dockerfile}" 'description="setmy.info Docker HUB Rocky Java Spring Boot microservice"' "description=\"${NAME} Spring Boot microservice\""
+    projectReplaceInFile "${dockerfile}" '"https://github.com/setmy-info/setmy.info/[^"]*"' "\"https://${DOCKER_NAMESPACE}.com/${NAME}\""
+}
+
 renameAppFolderInJenkinsfile() {
     projectReplaceInFile Jenkinsfile "${SB}/${TEMPLATE_APP}" "${SB}/${APP}"
 }
 
-renameAppFolderInRootInclude() {
-    projectReplaceInFile .smi-project-cleanup "${SB}/${TEMPLATE_APP}/" "${SB}/${APP}/"
+renameSites() {
+    projectReplaceInFile src/site/site.xml 'name="java-xyz"' "name=\"${NAME}\""
+    projectReplaceInFile src/site/site.xml '<name>Java ... </name>' "<name>${NAME}</name>"
+    projectReplaceInFile "${SB}/${APP}/src/site/site.xml" "name=\"${SB}\"" "name=\"${APP}\""
+    projectReplaceInFile "${SB}/${APP}/src/site/site.xml" '<name>Spring Boot Start Project</name>' "<name>${APP}</name>"
+}
+
+removeCleanupIncludes() {
+    projectRemove .smi-project-cleanup "${SB}/${APP}/.smi-project-cleanup"
 }
 
 doCleanup() {
@@ -204,6 +352,16 @@ doCleanup() {
     projectStep removeMavenPublishing
     projectStep removeOpenSourceLicense
     projectStep removeRemovedModulesFromJenkinsfile
+    projectStep removeTemplateBuildScripts
+    projectStep removeAiProfiles
+    projectStep replaceTemplateReadme
+    projectStep replaceTemplateAgentsIntro
+    projectStep removeVersionsBackups
+    projectStep removeTemplateDevelopers
+    projectStep removeTemplateUrls
+    projectStep resetChangesHistory
+    projectStep removeTemplateSitePages
+    projectStep removeGitignoreEntriesWithoutFolder
 }
 
 doRename() {
@@ -219,6 +377,12 @@ doRename() {
     projectStep renameSystemdUnit
     projectStep renameAppEtcFolder
     projectStep renameAppInPackaging
+    projectStep renameProjectVersion
+    projectStep renameGroupId
+    projectStep renameDescriptions
+    projectStep renameDockerImage
+    projectStep renameDockerLabels
     projectStep renameAppFolderInJenkinsfile
-    projectStep renameAppFolderInRootInclude
+    projectStep renameSites
+    projectStep removeCleanupIncludes
 }
