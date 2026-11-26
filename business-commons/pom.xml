@@ -19,7 +19,7 @@
     <name>business-commons</name>
     <description>
         Common parts of the business logic as plain Java library: no Spring or other DI/IoC dependency.
-        Used by business-logic.
+        A root module: it depends on no other module of the project, business-logic depends on it.
     </description>
 
     <dependencies>
