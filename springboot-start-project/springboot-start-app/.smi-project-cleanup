@@ -6,6 +6,8 @@ NEW_VERSION=0.1.0-SNAPSHOT
 GROUP_ID="${SMI_PROJECT_GROUP_ID:-}"
 DOCKER_NAMESPACE=example
 SCM_URL="git@git.example.com:${NAME}.git"
+VENDOR=Example
+HOME_URL=https://example.com
 
 removeAttic() {
     projectRemove attic
@@ -121,6 +123,11 @@ removeTemplateBuildScripts() {
     projectRemoveEmptyFolders src/main/sh/build src/main/sh src/main
 }
 
+removeTemplateCi() {
+    projectRemove bitbucket-pipelines.yml
+    projectDeleteLinesInFile .github/workflows/pipeline.yml "test -x build-sites.sh"
+}
+
 removeAiProfiles() {
     projectRemove ai.profiles
 }
@@ -136,6 +143,25 @@ ${NAME} project.
 \`\`\`shell
 ./mvnw clean install
 \`\`\`"
+}
+
+replaceTemplateAppReadme() {
+    readme="${SB}/${TEMPLATE_APP}/README.md"
+    grep -q "^Spring Boot start project:" "${readme}" 2>/dev/null || return 0
+    projectWriteFile "${readme}" "# ${APP}
+
+${APP} is the Spring Boot application of ${NAME}.
+
+## Build
+
+\`\`\`shell
+../../mvnw clean install
+\`\`\`
+
+## Documentation
+
+- [Keycloak](src/site/markdown/keycloak.md)
+- [RPM](src/site/markdown/rpm.md)"
 }
 
 replaceTemplateAgentsIntro() {
@@ -187,9 +213,7 @@ resetChangesHistory() {
 }
 
 removeTemplateSitePages() {
-    projectRemove "${SB}/${TEMPLATE_APP}/src/site/markdown/keycloak.md" \
-        "${SB}/${TEMPLATE_APP}/src/site/markdown/rpm.md" src/site/markdown/build.md
-    projectDeleteLinesInFile "${SB}/${TEMPLATE_APP}/src/site/site.xml" '<item name="Keycloak"' '<item name="RPM"'
+    projectRemove src/site/markdown/build.md
     projectDeleteLinesInFile src/site/site.xml '<item name="Build"'
     for site in src/site/site.xml "${SB}/${TEMPLATE_APP}/src/site/site.xml"; do
         projectDeleteLinesInFile "${site}" '^        <href>https://'
@@ -198,6 +222,10 @@ removeTemplateSitePages() {
 
 removeGitignoreEntriesWithoutFolder() {
     projectRemoveGitignoreEntriesWithoutFolder .gitignore
+}
+
+removeGitignoreSectionsOfOtherProjects() {
+    projectRemoveParagraphsInFile .gitignore "# cmake" "# Go" "# Python" "# AI agents" "**/claude.session.sh"
 }
 
 removeRemovedModulesFromJenkinsfile() {
@@ -215,7 +243,7 @@ renameAppFolder() {
 }
 
 renameAppModule() {
-    projectReplaceInFile "${SB}/pom.xml" "<module>${TEMPLATE_APP}</module>" "<module>${APP}</module>"
+    projectReplaceWordInFile "${SB}/pom.xml" "${TEMPLATE_APP}" "${APP}"
 }
 
 renameAppArtifact() {
@@ -266,9 +294,39 @@ renameAppEtcFolder() {
 renameAppInPackaging() {
     for file in "${SB}/${APP}"/rpm/*.spec "${SB}/${APP}/rpm/Makefile" \
         "${SB}/${APP}/src/main/sh/etc/systemd/system/${APP}.service" \
-        "${SB}/${APP}/src/main/sh/etc/${APP}/${APP}.env" Jenkinsfile; do
+        "${SB}/${APP}/src/main/sh/etc/${APP}/${APP}.env" Jenkinsfile \
+        "${SB}/${APP}/src/site/markdown/rpm.md" "${SB}/${APP}/src/site/markdown/keycloak.md"; do
         projectReplaceInFile "${file}" "smi-${TEMPLATE_APP}" "smi-${APP}"
         projectReplaceWordInFile "${file}" "${TEMPLATE_APP}" "${APP}"
+    done
+    projectReplaceInFile "${SB}/${APP}/src/site/markdown/rpm.md" "target/${TEMPLATE_APP}-" "target/${APP}-"
+}
+
+resetRpmVersion() {
+    for spec in "${SB}/${APP}"/rpm/*.spec; do
+        projectEditFile "${spec}" awk -v version="${NEW_VERSION%-SNAPSHOT}" -v date="$(LC_ALL=C date '+%a %b %d %Y')" '
+            /^Version:/ { sub(/!\?smi_version:[^}]*/, "!?smi_version:" version) }
+            { print }
+            /^%changelog/ { print "* " date " Developer <developer@example.com> - " version "-1"; print "- First package"; exit }'
+    done
+}
+
+replaceRpmVendor() {
+    for spec in "${SB}/${APP}"/rpm/*.spec; do
+        projectEditFile "${spec}" sed -e "s|^Vendor:\([ ]*\).*|Vendor:\1${VENDOR}|" -e "s|^URL:\([ ]*\).*|URL:\1${HOME_URL}|"
+    done
+    projectEditFile "${SB}/${APP}/src/main/sh/etc/systemd/system/${APP}.service" sed -e "s|^Documentation=.*|Documentation=${HOME_URL}|"
+}
+
+renameApplicationName() {
+    projectReplaceInFile "${SB}/${APP}/src/main/resources/application.yaml" "^        name: ${SB}$" "        name: ${APP}"
+}
+
+renameKeycloakClients() {
+    for file in $(grep -rl "${TEMPLATE_APP}-" "${SB}/${APP}" --exclude-dir=target); do
+        for client in api spa m2m; do
+            projectReplaceInFile "${file}" "${TEMPLATE_APP}-${client}" "${APP}-${client}"
+        done
     done
 }
 
@@ -312,7 +370,8 @@ renameDescriptions() {
 
 renameDockerImage() {
     projectReplaceInFile "${SB}/${APP}/pom.xml" "<repository>setmyinfo/" "<repository>${DOCKER_NAMESPACE}/"
-    for file in "${SB}/${APP}/src/main/docker/docker-compose.yaml" "${SB}/${APP}"/src/main/k8s/*/*.yaml; do
+    for file in "${SB}/${APP}/src/main/docker/docker-compose.yaml" "${SB}/${APP}"/src/main/k8s/*/*.yaml \
+        "${SB}/${APP}/src/site/markdown/keycloak.md"; do
         projectReplaceWordInFile "${file}" "${TEMPLATE_APP}" "${APP}"
         projectReplaceInFile "${file}" "setmyinfo/${APP}:" "${DOCKER_NAMESPACE}/${APP}:"
     done
@@ -364,8 +423,10 @@ doCleanup() {
     projectStep removeOpenSourceLicense
     projectStep removeRemovedModulesFromJenkinsfile
     projectStep removeTemplateBuildScripts
+    projectStep removeTemplateCi
     projectStep removeAiProfiles
     projectStep replaceTemplateReadme
+    projectStep replaceTemplateAppReadme
     projectStep replaceTemplateAgentsIntro
     projectStep removeVersionsBackups
     projectStep removeTemplateDevelopers
@@ -373,6 +434,7 @@ doCleanup() {
     projectStep resetChangesHistory
     projectStep removeTemplateSitePages
     projectStep removeGitignoreEntriesWithoutFolder
+    projectStep removeGitignoreSectionsOfOtherProjects
 }
 
 doRename() {
@@ -388,6 +450,10 @@ doRename() {
     projectStep renameSystemdUnit
     projectStep renameAppEtcFolder
     projectStep renameAppInPackaging
+    projectStep resetRpmVersion
+    projectStep replaceRpmVendor
+    projectStep renameApplicationName
+    projectStep renameKeycloakClients
     projectStep renameProjectVersion
     projectStep renameGroupId
     projectStep renameDescriptions
