@@ -1,6 +1,7 @@
 SB=springboot-start-project
 TEMPLATE_APP=springboot-start-app
 NAME="$(projectName)"
+APP="${NAME}-${TEMPLATE_APP}"
 
 removeAttic() {
     projectRemove attic
@@ -93,15 +94,15 @@ removeRemovedModulesFromJenkinsfile() {
 }
 
 renameAppFolder() {
-    projectRename "${SB}/${TEMPLATE_APP}" "${SB}/${NAME}"
+    projectRename "${SB}/${TEMPLATE_APP}" "${SB}/${APP}"
 }
 
 renameAppModule() {
-    projectReplaceInFile "${SB}/pom.xml" "<module>${TEMPLATE_APP}</module>" "<module>${NAME}</module>"
+    projectReplaceInFile "${SB}/pom.xml" "<module>${TEMPLATE_APP}</module>" "<module>${APP}</module>"
 }
 
 renameAppArtifact() {
-    projectRenameMavenArtifact "${TEMPLATE_APP}" "${NAME}" "${SB}/${NAME}/pom.xml"
+    projectRenameMavenArtifact "${TEMPLATE_APP}" "${APP}" "${SB}/${APP}/pom.xml"
 }
 
 renameBusinessArtifacts() {
@@ -131,16 +132,16 @@ renameSpringBootParentOfModules() {
 }
 
 renameAppJarInRpmMakefile() {
-    projectEditFile "${SB}/${NAME}/rpm/Makefile" sed \
-        -e "s|^\(JAR *:= *[$](REPO)/target/\)[$](APP)-|\1${NAME}-|"
+    projectEditFile "${SB}/${APP}/rpm/Makefile" sed \
+        -e "s|^\(JAR *:= *[$](REPO)/target/\)[$](APP)-|\1${APP}-|"
 }
 
 renameAppFolderInJenkinsfile() {
-    projectReplaceInFile Jenkinsfile "${SB}/${TEMPLATE_APP}" "${SB}/${NAME}"
+    projectReplaceInFile Jenkinsfile "${SB}/${TEMPLATE_APP}" "${SB}/${APP}"
 }
 
 renameAppFolderInRootInclude() {
-    projectReplaceInFile .smi-project-cleanup "${SB}/${TEMPLATE_APP}/" "${SB}/${NAME}/"
+    projectReplaceInFile .smi-project-cleanup "${SB}/${TEMPLATE_APP}/" "${SB}/${APP}/"
 }
 
 doCleanup() {
