@@ -1,0 +1,161 @@
+#!/bin/sh
+
+set -eu
+
+TEMPLATE_APP_MODULE=springboot-start-app
+SPRINGBOOT_PARENT_DIR=springboot-start-project
+
+usage() {
+    cat <<EOF
+Usage: $(basename "$0") NEW_PROJECT_NAME [NEW_PROJECT_DIR]
+
+Cleans a project made by smi-project-prepare down to the Spring Boot app, renamed to NEW_PROJECT_NAME.
+NEW_PROJECT_DIR is the root of the new project, default the current directory. Safe to run again.
+
+Removes (the upstream jars and BOMs are expected in the local Maven repository ~/.m2):
+  attic, java-*, groovy-*, dependencies-bom, maven-plugin-start-project, python-ai, setmy-info-jail,
+  submodules, tomcat-start-project, src/site/markdown/tasklist,
+  ${SPRINGBOOT_PARENT_DIR}/spring-boot-*-starter
+
+Keeps:
+  ${SPRINGBOOT_PARENT_DIR}/business-logic-starter, ${SPRINGBOOT_PARENT_DIR}/spring-boot-business-logic-starter
+
+Renames:
+  ${SPRINGBOOT_PARENT_DIR}/${TEMPLATE_APP_MODULE} to ${SPRINGBOOT_PARENT_DIR}/NEW_PROJECT_NAME, artifactId NEW_PROJECT_NAME
+  root pom artifactId to NEW_PROJECT_NAME-parent, ${SPRINGBOOT_PARENT_DIR} pom artifactId to NEW_PROJECT_NAME-springboot
+
+Updates:
+  <module> lines of removed modules, .gitmodules, Jenkinsfile, the jar name in the rpm Makefile,
+  the dependencies-bom version as property setmy.info.version in the root pom
+EOF
+}
+
+if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
+    usage >&2
+    exit 1
+fi
+
+NEW_PROJECT_NAME="$1"
+NEW_PROJECT_DIR="${2:-.}"
+
+case "${NEW_PROJECT_NAME}" in
+    ""|*/*|.*|*" "*)
+        echo "$(basename "$0"): invalid project name: ${NEW_PROJECT_NAME}" >&2
+        exit 1
+        ;;
+esac
+
+cd "${NEW_PROJECT_DIR}"
+
+if [ ! -f pom.xml ] || [ ! -d "${SPRINGBOOT_PARENT_DIR}" ]; then
+    echo "$(basename "$0"): ${PWD} is not the template project root (pom.xml, ${SPRINGBOOT_PARENT_DIR})" >&2
+    exit 1
+fi
+
+NEW_APP_MODULE_DIR="${SPRINGBOOT_PARENT_DIR}/${NEW_PROJECT_NAME}"
+
+edit_file() {
+    file="$1"
+    shift
+    [ -f "${file}" ] || return 0
+    "$@" < "${file}" > "${file}.smi-tmp"
+    cat "${file}.smi-tmp" > "${file}"
+    rm -f "${file}.smi-tmp"
+}
+
+remove() {
+    for path in "$@"; do
+        if [ -e "${path}" ] || [ -L "${path}" ]; then
+            echo "remove ${path}"
+            rm -rf "${path}"
+        fi
+    done
+}
+
+prune_modules() {
+    pom="$1"
+    base="$(dirname "${pom}")"
+    edit_file "${pom}" awk -v base="${base}" '
+        match($0, /<module>[^<]*<\/module>/) {
+            m = substr($0, RSTART + 8, RLENGTH - 17)
+            if (system("test -d \"" base "/" m "\"") != 0) next
+        }
+        { print }'
+}
+
+remove attic dependencies-bom maven-plugin-start-project python-ai setmy-info-jail submodules \
+    tomcat-start-project src/site/markdown/tasklist
+remove java-* groovy-*
+for starter in "${SPRINGBOOT_PARENT_DIR}"/spring-boot-*-starter; do
+    case "${starter}" in
+        */spring-boot-business-logic-starter) ;;
+        *) remove "${starter}" ;;
+    esac
+done
+
+if [ -f .gitmodules ]; then
+    edit_file .gitmodules awk '
+        /^\[submodule / { flush(); buf = $0 "\n"; drop = 0; next }
+        buf != "" { buf = buf $0 "\n"; if ($0 ~ /^[ \t]*path[ \t]*=[ \t]*submodules\//) drop = 1; next }
+        { print }
+        function flush() { if (buf != "" && !drop) printf "%s", buf; buf = "" }
+        END { flush() }'
+    if [ ! -s .gitmodules ]; then
+        remove .gitmodules
+    fi
+fi
+
+if [ -d "${SPRINGBOOT_PARENT_DIR}/${TEMPLATE_APP_MODULE}" ] && [ ! -e "${NEW_APP_MODULE_DIR}" ]; then
+    echo "rename ${SPRINGBOOT_PARENT_DIR}/${TEMPLATE_APP_MODULE} to ${NEW_APP_MODULE_DIR}"
+    mv "${SPRINGBOOT_PARENT_DIR}/${TEMPLATE_APP_MODULE}" "${NEW_APP_MODULE_DIR}"
+fi
+
+prune_modules pom.xml
+edit_file "${SPRINGBOOT_PARENT_DIR}/pom.xml" sed \
+    -e "s|<module>${TEMPLATE_APP_MODULE}</module>|<module>${NEW_PROJECT_NAME}</module>|"
+prune_modules "${SPRINGBOOT_PARENT_DIR}/pom.xml"
+
+TEMPLATE_BOM_VERSION="$(sed -n 's|^    <version>\(.*\)</version>.*|\1|p' pom.xml | head -1)"
+if ! grep -q '<setmy.info.version>' pom.xml; then
+    edit_file pom.xml awk -v v="${TEMPLATE_BOM_VERSION}" '
+        { print }
+        !done && /<properties>/ {
+            indent = $0
+            sub(/<properties>.*/, "", indent)
+            print indent "    <setmy.info.version>" v "</setmy.info.version>"
+            done = 1
+        }'
+fi
+edit_file pom.xml awk '
+    /<artifactId>dependencies-bom<\/artifactId>/ { bom = 1 }
+    bom && /<version>\$\{project\.version\}<\/version>/ { sub(/\$\{project\.version\}/, "${setmy.info.version}"); bom = 0 }
+    { print }'
+
+edit_file pom.xml sed \
+    -e "s|<artifactId>multi-projects</artifactId>|<artifactId>${NEW_PROJECT_NAME}-parent</artifactId>|" \
+    -e "s|<name>multi-projects</name>|<name>${NEW_PROJECT_NAME}-parent</name>|"
+edit_file "${SPRINGBOOT_PARENT_DIR}/pom.xml" sed \
+    -e "s|<artifactId>multi-projects</artifactId>|<artifactId>${NEW_PROJECT_NAME}-parent</artifactId>|" \
+    -e "s|<artifactId>${SPRINGBOOT_PARENT_DIR}</artifactId>|<artifactId>${NEW_PROJECT_NAME}-springboot</artifactId>|" \
+    -e "s|<name>${SPRINGBOOT_PARENT_DIR}</name>|<name>${NEW_PROJECT_NAME}-springboot</name>|"
+for logic_pom in "${SPRINGBOOT_PARENT_DIR}/business-logic-starter/pom.xml" \
+    "${SPRINGBOOT_PARENT_DIR}/spring-boot-business-logic-starter/pom.xml"; do
+    edit_file "${logic_pom}" sed \
+        -e "s|<artifactId>${SPRINGBOOT_PARENT_DIR}</artifactId>|<artifactId>${NEW_PROJECT_NAME}-springboot</artifactId>|"
+done
+edit_file "${NEW_APP_MODULE_DIR}/pom.xml" sed \
+    -e "s|<artifactId>${SPRINGBOOT_PARENT_DIR}</artifactId>|<artifactId>${NEW_PROJECT_NAME}-springboot</artifactId>|" \
+    -e "s|<artifactId>${TEMPLATE_APP_MODULE}</artifactId>|<artifactId>${NEW_PROJECT_NAME}</artifactId>|" \
+    -e "s|<name>${TEMPLATE_APP_MODULE}</name>|<name>${NEW_PROJECT_NAME}</name>|"
+
+edit_file "${NEW_APP_MODULE_DIR}/rpm/Makefile" sed \
+    -e "s|^\(JAR *:= *[$](REPO)/target/\)[$](APP)-|\1${NEW_PROJECT_NAME}-|"
+
+edit_file Jenkinsfile sed \
+    -e "s|${SPRINGBOOT_PARENT_DIR}/${TEMPLATE_APP_MODULE}|${NEW_APP_MODULE_DIR}|g"
+edit_file Jenkinsfile awk '
+    /echo .cd springboot-start-project\/spring-boot-business-logic-starter/ { print; next }
+    /echo .cd (java-|groovy-|dependencies-bom|maven-plugin-start-project|tomcat-start-project|springboot-start-project\/spring-boot-)/ { next }
+    { print }'
+
+echo "done: ${PWD}, build with ./mvnw clean install"
