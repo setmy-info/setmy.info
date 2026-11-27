@@ -76,7 +76,7 @@ make -C springboot-start-project/springboot-start-app help
 make -C springboot-start-project/springboot-start-app rpms
 ```
 
-The version comes from `pom.xml`: `1.2.0-SNAPSHOT` gives version `1.2.0` with release `0.<BUILD_NUMBER>` (Jenkins
+The version comes from `pom.xml`: `1.4.0` gives version `1.4.0` with release `0.<BUILD_NUMBER>` (Jenkins
 build number), so every CI build is an upgrade of the previous one; a version without `-SNAPSHOT` gives release `1`.
 Output in `$(rpm --eval '%{_topdir}')/RPMS/noarch`.
 
@@ -112,15 +112,15 @@ Without a host variable in the job, the deploy stages only say so and the build 
 
 ## Version
 
-`src/main/sh/build/update-versions.sh` of the repository root bumps the version of every module at once, in the
-repository root:
+`smi-new-version` (setmy-info-scripts) bumps the version of every module at once, in the repository root:
 
 ```shell
-src/main/sh/build/update-versions.sh 1.3.0-SNAPSHOT
-src/main/sh/build/update-versions.sh 1.3.0 'what changed, one line'
+smi-new-version 1.3.0-SNAPSHOT
 ```
 
-It runs `mvn versions:set` over all modules, fixes the `info.setmy` versions Maven left behind, and updates the
-version in `tomcat-start-project` (Makefile, Dockerfile, Jailfile), `java-clojure` (project.clj, deps.edn), the
-fallback `Version` of the specs here and this page. With the second argument the specs also get a `%changelog`
-entry. Files still carrying the old version are listed at the end.
+It includes `./.new-version`, which includes `./src/main/sh/build/.new-version`, whose `doVersionChange` runs
+`mvn versions:set` over all modules, fixes the `info.setmy` versions Maven left behind, and updates the version in
+`tomcat-start-project` (Makefile, Dockerfile, Jailfile), `java-clojure` (project.clj, deps.edn), the fallback
+`Version` of the specs here and this page. Files that are not there are skipped. `git new-version 1.3.0-SNAPSHOT`
+does the same in a git flow feature branch, committed and ready to merge. The `%changelog` entry of the specs is
+written by hand.

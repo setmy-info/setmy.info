@@ -1,7 +1,7 @@
 # Copyright Imre Tabur
 
 DOCKER_PROJECT_NAME="tomcat-start-project"
-DOCKER_PROJECT_VERSION="1.2.0-SNAPSHOT"
+DOCKER_PROJECT_VERSION="1.4.0"
 DOCKER_ID_ORGANIZATION="setmyinfo"
 
 all: build image show-images

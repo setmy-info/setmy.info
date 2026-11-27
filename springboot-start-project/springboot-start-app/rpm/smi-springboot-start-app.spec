@@ -8,7 +8,7 @@
 %global profile_marker LIVE
 
 Name:           smi-springboot-start-app
-Version:        %{?smi_version}%{!?smi_version:1.2.0}
+Version:        %{?smi_version}%{!?smi_version:1.4.0}
 Release:        %{?smi_release}%{!?smi_release:1}
 Summary:        springboot-start-app Spring Boot service, LIVE machine
 
