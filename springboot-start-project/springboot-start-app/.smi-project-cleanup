@@ -1,6 +1,16 @@
 SB=springboot-start-project
 TEMPLATE_APP=springboot-start-app
 NAME="$(projectName)"
+APP="${NAME}-${TEMPLATE_APP}"
+
+removeTemplateFolders() {
+    projectRemove attic incubation ai.profiles python-ai setmy-info-jail
+}
+
+removeSubmodules() {
+    projectRemove submodules
+    projectRemoveGitSubmodulesWithoutFolder
+}
 
 removeRootModules() {
     projectRemoveMavenModulesExcept . business-commons business-logic "${SB}"
@@ -18,16 +28,27 @@ removeMavenPublishing() {
 }
 
 renameArtifacts() {
-    for artifact in multi-projects business-commons business-logic "${SB}" spring-boot-business-logic-starter "${TEMPLATE_APP}"; do
+    for artifact in multi-projects business-commons business-logic "${SB}" spring-boot-business-logic-starter; do
         projectRenameMavenArtifact "${artifact}" "${NAME}-${artifact}" pom.xml */pom.xml "${SB}"/*/pom.xml
+    done
+    projectRenameMavenArtifact "${TEMPLATE_APP}" "${NAME}" "${SB}/${TEMPLATE_APP}/pom.xml"
+}
+
+renameAppModule() {
+    projectRename "${SB}/${TEMPLATE_APP}" "${SB}/${APP}"
+    projectReplaceInFile "${SB}/pom.xml" "<module>${TEMPLATE_APP}</module>" "<module>${APP}</module>"
+    for file in Jenkinsfile build-sites.sh src/main/sh/build/update-versions.sh; do
+        projectReplaceInFile "${file}" "${SB}/${TEMPLATE_APP}" "${SB}/${APP}"
     done
 }
 
 removeCleanupIncludes() {
-    projectRemove .smi-project-cleanup "${SB}/${TEMPLATE_APP}/.smi-project-cleanup"
+    projectRemove .smi-project-cleanup "${SB}/${APP}/.smi-project-cleanup"
 }
 
 doCleanup() {
+    projectStep removeTemplateFolders
+    projectStep removeSubmodules
     projectStep removeRootModules
     projectStep removeSpringBootModules
     projectStep removeMavenPublishing
@@ -35,6 +56,7 @@ doCleanup() {
 
 doRename() {
     projectStep renameArtifacts
+    projectStep renameAppModule
 }
 
 doPost() {
