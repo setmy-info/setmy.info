@@ -1,4 +1,4 @@
-(defproject info.setmy/java-clojure "1.4.0"
+(defproject info.setmy/java-clojure "1.3.0-SNAPSHOT"
     :description "Java Clojure project."
     :url "https://github.com/setmy-info/setmy.info/java-clojure"
     :license

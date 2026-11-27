@@ -76,7 +76,7 @@ make -C springboot-start-project/springboot-start-app help
 make -C springboot-start-project/springboot-start-app rpms
 ```
 
-The version comes from `pom.xml`: `1.4.0` gives version `1.4.0` with release `0.<BUILD_NUMBER>` (Jenkins
+The version comes from `pom.xml`: `1.3.0-SNAPSHOT` gives version `1.3.0` with release `0.<BUILD_NUMBER>` (Jenkins
 build number), so every CI build is an upgrade of the previous one; a version without `-SNAPSHOT` gives release `1`.
 Output in `$(rpm --eval '%{_topdir}')/RPMS/noarch`.
 

@@ -17,4 +17,4 @@ UPDATE
 UPGRADE
 
 # Tomcat 11 (Servlet 6.1, Jakarta EE 11): FreeBSD port www/tomcat110. Tomcat 10.0 can not run this war.
-COPY target/tomcat-start-project-1.4.0.war /usr/local/apache-tomcat-11.0/webapps/tomcat-start-project-1.4.0.war
+COPY target/tomcat-start-project-1.3.0-SNAPSHOT.war /usr/local/apache-tomcat-11.0/webapps/tomcat-start-project-1.3.0-SNAPSHOT.war
