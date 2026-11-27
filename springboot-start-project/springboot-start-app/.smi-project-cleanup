@@ -1,7 +1,6 @@
 SB=springboot-start-project
 TEMPLATE_APP=springboot-start-app
 NAME="$(projectName)"
-APP="${NAME}-${TEMPLATE_APP}"
 
 removeTemplateFolders() {
     projectRemove attic incubation ai.profiles python-ai setmy-info-jail
@@ -34,16 +33,8 @@ renameArtifacts() {
     projectRenameMavenArtifact "${TEMPLATE_APP}" "${NAME}" "${SB}/${TEMPLATE_APP}/pom.xml"
 }
 
-renameAppModule() {
-    projectRename "${SB}/${TEMPLATE_APP}" "${SB}/${APP}"
-    projectReplaceInFile "${SB}/pom.xml" "<module>${TEMPLATE_APP}</module>" "<module>${APP}</module>"
-    for file in Jenkinsfile build-sites.sh src/main/sh/build/update-versions.sh; do
-        projectReplaceInFile "${file}" "${SB}/${TEMPLATE_APP}" "${SB}/${APP}"
-    done
-}
-
 removeCleanupIncludes() {
-    projectRemove .smi-project-cleanup "${SB}/${APP}/.smi-project-cleanup"
+    projectRemove .smi-project-cleanup "${SB}/${TEMPLATE_APP}/.smi-project-cleanup"
 }
 
 doCleanup() {
@@ -56,7 +47,6 @@ doCleanup() {
 
 doRename() {
     projectStep renameArtifacts
-    projectStep renameAppModule
 }
 
 doPost() {
