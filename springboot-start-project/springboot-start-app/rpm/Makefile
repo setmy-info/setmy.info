@@ -14,6 +14,7 @@ APP      := springboot-start-app
 REPO     := $(abspath $(CURDIR)/..)
 # Project version from pom.xml: the <version> line indented by 4 spaces is the project one, the parent one by 8
 MAVEN_VERSION := $(shell sed -n 's|^    <version>\(.*\)</version>.*|\1|p' $(REPO)/pom.xml | head -1)
+ARTIFACT_ID := $(shell sed -n 's|^    <artifactId>\(.*\)</artifactId>.*|\1|p' $(REPO)/pom.xml | head -1)
 VERSION  := $(subst -SNAPSHOT,,$(MAVEN_VERSION))
 # A snapshot gets release 0.<Jenkins build number>, so every CI build is an upgrade of the one before it,
 # and a released version (no -SNAPSHOT) gets release 1
@@ -28,7 +29,7 @@ STAGE    := $(CURDIR)/.stage
 TARBALL  := $(TOPDIR)/SOURCES/$(SRCNAME)-$(VERSION).tar.gz
 
 # The executable jar: spring-boot-maven-plugin repackages with the classifier "exec"
-JAR      := $(REPO)/target/$(APP)-$(MAVEN_VERSION)-exec.jar
+JAR      := $(REPO)/target/$(ARTIFACT_ID)-$(MAVEN_VERSION)-exec.jar
 UNIT     := $(REPO)/src/main/sh/etc/systemd/system/$(APP).service
 
 SPECS    := $(sort $(wildcard *.spec))
