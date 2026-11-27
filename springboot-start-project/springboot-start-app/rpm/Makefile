@@ -23,7 +23,8 @@ RELEASE  ?= 0.$(or $(BUILD_NUMBER),1)
 else
 RELEASE  ?= 1
 endif
-SRCNAME  := smi-$(APP)
+PACKAGE  := smi-springboot-start-app
+SRCNAME  := $(PACKAGE)
 TOPDIR   := $(shell rpm --eval '%{_topdir}')
 STAGE    := $(CURDIR)/.stage
 TARBALL  := $(TOPDIR)/SOURCES/$(SRCNAME)-$(VERSION).tar.gz
@@ -39,8 +40,8 @@ SRPMS    := $(foreach n,$(NAMES),$(TOPDIR)/SRPMS/$(n)-$(VERSION)-$(RELEASE).src.
 
 RPMBUILD := rpmbuild --quiet --define 'smi_version $(VERSION)' --define 'smi_release $(RELEASE)'
 
-SKIP_LIVE := smi-$(APP)-test
-SKIP_TEST := smi-$(APP)
+SKIP_LIVE := $(PACKAGE)-test
+SKIP_TEST := $(PACKAGE)
 RPMS_LIVE := $(filter-out $(foreach n,$(SKIP_LIVE),$(TOPDIR)/RPMS/noarch/$(n)-$(VERSION)-$(RELEASE).noarch.rpm),$(RPMS))
 RPMS_TEST := $(filter-out $(foreach n,$(SKIP_TEST),$(TOPDIR)/RPMS/noarch/$(n)-$(VERSION)-$(RELEASE).noarch.rpm),$(RPMS))
 

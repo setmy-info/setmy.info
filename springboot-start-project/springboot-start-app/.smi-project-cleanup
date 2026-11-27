@@ -1,5 +1,6 @@
 SB=springboot-start-project
 TEMPLATE_APP=springboot-start-app
+APP_DIR="${SB}/${TEMPLATE_APP}"
 NAME="$(projectName)"
 
 removeTemplateFolders() {
@@ -20,7 +21,7 @@ removeSpringBootModules() {
 }
 
 removeMavenPublishing() {
-    for pom in pom.xml "${SB}/${TEMPLATE_APP}/pom.xml"; do
+    for pom in pom.xml "${APP_DIR}/pom.xml"; do
         projectRemoveXmlElement "${pom}" distributionManagement
         projectRemoveXmlElement "${pom}" plugin nexus-staging-maven-plugin
     done
@@ -30,11 +31,20 @@ renameArtifacts() {
     for artifact in multi-projects business-commons business-logic "${SB}" spring-boot-business-logic-starter; do
         projectRenameMavenArtifact "${artifact}" "${NAME}-${artifact}" pom.xml */pom.xml "${SB}"/*/pom.xml
     done
-    projectRenameMavenArtifact "${TEMPLATE_APP}" "${NAME}" "${SB}/${TEMPLATE_APP}/pom.xml"
+    projectRenameMavenArtifact "${TEMPLATE_APP}" "${NAME}" "${APP_DIR}/pom.xml"
+}
+
+renameRpmPackages() {
+    for file in $(grep -rl "smi-${TEMPLATE_APP}" "${APP_DIR}/rpm" "${APP_DIR}/src"); do
+        projectReplaceInFile "${file}" "smi-${TEMPLATE_APP}" "smi-${NAME}"
+    done
+    for spec in "${APP_DIR}/rpm/smi-${TEMPLATE_APP}"*.spec; do
+        projectRename "${spec}" "${APP_DIR}/rpm/$(basename "${spec}" | sed "s|smi-${TEMPLATE_APP}|smi-${NAME}|")"
+    done
 }
 
 removeCleanupIncludes() {
-    projectRemove .smi-project-cleanup "${SB}/${TEMPLATE_APP}/.smi-project-cleanup"
+    projectRemove .smi-project-cleanup "${APP_DIR}/.smi-project-cleanup"
 }
 
 doCleanup() {
@@ -47,6 +57,7 @@ doCleanup() {
 
 doRename() {
     projectStep renameArtifacts
+    projectStep renameRpmPackages
 }
 
 doPost() {
